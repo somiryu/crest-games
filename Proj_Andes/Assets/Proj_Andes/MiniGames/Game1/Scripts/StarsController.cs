@@ -5,12 +5,19 @@ using UnityEngine;
 public class StarsController : MonoBehaviour
 {
     MeshRenderer rend;
-    void Start()
+    Pool<StarsController> pool;
+    public void Init(Pool<StarsController> _pool)
     {
+        pool = _pool;
         rend = GetComponentInChildren<MeshRenderer>();
         rend.material.color = Color.yellow;
     }
 
+    public void OnCaptured()
+    {
+        pool.RecycleItem(this);
+        gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {

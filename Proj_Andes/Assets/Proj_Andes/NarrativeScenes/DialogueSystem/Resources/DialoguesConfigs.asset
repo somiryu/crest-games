@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acf102da377d82649b63fd10f24df517, type: 3}
-  m_Name: Level Config
+  m_Script: {fileID: 11500000, guid: 2f3c24ec7631d0641a3355cb6d91a02e, type: 3}
+  m_Name: DialoguesConfigs
   m_EditorClassIdentifier: 
-  regularSpeed: 3
-  turboSpeed: 15
-  accelerationSpeed: 5
-  turboLenght: 2
-  regularRideDuration: 15
-  turboRideDuration: 0
-  starsAmount: 0
+  appearTime: 0.08
+  skipKey: 32
+  charactersUIConfigs:
+  - chType: 0
+    image: {fileID: -1168338577, guid: 432526d69bc8ac543ba94762f009d269, type: 3}
+    name: ---

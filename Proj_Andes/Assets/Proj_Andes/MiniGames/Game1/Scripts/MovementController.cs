@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEditor.PackageManager;
+using Unity.VisualScripting;
 
 public class MovementController : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class MovementController : MonoBehaviour
     float timer;
     float turboTimer;
     int starsGatheredCount;
+    int turboClicks;
+    bool onTurbo;
     [SerializeField] float currentSpeed;
     [SerializeField] float forceOnClick;
     [SerializeField] float gravitalForce;
@@ -27,16 +30,16 @@ public class MovementController : MonoBehaviour
     Ray hit;
     void Start()
     {
+        Init();
+    }
+    public void Init()
+    {
         TryGetComponent(out myCollider);
-        firstPos = transform.position;
         playBtn.onClick.AddListener(Play);
         turboBtn.onClick.AddListener(OnTurbo);
         colls = new Collider[5];
-        currentSpeed = levelConfig.regularSpeed;
-        finishText.gameObject.SetActive(false);
+        RideBegining();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (onPlay) ContinuousMovement(currentSpeed);
@@ -49,15 +52,7 @@ public class MovementController : MonoBehaviour
         var collsAmt = Physics.OverlapSphereNonAlloc(myCollider.transform.position, myCollider.radius, colls);
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
 
-        if (currentSpeed == levelConfig.turboSpeed)
-        {
-            turboTimer += Time.deltaTime;
-            if(turboTimer >= levelConfig.turboLenght)
-            {
-                currentSpeed = levelConfig.regularSpeed;
-                turboTimer = 0;
-            }
-        }
+        if (onTurbo) TurboMovement();
     }
     void OnClickBoard(Collider collider)
     {
@@ -90,21 +85,71 @@ public class MovementController : MonoBehaviour
     }
     void CollisionManagement(Collider collider)
     {
-        if (collider.CompareTag("FinishLine")) { finishText.gameObject.SetActive(true); Debug.Log("FNINSHLINE"); }
+        if (collider.CompareTag("Finish")) EndOfRide();
         else if (collider.TryGetComponent(out StarsController star))
         {
-            star.gameObject.SetActive(false);
+            star.OnCaptured();
             starsGatheredCount += 1;
             Debug.Log("caught star");
         }
     }
     void OnTurbo()
     {
-        currentSpeed = levelConfig.turboSpeed;
+        turboClicks += 1;
+        onTurbo = true;
     }
     void Play()
     {
-        if (!onPlay) onPlay = true;
+        if (!onPlay) 
+        {
+            onPlay = true;
+            RideBegining();
+        }
         else onPlay = false;
     }
+    void TurboMovement()
+    {
+        turboTimer += Time.deltaTime;
+        if (turboTimer >= levelConfig.turboLenght) { Deacceleration(); }
+        else
+        {
+            currentSpeed += levelConfig.accelerationSpeed * Time.deltaTime;
+            if (currentSpeed >= levelConfig.turboSpeed) currentSpeed = levelConfig.turboSpeed;
+        }
+    }
+    void Deacceleration()
+    {
+        currentSpeed -= levelConfig.accelerationSpeed * Time.deltaTime;
+        if (currentSpeed <= levelConfig.regularSpeed)
+        {
+            currentSpeed = levelConfig.regularSpeed;
+            Debug.Log("done with turbo");
+            onTurbo = false;
+            turboTimer = 0;
+        }
+    }
+    void RideBegining()
+    {
+        firstPos = transform.position;
+        currentSpeed = levelConfig.regularSpeed;
+        finishText.gameObject.SetActive(false);
+    }
+    void EndOfRide()
+    {
+        var ride = new GameRideData();
+        ride.starsCollected = starsGatheredCount;
+        ride.turboClicks = turboClicks;
+        ride.totalRideDuration = timer;
+        ride.totalStars = levelConfig.starsAmount;
+        finishText.gameObject.SetActive(true); 
+        onPlay = false;
+    }
+}
+
+public class GameRideData
+{
+    public int turboClicks;
+    public int starsCollected;
+    public int totalStars;
+    public float totalRideDuration;
 }
