@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 using System.Text;
 using System;
+using UnityEngine.Playables;
+using UnityEditor.Timeline;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
@@ -19,14 +21,17 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] TMP_Text dialogueTxt;
     [SerializeField] Button skipDialogueBtn;
     [SerializeField] Button dialogueBoxBtn;
+    [SerializeField] PlayableDirector timeLinePlayer;
 
     [SerializeField] Pool<ResponseBtn> responseBtnsPool;
     [SerializeField] bool forceDialogeAppear;
 
     private int currShowingIdx = -1;
     private bool isShowing = false;
+    private bool hasPendingDialogueChange = false;
     public bool IsShowing => isShowing;
     private KeyCode skipKey = KeyCode.Space;
+    public dialogLineState state = dialogLineState.NotShowing;
 
     //Appear dialogue params
     private bool isAppearingTxt = false;
@@ -44,7 +49,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private void OnValidate() {
         if (forceDialogeAppear) {
             if (Application.isPlaying) {
-                ShowDialogue(dialoguesToShow);
+                ShowDialogueSequence(dialoguesToShow);
             }
             forceDialogeAppear = false;
         }
@@ -64,12 +69,13 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 		else
 		{
-            NextDialogue();
+            //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
+            hasPendingDialogueChange = true;
 		}
 	}
 
 
-    public void ShowDialogue(DialogueSequenceData newDialogues) {
+    public void ShowDialogueSequence(DialogueSequenceData newDialogues) {
         dialoguesToShow = newDialogues;
         currShowingIdx = -1;
         isShowing = true;
@@ -110,6 +116,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
         currText.Clear();
         currText.Append(currDialogueCharacters[currCharProgress]);
         skipDialogueBtn.gameObject.SetActive(false);
+
+        if(currAnimSequence != null) StopCoroutine(currAnimSequence);
+        currAnimSequence = DialogAnimSequence(curr);
+        StartCoroutine(currAnimSequence);
     }
 
     public void StartTextAppear()
@@ -119,27 +129,66 @@ public class DialoguesDisplayerUI : MonoBehaviour
         forceEndAppearingTxt = false;
     }
 
-    public void Update() {
+    public void Update()
+    {
         if (!isShowing) return;
-		if (Input.GetKeyDown(KeyCode.I))
-		{
+        if (Input.GetKeyDown(KeyCode.I))
+        {
             HideDialogues();
             return;
-		}
-        if (isAppearingTxt) {
+        }
+        if (isAppearingTxt)
+        {
             AppearText();
         }
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             OnDialogueBoxBtnPressed();
         }
     }
+
+    private IEnumerator currAnimSequence;
+
+    private IEnumerator DialogAnimSequence(DialogueData dialogueData)
+    {
+        state = dialogLineState.Entering;
+        if (dialogueData.EnterAnim != null)
+        {
+            timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
+			timeLinePlayer.playableAsset = dialogueData.EnterAnim;
+            timeLinePlayer.Play();
+            while(timeLinePlayer.state == PlayState.Playing) yield return null;
+        }
+
+        state = dialogLineState.Idle;
+        if(dialogueData.IdleAnim != null)
+        {
+			timeLinePlayer.extrapolationMode = DirectorWrapMode.Loop;
+			timeLinePlayer.playableAsset = dialogueData.IdleAnim;
+            timeLinePlayer.Play();
+            while(!hasPendingDialogueChange) yield return null;
+        }
+
+        state = dialogLineState.Exiting;
+        if(dialogueData.ExitAnim != null)
+        {
+			timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
+			timeLinePlayer.playableAsset = dialogueData.ExitAnim;
+            timeLinePlayer.Play();
+			while (timeLinePlayer.state == PlayState.Playing) yield return null;
+		}
+        state = dialogLineState.NotShowing;
+        hasPendingDialogueChange = false;
+        currAnimSequence = null;
+        NextDialogue();
+	}
+
 
     private void OnClickResponse(DialogueResponse responseClicked)
 	{
 		if (responseClicked.changeSequence)
 		{
-            ShowDialogue(responseClicked.dataAfterResponse);
+            ShowDialogueSequence(responseClicked.dataAfterResponse);
 		}
 		else
 		{
@@ -175,5 +224,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
         dialoguesToShow = null;
         mainDialoguesGraphics.SetActive(false);
         OnEndShowingDialogue?.Invoke();
-    }
+        currShowingIdx = -1;
+
+	}
+}
+
+public enum dialogLineState
+{
+    NotShowing,
+    Entering,
+    Idle,
+    Exiting
 }

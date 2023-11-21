@@ -16,3 +16,12 @@ MonoBehaviour:
   - characterType: 0
     text: 'Test Dialogue '
     responses: []
+    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
+    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
+    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
+  - characterType: 0
+    text: Test Dialogue 2
+    responses: []
+    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
+    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
+    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}

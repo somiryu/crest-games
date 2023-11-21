@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 [CreateAssetMenu(fileName = "Dialogue Sequence Data", menuName = "DialogueSystem/Sequence")]
 public class DialogueSequenceData : ScriptableObject {
@@ -25,6 +26,9 @@ public class DialogueData
     [TextArea(1, 20)]
     public string text;
     public DialogueResponse[] responses;
+    public TimelineAsset EnterAnim;
+    public TimelineAsset IdleAnim;
+    public TimelineAsset ExitAnim;
 }
 
 
