@@ -1011,11 +1011,14 @@ MonoBehaviour:
   dialogueTxt: {fileID: 3063343628096675031}
   skipDialogueBtn: {fileID: 3063343627693124700}
   dialogueBoxBtn: {fileID: 7763545073195453280}
+  timeLinePlayer: {fileID: 0}
   responseBtnsPool:
     itemPrefab: {fileID: 3933102859777142689, guid: cf2bbed7d83ddae4c914e14fabf8ae1e, type: 3}
     hierarchyParent: {fileID: 7466929433441695099}
     growBy: 3
   forceDialogeAppear: 0
+  autoContinueOnClickDialog: 1
+  state: 0
 --- !u!1 &3063343629091718543
 GameObject:
   m_ObjectHideFlags: 0

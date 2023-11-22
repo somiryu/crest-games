@@ -25,6 +25,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     [SerializeField] Pool<ResponseBtn> responseBtnsPool;
     [SerializeField] bool forceDialogeAppear;
+    [SerializeField] bool autoContinueOnClickDialog;
 
     private int currShowingIdx = -1;
     private bool isShowing = false;
@@ -69,8 +70,11 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 		else
 		{
-            //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
-            hasPendingDialogueChange = true;
+            if (autoContinueOnClickDialog)
+            {
+                //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
+                hasPendingDialogueChange = true;
+            }
 		}
 	}
 
