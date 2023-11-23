@@ -10,6 +10,12 @@ using UnityEditor.Timeline;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
+
+    private static DialoguesDisplayerUI instance;
+
+    public static DialoguesDisplayerUI Instance => instance;
+
+
     [SerializeField] DialogueSequenceData dialoguesToShow;
     public DialogueSequenceData CurrDialoguesBeingShown => dialoguesToShow;
     [Space(20)]
@@ -25,6 +31,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     [SerializeField] Pool<ResponseBtn> responseBtnsPool;
     [SerializeField] bool forceDialogeAppear;
+    [SerializeField] bool autoContinueOnClickDialog;
 
     private int currShowingIdx = -1;
     private bool isShowing = false;
@@ -56,10 +63,27 @@ public class DialoguesDisplayerUI : MonoBehaviour
     }
 
     private void Awake() {
+        if(instance != null && instance != this) DestroyImmediate(instance);
+        instance = this;
+
+
         responseBtnsPool.Init(4);
         skipDialogueBtn.onClick.AddListener(NextDialogue);
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
     }
+
+    public void OnWantsToChangeDialogFromTrigger()
+    {
+        if (isAppearingTxt)
+        {
+            forceEndAppearingTxt = true;
+        }
+        else
+        {
+            //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
+            hasPendingDialogueChange = true;
+        }
+	}
 
     private void OnDialogueBoxBtnPressed()
 	{
@@ -69,8 +93,11 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 		else
 		{
-            //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
-            hasPendingDialogueChange = true;
+            if (autoContinueOnClickDialog)
+            {
+                //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
+                hasPendingDialogueChange = true;
+            }
 		}
 	}
 
@@ -88,7 +115,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     public void NextDialogue() {
         currShowingIdx++;
-        if(currShowingIdx >= dialoguesToShow.dialogues.Length) {
+        if(dialoguesToShow == null || currShowingIdx >= dialoguesToShow.dialogues.Length) {
             HideDialogues();
             return;
         }
