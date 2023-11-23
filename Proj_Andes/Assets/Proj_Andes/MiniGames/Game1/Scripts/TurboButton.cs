@@ -1,22 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class TurboButton : MonoBehaviour
+public class TurboButton : Image, IPointerDownHandler, IPointerUpHandler
 {
-    public CameraController cam;
-
-    // Start is called before the first frame update
-    void Start()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        
+        PlayerController.Instance.OnEnterTurboMode();
+        Debug.Log("working");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPointerUp(PointerEventData eventData)
     {
-        Vector3 newPos = transform.position;
-        newPos.x = cam.transform.position.x;
-        transform.position = newPos;
+        PlayerController.Instance.OnExitTurboMode();
+
+        Debug.Log("working up");
     }
 }
