@@ -13,8 +13,9 @@ public class StarsController : MonoBehaviour
         rend.material.color = Color.yellow;
     }
 
-    public void OnCaptured()
+    public void OnCaptured(bool onTurbo)
     {
+        if (onTurbo) return;
         pool.RecycleItem(this);
         gameObject.SetActive(false);
     }

@@ -9,7 +9,6 @@ public class LevelConfig : ScriptableObject
     public float regularSpeed;
     public float turboSpeed;
     public float accelerationSpeed;
-    public float turboLenght;
     public float regularRideDuration;
     public float turboRideDuration;
     public int starsAmount;

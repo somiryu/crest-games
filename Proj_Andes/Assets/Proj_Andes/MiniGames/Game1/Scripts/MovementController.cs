@@ -16,13 +16,12 @@ public class MovementController : MonoBehaviour
     SphereCollider myCollider;
     [SerializeField] Collider[] colls;
     [SerializeField] Button playBtn;
-    [SerializeField] Button turboBtn;
     [SerializeField] TextMeshProUGUI finishText;
     float timer;
     float turboTimer;
     int starsGatheredCount;
-    int turboClicks;
-    bool onTurbo;
+    public bool onTurbo;
+    bool slowling;
     [SerializeField] float currentSpeed;
     [SerializeField] float forceOnClick;
     [SerializeField] float gravitalForce;
@@ -36,37 +35,43 @@ public class MovementController : MonoBehaviour
     {
         TryGetComponent(out myCollider);
         playBtn.onClick.AddListener(Play);
-        turboBtn.onClick.AddListener(OnTurbo);
+        
         colls = new Collider[5];
         RideBegining();
     }
     void Update()
     {
         if (onPlay) ContinuousMovement(currentSpeed);
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(1))
         {
             hit = cam.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(hit, out RaycastHit hitInfo)) OnClickBoard(hitInfo.collider);
+            if(Physics.Raycast(hit, out RaycastHit hitInfo))
+            {
+                if(Input.GetMouseButtonDown(1)) OnClickBoard(hitInfo.collider, hitInfo);
+            }
         }
 
         var collsAmt = Physics.OverlapSphereNonAlloc(myCollider.transform.position, myCollider.radius, colls);
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
 
-        if (onTurbo) TurboMovement();
+        if (onTurbo)
+        {
+            TurboMovement();
+            if (Input.GetMouseButtonUp(1)) slowling = true;
+            if(slowling) Deacceleration();
+        }
     }
-    void OnClickBoard(Collider collider)
+    void OnClickBoard(Collider collider, RaycastHit hit)
     {
         if (collider.TryGetComponent(out ClickSpots spots))
         {
-
-            if (spots.goingUp)
-            {
-                transform.position += Vector3.up * forceOnClick * Time.deltaTime;
-            }
-            else
-            {
-                transform.position -= Vector3.up * forceOnClick * Time.deltaTime;
-            }
+            Vector3 newHeight = transform.position;
+            newHeight.y = hit.point.y;
+            transform.position = newHeight;
+        }
+        else if (collider.TryGetComponent(out TurboButton turbo))
+        {
+            onTurbo = true;
         }
     }
     void ContinuousMovement(float speed)
@@ -88,15 +93,10 @@ public class MovementController : MonoBehaviour
         if (collider.CompareTag("Finish")) EndOfRide();
         else if (collider.TryGetComponent(out StarsController star))
         {
-            star.OnCaptured();
+            star.OnCaptured(onTurbo);
             starsGatheredCount += 1;
             Debug.Log("caught star");
         }
-    }
-    void OnTurbo()
-    {
-        turboClicks += 1;
-        onTurbo = true;
     }
     void Play()
     {
@@ -109,13 +109,13 @@ public class MovementController : MonoBehaviour
     }
     void TurboMovement()
     {
+        if (slowling) return;
         turboTimer += Time.deltaTime;
-        if (turboTimer >= levelConfig.turboLenght) { Deacceleration(); }
-        else
-        {
-            currentSpeed += levelConfig.accelerationSpeed * Time.deltaTime;
-            if (currentSpeed >= levelConfig.turboSpeed) currentSpeed = levelConfig.turboSpeed;
-        }
+        currentSpeed += levelConfig.accelerationSpeed * Time.deltaTime;
+        Vector3 turboHeight = transform.position;
+        turboHeight.y = firstPos.y;
+        transform.position = turboHeight;
+        if (currentSpeed >= levelConfig.turboSpeed) currentSpeed = levelConfig.turboSpeed;
     }
     void Deacceleration()
     {
@@ -123,9 +123,8 @@ public class MovementController : MonoBehaviour
         if (currentSpeed <= levelConfig.regularSpeed)
         {
             currentSpeed = levelConfig.regularSpeed;
-            Debug.Log("done with turbo");
             onTurbo = false;
-            turboTimer = 0;
+            slowling = false;
         }
     }
     void RideBegining()
@@ -138,7 +137,7 @@ public class MovementController : MonoBehaviour
     {
         var ride = new GameRideData();
         ride.starsCollected = starsGatheredCount;
-        ride.turboClicks = turboClicks;
+        ride.turboSelectedTime = turboTimer;
         ride.totalRideDuration = timer;
         ride.totalStars = levelConfig.starsAmount;
         finishText.gameObject.SetActive(true); 
@@ -148,7 +147,7 @@ public class MovementController : MonoBehaviour
 
 public class GameRideData
 {
-    public int turboClicks;
+    public float turboSelectedTime;
     public int starsCollected;
     public int totalStars;
     public float totalRideDuration;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class BankgroundSpawner : MonoBehaviour, iSpawnerUsers<BackgroundController>
 {
     public Spawner<BackgroundController> spawner;
+    public Collider trigger;
     public bool initalItemsActive;
     public int initialSize;
     public bool InitialActiveItems()
