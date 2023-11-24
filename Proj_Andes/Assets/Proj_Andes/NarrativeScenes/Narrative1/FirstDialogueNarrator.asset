@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: FirstDialogueNarrator
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 0
+    text: "Desed que entras al sal\xF3n, sientes en ti panza que algo raro va a pasar.
+      Te acercas Cami, tu mejor amiga, y cuando le preguntas si ella tambien siente
+      lo mismo te responde:"
+    responses: []
+    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
+    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
+    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
+  - characterType: 0
+    text: "Uy! \xBFNo ser\xE1 que se te qued\xF3 el dibujo como a mi?"
+    responses: []
+    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
+    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
+    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
+  - characterType: 0
+    text: "No puedes creerlo, efectivamente se te pas\xF3 igual que a Cami y  no
+      tienes tu dibujo"
+    responses: []
+    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
+    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
+    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
+  - characterType: 0
+    text: "Justo ah\xED ves que la profe Sandra comienza a revisar los dibujos.\xA1Ya
+      se est\xE1 acerdando a tu puesto!"
+    responses: []
+    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
+    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
+    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
+  - characterType: 0
+    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 sientes?"
+    responses:
+    - response: 
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: 
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: 
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: 
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
+    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
+    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
