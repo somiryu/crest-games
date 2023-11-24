@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class StarsController : MonoBehaviour
 {
-    Pool<StarsController> pool;
-    public void Init(Pool<StarsController> _pool)
-    {
-        pool = _pool;
-    }
-
     public void OnCaptured()
     {
-        pool.RecycleItem(this);
-        gameObject.SetActive(false);
+        PlayerController.Instance.starsGatheredCount++;
+        Deactivate();
+        Debug.Log("caught star");
     }
-    // Update is called once per frame
-    void Update()
+    public void Deactivate()
     {
-
+        gameObject.SetActive(false);
     }
 }

@@ -17,16 +17,16 @@ public class PlayerController : MonoBehaviour
     Vector3 firstPos;
     float currentTargetSpeed;
     SphereCollider myCollider;
-    [SerializeField] Collider[] colls;
+    Collider[] colls;
     float timer;
     float turboTimer;
-    int starsGatheredCount;
-    public bool onTurbo;
-    [SerializeField] float currentSpeed;
-    [SerializeField] float forceOnClick;
-    [SerializeField] float gravitalForce;
+    [HideInInspector] public int starsGatheredCount;
+    public bool onTurbo = false;
+    float currentSpeed;
     public Camera cam;
     [SerializeField] CameraController camCC;
+    [SerializeField] Transform finalSpin;
+    [SerializeField] BackgroundController bk;
     public GameStages gameStages;
     public UIController ui;
     public GameRideData data;
@@ -50,9 +50,20 @@ public class PlayerController : MonoBehaviour
     {
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
-        ui.Init();
-        colls = new Collider[5];
-        RideBegining();
+        camCC = GetComponentInChildren<CameraController>();
+        ui.StartUi();
+    }
+    void SetSpeedway()
+    {
+        Vector3 playerStartPos = bk.bkSize.localScale;
+        playerStartPos.y = transform.position.y;
+        playerStartPos.x -= (bk.bkSize.localScale.x * 1.5f);
+        transform.position = playerStartPos;
+
+        Vector3 finalSpinPos = bk.bkSize.localScale;
+        finalSpinPos.y = finalSpin.transform.position.y;
+        finalSpinPos.x -= bk.bkSize.localScale.x - bk.bkSize.localScale.x/2;
+        finalSpin.transform.position = finalSpinPos;
     }
     void Update()
     {
@@ -113,8 +124,6 @@ public class PlayerController : MonoBehaviour
         {
             if (onTurbo) return;
             star.OnCaptured();
-            starsGatheredCount += 1;
-            Debug.Log("caught star");
         }
     }
     public void Play()
@@ -126,8 +135,12 @@ public class PlayerController : MonoBehaviour
         }
         else onPlay = false;
     }
-    void RideBegining()
+    public void RideBegining()
     {
+        bk.Init();
+        ui.StartUi();
+        colls = new Collider[5];
+        SetSpeedway();
         firstPos = transform.position;
         currentSpeed = levelConfig.regularSpeed;
         currentTargetSpeed = levelConfig.regularSpeed;
@@ -142,6 +155,7 @@ public class PlayerController : MonoBehaviour
         ride.totalStars = levelConfig.starsAmount;
         data = ride;
         ui.EndOfGame();
+        bk.EndOfGame();
         onPlay = false;
         gameStages = GameStages.End;
     }

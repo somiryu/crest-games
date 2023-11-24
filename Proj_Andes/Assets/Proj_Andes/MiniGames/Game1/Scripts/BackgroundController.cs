@@ -5,27 +5,23 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
-    Pool<BackgroundController> pool;
-    public float backgroundSpeed;
-    public float lifeTime;
-    float timer;
-    public void Init(Pool<BackgroundController> _pool)
+    public Transform bkSize;
+    PlayerController player => PlayerController.Instance;
+    StarsSpawner starsSpawner;
+    public void Init()
     {
-        pool = _pool;
+        starsSpawner = GetComponentInChildren<StarsSpawner>();
+        var newSize = bkSize.localScale;
+        newSize.x = player.levelConfig.regularRideDuration * player.levelConfig.regularSpeed;
+        bkSize.localScale = newSize;
+        starsSpawner.Init();
+    }
+    public void EndOfGame()
+    {
+        for (int i = 0; i < starsSpawner.stars.Count; i++)
+        {
+            starsSpawner.stars[i].Deactivate();
+        }
     }
 
-    void ContinuosMovement()
-    {
-        transform.position = Vector3.right * backgroundSpeed * Time.deltaTime;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        timer += Time.deltaTime;
-        if(timer >= lifeTime)
-        {
-            pool.RecycleItem(this);
-        }
-        ContinuosMovement();
-    }
 }
