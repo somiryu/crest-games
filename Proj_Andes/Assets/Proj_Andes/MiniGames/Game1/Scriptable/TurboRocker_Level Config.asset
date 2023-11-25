@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acf102da377d82649b63fd10f24df517, type: 3}
-  m_Name: Level Config
+  m_Name: TurboRocker_Level Config
   m_EditorClassIdentifier: 
   regularSpeed: 3
   turboSpeed: 15
   accelerationSpeed: 5
   regularRideDuration: 30
   turboRideDuration: 0
-  starsAmount: 10
+  starsAmount: 20

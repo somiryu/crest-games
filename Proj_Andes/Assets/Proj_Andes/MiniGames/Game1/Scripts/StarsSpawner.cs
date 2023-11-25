@@ -10,32 +10,32 @@ public class StarsSpawner : MonoBehaviour
     [SerializeField] StarsController starSample;
     BackgroundController backgroundController;
     public List<StarsController> stars = new List<StarsController>();
+
+    public BoxCollider SpawnArea => spawnArea;
     public void Init()
     {
         backgroundController = GetComponentInParent<BackgroundController>();
         var newSize = spawnArea.size;
-        newSize.x = backgroundController.bkSize.transform.localScale.x;
+        newSize.x = backgroundController.bkSize.transform.localScale.x * 0.9f;
         spawnArea.size = newSize;
         var spawnSpot = spawnArea.size.x/player.levelConfig.starsAmount;
-        var offset = spawnArea.size.x / 2;
-        var center = spawnArea.bounds.center;
-        var upLimit = center + spawnArea.bounds.extents;
-        var downLimit = center - spawnArea.bounds.extents;
-        var randomPos = center;
+        //Alittle bit more than 2 so that the first star doesn't appear in the face of the player
+        var offset = spawnArea.size.x / 2.2f;
+        var center = spawnArea.transform.position;
+        var upLimit = center + spawnArea.size/2;
+        var downLimit = center - spawnArea.size/2;
         for (int i = 0; i < player.levelConfig.starsAmount; i++)
         {
-            var newStar = GetStar();
+			var randomPos = center;
+			var newStar = GetStar();
             randomPos.x = -offset + spawnSpot * i;
-            randomPos.y += Random.Range(downLimit.y+2, upLimit.y-2);
+            randomPos.y = center.y + Random.Range(downLimit.y, upLimit.y);
             newStar.transform.position = randomPos;
             stars.Add(newStar);
         }
     }
-    void Update()
-    {
-        if (PlayerController.Instance.gameStages == GameStages.End) return;
 
-    }
+
     StarsController GetStar()
     {
         return Instantiate(starSample, spawnArea.transform);

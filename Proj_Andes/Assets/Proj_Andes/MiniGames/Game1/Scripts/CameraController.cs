@@ -6,13 +6,13 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     PlayerController player => PlayerController.Instance;
-    float visualOffset = -9;
+    [SerializeField] float visualOffset = -4.7f;
     float targetPos;
 
     void Update()
     {
         Vector3 newPos = transform.localPosition;
-        newPos.x = Mathf.MoveTowards(newPos.x, targetPos, player.levelConfig.accelerationSpeed * Time.deltaTime);
+        newPos.x = Mathf.MoveTowards(newPos.x, targetPos, player.levelConfig.accelerationSpeed * 4 * Time.deltaTime);
         newPos.y = 0;
         transform.localPosition = newPos;
     }

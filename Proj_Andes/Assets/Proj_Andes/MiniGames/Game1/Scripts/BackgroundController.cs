@@ -7,7 +7,7 @@ public class BackgroundController : MonoBehaviour
 {
     public Transform bkSize;
     PlayerController player => PlayerController.Instance;
-    StarsSpawner starsSpawner;
+    public StarsSpawner starsSpawner;
     public void Init()
     {
         starsSpawner = GetComponentInChildren<StarsSpawner>();

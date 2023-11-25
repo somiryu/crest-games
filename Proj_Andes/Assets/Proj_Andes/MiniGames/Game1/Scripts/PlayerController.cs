@@ -6,11 +6,14 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEditor.PackageManager;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     static PlayerController instance;
     public static PlayerController Instance => instance;
+
     public LevelConfig levelConfig;
     public bool onPlay;
     public Transform character;
@@ -18,20 +21,35 @@ public class PlayerController : MonoBehaviour
     float currentTargetSpeed;
     SphereCollider myCollider;
     Collider[] colls;
-    float timer;
-    float turboTimer;
     [HideInInspector] public int starsGatheredCount;
     public bool onTurbo = false;
     float currentSpeed;
     public Camera cam;
     [SerializeField] CameraController camCC;
     [SerializeField] Transform finalSpin;
-    [SerializeField] BackgroundController bk;
+    public BackgroundController bk;
     public GameStages gameStages;
     public UIController ui;
     public GameRideData data;
+
+    public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
+
+
     Ray hit;
-    private void Awake()
+	float timer;
+	float turboTimer;
+    float targetYPos;
+    float playerRanXSpace;
+
+    public float CurrProgress
+    {
+        get
+        {
+            return playerRanXSpace / bk.bkSize.localScale.x;
+        }
+    }
+
+	private void Awake()
     {
         if (instance != null)
         {
@@ -48,12 +66,28 @@ public class PlayerController : MonoBehaviour
     }
     public void Init()
     {
+		playerRanXSpace = 0;
+        targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
         camCC = GetComponentInChildren<CameraController>();
         ui.StartUi();
-    }
-    void SetSpeedway()
+
+	}
+
+	public void RideBegining()
+	{
+		ui.StartUi();
+		colls = new Collider[5];
+		currentSpeed = levelConfig.regularSpeed;
+		currentTargetSpeed = levelConfig.regularSpeed;
+		bk.Init();
+		SetSpeedway();
+		firstPos = transform.position;
+		gameStages = GameStages.Start;
+	}
+
+	void SetSpeedway()
     {
         Vector3 playerStartPos = bk.bkSize.localScale;
         playerStartPos.y = transform.position.y;
@@ -65,30 +99,21 @@ public class PlayerController : MonoBehaviour
         finalSpinPos.x -= bk.bkSize.localScale.x - bk.bkSize.localScale.x/2;
         finalSpin.transform.position = finalSpinPos;
     }
+
     void Update()
     {
-        if (onPlay) ContinuousMovement();
-        if (Input.GetMouseButton(1))
+        if (!onPlay) return;
+        ContinuousMovement();
+        if (Input.GetMouseButtonDown(0) &&!EventSystem.current.IsPointerOverGameObject())
         {
-            hit = cam.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(hit, out RaycastHit hitInfo))
-            {
-                if(Input.GetMouseButtonDown(1)) OnClickBoard(hitInfo.collider, hitInfo);
-            }
+            var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            targetYPos = mouseWorldPos.y;
+            targetYPos = Mathf.Clamp( targetYPos, -RoadSize.y / 2, RoadSize.y / 2);
         }
 
         var collsAmt = Physics.OverlapSphereNonAlloc(myCollider.transform.position, myCollider.radius, colls);
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
 
-    }
-    void OnClickBoard(Collider collider, RaycastHit hit)
-    {
-        if (collider.TryGetComponent(out ClickSpots spots))
-        {
-            Vector3 newHeight = transform.position;
-            newHeight.y = hit.point.y;
-            transform.position = newHeight;
-        }
     }
     void ContinuousMovement()
     {
@@ -96,7 +121,12 @@ public class PlayerController : MonoBehaviour
         timer += Time.deltaTime;
         if (timer <= levelConfig.regularRideDuration)
         {
-            transform.position += Vector3.right * currentSpeed * Time.deltaTime;
+            var movementToAdd = Vector3.right * currentSpeed * Time.deltaTime;
+            playerRanXSpace += movementToAdd.x;
+            transform.position += movementToAdd;
+            var currPos = transform.position;
+            currPos.y = Mathf.MoveTowards(currPos.y, targetYPos, currentSpeed * Time.deltaTime);
+            transform.position = currPos;
         }
         else
         {
@@ -135,17 +165,7 @@ public class PlayerController : MonoBehaviour
         }
         else onPlay = false;
     }
-    public void RideBegining()
-    {
-        bk.Init();
-        ui.StartUi();
-        colls = new Collider[5];
-        SetSpeedway();
-        firstPos = transform.position;
-        currentSpeed = levelConfig.regularSpeed;
-        currentTargetSpeed = levelConfig.regularSpeed;
-        gameStages = GameStages.Start;
-    }
+ 
     void EndOfRide()
     {
         var ride = new GameRideData();
