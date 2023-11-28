@@ -14,8 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - characterType: 0
-    text: Text after response 1
-    responses: []
+    text: 
+    responses:
+    - response: asdasdas
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: qweqweqwe
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}

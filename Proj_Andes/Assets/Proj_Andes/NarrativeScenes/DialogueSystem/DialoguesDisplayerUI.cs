@@ -10,9 +10,7 @@ using UnityEditor.Timeline;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
-
     private static DialoguesDisplayerUI instance;
-
     public static DialoguesDisplayerUI Instance => instance;
 
 
@@ -25,19 +23,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] TMP_Text nameTxt;
     [SerializeField] GameObject nameTxtContainer;
     [SerializeField] TMP_Text dialogueTxt;
+    [SerializeField] GameObject dialogueTxtContainer;
     [SerializeField] Button skipDialogueBtn;
     [SerializeField] Button dialogueBoxBtn;
     [SerializeField] PlayableDirector timeLinePlayer;
+    [SerializeField] Transform responseDisplayersContainer;
 
-    [SerializeField] Pool<ResponseBtn> responseBtnsPool;
     [SerializeField] bool forceDialogeAppear;
-    [SerializeField] bool autoContinueOnClickDialog;
 
     private int currShowingIdx = -1;
     private bool isShowing = false;
     private bool hasPendingDialogueChange = false;
     public bool IsShowing => isShowing;
-    private KeyCode skipKey = KeyCode.Space;
     public dialogLineState state = dialogLineState.NotShowing;
 
     //Appear dialogue params
@@ -48,7 +45,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private int currCharProgress;
     private char[] currDialogueCharacters;
 
-    private StringBuilder currText = new StringBuilder();
+    private DialoguesResponsesDisplayerUI currResponsesDisplayer;
+
+    //This stores a reference to the original prefab linked to the cached instance, so that we don't instantiate two of the same.
+    private Dictionary<DialoguesResponsesDisplayerUI, DialoguesResponsesDisplayerUI> cachedResponseDisplayers
+        = new Dictionary<DialoguesResponsesDisplayerUI, DialoguesResponsesDisplayerUI>();
+
+
+
+	private StringBuilder currText = new StringBuilder();
 
     public Action OnStartShowingDialogue;
     public Action OnEndShowingDialogue;
@@ -66,8 +71,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if(instance != null && instance != this) DestroyImmediate(instance);
         instance = this;
 
-
-        responseBtnsPool.Init(4);
         skipDialogueBtn.onClick.AddListener(NextDialogue);
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
     }
@@ -93,7 +96,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 		else
 		{
-            if (autoContinueOnClickDialog)
+            if (AutoContinueActive())
             {
                 //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
                 hasPendingDialogueChange = true;
@@ -101,12 +104,17 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 	}
 
+    bool AutoContinueActive()
+    {
+		var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
+        return currDialogue.autoContinueOnClickDialog && currDialogue.responses.Length == 0;
+    }
+
 
     public void ShowDialogueSequence(DialogueSequenceData newDialogues) {
         dialoguesToShow = newDialogues;
         currShowingIdx = -1;
         isShowing = true;
-        skipKey = DialogueConfigs.Instace.skipKey;
         appearTime = DialogueConfigs.Instace.appearTime;
         mainDialoguesGraphics.SetActive(true);
         NextDialogue();
@@ -122,14 +130,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
         var curr = dialoguesToShow.dialogues[currShowingIdx];
         var currCharConfigs = curr.characterType.GetCharacterConfig();
         var currResponses = curr.responses;
-        responseBtnsPool.RecycleAll();
-		for (int i = 0; i < currResponses.Length; i++)
-		{
-            var currResponse = currResponses[i];
-            var responseBtn = responseBtnsPool.GetNewItem();
-            responseBtn.SetData(currResponse);
-            responseBtn.onClicked += OnClickResponse;
-		}
+
+        //Clean old responses if needed
+        if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
+		//Get new response handler
+		currResponsesDisplayer = GetResponseDisplayer(curr);
+        if(currResponsesDisplayer != null) currResponsesDisplayer.ShowResponses(currResponses);
 
         characterImageContainer.SetActive(currCharConfigs.image != null);
         characterImage.sprite = currCharConfigs.image;
@@ -138,15 +144,43 @@ public class DialoguesDisplayerUI : MonoBehaviour
         nameTxt.SetText(currCharConfigs.name);
 
         currDialogueCharacters = curr.text.ToCharArray();
-        currCharProgress = 0;
-        StartTextAppear();
-        currText.Clear();
-        currText.Append(currDialogueCharacters[currCharProgress]);
+
+        if(currDialogueCharacters.Length > 0 )
+        {
+			dialogueTxtContainer.SetActive(true);
+			currCharProgress = 0;
+			StartTextAppear();
+			currText.Clear();
+			currText.Append(currDialogueCharacters[currCharProgress]);
+		}
+		else dialogueTxtContainer.SetActive(false);
+
+       
         skipDialogueBtn.gameObject.SetActive(false);
 
         if(currAnimSequence != null) StopCoroutine(currAnimSequence);
         currAnimSequence = DialogAnimSequence(curr);
         StartCoroutine(currAnimSequence);
+    }
+
+    private DialoguesResponsesDisplayerUI GetResponseDisplayer(DialogueData dialogueData)
+    {
+        if(dialogueData.responses.Length == 0) return null;
+        if(dialogueData.responsesDisplayerPrefab == null)
+        {
+            Debug.LogError("You have responses, but you haven't set a response displayer on dialogue data" + dialogueData.responses[0].response, CurrDialoguesBeingShown);
+            return null;
+        }
+        //Already cached
+        if(cachedResponseDisplayers.TryGetValue(dialogueData.responsesDisplayerPrefab, out var responsesDisplayerUI))
+        {
+            return responsesDisplayerUI;
+        }
+        //It's a new one
+        var instance = Instantiate(dialogueData.responsesDisplayerPrefab, responseDisplayersContainer);
+        instance.Init(this);
+        cachedResponseDisplayers.Add(dialogueData.responsesDisplayerPrefab, instance);
+        return instance;
     }
 
     public void StartTextAppear()
@@ -164,14 +198,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
             HideDialogues();
             return;
         }
-        if (isAppearingTxt)
-        {
-            AppearText();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OnDialogueBoxBtnPressed();
-        }
+
+        if (isAppearingTxt) AppearText();
     }
 
     private IEnumerator currAnimSequence;
@@ -211,7 +239,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	}
 
 
-    private void OnClickResponse(DialogueResponse responseClicked)
+    public void OnClickResponse(DialogueResponse responseClicked)
 	{
 		if (responseClicked.changeSequence)
 		{
@@ -240,8 +268,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (forceEndAppearingTxt) {
             isAppearingTxt = false;
             dialogueTxt.SetText(currDialogue.text);
-            skipDialogueBtn.gameObject.SetActive(currDialogue.responses.Length == 0);
-            dialogueBoxBtn.gameObject.SetActive(currDialogue.responses.Length == 0);
+            var turnOnAutoSkip = AutoContinueActive();
+            skipDialogueBtn.gameObject.SetActive(turnOnAutoSkip);
+            dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);
         }
     }
 

@@ -16,11 +16,13 @@ MonoBehaviour:
   - characterType: 0
     text: 'Test Dialogue '
     responses: []
+    responsesDisplayerPrefab: {fileID: 0}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
   - characterType: 0
-    text: Test Dialogue 2
+    text: 
     responses:
     - response: Response 1
       changeSequence: 1
@@ -28,6 +30,8 @@ MonoBehaviour:
     - response: Response 2
       changeSequence: 1
       dataAfterResponse: {fileID: 11400000, guid: db8b288fd85be984286417a60ef3ff10, type: 2}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: f30613af19a1c2b4aa12c0ac691e8593, type: 3}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}

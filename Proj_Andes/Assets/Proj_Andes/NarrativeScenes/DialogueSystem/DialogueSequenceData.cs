@@ -26,6 +26,9 @@ public class DialogueData
     [TextArea(1, 20)]
     public string text;
     public DialogueResponse[] responses;
+    public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
+    [Tooltip("If true, the dialog will continue to the next line automatically when pressing the dialog box, (only works of no responses are present)")]
+    public bool autoContinueOnClickDialog = true;
     public TimelineAsset EnterAnim;
     public TimelineAsset IdleAnim;
     public TimelineAsset ExitAnim;
