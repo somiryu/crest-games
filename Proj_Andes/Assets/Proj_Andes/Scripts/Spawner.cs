@@ -20,15 +20,16 @@ public class Spawner<T> where T : Component
     public float spawnRate = 3;
     public float randomFactor = 1;
     public Collider spawnArea;
-
+    public bool randomSpawnArea;
     private float nextSpawnTime = 3;
     //public bool initialDelayDone = false;
     float timer;
     iSpawnerUsers<T> owner;
-    public void Init(iSpawnerUsers<T> user)
+    public void Init(iSpawnerUsers<T> user, float _spawnRate)
     {
         owner = user;
         pool.Init(user.InitialSize(), user.InitialActiveItems());
+        spawnRate = _spawnRate;
     }
     public void Tick()
     {
@@ -43,13 +44,17 @@ public class Spawner<T> where T : Component
     public void SpawnNewItem()
     {
         var newItem = pool.GetNewItem();
-        var center = owner.transform.position;
-        var upLimit = center + spawnArea.bounds.extents;
-        var downLimit = center - spawnArea.bounds.extents;
-        var randomPos = center;
-        randomPos.x += Random.Range(downLimit.x, upLimit.x);
-        randomPos.y += Random.Range(downLimit.y, upLimit.y);
-        newItem.transform.position = randomPos;
+        if (randomSpawnArea)
+        {
+            var center = owner.transform.position;
+            var upLimit = center + spawnArea.bounds.extents;
+            var downLimit = center - spawnArea.bounds.extents;
+            var randomPos = center;
+            randomPos.x += Random.Range(downLimit.x, upLimit.x);
+            randomPos.y += Random.Range(downLimit.y, upLimit.y);
+            newItem.transform.position = randomPos;
+        }
+        else newItem.transform.position = spawnArea.transform.position;
         newItem.gameObject.SetActive(true);
         owner.OnCustomizeSpawn(newItem, pool);
     }

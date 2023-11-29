@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BoostersAndScape_GameConfig
   m_EditorClassIdentifier: 
   turboSpeed: 5
-  accelerationSpeed: 2
+  accelerationSpeed: 0.5
   regularSpeed: 1.5
   boostersPerRun: 10
   forcedFails: 2
+  boosterTriggerRate: 5

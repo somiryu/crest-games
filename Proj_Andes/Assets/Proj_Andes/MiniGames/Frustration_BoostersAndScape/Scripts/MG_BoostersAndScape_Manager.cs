@@ -14,6 +14,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
 
     public Transform rocket;
     public Transform alien;
+    MG_BoostersAndScape_AlienMovementController alienMov;
     public bool onPlay;
 
     public float targetSpeed;
@@ -23,7 +24,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     public bool onTrapMode;
 
     public List<MG_BoostersAndScape_Boosters> activeBoosters = new List<MG_BoostersAndScape_Boosters>();
-
+    [SerializeField] MG_BoostersAndScape_Spawner spawner;
     [SerializeField] Button playBtn;
     private void Awake()
     {
@@ -32,12 +33,14 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
             if (instance != this) DestroyImmediate(this);
         }
         instance = this;
+        spawner.Init();
         Init();
     }
 
     void Init()
     {
         playBtn.onClick.AddListener(OnGameStart);
+        alien.TryGetComponent(out alienMov);
     }
 
     // Update is called once per frame
@@ -56,10 +59,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
                 else OnMissedBooster();
             }
         }
-        //temporary
-        if(totalAttempts > gameConfig.boostersPerRun) onPlay = false;
+        if (alien.transform.position.x >= rocket.transform.position.x) OnGameEnd();
     }
-    
     void OnGameStart()
     {
         successfulAttempts = 0;
@@ -68,19 +69,24 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     void OnGameEnd()
     {
         onPlay = false;
+        Debug.Log("Game over!");
     }
     public void OnBoostered()
     {
         targetSpeed = gameConfig.turboSpeed;
-        alien.TryGetComponent(out MG_BoostersAndScape_MovementController mov);
-        mov.dir = -1;
+        alienMov.OnBoosted();
         successfulAttempts++;
         Debug.Log("boosted");
 
     }
     public void OnMissedBooster()
     {
-        targetSpeed = gameConfig.regularSpeed;
+        alienMov.OnFailedToBoost();
+
         Debug.Log("not boosted");
+    }
+    public void OnBoosterEnded()
+    {
+        targetSpeed = gameConfig.regularSpeed;
     }
 }

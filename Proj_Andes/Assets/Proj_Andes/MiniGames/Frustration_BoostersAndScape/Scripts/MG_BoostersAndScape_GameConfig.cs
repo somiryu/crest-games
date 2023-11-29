@@ -11,4 +11,5 @@ public class MG_BoostersAndScape_GameConfig : ScriptableObject
     public float regularSpeed;
     public int boostersPerRun;
     public int forcedFails;
+    public float boosterTriggerRate;
 }
