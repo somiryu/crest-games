@@ -26,14 +26,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] GameObject dialogueTxtContainer;
     [SerializeField] Button skipDialogueBtn;
     [SerializeField] Button dialogueBoxBtn;
+    [SerializeField] Button repeatBtn;
     [SerializeField] PlayableDirector timeLinePlayer;
     [SerializeField] Transform responseDisplayersContainer;
+    [SerializeField] AudioSource audioPlayer;
 
     [SerializeField] bool forceDialogeAppear;
 
     private int currShowingIdx = -1;
     private bool isShowing = false;
-    private bool hasPendingDialogueChange = false;
+    private bool hasPendingLineChange = false;
+    private bool audioIsDone = false;
+    private DialogueSequenceData pendingSequenceToShow;
     public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
 
@@ -73,10 +77,14 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         skipDialogueBtn.onClick.AddListener(NextDialogue);
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
+        repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
     }
 
-    public void OnWantsToChangeDialogFromTrigger()
+    public bool OnWantsToChangeDialogFromTrigger()
     {
+        if (!audioIsDone) return false;
+        if (state != dialogLineState.Idle) return false;
+        
         if (isAppearingTxt)
         {
             forceEndAppearingTxt = true;
@@ -84,8 +92,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
         else
         {
             //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
-            hasPendingDialogueChange = true;
+            hasPendingLineChange = true;
         }
+
+        return true;
 	}
 
     private void OnDialogueBoxBtnPressed()
@@ -99,7 +109,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             if (AutoContinueActive())
             {
                 //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
-                hasPendingDialogueChange = true;
+                hasPendingLineChange = true;
             }
 		}
 	}
@@ -110,8 +120,23 @@ public class DialoguesDisplayerUI : MonoBehaviour
         return currDialogue.autoContinueOnClickDialog && currDialogue.responses.Length == 0;
     }
 
+    /// <summary>
+    /// Set the new sequence as pending to be shown, (Not changing directly because we want to wait for the exit anim to happen)
+    /// </summary>
+    public bool SetPendingSequence(DialogueSequenceData newDialogSequence)
+    {
+		if (!audioIsDone) return false;
+		if (state != dialogLineState.Idle) return false;
+
+		pendingSequenceToShow = newDialogSequence;
+        hasPendingLineChange = true;
+
+        return true;
+    }
+
 
     public void ShowDialogueSequence(DialogueSequenceData newDialogues) {
+        pendingSequenceToShow = null;
         dialoguesToShow = newDialogues;
         currShowingIdx = -1;
         isShowing = true;
@@ -127,41 +152,39 @@ public class DialoguesDisplayerUI : MonoBehaviour
             HideDialogues();
             return;
         }
-        var curr = dialoguesToShow.dialogues[currShowingIdx];
-        var currCharConfigs = curr.characterType.GetCharacterConfig();
-        var currResponses = curr.responses;
+        ShowCurrDialog();
+    }
 
-        //Clean old responses if needed
-        if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
+    private void ShowCurrDialog(bool SkipEnterAnim = false)
+    {
+		var curr = dialoguesToShow.dialogues[currShowingIdx];
+
+		repeatBtn.gameObject.SetActive(false);
+		skipDialogueBtn.gameObject.SetActive(false);
+
+		var currResponses = curr.responses;
+		//Clean old responses if needed
+		if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
 		//Get new response handler
 		currResponsesDisplayer = GetResponseDisplayer(curr);
-        if(currResponsesDisplayer != null) currResponsesDisplayer.ShowResponses(currResponses);
+		if (currResponsesDisplayer != null) currResponsesDisplayer.ShowResponses(currResponses);
 
-        characterImageContainer.SetActive(currCharConfigs.image != null);
-        characterImage.sprite = currCharConfigs.image;
+        //Image and name of character
+		var currCharConfigs = curr.characterType.GetCharacterConfig();
+		characterImageContainer.SetActive(currCharConfigs.image != null);
+		characterImage.sprite = currCharConfigs.image;
+		nameTxtContainer.SetActive(string.IsNullOrEmpty(currCharConfigs.name));
+		nameTxt.SetText(currCharConfigs.name);
 
-        nameTxtContainer.SetActive(string.IsNullOrEmpty(currCharConfigs.name));
-        nameTxt.SetText(currCharConfigs.name);
 
-        currDialogueCharacters = curr.text.ToCharArray();
+		currDialogueCharacters = curr.text.ToCharArray();
+		dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
+		dialogueTxt.SetText("");
 
-        if(currDialogueCharacters.Length > 0 )
-        {
-			dialogueTxtContainer.SetActive(true);
-			currCharProgress = 0;
-			StartTextAppear();
-			currText.Clear();
-			currText.Append(currDialogueCharacters[currCharProgress]);
-		}
-		else dialogueTxtContainer.SetActive(false);
-
-       
-        skipDialogueBtn.gameObject.SetActive(false);
-
-        if(currAnimSequence != null) StopCoroutine(currAnimSequence);
-        currAnimSequence = DialogAnimSequence(curr);
-        StartCoroutine(currAnimSequence);
-    }
+		if (currAnimSequence != null) StopCoroutine(currAnimSequence);
+		currAnimSequence = DialogAnimSequence(curr, SkipEnterAnim);
+		StartCoroutine(currAnimSequence);
+	}
 
     private DialoguesResponsesDisplayerUI GetResponseDisplayer(DialogueData dialogueData)
     {
@@ -204,10 +227,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     private IEnumerator currAnimSequence;
 
-    private IEnumerator DialogAnimSequence(DialogueData dialogueData)
+    private IEnumerator DialogAnimSequence(DialogueData dialogueData, bool skipEnterAnim = false)
     {
         state = dialogLineState.Entering;
-        if (dialogueData.EnterAnim != null)
+        if (dialogueData.EnterAnim != null && !skipEnterAnim)
         {
             timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
 			timeLinePlayer.playableAsset = dialogueData.EnterAnim;
@@ -215,16 +238,45 @@ public class DialoguesDisplayerUI : MonoBehaviour
             while(timeLinePlayer.state == PlayState.Playing) yield return null;
         }
 
-        state = dialogLineState.Idle;
+		audioIsDone = true;
+		//Start playing audio
+		if (dialogueData.audio != null)
+		{
+			audioPlayer.clip = dialogueData.audio;
+			audioPlayer.Play();
+			audioIsDone = false;
+		}
+
+        //Start showing text
+		if (currDialogueCharacters.Length > 0)
+		{
+			currCharProgress = 0;
+			StartTextAppear();
+			currText.Clear();
+			currText.Append(currDialogueCharacters[currCharProgress]);
+		}
+
+		state = dialogLineState.Idle;
         if(dialogueData.IdleAnim != null)
         {
 			timeLinePlayer.extrapolationMode = DirectorWrapMode.Loop;
 			timeLinePlayer.playableAsset = dialogueData.IdleAnim;
             timeLinePlayer.Play();
-            while(!hasPendingDialogueChange) yield return null;
         }
 
-        state = dialogLineState.Exiting;
+		while (!audioIsDone)
+        {
+            audioIsDone = !audioPlayer.isPlaying;
+            yield return null;
+        }
+
+		repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || dialogueData.audio != null);
+
+
+		while (!hasPendingLineChange) yield return null;
+
+
+		state = dialogLineState.Exiting;
         if(dialogueData.ExitAnim != null)
         {
 			timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
@@ -233,9 +285,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
 			while (timeLinePlayer.state == PlayState.Playing) yield return null;
 		}
         state = dialogLineState.NotShowing;
-        hasPendingDialogueChange = false;
+        hasPendingLineChange = false;
         currAnimSequence = null;
-        NextDialogue();
+
+        if (pendingSequenceToShow != null) ShowDialogueSequence(pendingSequenceToShow);
+        else NextDialogue();
+
 	}
 
 
@@ -243,12 +298,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	{
 		if (responseClicked.changeSequence)
 		{
-            ShowDialogueSequence(responseClicked.dataAfterResponse);
+            pendingSequenceToShow = responseClicked.dataAfterResponse;
+            hasPendingLineChange = true;
 		}
-		else
-		{
-            NextDialogue();
-		}
+		else hasPendingLineChange = true;
 	}
 
     public void AppearText() {

@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btn: {fileID: 6894406546717336060}
   responseTxt: {fileID: 3624301558959741956}
+  responseImg: {fileID: 1117385515315517833}
 --- !u!1 &8794435060529775678
 GameObject:
   m_ObjectHideFlags: 0
