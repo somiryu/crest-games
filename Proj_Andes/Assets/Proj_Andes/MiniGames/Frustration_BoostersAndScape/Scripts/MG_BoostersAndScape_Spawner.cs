@@ -33,4 +33,8 @@ public class MG_BoostersAndScape_Spawner : MonoBehaviour, iSpawnerUsers<MG_Boost
         if (!manager.onPlay) return;
         spawner.Tick();
     }
+    public void OnGameEnd()
+    {
+        spawner.pool.RecycleAll();
+    }
 }

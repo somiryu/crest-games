@@ -16,5 +16,5 @@ MonoBehaviour:
   accelerationSpeed: 0.5
   regularSpeed: 1.5
   boostersPerRun: 10
-  forcedFails: 2
+  forcedFails: 3
   boosterTriggerRate: 5
