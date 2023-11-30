@@ -16,8 +16,6 @@ public static class Utility
         }
     }
 
-   
-
     static void GetObjectsOfType<T>(GameObject currObj, List<T> objectsTList)
     {
         if (currObj.TryGetComponent(out T obj))

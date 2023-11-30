@@ -78,8 +78,16 @@ public class Pool <T> where T : Component
 
 	public void RecycleItem(T item)
 	{
-		var idx = allItems.IndexOf(item);
+        if (item == null)
+        {
+			Debug.LogError("Trying to recycle a null obj");
+        }
+        var idx = allItems.IndexOf(item);
 		item.gameObject.SetActive(false);
+		if(idx >= itemsAvailability.Count || idx < 0)
+		{
+			Debug.Log("Trying to recycle obj but index out of bound: " + idx, item);
+		}
 		itemsAvailability[idx] = true;
 	}
 
