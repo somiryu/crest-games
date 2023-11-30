@@ -5,7 +5,7 @@ using UnityEngine;
 public class MG_BoostersAndScape_Spawner : MonoBehaviour, iSpawnerUsers<MG_BoostersAndScape_Boosters>
 {
     MG_BoostersAndScape_Manager manager => MG_BoostersAndScape_Manager.Instance;
-    [SerializeField] Spawner<MG_BoostersAndScape_Boosters> spawner;
+    public Spawner<MG_BoostersAndScape_Boosters> spawner;
     public bool InitialActiveItems()
     {
         return false;
@@ -25,9 +25,9 @@ public class MG_BoostersAndScape_Spawner : MonoBehaviour, iSpawnerUsers<MG_Boost
     public void Init()
     {
         spawner.Init(this, manager.gameConfig.boosterTriggerRate);
+        spawner.nextSpawnTime = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!manager.onPlay) return;

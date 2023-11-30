@@ -16,20 +16,19 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
     public void Init(Pool<MG_BoostersAndScape_Boosters> _pool)
     {
         pool = _pool;
-        manager.activeBoosters.Add(this);
         timer = 0;
-        lifetime = manager.gameConfig.boosterTriggerRate +2;
         boosted = false;
         initPos.x = transform.position.x;
+        lifetime = manager.gameConfig.boosterTriggerRate * 2;
         targetPos.x = manager.rocket.transform.position.x - initPos.x*2;
+        manager.currentBooster = this;
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if(timer >= lifetime) Recycle();
         if (!manager.onPlay) return;
         timer += Time.deltaTime;
+        if(timer > lifetime) Recycle(); 
         var currentProgress = Mathf.InverseLerp(0, manager.gameConfig.boosterTriggerRate*2, timer);
         var currentPos = Mathf.Lerp(initPos.x, targetPos.x, currentProgress);
         transform.position = Vector3.right * currentPos;
@@ -37,19 +36,23 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
 
     void Recycle()
     {
-        manager.activeBoosters.Remove(this);
         pool.RecycleItem(this);
     }
     public void Boosted()
     {
         boosted = true;
+        Recycle();
+    }
+    public void NotBoosted()
+    {
+        boosted = false;
     }
     public bool Boosteable()
     {
         if(manager.onTrapMode) return false;
         if (transform.position.x > manager.rocket.transform.position.x - manager.successRange && transform.position.x < manager.rocket.transform.position.x + manager.successRange)
         {
-            Debug.Log("boosteable");
+            //Debug.Log("boosteable");
             return true;
         }
         else { Debug.Log("not boosteable"); return false; }

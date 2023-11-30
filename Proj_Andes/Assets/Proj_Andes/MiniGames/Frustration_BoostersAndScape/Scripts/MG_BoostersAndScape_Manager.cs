@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -22,7 +23,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     public int totalAttempts;
     public float successRange;
     public bool onTrapMode;
-    float timer;
+    public MG_BoostersAndScape_Boosters currentBooster;
+    public float timer;
+    public bool onBoost;
+    float targetTime;
     Vector3 startPos;
 
     public List<MG_BoostersAndScape_Boosters> activeBoosters = new List<MG_BoostersAndScape_Boosters>();
@@ -46,29 +50,30 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
         startPos = rocket.transform.position;
         startPos.x = 0;
         rocket.transform.position = startPos;
+        targetTime = gameConfig.boosterTriggerRate;
     }
 
     void Update()
     {
         if (!onPlay) return;
         timer += Time.deltaTime;
-        if(timer >= gameConfig.boosterTriggerRate)
+        spawner.spawner.timer = timer;
+        if(timer >= targetTime)
         {
-            for (int i = 0; i < activeBoosters.Count; i++)
+            if (onBoost)
             {
-                if (!activeBoosters[i].boosted) OnMissedBooster();
+                onBoost = false;
+                targetTime = gameConfig.boosterTriggerRate;
             }
             timer = 0;
+            MoveToNextPos(currentBooster);
         }
+        Debug.Log(timer + " " + targetTime);
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            for (int i = 0; i < activeBoosters.Count; i++)
+            if (currentBooster.Boosteable())
             {
-                if (activeBoosters[i].Boosteable())
-                {
-                    OnBoostered(activeBoosters[i]);
-                    break;
-                }
+                OnBoostered(currentBooster);
             }
         }
         ForcedToFail();
@@ -79,6 +84,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
             rocket.transform.position = Vector3.right * 5 * Time.deltaTime;
         }
         if (alien.transform.position.x >= rocket.transform.position.x) OnGameEnd();
+        Debug.Log(spawner.spawner.timer);
+
     }
     void OnGameStart()
     {
@@ -95,16 +102,19 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
-        booster.boosted = true;
+        onBoost = true;
+        targetTime = 0.3f;
         alienMov.OnBoosted();
+        booster.Boosted();
+        spawner.spawner.nextSpawnTime = targetTime;
         successfulAttempts++;
-        Debug.Log("boosted");
-
+        Debug.LogError("boosted");
+        timer = 0;
     }
-    public void OnMissedBooster()
+    public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
     {
-        alienMov.OnFailedToBoost();
-        Debug.Log("not boosted");
+        alienMov.MoveToNextPoint();
+        Debug.LogError("not boosted");
     }
     public void ForcedToFail()
     {

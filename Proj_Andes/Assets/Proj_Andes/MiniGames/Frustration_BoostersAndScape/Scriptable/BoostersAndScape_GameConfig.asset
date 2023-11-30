@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf12025a3f299348af496aaed2cf23b, type: 3}
   m_Name: BoostersAndScape_GameConfig
   m_EditorClassIdentifier: 
-  turboSpeed: 5
-  accelerationSpeed: 0.5
-  regularSpeed: 1.5
-  boostersPerRun: 10
-  forcedFails: 3
-  boosterTriggerRate: 5
+  boostersPerRun: 7
+  forcedFails: 4
+  boosterTriggerRate: 2

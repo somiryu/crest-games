@@ -1,66 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MG_BoostersAndScape_AlienMovementController : MonoBehaviour
 {
     MG_BoostersAndScape_Manager manager => MG_BoostersAndScape_Manager.Instance;
     [SerializeField] float currentSpeed;
-    Vector3 roadStart;
-    Vector3 initPos;
-    Vector3 targetPos;
+    float roadStart;
+    float initPos;
+    float targetPos;
     float unitOfProgress;
-    float timer;
-    int progressGuide;
+    public float timer => manager.timer;
+    public int progressGuide;
     //Pending to improve target time
     float targetTime;
     private void Start()
     {
-        initPos = transform.position;
+        initPos = transform.position.x;
         roadStart = initPos;
-        progressGuide = 1;
+        progressGuide = 0;
         targetTime = manager.gameConfig.boosterTriggerRate;
-        var dis = manager.rocket.transform.position - initPos;
-        unitOfProgress = dis.magnitude / manager.gameConfig.forcedFails;
-        targetPos.x = initPos.x + unitOfProgress;
+        var dis = manager.rocket.transform.position.x - initPos;
+        unitOfProgress = Mathf.Abs(dis) / manager.gameConfig.forcedFails;
     }
     void Update()
     {
         if (!manager.onPlay) return;
-        timer += Time.deltaTime;
         var currentProgress = Mathf.InverseLerp(0, targetTime, timer);
-        var currentPos = Mathf.Lerp(initPos.x, targetPos.x, currentProgress);
+        var currentPos = Mathf.Lerp(initPos, roadStart + unitOfProgress * progressGuide, currentProgress);
         transform.position = Vector3.right * currentPos;
     }
-    
+
     public void OnBoosted()
     {
         progressGuide--;
-        targetTime = manager.gameConfig.boosterTriggerRate / 2;
-        if (progressGuide >= 0)
+        targetTime = 0.3f;
+        if (progressGuide <= 0)
         {
-            targetPos.x = roadStart.x;
+            progressGuide = 0;
         }
-        initPos = transform.position;
-        timer = 0;
+        initPos = transform.position.x;
+        Debug.Log("succeed "+progressGuide);
+
     }
-    public void OnFailedToBoost()
+    public void MoveToNextPoint()
     {
         progressGuide++;
         targetTime = manager.gameConfig.boosterTriggerRate;
-        initPos = transform.position;
-        targetPos.x = roadStart.x + unitOfProgress * progressGuide;
-        timer = 0;
+        initPos = transform.position.x;
+        Debug.Log("failed "+progressGuide);
     }
 
     public void OnGameStart()
     {
-        transform.position = roadStart;
-        initPos = transform.position;
+        Vector3 startPos;
+        startPos = transform.position;
+        startPos.x = roadStart;
+        transform.position = startPos;
+        initPos = transform.position.x;
         progressGuide = 1;
         targetTime = manager.gameConfig.boosterTriggerRate;
-        var dis = manager.rocket.transform.position - initPos;
-        unitOfProgress = dis.magnitude / manager.gameConfig.forcedFails;
-        targetPos.x = initPos.x + unitOfProgress;
+        var dis = manager.rocket.transform.position.x - initPos;
+        unitOfProgress = Mathf.Abs(dis) / manager.gameConfig.forcedFails;
+        targetPos = initPos + unitOfProgress;
     }
 }

@@ -21,9 +21,9 @@ public class Spawner<T> where T : Component
     public float randomFactor = 1;
     public Collider spawnArea;
     public bool randomSpawnArea;
-    private float nextSpawnTime = 3;
+    public float nextSpawnTime = 3;
     //public bool initialDelayDone = false;
-    float timer;
+    public float timer;
     iSpawnerUsers<T> owner;
     public void Init(iSpawnerUsers<T> user, float _spawnRate)
     {
