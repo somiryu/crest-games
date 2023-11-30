@@ -8,6 +8,7 @@ public class NarrativeSceneManager : MonoBehaviour
     public static NarrativeSceneManager Instance => instance;
 
 	[SerializeField] DialoguesDisplayerUI dialogueDisplayerUI;
+	[SerializeField] DialogueSequenceData _startingSequence;
 
 	public DialoguesDisplayerUI DialogueDisplayerUI => dialogueDisplayerUI;
 
@@ -18,6 +19,11 @@ public class NarrativeSceneManager : MonoBehaviour
 	{
 		if(instance == null && instance != this) DestroyImmediate(instance);
 		instance = this;
+	}
+
+	private void Start()
+	{
+		if(_startingSequence != null) dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
 	}
 
 	private void Update()
