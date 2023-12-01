@@ -9,4 +9,5 @@ public class MG_BoostersAndScape_GameConfig : ScriptableObject
     public int boostersPerRun;
     public int forcedFails;
     public float boosterTriggerRate;
+    public bool forceToFail;
 }

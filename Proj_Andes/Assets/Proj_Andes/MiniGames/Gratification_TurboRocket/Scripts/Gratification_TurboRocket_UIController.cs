@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class UIController : MonoBehaviour
+public class Gratification_TurboRocket_UIController : MonoBehaviour
 {
     [SerializeField] Button playBtn;
     [SerializeField] Button replayBtn;
@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
     [SerializeField] Slider progressSlider;
     //[SerializeField] TextMeshProUGUI turboText;
     //[SerializeField] TextMeshProUGUI durationText;
-    PlayerController player => PlayerController.Instance;
+    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
     public void StartUi()
     {
         playBtn.onClick.AddListener(

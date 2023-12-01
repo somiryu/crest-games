@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Level Config", menuName = "Game1/LevelConfig")]
 
-public class LevelConfig : ScriptableObject
+public class Gratification_TurboRocket_LevelConfig : ScriptableObject
 {
     public float regularSpeed;
     public float turboSpeed;

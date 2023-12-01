@@ -21,14 +21,13 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     [HideInInspector] public bool onPlay;
     int successfulAttempts;
     int totalAttempts;
-    public float catchBoosterRange;
+    float catchBoosterRange;
     [HideInInspector] public bool onTrapMode;
     [HideInInspector] public float timer;
     bool onBoost;
     float targetTime;
     Vector3 startPos;
 
-    [SerializeField] bool forceToFail;
     public List<int> forcedFails = new List<int>();
     [SerializeField] MG_BoostersAndScape_Spawner spawner;
     [SerializeField] Button playBtn;
@@ -51,6 +50,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
         startPos.x = 0;
         rocket.transform.position = startPos;
         targetTime = gameConfig.boosterTriggerRate;
+        catchBoosterRange = 1.5f;
     }
 
     void Update()
@@ -70,7 +70,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (forceToFail) ForcedToFail();
+            if (gameConfig.forceToFail) ForcedToFail();
             if (currentBooster.Boosteable())
             {
                 OnBoostered(currentBooster);

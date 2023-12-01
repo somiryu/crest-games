@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class BackgroundController : MonoBehaviour
+public class Gratification_TurboRocket_BackgroundController : MonoBehaviour
 {
     public Transform bkSize;
-    PlayerController player => PlayerController.Instance;
-    public StarsSpawner starsSpawner;
+    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
+    public Gratification_TurboRocket_StarsSpawner starsSpawner;
     public void Init()
     {
-        starsSpawner = GetComponentInChildren<StarsSpawner>();
+        starsSpawner = GetComponentInChildren<Gratification_TurboRocket_StarsSpawner>();
         var newSize = bkSize.localScale;
         newSize.x = player.levelConfig.regularRideDuration * player.levelConfig.regularSpeed;
         bkSize.localScale = newSize;

@@ -9,12 +9,12 @@ using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour
+public class Gratification_TurboRocket_PlayerController : MonoBehaviour
 {
-    static PlayerController instance;
-    public static PlayerController Instance => instance;
+    static Gratification_TurboRocket_PlayerController instance;
+    public static Gratification_TurboRocket_PlayerController Instance => instance;
 
-    public LevelConfig levelConfig;
+    public Gratification_TurboRocket_LevelConfig levelConfig;
     public bool onPlay;
     public Transform character;
     Vector3 firstPos;
@@ -25,11 +25,11 @@ public class PlayerController : MonoBehaviour
     public bool onTurbo = false;
     float currentSpeed;
     public Camera cam;
-    [SerializeField] CameraController camCC;
+    [SerializeField] Gratification_TurboRocket_CameraController camCC;
     [SerializeField] Transform finalSpin;
-    public BackgroundController bk;
+    public Gratification_TurboRocket_BackgroundController bk;
     public GameStages gameStages;
-    public UIController ui;
+    public Gratification_TurboRocket_UIController ui;
     public GameRideData data;
 
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
-        camCC = GetComponentInChildren<CameraController>();
+        camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
         ui.StartUi();
 
 	}
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
     void CollisionManagement(Collider collider)
     {
         if (collider.CompareTag("Finish")) EndOfRide();
-        else if (collider.TryGetComponent(out StarsController star))
+        else if (collider.TryGetComponent(out Gratification_TurboRocket_StarsController star))
         {
             if (onTurbo) return;
             star.OnCaptured();
