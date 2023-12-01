@@ -41,7 +41,6 @@ public class MG_BoostersAndScape_AlienMovementController : MonoBehaviour
             progressGuide = 0;
         }
         initPos = transform.position.x;
-        Debug.Log("succeed "+progressGuide);
 
     }
     public void MoveToNextPoint()
@@ -49,7 +48,6 @@ public class MG_BoostersAndScape_AlienMovementController : MonoBehaviour
         progressGuide++;
         targetTime = manager.gameConfig.boosterTriggerRate;
         initPos = transform.position.x;
-        Debug.Log("failed "+progressGuide);
     }
 
     public void OnGameStart()

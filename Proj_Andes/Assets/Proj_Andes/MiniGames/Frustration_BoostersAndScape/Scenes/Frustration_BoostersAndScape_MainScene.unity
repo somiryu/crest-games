@@ -398,7 +398,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 544094f72527f3747a44b0782e6d9bbb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4a40a5514f0c884389829cced0dea09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -657,9 +657,11 @@ MonoBehaviour:
       hierarchyParent: {fileID: 1285524741}
       growBy: 0
     spawnRate: 6
-    randomFactor: 1
+    randomFactor: 0
     spawnArea: {fileID: 1285524740}
     randomSpawnArea: 0
+    nextSpawnTime: 3
+    timer: 0
 --- !u!1 &1323460058
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,12 +709,14 @@ MonoBehaviour:
   gameConfig: {fileID: 11400000, guid: 36371871d8798ef499c9ed4935329b42, type: 2}
   rocket: {fileID: 93064888}
   alien: {fileID: 1895217596}
+  currentBooster: {fileID: 0}
   onPlay: 0
-  targetSpeed: 0
   totalAttempts: 0
-  successRange: 2
+  catchBoosterRange: 0
   onTrapMode: 0
-  activeBoosters: []
+  timer: 0
+  forceToFail: 1
+  forcedFails: 
   spawner: {fileID: 1285524742}
   playBtn: {fileID: 2104755056}
 --- !u!1 &1787294566
@@ -799,8 +803,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -895,6 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 1.1
+  progressGuide: 0
 --- !u!1 &2104755054
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,8 +936,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.1, y: -118.5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -27, y: -228}
+  m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2104755056
 MonoBehaviour:
@@ -991,7 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8113208, g: 0.7257496, b: 0.08802067, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

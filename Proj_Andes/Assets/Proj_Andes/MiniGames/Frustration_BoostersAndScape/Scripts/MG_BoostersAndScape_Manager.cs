@@ -16,20 +16,20 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     public Transform rocket;
     public Transform alien;
     MG_BoostersAndScape_AlienMovementController alienMov;
-    public bool onPlay;
+    [HideInInspector] public MG_BoostersAndScape_Boosters currentBooster;
 
-    public float targetSpeed;
+    [HideInInspector] public bool onPlay;
     int successfulAttempts;
-    public int totalAttempts;
-    public float successRange;
-    public bool onTrapMode;
-    public MG_BoostersAndScape_Boosters currentBooster;
-    public float timer;
-    public bool onBoost;
+    int totalAttempts;
+    public float catchBoosterRange;
+    [HideInInspector] public bool onTrapMode;
+    [HideInInspector] public float timer;
+    bool onBoost;
     float targetTime;
     Vector3 startPos;
 
-    public List<MG_BoostersAndScape_Boosters> activeBoosters = new List<MG_BoostersAndScape_Boosters>();
+    [SerializeField] bool forceToFail;
+    public List<int> forcedFails = new List<int>();
     [SerializeField] MG_BoostersAndScape_Spawner spawner;
     [SerializeField] Button playBtn;
     private void Awake()
@@ -68,34 +68,40 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
             timer = 0;
             MoveToNextPos(currentBooster);
         }
-        Debug.Log(timer + " " + targetTime);
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+            if (forceToFail) ForcedToFail();
             if (currentBooster.Boosteable())
             {
                 OnBoostered(currentBooster);
             }
         }
-        ForcedToFail();
-        if(successfulAttempts == 10)
+        if (successfulAttempts == 10)
         {
             OnGameEnd();
             Debug.Log("You won!");
             rocket.transform.position = Vector3.right * 5 * Time.deltaTime;
         }
         if (alien.transform.position.x >= rocket.transform.position.x) OnGameEnd();
-        Debug.Log(spawner.spawner.timer);
 
     }
     void OnGameStart()
     {
+        playBtn.gameObject.SetActive(false);
+        spawner.OnGameStart();
         successfulAttempts = 0;
         alienMov.OnGameStart();
         rocket.transform.position = startPos;
+        totalAttempts = 0;
+        for (int i = 0; i < gameConfig.forcedFails; i++)
+        {
+            forcedFails.Add(GenerateRandom());
+        }
         onPlay = true;
     }
     void OnGameEnd()
     {
+        playBtn.gameObject.SetActive(true);
         onPlay = false;
         spawner.OnGameEnd();
         Debug.Log("Game over!");
@@ -108,16 +114,29 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
         booster.Boosted();
         spawner.spawner.nextSpawnTime = targetTime;
         successfulAttempts++;
-        Debug.LogError("boosted");
+        Debug.Log("boosted");
         timer = 0;
     }
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
     {
+        totalAttempts++;
         alienMov.MoveToNextPoint();
-        Debug.LogError("not boosted");
     }
     public void ForcedToFail()
     {
-        if(successfulAttempts >= 8) onTrapMode = true;
+        for (int i = 0; i < forcedFails.Count; i++)
+        {
+            if (totalAttempts == forcedFails[i])
+            {
+                forcedFails.Remove(forcedFails[i]);
+                onTrapMode = true;
+            }
+            else onTrapMode = false;
+        }
+        if (successfulAttempts >= gameConfig.boostersPerRun - gameConfig.forcedFails) onTrapMode = true;
+    }
+    int GenerateRandom()
+    {
+        return Random.Range((gameConfig.boostersPerRun-gameConfig.forcedFails), totalAttempts);
     }
 }

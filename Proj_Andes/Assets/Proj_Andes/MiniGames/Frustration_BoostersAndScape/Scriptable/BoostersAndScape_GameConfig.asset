@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf12025a3f299348af496aaed2cf23b, type: 3}
   m_Name: BoostersAndScape_GameConfig
   m_EditorClassIdentifier: 
-  boostersPerRun: 7
-  forcedFails: 4
+  boostersPerRun: 12
+  forcedFails: 2
   boosterTriggerRate: 2

@@ -18,20 +18,24 @@ public class MG_BoostersAndScape_Spawner : MonoBehaviour, iSpawnerUsers<MG_Boost
 
     public void OnCustomizeSpawn(MG_BoostersAndScape_Boosters newItem, Pool<MG_BoostersAndScape_Boosters> pool)
     {
-        manager.totalAttempts++;
         newItem.Init(pool);
     }
 
     public void Init()
     {
         spawner.Init(this, manager.gameConfig.boosterTriggerRate);
-        spawner.nextSpawnTime = 0;
+        OnGameStart();
     }
 
     void Update()
     {
         if (!manager.onPlay) return;
         spawner.Tick();
+    }
+    public void OnGameStart()
+    {
+        spawner.nextSpawnTime = 0;
+
     }
     public void OnGameEnd()
     {
