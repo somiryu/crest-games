@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class MG_BoostersAndScape_Manager : MonoBehaviour
@@ -21,7 +22,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     [HideInInspector] public bool onPlay;
     int successfulAttempts;
     int totalAttempts;
-    float catchBoosterRange;
+    [HideInInspector] public float catchBoosterRange;
     [HideInInspector] public bool onTrapMode;
     [HideInInspector] public float timer;
     bool onBoost;
@@ -31,6 +32,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     public List<int> forcedFails = new List<int>();
     [SerializeField] MG_BoostersAndScape_Spawner spawner;
     [SerializeField] Button playBtn;
+    [SerializeField] Transform endOfGameContainer;
+    [SerializeField] TextMeshProUGUI finalScoreText;
+
     private void Awake()
     {
         if(instance != null)
@@ -50,6 +54,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
         startPos.x = 0;
         rocket.transform.position = startPos;
         targetTime = gameConfig.boosterTriggerRate;
+        endOfGameContainer.gameObject.SetActive(false);
         catchBoosterRange = 1.5f;
     }
 
@@ -88,6 +93,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     void OnGameStart()
     {
         playBtn.gameObject.SetActive(false);
+        endOfGameContainer.gameObject.SetActive(false);
         spawner.OnGameStart();
         successfulAttempts = 0;
         alienMov.OnGameStart();
@@ -102,6 +108,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     void OnGameEnd()
     {
         playBtn.gameObject.SetActive(true);
+        finalScoreText.text = "Boosters captured " + successfulAttempts + "/10";
+        endOfGameContainer.gameObject.SetActive(true);
         onPlay = false;
         spawner.OnGameEnd();
         Debug.Log("Game over!");
