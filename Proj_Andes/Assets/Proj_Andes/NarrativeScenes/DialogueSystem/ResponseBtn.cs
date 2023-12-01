@@ -7,18 +7,16 @@ using System;
 
 public class ResponseBtn : MonoBehaviour
 {
-    [SerializeField]
-    private Button btn;
-    public Button Btn => btn;
-
-    [SerializeField]
-    private TMP_Text responseTxt;
-    public TMP_Text ResponseTxt => responseTxt;
+	[SerializeField] Button btn;
+	[SerializeField] TMP_Text responseTxt;
+	[SerializeField] Image responseImg;
 
     private DialogueResponse responseData;
+	public Button Btn => btn;
+    public TMP_Text ResponseTxt => responseTxt;
     public DialogueResponse ResponseData => responseData;
 
-    public Action<DialogueResponse> onClicked;
+	public Action<DialogueResponse> onClicked;
 
 	private void Awake()
 	{
@@ -29,8 +27,17 @@ public class ResponseBtn : MonoBehaviour
 	public void SetData(DialogueResponse _responseData)
 	{
         responseData = _responseData;
-        responseTxt.SetText(responseData.response);
-        onClicked = null
-            ;
+
+		if (responseTxt != null)
+		{
+			responseTxt.SetText(responseData.response);
+			responseTxt.gameObject.SetActive(!string.IsNullOrEmpty(responseData.response));
+		}
+		if(responseImg != null)
+		{
+			responseImg.gameObject.SetActive(responseData.responseImage != null);
+			responseImg.sprite = responseData.responseImage;
+		}
+		onClicked = null;
 	}
 }

@@ -6,5 +6,16 @@ public class ChangeDialogSequenceOnClicked : MonoBehaviour
 {
     public DialogueSequenceData sequenceToSet;
 
-    public void OnClicked() => NarrativeSceneManager.Instance.DialogueDisplayerUI.ShowDialogueSequence(sequenceToSet);
+	public GameObject[] objToHideOnClick;
+	public GameObject[] objToShowOnClick;
+
+	public void OnClicked()
+	{
+		bool succed = NarrativeSceneManager.Instance.DialogueDisplayerUI.SetPendingSequence(sequenceToSet);
+		if (succed)
+		{
+			for (int i = 0; i < objToHideOnClick.Length; i++) objToHideOnClick[i].gameObject.SetActive(false);
+			for (int i = 0; i < objToShowOnClick.Length; i++) objToShowOnClick[i].gameObject.SetActive(true);
+		}
+	}
 }
