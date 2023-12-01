@@ -15,3 +15,4 @@ MonoBehaviour:
   boostersPerRun: 12
   forcedFails: 2
   boosterTriggerRate: 2
+  forceToFail: 1
