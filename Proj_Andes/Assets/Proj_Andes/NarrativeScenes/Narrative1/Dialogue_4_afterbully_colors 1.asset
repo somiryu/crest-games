@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: Dialogue_2_afterdraw
+  m_Name: Dialogue_4_afterbully_colors 1
   m_EditorClassIdentifier: 
   dialogues:
   - characterType: 0
-    text: "Justo cuando la profe esta llegando a tu puesto, un compa\xF1ero le hace
-      una pregunta y la distrae... parece que te salvaste esta vez"
+    text: Alex te ignora
     audio: {fileID: 0}
     responses: []
     responsesDisplayerPrefab: {fileID: 0}
@@ -24,8 +23,8 @@ MonoBehaviour:
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
   - characterType: 0
-    text: "Volteas a mirar hacia tu cuaderno y te das cuenta de que mientras estabas
-      pendiente de la profe, Alex, un compa\xF1ero del sal\xF3n comenzo a rayarlo."
+    text: "Luego de un rato te sientes mejor. La profe les pide hacer un nuevo dibujo,
+      y que compartan los materiales entre sus compa\xF1eros"
     audio: {fileID: 0}
     responses: []
     responsesDisplayerPrefab: {fileID: 0}
@@ -34,27 +33,29 @@ MonoBehaviour:
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
   - characterType: 0
-    text: "Cuando te pasa algo as\xED, \xBF qu\xE9 sientes?"
+    text: Alex tiene los colores rojo y amarillo que tu necesitas, pero no te los
+      quiere prestar.
+    audio: {fileID: 0}
+    responses: []
+    responsesDisplayerPrefab: {fileID: 0}
+    autoContinueOnClickDialog: 1
+    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
+    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
+    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
+  - characterType: 0
+    text: "Cuando te pasa algo as\xED, \xBF qu\xE9 haces?"
     audio: {fileID: 0}
     responses:
-    - response: RABIA
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+    - response: Le digo que podemos tomar turnos para usar los colores
+      responseImage: {fileID: 0}
       changeSequence: 0
       dataAfterResponse: {fileID: 0}
-    - response: MIEDO
-      responseImage: {fileID: 21300000, guid: 8c4c886567c9e4d438a4851a5d5c204d, type: 3}
+    - response: Le quito los colores a Alex, sin decirle nada
+      responseImage: {fileID: 0}
       changeSequence: 0
       dataAfterResponse: {fileID: 0}
-    - response: ALEGRIA
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: TRISTEZA
-      responseImage: {fileID: 21300000, guid: 8c4c886567c9e4d438a4851a5d5c204d, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: "NO S\xC9"
-      responseImage: {fileID: 21300000, guid: e03b3f55e3112bb44b1ebf86d53c3778, type: 3}
+    - response: Dejo asi y utilizo otros colores para mi dibujo
+      responseImage: {fileID: 0}
       changeSequence: 0
       dataAfterResponse: {fileID: 0}
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}

@@ -15,7 +15,22 @@ MonoBehaviour:
   dialogues:
   - characterType: 0
     text: "Cuando te pasa algo as\xED, \xBF qu\xE9 haces?"
-    responses: []
+    audio: {fileID: 0}
+    responses:
+    - response: "Me levanto y tembi\xE9n la rayo el cuaderno"
+      responseImage: {fileID: 0}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: Le digo que eso me molesta mucho, que no lo haga
+      responseImage: {fileID: 0}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: Cierro mi cuaderno y hago como si no me hubiera dado cuenta
+      responseImage: {fileID: 0}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}

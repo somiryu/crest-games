@@ -17,45 +17,68 @@ MonoBehaviour:
     text: "Desed que entras al sal\xF3n, sientes en ti panza que algo raro va a pasar.
       Te acercas Cami, tu mejor amiga, y cuando le preguntas si ella tambien siente
       lo mismo te responde:"
+    audio: {fileID: 0}
     responses: []
+    responsesDisplayerPrefab: {fileID: 0}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
   - characterType: 0
     text: "Uy! \xBFNo ser\xE1 que se te qued\xF3 el dibujo como a mi?"
+    audio: {fileID: 0}
     responses: []
+    responsesDisplayerPrefab: {fileID: 0}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
   - characterType: 0
     text: "No puedes creerlo, efectivamente se te pas\xF3 igual que a Cami y  no
       tienes tu dibujo"
+    audio: {fileID: 0}
     responses: []
+    responsesDisplayerPrefab: {fileID: 0}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
   - characterType: 0
     text: "Justo ah\xED ves que la profe Sandra comienza a revisar los dibujos.\xA1Ya
       se est\xE1 acerdando a tu puesto!"
+    audio: {fileID: 0}
     responses: []
+    responsesDisplayerPrefab: {fileID: 0}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
   - characterType: 0
     text: "Cuando te pasa algo as\xED, \xBFqu\xE9 sientes?"
+    audio: {fileID: 0}
     responses:
-    - response: 
+    - response: RABIA
+      responseImage: {fileID: 0}
       changeSequence: 0
       dataAfterResponse: {fileID: 0}
-    - response: 
+    - response: "MIEDO\t"
+      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
       changeSequence: 0
       dataAfterResponse: {fileID: 0}
-    - response: 
+    - response: ALEGRIA
+      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
       changeSequence: 0
       dataAfterResponse: {fileID: 0}
-    - response: 
+    - response: TRISTEZA
+      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
       changeSequence: 0
       dataAfterResponse: {fileID: 0}
+    - response: "NO S\xC9"
+      responseImage: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    autoContinueOnClickDialog: 1
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
     ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
