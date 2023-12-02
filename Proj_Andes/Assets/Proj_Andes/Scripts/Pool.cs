@@ -10,8 +10,7 @@ public class Pool <T> where T : Component
 	private List<bool> itemsAvailability;
 	[SerializeField]
 	private T itemPrefab;
-	[SerializeField]
-	private Transform hierarchyParent;
+	public Transform hierarchyParent;
 	[SerializeField]
 	private int growBy;
 
