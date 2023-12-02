@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class Gratification_TurboRocket_CameraController : MonoBehaviour
 {
-    PlayerController player => PlayerController.Instance;
+    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
     [SerializeField] float visualOffset = -4.7f;
     float targetPos;
 

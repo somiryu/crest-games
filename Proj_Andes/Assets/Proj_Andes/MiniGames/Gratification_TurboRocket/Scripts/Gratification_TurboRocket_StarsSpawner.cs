@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class StarsSpawner : MonoBehaviour
+public class Gratification_TurboRocket_StarsSpawner : MonoBehaviour
 {
-    PlayerController player => PlayerController.Instance;
+    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
     [SerializeField] BoxCollider spawnArea;
-    [SerializeField] StarsController starSample;
-    BackgroundController backgroundController;
-    public List<StarsController> stars = new List<StarsController>();
+    [SerializeField] Gratification_TurboRocket_StarsController starSample;
+    Gratification_TurboRocket_BackgroundController backgroundController;
+    public List<Gratification_TurboRocket_StarsController> stars = new List<Gratification_TurboRocket_StarsController>();
 
     public BoxCollider SpawnArea => spawnArea;
     public void Init()
     {
-        backgroundController = GetComponentInParent<BackgroundController>();
+        backgroundController = GetComponentInParent<Gratification_TurboRocket_BackgroundController>();
         var newSize = spawnArea.size;
         newSize.x = backgroundController.bkSize.transform.localScale.x * 0.9f;
         spawnArea.size = newSize;
@@ -36,7 +36,7 @@ public class StarsSpawner : MonoBehaviour
     }
 
 
-    StarsController GetStar()
+    Gratification_TurboRocket_StarsController GetStar()
     {
         return Instantiate(starSample, spawnArea.transform);
     }

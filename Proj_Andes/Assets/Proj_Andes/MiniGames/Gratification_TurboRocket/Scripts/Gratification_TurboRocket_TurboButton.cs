@@ -4,16 +4,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TurboButton : Image, IPointerDownHandler, IPointerUpHandler
+public class Gratification_TurboRocket_TurboButton : Image, IPointerDownHandler, IPointerUpHandler
 {
     public void OnPointerDown(PointerEventData eventData)
     {
-        PlayerController.Instance.OnEnterTurboMode();
+        Gratification_TurboRocket_PlayerController.Instance.OnEnterTurboMode();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        PlayerController.Instance.OnExitTurboMode();
+        Gratification_TurboRocket_PlayerController.Instance.OnExitTurboMode();
 
     }
 }
