@@ -17,4 +17,13 @@ MonoBehaviour:
   charactersUIConfigs:
   - chType: 0
     image: {fileID: -1168338577, guid: 432526d69bc8ac543ba94762f009d269, type: 3}
-    name: ---
+    name: 
+  - chType: 1
+    image: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+    name: Cami
+  - chType: 2
+    image: {fileID: 21300000, guid: d6abb41e2a9d7a64f89089ab167fb843, type: 3}
+    name: "Tom\xE1s"
+  - chType: 3
+    image: {fileID: 21300000, guid: 0eb0917f1a00b7442b29f1c106ae8af7, type: 3}
+    name: Alex

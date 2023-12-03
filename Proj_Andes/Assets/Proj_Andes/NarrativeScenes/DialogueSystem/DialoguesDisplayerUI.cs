@@ -56,7 +56,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
         = new Dictionary<DialoguesResponsesDisplayerUI, DialoguesResponsesDisplayerUI>();
 
 
-
 	private StringBuilder currText = new StringBuilder();
 
     public Action OnStartShowingDialogue;
@@ -75,7 +74,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if(instance != null && instance != this) DestroyImmediate(instance);
         instance = this;
 
-        skipDialogueBtn.onClick.AddListener(NextDialogue);
+        skipDialogueBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
     }
@@ -147,9 +146,22 @@ public class DialoguesDisplayerUI : MonoBehaviour
     }
 
     public void NextDialogue() {
+
+        DialogueData lastPlayedDialog = null;
+        if(currShowingIdx > -1 && currShowingIdx < dialoguesToShow.dialogues.Length) lastPlayedDialog = dialoguesToShow.dialogues[currShowingIdx];
+
         currShowingIdx++;
         if(dialoguesToShow == null || currShowingIdx >= dialoguesToShow.dialogues.Length) {
+            DialogueSequenceData nextSequence = null;
+            if(dialoguesToShow != null)
+            {
+                nextSequence = lastPlayedDialog.changeToSequence;
+            }
             HideDialogues();
+            if(nextSequence != null)
+            {
+                ShowDialogueSequence(nextSequence);
+            }
             return;
         }
         ShowCurrDialog();
@@ -173,7 +185,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		var currCharConfigs = curr.characterType.GetCharacterConfig();
 		characterImageContainer.SetActive(currCharConfigs.image != null);
 		characterImage.sprite = currCharConfigs.image;
-		nameTxtContainer.SetActive(string.IsNullOrEmpty(currCharConfigs.name));
+		nameTxtContainer.SetActive(!string.IsNullOrEmpty(currCharConfigs.name));
 		nameTxt.SetText(currCharConfigs.name);
 
 

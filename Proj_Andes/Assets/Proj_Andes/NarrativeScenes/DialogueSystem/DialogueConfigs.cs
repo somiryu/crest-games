@@ -36,6 +36,9 @@ public class DialogueConfigs : ScriptableObject {
 
 public enum CharactersTypes {
     NONE = 0,
+    Cami = 1,
+    Tomas = 2,
+    Alex = 3,
 }
 
 [Serializable]

@@ -23,13 +23,20 @@ public class DialogueSequenceData : ScriptableObject {
 public class DialogueData
 {
     public CharactersTypes characterType;
-    [TextArea(1, 20)]
+	public bool autoContinueOnClickDialog = true;
+    [Space]
+    public DialogueSequenceData changeToSequence;
+	[Space]
+	[TextArea(1, 20)]
     public string text;
-	public AudioClip audio;
+	[Header("Responses")]
+	public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
 	public DialogueResponse[] responses;
-    public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
     [Tooltip("If true, the dialog will continue to the next line automatically when pressing the dialog box, (only works of no responses are present)")]
-    public bool autoContinueOnClickDialog = true;
+
+    [Space(20)]
+	public AudioClip audio;
+	[Header("Anims")]
     public TimelineAsset EnterAnim;
     public TimelineAsset IdleAnim;
     public TimelineAsset ExitAnim;
