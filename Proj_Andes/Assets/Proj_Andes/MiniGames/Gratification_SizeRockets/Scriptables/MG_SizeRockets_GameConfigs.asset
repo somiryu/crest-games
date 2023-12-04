@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57c305c77f3a434ba071a7c4863b426, type: 3}
+  m_Name: MG_SizeRockets_GameConfigs
+  m_EditorClassIdentifier: 
+  minCoinsToGive: 1
+  maxCoinsToGive: 5
+  planetsAmountToGenerate: 5
+  shipsPerGame: 5
+  shipsConfigs:
+  - rocketType: 0
+    speed: 3
+    coinsCapacity: 1
+  - rocketType: 1
+    speed: 2
+    coinsCapacity: 3
+  - rocketType: 2
+    speed: 1
+    coinsCapacity: 5
