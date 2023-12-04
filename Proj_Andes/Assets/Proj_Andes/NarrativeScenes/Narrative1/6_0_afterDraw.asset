@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 6_0_afterDraw
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "La profe Sandra te pregunta qu\xE9 pas\xF3 y te promete que hablar\xE1
+      con tus compa\xF1eros."
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Qu\xE9 dia tan horrible! Ojal\xE1 que en Educaci\xF3n F\xEDsica te vaya
+      mejor."
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: No te gusta la idea de hacer clase con tu brazo que te duele tanto, pero
+      te acuerdas que hoy es juego libre y eso te alegra...
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Tu profe espera a que se organizen y explica c\xF3mo ser\xE1 la actividad"
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 4
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 9c831892bf4d7574b8016314e8116aa2, type: 3}
+    responses:
+    - response: 
+      responseImage: {fileID: 0}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 11400000, guid: c5c74847b1811b94f85c1312fb0ba5d4, type: 2}
+    - response: 
+      responseImage: {fileID: 0}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 11400000, guid: 8b1726e1cb72d1847a6e68027b572183, type: 2}
+    - response: 
+      responseImage: {fileID: 0}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 11400000, guid: 0a9344e9cd523d4428992b68b261ae51, type: 2}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 4
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Cada qui\xE9n escoja lo que quiera. Recuerden que, dependiendo de lo que
+      elijan, tendr\xE1n que hacer algo."
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
