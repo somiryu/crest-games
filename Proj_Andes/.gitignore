@@ -216,5 +216,7 @@ Assets/Plugins/Android*
 Assets/Plugins/iOS*
 Assets/Plugins/Android/
 Assets/Plugins/iOS/
+/Assets/Plugins/tvOS*
+/Assets/Plugins/tvOS/
 # Removes an erroneous meta file inclusion.
 Assets/Plugins.meta
