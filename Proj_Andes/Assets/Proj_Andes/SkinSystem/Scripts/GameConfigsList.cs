@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tymski;
+using UnityEditor.Tilemaps;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "GameConfigsList", menuName = "GameConfigs/GameConfigsList")]
 public class GameConfigsList : ScriptableObject
@@ -21,5 +24,9 @@ public class GameConfigsList : ScriptableObject
     public GameConfig GetCurrentGame()
     {
         return gameConfigs[goToSceneIdx];
+    }
+    public SceneReference GetRandomGame()
+    {
+        return gameConfigs[Random.Range(0, gameConfigs.Count)].scene;
     }
 }

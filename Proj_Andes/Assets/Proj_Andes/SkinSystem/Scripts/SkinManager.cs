@@ -26,7 +26,7 @@ public class SkinManager : MonoBehaviour
 			allSkinnableImages[i].SetSkinType(skinToSet);
 			SceneManagement.currSkinType = skinToSet;
         }
-        if (mainSkinSelectionScreen) SceneManagement.SetScene();
+        if (mainSkinSelectionScreen) SceneManagement.SetGameScene();
     }
 
 

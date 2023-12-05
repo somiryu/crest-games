@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/MiniGames/Gratification_SizeRockets/Scenes/Gratification_SizeRockets.unity
     guid: 9bd58a801a9eb5e47a14b0c0ef4faeda
+  - enabled: 1
+    path: Assets/Proj_Andes/MiniGames/Menu/Scenes/PlayScene.unity
+    guid: 69f1c644272a182468a361a990562861
   m_configObjects: {}

@@ -10,9 +10,13 @@ public static class SceneManagement
     public static SceneReference currentScene;
     public static SkinType currSkinType {  get; set; }
 
-    public static void SetScene()
+    public static void SetGameScene()
     {
         currentScene = GameConfigsList.Instance.GetCurrentGame().scene;
         SceneManager.LoadScene(currentScene);
+    }
+    public static void GoToScene(SceneReference scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }
