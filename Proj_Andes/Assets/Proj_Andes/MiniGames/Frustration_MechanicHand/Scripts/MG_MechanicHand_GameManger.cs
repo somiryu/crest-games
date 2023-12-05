@@ -57,7 +57,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour
 		playerLifesAmountTxt.SetText(currPlayerLifes.ToString());
 
 		afterActionPanel.SetActive(false);
-		afterAction_ResetBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+        afterAction_ResetBtn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 		currAsteroidsSize = 1;
 
         asteroidsPool.Init(10);

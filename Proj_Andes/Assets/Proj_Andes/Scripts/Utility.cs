@@ -8,7 +8,7 @@ public static class Utility
 {
     public static void FindObjectsByType<T>(List<T> objectsTList)
     {
-        var rootObjs = SceneManager.GetActiveScene().GetRootGameObjects();
+        var rootObjs = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
         for (int i = 0; i < rootObjs.Length; i++)
         {
             var curr = rootObjs[i];
@@ -31,7 +31,7 @@ public static class Utility
 
     public static T FindObjectByType<T>() where T : Component
     {
-        var rootObjs = SceneManager.GetActiveScene().GetRootGameObjects();
+        var rootObjs = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
         for (int i = 0; i < rootObjs.Length; i++)
         {
             var curr = rootObjs[i];

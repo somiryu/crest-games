@@ -62,7 +62,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour
 		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.medium));
 		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.large));
 
-		afterAction_RetryBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+        afterAction_RetryBtn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 
 		smallRocketsPool.Init(5);
 		mediumRocketsPool.Init(5);

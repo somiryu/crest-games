@@ -68,7 +68,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour
 		rightBtn.onClick.AddListener(OnClickedRight);
 		discardBtn.onClick.AddListener(OnClickedDiscard);
 
-		retryBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+        retryBtn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);

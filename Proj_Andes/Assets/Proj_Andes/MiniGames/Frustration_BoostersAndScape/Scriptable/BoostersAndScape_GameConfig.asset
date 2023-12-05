@@ -16,3 +16,7 @@ MonoBehaviour:
   forcedFails: 2
   boosterTriggerRate: 2
   forceToFail: 1
+  gameScene:
+    sceneAsset: {fileID: 102900000, guid: 52beac390ad590b4eae40f9edfaf3327, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/Frustration_BoostersAndScape/Scenes/Frustration_BoostersAndScape_MainScene.unity
+  updateScene: 0

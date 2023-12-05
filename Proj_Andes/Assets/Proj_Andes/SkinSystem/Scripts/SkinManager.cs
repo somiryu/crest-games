@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SkinManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class SkinManager : MonoBehaviour
     public static SkinManager Instance => instance;
 
 	private List<SkinnableImage> allSkinnableImages = new List<SkinnableImage>();
-
+	public bool mainSkinSelectionScreen;
 	private void Awake()
 	{
 		if(instance != null && instance != this) Destroy(instance);
@@ -23,8 +24,12 @@ public class SkinManager : MonoBehaviour
 		for(int i = 0; i < allSkinnableImages.Count; i++)
 		{
 			allSkinnableImages[i].SetSkinType(skinToSet);
-		}
-	}
+			GameConfigsList.Instance.skinType = skinToSet;
+            Debug.Log("setting " + skinToSet + " in " + SceneManagement.Instance.currentScene);
+
+        }
+        if (mainSkinSelectionScreen) SceneManagement.Instance.SetScene();
+    }
 
 
 }

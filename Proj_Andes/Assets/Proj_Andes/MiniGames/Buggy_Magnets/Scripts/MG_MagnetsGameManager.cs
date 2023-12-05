@@ -47,7 +47,7 @@ public class MG_MagnetsGameManager : MonoBehaviour
 		currSpawnedItems = 0;
 		currEnergyPicked = 0;
 		currEneryProgress = 0;
-		retryBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+        retryBtn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 		EnergyFillImage.fillAmount = 0;
 		MagnetsAmount.SetText(availableMagnets.ToString());
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);

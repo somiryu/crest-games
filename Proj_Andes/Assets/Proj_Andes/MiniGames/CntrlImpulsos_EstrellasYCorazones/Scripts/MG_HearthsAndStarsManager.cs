@@ -55,7 +55,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
 		leftBtn.onClick.AddListener(OnClickedLeft);
 		rightBtn.onClick.AddListener(OnClickedRight);
-		retryBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+        retryBtn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 
 		InitRound();
 	}
