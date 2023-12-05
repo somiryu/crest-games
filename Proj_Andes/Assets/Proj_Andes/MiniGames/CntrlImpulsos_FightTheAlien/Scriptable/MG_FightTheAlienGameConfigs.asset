@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: MG_FightTheAlienGameConfigs
   m_EditorClassIdentifier: 
   timePerChoice: 5
-  maxRounds: 10
+  PlayerHealth: 10
+  EnemyHealth: 10
   initialCoins: 0
   coinsOnCorrectAnswer: 2
   coinsOnWrongAnswer: -1
+  playerHealthLostOnWrongAnswer: -1
+  EnemyHealthLostOnRightAnswer: -1
+  gameScene:
+    sceneAsset: {fileID: 102900000, guid: 8bed209e6ffcec6428298b17b507740a, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_FightTheAlien/Scenes/CntrlImpulsos_FightTheAlien.unity

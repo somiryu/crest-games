@@ -17,10 +17,9 @@ public class GameConfigsList : ScriptableObject
     }
 
     public List<GameConfig> gameConfigs;
-
+    public int goToSceneIdx;
     public GameConfig GetCurrentGame()
     {
-        return gameConfigs[0];
+        return gameConfigs[goToSceneIdx];
     }
-    public SkinType skinType;
 }

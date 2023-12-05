@@ -18,3 +18,6 @@ MonoBehaviour:
   initialMagnetsCount: 5
   neededEnergyToPick: 10
   activeCheats: 1
+  gameScene:
+    sceneAsset: {fileID: 102900000, guid: 1854d9b868866b04a9628e64dac549d7, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/Buggy_Magnets/Scenes/MG_Magnets.unity

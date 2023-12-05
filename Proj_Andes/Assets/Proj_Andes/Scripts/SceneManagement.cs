@@ -5,35 +5,12 @@ using Tymski;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManagement : MonoBehaviour
+public static class SceneManagement
 {
-    static SceneManagement instance;
-    public static SceneManagement Instance=>instance;
+    public static SceneReference currentScene;
+    public static SkinType currSkinType {  get; set; }
 
-    public SceneReference currentScene;
-    SkinManager skinManager => SkinManager.Instance;
-    SkinType currSkinType => GameConfigsList.Instance.skinType;
-
-    private void Awake()
-    {
-        if(instance)
-        {
-            if (instance != this) DestroyImmediate(this);
-        }
-        instance = this;
-    }
-    void Start()
-    {
-        if(!skinManager.mainSkinSelectionScreen) skinManager.SetSkin(currSkinType);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void SetScene()
+    public static void SetScene()
     {
         currentScene = GameConfigsList.Instance.GetCurrentGame().scene;
         SceneManager.LoadScene(currentScene);

@@ -17,18 +17,16 @@ public class SkinManager : MonoBehaviour
 		instance = this;
 
 		Utility.FindObjectsByType(allSkinnableImages);
-	}
-
-	public void SetSkin(SkinType skinToSet)
+        if (!mainSkinSelectionScreen) SetSkin(SceneManagement.currSkinType);
+    }
+    public void SetSkin(SkinType skinToSet)
 	{
 		for(int i = 0; i < allSkinnableImages.Count; i++)
 		{
 			allSkinnableImages[i].SetSkinType(skinToSet);
-			GameConfigsList.Instance.skinType = skinToSet;
-            Debug.Log("setting " + skinToSet + " in " + SceneManagement.Instance.currentScene);
-
+			SceneManagement.currSkinType = skinToSet;
         }
-        if (mainSkinSelectionScreen) SceneManagement.Instance.SetScene();
+        if (mainSkinSelectionScreen) SceneManagement.SetScene();
     }
 
 

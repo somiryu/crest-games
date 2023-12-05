@@ -14,7 +14,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
     static Gratification_TurboRocket_PlayerController instance;
     public static Gratification_TurboRocket_PlayerController Instance => instance;
 
-    public Gratification_TurboRocket_LevelConfig levelConfig;
+    public Gratification_TurboRocket_GameConfig levelConfig;
     public bool onPlay;
     public Transform character;
     Vector3 firstPos;

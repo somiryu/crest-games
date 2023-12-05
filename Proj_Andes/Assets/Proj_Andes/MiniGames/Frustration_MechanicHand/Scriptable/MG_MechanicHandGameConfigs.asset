@@ -19,3 +19,6 @@ MonoBehaviour:
   hookMoveSpeed: 1
   percentageNeededToWin: 0.8
   activeCheats: 0
+  gameScene:
+    sceneAsset: {fileID: 102900000, guid: 424d06e04238e79488209179da26a38c, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/Frustration_MechanicHand/Scenes/Frustration_MechanicHand_TestScene.unity
