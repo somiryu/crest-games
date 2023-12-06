@@ -30,3 +30,8 @@ public class GameConfigsList : ScriptableObject
         return gameConfigs[Random.Range(0, gameConfigs.Count)].scene;
     }
 }
+
+public abstract class GameConfig : ScriptableObject
+{
+    public abstract SceneReference scene { get; }
+}

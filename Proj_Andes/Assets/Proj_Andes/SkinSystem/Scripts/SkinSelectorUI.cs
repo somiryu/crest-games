@@ -7,18 +7,24 @@ using UnityEngine.UI;
 public class SkinSelectorUI : MonoBehaviour
 {
     public List<BtnPerSkinType> btnsPerSkins = new List<BtnPerSkinType>();
-
+	public Button goToGame;
 	private void Awake()
 	{
 		for (int i = 0; i < btnsPerSkins.Count; i++)
 		{
 			var curr = btnsPerSkins[i];
-			curr.btn.onClick.AddListener(() => SkinManager.Instance.SetSkin(curr.skinType));
+			curr.btn.onClick.AddListener(() => GetSkinTypeSelection(curr.skinType));
 		}
+		goToGame.onClick.AddListener(SceneManagement.SetGameScene);
 	}
+    public void GetSkinTypeSelection(SkinType skinType)
+    {
+        if (SceneManagement.currSkinType == skinType) return;
+        SkinManager.Instance.SetSkin(skinType);
+        SceneManagement.currSkinType = skinType;
+    }
 
 }
-
 
 [Serializable]
 public struct BtnPerSkinType

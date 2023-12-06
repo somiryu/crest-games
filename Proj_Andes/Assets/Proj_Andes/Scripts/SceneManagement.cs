@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 public static class SceneManagement
 {
     public static SceneReference currentScene;
-    public static SkinType currSkinType {  get; set; }
-
+    public static SkinType currSkinType { get; set; }
     public static void SetGameScene()
     {
         currentScene = GameConfigsList.Instance.GetCurrentGame().scene;
