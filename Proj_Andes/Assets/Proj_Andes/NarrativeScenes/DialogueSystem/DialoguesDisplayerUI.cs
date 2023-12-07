@@ -38,6 +38,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private bool hasPendingLineChange = false;
     private bool audioIsDone = false;
     private DialogueSequenceData pendingSequenceToShow;
+    private DialogueResponse preselectedResponse;
+    private bool preselectedResponseAudioIsDone = false;
     public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
 
@@ -106,7 +108,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 		else
 		{
-            if (AutoContinueActive())
+            if (AutoContinueActive() && audioIsDone)
             {
                 //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
                 hasPendingLineChange = true;
@@ -165,9 +167,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		var currResponses = curr.responses;
 		//Clean old responses if needed
 		if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
-		//Get new response handler
-		currResponsesDisplayer = GetResponseDisplayer(curr);
-		if (currResponsesDisplayer != null) currResponsesDisplayer.ShowResponses(currResponses);
+
 
         //Image and name of character
 		var currCharConfigs = curr.characterType.GetCharacterConfig();
@@ -233,47 +233,63 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (dialogueData.EnterAnim != null && !skipEnterAnim)
         {
             timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
-			timeLinePlayer.playableAsset = dialogueData.EnterAnim;
+            timeLinePlayer.playableAsset = dialogueData.EnterAnim;
             timeLinePlayer.Play();
-            while(timeLinePlayer.state == PlayState.Playing) yield return null;
+            while (timeLinePlayer.state == PlayState.Playing) yield return null;
         }
 
-		audioIsDone = true;
-		//Start playing audio
-		if (dialogueData.audio != null)
-		{
-			audioPlayer.clip = dialogueData.audio;
-			audioPlayer.Play();
-			audioIsDone = false;
-		}
+        audioIsDone = true;
+        //Start playing audio
+        if (dialogueData.audio != null)
+        {
+            audioPlayer.clip = dialogueData.audio;
+            audioPlayer.Play();
+            audioIsDone = false;
+        }
 
         //Start showing text
-		if (currDialogueCharacters.Length > 0)
-		{
-			currCharProgress = 0;
-			StartTextAppear();
-			currText.Clear();
-			currText.Append(currDialogueCharacters[currCharProgress]);
-		}
-
-		state = dialogLineState.Idle;
-        if(dialogueData.IdleAnim != null)
+        if (currDialogueCharacters.Length > 0)
         {
-			timeLinePlayer.extrapolationMode = DirectorWrapMode.Loop;
-			timeLinePlayer.playableAsset = dialogueData.IdleAnim;
+            currCharProgress = 0;
+            StartTextAppear();
+            currText.Clear();
+            currText.Append(currDialogueCharacters[currCharProgress]);
+        }
+
+        state = dialogLineState.Idle;
+        if (dialogueData.IdleAnim != null)
+        {
+            timeLinePlayer.extrapolationMode = DirectorWrapMode.Loop;
+            timeLinePlayer.playableAsset = dialogueData.IdleAnim;
             timeLinePlayer.Play();
         }
 
-		while (!audioIsDone)
+        while (!audioIsDone)
         {
             audioIsDone = !audioPlayer.isPlaying;
             yield return null;
         }
 
-		repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || dialogueData.audio != null);
+
+        repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || dialogueData.audio != null);
 
 
-		while (!hasPendingLineChange) yield return null;
+        //Get new response handler
+        if (dialogueData.responses.Length > 0)
+        {
+			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
+			if (currResponsesDisplayer != null) currResponsesDisplayer.ShowResponses(dialogueData.responses);
+		}
+
+
+        while (!hasPendingLineChange)
+        {
+            if(preselectedResponse != null)
+            {
+                preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
+            }
+            yield return null;
+        }
 
 
 		state = dialogLineState.Exiting;
@@ -295,13 +311,28 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 
     public void OnClickResponse(DialogueResponse responseClicked)
-	{
-		if (responseClicked.changeSequence)
-		{
-            pendingSequenceToShow = responseClicked.dataAfterResponse;
-            hasPendingLineChange = true;
-		}
-		else hasPendingLineChange = true;
+    {
+        if (!audioIsDone) return;
+
+        //Confirm the response
+        if (preselectedResponse == responseClicked)
+        {
+            if (preselectedResponseAudioIsDone)
+            {
+				if (responseClicked.changeSequence)
+				{
+					pendingSequenceToShow = responseClicked.dataAfterResponse;
+				}
+				hasPendingLineChange = true;
+            }
+            return;
+        }
+        //Response set for confirmation (You need to double click it to confirm)
+        preselectedResponseAudioIsDone = false;
+        audioPlayer.clip = responseClicked.responseAudio;
+        if(audioPlayer.clip != null) audioPlayer.Play();
+        preselectedResponse = responseClicked;
+		
 	}
 
     public void AppearText() {

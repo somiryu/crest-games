@@ -16,8 +16,18 @@ MonoBehaviour:
   - characterType: 0
     text: This is a test text
     audio: {fileID: 8300000, guid: e393447a0053736468fcdd2ab9fd04f9, type: 3}
-    responses: []
-    responsesDisplayerPrefab: {fileID: 0}
+    responses:
+    - response: Text Response 1
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 9bc5e14102d7b3a48b69aa3a67d6a707, type: 3}
+      changeSequence: 1
+      dataAfterResponse: {fileID: 11400000, guid: 96261f73ccc45c94f808e9417c6cc72d, type: 2}
+    - response: Text Response 2
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 0}
+      changeSequence: 1
+      dataAfterResponse: {fileID: 11400000, guid: db8b288fd85be984286417a60ef3ff10, type: 2}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: f30613af19a1c2b4aa12c0ac691e8593, type: 3}
     autoContinueOnClickDialog: 0
     EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
     IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
@@ -28,10 +38,12 @@ MonoBehaviour:
     responses:
     - response: Response 1
       responseImage: {fileID: 0}
+      responseAudio: {fileID: 0}
       changeSequence: 1
       dataAfterResponse: {fileID: 11400000, guid: 96261f73ccc45c94f808e9417c6cc72d, type: 2}
     - response: Response 2
       responseImage: {fileID: 0}
+      responseAudio: {fileID: 0}
       changeSequence: 1
       dataAfterResponse: {fileID: 11400000, guid: db8b288fd85be984286417a60ef3ff10, type: 2}
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: f30613af19a1c2b4aa12c0ac691e8593, type: 3}
