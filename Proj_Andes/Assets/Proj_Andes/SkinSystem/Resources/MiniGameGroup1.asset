@@ -19,4 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
   - {fileID: 11400000, guid: cf4b54b3469cdb7469e4b7aa254c9395, type: 2}
   randomize: 0
-  prevGame: {fileID: 0}
+  prevGame: {fileID: 11400000, guid: 6a8e85563e4d0f345872afaa7882124f, type: 2}

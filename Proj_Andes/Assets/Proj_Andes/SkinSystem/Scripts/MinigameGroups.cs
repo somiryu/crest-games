@@ -4,28 +4,12 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "MiniGameGroup", menuName = "GameConfigs/MiniGameGroup")]
-public class MinigameGroups : ScriptableObject
+public class MinigameGroups : GameSequence
 {
-    public List<GameConfig> miniGamesInGroup;
+    public List<GameSequenceItem> miniGamesInGroup;
     public bool randomize;
-    public GameConfig prevGame;
-    public bool goToNextGame;
-
-    [ContextMenu("ResetSequence")]
-    private void ResetSequence()
-    {
-        prevGame = null;
-    }
-    public void OnValidate()
-    {
-        if (goToNextGame)
-        {
-            goToNextGame = false;
-            if (miniGamesInGroup.IndexOf(prevGame) >= miniGamesInGroup.Count-1) SceneManagement.GoToScene(prevGame.scene);
-            else SceneManagement.GoToScene(GetNextMiniGame().scene);
-        }
-    }
-    public GameConfig GetNextMiniGame()
+    GameSequenceItem prevGame = GameSequencesList.Instance.prevGame;
+    public GameSequenceItem GetNextMiniGame()
     {
         if (randomize)
         {
@@ -44,7 +28,7 @@ public class MinigameGroups : ScriptableObject
         }
     }
 
-    GameConfig GetRandomGame()
+    GameSequenceItem GetRandomGame()
     {
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
         if (newGame != prevGame)
@@ -52,5 +36,20 @@ public class MinigameGroups : ScriptableObject
             return newGame;
         }
         else return GetRandomGame();
+    }
+
+    public override void OnSequenceStart()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnSequenceOver()
+    {
+        GameSequencesList.Instance.GoToNextSequence();
+    }
+
+    public override GameSequenceItem GetNextItem()
+    {
+        return GetNextMiniGame();
     }
 }

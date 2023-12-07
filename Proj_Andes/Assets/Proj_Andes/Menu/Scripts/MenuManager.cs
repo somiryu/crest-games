@@ -11,14 +11,12 @@ public class MenuManager : MonoBehaviour
     {
         playButton.onClick.AddListener(PlayGame);
     }
-
-    // Update is called once per frame
     void Update()
     {
         
     }
     void PlayGame()
     {
-        SceneManagement.GoToScene(GameGroupsList.Instance.GetMinigameGroup().GetNextMiniGame().scene);
+        SceneManagement.GoToScene(GameSequencesList.Instance.GetGameSequence().GetNextItem().scene);
     }
 }

@@ -26,8 +26,8 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
             });
 
         endOfGameContainer.gameObject.SetActive(false);
-        replayBtn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, LoadSceneMode.Single));
-	}
+        replayBtn.onClick.AddListener(() => SceneManagement.GoToScene(player.levelConfig.scene));
+    }
 
 	private void Update()
 	{

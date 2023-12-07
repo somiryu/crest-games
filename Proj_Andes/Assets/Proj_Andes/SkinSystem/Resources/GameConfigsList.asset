@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a7ddeaf8f4d9542815788b594a7568, type: 3}
   m_Name: GameConfigsList
   m_EditorClassIdentifier: 
-  gameConfigs:
+  gameSequences:
   - {fileID: 11400000, guid: 02edb24ab208cc7469340eb9631f61ac, type: 2}
-  goToSceneIdx: 0
+  - {fileID: 11400000, guid: 02edb24ab208cc7469340eb9631f61ac, type: 2}
+  prevGame: {fileID: 0}
+  goToGameGroupIdx: 0
+  continueToNextItem: 0
