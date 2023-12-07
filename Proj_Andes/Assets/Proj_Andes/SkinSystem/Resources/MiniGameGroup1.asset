@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a897d4e5304744f8eac206b8045b31, type: 3}
+  m_Name: MiniGameGroup1
+  m_EditorClassIdentifier: 
+  miniGamesInGroup:
+  - {fileID: 11400000, guid: 6a8e85563e4d0f345872afaa7882124f, type: 2}
+  - {fileID: 11400000, guid: 90f7abf53fcb1084185c23a779968874, type: 2}
+  - {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
+  - {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
+  - {fileID: 11400000, guid: cf4b54b3469cdb7469e4b7aa254c9395, type: 2}
+  randomize: 0
+  prevGame: {fileID: 0}

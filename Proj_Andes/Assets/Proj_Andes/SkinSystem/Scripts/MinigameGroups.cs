@@ -9,30 +9,48 @@ public class MinigameGroups : ScriptableObject
     public List<GameConfig> miniGamesInGroup;
     public bool randomize;
     public GameConfig prevGame;
-    public GameConfig currGame;
+    public bool goToNextGame;
 
+    [ContextMenu("ResetSequence")]
+    private void ResetSequence()
+    {
+        prevGame = null;
+    }
+    public void OnValidate()
+    {
+        if (goToNextGame)
+        {
+            goToNextGame = false;
+            if (miniGamesInGroup.IndexOf(prevGame) >= miniGamesInGroup.Count-1) SceneManagement.GoToScene(prevGame.scene);
+            else SceneManagement.GoToScene(GetNextMiniGame().scene);
+        }
+    }
     public GameConfig GetNextMiniGame()
     {
         if (randomize)
         {
-            var newRandomGame = GetRandomGame();
-            return newRandomGame;
+            return GetRandomGame();
         }
         if(miniGamesInGroup.Contains(prevGame))
         {
-            prevGame = miniGamesInGroup[miniGamesInGroup.IndexOf(prevGame)];
-            Debug.Log(GetNextMiniGame().ToString() + " " + miniGamesInGroup[miniGamesInGroup.IndexOf(prevGame)]);
-            return miniGamesInGroup[miniGamesInGroup.IndexOf(prevGame)+1];
+            var newGame = miniGamesInGroup[miniGamesInGroup.IndexOf(prevGame) + 1];
+            prevGame = newGame;
+            return newGame;
         }
         else
         {
-            Debug.Log(GetNextMiniGame().ToString() + " " + miniGamesInGroup[miniGamesInGroup.IndexOf(prevGame)]);
+            prevGame = miniGamesInGroup[0];
             return miniGamesInGroup[0];
         }
     }
 
     GameConfig GetRandomGame()
     {
-        return miniGamesInGroup[ Random.Range(0, miniGamesInGroup.Count)];
+        var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
+        if (newGame != prevGame)
+        {
+            return newGame;
+        }
+        else return GetRandomGame();
     }
 }

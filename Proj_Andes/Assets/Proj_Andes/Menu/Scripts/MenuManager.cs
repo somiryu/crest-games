@@ -19,6 +19,6 @@ public class MenuManager : MonoBehaviour
     }
     void PlayGame()
     {
-        SceneManagement.GoToScene(GameConfigsList.Instance.GetRandomGame());
+        SceneManagement.GoToScene(GameGroupsList.Instance.GetMinigameGroup().GetNextMiniGame().scene);
     }
 }

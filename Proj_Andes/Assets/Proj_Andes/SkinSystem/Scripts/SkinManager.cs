@@ -26,7 +26,6 @@ public class SkinManager : MonoBehaviour
         }
     }
 
-
 }
 
 public enum SkinType

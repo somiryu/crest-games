@@ -11,7 +11,7 @@ public static class SceneManagement
     public static SkinType currSkinType { get; set; }
     public static void SetGameScene()
     {
-        currentScene = GameConfigsList.Instance.GetCurrentGame().scene;
+        currentScene = GameGroupsList.Instance.GetMinigameGroup().GetNextMiniGame().scene;
         SceneManager.LoadScene(currentScene);
     }
     public static void GoToScene(SceneReference scene)
