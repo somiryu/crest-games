@@ -39,8 +39,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private bool audioIsDone = false;
     private DialogueSequenceData pendingSequenceToShow;
     private DialogueResponse preselectedResponse;
-    private bool preselectedResponseAudioIsDone = false;
-    public bool IsShowing => isShowing;
+	private bool preselectedResponseAudioIsDone = false;
+
+	public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
 
     //Appear dialogue params
@@ -59,6 +60,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 
 	private StringBuilder currText = new StringBuilder();
+
+    public DialogueData CurrDialog => dialoguesToShow.dialogues[currShowingIdx];
 
     public Action OnStartShowingDialogue;
     public Action OnEndShowingDialogue;
@@ -118,7 +121,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
     bool AutoContinueActive()
     {
 		var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
-        return currDialogue.autoContinueOnClickDialog && currDialogue.responses.Length == 0;
+        return currDialogue.autoContinueOnClickDialog && 
+            (currDialogue.responses.Length == 0 || currDialogue.AllResponsesWereGrayOut(grayOutResponseIdxes));
     }
 
     /// <summary>
@@ -135,11 +139,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
         return true;
     }
 
+    int customStartIdx = -1;
+    List<int> grayOutResponseIdxes = new List<int>();
 
-    public void ShowDialogueSequence(DialogueSequenceData newDialogues) {
+    public void ShowDialogueSequence(DialogueSequenceData newDialogues)
+    {
         pendingSequenceToShow = null;
         dialoguesToShow = newDialogues;
-        currShowingIdx = -1;
+        currShowingIdx = customStartIdx;
+        customStartIdx = -1;
         isShowing = true;
         appearTime = DialogueConfigs.Instace.appearTime;
         mainDialoguesGraphics.SetActive(true);
@@ -155,9 +163,21 @@ public class DialoguesDisplayerUI : MonoBehaviour
         currShowingIdx++;
         if(dialoguesToShow == null || currShowingIdx >= dialoguesToShow.dialogues.Length) {
             DialogueSequenceData nextSequence = null;
+            customStartIdx = -1;
             if(dialoguesToShow != null)
             {
                 nextSequence = lastPlayedDialog.changeToSequence;
+                if (lastPlayedDialog.changeToSequenceStartDialogIdx != -1)
+                {
+                    customStartIdx = lastPlayedDialog.changeToSequenceStartDialogIdx - 1; //Minus one because we call "Next dialogue" after this
+                }
+                if (lastPlayedDialog.changeToSequenceResponseIdxToGrayOut != -1)
+                {
+                    if (!grayOutResponseIdxes.Contains(lastPlayedDialog.changeToSequenceResponseIdxToGrayOut))
+                    {
+                        grayOutResponseIdxes.Add(lastPlayedDialog.changeToSequenceResponseIdxToGrayOut);
+                    }
+                }
             }
             HideDialogues();
             if(nextSequence != null)
@@ -173,10 +193,16 @@ public class DialoguesDisplayerUI : MonoBehaviour
     {
 		var curr = dialoguesToShow.dialogues[currShowingIdx];
 
+		if (CurrDialog.AllResponsesWereGrayOut(grayOutResponseIdxes))
+		{
+			grayOutResponseIdxes.Clear();
+			ShowDialogueSequence(CurrDialog.changeToSequence);
+			return;
+		}
+
 		repeatBtn.gameObject.SetActive(false);
 		skipDialogueBtn.gameObject.SetActive(false);
 
-		var currResponses = curr.responses;
 		//Clean old responses if needed
 		if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
 
@@ -290,7 +316,14 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (dialogueData.responses.Length > 0)
         {
 			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
-			if (currResponsesDisplayer != null) currResponsesDisplayer.ShowResponses(dialogueData.responses);
+            if (currResponsesDisplayer != null)
+            {
+                currResponsesDisplayer.ShowResponses(dialogueData.responses);
+                for (int i = 0; i < grayOutResponseIdxes.Count; i++)
+                {
+                    currResponsesDisplayer.GrayOutResponse(grayOutResponseIdxes[i]);
+				}
+            }
 		}
 
 
@@ -316,7 +349,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
         hasPendingLineChange = false;
         currAnimSequence = null;
 
-        if (pendingSequenceToShow != null) ShowDialogueSequence(pendingSequenceToShow);
+        if (pendingSequenceToShow != null)
+        {
+            ShowDialogueSequence(pendingSequenceToShow);
+        }
         else NextDialogue();
 
 	}
@@ -331,10 +367,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         {
             if (preselectedResponseAudioIsDone)
             {
-				if (responseClicked.changeSequence)
-				{
-					pendingSequenceToShow = responseClicked.dataAfterResponse;
-				}
+				if (responseClicked.dataAfterResponse != null) pendingSequenceToShow = responseClicked.dataAfterResponse;
 				hasPendingLineChange = true;
             }
             return;
@@ -351,14 +384,13 @@ public class DialoguesDisplayerUI : MonoBehaviour
         var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
         dialogueTxt.SetText(currText.ToString());
         appearTimer += Time.deltaTime;
-        if (appearTimer >= appearTime) {
+        if (appearTimer >= appearTime)
+        {
             appearTimer = 0;
             currCharProgress++;
-            if (currCharProgress >= currDialogueCharacters.Length) {
-                forceEndAppearingTxt = true;
-            } else {
-                currText.Append(currDialogueCharacters[currCharProgress]);
-            }
+
+            if (currCharProgress >= currDialogueCharacters.Length) forceEndAppearingTxt = true;
+            else currText.Append(currDialogueCharacters[currCharProgress]);
         }
        
         if (forceEndAppearingTxt) {

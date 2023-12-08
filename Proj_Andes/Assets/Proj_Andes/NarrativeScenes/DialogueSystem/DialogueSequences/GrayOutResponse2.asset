@@ -10,19 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: 7_ok
+  m_Name: GrayOutResponse2
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 2
+  - characterType: 0
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses:
-    - response: Rayo el pupitre y lo tacho con rabia
-      responseImage: {fileID: 0}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+    changeToSequence: {fileID: 11400000, guid: 9f94db14bb1b42c4fa2fd0a39b698265, type: 2}
+    changeToSequenceStartDialogIdx: 1
+    changeToSequenceResponseIdxToGrayOut: 1
+    text: Text for gray out response 2
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

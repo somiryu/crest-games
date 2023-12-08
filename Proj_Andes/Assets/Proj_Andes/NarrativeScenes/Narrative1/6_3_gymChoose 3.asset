@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - characterType: 4
-    autoContinueOnClickDialog: 0
-    changeToSequence: {fileID: 11400000, guid: 0de04ae823905844ba0cdf9477c50992, type: 2}
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
+    changeToSequenceStartDialogIdx: 5
+    changeToSequenceResponseIdxToGrayOut: 2
     text: "Lo siento, ese ya lo escogi\xF3 Luis."
     responsesDisplayerPrefab: {fileID: 0}
     responses: []

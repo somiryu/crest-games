@@ -16,6 +16,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "La profe Sandra te pregunta qu\xE9 pas\xF3 y te promete que hablar\xE1
       con tus compa\xF1eros."
     responsesDisplayerPrefab: {fileID: 0}
@@ -27,6 +29,8 @@ MonoBehaviour:
   - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Qu\xE9 dia tan horrible! Ojal\xE1 que en Educaci\xF3n F\xEDsica te vaya
       mejor."
     responsesDisplayerPrefab: {fileID: 0}
@@ -38,6 +42,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: No te gusta la idea de hacer clase con tu brazo que te duele tanto, pero
       te acuerdas que hoy es juego libre y eso te alegra...
     responsesDisplayerPrefab: {fileID: 0}
@@ -49,6 +55,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Tu profe espera a que se organizen y explica c\xF3mo ser\xE1 la actividad"
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
@@ -59,32 +67,36 @@ MonoBehaviour:
   - characterType: 4
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 9c831892bf4d7574b8016314e8116aa2, type: 3}
-    responses:
-    - response: 
-      responseImage: {fileID: 0}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 11400000, guid: c5c74847b1811b94f85c1312fb0ba5d4, type: 2}
-    - response: 
-      responseImage: {fileID: 0}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 11400000, guid: 8b1726e1cb72d1847a6e68027b572183, type: 2}
-    - response: 
-      responseImage: {fileID: 0}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 11400000, guid: 0a9344e9cd523d4428992b68b261ae51, type: 2}
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 4
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Cada qui\xE9n escoja lo que quiera. Recuerden que, dependiendo de lo que
       elijan, tendr\xE1n que hacer algo."
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 0de04ae823905844ba0cdf9477c50992, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 9c831892bf4d7574b8016314e8116aa2, type: 3}
+    responses:
+    - response: 
+      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: c5c74847b1811b94f85c1312fb0ba5d4, type: 2}
+    - response: 
+      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 8b1726e1cb72d1847a6e68027b572183, type: 2}
+    - response: 
+      responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 0a9344e9cd523d4428992b68b261ae51, type: 2}
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

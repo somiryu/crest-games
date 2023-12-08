@@ -24,12 +24,14 @@ public class DialogueData
 {
     public CharactersTypes characterType;
 	public bool autoContinueOnClickDialog = true;
-    [Space]
+    [Header("Change sequence on continue configs")]
     public DialogueSequenceData changeToSequence;
+    public int changeToSequenceStartDialogIdx = -1;
+    public int changeToSequenceResponseIdxToGrayOut = -1;
 	[Space]
 	[TextArea(1, 20)]
     public string text;
-	[Header("Responses")]
+    [Header("Responses")]
 	public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
 	public DialogueResponse[] responses;
     [Tooltip("If true, the dialog will continue to the next line automatically when pressing the dialog box, (only works of no responses are present)")]
@@ -40,6 +42,14 @@ public class DialogueData
     public TimelineAsset EnterAnim;
     public TimelineAsset IdleAnim;
     public TimelineAsset ExitAnim;
+
+
+    public bool AllResponsesWereGrayOut(List<int> grayedOutResponseIdxes)
+    {
+        if (responses.Length == 0) return false;
+        if (responses.Length == grayedOutResponseIdxes.Count) return true;
+        return false;
+    }
 }
 
 
@@ -50,6 +60,5 @@ public class DialogueResponse
     public string response;
     public Sprite responseImage;
     public AudioClip responseAudio;
-    public bool changeSequence;
     public DialogueSequenceData dataAfterResponse;
 }

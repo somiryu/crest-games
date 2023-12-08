@@ -36,6 +36,20 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 		gameObject.SetActive(true);
     }
 
+    public void GrayOutResponse(int responseIdx)
+    {
+        currResponses[responseIdx].Btn.interactable = false;
+    }
+
+    public bool HasAvailableResponse()
+    {
+        for (int i = 0; i< currResponses.Count; i++)
+        {
+            if (currResponses[i].Btn.interactable) return true;
+        }
+        return false;
+    }
+
 
     public void HighlightResponse(DialogueResponse response)
     {
@@ -45,12 +59,16 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
         btn.transform.localScale = Vector3.one * 1.2f;
         currHighlightedResponse = btn;
         mainUi.OnClickResponse(response);
-
 	}
 
     public void Hide()
     {
-        responsesPool.RecycleAll();
+        if (currHighlightedResponse != null)
+        {
+            currHighlightedResponse.transform.localScale = Vector3.one; 
+            currHighlightedResponse = null;
+        }
+		responsesPool.RecycleAll();
         gameObject.SetActive(false);
         currResponses.Clear();
     }

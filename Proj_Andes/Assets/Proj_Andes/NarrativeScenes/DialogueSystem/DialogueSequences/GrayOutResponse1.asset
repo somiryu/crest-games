@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: 6_2_gymChoose 2
+  m_Name: GrayOutResponse1
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 4
+  - characterType: 0
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
-    changeToSequenceStartDialogIdx: 5
-    changeToSequenceResponseIdxToGrayOut: 1
-    text: "Lo siento, ese ya lo escogi\xF3 Juana."
-    responsesDisplayerPrefab: {fileID: 0}
+    changeToSequence: {fileID: 11400000, guid: 9f94db14bb1b42c4fa2fd0a39b698265, type: 2}
+    changeToSequenceStartDialogIdx: 1
+    changeToSequenceResponseIdxToGrayOut: 0
+    text: Text for gray out response
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}

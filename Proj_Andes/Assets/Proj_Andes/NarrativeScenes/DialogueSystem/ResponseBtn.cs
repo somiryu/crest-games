@@ -42,5 +42,6 @@ public class ResponseBtn : MonoBehaviour
 			responseImg.sprite = responseData.responseImage;
 		}
 		onClicked = null;
+		btn.interactable = true;
 	}
 }
