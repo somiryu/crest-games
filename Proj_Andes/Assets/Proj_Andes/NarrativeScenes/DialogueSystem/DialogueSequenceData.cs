@@ -49,6 +49,7 @@ public class DialogueResponse
     [TextArea(1, 20)]
     public string response;
     public Sprite responseImage;
+    public AudioClip responseAudio;
     public bool changeSequence;
     public DialogueSequenceData dataAfterResponse;
 }

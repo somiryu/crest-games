@@ -214,10 +214,9 @@ Assets/ExternalDependencyManager/
 Assets/ExternalDependencyManager*
 Assets/Plugins/Android*
 Assets/Plugins/iOS*
-Assets/Plugins/tvOS*
 Assets/Plugins/Android/
 Assets/Plugins/iOS/
-Assets/Plugins/tvOS/
+/Assets/Plugins/tvOS*
+/Assets/Plugins/tvOS/
 # Removes an erroneous meta file inclusion.
 Assets/Plugins.meta
-Proj_Andes/Assets/Plugins/tvOS.meta
