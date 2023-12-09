@@ -101,7 +101,7 @@ MonoBehaviour:
     ExitAnim: {fileID: 0}
   - characterType: 0
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
+    changeToSequence: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
     text: "\xBFQu\xE9 crees que sinti\xF3 Cami cuando le pas\xF3 esto?"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
@@ -112,15 +112,15 @@ MonoBehaviour:
     - response: MIEDO
       responseImage: {fileID: 21300000, guid: 0c343c4df81426643b4765725573ef16, type: 3}
       changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
     - response: ALGRIA
       responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
       changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
     - response: TRISTEZA
       responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
       changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
     - response: "NO S\xC9"
       responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
       changeSequence: 0

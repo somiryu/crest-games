@@ -75,7 +75,7 @@ MonoBehaviour:
     ExitAnim: {fileID: 0}
   - characterType: 1
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
+    changeToSequence: {fileID: 11400000, guid: 597d97972322d5341aaa5042f655e5bf, type: 2}
     text: "Verdad que ayer no viniste al colegio! No  te imaginas lo que pas\xF3!"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
