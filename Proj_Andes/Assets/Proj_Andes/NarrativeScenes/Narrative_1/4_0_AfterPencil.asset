@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 4_0_AfterPencil
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Bueno, el caso es que ped\xED prestado un lapiz."
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Cuando salimos al recreo no estuvo tan ch\xE9vere"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "T\xFA no estabas, y no encontr\xE9 con quien jugar. Me qued\xE9 sola todo
+      el tiempo."
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "\xBFC\xF3mo te sientes tu al saber lo que le pas\xF3 a Cami?"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses:
+    - response: BIEN
+      responseImage: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: NADA
+      responseImage: {fileID: 21300000, guid: 5e90a61f787052a4888cb4b2b05925ce, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: MAL
+      responseImage: {fileID: 21300000, guid: 5598b4484487242429598640ff99888f, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: aaa3eb360ed99c544b70bf5bf3b7a06c, type: 2}
+    text: "\xBFQu\xE9 crees que sinti\xF3 Cami cuando le pas\xF3 esto?"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses:
+    - response: "RABIA\t\t"
+      responseImage: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: MIEDO
+      responseImage: {fileID: 21300000, guid: 6ceee92a670dc014790770714cd44c8e, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: ALEGRIA
+      responseImage: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: TRISTEZA
+      responseImage: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: "NO S\xC9"
+      responseImage: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}

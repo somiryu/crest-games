@@ -32,12 +32,12 @@ MonoBehaviour:
     responses:
     - response: "SI\t"
       responseImage: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+      changeSequence: 1
+      dataAfterResponse: {fileID: 11400000, guid: daec2499c7e37ae448ac440d03c4d46c, type: 2}
     - response: NO
       responseImage: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+      changeSequence: 1
+      dataAfterResponse: {fileID: 11400000, guid: 381e946ad44109546a96d39533e94ceb, type: 2}
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

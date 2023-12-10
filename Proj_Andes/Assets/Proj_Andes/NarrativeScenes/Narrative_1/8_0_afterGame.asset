@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: 3_0_afterrNOespnde
+  m_Name: 8_0_afterGame
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "Uff, qu\xE9 de buenas. Aveces a la profe se la olvida. \"Yo tengo mucha
-      suerte! Bueno, casi siempre"
+    text: "Uy! Son\xF3 la campana! Vamos al recreo y juguemos un rato!"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 0}
