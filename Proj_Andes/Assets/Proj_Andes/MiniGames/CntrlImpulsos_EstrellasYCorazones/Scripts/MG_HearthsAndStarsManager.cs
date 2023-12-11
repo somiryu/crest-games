@@ -78,7 +78,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 		rightImg.gameObject.SetActive(false);
 		leftImg.gameObject.SetActive(false);
 
-        //inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
 		currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;
@@ -103,7 +102,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
 	private void OnClickedLeft()
     {
-       // inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
 
         var succed = false;
@@ -115,7 +113,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
     private void OnClickedRight()
     {
-       // inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
         var succed = false;
 		if (currRequiresSameDirection && currShowingRight) succed = true;
@@ -151,7 +148,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
             GameOver();
             return;
         }
-        inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
+
+        Animator animatorImg = inGameUIPanel.GetComponent<Animator>();
+        animatorImg.ResetTrigger("Appear");
+        animatorImg.SetTrigger("Appear");
 
         InitRound();
     }
