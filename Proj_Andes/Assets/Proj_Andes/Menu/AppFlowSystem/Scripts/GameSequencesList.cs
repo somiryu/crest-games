@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Tymski;
 using UnityEngine;
@@ -18,9 +19,9 @@ public class GameSequencesList : ScriptableObject
     }
 
     public List<GameSequence> gameSequences;
-    public GameSequenceItem prevGame;
+    [NonSerialized] public GameSequenceItem prevGame;
 
-    public int goToGameGroupIdx;
+    [NonSerialized] public int goToGameGroupIdx;
     public bool continueToNextItem;
     public void OnValidate()
     {
@@ -65,13 +66,14 @@ public abstract class GameSequence : ScriptableObject
     public abstract void OnSequenceOver();
 }
 
-public abstract class GameSequenceItem : ScriptableObject
+public class GameSequenceItem : ScriptableObject
 {
-    public abstract SceneReference scene { get; }
+    public SceneReference scene;
 }
 
 public abstract class GameConfig : GameSequenceItem
 {
+
 
 }
 

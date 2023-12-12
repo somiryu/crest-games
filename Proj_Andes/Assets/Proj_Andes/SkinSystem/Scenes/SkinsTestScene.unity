@@ -288,6 +288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524c7c80f9f33014d9951a313616cebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 16f841297cc4ebe4199416100f204e4f, type: 3}
+    scenePath: Assets/Proj_Andes/SkinSystem/Scenes/SkinsTestScene.unity
 --- !u!1 &761943491
 GameObject:
   m_ObjectHideFlags: 0

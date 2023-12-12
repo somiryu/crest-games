@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using Tymski;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "SkinSelectorManager", menuName = "GameSequencesList/SkinSelectorManager")]
+public class SkinSelectorItem : GameSequenceItem
+{
+
+}
 public class SkinSelectorManager : MonoBehaviour
 {
     static SkinSelectorManager instance;

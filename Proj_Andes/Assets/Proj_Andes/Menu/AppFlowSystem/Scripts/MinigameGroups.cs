@@ -1,13 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "MiniGameGroup", menuName = "GameConfigs/MiniGameGroup")]
+[CreateAssetMenu(fileName = "MiniGameGroup", menuName = "GameSequencesList/MiniGameGroup")]
 public class MinigameGroups : GameSequence
 {
     public List<GameSequenceItem> miniGamesInGroup;
-    List<GameSequenceItem> itemsPlayed = new List<GameSequenceItem>();
+    [NonSerialized] List<GameSequenceItem> itemsPlayed = new List<GameSequenceItem>();
     public bool randomize;
     public GameSequenceItem GetNextMiniGame()
     {

@@ -14,8 +14,6 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	public int shipsPerGame;
 
 	public SizeRockets_ShipConfig[] shipsConfigs;
-	public SceneReference gameScene;
-	public override SceneReference scene => gameScene;
 
     public SizeRockets_ShipConfig GetShipConfig(SizeRocketsRocketTypes shipType)
 	{

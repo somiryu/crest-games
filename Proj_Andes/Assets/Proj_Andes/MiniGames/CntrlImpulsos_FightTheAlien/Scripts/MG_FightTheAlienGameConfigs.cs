@@ -15,6 +15,4 @@ public class MG_FightTheAlienGameConfigs : GameConfig
 
 	public int playerHealthLostOnWrongAnswer = -1;
 	public int EnemyHealthLostOnRightAnswer = -1;
-	public SceneReference gameScene;
-	public override SceneReference scene => gameScene;
 }

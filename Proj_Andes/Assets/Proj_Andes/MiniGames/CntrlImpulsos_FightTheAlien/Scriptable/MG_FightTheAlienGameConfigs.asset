@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f016ccdd89c25d4b98df4359a8658e0, type: 3}
   m_Name: MG_FightTheAlienGameConfigs
   m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 8bed209e6ffcec6428298b17b507740a, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_FightTheAlien/Scenes/CntrlImpulsos_FightTheAlien.unity
   timePerChoice: 5
   PlayerHealth: 10
   EnemyHealth: 10
@@ -20,6 +23,3 @@ MonoBehaviour:
   coinsOnWrongAnswer: -1
   playerHealthLostOnWrongAnswer: -1
   EnemyHealthLostOnRightAnswer: -1
-  gameScene:
-    sceneAsset: {fileID: 102900000, guid: 8bed209e6ffcec6428298b17b507740a, type: 3}
-    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_FightTheAlien/Scenes/CntrlImpulsos_FightTheAlien.unity
