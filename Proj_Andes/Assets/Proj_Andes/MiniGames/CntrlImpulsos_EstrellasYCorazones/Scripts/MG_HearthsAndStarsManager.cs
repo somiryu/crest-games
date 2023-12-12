@@ -19,14 +19,21 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
     [SerializeField] Button rightBtn;
 
     [SerializeField] GameObject afterActionPanel;
+    [SerializeField] GameObject inGameUIPanel;
+   
+    [SerializeField] AudioClip correctAudio;
+    [SerializeField] AudioClip wrongAudio;
+    [SerializeField] AudioClip finishAudio;
 
     [Header("UI")]
     [SerializeField] TMP_Text currCoinsValueTxt;
     [SerializeField] TMP_Text currRoundValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
+    [SerializeField] Button retryBtn2;
     [SerializeField] Slider timerUI;
 
+    private AudioSource audiosource; 
 
     private float timerPerChoice = 0;
     private int currCoins;
@@ -46,8 +53,11 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
     {
         currCoins = gameConfigs.initialCoins;
         currRound = 0;
+        audiosource = GetComponent<AudioSource>();
 
-		afterActionPanel.SetActive(false);
+
+        afterActionPanel.SetActive(false);
+		inGameUIPanel.SetActive(true);
         gameoverFlag = false;
 
         timerUI.minValue = 0;
@@ -56,6 +66,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 		leftBtn.onClick.AddListener(OnClickedLeft);
 		rightBtn.onClick.AddListener(OnClickedRight);
 		retryBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+		retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 
 		InitRound();
 	}
@@ -66,6 +77,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
 		rightImg.gameObject.SetActive(false);
 		leftImg.gameObject.SetActive(false);
+
+        //inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
 		currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;
@@ -90,6 +103,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
 	private void OnClickedLeft()
     {
+       // inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
+
+
         var succed = false;
         if (!currRequiresSameDirection && currShowingRight) succed = true;
         if (currRequiresSameDirection && !currShowingRight) succed = true;
@@ -99,7 +115,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
     private void OnClickedRight()
     {
-		var succed = false;
+       // inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
+
+        var succed = false;
 		if (currRequiresSameDirection && currShowingRight) succed = true;
 		if (!currRequiresSameDirection && !currShowingRight) succed = true;
 		if (succed) OnCorrectChoice();
@@ -108,6 +126,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
     private void OnWrongChoice()
     {
+        audiosource.clip = wrongAudio;
+        audiosource.Play();
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         OnRoundEnded();
@@ -115,6 +135,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
     private void OnCorrectChoice()
     {
+        audiosource.clip = correctAudio;
+        audiosource.Play();
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         OnRoundEnded();
     }
@@ -129,14 +151,18 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
             GameOver();
             return;
         }
+        inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
         InitRound();
     }
 
     void GameOver()
     {
+        audiosource.clip = finishAudio;
+        audiosource.Play();
         gameoverFlag = true;
+		inGameUIPanel.SetActive(false);
         afterActionPanel.SetActive(true);
-		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
+        afterActionFinalCoinsTxt.SetText(currCoins.ToString());
 	}
 }
