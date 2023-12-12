@@ -14,9 +14,7 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     public bool forceToFail;
     public SceneReference gameScene;
     public bool updateScene;
-
     public override SceneReference scene => gameScene;
-
 
     private void OnValidate()
     {

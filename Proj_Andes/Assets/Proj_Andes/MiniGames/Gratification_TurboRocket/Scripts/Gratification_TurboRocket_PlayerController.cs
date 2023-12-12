@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class Gratification_TurboRocket_PlayerController : MonoBehaviour
+public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager
 {
     static Gratification_TurboRocket_PlayerController instance;
     public static Gratification_TurboRocket_PlayerController Instance => instance;
@@ -31,7 +31,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
     public GameStages gameStages;
     public Gratification_TurboRocket_UIController ui;
     public GameRideData data;
-
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
 
 
@@ -72,12 +73,13 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
         TryGetComponent(out ui);
         camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
         ui.StartUi();
-
+        eogManager.OnGameStart();
 	}
 
 	public void RideBegining()
 	{
 		ui.StartUi();
+
 		colls = new Collider[5];
 		currentSpeed = levelConfig.regularSpeed;
 		currentTargetSpeed = levelConfig.regularSpeed;
@@ -177,6 +179,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
         ui.EndOfGame();
         bk.EndOfGame();
         onPlay = false;
+        eogManager.OnGameOver();
         gameStages = GameStages.End;
     }
 }

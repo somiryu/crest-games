@@ -14,5 +14,4 @@ public class MG_MagnetsConfigs : GameConfig
 	public bool activeCheats;
 	public SceneReference gameScene;
 	public override SceneReference scene => gameScene;
-
 }

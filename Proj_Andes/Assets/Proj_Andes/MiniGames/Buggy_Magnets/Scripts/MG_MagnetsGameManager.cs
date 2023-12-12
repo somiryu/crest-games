@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MG_MagnetsGameManager : MonoBehaviour
+public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 {
     public Pool<MG_MagnetsEnergyItem> energyItemsPool;
 
@@ -32,9 +32,10 @@ public class MG_MagnetsGameManager : MonoBehaviour
 	private float currEneryProgress;
 
 	private Collider[] overlayResults = new Collider[20];
-	
+	[SerializeField] EndOfGameManager eogManager;
+	public EndOfGameManager EndOfGameManager => eogManager;
 
-	public void Awake()
+    public void Awake()
 	{
 		Init();
 	}
@@ -51,6 +52,7 @@ public class MG_MagnetsGameManager : MonoBehaviour
 		EnergyFillImage.fillAmount = 0;
 		MagnetsAmount.SetText(availableMagnets.ToString());
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);
+		eogManager.OnGameStart();
 	}
 
 	private void Update()
@@ -145,6 +147,7 @@ public class MG_MagnetsGameManager : MonoBehaviour
 		var won = Mathf.Abs(afterActionEnergyFillImage.fillAmount - 1f) < 0.02f;
 		winTitle.SetActive(won);
 		loseTitle.SetActive(!won);
+		eogManager.OnGameOver();
 	}
 
 }

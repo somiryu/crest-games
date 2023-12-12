@@ -8,22 +8,22 @@ public class MinigameGroups : GameSequence
 {
     public List<GameSequenceItem> miniGamesInGroup;
     public bool randomize;
-    GameSequenceItem prevGame = GameSequencesList.Instance.prevGame;
+    //GameSequenceItem prevGame = GameSequencesList.Instance.prevGame;
     public GameSequenceItem GetNextMiniGame()
     {
         if (randomize)
         {
             return GetRandomGame();
         }
-        if(miniGamesInGroup.Contains(prevGame))
+        if(miniGamesInGroup.Contains(GameSequencesList.Instance.prevGame))
         {
-            var newGame = miniGamesInGroup[miniGamesInGroup.IndexOf(prevGame) + 1];
-            prevGame = newGame;
+            var newGame = miniGamesInGroup[miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame) + 1];
+            GameSequencesList.Instance.prevGame = newGame;
             return newGame;
         }
         else
         {
-            prevGame = miniGamesInGroup[0];
+            GameSequencesList.Instance.prevGame = miniGamesInGroup[0];
             return miniGamesInGroup[0];
         }
     }
@@ -31,7 +31,7 @@ public class MinigameGroups : GameSequence
     GameSequenceItem GetRandomGame()
     {
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
-        if (newGame != prevGame)
+        if (newGame != GameSequencesList.Instance.prevGame)
         {
             return newGame;
         }

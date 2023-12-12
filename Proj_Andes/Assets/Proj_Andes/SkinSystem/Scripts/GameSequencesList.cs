@@ -18,6 +18,7 @@ public class GameSequencesList : ScriptableObject
     }
 
     public List<GameSequence> gameSequences;
+    public GameSequenceItem currentItem;
     public GameSequenceItem prevGame;
     public int goToGameGroupIdx;
     public bool continueToNextItem;
@@ -29,10 +30,15 @@ public class GameSequencesList : ScriptableObject
             SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
         }
     }
+    public void GoToNextItemInList()
+    {
+        SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
+    }
     [ContextMenu("ResetSequence")]
     private void ResetSequence()
     {
         prevGame = null;
+        goToGameGroupIdx = 0;
     }
     public GameSequence GetGameSequence()
     {
@@ -49,7 +55,7 @@ public class GameSequencesList : ScriptableObject
 
 public abstract class GameConfig : GameSequenceItem
 {
-    //public abstract void OnGameOver();
+
 }
 
 public abstract class GameSequence : ScriptableObject

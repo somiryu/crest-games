@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MG_VoiceStarOrFlowerManager : MonoBehaviour
+public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 {
 	[SerializeField] MG_VoiceStarOrFlowerGameConfigs gameConfigs;
 	[Space(20)]
@@ -34,6 +34,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour
     [SerializeField] Button retryBtn;
     [SerializeField] Slider timerUI;
 
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
 
     private float timerPerChoice = 0;
     private int currCoins;
@@ -68,7 +70,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour
 		rightBtn.onClick.AddListener(OnClickedRight);
 		discardBtn.onClick.AddListener(OnClickedDiscard);
 
-        retryBtn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+        retryBtn.onClick.AddListener(() => SceneManagement.GoToScene(gameConfigs.scene));
 
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
@@ -89,6 +91,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour
         currTargetImg.sprite = imgToUse;
         audioPlayer.clip = soundToUse;
         audioPlayer.Play();
+        eogManager.OnGameStart();
 	}
 
 	private void Update()
@@ -167,5 +170,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
 		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
+        eogManager.OnGameOver();
 	}
 }

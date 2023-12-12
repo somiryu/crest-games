@@ -12,6 +12,5 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
 	public SceneReference gameScene;
-
 	public override SceneReference scene => gameScene;
 }

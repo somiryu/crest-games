@@ -13,6 +13,5 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public float regularRideDuration;
     public int starsAmount;
     public SceneReference gameScene;
-
     public override SceneReference scene => gameScene;
 }

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class MG_BoostersAndScape_Manager : MonoBehaviour
+public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 {
     static MG_BoostersAndScape_Manager instance;
     public static MG_BoostersAndScape_Manager Instance => instance;
@@ -35,6 +35,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     [SerializeField] Transform endOfGameContainer;
     [SerializeField] TextMeshProUGUI finalScoreText;
 
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
     private void Awake()
     {
         if(instance != null)
@@ -94,6 +96,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
     {
         playBtn.gameObject.SetActive(false);
         endOfGameContainer.gameObject.SetActive(false);
+        eogManager.OnGameStart();
         spawner.OnGameStart();
         successfulAttempts = 0;
         alienMov.OnGameStart();
@@ -104,6 +107,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
             forcedFails.Add(GenerateRandom());
         }
         onPlay = true;
+
     }
     void OnGameEnd()
     {
@@ -112,6 +116,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour
         endOfGameContainer.gameObject.SetActive(true);
         onPlay = false;
         spawner.OnGameEnd();
+        eogManager.OnGameOver();
         Debug.Log("Game over!");
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)

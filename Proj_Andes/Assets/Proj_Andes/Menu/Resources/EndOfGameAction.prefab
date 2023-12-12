@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b87e0f35ecc2bf46ab2aff2c7c1e953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetBtn: {fileID: 8433712547103760689}
+  continueBtn: {fileID: 3897476052496720784}
+  eogContainer: {fileID: 9069166033385277267}
 --- !u!1 &5972084101941684325
 GameObject:
   m_ObjectHideFlags: 0

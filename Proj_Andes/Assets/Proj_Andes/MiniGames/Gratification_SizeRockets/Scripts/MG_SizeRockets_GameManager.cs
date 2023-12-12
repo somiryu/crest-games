@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MG_SizeRockets_GameManager : MonoBehaviour
+public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 {
 	private static MG_SizeRockets_GameManager instance;
 	public static MG_SizeRockets_GameManager Instance => instance;
@@ -42,7 +42,10 @@ public class MG_SizeRockets_GameManager : MonoBehaviour
 	private SizeRocketsRocketTypes selectedRocketType;
 	private MG_SizeRockets_Planet currTargetPlanet;
 
-	public int minCoinsToGive => gameConfigs.minCoinsToGive;
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
+
+    public int minCoinsToGive => gameConfigs.minCoinsToGive;
 	public int maxCoinsToGive => gameConfigs.maxCoinsToGive;
 	public int planetsAmountToGenerate => gameConfigs.planetsAmountToGenerate;
 	public int shipsPerGame => gameConfigs.shipsPerGame;
@@ -103,7 +106,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour
 
 			planets[i].Init(Mathf.RoundToInt(coinsToGive));
 		}
-
+		eogManager.OnGameStart();
 	}
 
 	Vector3 GetNewRandomPosition(int trialIdx, Vector3 minPos, Vector3 maxPos)
@@ -208,6 +211,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour
 	{
 		afterActionPanel.SetActive(true);
 		afterAction_CoinsCountTxt.SetText(totalCoinsWon.ToString());
+		eogManager.OnGameOver();
 	}
 
 }

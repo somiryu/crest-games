@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MG_HearthsAndStarsManager : MonoBehaviour
+public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 {
 	[SerializeField] MG_HearthAndStarsGameConfigs gameConfigs;
 	[Space(20)]
@@ -27,6 +27,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
     [SerializeField] Button retryBtn;
     [SerializeField] Slider timerUI;
 
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
 
     private float timerPerChoice = 0;
     private int currCoins;
@@ -66,6 +68,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
 		rightImg.gameObject.SetActive(false);
 		leftImg.gameObject.SetActive(false);
+
+        eogManager.OnGameStart();
 
 		currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;
@@ -138,5 +142,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
 		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
+        eogManager.OnGameOver();
 	}
 }

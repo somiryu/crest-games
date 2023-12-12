@@ -16,6 +16,7 @@ public static class SceneManagement
     }
     public static void GoToScene(SceneReference scene)
     {
+        currentScene = scene;
         SceneManager.LoadScene(scene);
     }
 }
