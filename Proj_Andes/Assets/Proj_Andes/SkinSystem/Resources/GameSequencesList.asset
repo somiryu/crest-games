@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71a7ddeaf8f4d9542815788b594a7568, type: 3}
-  m_Name: GameConfigsList
+  m_Name: GameSequencesList
   m_EditorClassIdentifier: 
-  gameSequences:
-  - {fileID: 11400000, guid: 02edb24ab208cc7469340eb9631f61ac, type: 2}
-  - {fileID: 11400000, guid: 02edb24ab208cc7469340eb9631f61ac, type: 2}
-  prevGame: {fileID: 11400000, guid: cf4b54b3469cdb7469e4b7aa254c9395, type: 2}
+  gameSequences: []
+  currentItem: {fileID: 0}
+  prevGame: {fileID: 0}
   goToGameGroupIdx: 0
   continueToNextItem: 0

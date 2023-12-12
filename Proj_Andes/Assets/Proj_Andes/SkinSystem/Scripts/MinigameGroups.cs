@@ -7,8 +7,8 @@ using Random = UnityEngine.Random;
 public class MinigameGroups : GameSequence
 {
     public List<GameSequenceItem> miniGamesInGroup;
+    List<GameSequenceItem> itemsPlayed = new List<GameSequenceItem>();
     public bool randomize;
-    //GameSequenceItem prevGame = GameSequencesList.Instance.prevGame;
     public GameSequenceItem GetNextMiniGame()
     {
         if (randomize)
@@ -17,6 +17,11 @@ public class MinigameGroups : GameSequence
         }
         if(miniGamesInGroup.Contains(GameSequencesList.Instance.prevGame))
         {
+            if(miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame) >= miniGamesInGroup.Count - 1)
+            {
+                OnSequenceOver();
+                return GameSequencesList.Instance.prevGame;
+            }
             var newGame = miniGamesInGroup[miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame) + 1];
             GameSequencesList.Instance.prevGame = newGame;
             return newGame;
@@ -27,22 +32,22 @@ public class MinigameGroups : GameSequence
             return miniGamesInGroup[0];
         }
     }
-
     GameSequenceItem GetRandomGame()
     {
-        var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
-        if (newGame != GameSequencesList.Instance.prevGame)
+        if(itemsPlayed.Count >= miniGamesInGroup.Count)
         {
+            OnSequenceOver();
+            return GameSequencesList.Instance.prevGame;
+        }
+        var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
+        if (!itemsPlayed.Contains(newGame))
+        {
+            //GameSequencesList.Instance.prevGame = newGame;
+            itemsPlayed.Add(newGame);
             return newGame;
         }
         else return GetRandomGame();
     }
-
-    public override void OnSequenceStart()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void OnSequenceOver()
     {
         GameSequencesList.Instance.GoToNextSequence();
@@ -51,5 +56,10 @@ public class MinigameGroups : GameSequence
     public override GameSequenceItem GetNextItem()
     {
         return GetNextMiniGame();
+    }
+
+    public override void OnReset()
+    {
+        itemsPlayed.Clear();
     }
 }

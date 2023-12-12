@@ -13,7 +13,6 @@ public class EndOfGameManager : MonoBehaviour
     public Button resetBtn;
     public Button continueBtn;
     [SerializeField] Transform eogContainer;
-    GameSequenceItem currentScene => GameSequencesList.Instance.currentItem;
 
     private void Awake()
     {

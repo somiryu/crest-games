@@ -3,10 +3,10 @@ using Tymski;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "GameConfigsList", menuName = "GameConfigs/GameConfigsList")]
+[CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
-    public static string instancePath = "GameConfigsList";
+    public static string instancePath = "GameSequencesList";
     static GameSequencesList instance;
     public static GameSequencesList Instance
     {
@@ -18,8 +18,8 @@ public class GameSequencesList : ScriptableObject
     }
 
     public List<GameSequence> gameSequences;
-    public GameSequenceItem currentItem;
     public GameSequenceItem prevGame;
+
     public int goToGameGroupIdx;
     public bool continueToNextItem;
     public void OnValidate()
@@ -39,6 +39,7 @@ public class GameSequencesList : ScriptableObject
     {
         prevGame = null;
         goToGameGroupIdx = 0;
+        for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
     }
     public GameSequence GetGameSequence()
     {
@@ -47,10 +48,26 @@ public class GameSequencesList : ScriptableObject
 
     public void GoToNextSequence()
     {
-        goToGameGroupIdx++;
-        //SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
+        if (goToGameGroupIdx < gameSequences.Count - 1) 
+        {
+            goToGameGroupIdx++;
+            prevGame = null;
+            SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
+        } 
+        else Debug.Log("End of sequences");
     }
 
+}
+public abstract class GameSequence : ScriptableObject
+{
+    public abstract void OnReset();
+    public abstract GameSequenceItem GetNextItem();
+    public abstract void OnSequenceOver();
+}
+
+public abstract class GameSequenceItem : ScriptableObject
+{
+    public abstract SceneReference scene { get; }
 }
 
 public abstract class GameConfig : GameSequenceItem
@@ -58,14 +75,3 @@ public abstract class GameConfig : GameSequenceItem
 
 }
 
-public abstract class GameSequence : ScriptableObject
-{
-    public abstract void OnSequenceStart();
-    public abstract GameSequenceItem GetNextItem();
-    public abstract void OnSequenceOver();
-}
-public abstract class GameSequenceItem : ScriptableObject
-{
-    public abstract SceneReference scene { get; }
-
-}
