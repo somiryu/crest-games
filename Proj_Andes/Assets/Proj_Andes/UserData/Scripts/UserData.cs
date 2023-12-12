@@ -6,25 +6,27 @@ using UnityEngine;
 [Serializable]
 public class UserData 
 {
-	public string UserName;
-	public string Email;
-	public string Id;
+	public string id;
+	public string name;
+	public int age;
+	public UserGender gender;
+	public string city;
+	public string institution;
 
 	public UserData()
 	{
-		UserName = "Default User";
-		Email = string.Empty;
-		Id = "DefaultUserID";
+		id = Guid.NewGuid().ToString();
+		name = "Unnamed";
+		age = -1;
+		gender = UserGender.NONE;
+		city = string.Empty;
+		institution = string.Empty;
 	}
+}
 
-	public UserData(string email, string id)
-	{
-		Email = email;
-		Id = id;
-		UserName = email;
-	}
-
-
-
-
+public enum UserGender
+{
+	Hombre,
+	Mujer,
+	NONE,
 }

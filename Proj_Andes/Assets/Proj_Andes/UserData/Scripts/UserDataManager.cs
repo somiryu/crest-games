@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager;
@@ -27,6 +28,9 @@ public class UserDataManager : ScriptableObject
 
 	public UserData DefaultUserData = new UserData();
 
+	[NonSerialized]
+	public List<UserData> usersDatas = new List<UserData>();
+
 	[SerializeField] UserData currUserData;
 
 	public UserData CurrUserData
@@ -44,9 +48,17 @@ public class UserDataManager : ScriptableObject
 		if (instance == null) instance = Resources.Load<UserDataManager>(instancePath);
 	}
 
+	public void LoadDataFromRemoteDataBase()
+	{
+		usersDatas = DatabaseManager.GetUserDatasList();
+	}
+
+
 	public void SetCurrUser(string email, string id)
 	{
-		currUserData = new UserData(email, id);
+		currUserData = new UserData();
+		currUserData.name = email;
+		currUserData.id = id;
 	}
 
 }
