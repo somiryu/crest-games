@@ -23,7 +23,6 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] Image afterActionEnergyFillImage;
 	[SerializeField] GameObject winTitle;
 	[SerializeField] GameObject loseTitle;
-	[SerializeField] Button retryBtn;
 
 	private float timer;
 	private int currSpawnedItems;
@@ -48,7 +47,6 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		currSpawnedItems = 0;
 		currEnergyPicked = 0;
 		currEneryProgress = 0;
-        retryBtn.onClick.AddListener(() => SceneManagement.GoToScene(gameConfigs.scene));
 		EnergyFillImage.fillAmount = 0;
 		MagnetsAmount.SetText(availableMagnets.ToString());
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);

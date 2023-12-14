@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: GameSequencesList
   m_EditorClassIdentifier: 
   gameSequences:
-  - {fileID: 11400000, guid: 02edb24ab208cc7469340eb9631f61ac, type: 2}
-  - {fileID: 11400000, guid: 13ca465b41d63284d88a6d63b5568bf6, type: 2}
-  - {fileID: 11400000, guid: 13ca465b41d63284d88a6d63b5568bf6, type: 2}
+  - {fileID: 11400000, guid: c81a1a56a3da09a4eb7d8142dbc0be61, type: 2}
+  - {fileID: 11400000, guid: 41fef01bd660fc64586ae05004bbc2a8, type: 2}
   continueToNextItem: 0

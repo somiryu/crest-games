@@ -8,14 +8,15 @@ public class SkinSelectorUI : MonoBehaviour
 {
     public List<BtnPerSkinType> btnsPerSkins = new List<BtnPerSkinType>();
 	public Button goToGame;
-	private void Awake()
+	[SerializeField] SkinSelectorItem skinSelectorItem;
+    private void Awake()
 	{
 		for (int i = 0; i < btnsPerSkins.Count; i++)
 		{
 			var curr = btnsPerSkins[i];
 			curr.btn.onClick.AddListener(() => GetSkinTypeSelection(curr.skinType));
 		}
-		goToGame.onClick.AddListener(SceneManagement.SetGameScene);
+		goToGame.onClick.AddListener(skinSelectorItem.OnSequenceOver);
 	}
     public void GetSkinTypeSelection(SkinType skinType)
     {

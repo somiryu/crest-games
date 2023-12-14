@@ -23,7 +23,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 	[Header("After Action")]
 	public GameObject afterActionPanel;
 	public TMP_Text afterAction_CoinsCountTxt;
-	public Button afterAction_RetryBtn;
 
 	[Header("Rockets")]
 	public Pool<MG_SizeRockets_Rocket> smallRocketsPool;
@@ -64,8 +63,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
 		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.medium));
 		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.large));
-
-        afterAction_RetryBtn.onClick.AddListener(() => SceneManagement.GoToScene(gameConfigs.scene));
 
 		smallRocketsPool.Init(5);
 		mediumRocketsPool.Init(5);

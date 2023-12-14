@@ -36,7 +36,7 @@ public class GameSequencesList : ScriptableObject
         SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
     }
     [ContextMenu("ResetSequence")]
-    private void ResetSequence()
+    public void ResetSequence()
     {
         prevGame = null;
         goToGameGroupIdx = 0;
@@ -59,7 +59,7 @@ public class GameSequencesList : ScriptableObject
     }
 
 }
-public abstract class GameSequence : ScriptableObject
+public abstract class GameSequence : GameSequenceItem
 {
     public abstract void OnReset();
     public abstract GameSequenceItem GetNextItem();

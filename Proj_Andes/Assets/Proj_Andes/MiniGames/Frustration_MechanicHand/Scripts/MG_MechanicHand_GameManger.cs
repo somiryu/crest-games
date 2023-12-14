@@ -17,7 +17,6 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public List<BoxCollider> asteroidsAreaPerRound = new List<BoxCollider>();
 	public TMP_Text playerLifesAmountTxt;
 	public GameObject afterActionPanel;
-	public Button afterAction_ResetBtn;
 	public TMP_Text afterAction_ResultsTxt;
 	public GameObject afterAction_WinLabel;
 	public GameObject afterAction_LoseLabel;
@@ -60,7 +59,6 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		playerLifesAmountTxt.SetText(currPlayerLifes.ToString());
 
 		afterActionPanel.SetActive(false);
-        afterAction_ResetBtn.onClick.AddListener(() => SceneManagement.GoToScene(gameConfigs.scene));
         currAsteroidsSize = 1;
 
         asteroidsPool.Init(10);

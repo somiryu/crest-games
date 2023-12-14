@@ -60,9 +60,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
             }
         }
         instance = this;
-    }
-    void Start()
-    {
         Init();
     }
     public void Init()
@@ -72,21 +69,21 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
         camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
-        ui.StartUi();
         eogManager.OnGameStart();
+        RideBegining();
 	}
 
 	public void RideBegining()
 	{
 		ui.StartUi();
-
 		colls = new Collider[5];
 		currentSpeed = levelConfig.regularSpeed;
 		currentTargetSpeed = levelConfig.regularSpeed;
 		bk.Init();
 		SetSpeedway();
 		firstPos = transform.position;
-		gameStages = GameStages.Start;
+        onPlay = true;
+        gameStages = GameStages.Start;
 	}
 
 	void SetSpeedway()
@@ -157,15 +154,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
             if (onTurbo) return;
             star.OnCaptured();
         }
-    }
-    public void Play()
-    {
-        if (!onPlay) 
-        {
-            onPlay = true;
-            RideBegining();
-        }
-        else onPlay = false;
     }
  
     void EndOfRide()

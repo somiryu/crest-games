@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NarrativeSceneItem", menuName = "GameSequencesList/NarrativeSceneItem")]
-public class NarrativeSceneItem : GameSequence
+[CreateAssetMenu(fileName = "SkinSelectorManager", menuName = "GameSequencesList/SkinSelectorManager")]
+public class SkinSelectorItem : GameSequence
 {
     public override GameSequenceItem GetNextItem()
     {
@@ -13,7 +12,6 @@ public class NarrativeSceneItem : GameSequence
 
     public override void OnReset()
     {
-        
     }
 
     public override void OnSequenceOver()
@@ -21,4 +19,3 @@ public class NarrativeSceneItem : GameSequence
         GameSequencesList.Instance.GoToNextSequence();
     }
 }
-

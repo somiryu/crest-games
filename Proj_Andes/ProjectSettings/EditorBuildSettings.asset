@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/Menu/Scenes/PlayScene.unity
     guid: 69f1c644272a182468a361a990562861
+  - enabled: 1
+    path: Assets/Proj_Andes/SkinSystem/Scenes/SkinsTestScene.unity
+    guid: 16f841297cc4ebe4199416100f204e4f
+  - enabled: 1
+    path: Assets/Proj_Andes/NarrativeScenes/DialogueSystem/TestSenes/DialogsTestScene.unity
+    guid: aa71629bf033a30449e6fb7f6c27e4b4
   m_configObjects: {}

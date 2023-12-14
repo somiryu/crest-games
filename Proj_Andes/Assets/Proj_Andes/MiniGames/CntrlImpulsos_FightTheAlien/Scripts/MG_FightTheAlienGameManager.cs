@@ -72,7 +72,6 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
             answerBtns[i].onClick.AddListener(() => OnAnswerBtnClicked(currIdx));
         }
 
-        retryBtn.onClick.AddListener(() => SceneManagement.GoToScene(gameConfigs.scene));
 
 		InitRound();
 	}

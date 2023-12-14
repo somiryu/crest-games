@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
     }
     void PlayGame()
     {
+        GameSequencesList.Instance.ResetSequence();
         SceneManagement.GoToScene(GameSequencesList.Instance.GetGameSequence().GetNextItem().scene);
     }
 }

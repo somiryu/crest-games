@@ -31,7 +31,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
     public List<int> forcedFails = new List<int>();
     [SerializeField] MG_BoostersAndScape_Spawner spawner;
-    [SerializeField] Button playBtn;
     [SerializeField] Transform endOfGameContainer;
     [SerializeField] TextMeshProUGUI finalScoreText;
 
@@ -50,7 +49,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
     void Init()
     {
-        playBtn.onClick.AddListener(OnGameStart);
         alien.TryGetComponent(out alienMov);
         startPos = rocket.transform.position;
         startPos.x = 0;
@@ -58,6 +56,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         targetTime = gameConfig.boosterTriggerRate;
         endOfGameContainer.gameObject.SetActive(false);
         catchBoosterRange = 1.5f;
+        OnGameStart();
     }
 
     void Update()
@@ -94,7 +93,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     }
     void OnGameStart()
     {
-        playBtn.gameObject.SetActive(false);
         endOfGameContainer.gameObject.SetActive(false);
         eogManager.OnGameStart();
         spawner.OnGameStart();
@@ -111,7 +109,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     }
     void OnGameEnd()
     {
-        playBtn.gameObject.SetActive(true);
         finalScoreText.text = "Boosters captured " + successfulAttempts + "/10";
         endOfGameContainer.gameObject.SetActive(true);
         onPlay = false;

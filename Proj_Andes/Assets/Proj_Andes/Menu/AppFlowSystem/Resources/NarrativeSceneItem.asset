@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86efade2ed66f5143b25a2417d38207b, type: 3}
-  m_Name: SkinSelectorManager
+  m_Script: {fileID: 11500000, guid: 6af2c7455cd2d594cb94cf93c8130889, type: 3}
+  m_Name: NarrativeSceneItem
   m_EditorClassIdentifier: 
   scene:
-    sceneAsset: {fileID: 102900000, guid: 16f841297cc4ebe4199416100f204e4f, type: 3}
-    scenePath: Assets/Proj_Andes/SkinSystem/Scenes/SkinsTestScene.unity
+    sceneAsset: {fileID: 102900000, guid: aa71629bf033a30449e6fb7f6c27e4b4, type: 3}
+    scenePath: Assets/Proj_Andes/NarrativeScenes/DialogueSystem/TestSenes/DialogsTestScene.unity
