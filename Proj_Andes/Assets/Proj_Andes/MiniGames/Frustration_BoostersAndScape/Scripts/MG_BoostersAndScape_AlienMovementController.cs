@@ -13,9 +13,8 @@ public class MG_BoostersAndScape_AlienMovementController : MonoBehaviour
     float unitOfProgress;
     public float timer => manager.timer;
     public int progressGuide;
-    //Pending to improve target time
     float targetTime;
-    private void Start()
+    public void Init()
     {
         initPos = transform.position.x;
         roadStart = initPos;

@@ -28,7 +28,7 @@ public class GameSequencesList : ScriptableObject
         if (continueToNextItem)
         {
             continueToNextItem = false;
-            if (GetGameSequence().GetNextItem() is NarrativeSceneItem) goToGameGroupIdx++;
+            if (gameSequences[goToGameGroupIdx] is NarrativeSceneItem) goToGameGroupIdx++;
             SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
         }
     }
@@ -55,6 +55,7 @@ public class GameSequencesList : ScriptableObject
             goToGameGroupIdx++;
             prevGame = null;
             SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
+            Debug.Log(SceneManagement.currentScene);
         } 
         else Debug.Log("End of sequences");
     }

@@ -49,6 +49,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     void Init()
     {
         alien.TryGetComponent(out alienMov);
+        alienMov.Init();
         startPos = rocket.transform.position;
         startPos.x = 0;
         rocket.transform.position = startPos;
@@ -61,7 +62,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     void Update()
     {
         if (!onPlay) return;
-        Debug.Log(onPlay);
         timer += Time.deltaTime;
         spawner.spawner.timer = timer;
         if(timer >= targetTime)
