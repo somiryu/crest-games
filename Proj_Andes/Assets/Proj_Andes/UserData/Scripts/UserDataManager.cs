@@ -53,12 +53,30 @@ public class UserDataManager : ScriptableObject
 		usersDatas = DatabaseManager.GetUserDatasList();
 	}
 
+	public void SaveDataToRemoteDataBase()
+	{
+		DatabaseManager.SaveUserDatasList(usersDatas);
+	}
 
 	public void SetCurrUser(string email, string id)
 	{
 		currUserData = new UserData();
 		currUserData.name = email;
 		currUserData.id = id;
+	}
+
+	public void RegisterNewUser(UserData user)
+	{
+		currUserData = user;
+		usersDatas.Add(currUserData);
+		SaveDataToRemoteDataBase();
+	}
+
+	public void RemoveUser(string id)
+	{
+		var data = usersDatas.Find(x => x.id == id);
+		usersDatas.Remove(data);
+		SaveDataToRemoteDataBase();
 	}
 
 }

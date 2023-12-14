@@ -11,7 +11,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
 
-	public Pool<UsersListItem> currUserBtns;
+	public Pool<UsersListItem> userBtnsPool;
+	public Dictionary<UsersListItem, string> currBtnsByDataID;
 
 	[SerializeField] Button goToUserCreationPanel;
 
@@ -25,6 +26,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] TMP_InputField institutionField;
 	[SerializeField] Button createBtn;
 	[SerializeField] Button cancelBtn;
+	[SerializeField] Button wrongNewUserDataPopUp;
 
 
 	private void Awake()
@@ -32,6 +34,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		cancelBtn.onClick.AddListener(() => createNewUserPanel.SetActive(false));
 		createBtn.onClick.AddListener(OnFinishedUserCreation);
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
+		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
+		correctlyLoggedInFlag = false;
+		doneInitialization = false;
+		userBtnsPool.Init(10);
+		currBtnsByDataID = new Dictionary<UsersListItem, string>();
 	}
 
 	private void Start()
@@ -53,6 +60,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			Firebase.Auth.AuthResult result = task.Result;
 			Debug.LogFormat("User signed in successfully: {0} ({1})",
 				result.User.DisplayName, result.User.UserId);
+
+			correctlyLoggedInFlag = true;
 		});
 	}
 
@@ -60,20 +69,23 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		if (correctlyLoggedInFlag && !doneInitialization)
 		{
-			InitializeDataList();
-			correctlyLoggedInFlag=false;
+			UserDataManager.Instance.LoadDataFromRemoteDataBase();
+			RebuildUsersList();
+			correctlyLoggedInFlag = false;
 			doneInitialization = true;
 		}
 	}
 
-	void InitializeDataList()
+	void RebuildUsersList()
 	{
-		UserDataManager.Instance.LoadDataFromRemoteDataBase();
+		currBtnsByDataID.Clear();
+		userBtnsPool.RecycleAll();
 		var users = UserDataManager.Instance.usersDatas;
 		for (int i = 0; i < users.Count; i++) 
 		{
-			var newBtn = currUserBtns.GetNewItem();
-			newBtn.Init(users[i].name);
+			var newBtn = userBtnsPool.GetNewItem();
+			newBtn.Init(users[i].name, this);
+			currBtnsByDataID.Add(newBtn, users[i].id);
 		}
 	}
 
@@ -84,14 +96,36 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	void OnFinishedUserCreation()
 	{
-		createNewUserPanel.SetActive(false);
 		var newUser = new UserData();
 		newUser.name = nameField.text;
-		newUser.age = int.Parse(ageField.text);
-		newUser.gender = (UserGender)Enum.Parse(typeof(UserGender), sexField.text);
+		newUser.age = int.TryParse(ageField.text, out var result)? result : -1;
+		newUser.gender = Enum.TryParse<UserGender>(sexField.text, out var found)? found : UserGender.NONE;
 		newUser.city = cityField.text;
 		newUser.institution = institutionField.text;
 
+		var validData = true;
+		validData &= !string.IsNullOrEmpty(newUser.name);
+		validData &= newUser.age != -1;
+		validData &= newUser.gender != UserGender.NONE;
+		validData &= !string.IsNullOrEmpty(newUser.city);
+		validData &= !string.IsNullOrEmpty(newUser.institution);
+
+		if(!validData) wrongNewUserDataPopUp.gameObject.SetActive(true);
+		else
+		{
+			newUser.id = Guid.NewGuid().ToString();
+			UserDataManager.Instance.RegisterNewUser(newUser);
+			createNewUserPanel.SetActive(false);
+			RebuildUsersList();
+		}
+
+	}
+
+	public void RemoveUserOfBtn(UsersListItem item)
+	{
+		if (!currBtnsByDataID.TryGetValue(item, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
+		UserDataManager.Instance.RemoveUser(idFound);
+		RebuildUsersList();
 	}
 
 }
