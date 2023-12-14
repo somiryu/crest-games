@@ -26,6 +26,7 @@ public class MG_FightTheAlienManager : MonoBehaviour
 	[Header("After Action UI")]
 	[SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
+    [SerializeField] Button retryBtn2;
 
     [Header("Posible Answer")]
 	[SerializeField] AlienAttackConfig[] alienAttacksConfigs;
@@ -71,6 +72,7 @@ public class MG_FightTheAlienManager : MonoBehaviour
         }
 
 		retryBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+		retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 
 		InitRound();
 	}
