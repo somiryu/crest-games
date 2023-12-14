@@ -46,7 +46,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         spawner.Init();
         Init();
     }
-
     void Init()
     {
         alien.TryGetComponent(out alienMov);
@@ -62,6 +61,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     void Update()
     {
         if (!onPlay) return;
+        Debug.Log(onPlay);
         timer += Time.deltaTime;
         spawner.spawner.timer = timer;
         if(timer >= targetTime)
@@ -89,7 +89,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
             rocket.transform.position = Vector3.right * 5 * Time.deltaTime;
         }
         if (alien.transform.position.x >= rocket.transform.position.x) OnGameEnd();
-
     }
     void OnGameStart()
     {

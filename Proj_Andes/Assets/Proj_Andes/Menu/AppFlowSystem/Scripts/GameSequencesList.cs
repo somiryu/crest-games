@@ -28,6 +28,7 @@ public class GameSequencesList : ScriptableObject
         if (continueToNextItem)
         {
             continueToNextItem = false;
+            if (GetGameSequence().GetNextItem() is NarrativeSceneItem) goToGameGroupIdx++;
             SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
         }
     }

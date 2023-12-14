@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 1_0_Narrator_yesterday
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Efectivamente no fuiste al colegio porque ten\xEDas gripa, pero estas
+      de buenas porque la profe se demora recogiendo un material para la clase, asi
+      que Cami comienza a ponerte al d\xEDa."
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Ayer fue horrible! Me despert\xE9 tarde y tuve que correr un mont\xF3n
+      para llegar."
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "cuando porfin llegu\xE9, no me quer\xEDan dejar entrar. Me dijeron que
+      ten\xEDan que llamar a mi casa para que me recogieran. El colmo!,\xA1hab\xEDa
+      llegado 2 minutos tarde!"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: f8d273cd4b2ae5146833e143cb618c67, type: 2}
+    text: "\xBFC\xF3mo te sientes t\xFA, al saber lo que le pas\xF3 a Cami?"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses:
+    - response: "BIEN\t"
+      responseImage: {fileID: 21300000, guid: b799d874948b84e47a5f3a021c70058c, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: NADA
+      responseImage: {fileID: 21300000, guid: 098bcf0e01978024385c25352552b6d7, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: MAL
+      responseImage: {fileID: 21300000, guid: 098bcf0e01978024385c25352552b6d7, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}

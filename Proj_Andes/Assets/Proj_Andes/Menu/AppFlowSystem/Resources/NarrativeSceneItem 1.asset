@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NarrativeSceneItem 1
   m_EditorClassIdentifier: 
   scene:
-    sceneAsset: {fileID: 0}
-    scenePath: 
+    sceneAsset: {fileID: 102900000, guid: 136d5b9d50c51fa49b33ac348168a23f, type: 3}
+    scenePath: Assets/Proj_Andes/NarrativeScenes/Narrative_1/DialogsNarrative1.unity

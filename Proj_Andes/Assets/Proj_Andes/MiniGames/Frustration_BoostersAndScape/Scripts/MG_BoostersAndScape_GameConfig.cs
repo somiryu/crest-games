@@ -13,23 +13,5 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     public float boosterTriggerRate;
     public bool forceToFail;
     public bool updateScene;
-
-    private void OnValidate()
-    {
-        if (updateScene)
-        {
-            updateScene = false;
-            scene = OnSceneChanged(scene);
-        }
-    }
-    SceneReference OnSceneChanged(SceneReference sceneRef)
-    {
-        if(scene != sceneRef)
-        {
-            return scene;
-        }
-        return scene;
-    }
-
 }
 

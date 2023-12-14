@@ -25,6 +25,7 @@ public class MinigameGroups : GameSequence
             }
             var newGame = miniGamesInGroup[miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame) + 1];
             GameSequencesList.Instance.prevGame = newGame;
+            Debug.Log(miniGamesInGroup.IndexOf(newGame));
             return newGame;
         }
         else
@@ -56,6 +57,7 @@ public class MinigameGroups : GameSequence
 
     public override GameSequenceItem GetNextItem()
     {
+        //Debug.Log(miniGamesInGroup.IndexOf(GetNextMiniGame()));
         return GetNextMiniGame();
     }
 

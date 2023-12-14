@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 5_0_class_table
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "\xA1Mira lo que hay en tu mesa!"
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Es una pata como cualquier otra, de metal. Nada extra\xF1o."
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: Mira otra vez..
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "\xA1Mira ac\xE1!"
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "El dibujo te tom\xF3 por sorpresa "
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: "Cuando te pasa algo as\xED, \xBFQu\xE9 haces?"
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    text: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: baf5f2bdf5eae2c40b8c71c0f36aa328, type: 3}
+    responses:
+    - response: 
+      responseImage: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: 
+      responseImage: {fileID: 21300000, guid: 5e90a61f787052a4888cb4b2b05925ce, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    - response: 
+      responseImage: {fileID: 21300000, guid: 6ceee92a670dc014790770714cd44c8e, type: 3}
+      changeSequence: 0
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}

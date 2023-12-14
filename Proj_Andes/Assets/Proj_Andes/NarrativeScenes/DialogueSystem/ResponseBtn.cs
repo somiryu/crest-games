@@ -18,8 +18,11 @@ public class ResponseBtn : MonoBehaviour
 
 	public Action<DialogueResponse> onClicked;
 
+	public RectTransform RectTransform;
+
 	private void Awake()
 	{
+		TryGetComponent(out RectTransform);
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(() => onClicked?.Invoke(ResponseData));
 	}
@@ -39,5 +42,6 @@ public class ResponseBtn : MonoBehaviour
 			responseImg.sprite = responseData.responseImage;
 		}
 		onClicked = null;
+		btn.interactable = true;
 	}
 }
