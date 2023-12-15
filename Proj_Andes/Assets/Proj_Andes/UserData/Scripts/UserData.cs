@@ -26,7 +26,7 @@ public class UserData
 
 public enum UserGender
 {
-	Hombre,
-	Mujer,
+	Masculino,
+	Femenino,
 	NONE,
 }

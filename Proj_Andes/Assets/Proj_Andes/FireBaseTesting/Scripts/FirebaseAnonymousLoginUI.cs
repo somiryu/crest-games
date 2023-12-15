@@ -21,7 +21,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	public GameObject createNewUserPanel;
 	[SerializeField] TMP_InputField nameField;
 	[SerializeField] TMP_InputField ageField;
-	[SerializeField] TMP_InputField sexField;
+	[SerializeField] TMP_Dropdown sexField;
 	[SerializeField] TMP_InputField cityField;
 	[SerializeField] TMP_InputField institutionField;
 	[SerializeField] Button createBtn;
@@ -69,6 +69,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		if (correctlyLoggedInFlag && !doneInitialization)
 		{
+			Debug.Log("Correctly logged in");
 			UserDataManager.Instance.LoadDataFromRemoteDataBase();
 			RebuildUsersList();
 			correctlyLoggedInFlag = false;
@@ -99,7 +100,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		var newUser = new UserData();
 		newUser.name = nameField.text;
 		newUser.age = int.TryParse(ageField.text, out var result)? result : -1;
-		newUser.gender = Enum.TryParse<UserGender>(sexField.text, out var found)? found : UserGender.NONE;
+		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true ,out var found)? found : UserGender.NONE;
 		newUser.city = cityField.text;
 		newUser.institution = institutionField.text;
 

@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: {fileID: 6661915230640857196}
   deleteUserBtn: {fileID: 3913973147187333196}
+  mainBtn: {fileID: 6842348938654831731}
 --- !u!1 &4221351735087035236
 GameObject:
   m_ObjectHideFlags: 0
