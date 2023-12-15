@@ -26,6 +26,14 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 	[Header("After Action UI")]
 	[SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
+    [SerializeField] Button retryBtn2;
+    [SerializeField] GameObject inGameUIPaneltoDissapear;
+
+
+    [Header("Game Audio")]
+    [SerializeField] AudioClip correctAudio;
+    [SerializeField] AudioClip wrongAudio;
+    [SerializeField] AudioClip finishAudio;
 
     [Header("Posible Answer")]
 	[SerializeField] AlienAttackConfig[] alienAttacksConfigs;
@@ -72,6 +80,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
             answerBtns[i].onClick.AddListener(() => OnAnswerBtnClicked(currIdx));
         }
 
+		retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 
 		InitRound();
 	}

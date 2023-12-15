@@ -18,6 +18,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] Button leftBtn;
     [SerializeField] Button rightBtn;
 
+    [SerializeField] ParticleSystem LCorrectparticle;
+    [SerializeField] ParticleSystem RCorrectparticle;
+
     [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUIPanel;
    
@@ -103,25 +106,25 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
 	private void OnClickedLeft()
     {
-       // inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
 
         var succed = false;
         if (!currRequiresSameDirection && currShowingRight) succed = true;
         if (currRequiresSameDirection && !currShowingRight) succed = true;
-        if(succed) OnCorrectChoice();
+        if (succed) OnCorrectChoice();
         else OnWrongChoice();
     }
 
     private void OnClickedRight()
     {
-       // inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
         var succed = false;
 		if (currRequiresSameDirection && currShowingRight) succed = true;
 		if (!currRequiresSameDirection && !currShowingRight) succed = true;
-		if (succed) OnCorrectChoice();
-		else OnWrongChoice();
+        if (succed)OnCorrectChoice();
+     
+
+        else OnWrongChoice();
 	}
 
     private void OnWrongChoice()
@@ -135,9 +138,15 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     private void OnCorrectChoice()
     {
+        RCorrectparticle.Stop();
+        LCorrectparticle.Stop();
+        
         audiosource.clip = correctAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnCorrectAnswer;
+        if (currShowingRight)RCorrectparticle.Play();
+        else LCorrectparticle.Play();
+            
         OnRoundEnded();
     }
 
@@ -151,7 +160,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
             GameOver();
             return;
         }
-        inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
+
+        Animator animatorImg = inGameUIPanel.GetComponent<Animator>();
+        animatorImg.ResetTrigger("Appear");
+        animatorImg.SetTrigger("Appear");
 
         InitRound();
     }
