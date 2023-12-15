@@ -734,6 +734,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkinableImage
       objectReference: {fileID: 0}
+    - target: {fileID: 2880770732505582083, guid: 098e0d6a8aceb4148a94732c0841cc6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4285370526240560209, guid: 098e0d6a8aceb4148a94732c0841cc6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.17

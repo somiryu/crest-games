@@ -179,7 +179,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
                     }
                 }
             }
-            HideDialogues();
+            HideDialogues(nextSequence == null);
             if(nextSequence != null)
             {
                 ShowDialogueSequence(nextSequence);
@@ -256,7 +256,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (!isShowing) return;
         if (Input.GetKeyDown(KeyCode.I))
         {
-            HideDialogues();
+            HideDialogues(false);
             return;
         }
 
@@ -402,14 +402,14 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
     }
 
-    public void HideDialogues() {
+    public void HideDialogues(bool GoToNextScene) {
         isAppearingTxt = false;
         isShowing = false;
         dialoguesToShow = null;
         mainDialoguesGraphics.SetActive(false);
         OnEndShowingDialogue?.Invoke();
         currShowingIdx = -1;
-        narrativeSceneItem.OnSequenceOver();
+        if(GoToNextScene) narrativeSceneItem.OnSequenceOver();
 	}
 }
 

@@ -70,7 +70,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 		rightBtn.onClick.AddListener(OnClickedRight);
 		discardBtn.onClick.AddListener(OnClickedDiscard);
 
-        retryBtn.onClick.AddListener(() => SceneManagement.GoToScene(gameConfigs.scene));
 
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);

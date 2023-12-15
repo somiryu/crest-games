@@ -18,13 +18,14 @@ public class MinigameGroups : GameSequence
         }
         if(miniGamesInGroup.Contains(GameSequencesList.Instance.prevGame))
         {
-            if(miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame) >= miniGamesInGroup.Count - 1)
-            {
-                OnSequenceOver();
-                return GameSequencesList.Instance.prevGame;
-            }
-            var newGame = miniGamesInGroup[miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame) + 1];
+            var lastGameIdx = miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame);
+            var newGameIdx = lastGameIdx + 1;
+
+            if (newGameIdx >= miniGamesInGroup.Count) return null;
+
+            var newGame = miniGamesInGroup[lastGameIdx + 1];
             GameSequencesList.Instance.prevGame = newGame;
+
             return newGame;
         }
         else
@@ -37,8 +38,7 @@ public class MinigameGroups : GameSequence
     {
         if(itemsPlayed.Count >= miniGamesInGroup.Count)
         {
-            OnSequenceOver();
-            return GameSequencesList.Instance.prevGame;
+            return null;
         }
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
         if (!itemsPlayed.Contains(newGame))

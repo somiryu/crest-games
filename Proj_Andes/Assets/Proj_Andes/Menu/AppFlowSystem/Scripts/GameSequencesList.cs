@@ -34,8 +34,11 @@ public class GameSequencesList : ScriptableObject
     }
     public void GoToNextItemInList()
     {
-        SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
+        var nextItem = GetGameSequence().GetNextItem();
+        if(nextItem != null) SceneManagement.GoToScene(nextItem.scene);
+		else GoToNextSequence();
     }
+
     [ContextMenu("ResetSequence")]
     public void ResetSequence()
     {
