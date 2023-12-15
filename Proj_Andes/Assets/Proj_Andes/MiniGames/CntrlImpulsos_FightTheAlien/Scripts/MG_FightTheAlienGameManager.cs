@@ -44,6 +44,7 @@ public class MG_FightTheAlienManager : MonoBehaviour
     private int currCorrectAnswerIdx;
     private int currPlayerHealth;
     private int currEnemyHealth;
+    private AudioSource audiosource;
 
     private bool gameoverFlag = false;
 
@@ -54,6 +55,8 @@ public class MG_FightTheAlienManager : MonoBehaviour
 
 	public void Init()
     {
+        audiosource = GetComponent<AudioSource>();
+
         currCoins = gameConfigs.initialCoins;
         currPlayerHealth = gameConfigs.PlayerHealth;
         currEnemyHealth = gameConfigs.EnemyHealth;
