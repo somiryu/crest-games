@@ -64,6 +64,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         currEnemyHealth = gameConfigs.EnemyHealth;
 
 		afterActionPanel.SetActive(false);
+		inGameUIPaneltoDissapear.SetActive(true);
         gameoverFlag = false;
 
         timerUI.minValue = 0;
@@ -136,6 +137,9 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 	}
     private void OnWrongChoice()
     {
+        audiosource.clip = wrongAudio;
+        audiosource.Play();
+
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         currPlayerHealth += gameConfigs.playerHealthLostOnWrongAnswer;
@@ -144,6 +148,9 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
     private void OnCorrectChoice()
     {
+        audiosource.clip = correctAudio;
+        audiosource.Play();
+
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         currEnemyHealth += gameConfigs.EnemyHealthLostOnRightAnswer;
         OnRoundEnded();
@@ -165,8 +172,12 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
+        audiosource.clip = finishAudio;
+        audiosource.Play();
+
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
+        inGameUIPaneltoDissapear.SetActive(false);
 		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
         eogManager.OnGameOver();
 	}
