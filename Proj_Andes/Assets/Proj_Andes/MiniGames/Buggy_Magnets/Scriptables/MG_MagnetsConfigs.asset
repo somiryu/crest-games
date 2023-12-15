@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba69adfcf8db33545991964f3be3f656, type: 3}
   m_Name: MG_MagnetsConfigs
   m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 1854d9b868866b04a9628e64dac549d7, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/Buggy_Magnets/Scenes/MG_Magnets.unity
   timeBetweenSpawns: 1
   maxSpawnsOnScreen: 30
   userMagnetRadius: 1

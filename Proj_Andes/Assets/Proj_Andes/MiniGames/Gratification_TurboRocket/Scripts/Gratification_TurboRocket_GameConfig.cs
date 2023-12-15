@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tymski;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Level Config", menuName = "Game1/LevelConfig")]
+[CreateAssetMenu(fileName = "Gratification_TurboRocket_GameConfig", menuName = "MiniGames/Gratification_TurboRocket_GameConfig")]
 
-public class Gratification_TurboRocket_LevelConfig : ScriptableObject
+public class Gratification_TurboRocket_GameConfig : GameConfig
 {
     public float regularSpeed;
     public float turboSpeed;
     public float accelerationSpeed;
     public float regularRideDuration;
-    public float turboRideDuration;
     public int starsAmount;
-
 }

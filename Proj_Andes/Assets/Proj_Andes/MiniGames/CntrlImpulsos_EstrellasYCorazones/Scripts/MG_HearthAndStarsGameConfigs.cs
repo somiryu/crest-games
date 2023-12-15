@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tymski;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "HearthAndStarsGameConfigs", menuName = "MiniGames/HearthAndStarsGameConfigs")]
-public class MG_HearthAndStarsGameConfigs : ScriptableObject
+public class MG_HearthAndStarsGameConfigs : GameConfig
 {
 	public float timePerChoice = 5f;
 	public int maxRounds = 10;

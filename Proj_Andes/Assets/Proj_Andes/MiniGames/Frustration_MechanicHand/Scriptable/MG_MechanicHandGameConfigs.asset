@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8953960b0890a0840b3c1b686df85f56, type: 3}
   m_Name: MG_MechanicHandGameConfigs
   m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 424d06e04238e79488209179da26a38c, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/Frustration_MechanicHand/Scenes/Frustration_MechanicHand_TestScene.unity
   asteroidsPerRound: 5
   asteroidsSizeLoseAmountPerRound: 0.2
   playerLifes: 5

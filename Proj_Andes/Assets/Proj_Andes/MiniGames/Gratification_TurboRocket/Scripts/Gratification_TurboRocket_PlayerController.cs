@@ -9,12 +9,12 @@ using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class Gratification_TurboRocket_PlayerController : MonoBehaviour
+public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager
 {
     static Gratification_TurboRocket_PlayerController instance;
     public static Gratification_TurboRocket_PlayerController Instance => instance;
 
-    public Gratification_TurboRocket_LevelConfig levelConfig;
+    public Gratification_TurboRocket_GameConfig levelConfig;
     public bool onPlay;
     public Transform character;
     Vector3 firstPos;
@@ -31,7 +31,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
     public GameStages gameStages;
     public Gratification_TurboRocket_UIController ui;
     public GameRideData data;
-
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
 
 
@@ -59,9 +60,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
             }
         }
         instance = this;
-    }
-    void Start()
-    {
         Init();
     }
     public void Init()
@@ -71,8 +69,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
         camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
-        ui.StartUi();
-
+        eogManager.OnGameStart();
+        RideBegining();
 	}
 
 	public void RideBegining()
@@ -84,7 +82,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
 		bk.Init();
 		SetSpeedway();
 		firstPos = transform.position;
-		gameStages = GameStages.Start;
+        onPlay = true;
+        gameStages = GameStages.Start;
 	}
 
 	void SetSpeedway()
@@ -156,15 +155,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
             star.OnCaptured();
         }
     }
-    public void Play()
-    {
-        if (!onPlay) 
-        {
-            onPlay = true;
-            RideBegining();
-        }
-        else onPlay = false;
-    }
  
     void EndOfRide()
     {
@@ -177,6 +167,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour
         ui.EndOfGame();
         bk.EndOfGame();
         onPlay = false;
+        eogManager.OnGameOver();
         gameStages = GameStages.End;
     }
 }

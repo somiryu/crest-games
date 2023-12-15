@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acf102da377d82649b63fd10f24df517, type: 3}
-  m_Name: TurboRocker_Level Config
+  m_Script: {fileID: 11500000, guid: 86efade2ed66f5143b25a2417d38207b, type: 3}
+  m_Name: SkinSelectorManager
   m_EditorClassIdentifier: 
-  regularSpeed: 3
-  turboSpeed: 15
-  accelerationSpeed: 5
-  regularRideDuration: 30
-  turboRideDuration: 0
-  starsAmount: 20
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 16f841297cc4ebe4199416100f204e4f, type: 3}
+    scenePath: Assets/Proj_Andes/SkinSystem/Scenes/SkinsTestScene.unity

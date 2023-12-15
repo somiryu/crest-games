@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MG_HearthsAndStarsManager : MonoBehaviour
+public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 {
 	[SerializeField] MG_HearthAndStarsGameConfigs gameConfigs;
 	[Space(20)]
@@ -18,6 +18,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 	[SerializeField] Button leftBtn;
     [SerializeField] Button rightBtn;
 
+    [SerializeField] ParticleSystem LCorrectparticle;
+    [SerializeField] ParticleSystem RCorrectparticle;
+
     [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUIPanel;
    
@@ -29,10 +32,11 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
     [SerializeField] TMP_Text currCoinsValueTxt;
     [SerializeField] TMP_Text currRoundValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
-    [SerializeField] Button retryBtn;
     [SerializeField] Button retryBtn2;
     [SerializeField] Slider timerUI;
 
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
     private AudioSource audiosource; 
 
     private float timerPerChoice = 0;
@@ -65,10 +69,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
 		leftBtn.onClick.AddListener(OnClickedLeft);
 		rightBtn.onClick.AddListener(OnClickedRight);
-		retryBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 		retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+        eogManager.OnGameStart();
 
-		InitRound();
+        InitRound();
 	}
 
 	void InitRound()
@@ -78,7 +82,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 		rightImg.gameObject.SetActive(false);
 		leftImg.gameObject.SetActive(false);
 
-        //inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
 		currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;
@@ -103,25 +106,25 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
 	private void OnClickedLeft()
     {
-       // inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
 
         var succed = false;
         if (!currRequiresSameDirection && currShowingRight) succed = true;
         if (currRequiresSameDirection && !currShowingRight) succed = true;
-        if(succed) OnCorrectChoice();
+        if (succed) OnCorrectChoice();
         else OnWrongChoice();
     }
 
     private void OnClickedRight()
     {
-       // inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
 
         var succed = false;
 		if (currRequiresSameDirection && currShowingRight) succed = true;
 		if (!currRequiresSameDirection && !currShowingRight) succed = true;
-		if (succed) OnCorrectChoice();
-		else OnWrongChoice();
+        if (succed)OnCorrectChoice();
+     
+
+        else OnWrongChoice();
 	}
 
     private void OnWrongChoice()
@@ -135,9 +138,15 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 
     private void OnCorrectChoice()
     {
+        RCorrectparticle.Stop();
+        LCorrectparticle.Stop();
+        
         audiosource.clip = correctAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnCorrectAnswer;
+        if (currShowingRight)RCorrectparticle.Play();
+        else LCorrectparticle.Play();
+            
         OnRoundEnded();
     }
 
@@ -151,7 +160,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
             GameOver();
             return;
         }
-        inGameUIPanel.GetComponent<Animator>().SetTrigger("Appear");
+
+        Animator animatorImg = inGameUIPanel.GetComponent<Animator>();
+        animatorImg.ResetTrigger("Appear");
+        animatorImg.SetTrigger("Appear");
 
         InitRound();
     }
@@ -164,5 +176,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour
 		inGameUIPanel.SetActive(false);
         afterActionPanel.SetActive(true);
         afterActionFinalCoinsTxt.SetText(currCoins.ToString());
+        eogManager.OnGameOver();
 	}
 }

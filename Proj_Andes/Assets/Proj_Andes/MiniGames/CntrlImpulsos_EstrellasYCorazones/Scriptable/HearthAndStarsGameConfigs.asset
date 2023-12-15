@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba309166b1939dd4695ae3afb9083326, type: 3}
   m_Name: HearthAndStarsGameConfigs
   m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 6f0335c0093bc764f8eefa1a5c6deed5, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_EstrellasYCorazones/Scenes/CntrlImpulsos_EstrellasYCorazones.unity
   timePerChoice: 3
   maxRounds: 10
   initialCoins: 0

@@ -12,7 +12,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 {
     private static DialoguesDisplayerUI instance;
     public static DialoguesDisplayerUI Instance => instance;
-
+    [SerializeField] NarrativeSceneItem narrativeSceneItem;
 
     [SerializeField] DialogueSequenceData dialoguesToShow;
     public DialogueSequenceData CurrDialoguesBeingShown => dialoguesToShow;
@@ -179,7 +179,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
                     }
                 }
             }
-            HideDialogues();
+            HideDialogues(nextSequence == null);
             if(nextSequence != null)
             {
                 ShowDialogueSequence(nextSequence);
@@ -256,7 +256,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (!isShowing) return;
         if (Input.GetKeyDown(KeyCode.I))
         {
-            HideDialogues();
+            HideDialogues(false);
             return;
         }
 
@@ -402,14 +402,14 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
     }
 
-    public void HideDialogues() {
+    public void HideDialogues(bool GoToNextScene) {
         isAppearingTxt = false;
         isShowing = false;
         dialoguesToShow = null;
         mainDialoguesGraphics.SetActive(false);
         OnEndShowingDialogue?.Invoke();
         currShowingIdx = -1;
-
+        if(GoToNextScene) narrativeSceneItem.OnSequenceOver();
 	}
 }
 

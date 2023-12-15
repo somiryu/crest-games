@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Tymski;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "MG_MechanicHandGameConfigs", menuName = "MiniGames/MG_MechanicHandGameConfigs")]
-public class MG_MechanicHandGameConfigs : ScriptableObject
+public class MG_MechanicHandGameConfigs : GameConfig
 {
 	public int asteroidsPerRound = 5;
 	public float asteroidsSizeLoseAmountPerRound = 0.2f;

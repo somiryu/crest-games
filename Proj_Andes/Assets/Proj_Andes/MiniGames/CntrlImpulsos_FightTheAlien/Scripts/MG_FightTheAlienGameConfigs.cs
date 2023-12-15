@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tymski;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MG_FightTheAlienGameConfigs", menuName = "MiniGames/MG_FightTheAlienGameConfigs")]
-public class MG_FightTheAlienGameConfigs : ScriptableObject
+public class MG_FightTheAlienGameConfigs : GameConfig
 {
 	public float timePerChoice = 5f;
 	public int PlayerHealth = 10;

@@ -16,18 +16,22 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Desde que entras al sal\xF3n, sientes en tu panza que algo raro va a pasar.
       Te acercas a Cami, tu mejor amiga, y cuando le preguntas si ella tambien siente
       lo mismo te responde:"
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 8300000, guid: 3cf838d5883d30c49b4911ef81b2018a, type: 3}
+    audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Uy! \xBFNo ser\xE1 que se te qued\xF3 el dibujo como a mi?"
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
@@ -38,6 +42,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "No puedes creerlo, efectivamente se te pas\xF3 igual que a Cami y  no
       tienes tu dibujo"
     responsesDisplayerPrefab: {fileID: 0}
@@ -49,6 +55,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Justo ah\xED ves que la profe Sandra comienza a revisar los dibujos.\xA1Ya
       se est\xE1 acerdando a tu puesto!"
     responsesDisplayerPrefab: {fileID: 0}
@@ -60,6 +68,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Cuando te pasa algo as\xED, \xBFqu\xE9 sientes?"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -70,28 +80,30 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 0
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
     - response: RABIA
       responseImage: {fileID: 0}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: "MIEDO\t"
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: ALEGRIA
       responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: TRISTEZA
       responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: "NO S\xC9"
       responseImage: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -100,6 +112,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Justo cuando la profe esta llegando a tu puesto, un compa\xF1ero le hace
       una pregunta y la distrae... parece que te salvaste esta vez"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
@@ -111,6 +125,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Volteas a mirar hacia tu cuaderno y te das cuenta de que mientras estabas
       pendiente de la profe, Alex, un compa\xF1ero del sal\xF3n comenzo a rayarlo."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
@@ -122,6 +138,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Cuando te pasa algo as\xED, \xBF qu\xE9 sientes?"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -132,28 +150,30 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 0
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
     - response: RABIA
       responseImage: {fileID: 0}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: "MIEDO\t"
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: ALEGRIA
       responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: TRISTEZA
       responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: "NO S\xC9"
       responseImage: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -162,6 +182,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -172,20 +194,22 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 0
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
     - response: Le digo que eso me molesta mucho, que no lo haga
       responseImage: {fileID: 0}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: "Me levanto y tambi\xE9n le rayo el cuaderno"
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: Cierro mi cuarderno y hago como si no me hubiera dado cuenta
       responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -194,6 +218,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: Alex te ignora
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -204,6 +230,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Luego de un rato te sientes mejor. La profe les pide hacer un nuevo dibujo,
       y que compartan los materiales entre sus compa\xF1eros"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
@@ -215,6 +243,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Alex tiene los colores rojo y amarillo que t\xFA necesitas, pero no te
       los quiere prestar"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
@@ -226,6 +256,8 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -236,20 +268,22 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 0
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
     - response: Le digo que podemos tomar turnos para usar los colores
       responseImage: {fileID: 0}
-      changeSequence: 1
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 8702f028d206a664f85ee29e49df7b59, type: 2}
     - response: Le quito los colores a Alex, sin decirle nada
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      changeSequence: 1
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 8702f028d206a664f85ee29e49df7b59, type: 2}
     - response: "Dejo as\xED, y utilizo otros colores para mi dibujo"
       responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 1
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 8702f028d206a664f85ee29e49df7b59, type: 2}
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
