@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MG_FightTheAlienManager : MonoBehaviour
+public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 {
 	[SerializeField] MG_FightTheAlienGameConfigs gameConfigs;
     [Space(20)]
@@ -38,8 +38,10 @@ public class MG_FightTheAlienManager : MonoBehaviour
     [Header("Posible Answer")]
 	[SerializeField] AlienAttackConfig[] alienAttacksConfigs;
 
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
 
-	private float timerPerChoice = 0;
+    private float timerPerChoice = 0;
     private int currCoins;
     private int currCorrectAnswerIdx;
     private int currPlayerHealth;
@@ -81,7 +83,6 @@ public class MG_FightTheAlienManager : MonoBehaviour
             answerBtns[i].onClick.AddListener(() => OnAnswerBtnClicked(currIdx));
         }
 
-		retryBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 		retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 
 		InitRound();
@@ -92,7 +93,7 @@ public class MG_FightTheAlienManager : MonoBehaviour
 	void InitRound()
     {
         timerPerChoice = 0;
-
+        eogManager.OnGameStart();
         var randomAttack = Random.Range(0, alienAttacksConfigs.Length);
         var currConfig = alienAttacksConfigs[randomAttack];
 
@@ -167,6 +168,7 @@ public class MG_FightTheAlienManager : MonoBehaviour
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
 		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
+        eogManager.OnGameOver();
 	}
 }
 

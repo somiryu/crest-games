@@ -30,7 +30,7 @@ public class SkinnableImage : MonoBehaviour
         }
         if(image) image.sprite = sprite;
         if(sRenderer) sRenderer.sprite = sprite;
-	}
+    }
 }
 
 [Serializable]

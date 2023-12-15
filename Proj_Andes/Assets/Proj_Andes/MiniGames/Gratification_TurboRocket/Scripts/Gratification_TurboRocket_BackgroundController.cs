@@ -10,7 +10,6 @@ public class Gratification_TurboRocket_BackgroundController : MonoBehaviour
     public Gratification_TurboRocket_StarsSpawner starsSpawner;
     public void Init()
     {
-        starsSpawner = GetComponentInChildren<Gratification_TurboRocket_StarsSpawner>();
         var newSize = bkSize.localScale;
         newSize.x = player.levelConfig.regularRideDuration * player.levelConfig.regularSpeed;
         bkSize.localScale = newSize;

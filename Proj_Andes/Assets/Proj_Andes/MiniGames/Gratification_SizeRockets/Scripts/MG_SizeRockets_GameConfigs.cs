@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Tymski;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MG_SizeRockets_GameConfigs", menuName = "MiniGames/MG_SizeRockets_GameConfigs")]
-public class MG_SizeRockets_GameConfigs : ScriptableObject
+public class MG_SizeRockets_GameConfigs : GameConfig
 {
 	public int minCoinsToGive;
 	public int maxCoinsToGive;
@@ -14,7 +15,7 @@ public class MG_SizeRockets_GameConfigs : ScriptableObject
 
 	public SizeRockets_ShipConfig[] shipsConfigs;
 
-	public SizeRockets_ShipConfig GetShipConfig(SizeRocketsRocketTypes shipType)
+    public SizeRockets_ShipConfig GetShipConfig(SizeRocketsRocketTypes shipType)
 	{
 		for (int i = 0; i < shipsConfigs.Length; i++)
 		{

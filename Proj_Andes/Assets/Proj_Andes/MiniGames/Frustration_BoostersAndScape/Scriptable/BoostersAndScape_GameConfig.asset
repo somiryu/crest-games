@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf12025a3f299348af496aaed2cf23b, type: 3}
   m_Name: BoostersAndScape_GameConfig
   m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 52beac390ad590b4eae40f9edfaf3327, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/Frustration_BoostersAndScape/Scenes/Frustration_BoostersAndScape_MainScene.unity
   boostersPerRun: 12
   forcedFails: 2
   boosterTriggerRate: 2
   forceToFail: 1
+  updateScene: 0

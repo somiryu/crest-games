@@ -7,7 +7,7 @@ public class SkinsConfigs : MonoBehaviour
 	private static string instancePath = "SkinsConfigs";
 	private static SkinsConfigs instance;
 
-	public static SkinsConfigs Instace
+	public static SkinsConfigs Instance
 	{
 		get
 		{

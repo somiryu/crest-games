@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5868bdcb590df3541a1ddb33a90bedb7, type: 3}
   m_Name: VoiceStarOrFlowerGameConfigs
   m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: d7608b90a7d13b34a8439223d93eb98c, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlower.unity
   timePerChoice: 5
   maxRounds: 10
   initialCoins: 0

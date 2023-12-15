@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MG_MechanicHand_GameManger : MonoBehaviour
+public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 {
 	private static MG_MechanicHand_GameManger instance;
 	public static MG_MechanicHand_GameManger Instance => instance;
@@ -17,7 +17,6 @@ public class MG_MechanicHand_GameManger : MonoBehaviour
 	public List<BoxCollider> asteroidsAreaPerRound = new List<BoxCollider>();
 	public TMP_Text playerLifesAmountTxt;
 	public GameObject afterActionPanel;
-	public Button afterAction_ResetBtn;
 	public TMP_Text afterAction_ResultsTxt;
 	public GameObject afterAction_WinLabel;
 	public GameObject afterAction_LoseLabel;
@@ -25,7 +24,10 @@ public class MG_MechanicHand_GameManger : MonoBehaviour
 	private List<Transform> currRoundAsteroids = new List<Transform>();
     BoxCollider CurrAsteroidsSpawnArea => asteroidsAreaPerRound[currRound];
 
-	public int asteroidsPerRound => gameConfigs.asteroidsPerRound;
+    [SerializeField] EndOfGameManager eogManager;
+    public EndOfGameManager EndOfGameManager => eogManager;
+
+    public int asteroidsPerRound => gameConfigs.asteroidsPerRound;
 	public float sizeLoseOnRoundChange => gameConfigs.asteroidsSizeLoseAmountPerRound;
 	int initialPlayerLifes => gameConfigs.playerLifes;
 
@@ -57,8 +59,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour
 		playerLifesAmountTxt.SetText(currPlayerLifes.ToString());
 
 		afterActionPanel.SetActive(false);
-		afterAction_ResetBtn.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
-		currAsteroidsSize = 1;
+        currAsteroidsSize = 1;
 
         asteroidsPool.Init(10);
 		player.Init();
@@ -82,6 +83,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour
 			curr.localScale = Vector3.one * currAsteroidsSize;
 			currRoundAsteroids.Add(curr);
 		}
+
+		eogManager.OnGameStart();
 	}
 
 	Vector3 GetNewRandomPosition(int trialIdx, Vector3 minPos, Vector3 maxPos)
@@ -145,6 +148,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour
 		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);
 		afterAction_WinLabel.SetActive(ratio >= gameConfigs.percentageNeededToWin);
 		afterAction_LoseLabel.SetActive(ratio < gameConfigs.percentageNeededToWin);
+		eogManager.OnGameOver();
 	}
 
 
