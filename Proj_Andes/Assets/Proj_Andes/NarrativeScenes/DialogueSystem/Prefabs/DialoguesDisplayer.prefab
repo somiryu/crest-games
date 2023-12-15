@@ -412,7 +412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25855914}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.203003, y: -121.907196}
+  m_AnchoredPosition: {x: 2.203125, y: -121.90723}
   m_SizeDelta: {x: -34.329, y: -236.1855}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3063343628042118868
@@ -912,9 +912,9 @@ RectTransform:
   m_Father: {fileID: 3063343628931919240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 140.48}
-  m_SizeDelta: {x: 0, y: 280.97}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -230.22858}
+  m_SizeDelta: {x: 0, y: -460.4471}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3063343628798107879
 CanvasRenderer:
@@ -1004,6 +1004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810f4d33c9419e94c98f69fa67bac335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  narrativeSceneItem: {fileID: 11400000, guid: dbdcd258bf1d5c6448f832f1b402c529, type: 2}
   dialoguesToShow: {fileID: 11400000, guid: 9f94db14bb1b42c4fa2fd0a39b698265, type: 2}
   mainDialoguesGraphics: {fileID: 3063343628798107872}
   characterImage: {fileID: 3063343629091718541}
@@ -1493,10 +1494,10 @@ RectTransform:
   - {fileID: 1215905397495010241}
   m_Father: {fileID: 3063343628798107873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1797, y: 997}
-  m_SizeDelta: {x: 102.1902, y: 81.2}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 123, y: 377}
+  m_SizeDelta: {x: 102.190186, y: 81.20001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1419864179035024534
 CanvasRenderer:
@@ -1612,6 +1613,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 254.16415}
-  m_SizeDelta: {x: 0, y: 508.3284}
+  m_AnchoredPosition: {x: 0, y: 227.7861}
+  m_SizeDelta: {x: 0, y: 455.5723}
   m_Pivot: {x: 0.5, y: 0.5}
