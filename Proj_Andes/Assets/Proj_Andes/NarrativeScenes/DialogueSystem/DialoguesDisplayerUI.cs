@@ -12,7 +12,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 {
     private static DialoguesDisplayerUI instance;
     public static DialoguesDisplayerUI Instance => instance;
-    [SerializeField] NarrativeSceneItem narrativeSceneItem;
+    [SerializeField] SimpleGameSequenceItem narrativeSceneItem;
 
     [SerializeField] DialogueSequenceData dialoguesToShow;
     public DialogueSequenceData CurrDialoguesBeingShown => dialoguesToShow;

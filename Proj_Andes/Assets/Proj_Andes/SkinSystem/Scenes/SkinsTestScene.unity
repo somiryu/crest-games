@@ -1131,7 +1131,7 @@ MonoBehaviour:
   - skinType: 2
     btn: {fileID: 945707045}
   goToGame: {fileID: 1829395317}
-  skinSelectorItem: {fileID: 11400000, guid: c81a1a56a3da09a4eb7d8142dbc0be61, type: 2}
+  skinSelectorItem: {fileID: 11400000, guid: f93a36707caef0744a2be27a6e8163ef, type: 2}
 --- !u!1 &1477591500
 GameObject:
   m_ObjectHideFlags: 0
