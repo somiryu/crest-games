@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a897d4e5304744f8eac206b8045b31, type: 3}
   m_Name: MiniGameGroup2
   m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 0}
+    scenePath: 
   miniGamesInGroup:
-  - {fileID: 11400000, guid: e9c5110f8800ba243aee031e543727e5, type: 2}
   - {fileID: 11400000, guid: 078fe712dc14761499bafb51fa1715da, type: 2}
-  - {fileID: 11400000, guid: 6a8e85563e4d0f345872afaa7882124f, type: 2}
-  - {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
-  - {fileID: 11400000, guid: 36371871d8798ef499c9ed4935329b42, type: 2}
+  - {fileID: 11400000, guid: 90f7abf53fcb1084185c23a779968874, type: 2}
+  - {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
+  - {fileID: 11400000, guid: e9c5110f8800ba243aee031e543727e5, type: 2}
   randomize: 1

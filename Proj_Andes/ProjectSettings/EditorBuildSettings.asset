@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Proj_Andes/Menu/Scenes/SplashArts.unity
+    guid: 2d5569de4d048af4ba2c8a16df5df7df
+  - enabled: 1
     path: Assets/Proj_Andes/MiniGames/Gratification_TurboRocket/Scenes/Gratification_TurboRocket.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -35,7 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/SkinSystem/Scenes/SkinsTestScene.unity
     guid: 16f841297cc4ebe4199416100f204e4f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Proj_Andes/NarrativeScenes/DialogueSystem/TestSenes/DialogsTestScene.unity
     guid: aa71629bf033a30449e6fb7f6c27e4b4
   - enabled: 1

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System.Text;
 using System;
 using UnityEngine.Playables;
-using UnityEditor.Timeline;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
