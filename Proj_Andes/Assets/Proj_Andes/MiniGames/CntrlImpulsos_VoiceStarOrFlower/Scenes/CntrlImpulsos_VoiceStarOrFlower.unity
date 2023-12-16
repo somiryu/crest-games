@@ -15565,7 +15565,7 @@ MonoBehaviour:
   leftBtn: {fileID: 657391130}
   rightBtn: {fileID: 1390768956}
   discardBtn: {fileID: 227213638}
-  afterActionPanel: {fileID: 180080037}
+  afterActionPanel: {fileID: 1287749179}
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
   rightAudio: {fileID: 8300000, guid: dc7b0595b4e4fe741bf177d1c46e4872, type: 3}
   audioPlayer: {fileID: 1951022623}

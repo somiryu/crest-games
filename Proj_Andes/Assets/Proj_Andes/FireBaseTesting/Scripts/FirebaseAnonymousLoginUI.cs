@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Firebase.Auth;
+using System.Threading.Tasks;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {
 	bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
+
+	string logInFailedWarning = string.Empty;
 
 	public Pool<UsersListItem> userBtnsPool;
 	public Dictionary<UsersListItem, string> currBtnsByDataID;
@@ -27,6 +30,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button createBtn;
 	[SerializeField] Button cancelBtn;
 	[SerializeField] Button wrongNewUserDataPopUp;
+	[SerializeField] Button logInFailedPopUp;
+	[SerializeField] TMP_Text logInFailTxt;
+	[SerializeField] TMP_Text logInsuccedIDUITxt;
+	 string logInsuccedID;
+
 
 
 	private void Awake()
@@ -35,6 +43,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		createBtn.onClick.AddListener(OnFinishedUserCreation);
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
+		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
 		correctlyLoggedInFlag = false;
 		doneInitialization = false;
 		userBtnsPool.Init(10);
@@ -43,33 +52,71 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	private void Start()
 	{
-		Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-
-		auth.SignInAnonymouslyAsync().ContinueWith(task => {
-			if (task.IsCanceled)
-			{
-				Debug.LogError("SignInAnonymouslyAsync was canceled.");
-				return;
-			}
-			if (task.IsFaulted)
-			{
-				Debug.LogError("SignInAnonymouslyAsync encountered an error: " + task.Exception);
-				return;
-			}
-
-			Firebase.Auth.AuthResult result = task.Result;
-			Debug.LogFormat("User signed in successfully: {0} ({1})",
-				result.User.DisplayName, result.User.UserId);
-
+		FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+		if(auth.CurrentUser != null)
+		{
+			Debug.Log("Already signed in: " + auth.CurrentUser.UserId);
+			logInsuccedID = ("Firebase ID:" + auth.CurrentUser.UserId);
 			correctlyLoggedInFlag = true;
-		});
+			return;
+		}
+		auth.SignInAnonymouslyAsync().ContinueWith(OnSingingResult);
 	}
+
+	void OnSingingResult(Task<AuthResult> taskResult)
+	{
+		if (taskResult.IsCanceled)
+		{
+			Debug.LogError("SignInAnonymouslyAsync was canceled.");
+			return;
+		}
+		if (taskResult.IsFaulted)
+		{
+			OnFailedLogIn(taskResult);
+			return;
+		}
+
+		AuthResult result = taskResult.Result;
+
+		Debug.LogFormat("User signed in successfully: {0} ({1})",
+			result.User.DisplayName, result.User.UserId);
+
+		logInsuccedID = ("Firebase ID:" + result.User.UserId);
+		correctlyLoggedInFlag = true;
+	}
+
+	void OnFailedLogIn(Task<AuthResult> taskResult)
+	{
+		var errMsg = GetErrorMessage(taskResult.Exception.InnerExceptions[0]);
+		logInFailedWarning = "Log in failed: " + errMsg;
+		Debug.LogError("SignInAnonymouslyAsync encountered an error: " + errMsg);
+	}
+
+	public static string GetErrorMessage(Exception exception)
+	{
+		Firebase.FirebaseException firebaseEx = exception as Firebase.FirebaseException;
+		if (firebaseEx != null)
+		{
+			var errorCode = (AuthError)firebaseEx.ErrorCode;
+			return errorCode.ToString();
+		}
+		return exception.ToString();
+	}
+
 
 	public void Update()
 	{
+		if (!string.IsNullOrEmpty(logInFailedWarning))
+		{
+			logInFailedPopUp.gameObject.SetActive(true);
+			logInFailTxt.SetText(logInFailedWarning);
+			logInFailedWarning = string.Empty;
+		}
+
 		if (correctlyLoggedInFlag && !doneInitialization)
 		{
 			Debug.Log("Correctly logged in");
+			logInsuccedIDUITxt.SetText(logInsuccedID);
 			UserDataManager.Instance.LoadDataFromRemoteDataBase();
 			RebuildUsersList();
 			correctlyLoggedInFlag = false;
