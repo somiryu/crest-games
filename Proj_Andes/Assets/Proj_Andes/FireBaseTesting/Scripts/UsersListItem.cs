@@ -16,6 +16,6 @@ public class UsersListItem : MonoBehaviour
         deleteUserBtn.onClick.RemoveAllListeners();
         deleteUserBtn.onClick.AddListener(() => logInController.RemoveUserOfBtn(this));
 		mainBtn.onClick.RemoveAllListeners();
-		mainBtn.onClick.AddListener(() => GameSequencesList.Instance.GoToNextSequence());
+		mainBtn.onClick.AddListener(() => logInController.OnSelectedUser(this));
 	}
 }

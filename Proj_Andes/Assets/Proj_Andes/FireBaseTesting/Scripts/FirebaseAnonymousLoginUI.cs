@@ -33,6 +33,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button logInFailedPopUp;
 	[SerializeField] TMP_Text logInFailTxt;
 	[SerializeField] TMP_Text logInsuccedIDUITxt;
+
+	[Header("After Log in Panel")]
+	[SerializeField] GameObject afterLogInPanel;
+	[SerializeField] Button afterLogInContinueBtn;
+	[SerializeField] Button afterLogInNewGameBtn;
+
 	 string logInsuccedID;
 
 
@@ -44,6 +50,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
+		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
+		afterLogInNewGameBtn.onClick.AddListener(OnNewGameBtnPressed);
+
+
 		correctlyLoggedInFlag = false;
 		doneInitialization = false;
 		userBtnsPool.Init(10);
@@ -174,6 +184,25 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		if (!currBtnsByDataID.TryGetValue(item, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
 		UserDataManager.Instance.RemoveUser(idFound);
 		RebuildUsersList();
+	}
+
+	public void OnSelectedUser(UsersListItem data)
+	{
+		if (!currBtnsByDataID.TryGetValue(data, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
+		UserDataManager.Instance.SetCurrUser(idFound);
+		var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
+		afterLogInPanel.SetActive(true);
+		afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
+	}
+
+	public void OnContinueGameBtnPressed()
+	{
+		GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+	}
+
+	void OnNewGameBtnPressed()
+	{
+		GameSequencesList.Instance.GoToNextSequence();
 	}
 
 }

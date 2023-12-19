@@ -23,6 +23,7 @@ public class UserDataManager : ScriptableObject
 		}
 	}
 
+	public static UserData CurrUser => instance.CurrUserData;
 
 	public UserData DefaultUserData = new UserData();
 
@@ -75,6 +76,12 @@ public class UserDataManager : ScriptableObject
 		var data = usersDatas.Find(x => x.id == id);
 		usersDatas.Remove(data);
 		SaveDataToRemoteDataBase();
+	}
+
+	public void SetCurrUser(string id)
+	{
+		var data = usersDatas.Find(x =>x.id == id);
+		currUserData = data;
 	}
 
 }

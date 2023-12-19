@@ -13,6 +13,10 @@ public class MinigameGroups : GameSequence
     public bool randomize;
     [Tooltip("How many games should we play before leaving the group (Only works if randomize is enable), if -1 we will play all items in the group")]
     public int maxItemsToPlayOnRandomize = -1;
+
+    [NonSerialized]
+    public int lastPlayedIdx = -1;
+
     public GameSequenceItem GetNextMiniGame()
     {
         if (randomize)
@@ -26,7 +30,8 @@ public class MinigameGroups : GameSequence
 
             if (newGameIdx >= miniGamesInGroup.Count) return null;
 
-            var newGame = miniGamesInGroup[lastGameIdx + 1];
+			lastPlayedIdx = newGameIdx;
+            var newGame = miniGamesInGroup[lastPlayedIdx];
             GameSequencesList.Instance.prevGame = newGame;
 
             return newGame;
@@ -46,6 +51,7 @@ public class MinigameGroups : GameSequence
         if (!itemsPlayed.Contains(newGame))
         {
             GameSequencesList.Instance.prevGame = newGame;
+            lastPlayedIdx = miniGamesInGroup.IndexOf(newGame);
             itemsPlayed.Add(newGame);
             return newGame;
         }
@@ -64,5 +70,8 @@ public class MinigameGroups : GameSequence
     public override void OnReset()
     {
         itemsPlayed.Clear();
+        lastPlayedIdx = -1;
     }
+
+    public override int GetCurrItemIdx() => lastPlayedIdx;
 }
