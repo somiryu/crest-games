@@ -30,12 +30,10 @@ public class GameSequencesList : ScriptableObject
             continueToNextItem = false;
             if (goToGameGroupIdx >= gameSequences.Count) return;
             if (gameSequences[goToGameGroupIdx] is SimpleGameSequenceItem) goToGameGroupIdx++;
-            else
-            {
-                var newItem = GetGameSequence().GetNextItem();
-                if (newItem == null) GoToNextSequence();
-                else SceneManagement.GoToScene(newItem.scene);
-			}
+
+            var newItem = GetGameSequence().GetNextItem();
+            if (newItem == null) GoToNextSequence();
+            else SceneManagement.GoToScene(newItem.scene);
         }
     }
     public void GoToNextItemInList()
@@ -59,14 +57,17 @@ public class GameSequencesList : ScriptableObject
 
     public void GoToNextSequence()
     {
-        if (goToGameGroupIdx < gameSequences.Count - 1) 
+		goToGameGroupIdx++;
+
+		if (goToGameGroupIdx >= gameSequences.Count)
         {
-            goToGameGroupIdx++;
-            prevGame = null;
-            SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
-            Debug.Log(SceneManagement.currentScene);
-        } 
-        else Debug.Log("End of sequences");
+            goToGameGroupIdx = 0;
+            Debug.LogWarning("Game sequence done, restarting the app");
+        }
+
+		prevGame = null;
+		SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
+		Debug.Log(SceneManagement.currentScene);
     }
 
 }

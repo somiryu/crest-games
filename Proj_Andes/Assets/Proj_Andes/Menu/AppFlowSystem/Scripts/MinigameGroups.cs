@@ -9,7 +9,10 @@ public class MinigameGroups : GameSequence
 {
     public List<GameSequenceItem> miniGamesInGroup;
     [NonSerialized] List<GameSequenceItem> itemsPlayed = new List<GameSequenceItem>();
+    [Space]
     public bool randomize;
+    [Tooltip("How many games should we play before leaving the group (Only works if randomize is enable), if -1 we will play all items in the group")]
+    public int maxItemsToPlayOnRandomize = -1;
     public GameSequenceItem GetNextMiniGame()
     {
         if (randomize)
@@ -36,10 +39,9 @@ public class MinigameGroups : GameSequence
     }
     GameSequenceItem GetRandomGame()
     {
-        if(itemsPlayed.Count >= miniGamesInGroup.Count)
-        {
-            return null;
-        }
+        var maxItemsToPlay = maxItemsToPlayOnRandomize != -1 ? maxItemsToPlayOnRandomize : miniGamesInGroup.Count;
+        if(itemsPlayed.Count >= maxItemsToPlay) return null;
+
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
         if (!itemsPlayed.Contains(newGame))
         {
