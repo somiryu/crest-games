@@ -1,6 +1,5 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
@@ -27,6 +26,9 @@ public class UserDataManager : ScriptableObject
 
 	public UserData DefaultUserData = new UserData();
 
+	[NonSerialized]
+	public List<UserData> usersDatas = new List<UserData>();
+
 	[SerializeField] UserData currUserData;
 
 	public UserData CurrUserData
@@ -44,9 +46,35 @@ public class UserDataManager : ScriptableObject
 		if (instance == null) instance = Resources.Load<UserDataManager>(instancePath);
 	}
 
+	public void LoadDataFromRemoteDataBase()
+	{
+		usersDatas = DatabaseManager.GetUserDatasList();
+	}
+
+	public void SaveDataToRemoteDataBase()
+	{
+		DatabaseManager.SaveUserDatasList(usersDatas);
+	}
+
 	public void SetCurrUser(string email, string id)
 	{
-		currUserData = new UserData(email, id);
+		currUserData = new UserData();
+		currUserData.name = email;
+		currUserData.id = id;
+	}
+
+	public void RegisterNewUser(UserData user)
+	{
+		currUserData = user;
+		usersDatas.Add(currUserData);
+		SaveDataToRemoteDataBase();
+	}
+
+	public void RemoveUser(string id)
+	{
+		var data = usersDatas.Find(x => x.id == id);
+		usersDatas.Remove(data);
+		SaveDataToRemoteDataBase();
 	}
 
 }

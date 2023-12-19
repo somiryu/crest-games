@@ -28,8 +28,14 @@ public class GameSequencesList : ScriptableObject
         if (continueToNextItem)
         {
             continueToNextItem = false;
-            if (gameSequences[goToGameGroupIdx] is NarrativeSceneItem) goToGameGroupIdx++;
-            SceneManagement.GoToScene(GetGameSequence().GetNextItem().scene);
+            if (goToGameGroupIdx >= gameSequences.Count) return;
+            if (gameSequences[goToGameGroupIdx] is SimpleGameSequenceItem) goToGameGroupIdx++;
+            else
+            {
+                var newItem = GetGameSequence().GetNextItem();
+                if (newItem == null) GoToNextSequence();
+                else SceneManagement.GoToScene(newItem.scene);
+			}
         }
     }
     public void GoToNextItemInList()

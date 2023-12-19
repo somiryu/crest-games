@@ -6,10 +6,8 @@ using UnityEngine.UIElements;
 public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 {
     public MG_MechanicHand_GameManger gameManager => MG_MechanicHand_GameManger.Instance;
-	//Multiplying it because normal values are too large
-	public float rotSpeedMultiplier => MG_MechanicHand_GameManger.Instance.gameConfigs.hookRotationSpeed * 0.05f;
-	//Multiplying it because normal values are too large
-	public float hookSpeed => MG_MechanicHand_GameManger.Instance.gameConfigs.hookMoveSpeed * 0.05f;
+	public float rotSpeedMultiplier => MG_MechanicHand_GameManger.Instance.gameConfigs.hookRotationSpeed ;
+	public float hookSpeed => MG_MechanicHand_GameManger.Instance.gameConfigs.hookMoveSpeed;
 	public float hookMaxDistance;
     public Transform hookedObj;
     public MG_MechanicHand_Hook hook;
@@ -67,7 +65,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     {
         var currDelta = Input.mousePosition.y - lastFrameMousePos;
         var currAngles = transform.eulerAngles;
-        currAngles.z += currDelta * rotSpeedMultiplier;
+        currAngles.z += currDelta * rotSpeedMultiplier * Time.deltaTime;
         currAngles.z = ClampAngle(currAngles.z, -90f, 90f);
         transform.eulerAngles = currAngles;
 
@@ -109,14 +107,14 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
         while ((originalPosition - currPosition).magnitude < hookMaxDistance)
         {
-            hook.transform.position += transform.right * hookSpeed;
+            hook.transform.position += transform.right * hookSpeed * Time.deltaTime;
             currPosition = hook.transform.localPosition;
             if (hookedObj) break;
             yield return null;
         }
         while ((currPosition != originalPosition))
         {
-            hook.transform.localPosition = Vector3.MoveTowards(hook.transform.localPosition, originalPosition, hookSpeed);
+            hook.transform.localPosition = Vector3.MoveTowards(hook.transform.localPosition, originalPosition, hookSpeed * Time.deltaTime);
             currPosition = hook.transform.localPosition;
             yield return null;
         }

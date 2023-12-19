@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using Tymski;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class SceneManagement

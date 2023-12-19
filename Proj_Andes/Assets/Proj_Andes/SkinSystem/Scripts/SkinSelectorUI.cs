@@ -8,7 +8,7 @@ public class SkinSelectorUI : MonoBehaviour
 {
     public List<BtnPerSkinType> btnsPerSkins = new List<BtnPerSkinType>();
 	public Button goToGame;
-	[SerializeField] SkinSelectorItem skinSelectorItem;
+	[SerializeField] SimpleGameSequenceItem skinSelectorItem;
     private void Awake()
 	{
 		for (int i = 0; i < btnsPerSkins.Count; i++)

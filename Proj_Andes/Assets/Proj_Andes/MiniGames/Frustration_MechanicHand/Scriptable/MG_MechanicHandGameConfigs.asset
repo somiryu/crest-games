@@ -18,7 +18,7 @@ MonoBehaviour:
   asteroidsPerRound: 5
   asteroidsSizeLoseAmountPerRound: 0.2
   playerLifes: 5
-  hookRotationSpeed: 1
-  hookMoveSpeed: 1
+  hookRotationSpeed: 15
+  hookMoveSpeed: 12
   percentageNeededToWin: 0.8
   activeCheats: 0
