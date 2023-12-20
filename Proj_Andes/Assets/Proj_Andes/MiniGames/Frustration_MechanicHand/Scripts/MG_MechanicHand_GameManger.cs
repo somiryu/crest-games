@@ -144,7 +144,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	void GameOver()
 	{
 		afterActionPanel.SetActive(true);
-		afterAction_ResultsTxt.SetText("Capturaste: " + totalCapturedAsteroids + " de " + asteroidsPerRound * 3);
+		//afterAction_ResultsTxt.SetText("Capturaste: " + totalCapturedAsteroids + " de " + asteroidsPerRound * 3);
+		afterAction_ResultsTxt.SetText( totalCapturedAsteroids.ToString());
 		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);
 		afterAction_WinLabel.SetActive(ratio >= gameConfigs.percentageNeededToWin);
 		afterAction_LoseLabel.SetActive(ratio < gameConfigs.percentageNeededToWin);

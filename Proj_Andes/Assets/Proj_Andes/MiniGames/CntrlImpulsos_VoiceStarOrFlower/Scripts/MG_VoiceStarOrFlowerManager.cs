@@ -19,6 +19,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] Button discardBtn;
 
     [SerializeField] GameObject afterActionPanel;
+    [SerializeField] GameObject inGameUiPanel;
     [Space(20)]
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
@@ -32,6 +33,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TMP_Text currCoinsValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
+    [SerializeField] Button retryBtn2;
     [SerializeField] Slider timerUI;
 
     [SerializeField] EndOfGameManager eogManager;
@@ -61,6 +63,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         lostRoundsCount = 0;
 
 		afterActionPanel.SetActive(false);
+		inGameUiPanel.SetActive(true);
         gameoverFlag = false;
 
         timerUI.minValue = 0;
@@ -74,7 +77,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
 
-		InitRound();
+        retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+
+        InitRound();
 	}
 
 	void InitRound()
@@ -168,6 +173,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     {
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
+        inGameUiPanel.SetActive(false);
 		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
         eogManager.OnGameOver();
 	}

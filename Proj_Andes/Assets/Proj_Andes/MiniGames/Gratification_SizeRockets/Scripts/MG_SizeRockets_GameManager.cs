@@ -22,6 +22,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 	public TMP_Text shipsLeftTxt;
 	[Header("After Action")]
 	public GameObject afterActionPanel;
+	public GameObject ingameObj;
 	public TMP_Text afterAction_CoinsCountTxt;
 
 	[Header("Rockets")]
@@ -55,7 +56,8 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 
 	private void Awake()
 	{
-		if(instance != null && instance != this) Destroy(instance);
+		ingameObj.SetActive(true);
+		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
 		GeneratePlanets();
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
@@ -128,7 +130,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 			var otherPos = planets[i].transform.position;
 			var delta = otherPos - position;
 			//1,5 if just the planets size, Offset of 1 so that planets appear far from each other
-			if (delta.magnitude <= 1.5f + 1)
+			if (delta.magnitude <= 1f + 1)
 			{
 				return false;
 			}
@@ -207,6 +209,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 	void GameOver()
 	{
 		afterActionPanel.SetActive(true);
+		ingameObj.SetActive(false);
 		afterAction_CoinsCountTxt.SetText(totalCoinsWon.ToString());
 		eogManager.OnGameOver();
 	}
