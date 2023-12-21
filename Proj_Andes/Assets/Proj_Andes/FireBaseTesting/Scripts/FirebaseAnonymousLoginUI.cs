@@ -197,7 +197,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnContinueGameBtnPressed()
 	{
-		GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+		var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
+        if (targetSequence is MinigameGroups group)
+        {
+			group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
+        }
+        GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
 	}
 
 	void OnNewGameBtnPressed()

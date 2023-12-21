@@ -20,4 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf4b54b3469cdb7469e4b7aa254c9395, type: 2}
   - {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
   - {fileID: 11400000, guid: 36371871d8798ef499c9ed4935329b42, type: 2}
-  randomize: 0
+  randomize: 1
+  maxItemsToPlayOnRandomize: -1

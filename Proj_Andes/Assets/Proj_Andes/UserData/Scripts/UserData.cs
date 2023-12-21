@@ -17,6 +17,7 @@ public class UserData
 	public int CheckPointIdx = -1;
 	//This refers to the item idx inside of the game group index
 	public int CheckPointSubIdx = -1;
+	public List<int> itemsPlayedIdxs = new List<int>();
 
 	public UserData()
 	{
@@ -28,6 +29,7 @@ public class UserData
 		institution = string.Empty;
 		CheckPointIdx = -1;
 		CheckPointSubIdx = -1;
+		itemsPlayedIdxs = new List<int>();
 	}
 }
 

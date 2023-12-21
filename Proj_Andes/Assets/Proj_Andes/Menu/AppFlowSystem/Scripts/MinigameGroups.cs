@@ -42,6 +42,28 @@ public class MinigameGroups : GameSequence
             return miniGamesInGroup[0];
         }
     }
+
+    public void SetItemsPlayedData(List<int> itemsIdsPlayed)
+    {
+        itemsPlayed.Clear();
+        for (int i = 0; itemsIdsPlayed.Count > 0; i++)
+        {
+            var item = miniGamesInGroup[itemsIdsPlayed[i]];
+            itemsPlayed.Add(item);
+		}
+	}
+
+    public List<int> GetItemsPlayedData()
+    {
+        var itemsPlayedIds = new List<int>();
+        for (int i = 0; i < itemsPlayed.Count; i++)
+        {
+            var idx = miniGamesInGroup.IndexOf(itemsPlayed[i]);
+            itemsPlayedIds.Add(idx);
+        }
+        return itemsPlayedIds;
+    }
+
     GameSequenceItem GetRandomGame()
     {
         var maxItemsToPlay = maxItemsToPlayOnRandomize != -1 ? maxItemsToPlayOnRandomize : miniGamesInGroup.Count;
@@ -53,6 +75,7 @@ public class MinigameGroups : GameSequence
             GameSequencesList.Instance.prevGame = newGame;
             lastPlayedIdx = miniGamesInGroup.IndexOf(newGame);
             itemsPlayed.Add(newGame);
+            UserDataManager.CurrUser.itemsPlayedIdxs.Add(lastPlayedIdx);
             return newGame;
         }
         else return GetRandomGame();
