@@ -39,13 +39,14 @@ public class GameSequencesList : ScriptableObject
     public void GoToNextItemInList()
     {
         var nextItem = GetGameSequence().GetNextItem();
-        if (nextItem != null)
-        {
-			UserDataManager.CurrUser.CheckPointSubIdx = GetGameSequence().GetCurrItemIdx();
-			UserDataManager.Instance.SaveDataToRemoteDataBase();
-			SceneManagement.GoToScene(nextItem.scene);
-        }
+        if (nextItem != null) SceneManagement.GoToScene(nextItem.scene);
         else GoToNextSequence();
+    }
+
+    public void GoToItemIdx(int idx)
+    {
+        var nextItem = GetGameSequence().GetItemByIdx(idx);
+        SceneManagement.GoToScene(nextItem.scene);
     }
 
     [ContextMenu("ResetSequence")]
@@ -74,9 +75,6 @@ public class GameSequencesList : ScriptableObject
 		prevGame = null;
 
         var newScene = GetGameSequence().GetNextItem().scene;
-		UserDataManager.CurrUser.CheckPointIdx = goToGameGroupIdx;
-		UserDataManager.Instance.SaveDataToRemoteDataBase();
-
 		SceneManagement.GoToScene(newScene);
     }
 
@@ -86,13 +84,10 @@ public class GameSequencesList : ScriptableObject
         var targetSequence = GetGameSequence();
         if(subIdx != -1 && targetSequence is MinigameGroups group)
         {
-            group.lastPlayedIdx = subIdx - 1;
-            if (subIdx - 1 >= 0)
-            {
-                prevGame = group.miniGamesInGroup[subIdx - 1];
-            }
+            group.lastPlayedIdx = subIdx;
+            if (subIdx >= 0) prevGame = group.miniGamesInGroup[subIdx];
 		}
-        GoToNextItemInList();
+        GoToItemIdx(subIdx);
 	}
 
 }
@@ -100,7 +95,8 @@ public abstract class GameSequence : GameSequenceItem
 {
     public abstract void OnReset();
     public abstract GameSequenceItem GetNextItem();
-    public abstract int GetCurrItemIdx();
+    public abstract GameSequenceItem GetItemByIdx(int idx);
+	public abstract int GetCurrItemIdx();
     public abstract void OnSequenceOver();
 }
 

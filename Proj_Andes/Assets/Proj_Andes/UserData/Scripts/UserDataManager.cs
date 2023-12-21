@@ -41,6 +41,39 @@ public class UserDataManager : ScriptableObject
 		}
 	}
 
+	[RuntimeInitializeOnLoadMethod]
+	static void RunOnStart()
+	{
+		Debug.Log("aplying callback");
+		Application.wantsToQuit += WantsToQuit;
+	}
+
+	static bool WantsToQuit()
+	{
+		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
+		var currSequence = GameSequencesList.Instance.GetGameSequence();
+		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
+		Debug.Log("Saving to server");
+		if (currSequence is MinigameGroups group)
+		{
+			CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
+		}
+		else CurrUser.itemsPlayedIdxs.Clear();
+
+		var dialogSystem = DialoguesDisplayerUI.Instance;
+		if (dialogSystem != null)
+		{
+			Debug.Log("Saving narrative idx");
+			CurrUser.currDialogCheckPoint = dialogSystem.CurrDialogIdx;
+		}
+		else CurrUser.currDialogCheckPoint = -1;
+
+		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
+		UserDataManager.Instance.SaveDataToRemoteDataBase();
+		return true;
+	}
+
+
 	//Doing this to avoid an issue that happens if you call resources from a "Task" (Happening when user just logged in)
 	public static void Init()
 	{

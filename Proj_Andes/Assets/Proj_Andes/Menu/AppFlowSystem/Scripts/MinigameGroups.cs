@@ -46,7 +46,7 @@ public class MinigameGroups : GameSequence
     public void SetItemsPlayedData(List<int> itemsIdsPlayed)
     {
         itemsPlayed.Clear();
-        for (int i = 0; itemsIdsPlayed.Count > 0; i++)
+        for (int i = 0; i < itemsIdsPlayed.Count; i++)
         {
             var item = miniGamesInGroup[itemsIdsPlayed[i]];
             itemsPlayed.Add(item);
@@ -66,7 +66,12 @@ public class MinigameGroups : GameSequence
 
     GameSequenceItem GetRandomGame()
     {
-        var maxItemsToPlay = maxItemsToPlayOnRandomize != -1 ? maxItemsToPlayOnRandomize : miniGamesInGroup.Count;
+        if(lastPlayedIdx != -1 && !itemsPlayed.Contains(GameSequencesList.Instance.prevGame))
+        {
+            itemsPlayed.Add(GameSequencesList.Instance.prevGame);
+            Debug.Log("Saved played ID: " +  lastPlayedIdx);
+        }
+		var maxItemsToPlay = maxItemsToPlayOnRandomize != -1 ? maxItemsToPlayOnRandomize : miniGamesInGroup.Count;
         if(itemsPlayed.Count >= maxItemsToPlay) return null;
 
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
@@ -74,8 +79,6 @@ public class MinigameGroups : GameSequence
         {
             GameSequencesList.Instance.prevGame = newGame;
             lastPlayedIdx = miniGamesInGroup.IndexOf(newGame);
-            itemsPlayed.Add(newGame);
-            UserDataManager.CurrUser.itemsPlayedIdxs.Add(lastPlayedIdx);
             return newGame;
         }
         else return GetRandomGame();
@@ -90,7 +93,10 @@ public class MinigameGroups : GameSequence
         return GetNextMiniGame();
     }
 
-    public override void OnReset()
+	public override GameSequenceItem GetItemByIdx(int idx) => miniGamesInGroup[(int)idx];
+
+
+	public override void OnReset()
     {
         itemsPlayed.Clear();
         lastPlayedIdx = -1;

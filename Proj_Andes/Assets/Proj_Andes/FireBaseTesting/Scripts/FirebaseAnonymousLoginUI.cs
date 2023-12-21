@@ -41,8 +41,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	 string logInsuccedID;
 
-
-
 	private void Awake()
 	{
 		cancelBtn.onClick.AddListener(() => createNewUserPanel.SetActive(false));
@@ -202,6 +200,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         {
 			group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
         }
+		//This doesn't work as the curr conversation sequence could change, so We need another solution :C commenting it for now
+		//DialoguesDisplayerUI.PendingNarrativeIdxToComsume = UserDataManager.CurrUser.currDialogCheckPoint;
         GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
 	}
 
@@ -209,5 +209,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		GameSequencesList.Instance.GoToNextSequence();
 	}
+
+	
 
 }

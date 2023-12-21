@@ -9,6 +9,11 @@ using UnityEngine.Playables;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
+   /// <summary>
+   /// The user data manager writes this values if it detects that there's a saved narrativeindex that we should push
+   /// </summary>
+    public static int PendingNarrativeIdxToComsume;
+
     private static DialoguesDisplayerUI instance;
     public static DialoguesDisplayerUI Instance => instance;
     [SerializeField] SimpleGameSequenceItem narrativeSceneItem;
@@ -61,6 +66,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	private StringBuilder currText = new StringBuilder();
 
     public DialogueData CurrDialog => dialoguesToShow.dialogues[currShowingIdx];
+    public int CurrDialogIdx => currShowingIdx;
 
     public Action OnStartShowingDialogue;
     public Action OnEndShowingDialogue;
@@ -145,6 +151,11 @@ public class DialoguesDisplayerUI : MonoBehaviour
     {
         pendingSequenceToShow = null;
         dialoguesToShow = newDialogues;
+        if (PendingNarrativeIdxToComsume != -1)
+        {
+            customStartIdx = PendingNarrativeIdxToComsume - 1;
+            PendingNarrativeIdxToComsume = -1;
+        }
         currShowingIdx = customStartIdx;
         customStartIdx = -1;
         isShowing = true;
