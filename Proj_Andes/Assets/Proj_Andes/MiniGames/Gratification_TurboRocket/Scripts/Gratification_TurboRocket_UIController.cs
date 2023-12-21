@@ -9,6 +9,7 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
 {
     [SerializeField] Button playBtn;
     [SerializeField] Transform endOfGameContainer;
+    [SerializeField] GameObject inGameObj;
     [SerializeField] TextMeshProUGUI finishText;
     [SerializeField] TextMeshProUGUI starsText;
     [SerializeField] Slider progressSlider;
@@ -16,6 +17,7 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
     public void StartUi()
     {
         endOfGameContainer.gameObject.SetActive(false);
+        inGameObj.gameObject.SetActive(true);
     }
 
 	private void Update()
@@ -27,8 +29,10 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
 	public void EndOfGame()
     {
         progressSlider.value = 1;
-        starsText.text = "Stars collected: " + player.data.starsCollected;
+        starsText.text =  player.data.starsCollected.ToString();
+        inGameObj.gameObject.SetActive(false);
         endOfGameContainer.gameObject.SetActive(true);
+
     }
 
 

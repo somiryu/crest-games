@@ -104,7 +104,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     }
     void OnGameEnd()
     {
-        finalScoreText.text = "Boosters captured " + successfulAttempts + "/10";
+        //finalScoreText.text = "Boosters captured " + successfulAttempts + "/10";
+        finalScoreText.text =   successfulAttempts.ToString() ;
         endOfGameContainer.gameObject.SetActive(true);
         onPlay = false;
         spawner.OnGameEnd();

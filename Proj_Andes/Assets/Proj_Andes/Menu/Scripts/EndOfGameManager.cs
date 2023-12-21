@@ -32,7 +32,7 @@ public class EndOfGameManager : MonoBehaviour
     {
         GameSequencesList.Instance.GoToNextItemInList();
     }
-    void ResetAction()
+    public void ResetAction()
     {
         SceneManagement.GoToScene(SceneManagement.currentScene);
     }
