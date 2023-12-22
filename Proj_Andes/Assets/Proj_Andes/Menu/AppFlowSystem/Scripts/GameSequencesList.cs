@@ -105,7 +105,7 @@ public class GameSequenceItem : ScriptableObject
     public SceneReference scene;
 }
 
-public abstract class GameConfig : GameSequenceItem
+public abstract class GameConfig : SimpleGameSequenceItem
 {
 
 
