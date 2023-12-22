@@ -53,4 +53,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/Menu/Scenes/FrustrationTermometer.unity
     guid: 700607cb32029ec4b8cfc8228e6a2b10
+  - enabled: 1
+    path: Assets/Proj_Andes/Menu/Scenes/TryAgainScene.unity
+    guid: bf533393218d3b640be24309f529e496
+  - enabled: 1
+    path: Assets/Proj_Andes/NarrativeScenes/EntranceNarrative/Scene/EntranceNarrative.unity
+    guid: 7b80da7717e63cc4c821134850801ab8
   m_configObjects: {}

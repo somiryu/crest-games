@@ -18,5 +18,5 @@ MonoBehaviour:
   miniGamesInGroup:
   - {fileID: 11400000, guid: 90f7abf53fcb1084185c23a779968874, type: 2}
   - {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
-  randomize: 0
-  maxItemsToPlayOnRandomize: -1
+  randomize: 1
+  maxItemsToPlayOnRandomize: 1
