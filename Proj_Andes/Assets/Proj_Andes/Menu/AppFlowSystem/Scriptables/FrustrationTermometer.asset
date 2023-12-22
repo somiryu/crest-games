@@ -15,5 +15,5 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: 700607cb32029ec4b8cfc8228e6a2b10, type: 3}
     scenePath: Assets/Proj_Andes/Menu/Scenes/FrustrationTermometer.unity
-  selectedFrustrationLevel: 3
-  defaultFrustrationLevel: 0
+  selectedFrustrationLevel: 0
+  defaultFrustrationLevel: 4

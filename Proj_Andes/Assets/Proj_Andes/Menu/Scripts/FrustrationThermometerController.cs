@@ -14,25 +14,26 @@ public class FrustrationThermometerController : MonoBehaviour
     void Start()
     {
         frustlevelButtons = buttonsContainer.GetComponentsInChildren<Button>();
-        /*
+        
         for (int i = 0; i < frustlevelButtons.Length; i++)
         {
-            frustlevelButtons[i].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)i));
-            Debug.Log(frustlevelButtons.Length + " " + (FrustrationLevel)i);
-        }*/
-        frustlevelButtons[0].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)0));
-        frustlevelButtons[1].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)1));
-        frustlevelButtons[2].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)2));
-        frustlevelButtons[3].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)3));
-        frustlevelButtons[4].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)4));
+            int idx = i;
+            frustlevelButtons[i].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)idx, frustlevelButtons[idx], idx));
+        }
         continueBtn.onClick.AddListener(Continue);
+        continueBtn.gameObject.SetActive(false);
     }
 
-    void GetFrustationLevel(FrustrationLevel frustrationLevel)
+    void GetFrustationLevel(FrustrationLevel frustrationLevel, Button button, int idx)
     {
         currFrustratioNlevel = frustrationLevel;
-        Debug.Log(currFrustratioNlevel);
-
+        ButtonPressed(button);
+        for (int i = 0; i < frustlevelButtons.Length; i++)
+        {
+            if (idx == i) continue;
+            else ButtonUnpressed(frustlevelButtons[i]);
+        }
+        continueBtn.gameObject.SetActive(true);
     }
 
     void Continue()
@@ -41,12 +42,24 @@ public class FrustrationThermometerController : MonoBehaviour
         Debug.Log(currFrustratioNlevel);
         frustrationTermometer.OnSequenceOver();
     }
+
+    void ButtonPressed(Button button)
+    {
+        button.image.color = Color.magenta;
+        Debug.Log("pressed");
+    }
+
+    void ButtonUnpressed(Button button)
+    {
+        button.image.color = Color.white;
+        Debug.Log("unpressed");
+    }
 }
 public enum FrustrationLevel
 {
-    Tranquile,
-    Uneasy,
-    Unsetlled,
-    Stressed,
     Frustrated,
+    Stressed,
+    Unsetlled,
+    Uneasy,
+    Tranquile,
 }
