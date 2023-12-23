@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3412858719df3af4bbe6d4db848d4a1c, type: 3}
-  m_Name: TryAgainItem
+  m_Script: {fileID: 11500000, guid: 6b6d45c61cf79d74b8d6bfb4a124308c, type: 3}
+  m_Name: ClosingItem
   m_EditorClassIdentifier: 
   scene:
-    sceneAsset: {fileID: 102900000, guid: bf533393218d3b640be24309f529e496, type: 3}
-    scenePath: Assets/Proj_Andes/Menu/Scenes/TryAgainScene.unity
+    sceneAsset: {fileID: 102900000, guid: f4ce91e5e357a9b41be85cac20f52314, type: 3}
+    scenePath: Assets/Proj_Andes/Menu/Scenes/ClosingScene.unity

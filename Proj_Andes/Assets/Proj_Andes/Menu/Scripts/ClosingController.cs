@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClosingController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] SimpleGameSequenceItem closingItem;
+    [SerializeField] float waitFor;
+    [SerializeField] Transform logoPanel;
+    WaitForSeconds waitForSec => new WaitForSeconds(waitFor);
     void Start()
     {
-        
+        logoPanel.gameObject.SetActive(false);
+        StartCoroutine(GoToNextScene());
     }
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator GoToNextScene()
     {
-        
+        yield return waitForSec;
+        logoPanel.gameObject.SetActive(true);
+        yield return waitForSec;
+        closingItem.OnSequenceOver();
+
     }
 }

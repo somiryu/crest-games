@@ -107,7 +107,11 @@ public class GameSequenceItem : ScriptableObject
 
 public abstract class GameConfig : SimpleGameSequenceItem
 {
-
+    public override GameSequenceItem GetNextItem()
+    {
+        GameSequencesList.Instance.GoToNextSequence();
+        return this;
+    }
 
 }
 

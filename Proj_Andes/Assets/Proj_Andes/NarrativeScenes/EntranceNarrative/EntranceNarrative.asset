@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - characterType: 0
-    autoContinueOnClickDialog: 0
+    autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: 0
     changeToSequenceResponseIdxToGrayOut: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 0
-    autoContinueOnClickDialog: 0
+    autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: 0
     changeToSequenceResponseIdxToGrayOut: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 1
-    autoContinueOnClickDialog: 0
+    autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: 0
     changeToSequenceResponseIdxToGrayOut: 0

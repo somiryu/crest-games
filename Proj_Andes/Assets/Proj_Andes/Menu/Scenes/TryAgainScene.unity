@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c6a2870ee22e049976ea7b566139ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tryAgainSeqItem: {fileID: 11400000, guid: df81f51c39490b444af1cc67ee1a02cb, type: 2}
+  tryAgainSeqItem: {fileID: 11400000, guid: fbd5369b561169246b1822fc9f497e3b, type: 2}
   retryBtn: {fileID: 800960292}
   waitFor: 3
 --- !u!1 &1307287086
