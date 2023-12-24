@@ -32,15 +32,9 @@ public class MinigameGroups : GameSequence
 
 			lastPlayedIdx = newGameIdx;
             var newGame = miniGamesInGroup[lastPlayedIdx];
-            GameSequencesList.Instance.prevGame = newGame;
-
             return newGame;
         }
-        else
-        {
-            GameSequencesList.Instance.prevGame = miniGamesInGroup[0];
-            return miniGamesInGroup[0];
-        }
+        else return miniGamesInGroup[0];
     }
 
     public void SetItemsPlayedData(List<int> itemsIdsPlayed)
@@ -77,7 +71,6 @@ public class MinigameGroups : GameSequence
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
         if (!itemsPlayed.Contains(newGame))
         {
-            GameSequencesList.Instance.prevGame = newGame;
             lastPlayedIdx = miniGamesInGroup.IndexOf(newGame);
             return newGame;
         }

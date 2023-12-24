@@ -8,9 +8,10 @@ public class ClosingController : MonoBehaviour
     [SerializeField] SimpleGameSequenceItem closingItem;
     [SerializeField] float waitFor;
     [SerializeField] Transform logoPanel;
-    WaitForSeconds waitForSec => new WaitForSeconds(waitFor);
+    WaitForSeconds waitForSec;
     void Start()
     {
+        waitForSec = new WaitForSeconds(waitFor);
         logoPanel.gameObject.SetActive(false);
         StartCoroutine(GoToNextScene());
     }

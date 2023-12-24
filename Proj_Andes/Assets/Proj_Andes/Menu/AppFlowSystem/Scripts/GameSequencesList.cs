@@ -41,7 +41,11 @@ public class GameSequencesList : ScriptableObject
     public void GoToNextItemInList()
     {
         var nextItem = GetGameSequence().GetNextItem();
-        if (nextItem != null) SceneManagement.GoToScene(nextItem.scene);
+        if (nextItem != null)
+        {
+            prevGame = nextItem;
+            SceneManagement.GoToScene(nextItem.scene);
+        }
         else GoToNextSequence();
     }
 
@@ -74,9 +78,7 @@ public class GameSequencesList : ScriptableObject
             Debug.LogWarning("Game sequence done, restarting the app");
         }
 		prevGame = null;
-
-        var newScene = GetGameSequence().GetNextItem().scene;
-		SceneManagement.GoToScene(newScene);
+        GoToNextItemInList();
     }
 
     public void GoToSequenceIdx(int idx, int subIdx)
@@ -87,7 +89,8 @@ public class GameSequencesList : ScriptableObject
         {
             group.lastPlayedIdx = subIdx;
             if (subIdx >= 0) prevGame = group.miniGamesInGroup[subIdx];
-		}
+        }
+        else prevGame = targetSequence;
         GoToItemIdx(subIdx);
 	}
 
@@ -112,8 +115,8 @@ public abstract class GameConfig : SimpleGameSequenceItem
 {
     public override GameSequenceItem GetNextItem()
     {
-        GameSequencesList.Instance.GoToNextSequence();
-        return this;
+        if (GameSequencesList.Instance.prevGame != this) return this;
+        else return null;
     }
 
 }

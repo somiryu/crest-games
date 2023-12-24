@@ -13,20 +13,24 @@ MonoBehaviour:
   m_Name: GameSequencesList
   m_EditorClassIdentifier: 
   gameSequences:
+  - {fileID: 11400000, guid: a5d5e430d1768fa4bb13849c706da389, type: 2}
   - {fileID: 11400000, guid: 8c0c8b4c4124a0f4794e93749362e7c7, type: 2}
-  - {fileID: 11400000, guid: 6585da0d1d86864418948965297520ff, type: 2}
-  - {fileID: 11400000, guid: 02edb24ab208cc7469340eb9631f61ac, type: 2}
+  - {fileID: 11400000, guid: 6a8e85563e4d0f345872afaa7882124f, type: 2}
+  - {fileID: 11400000, guid: 90f7abf53fcb1084185c23a779968874, type: 2}
+  - {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
+  - {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
+  - {fileID: 11400000, guid: cf4b54b3469cdb7469e4b7aa254c9395, type: 2}
   - {fileID: 11400000, guid: 41b74151a2d5906479c9b387a0d6e2d7, type: 2}
   - {fileID: 11400000, guid: 078fe712dc14761499bafb51fa1715da, type: 2}
   - {fileID: 11400000, guid: 6585da0d1d86864418948965297520ff, type: 2}
-  - {fileID: 11400000, guid: fbd5369b561169246b1822fc9f497e3b, type: 2}
+  - {fileID: 11400000, guid: 665034d8149ea2348816692b842306dc, type: 2}
   - {fileID: 11400000, guid: 36371871d8798ef499c9ed4935329b42, type: 2}
   - {fileID: 11400000, guid: 6585da0d1d86864418948965297520ff, type: 2}
-  - {fileID: 11400000, guid: fbd5369b561169246b1822fc9f497e3b, type: 2}
+  - {fileID: 11400000, guid: 665034d8149ea2348816692b842306dc, type: 2}
   - {fileID: 11400000, guid: e9c5110f8800ba243aee031e543727e5, type: 2}
   - {fileID: 11400000, guid: 6585da0d1d86864418948965297520ff, type: 2}
-  - {fileID: 11400000, guid: fbd5369b561169246b1822fc9f497e3b, type: 2}
+  - {fileID: 11400000, guid: 665034d8149ea2348816692b842306dc, type: 2}
   - {fileID: 11400000, guid: 13ca465b41d63284d88a6d63b5568bf6, type: 2}
   - {fileID: 11400000, guid: 18b0bb7e29cbcb843b393612df4b3786, type: 2}
-  - {fileID: 11400000, guid: f8c7c66db1c16cf46bacbb565fdc9c75, type: 2}
+  - {fileID: 11400000, guid: bfbbbcae4c8260a4d9521790035fd9d9, type: 2}
   continueToNextItem: 0
