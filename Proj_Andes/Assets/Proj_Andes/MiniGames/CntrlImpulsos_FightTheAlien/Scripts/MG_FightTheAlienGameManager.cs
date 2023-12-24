@@ -35,6 +35,10 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] AudioClip wrongAudio;
     [SerializeField] AudioClip finishAudio;
 
+    [Header("GameParticles")]
+    [SerializeField] ParticleSystem correctParticles;
+    [SerializeField] ParticleSystem incorrectParticles;
+
     [Header("Posible Answer")]
 	[SerializeField] AlienAttackConfig[] alienAttacksConfigs;
 
@@ -137,19 +141,29 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 	}
     private void OnWrongChoice()
     {
+        correctParticles.Stop();
+        incorrectParticles.Stop();
+
         audiosource.clip = wrongAudio;
         audiosource.Play();
 
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         currPlayerHealth += gameConfigs.playerHealthLostOnWrongAnswer;
+       
+        incorrectParticles.Play();
         OnRoundEnded();
     }
 
     private void OnCorrectChoice()
     {
+        correctParticles.Stop();
+        incorrectParticles.Stop();
+
         audiosource.clip = correctAudio;
         audiosource.Play();
+
+        correctParticles.Play();
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         currEnemyHealth += gameConfigs.EnemyHealthLostOnRightAnswer;

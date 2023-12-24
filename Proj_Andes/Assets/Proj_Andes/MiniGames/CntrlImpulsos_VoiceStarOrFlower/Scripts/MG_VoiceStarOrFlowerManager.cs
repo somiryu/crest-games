@@ -21,13 +21,21 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUiPanel;
     [Space(20)]
+    [Header("Game Audio")]
+    [SerializeField] AudioClip correctAudio;
+    [SerializeField] AudioClip wrongAudio;
+    [SerializeField] AudioClip finishAudio;
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
+    [SerializeField] AudioClip discardAudio;
     [SerializeField] AudioSource audioPlayer;
     [Space(20)]
     [SerializeField] Pool<Transform> leftWonItemsPool;
     [SerializeField] Pool<Transform> rightWonItemsPool;
 
+    [Header("GameParticles")]
+    [SerializeField] ParticleSystem correctParticles;
+    [SerializeField] ParticleSystem incorrectParticles;
 
     [Header("UI")]
     [SerializeField] TMP_Text currCoinsValueTxt;
@@ -124,26 +132,38 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	}
 
 	private void OnClickedDiscard()
-	{
-		if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
+    {
+        audioPlayer.clip = discardAudio;
+        audioPlayer.Play();
+        if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
 
 
 	private void OnWrongChoice()
     {
+        incorrectParticles.Stop();
+        correctParticles.Stop();
+
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
+        audioPlayer.clip = wrongAudio;
+        incorrectParticles.Play();
+        audioPlayer.Play();
         OnRoundEnded();
     }
 
     private void OnCorrectChoice()
     {
+        incorrectParticles.Stop();
+        correctParticles.Stop();
+
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         if (currSoundIsLeft && !currImgIsLeft)
         {
             leftWonItemsPool.GetNewItem();
+            
             wonLeftCount++;
         }
         else if(!currSoundIsLeft && currImgIsLeft)
@@ -151,6 +171,11 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 			rightWonItemsPool.GetNewItem();
 			wonRightCount++;
         }
+
+        correctParticles.Play();
+
+        audioPlayer.clip = rightAudio;
+        audioPlayer.Play();
         OnRoundEnded();
     }
 
@@ -171,6 +196,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
+        audioPlayer.clip = finishAudio;
+        audioPlayer.Play();
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
         inGameUiPanel.SetActive(false);
