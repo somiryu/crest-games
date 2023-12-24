@@ -1,4 +1,5 @@
-﻿using Tymski;
+﻿using System.Collections.Generic;
+using Tymski;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MG_MechanicHandGameConfigs", menuName = "MiniGames/MG_MechanicHandGameConfigs")]
@@ -12,4 +13,9 @@ public class MG_MechanicHandGameConfigs : GameConfig
 	[Range(0f,1f)]
 	public float percentageNeededToWin = 0.8f;
 	public bool activeCheats;
+
+    public override Dictionary<string, object> GetAnalytics()
+    {
+		return genericDictionary;
+    }
 }

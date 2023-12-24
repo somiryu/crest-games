@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,7 +50,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private bool currSoundIsLeft = false;
 
     private bool gameoverFlag = false;
-
+    float totalGameTime;
 	public void Awake()
 	{
         Init();
@@ -101,31 +102,31 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	private void Update()
 	{
         if (gameoverFlag) return;
-
+        totalGameTime += Time.deltaTime;
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            timerPerChoice = 0;
             OnWrongChoice();
+            timerPerChoice = 0;
         }
     }
 
 	private void OnClickedLeft()
     {
-        if(currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+        if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
         else OnWrongChoice();
     }
 
     private void OnClickedRight()
     {
-		if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+        if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
 
 	private void OnClickedDiscard()
 	{
-		if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
+        if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
 
@@ -135,6 +136,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
+        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
+        gameConfigs.roundResultWins.Add(false);
         OnRoundEnded();
     }
 
@@ -151,6 +154,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 			rightWonItemsPool.GetNewItem();
 			wonRightCount++;
         }
+        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
+        gameConfigs.roundResultWins.Add(true);
         OnRoundEnded();
     }
 
@@ -171,6 +176,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
+        gameConfigs.totalGameTime = totalGameTime;
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
         inGameUiPanel.SetActive(false);

@@ -32,6 +32,8 @@ public class GameSequencesList : ScriptableObject
             if (gameSequences[goToGameGroupIdx] is SimpleGameSequenceItem) goToGameGroupIdx++;
 
             var newItem = GetGameSequence().GetNextItem();
+            Debug.Log(goToGameGroupIdx);
+
             if (newItem == null) GoToNextSequence();
             else SceneManagement.GoToScene(newItem.scene);
         }
@@ -71,7 +73,6 @@ public class GameSequencesList : ScriptableObject
             goToGameGroupIdx = 0;
             Debug.LogWarning("Game sequence done, restarting the app");
         }
-
 		prevGame = null;
 
         var newScene = GetGameSequence().GetNextItem().scene;
@@ -93,11 +94,13 @@ public class GameSequencesList : ScriptableObject
 }
 public abstract class GameSequence : GameSequenceItem
 {
+    public Dictionary<string, object> genericDictionary;
     public abstract void OnReset();
     public abstract GameSequenceItem GetNextItem();
     public abstract GameSequenceItem GetItemByIdx(int idx);
 	public abstract int GetCurrItemIdx();
     public abstract void OnSequenceOver();
+    public abstract Dictionary<string, object> GetAnalytics();
 }
 
 public class GameSequenceItem : ScriptableObject

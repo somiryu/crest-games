@@ -14,6 +14,11 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	public int shipsPerGame;
 
 	public SizeRockets_ShipConfig[] shipsConfigs;
+    [NonSerialized] public Dictionary<string, object> analytics;
+    public override Dictionary<string, object> GetAnalytics()
+    {
+        return genericDictionary;
+    }
 
     public SizeRockets_ShipConfig GetShipConfig(SizeRocketsRocketTypes shipType)
 	{

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tymski;
@@ -12,4 +13,9 @@ public class MG_MagnetsConfigs : GameConfig
 	public int initialMagnetsCount;
 	public int neededEnergyToPick;
 	public bool activeCheats;
+    [NonSerialized] public Dictionary<string, object> analytics;
+    public override Dictionary<string, object> GetAnalytics()
+    {
+        return genericDictionary;
+    }
 }

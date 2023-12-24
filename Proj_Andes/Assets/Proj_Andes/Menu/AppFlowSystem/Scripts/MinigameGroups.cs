@@ -103,4 +103,9 @@ public class MinigameGroups : GameSequence
     }
 
     public override int GetCurrItemIdx() => lastPlayedIdx;
+
+    public override Dictionary<string, object> GetAnalytics()
+    {
+        return genericDictionary;
+    }
 }
