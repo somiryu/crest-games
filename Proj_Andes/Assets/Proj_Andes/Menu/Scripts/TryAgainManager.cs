@@ -8,21 +8,40 @@ public class TryAgainManager : MonoBehaviour
     [SerializeField] SimpleGameSequenceItem tryAgainSeqItem;
     [SerializeField] Button retryBtn;
     [SerializeField] float waitFor;
-    WaitForSeconds waitForSec => new WaitForSeconds(waitFor);
-    // Start is called before the first frame update
+    [SerializeField] Slider fakeLoadingSlider;
+
+    IEnumerator changeSceneRoutineRef;
+
     void Start()
     {
-        StartCoroutine(GoToNextScene());
+		fakeLoadingSlider.gameObject.SetActive(false);
+		retryBtn.onClick.AddListener(StartChangeSceneRoutine);
     }
 
-    // Update is called once per frame
-    void Update()
+    void StartChangeSceneRoutine()
     {
-        
+        if (changeSceneRoutineRef != null)
+        {
+            //TO DO: Store analytics of click counts.
+            return;
+        }
+        fakeLoadingSlider.gameObject.SetActive(true);
+        changeSceneRoutineRef = GoToNextScene();
+        StartCoroutine(changeSceneRoutineRef);
     }
+
     IEnumerator GoToNextScene()
     {
-        yield return waitForSec;
+        var timer = 0f;
+        var stuckTimeLimit = waitFor / 3;
+        while (timer < waitFor)
+        {
+            timer += Time.deltaTime;
+            var clampSliderValue = Mathf.Clamp(timer, 0, stuckTimeLimit);
+            var progress = Mathf.InverseLerp(0, waitFor, clampSliderValue);
+            fakeLoadingSlider.value = progress;
+            yield return null;
+        }
         tryAgainSeqItem.OnSequenceOver();
     }
 

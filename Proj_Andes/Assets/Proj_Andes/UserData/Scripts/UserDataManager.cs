@@ -23,7 +23,7 @@ public class UserDataManager : ScriptableObject
 		}
 	}
 
-	public static UserData CurrUser => instance.CurrUserData;
+	public static UserData CurrUser => Instance.CurrUserData;
 
 	public UserData DefaultUserData = new UserData();
 
