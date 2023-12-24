@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb17bbb5759b514a86ae907bca45417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closingItem: {fileID: 11400000, guid: f8c7c66db1c16cf46bacbb565fdc9c75, type: 2}
+  closingItem: {fileID: 11400000, guid: bfbbbcae4c8260a4d9521790035fd9d9, type: 2}
   waitFor: 3
   logoPanel: {fileID: 677228747}
 --- !u!1 &1307287086
