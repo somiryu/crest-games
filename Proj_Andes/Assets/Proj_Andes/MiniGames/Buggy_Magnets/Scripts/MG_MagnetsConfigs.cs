@@ -14,8 +14,4 @@ public class MG_MagnetsConfigs : GameConfig
 	public int neededEnergyToPick;
 	public bool activeCheats;
     [NonSerialized] public Dictionary<string, object> analytics;
-    public override Dictionary<string, object> GetAnalytics()
-    {
-        return genericDictionary;
-    }
 }

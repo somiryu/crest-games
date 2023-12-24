@@ -16,9 +16,4 @@ public class MG_FightTheAlienGameConfigs : GameConfig
 
 	public int playerHealthLostOnWrongAnswer = -1;
 	public int EnemyHealthLostOnRightAnswer = -1;
-    [NonSerialized] public Dictionary<string, object> analytics;
-    public override Dictionary<string, object> GetAnalytics()
-    {
-        return genericDictionary;
-    }
 }

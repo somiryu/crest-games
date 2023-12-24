@@ -13,9 +13,4 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public float accelerationSpeed;
     public float regularRideDuration;
     public int starsAmount;
-    [NonSerialized] public Dictionary<string, object> analytics;
-    public override Dictionary<string, object> GetAnalytics()
-    {
-        return genericDictionary;
-    }
 }

@@ -10,6 +10,6 @@ public class FrustrationTermometer : SimpleGameSequenceItem
     public FrustrationLevel defaultFrustrationLevel;
     public override Dictionary<string, object> GetAnalytics()
     {
-        return genericDictionary;
+        return itemAnalytics;
     }
 }

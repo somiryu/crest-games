@@ -106,6 +106,6 @@ public class MinigameGroups : GameSequence
 
     public override Dictionary<string, object> GetAnalytics()
     {
-        return genericDictionary;
+        return itemAnalytics;
     }
 }

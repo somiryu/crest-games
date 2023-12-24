@@ -10,10 +10,5 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     public float boosterTriggerRate;
     public bool forceToFail;
     public bool updateScene;
-    [NonSerialized] public Dictionary<string, object> analytics;
-    public override Dictionary<string, object> GetAnalytics()
-    {
-        return genericDictionary;
-    }
 }
 

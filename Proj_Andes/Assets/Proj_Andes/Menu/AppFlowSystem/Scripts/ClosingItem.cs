@@ -7,6 +7,6 @@ public class ClosingItem : SimpleGameSequenceItem
 {
     public override Dictionary<string, object> GetAnalytics()
     {
-        return genericDictionary;
+        return itemAnalytics;
     }
 }

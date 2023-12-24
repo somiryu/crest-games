@@ -4,11 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SimpleGameSequenceItem", menuName = "GameSequencesList/SimpleGameSequenceItem")]
 public class SimpleGameSequenceItem : GameSequence
 {
-    public override Dictionary<string, object> GetAnalytics()
-    {
-        return genericDictionary;
-    }
-
+    public override Dictionary<string, object> GetAnalytics() => itemAnalytics;
     public override int GetCurrItemIdx() => 0;
 
 	public override GameSequenceItem GetItemByIdx(int i) => this;

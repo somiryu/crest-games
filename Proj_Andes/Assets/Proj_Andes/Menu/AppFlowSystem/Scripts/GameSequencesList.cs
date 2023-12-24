@@ -94,7 +94,7 @@ public class GameSequencesList : ScriptableObject
 }
 public abstract class GameSequence : GameSequenceItem
 {
-    public Dictionary<string, object> genericDictionary;
+    public Dictionary<string, object> itemAnalytics;
     public abstract void OnReset();
     public abstract GameSequenceItem GetNextItem();
     public abstract GameSequenceItem GetItemByIdx(int idx);

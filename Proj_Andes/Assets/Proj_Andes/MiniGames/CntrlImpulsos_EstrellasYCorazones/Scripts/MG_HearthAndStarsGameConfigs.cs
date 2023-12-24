@@ -13,8 +13,4 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
 	[NonSerialized] public Dictionary<string, object> analytics;
-    public override Dictionary<string, object> GetAnalytics()
-    {
-        return genericDictionary;
-    }
 }

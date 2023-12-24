@@ -13,9 +13,4 @@ public class MG_MechanicHandGameConfigs : GameConfig
 	[Range(0f,1f)]
 	public float percentageNeededToWin = 0.8f;
 	public bool activeCheats;
-
-    public override Dictionary<string, object> GetAnalytics()
-    {
-		return genericDictionary;
-    }
 }

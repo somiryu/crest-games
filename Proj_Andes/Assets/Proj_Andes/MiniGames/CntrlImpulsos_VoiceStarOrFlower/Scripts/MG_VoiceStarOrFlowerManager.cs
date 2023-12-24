@@ -136,7 +136,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
         gameConfigs.roundResultWins.Add(false);
         OnRoundEnded();
     }
@@ -154,14 +153,15 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 			rightWonItemsPool.GetNewItem();
 			wonRightCount++;
         }
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
         gameConfigs.roundResultWins.Add(true);
         OnRoundEnded();
     }
 
     void OnRoundEnded()
     {
-        currCoinsValueTxt.text = currCoins.ToString();
+
+		gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
+		currCoinsValueTxt.text = currCoins.ToString();
 
         if(lostRoundsCount >= gameConfigs.maxRounds ||
             wonLeftCount >= gameConfigs.maxRounds ||
