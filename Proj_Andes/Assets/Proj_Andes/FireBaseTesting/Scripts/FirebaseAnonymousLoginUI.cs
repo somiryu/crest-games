@@ -200,8 +200,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         {
 			group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
         }
-		//This doesn't work as the curr conversation sequence could change, so We need another solution :C commenting it for now
-		//DialoguesDisplayerUI.PendingNarrativeIdxToComsume = UserDataManager.CurrUser.currDialogCheckPoint;
+		DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
         GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
 	}
 

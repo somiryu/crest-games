@@ -61,12 +61,12 @@ public class UserDataManager : ScriptableObject
 		else CurrUser.itemsPlayedIdxs.Clear();
 
 		var dialogSystem = DialoguesDisplayerUI.Instance;
-		if (dialogSystem != null)
+		if (dialogSystem != null && dialogSystem.SaveNavSequence)
 		{
-			Debug.Log("Saving narrative idx");
-			CurrUser.currDialogCheckPoint = dialogSystem.CurrDialogIdx;
+			//Store navigation info
+			CurrUser.narrativeNavCheckPointsNodes = dialogSystem.GetCurrNavigationNodes();
 		}
-		else CurrUser.currDialogCheckPoint = -1;
+		else CurrUser.narrativeNavCheckPointsNodes = null;
 
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
