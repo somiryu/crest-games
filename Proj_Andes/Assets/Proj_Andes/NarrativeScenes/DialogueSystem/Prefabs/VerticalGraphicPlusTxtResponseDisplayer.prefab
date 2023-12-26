@@ -89,7 +89,7 @@ MonoBehaviour:
     itemPrefab: {fileID: 3933102859777142689, guid: 395556648da1dd048a5a4ea1418d5da2, type: 3}
     hierarchyParent: {fileID: 5120906064912766403}
     growBy: 3
-  confirmationButton: {fileID: 6894406546717336060, guid: 4bbdaababef93c349afb09500deee43a, type: 3}
+  confirmationButtonPrefab: {fileID: 6894406546717336060, guid: 4bbdaababef93c349afb09500deee43a, type: 3}
   confirmationButtonPos: {fileID: 3457180990074134436}
   currResponses: []
   currHighlightedResponse: {fileID: 0}
