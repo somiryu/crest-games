@@ -276,8 +276,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		nameTxt.SetText(currCharConfigs.name);
 
 
-		currDialogueCharacters = curr.text.ToCharArray();
-		dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
+        if (!string.IsNullOrEmpty(curr.textAlternative))
+        {
+            currDialogueCharacters = (UserDataManager.CurrUser.gender == UserGender.Femenino)
+                ? curr.textAlternative.ToCharArray()
+                : curr.text.ToCharArray();
+        }
+        else
+        {
+            currDialogueCharacters = curr.text.ToCharArray();
+        }
+
+        dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
 		dialogueTxt.SetText("");
 
 		if (currAnimSequence != null) StopCoroutine(currAnimSequence);

@@ -31,6 +31,8 @@ public class DialogueData
 	[Space]
 	[TextArea(1, 20)]
     public string text;
+    [TextArea(1, 20)]
+    public string textAlternative;
     [Header("Responses")]
 	public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
 	public DialogueResponse[] responses;

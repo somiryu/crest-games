@@ -16,7 +16,10 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: ' Acabas de llegar a tu colegio'
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 0}
@@ -26,9 +29,10 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: 'Y te encuentras con tu mejor amiga Cami que te saluda en la puerta.
-
-'
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: Y te encuentras con tu mejor amiga Cami que te saluda en la puerta.
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 0}
@@ -38,7 +42,10 @@ MonoBehaviour:
   - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "\xA1Hola! Creo que hoy va a estar chevere el d\xEDa, \xBFcierto?"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 0}
@@ -48,16 +55,19 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: 
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
     - response: 'SI '
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: NO
       responseImage: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
-      changeSequence: 0
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -66,7 +76,10 @@ MonoBehaviour:
   - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: Uy, si! Seguro! Pero me da una pereza encontrarme con Alex
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 0}
@@ -76,7 +89,10 @@ MonoBehaviour:
   - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 597d97972322d5341aaa5042f655e5bf, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Verdad que ayer no viniste al colegio! No  te imaginas lo que pas\xF3!"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 0}
