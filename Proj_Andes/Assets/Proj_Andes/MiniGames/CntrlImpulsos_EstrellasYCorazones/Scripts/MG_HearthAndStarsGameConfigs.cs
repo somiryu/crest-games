@@ -12,5 +12,4 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 	public int initialCoins = 0;
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
-	[NonSerialized] public Dictionary<string, object> analytics;
 }

@@ -29,8 +29,9 @@ public class UserDataManager : ScriptableObject
 
 	[NonSerialized]
 	public List<UserData> usersDatas = new List<UserData>();
+	[NonSerialized] static List<Dictionary<string, object>> anayticsResults = new List<Dictionary<string, object>>();
 
-	[SerializeField] UserData currUserData;
+    [SerializeField] UserData currUserData;
 
 	public UserData CurrUserData
 	{
@@ -47,7 +48,15 @@ public class UserDataManager : ScriptableObject
 		Debug.Log("aplying callback");
 		Application.wantsToQuit += WantsToQuit;
 	}
-
+	static void GetAllAnalyticsData()
+	{
+		for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
+		{
+			var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
+            anayticsResults.Add(newData);
+        }
+		CurrUser.userAnayticsResults = anayticsResults;
+	}
 	static bool WantsToQuit()
 	{
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
@@ -67,7 +76,8 @@ public class UserDataManager : ScriptableObject
 			CurrUser.narrativeNavCheckPointsNodes = dialogSystem.GetCurrNavigationNodes();
 		}
 		else CurrUser.narrativeNavCheckPointsNodes = null;
-
+		
+		GetAllAnalyticsData();
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
 		return true;

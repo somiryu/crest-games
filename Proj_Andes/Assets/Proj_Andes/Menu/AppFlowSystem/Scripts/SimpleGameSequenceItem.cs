@@ -1,16 +1,30 @@
 ﻿using System.Collections.Generic;
+using Tymski;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SimpleGameSequenceItem", menuName = "GameSequencesList/SimpleGameSequenceItem")]
-public class SimpleGameSequenceItem : GameSequence
+public class SimpleGameSequenceItem : ScriptableObject
 {
-    public override Dictionary<string, object> GetAnalytics() => itemAnalytics;
-    public override int GetCurrItemIdx() => 0;
+    public SceneReference scene;
 
-	public override GameSequenceItem GetItemByIdx(int i) => this;
+    public Dictionary<string, object> itemAnalytics;
 
-	public override GameSequenceItem GetNextItem() => this;
-	public override void OnReset() { }
+    public virtual Dictionary<string, object> GetAnalytics() => itemAnalytics;
+    public virtual int GetCurrItemIdx() => 0;
 
-	public override void OnSequenceOver() => GameSequencesList.Instance.GoToNextSequence();
+	public virtual SimpleGameSequenceItem GetItemByIdx(int i) => this;
+
+	//public virtual SimpleGameSequenceItem GetNextItem() => this;
+    public virtual SimpleGameSequenceItem GetNextItem()
+    {
+        if (GameSequencesList.Instance.prevGame != this) return this;
+        else return null;
+    }
+    public virtual void OnReset() { }
+
+	public virtual void OnSequenceOver() => GameSequencesList.Instance.GoToNextSequence();
+    public virtual void SaveAnalytics()
+    {
+
+    }
 }

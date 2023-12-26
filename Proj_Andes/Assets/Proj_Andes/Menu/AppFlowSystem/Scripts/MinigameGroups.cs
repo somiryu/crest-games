@@ -5,10 +5,10 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "MiniGameGroup", menuName = "GameSequencesList/MiniGameGroup")]
-public class MinigameGroups : GameSequence
+public class MinigameGroups : SimpleGameSequenceItem
 {
-    public List<GameSequenceItem> miniGamesInGroup;
-    [NonSerialized] List<GameSequenceItem> itemsPlayed = new List<GameSequenceItem>();
+    public List<SimpleGameSequenceItem> miniGamesInGroup;
+    [NonSerialized] List<SimpleGameSequenceItem> itemsPlayed = new List<SimpleGameSequenceItem>();
     [Space]
     public bool randomize;
     [Tooltip("How many games should we play before leaving the group (Only works if randomize is enable), if -1 we will play all items in the group")]
@@ -17,7 +17,7 @@ public class MinigameGroups : GameSequence
     [NonSerialized]
     public int lastPlayedIdx = -1;
 
-    public GameSequenceItem GetNextMiniGame()
+    public SimpleGameSequenceItem GetNextMiniGame()
     {
         if (randomize)
         {
@@ -58,7 +58,7 @@ public class MinigameGroups : GameSequence
         return itemsPlayedIds;
     }
 
-    GameSequenceItem GetRandomGame()
+    SimpleGameSequenceItem GetRandomGame()
     {
         if(lastPlayedIdx != -1 && !itemsPlayed.Contains(GameSequencesList.Instance.prevGame))
         {
@@ -81,12 +81,12 @@ public class MinigameGroups : GameSequence
         GameSequencesList.Instance.GoToNextSequence();
     }
 
-    public override GameSequenceItem GetNextItem()
+    public override SimpleGameSequenceItem GetNextItem()
     {
         return GetNextMiniGame();
     }
 
-	public override GameSequenceItem GetItemByIdx(int idx) => miniGamesInGroup[(int)idx];
+	public override SimpleGameSequenceItem GetItemByIdx(int idx) => miniGamesInGroup[(int)idx];
 
 
 	public override void OnReset()
