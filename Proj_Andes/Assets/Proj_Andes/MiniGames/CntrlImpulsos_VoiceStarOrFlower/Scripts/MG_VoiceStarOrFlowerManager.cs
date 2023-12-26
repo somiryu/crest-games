@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,13 +21,21 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUiPanel;
     [Space(20)]
+    [Header("Game Audio")]
+    [SerializeField] AudioClip correctAudio;
+    [SerializeField] AudioClip wrongAudio;
+    [SerializeField] AudioClip finishAudio;
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
+    [SerializeField] AudioClip discardAudio;
     [SerializeField] AudioSource audioPlayer;
     [Space(20)]
     [SerializeField] Pool<Transform> leftWonItemsPool;
     [SerializeField] Pool<Transform> rightWonItemsPool;
 
+    [Header("GameParticles")]
+    [SerializeField] ParticleSystem correctParticles;
+    [SerializeField] ParticleSystem incorrectParticles;
 
     [Header("UI")]
     [SerializeField] TMP_Text currCoinsValueTxt;
@@ -50,7 +57,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private bool currSoundIsLeft = false;
 
     private bool gameoverFlag = false;
-    float totalGameTime;
+
 	public void Awake()
 	{
         Init();
@@ -102,30 +109,32 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	private void Update()
 	{
         if (gameoverFlag) return;
-        totalGameTime += Time.deltaTime;
+
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            OnWrongChoice();
             timerPerChoice = 0;
+            OnWrongChoice();
         }
     }
 
 	private void OnClickedLeft()
     {
-        if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+        if(currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
         else OnWrongChoice();
     }
 
     private void OnClickedRight()
     {
-        if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+		if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
 
 	private void OnClickedDiscard()
-	{
+    {
+        audioPlayer.clip = discardAudio;
+        audioPlayer.Play();
         if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
@@ -133,19 +142,28 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
 	private void OnWrongChoice()
     {
+        incorrectParticles.Stop();
+        correctParticles.Stop();
+
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
-        gameConfigs.roundResultWins.Add(false);
+        audioPlayer.clip = wrongAudio;
+        incorrectParticles.Play();
+        audioPlayer.Play();
         OnRoundEnded();
     }
 
     private void OnCorrectChoice()
     {
+        incorrectParticles.Stop();
+        correctParticles.Stop();
+
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         if (currSoundIsLeft && !currImgIsLeft)
         {
             leftWonItemsPool.GetNewItem();
+            
             wonLeftCount++;
         }
         else if(!currSoundIsLeft && currImgIsLeft)
@@ -153,15 +171,17 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 			rightWonItemsPool.GetNewItem();
 			wonRightCount++;
         }
-        gameConfigs.roundResultWins.Add(true);
+
+        correctParticles.Play();
+
+        audioPlayer.clip = rightAudio;
+        audioPlayer.Play();
         OnRoundEnded();
     }
 
     void OnRoundEnded()
     {
-
-		gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
-		currCoinsValueTxt.text = currCoins.ToString();
+        currCoinsValueTxt.text = currCoins.ToString();
 
         if(lostRoundsCount >= gameConfigs.maxRounds ||
             wonLeftCount >= gameConfigs.maxRounds ||
@@ -176,7 +196,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
-        gameConfigs.totalGameTime = totalGameTime;
+        audioPlayer.clip = finishAudio;
+        audioPlayer.Play();
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
         inGameUiPanel.SetActive(false);
