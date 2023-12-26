@@ -420,29 +420,28 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 	}
 
-
     public void OnClickResponse(DialogueResponse responseClicked)
     {
         if (!audioIsDone) return;
+        
+        currResponsesDisplayer.InitConfirmationButton(this);
 
-        //Confirm the response
-        if (preselectedResponse == responseClicked)
-        {
-            if (preselectedResponseAudioIsDone)
-            {
-				if (responseClicked.dataAfterResponse != null) pendingSequenceToShow = responseClicked.dataAfterResponse;
-				hasPendingLineChange = true;
-                lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == responseClicked);
-            }
-            return;
-        }
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
         audioPlayer.clip = responseClicked.responseAudio;
         if(audioPlayer.clip != null) audioPlayer.Play();
         preselectedResponse = responseClicked;
-		
-	}
+
+    }
+    public void OnClickResponseConfirmation()
+    {   
+        if (preselectedResponseAudioIsDone)
+        {
+            if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
+            hasPendingLineChange = true;
+            lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
+        }
+    }
 
     public void AppearText() {
         var currDialogue = dialoguesToShow.dialogues[currShowingIdx];

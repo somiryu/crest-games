@@ -2,11 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialoguesResponsesDisplayerUI : MonoBehaviour
 {
     public Pool<ResponseBtn> responsesPool;
     private DialoguesDisplayerUI mainUi;
+
+    private Button confirmationButton;
+    [SerializeField] Button confirmationButtonPrefab;
+    [SerializeField] Transform confirmationButtonPos;
+
 
     public List<ResponseBtn> currResponses;
     public IDialoguesResponseDisplayerUser[] users;
@@ -19,6 +25,8 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
         responsesPool.Init(4);
         users = GetComponentsInChildren<IDialoguesResponseDisplayerUser>();
 		for (int i = 0; i < users.Length; i++) users[i].Init(this);
+        confirmationButton = Instantiate(confirmationButtonPrefab,confirmationButtonPos);
+        confirmationButton.gameObject.SetActive(false);
 	}
 
 	public void ShowResponses(DialogueResponse[] responseDatas)
@@ -34,6 +42,12 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 			for (int j = 0; j < users.Length; j++) users[j].OnShowResponseBtn(newResponse);
 		}
 		gameObject.SetActive(true);
+    }
+
+    public void InitConfirmationButton(DialoguesDisplayerUI dialoguesDisplayerUI)
+    {
+        confirmationButton.gameObject.SetActive(true);
+        confirmationButton.onClick.AddListener(dialoguesDisplayerUI.OnClickResponseConfirmation);
     }
 
     public void GrayOutResponse(int responseIdx)
