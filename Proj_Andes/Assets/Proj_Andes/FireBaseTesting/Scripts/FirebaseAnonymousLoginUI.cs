@@ -56,6 +56,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		doneInitialization = false;
 		userBtnsPool.Init(10);
 		currBtnsByDataID = new Dictionary<UsersListItem, string>();
+		
 	}
 
 	private void Start()
@@ -137,6 +138,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		currBtnsByDataID.Clear();
 		userBtnsPool.RecycleAll();
 		var users = UserDataManager.Instance.usersDatas;
+		Debug.Log("Rebuilding user datas: user amounts found: " + users.Count);
 		for (int i = 0; i < users.Count; i++) 
 		{
 			var newBtn = userBtnsPool.GetNewItem();
@@ -208,7 +210,4 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		GameSequencesList.Instance.GoToNextSequence();
 	}
-
-	
-
 }

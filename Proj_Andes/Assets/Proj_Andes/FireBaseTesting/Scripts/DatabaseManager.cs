@@ -12,6 +12,7 @@ public static class DatabaseManager
     public static List<UserData> GetUserDatasList()
     {
        var jsonData = PlayerPrefs.GetString(UserDatasJSONKey);
+        Debug.Log("Loaded data: " + jsonData);
         if(string.IsNullOrEmpty(jsonData)) return new List<UserData>();
 
        return JsonUtility.FromJson<UserDataListWrapper>(jsonData).userDatas;
