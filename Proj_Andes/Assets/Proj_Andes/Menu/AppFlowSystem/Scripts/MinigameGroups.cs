@@ -32,27 +32,46 @@ public class MinigameGroups : GameSequence
 
 			lastPlayedIdx = newGameIdx;
             var newGame = miniGamesInGroup[lastPlayedIdx];
-            GameSequencesList.Instance.prevGame = newGame;
-
             return newGame;
         }
-        else
-        {
-            GameSequencesList.Instance.prevGame = miniGamesInGroup[0];
-            return miniGamesInGroup[0];
-        }
+        else return miniGamesInGroup[0];
     }
+
+    public void SetItemsPlayedData(List<int> itemsIdsPlayed)
+    {
+        itemsPlayed.Clear();
+        for (int i = 0; i < itemsIdsPlayed.Count; i++)
+        {
+            var item = miniGamesInGroup[itemsIdsPlayed[i]];
+            itemsPlayed.Add(item);
+		}
+	}
+
+    public List<int> GetItemsPlayedData()
+    {
+        var itemsPlayedIds = new List<int>();
+        for (int i = 0; i < itemsPlayed.Count; i++)
+        {
+            var idx = miniGamesInGroup.IndexOf(itemsPlayed[i]);
+            itemsPlayedIds.Add(idx);
+        }
+        return itemsPlayedIds;
+    }
+
     GameSequenceItem GetRandomGame()
     {
-        var maxItemsToPlay = maxItemsToPlayOnRandomize != -1 ? maxItemsToPlayOnRandomize : miniGamesInGroup.Count;
+        if(lastPlayedIdx != -1 && !itemsPlayed.Contains(GameSequencesList.Instance.prevGame))
+        {
+            itemsPlayed.Add(GameSequencesList.Instance.prevGame);
+            Debug.Log("Saved played ID: " +  lastPlayedIdx);
+        }
+		var maxItemsToPlay = maxItemsToPlayOnRandomize != -1 ? maxItemsToPlayOnRandomize : miniGamesInGroup.Count;
         if(itemsPlayed.Count >= maxItemsToPlay) return null;
 
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
         if (!itemsPlayed.Contains(newGame))
         {
-            GameSequencesList.Instance.prevGame = newGame;
             lastPlayedIdx = miniGamesInGroup.IndexOf(newGame);
-            itemsPlayed.Add(newGame);
             return newGame;
         }
         else return GetRandomGame();
@@ -67,7 +86,10 @@ public class MinigameGroups : GameSequence
         return GetNextMiniGame();
     }
 
-    public override void OnReset()
+	public override GameSequenceItem GetItemByIdx(int idx) => miniGamesInGroup[(int)idx];
+
+
+	public override void OnReset()
     {
         itemsPlayed.Clear();
         lastPlayedIdx = -1;

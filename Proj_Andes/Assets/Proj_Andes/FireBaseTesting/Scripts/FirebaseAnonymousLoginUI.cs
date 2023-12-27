@@ -41,8 +41,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	 string logInsuccedID;
 
-
-
 	private void Awake()
 	{
 		cancelBtn.onClick.AddListener(() => createNewUserPanel.SetActive(false));
@@ -58,6 +56,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		doneInitialization = false;
 		userBtnsPool.Init(10);
 		currBtnsByDataID = new Dictionary<UsersListItem, string>();
+		
 	}
 
 	private void Start()
@@ -139,6 +138,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		currBtnsByDataID.Clear();
 		userBtnsPool.RecycleAll();
 		var users = UserDataManager.Instance.usersDatas;
+		Debug.Log("Rebuilding user datas: user amounts found: " + users.Count);
 		for (int i = 0; i < users.Count; i++) 
 		{
 			var newBtn = userBtnsPool.GetNewItem();
@@ -197,12 +197,17 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnContinueGameBtnPressed()
 	{
-		GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+		var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
+        if (targetSequence is MinigameGroups group)
+        {
+			group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
+        }
+		DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
+        GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
 	}
 
 	void OnNewGameBtnPressed()
 	{
 		GameSequencesList.Instance.GoToNextSequence();
 	}
-
 }

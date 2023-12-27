@@ -33,12 +33,16 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] bool forceDialogeAppear;
 
     private int currShowingIdx = -1;
+    private int lastDisplayedDialogLineIdx = -1;
+    private int lastPickedResponseIdx = -1;
     private bool isShowing = false;
     private bool hasPendingLineChange = false;
     private bool audioIsDone = false;
     private DialogueSequenceData pendingSequenceToShow;
     private DialogueResponse preselectedResponse;
 	private bool preselectedResponseAudioIsDone = false;
+
+    public bool SaveNavSequence = true;
 
 	public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
@@ -61,11 +65,20 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	private StringBuilder currText = new StringBuilder();
 
     public DialogueData CurrDialog => dialoguesToShow.dialogues[currShowingIdx];
+    public int CurrDialogIdx => currShowingIdx;
 
     public Action OnStartShowingDialogue;
     public Action OnEndShowingDialogue;
 
-    private void OnValidate() {
+    [NonSerialized]
+    public List<NarrativeNavigationNode> choicesTree = new List<NarrativeNavigationNode>();
+
+	/// <summary>
+	/// The user data manager writes this values if it detects that there's a saved narrativeindex that we should push
+	/// </summary>
+	public static List<NarrativeNavigationNode> CheckPointTreeToConsume;
+
+	private void OnValidate() {
         if (forceDialogeAppear) {
             if (Application.isPlaying) {
                 ShowDialogueSequence(dialoguesToShow);
@@ -81,9 +94,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
         skipDialogueBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
-    }
+		choicesTree.Clear();
+	}
 
-    public bool OnWantsToChangeDialogFromTrigger()
+	public bool OnWantsToChangeDialogFromTrigger()
     {
         if (!audioIsDone) return false;
         if (state != dialogLineState.Idle) return false;
@@ -143,7 +157,26 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     public void ShowDialogueSequence(DialogueSequenceData newDialogues)
     {
-        pendingSequenceToShow = null;
+        if (lastDisplayedDialogLineIdx != -1)
+        {
+            var narrNavigation = new NarrativeNavigationNode(
+                       _sourceDialogIdx: lastDisplayedDialogLineIdx,
+                       _responsePickedIdx: lastPickedResponseIdx,
+                       _nextDialogCustomStartIdx: customStartIdx);
+
+			Debug.Log("Registering new narr navitagation from dialogLine idx: " + narrNavigation.sourceDialogIdx);
+			Debug.Log("Response picked: " + narrNavigation.responsePickedIdx);
+			Debug.Log("Next dialog custom start idx: " + narrNavigation.nextDialogCustomStartIdx);
+
+			choicesTree.Add(narrNavigation);
+        }
+		//This is the first secuence of this scene, check if we have a pending checkpoint info
+		else if(CheckPointTreeToConsume != null && CheckPointTreeToConsume.Count > 0)
+		{
+            newDialogues = LoadCheckPointInfo(newDialogues);
+        }
+
+		pendingSequenceToShow = null;
         dialoguesToShow = newDialogues;
         currShowingIdx = customStartIdx;
         customStartIdx = -1;
@@ -153,6 +186,34 @@ public class DialoguesDisplayerUI : MonoBehaviour
         NextDialogue();
         OnStartShowingDialogue?.Invoke();
     }
+
+
+	DialogueSequenceData LoadCheckPointInfo(DialogueSequenceData startSequence)
+    {
+        var currSequence = startSequence;
+        for (int i = 0; i < CheckPointTreeToConsume.Count -1; i++)
+        {
+            currSequence = GetTargetSequence(currSequence, CheckPointTreeToConsume[i]);
+        }
+        //-1 as we will call the nextDialogue after this
+        customStartIdx = CheckPointTreeToConsume[CheckPointTreeToConsume.Count - 1].sourceDialogIdx - 1;
+		choicesTree = new List<NarrativeNavigationNode>(CheckPointTreeToConsume);
+        //The last position was an unfinished movement, so remove that one
+        choicesTree.RemoveAt(choicesTree.Count - 1);
+		CheckPointTreeToConsume.Clear();
+        return currSequence;
+    }
+    DialogueSequenceData GetTargetSequence(DialogueSequenceData startSequence, NarrativeNavigationNode navInfo)
+    {
+        var fromDialogLine = startSequence.dialogues[navInfo.sourceDialogIdx];
+        if(navInfo.responsePickedIdx != -1) 
+        {
+            var targetResponse = fromDialogLine.responses[navInfo.responsePickedIdx];
+            if(targetResponse.dataAfterResponse != null) return targetResponse.dataAfterResponse;
+            else return fromDialogLine.changeToSequence;
+        }
+        else return fromDialogLine.changeToSequence;
+	}
 
     public void NextDialogue() {
 
@@ -190,6 +251,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     private void ShowCurrDialog(bool SkipEnterAnim = false)
     {
+        lastDisplayedDialogLineIdx = currShowingIdx;
 		var curr = dialoguesToShow.dialogues[currShowingIdx];
 
 		if (CurrDialog.AllResponsesWereGrayOut(grayOutResponseIdxes))
@@ -312,6 +374,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 
         //Get new response handler
+        lastPickedResponseIdx = -1;
+        preselectedResponse = null;
         if (dialogueData.responses.Length > 0)
         {
 			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
@@ -356,28 +420,29 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 	}
 
-
     public void OnClickResponse(DialogueResponse responseClicked)
     {
         if (!audioIsDone) return;
+        
+        currResponsesDisplayer.ActiveConfirmationButton(true);
 
-        //Confirm the response
-        if (preselectedResponse == responseClicked)
-        {
-            if (preselectedResponseAudioIsDone)
-            {
-				if (responseClicked.dataAfterResponse != null) pendingSequenceToShow = responseClicked.dataAfterResponse;
-				hasPendingLineChange = true;
-            }
-            return;
-        }
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
         audioPlayer.clip = responseClicked.responseAudio;
         if(audioPlayer.clip != null) audioPlayer.Play();
         preselectedResponse = responseClicked;
-		
-	}
+
+    }
+    public void OnClickResponseConfirmation()
+    {   
+        if (preselectedResponseAudioIsDone)
+        {
+            if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
+            hasPendingLineChange = true;
+            lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
+            currResponsesDisplayer.ActiveConfirmationButton(false);
+        }
+    }
 
     public void AppearText() {
         var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
@@ -410,7 +475,33 @@ public class DialoguesDisplayerUI : MonoBehaviour
         currShowingIdx = -1;
         if(GoToNextScene) narrativeSceneItem.OnSequenceOver();
 	}
+
+    public List<NarrativeNavigationNode> GetCurrNavigationNodes()
+    {
+		//Storing the last node so that we know on which dialog line we were at the moment this history was asked for
+		choicesTree.Add(new NarrativeNavigationNode(lastDisplayedDialogLineIdx));
+        return choicesTree;
+    }
 }
+
+[Serializable]
+public struct NarrativeNavigationNode
+{
+    public int sourceDialogIdx;
+    public int responsePickedIdx;
+    public int nextDialogCustomStartIdx;
+
+    public NarrativeNavigationNode(
+        int _sourceDialogIdx = -1, 
+        int _responsePickedIdx = -1, 
+        int _nextDialogCustomStartIdx = -1)
+    {
+        sourceDialogIdx = _sourceDialogIdx;
+        responsePickedIdx = _responsePickedIdx;
+        nextDialogCustomStartIdx = _nextDialogCustomStartIdx;
+    }
+}
+
 
 public enum dialogLineState
 {
