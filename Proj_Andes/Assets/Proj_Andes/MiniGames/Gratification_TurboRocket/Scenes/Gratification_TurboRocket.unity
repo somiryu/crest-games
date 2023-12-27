@@ -15929,7 +15929,7 @@ MonoBehaviour:
   ui: {fileID: 1380917380}
   eogManager: {fileID: 2013050662}
   turboParticles: {fileID: 239183779}
-  turboSFX: {fileID: 0}
+  turboSFX: {fileID: 1380917382}
 --- !u!82 &1380917382
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16444,6 +16444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1543076246}
   - component: {fileID: 1543076247}
+  - component: {fileID: 1543076248}
   m_Layer: 0
   m_Name: planetArt
   m_TagString: Untagged
@@ -16518,6 +16519,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1543076248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543076245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  sRenderer: {fileID: 1543076247}
+  imagePerSkinTypes:
+  - skinType: 0
+    sprite: {fileID: 21300000, guid: 504b9308980952e4f9842806cec292f9, type: 3}
+  - skinType: 0
+    sprite: {fileID: 21300000, guid: 476b61bddb25c77419a142a987f9861a, type: 3}
+  - skinType: 0
+    sprite: {fileID: 21300000, guid: 68a8984e6d649b642a0e1ca80c430d0c, type: 3}
 --- !u!1 &1565679776
 GameObject:
   m_ObjectHideFlags: 0
