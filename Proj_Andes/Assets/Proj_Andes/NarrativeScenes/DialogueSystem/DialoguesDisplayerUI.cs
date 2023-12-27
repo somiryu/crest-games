@@ -424,7 +424,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     {
         if (!audioIsDone) return;
         
-        currResponsesDisplayer.InitConfirmationButton(this);
+        currResponsesDisplayer.ActiveConfirmationButton(true);
 
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
@@ -440,6 +440,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
             hasPendingLineChange = true;
             lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
+            currResponsesDisplayer.ActiveConfirmationButton(false);
         }
     }
 
