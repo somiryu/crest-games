@@ -61,8 +61,7 @@ public class DialogueData
 public class DialogueResponse
 {
     [TextArea(1, 20)]
-    public string response;
-    public string responseAlternative;
+    public string response;    
     public Sprite responseImage;
     public AudioClip responseAudio;
     public DialogueSequenceData dataAfterResponse;
