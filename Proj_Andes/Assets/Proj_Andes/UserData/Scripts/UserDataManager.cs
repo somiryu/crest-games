@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
@@ -29,7 +30,6 @@ public class UserDataManager : ScriptableObject
 
 	[NonSerialized]
 	public List<UserData> usersDatas = new List<UserData>();
-	[NonSerialized] static List<Dictionary<string, object>> anayticsResults = new List<Dictionary<string, object>>();
 
     [SerializeField] UserData currUserData;
 
@@ -48,16 +48,23 @@ public class UserDataManager : ScriptableObject
 		Debug.Log("aplying callback");
 		Application.wantsToQuit += WantsToQuit;
 	}
-	static void GetAllAnalyticsData()
-	{
-		for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
-		{
-			var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
-            anayticsResults.Add(newData);
+    static void GetAllAnalyticsData()
+    {
+        for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
+        {
+            var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
+            List<string> currDictionaryKeys = newData.Keys.ToList();
+            for (int j = 0; j < currDictionaryKeys.Count; j++)
+            {
+                if (CurrUser.userAnayticsResults.ContainsKey(currDictionaryKeys[j]))
+                {
+                    CurrUser.userAnayticsResults[currDictionaryKeys[j]] = newData[currDictionaryKeys[j]];
+                }
+                else CurrUser.userAnayticsResults.Add(currDictionaryKeys[i], newData[currDictionaryKeys[j]]);
+            }
         }
-		CurrUser.userAnayticsResults = anayticsResults;
-	}
-	static bool WantsToQuit()
+    }
+    static bool WantsToQuit()
 	{
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();

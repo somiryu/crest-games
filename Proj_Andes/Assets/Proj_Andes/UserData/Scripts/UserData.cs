@@ -19,7 +19,7 @@ public class UserData
 	public int CheckPointSubIdx = -1;
 	public List<NarrativeNavigationNode> narrativeNavCheckPointsNodes;
 	public List<int> itemsPlayedIdxs = new List<int>();
-    public List<Dictionary<string, object>> userAnayticsResults = new List<Dictionary<string, object>>();
+    public Dictionary<string, object> userAnayticsResults = new Dictionary<string, object>();
 
 
     public UserData()
