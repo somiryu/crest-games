@@ -24,6 +24,10 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     public Gratification_TurboRocket_UIController ui;
     public GameRideData data;
     [SerializeField] EndOfGameManager eogManager;
+
+    [SerializeField] ParticleSystem turboParticles;
+    [SerializeField] AudioSource turboSFX;
+
     public EndOfGameManager EndOfGameManager => eogManager;
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
 
@@ -128,6 +132,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     public void OnEnterTurboMode()
     {
+        turboParticles.Play();
+        turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
         camCC.OnEnterTurbo();
         onTurbo = true;
@@ -136,6 +142,10 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     {
         currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
+        turboParticles.Stop();
+        turboSFX.Stop();
+
+
         onTurbo = false;
     }
     void CollisionManagement(Collider collider)
