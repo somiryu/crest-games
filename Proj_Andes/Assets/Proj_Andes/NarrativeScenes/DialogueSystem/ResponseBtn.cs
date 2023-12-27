@@ -32,8 +32,8 @@ public class ResponseBtn : MonoBehaviour
         responseData = _responseData;
 
 		if (responseTxt != null)
-		{
-			responseTxt.SetText(responseData.response);
+		{           
+            responseTxt.SetText(responseData.response);
 			responseTxt.gameObject.SetActive(!string.IsNullOrEmpty(responseData.response));
 		}
 		if(responseImg != null)
