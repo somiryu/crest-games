@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager
 {
@@ -27,6 +29,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
     [SerializeField] ParticleSystem turboParticles;
     [SerializeField] AudioSource turboSFX;
+    [SerializeField] PlayableDirector endTimelineDirector;
 
     public EndOfGameManager EndOfGameManager => eogManager;
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
@@ -60,7 +63,10 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     public void Init()
     {
-		playerRanXSpace = 0;
+        character.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        character.GetComponentInChildren<ParticleSystem>().Play();
+
+        playerRanXSpace = 0;
         targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
@@ -166,13 +172,23 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         ride.totalRideDuration = timer;
         ride.totalStars = levelConfig.starsAmount;
         data = ride;
-        ui.EndOfGame();
         bk.EndOfGame();
         onPlay = false;
+        character.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        character.GetComponentInChildren<ParticleSystem>().Stop();
+
+        StartCoroutine(_OnFinishSequence());
+    }
+    IEnumerator _OnFinishSequence()
+    {
+        endTimelineDirector.Play();
+        yield return new WaitForSeconds(2f);
+        ui.EndOfGame();
         eogManager.OnGameOver();
         gameStages = GameStages.End;
     }
 }
+
 
 public class GameRideData
 {
