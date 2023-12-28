@@ -8,40 +8,50 @@ public class DifficultyModificators : MonoBehaviour
 {   
 }
 
-[Serializable]
-public class DifficultyModificatorInt
-{
-    public DifficultyLevel difficultyLevel;
-    public int valueBase;
-    public DifficultyOperation difficultyOperation;
-    public int valueModificator;
-
-    public int GetValueModify()
-    {
-        return 0;
-    }
-
-}
 
 [Serializable]
 public class DifficultyModificatorFloat
 {
-    public DifficultyLevel difficultyLevel;
     public float valueBase;
+    public List<Modifier> modifierPerDifficultLevel;
+
+    public float GetValueModify()
+    {
+        for (int i = 0; i < modifierPerDifficultLevel.Count; i++)
+        {
+            Modifier currentModifier = modifierPerDifficultLevel[i];
+
+            if (currentModifier.difficultyLevel == UserDataManager.CurrUser.difficultyLevel)
+            {
+                switch (currentModifier.difficultyOperation)
+                {
+                    case DifficultyOperation.Multiply:
+                        return valueBase * currentModifier.valueModificator;
+                    case DifficultyOperation.Add:
+                        return valueBase + currentModifier.valueModificator;
+                    case DifficultyOperation.Subtract:
+                        return valueBase - currentModifier.valueModificator;
+                }
+            }
+        }
+        return valueBase;
+    }
+}
+
+[Serializable]
+public class Modifier
+{
+    public DifficultyLevel difficultyLevel;
     public DifficultyOperation difficultyOperation;
     public float valueModificator;
-
-    public int GetValueModify()
-    {
-        return 0;
-    }
 }
 
 public enum DifficultyLevel
 {
     Easy,
     Medium,
-    Hard
+    Hard,
+    NONE
 }
 
 public enum DifficultyOperation

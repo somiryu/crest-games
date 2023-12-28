@@ -13,10 +13,6 @@ public class MG_MagnetsConfigs : GameConfig
 	public int neededEnergyToPick;
 	public bool activeCheats;
 
-    public DifficultyModificatorFloat _timeBetweenSpawns;
-    public DifficultyModificatorInt _maxSpawnsOnScreen;
-    public DifficultyModificatorInt _userMagnetRadius;
-    public DifficultyModificatorInt _initialMagnetsCount;
-    public DifficultyModificatorInt _neededEnergyToPick;
+    public DifficultyModificatorFloat timeBetweenSpawnsPerDifficultLevel;
     
 }

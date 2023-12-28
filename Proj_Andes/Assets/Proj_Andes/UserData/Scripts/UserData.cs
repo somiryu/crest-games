@@ -10,6 +10,7 @@ public class UserData
 	public string name;
 	public int age;
 	public UserGender gender;
+    public DifficultyLevel difficultyLevel;
 	public string city;
 	public string institution;
 
@@ -28,6 +29,7 @@ public class UserData
 		gender = UserGender.NONE;
 		city = string.Empty;
 		institution = string.Empty;
+        difficultyLevel = DifficultyLevel.NONE;
 		CheckPointIdx = -1;
 		CheckPointSubIdx = -1;
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
