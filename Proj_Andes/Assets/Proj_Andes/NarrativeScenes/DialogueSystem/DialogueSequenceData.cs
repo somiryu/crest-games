@@ -36,8 +36,7 @@ public class DialogueData
     [Header("Responses")]
 	public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
 	public DialogueResponse[] responses;
-    public DialogueResponse[] responsesAlternative;
-
+    
     [Tooltip("If true, the dialog will continue to the next line automatically when pressing the dialog box, (only works of no responses are present)")]
 
     [Space(20)]
@@ -61,7 +60,9 @@ public class DialogueData
 public class DialogueResponse
 {
     [TextArea(1, 20)]
-    public string response;    
+    public string response;
+    [TextArea(1, 20)]
+    public string responseAlternative;
     public Sprite responseImage;
     public AudioClip responseAudio;
     public DialogueSequenceData dataAfterResponse;

@@ -13,6 +13,16 @@ MonoBehaviour:
   m_Name: UserDataManager
   m_EditorClassIdentifier: 
   DefaultUserData:
-    UserName: Default User
-    Email: 
-    Id: DefaultUserID
+    id: 23e04b5e-5cd7-4efd-954a-ff9d7582611b
+    name: Unnamed
+    age: -1
+    gender: 0
+    city: 
+    institution: 
+    CheckPointIdx: 0
+    CheckPointSubIdx: 0
+    narrativeNavCheckPointsNodes:
+    - sourceDialogIdx: 1
+      responsePickedIdx: -1
+      nextDialogCustomStartIdx: -1
+    itemsPlayedIdxs: 

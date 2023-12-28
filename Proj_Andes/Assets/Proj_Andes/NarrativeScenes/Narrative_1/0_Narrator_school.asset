@@ -22,7 +22,6 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    responsesAlternative: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -36,7 +35,6 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    responsesAlternative: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -50,7 +48,6 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    responsesAlternative: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -65,14 +62,15 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
     - response: 'SI '
+      responseAlternative: 
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: NO
+      responseAlternative: 
       responseImage: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    responsesAlternative: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -86,7 +84,6 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    responsesAlternative: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -100,7 +97,6 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    responsesAlternative: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

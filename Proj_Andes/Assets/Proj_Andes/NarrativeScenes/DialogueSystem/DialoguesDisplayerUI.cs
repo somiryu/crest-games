@@ -275,16 +275,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		nameTxtContainer.SetActive(!string.IsNullOrEmpty(currCharConfigs.name));
 		nameTxt.SetText(currCharConfigs.name);
 
-
-        if (!string.IsNullOrEmpty(curr.textAlternative))
-        { 
-            currDialogueCharacters = SelectTextByGender(curr).ToCharArray();
-        }
-        else
-        {
-            currDialogueCharacters = curr.text.ToCharArray();
-        }
-
+        currDialogueCharacters = SelectTextByGender(curr).ToCharArray();
+      
         dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
 		dialogueTxt.SetText("");
 
@@ -389,14 +381,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
             if (currResponsesDisplayer != null)
             {
-                if (dialogueData.responsesAlternative.Length > 0)
-                {
-                    currResponsesDisplayer.ShowResponses((UserDataManager.CurrUser.gender == UserGender.Masculino) ? dialogueData.responsesAlternative : dialogueData.responses);
-                }
-                else
-                {
-                    currResponsesDisplayer.ShowResponses(dialogueData.responses);
-                }
+                currResponsesDisplayer.ShowResponses(dialogueData.responses);               
 
                 for (int i = 0; i < grayOutResponseIdxes.Count; i++)
                 {
@@ -500,7 +485,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     public string SelectTextByGender(DialogueData curr)
     {
-        var text = (UserDataManager.CurrUser.gender == UserGender.Masculino) ? curr.textAlternative : curr.text;
+        string text = string.IsNullOrEmpty(curr.textAlternative)
+            ? curr.text
+            : (UserDataManager.CurrUser.gender == UserGender.Masculino)
+                ? curr.textAlternative
+                : curr.text;
+
         return text;
     }
 }
