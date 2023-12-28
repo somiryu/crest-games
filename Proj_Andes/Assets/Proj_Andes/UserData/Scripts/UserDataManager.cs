@@ -53,14 +53,21 @@ public class UserDataManager : ScriptableObject
         for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
         {
             var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
-            List<string> currDictionaryKeys = newData.Keys.ToList();
-            for (int j = 0; j < currDictionaryKeys.Count; j++)
-            {
-                if (CurrUser.userAnayticsResults.ContainsKey(currDictionaryKeys[j]))
+			if(newData != null)
+			{
+                List<string> currDictionaryKeys = newData.Keys.ToList();
+                for (int j = 0; j < currDictionaryKeys.Count; j++)
                 {
-                    CurrUser.userAnayticsResults[currDictionaryKeys[j]] = newData[currDictionaryKeys[j]];
+                    if (CurrUser.userAnayticsResults.ContainsKey(currDictionaryKeys[j]))
+                    {
+                        CurrUser.userAnayticsResults[currDictionaryKeys[j]] = newData[currDictionaryKeys[j]];
+                    }
+                    else
+					{
+                        CurrUser.userAnayticsResults.Add(currDictionaryKeys[j], newData[currDictionaryKeys[j]]);
+						Debug.Log(CurrUser.userAnayticsResults[currDictionaryKeys[j]]);
+                    }
                 }
-                else CurrUser.userAnayticsResults.Add(currDictionaryKeys[i], newData[currDictionaryKeys[j]]);
             }
         }
     }
@@ -69,7 +76,10 @@ public class UserDataManager : ScriptableObject
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
-		Debug.Log("Saving to server");
+
+        GetAllAnalyticsData();
+
+        Debug.Log("Saving to server");
 		if (currSequence is MinigameGroups group)
 		{
 			CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
@@ -84,9 +94,9 @@ public class UserDataManager : ScriptableObject
 		}
 		else CurrUser.narrativeNavCheckPointsNodes = null;
 		
-		GetAllAnalyticsData();
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
+		DatabaseManager.GetUserDatasList();
 		return true;
 	}
 

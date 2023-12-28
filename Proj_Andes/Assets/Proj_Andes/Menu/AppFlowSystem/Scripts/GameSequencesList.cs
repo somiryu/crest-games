@@ -40,7 +40,6 @@ public class GameSequencesList : ScriptableObject
             SceneManagement.GoToScene(nextItem.scene);
         }
         else GoToNextSequence();
-        Debug.Log(prevGame);
     }
 
     public void GoToItemIdx(int idx)
