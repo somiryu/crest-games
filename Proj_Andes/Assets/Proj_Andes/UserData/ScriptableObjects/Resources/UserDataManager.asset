@@ -15,14 +15,11 @@ MonoBehaviour:
   DefaultUserData:
     id: 23e04b5e-5cd7-4efd-954a-ff9d7582611b
     name: Unnamed
-    age: -1
+    age: 9
     gender: 0
     city: 
     institution: 
     CheckPointIdx: 0
     CheckPointSubIdx: 0
-    narrativeNavCheckPointsNodes:
-    - sourceDialogIdx: 1
-      responsePickedIdx: -1
-      nextDialogCustomStartIdx: -1
+    narrativeNavCheckPointsNodes: []
     itemsPlayedIdxs: 

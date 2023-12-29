@@ -6,6 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
 public class UserDataManager : ScriptableObject
 {
+	[SerializeField] int maxAgeEasyLevel = 4;
+    [SerializeField] int maxAgeMediumLevel = 8;
+
 	private static string instancePath = "UserDataManager";
 
 	private static UserDataManager instance;
@@ -110,6 +113,14 @@ public class UserDataManager : ScriptableObject
 		var idx = usersDatas.FindIndex(x =>x.id == id);
 		currUserDataIdx = idx;
 	}
+
+    public DifficultyLevel GetDifficultyLevelUser()
+    {
+		var currAge = CurrUser.age;
+        if (currAge <= maxAgeEasyLevel) return DifficultyLevel.Easy;
+        else if (currAge <= maxAgeMediumLevel) return DifficultyLevel.Medium;
+        else return DifficultyLevel.Hard;        
+    }
 
 }
 

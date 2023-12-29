@@ -17,25 +17,30 @@ public class DifficultyModificatorFloat
 
     public float GetValueModify()
     {
+        var difficulty = UserDataManager.Instance.GetDifficultyLevelUser();
+        Modifier currentModifier = GetCurrentModifier(difficulty);
+        switch (currentModifier.difficultyOperation)
+        {
+            case DifficultyOperation.Multiply:
+                return valueBase * currentModifier.valueModificator;
+            case DifficultyOperation.Add:
+                return valueBase + currentModifier.valueModificator;
+            case DifficultyOperation.Subtract:
+                return valueBase - currentModifier.valueModificator;
+        }                
+        return valueBase;
+    }
+
+    public Modifier GetCurrentModifier(DifficultyLevel difficultyLevel)
+    {
         for (int i = 0; i < modifierPerDifficultLevel.Count; i++)
         {
             Modifier currentModifier = modifierPerDifficultLevel[i];
-
-            if (currentModifier.difficultyLevel == UserDataManager.CurrUser.difficultyLevel)
-            {
-                switch (currentModifier.difficultyOperation)
-                {
-                    case DifficultyOperation.Multiply:
-                        return valueBase * currentModifier.valueModificator;
-                    case DifficultyOperation.Add:
-                        return valueBase + currentModifier.valueModificator;
-                    case DifficultyOperation.Subtract:
-                        return valueBase - currentModifier.valueModificator;
-                }
-            }
+            if (currentModifier.difficultyLevel == difficultyLevel) return currentModifier;            
         }
-        return valueBase;
+        return null;
     }
+
 }
 
 [Serializable]
@@ -50,8 +55,7 @@ public enum DifficultyLevel
 {
     Easy,
     Medium,
-    Hard,
-    NONE
+    Hard
 }
 
 public enum DifficultyOperation
