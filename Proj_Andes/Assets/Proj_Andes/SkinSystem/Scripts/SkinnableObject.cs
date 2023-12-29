@@ -6,7 +6,7 @@ using System;
 public class SkinnableObject : MonoBehaviour
 {
     [SerializeField] ChangeableItem[] items;
-    public Action<ChangeableItem> getCurrentObject;
+    public Action<Transform> OnCurrSkinObjChanged;
     [SerializeField] Transform item;
     void Awake()
     {
@@ -15,6 +15,7 @@ public class SkinnableObject : MonoBehaviour
     }
     public void SwitchItem(SkinType skinType, out Transform currObject)
     {
+        var previousItem = item;
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i].skinType == skinType)
@@ -22,12 +23,10 @@ public class SkinnableObject : MonoBehaviour
                 items[i].item.gameObject.SetActive(true);
                 item = items[i].item;
             }
-            else
-            {
-                items[i].item.gameObject.SetActive(false);
-            }
+            else items[i].item.gameObject.SetActive(false);
         }
         currObject = item;
+        if (previousItem != item) OnCurrSkinObjChanged?.Invoke(item);
     }
 }
 [Serializable]
