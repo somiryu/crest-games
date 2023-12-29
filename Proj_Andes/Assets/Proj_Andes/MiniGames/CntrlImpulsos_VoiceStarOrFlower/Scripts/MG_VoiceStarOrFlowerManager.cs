@@ -61,9 +61,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private bool gameoverFlag = false;
     float totalGameTime;
 
-    List<float> timeToMakeAChoice = new List<float>();
-    List<bool> roundResultWins = new List<bool>();
-
     public void Awake()
 	{
         Init();
@@ -80,6 +77,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 		inGameUiPanel.SetActive(true);
         gameoverFlag = false;
 
+        gameConfigs.ResetCurrentAnalytics();
+
         timerUI.minValue = 0;
         timerUI.maxValue = gameConfigs.timePerChoice;
 
@@ -92,6 +91,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         rightWonItemsPool.Init(gameConfigs.maxRounds);
 
         retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
+
 
         InitRound();
 	}
@@ -152,7 +152,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        roundResultWins.Add(false);
+        gameConfigs.roundResultWins.Add(false);
 
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
@@ -168,7 +168,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        roundResultWins.Add(true);
+        gameConfigs.roundResultWins.Add(true);
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         if (currSoundIsLeft && !currImgIsLeft)
@@ -193,7 +193,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     void OnRoundEnded()
     {
         currCoinsValueTxt.text = currCoins.ToString();
-        timeToMakeAChoice.Add(timerPerChoice);
+        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
         if (lostRoundsCount >= gameConfigs.maxRounds ||
             wonLeftCount >= gameConfigs.maxRounds ||
@@ -208,8 +208,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
-        gameConfigs.GetPlaytimeAnalytics(timeToMakeAChoice, roundResultWins, totalGameTime);
-
+        gameConfigs.totalGameTime = totalGameTime;
+        gameConfigs.SaveAnalytics();
         audioPlayer.clip = finishAudio;
         audioPlayer.Play();
         gameoverFlag = true;
