@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
@@ -30,13 +31,13 @@ public class UserDataManager : ScriptableObject
 	[NonSerialized]
 	public List<UserData> usersDatas = new List<UserData>();
 
-	int currUserDataIdx;
+	int currUserDataIdx = -1;
 
 	public UserData CurrUserData
-	{
-		get 
-		{
-			if (currUserDataIdx != -1) return usersDatas[currUserDataIdx];
+    {
+        get
+        {
+			if (currUserDataIdx != -1 && currUserDataIdx < usersDatas.Count) return usersDatas[currUserDataIdx];
 			return DefaultUserData;
 		}
 	}
