@@ -181,6 +181,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     IEnumerator _OnFinishSequence()
     {
+        camCC.OnGameFinishedSequence();
         endTimelineDirector.Play();
         yield return new WaitForSeconds(2f);
         ui.EndOfGame();
