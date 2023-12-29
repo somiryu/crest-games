@@ -20,8 +20,7 @@ public class DifficultyModificatorFloat
     {
         var difficulty = UserDataManager.Instance.GetDifficultyLevelUser();
         Modifier currentModifier = GetCurrentModifier(difficulty);
-        if (currentModifier != null) return currentModifier.ApplyModification(valueBase);
-        return valueBase;
+        return currentModifier.ApplyModification(valueBase);        
     }
     public Modifier GetCurrentModifier(DifficultyLevel difficultyLevel)
     {
