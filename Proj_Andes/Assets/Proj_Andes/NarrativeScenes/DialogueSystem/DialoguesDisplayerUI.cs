@@ -45,7 +45,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     public bool SaveNavSequence = true;
 
-	public bool IsShowing => isShowing;
+    public bool isTutorialNarrativeComplete = false;
+
+
+    public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
 
     //Appear dialogue params
@@ -264,9 +267,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 		repeatBtn.gameObject.SetActive(false);
 		skipDialogueBtn.gameObject.SetActive(false);
+        imageTutorialSkipDialogue.gameObject.SetActive(false);
 
-		//Clean old responses if needed
-		if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
+        //Clean old responses if needed
+        if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
 
 
         //Image and name of character
@@ -465,6 +469,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
             var turnOnAutoSkip = AutoContinueActive();
             skipDialogueBtn.gameObject.SetActive(turnOnAutoSkip);
             dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);
+           
+            if (!UserDataManager.CurrUser.tutorialNarrative && !isTutorialNarrativeComplete)
+            {
+                imageTutorialSkipDialogue.gameObject.SetActive(true);
+                isTutorialNarrativeComplete = true;
+            }
         }
     }
 

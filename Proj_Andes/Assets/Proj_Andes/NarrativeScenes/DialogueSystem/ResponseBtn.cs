@@ -53,6 +53,10 @@ public class ResponseBtn : MonoBehaviour
 			responseImg.gameObject.SetActive(responseData.responseImage != null);
 			responseImg.sprite = responseData.responseImage;
 		}
+        if(!UserDataManager.CurrUser.tutorialNarrative) { 
+            tutorialImg.gameObject.SetActive(true);
+        }
+
 		onClicked = null;
 		btn.interactable = true;
 	}
