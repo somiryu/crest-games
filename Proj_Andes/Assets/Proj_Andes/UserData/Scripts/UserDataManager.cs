@@ -42,11 +42,6 @@ public class UserDataManager : ScriptableObject
 		}
 	}
 
-	public static bool SaveToServer()
-	{
-		Debug.Log("aplying callback");
-		Application.wantsToQuit += WantsToQuit;
-	}
     static void GetAllAnalyticsData()
     {
         for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
@@ -70,7 +65,7 @@ public class UserDataManager : ScriptableObject
             }
         }
     }
-    static bool WantsToQuit()
+    public static bool SaveToServer()
 	{
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
