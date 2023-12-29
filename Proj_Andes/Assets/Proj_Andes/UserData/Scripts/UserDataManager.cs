@@ -31,19 +31,18 @@ public class UserDataManager : ScriptableObject
 	[NonSerialized]
 	public List<UserData> usersDatas = new List<UserData>();
 
-    [SerializeField] UserData currUserData;
+	int currUserDataIdx = -1;
 
 	public UserData CurrUserData
-	{
-		get 
-		{
-			if (currUserData != null) return currUserData;
+    {
+        get
+        {
+			if (currUserDataIdx != -1 && currUserDataIdx < usersDatas.Count) return usersDatas[currUserDataIdx];
 			return DefaultUserData;
 		}
 	}
 
-	[RuntimeInitializeOnLoadMethod]
-	static void RunOnStart()
+	public static bool SaveToServer()
 	{
 		Debug.Log("aplying callback");
 		Application.wantsToQuit += WantsToQuit;
@@ -119,15 +118,15 @@ public class UserDataManager : ScriptableObject
 
 	public void SetCurrUser(string email, string id)
 	{
-		currUserData = new UserData();
-		currUserData.name = email;
-		currUserData.id = id;
+		var newuserData = new UserData();
+		newuserData.name = email;
+		newuserData.id = id;
+		RegisterNewUser(newuserData);
 	}
 
 	public void RegisterNewUser(UserData user)
 	{
-		currUserData = user;
-		usersDatas.Add(currUserData);
+		usersDatas.Add(user);
 		SaveDataToRemoteDataBase();
 	}
 
@@ -140,8 +139,8 @@ public class UserDataManager : ScriptableObject
 
 	public void SetCurrUser(string id)
 	{
-		var data = usersDatas.Find(x =>x.id == id);
-		currUserData = data;
+		var idx = usersDatas.FindIndex(x =>x.id == id);
+		currUserDataIdx = idx;
 	}
 
 }
