@@ -10,6 +10,8 @@ public class ResponseBtn : MonoBehaviour
 	[SerializeField] Button btn;
 	[SerializeField] TMP_Text responseTxt;
 	[SerializeField] Image responseImg;
+    [SerializeField] Image tutorialImg;
+
 
     private DialogueResponse responseData;
 	public Button Btn => btn;
@@ -19,6 +21,8 @@ public class ResponseBtn : MonoBehaviour
 	public Action<DialogueResponse> onClicked;
 
 	public RectTransform RectTransform;
+
+
 
 	private void Awake()
 	{

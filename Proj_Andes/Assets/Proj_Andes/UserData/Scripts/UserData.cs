@@ -12,6 +12,7 @@ public class UserData
 	public UserGender gender;
 	public string city;
 	public string institution;
+	public bool tutorialNarrative;	
 
 	//This refers to the Game group index
 	public int CheckPointIdx = -1;
@@ -32,6 +33,7 @@ public class UserData
 		CheckPointSubIdx = -1;
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
 		itemsPlayedIdxs = new List<int>();
+		tutorialNarrative = false;		
 	}
 }
 
