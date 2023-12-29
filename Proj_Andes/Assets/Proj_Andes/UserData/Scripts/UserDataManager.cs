@@ -37,7 +37,7 @@ public class UserDataManager : ScriptableObject
     {
         get
         {
-			if (currUserDataIdx != -1 && currUserDataIdx < usersDatas.Count ) return usersDatas[currUserDataIdx];
+			if (currUserDataIdx != -1 && currUserDataIdx < usersDatas.Count) return usersDatas[currUserDataIdx];
 			return DefaultUserData;
 		}
 	}

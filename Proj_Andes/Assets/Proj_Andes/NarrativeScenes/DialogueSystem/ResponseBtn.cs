@@ -33,10 +33,18 @@ public class ResponseBtn : MonoBehaviour
 
 		if (responseTxt != null)
 		{
-			responseTxt.SetText(responseData.response);
-			responseTxt.gameObject.SetActive(!string.IsNullOrEmpty(responseData.response));
-		}
-		if(responseImg != null)
+            if (!string.IsNullOrEmpty(responseData.responseAlternative))
+            {
+                var userGender = UserDataManager.CurrUser.gender;
+                var currResponse = (userGender == UserGender.Femenino) ? responseData.responseAlternative : responseData.response;
+                SetResponseText(currResponse);
+            }
+            else
+            {
+                SetResponseText(responseData.response);
+            }
+        }
+        if (responseImg != null)
 		{
 			responseImg.gameObject.SetActive(responseData.responseImage != null);
 			responseImg.sprite = responseData.responseImage;
@@ -44,4 +52,10 @@ public class ResponseBtn : MonoBehaviour
 		onClicked = null;
 		btn.interactable = true;
 	}
+
+    void SetResponseText(string text)
+    {
+        responseTxt.SetText(text);
+        responseTxt.gameObject.SetActive(!string.IsNullOrEmpty(text));
+    }
 }
