@@ -486,11 +486,11 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     public string SelectTextByGender(DialogueData curr)
     {
-        string text = string.IsNullOrEmpty(curr.textAlternative)
-            ? curr.text
-            : (UserDataManager.CurrUser.gender == UserGender.Masculino)
-                ? curr.textAlternative
-                : curr.text;
+        var text = curr.text;
+        if(UserDataManager.CurrUser.gender == UserGender.Femenino && !string.IsNullOrEmpty(curr.textAlternative))
+        {
+            text = curr.textAlternative;
+        }
 
         return text;
     }
