@@ -12,15 +12,17 @@ public class UserData
 	public UserGender gender;
     public string city;
 	public string institution;
+    public Dictionary<string, object> userAnayticsResults = new Dictionary<string, object>();
 
-	//This refers to the Game group index
-	public int CheckPointIdx = -1;
+
+    //This refers to the Game group index
+    public int CheckPointIdx = -1;
 	//This refers to the item idx inside of the game group index
 	public int CheckPointSubIdx = -1;
 	public List<NarrativeNavigationNode> narrativeNavCheckPointsNodes;
 	public List<int> itemsPlayedIdxs = new List<int>();
 
-	public UserData()
+    public UserData()
 	{
 		id = Guid.NewGuid().ToString();
 		name = "Unnamed";
@@ -28,6 +30,8 @@ public class UserData
 		gender = UserGender.NONE;
 		city = string.Empty;
 		institution = string.Empty;
+        userAnayticsResults = new Dictionary<string, object>();
+
         CheckPointIdx = -1;
 		CheckPointSubIdx = -1;
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
