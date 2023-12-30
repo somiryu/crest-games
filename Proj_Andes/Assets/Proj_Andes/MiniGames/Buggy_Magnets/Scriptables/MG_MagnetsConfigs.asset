@@ -30,6 +30,6 @@ MonoBehaviour:
     - difficultyLevel: 1
       difficultyOperation: 0
       valueModificator: 2
-    - difficultyLevel: 0
+    - difficultyLevel: 2
       difficultyOperation: 2
-      valueModificator: 5
+      valueModificator: 2

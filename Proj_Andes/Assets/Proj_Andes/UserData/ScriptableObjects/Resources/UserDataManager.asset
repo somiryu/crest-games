@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce440874d62033c4988e27a0e3085c0f, type: 3}
   m_Name: UserDataManager
   m_EditorClassIdentifier: 
+  maxAgeEasyLevel: 4
+  maxAgeMediumLevel: 8
   DefaultUserData:
     id: 23e04b5e-5cd7-4efd-954a-ff9d7582611b
     name: Unnamed
-    age: 9
+    age: 2
     gender: 0
     city: 
     institution: 

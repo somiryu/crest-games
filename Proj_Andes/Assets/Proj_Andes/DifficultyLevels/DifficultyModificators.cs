@@ -29,7 +29,7 @@ public class DifficultyModificatorFloat
             Modifier currentModifier = modifierPerDifficultLevel[i];
             if (currentModifier.difficultyLevel == difficultyLevel) return currentModifier;
         }
-        Debug.Log("No modifier found for the current difficulty level.");
+        Debug.Log("No modifier found for the current difficulty level: " + difficultyLevel);
         return null;
     }
 }
