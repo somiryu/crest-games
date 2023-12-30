@@ -20,6 +20,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	[Header("after action UI")]
 	[SerializeField] GameObject afterActionPanel;
+	[SerializeField] GameObject ingameObj;
+	[SerializeField] GameObject ingameObjUI;
 	[SerializeField] Image afterActionEnergyFillImage;
 	[SerializeField] GameObject winTitle;
 	[SerializeField] GameObject loseTitle;
@@ -41,6 +43,10 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	public void Init()
     {
+
+		ingameObj.SetActive(true);
+		ingameObjUI.SetActive(true);
+
 		energyItemsPool.Init(30);
 		availableMagnets = gameConfigs.initialMagnetsCount;
 		timer = 0;
@@ -56,7 +62,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	private void Update()
 	{
 		timer += Time.deltaTime;
-		if(timer > gameConfigs.timeBetweenSpawns)
+		if (timer > gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify())
 		{
 			timer = 0;
 			SpawnNewItem();
@@ -139,6 +145,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	void OnGameOver()
 	{
 		afterActionPanel.SetActive(true);
+		ingameObj.SetActive(false);
+		ingameObjUI.SetActive(false);
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
 		afterActionEnergyFillImage.fillAmount = currEneryProgress;

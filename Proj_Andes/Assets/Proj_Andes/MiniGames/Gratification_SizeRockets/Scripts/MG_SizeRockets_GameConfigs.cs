@@ -15,6 +15,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 
 	public SizeRockets_ShipConfig[] shipsConfigs;
 
+
     public SizeRockets_ShipConfig GetShipConfig(SizeRocketsRocketTypes shipType)
 	{
 		for (int i = 0; i < shipsConfigs.Length; i++)
