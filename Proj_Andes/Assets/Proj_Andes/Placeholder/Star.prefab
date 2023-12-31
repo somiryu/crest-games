@@ -5075,6 +5075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7066017859054972442}
   - component: {fileID: 4850977741666524575}
+  - component: {fileID: 1541241723062797353}
   m_Layer: 0
   m_Name: Art
   m_TagString: Untagged
@@ -5149,3 +5150,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &1541241723062797353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9111216374908650339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignOnAwake: 1
+  image: {fileID: 0}
+  sRenderer: {fileID: 4850977741666524575}
+  imagePerSkinTypes:
+  - skinType: 0
+    sprite: {fileID: 21300000, guid: 0267870f377d30246aee5a83c8b01360, type: 3}
+  - skinType: 1
+    sprite: {fileID: 21300000, guid: afbfeb9e2b3a1fb4580be500c442f480, type: 3}
+  - skinType: 2
+    sprite: {fileID: 21300000, guid: 719c884a8f770c34eb87ef5e91d6769c, type: 3}
