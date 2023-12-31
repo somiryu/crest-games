@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public static class DatabaseManager
 {
@@ -12,16 +13,18 @@ public static class DatabaseManager
     public static List<UserData> GetUserDatasList()
     {
        var jsonData = PlayerPrefs.GetString(UserDatasJSONKey);
-        Debug.Log("Loaded data: " + jsonData);
+        Debug.Log("Data retrieved: " + jsonData);
         if(string.IsNullOrEmpty(jsonData)) return new List<UserData>();
 
-       return JsonUtility.FromJson<UserDataListWrapper>(jsonData).userDatas;
+
+       return JsonConvert.DeserializeObject<UserDataListWrapper>(jsonData).userDatas;
     }
 
     public static void SaveUserDatasList(List<UserData> userDatas)
     {
         UserDataList.userDatas = userDatas;
-        var jsonData = JsonUtility.ToJson(UserDataList);
+        var jsonData = JsonConvert.SerializeObject(UserDataList);
+        Debug.Log("Saving data: " +  jsonData);
         PlayerPrefs.SetString(UserDatasJSONKey, jsonData);
     }
 }

@@ -62,7 +62,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	private void Update()
 	{
 		timer += Time.deltaTime;
-		if(timer > gameConfigs.timeBetweenSpawns)
+		if (timer > gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify())
 		{
 			timer = 0;
 			SpawnNewItem();
