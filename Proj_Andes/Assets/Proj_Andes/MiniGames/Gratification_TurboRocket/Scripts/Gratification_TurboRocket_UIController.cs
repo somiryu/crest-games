@@ -14,6 +14,7 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
     [SerializeField] GameObject inGameObjUI;
     [SerializeField] TextMeshProUGUI finishText;
     [SerializeField] TextMeshProUGUI starsText;
+    [SerializeField] TextMeshProUGUI starsTextUpdate;
     [SerializeField] Slider progressSlider;
     Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
     public void StartUi()
@@ -26,7 +27,9 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
 
 	private void Update()
 	{
+        //starsTextUpdate.text = player.data.starsCollected.ToString();
         if (!player.onPlay) return;
+
         progressSlider.value = player.CurrProgress;
 	}
 
