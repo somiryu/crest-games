@@ -29,6 +29,7 @@ public class ResponseBtn : MonoBehaviour
 		TryGetComponent(out RectTransform);
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(() => onClicked?.Invoke(ResponseData));
+       
 	}
 
 	public void SetData(DialogueResponse _responseData)
@@ -66,4 +67,6 @@ public class ResponseBtn : MonoBehaviour
         responseTxt.SetText(text);
         responseTxt.gameObject.SetActive(!string.IsNullOrEmpty(text));
     }
+
+
 }

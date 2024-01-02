@@ -24,12 +24,13 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] TMP_Text dialogueTxt;
     [SerializeField] GameObject dialogueTxtContainer;
     [SerializeField] Button skipDialogueBtn;
-    [SerializeField] Image imageTutorialSkipDialogue;
+    [SerializeField] TutorialUser tutorialSkipDialogueBtn;
     [SerializeField] Button dialogueBoxBtn;
     [SerializeField] Button repeatBtn;
     [SerializeField] PlayableDirector timeLinePlayer;
     [SerializeField] Transform responseDisplayersContainer;
     [SerializeField] AudioSource audioPlayer;
+
 
     [SerializeField] bool forceDialogeAppear;
 
@@ -44,9 +45,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	private bool preselectedResponseAudioIsDone = false;
 
     public bool SaveNavSequence = true;
-
-    public bool isTutorialNarrativeComplete = false;
-
+    
 
     public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
@@ -121,6 +120,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     private void OnDialogueBoxBtnPressed()
 	{
+        
 		if (isAppearingTxt)
 		{
             forceEndAppearingTxt = true;
@@ -220,7 +220,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	}
 
     public void NextDialogue() {
-
+        
         DialogueData lastPlayedDialog = null;
         if(currShowingIdx > -1 && currShowingIdx < dialoguesToShow.dialogues.Length) lastPlayedDialog = dialoguesToShow.dialogues[currShowingIdx];
 
@@ -266,8 +266,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 
 		repeatBtn.gameObject.SetActive(false);
-		skipDialogueBtn.gameObject.SetActive(false);
-        imageTutorialSkipDialogue.gameObject.SetActive(false);
+		skipDialogueBtn.gameObject.SetActive(false);        
 
         //Clean old responses if needed
         if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
@@ -468,13 +467,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             dialogueTxt.SetText(SelectTextByGender(currDialogue));
             var turnOnAutoSkip = AutoContinueActive();
             skipDialogueBtn.gameObject.SetActive(turnOnAutoSkip);
-            dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);
-           
-            if (!UserDataManager.CurrUser.tutorialNarrative && !isTutorialNarrativeComplete)
-            {
-                imageTutorialSkipDialogue.gameObject.SetActive(true);
-                isTutorialNarrativeComplete = true;
-            }
+            dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);       
         }
     }
 
@@ -505,6 +498,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         return text;
     }
+
+   
 }
 
 [Serializable]
