@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager
 {
@@ -24,6 +26,15 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     public Gratification_TurboRocket_UIController ui;
     public GameRideData data;
     [SerializeField] EndOfGameManager eogManager;
+
+    [SerializeField] ParticleSystem turboParticles;
+    [SerializeField] AudioSource turboSFX;
+    [SerializeField] PlayableDirector endTimelineDirector;
+    [SerializeField] Transform artParent;
+    [SerializeField] SkinnableObject artSkinnableObj;
+
+    Animator characterAnimator;
+
     public EndOfGameManager EndOfGameManager => eogManager;
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
 
@@ -56,14 +67,27 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     public void Init()
     {
-		playerRanXSpace = 0;
+        artSkinnableObj.OnCurrSkinObjChanged += ReasignAnimator;
+        artParent.gameObject.SetActive(true);
+        character.GetComponentInChildren<ParticleSystem>().Play();
+
+        playerRanXSpace = 0;
         targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
         camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
         eogManager.OnGameStart();
+	}
+
+	private void Start()
+	{
         RideBegining();
 	}
+
+	void ReasignAnimator(Transform newActiveObj)
+    {
+        characterAnimator = newActiveObj.GetComponentInChildren<Animator>(includeInactive: true);
+    }
 
 	public void RideBegining()
 	{
@@ -128,14 +152,22 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     public void OnEnterTurboMode()
     {
+        characterAnimator.SetTrigger("Turbo");
+        turboParticles.Play();
+        turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
         camCC.OnEnterTurbo();
         onTurbo = true;
     }
     public void OnExitTurboMode()
     {
-        currentTargetSpeed = levelConfig.regularSpeed;
+		characterAnimator.SetTrigger("Normal");
+		currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
+        turboParticles.Stop();
+        turboSFX.Stop();
+
+
         onTurbo = false;
     }
     void CollisionManagement(Collider collider)
@@ -156,13 +188,24 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         ride.totalRideDuration = timer;
         ride.totalStars = levelConfig.starsAmount;
         data = ride;
-        ui.EndOfGame();
         bk.EndOfGame();
         onPlay = false;
+		character.GetComponentInChildren<ParticleSystem>().Stop();
+		artParent.gameObject.SetActive(false);
+
+        StartCoroutine(_OnFinishSequence());
+    }
+    IEnumerator _OnFinishSequence()
+    {
+        camCC.OnGameFinishedSequence();
+        endTimelineDirector.Play();
+        yield return new WaitForSeconds(2f);
+        ui.EndOfGame();
         eogManager.OnGameOver();
         gameStages = GameStages.End;
     }
 }
+
 
 public class GameRideData
 {

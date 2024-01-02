@@ -18,8 +18,8 @@ public class GameSequencesList : ScriptableObject
         }
     }
 
-    public List<GameSequence> gameSequences;
-    [NonSerialized] public GameSequenceItem prevGame;
+    public List<SimpleGameSequenceItem> gameSequences;
+    [NonSerialized] public SimpleGameSequenceItem prevGame;
 
     [NonSerialized] public int goToGameGroupIdx;
     public bool continueToNextItem;
@@ -28,12 +28,7 @@ public class GameSequencesList : ScriptableObject
         if (continueToNextItem)
         {
             continueToNextItem = false;
-            if (goToGameGroupIdx >= gameSequences.Count) return;
-            if (gameSequences[goToGameGroupIdx] is SimpleGameSequenceItem) goToGameGroupIdx++;
-
-            var newItem = GetGameSequence().GetNextItem();
-            if (newItem == null) GoToNextSequence();
-            else SceneManagement.GoToScene(newItem.scene);
+            GoToNextItemInList();
         }
     }
     public void GoToNextItemInList()
@@ -61,7 +56,7 @@ public class GameSequencesList : ScriptableObject
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
     }
 
-    public GameSequence GetGameSequence()
+    public SimpleGameSequenceItem GetGameSequence()
     {
         return gameSequences[goToGameGroupIdx];
     }
@@ -73,9 +68,9 @@ public class GameSequencesList : ScriptableObject
 		if (goToGameGroupIdx >= gameSequences.Count)
         {
             goToGameGroupIdx = 0;
+            for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
             Debug.LogWarning("Game sequence done, restarting the app");
         }
-
 		prevGame = null;
         GoToNextItemInList();
     }
@@ -94,27 +89,10 @@ public class GameSequencesList : ScriptableObject
 	}
 
 }
-public abstract class GameSequence : GameSequenceItem
-{
-    public abstract void OnReset();
-    public abstract GameSequenceItem GetNextItem();
-    public abstract GameSequenceItem GetItemByIdx(int idx);
-	public abstract int GetCurrItemIdx();
-    public abstract void OnSequenceOver();
-}
-
-public class GameSequenceItem : ScriptableObject
-{
-    public SceneReference scene;
-}
 
 public abstract class GameConfig : SimpleGameSequenceItem
 {
-    public override GameSequenceItem GetNextItem()
-    {
-        if (GameSequencesList.Instance.prevGame != this) return this;
-        else return null;
-    }
+
 
 }
 
