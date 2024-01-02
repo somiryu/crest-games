@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51813b6438b1ee541af7d1a4288e7529, type: 3}
-  m_Name: MarketScene
+  m_Script: {fileID: 11500000, guid: f33163b2d41f2434ebae54ddb5c1dbfa, type: 3}
+  m_Name: MonsterMarketConfig
   m_EditorClassIdentifier: 
   scene:
     sceneAsset: {fileID: 102900000, guid: f114701dcf9496d4c9c31319667c098d, type: 3}
     scenePath: Assets/Proj_Andes/Menu/Scenes/MarketScene.unity
+  RegularChestPrice: 1
+  RareChestPrice: 2
+  LegendaryChestPrice: 5
+  availableCoins: 10

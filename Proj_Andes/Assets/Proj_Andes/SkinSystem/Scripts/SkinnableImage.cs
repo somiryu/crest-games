@@ -8,7 +8,7 @@ public class SkinnableImage : MonoBehaviour
 {
 
 	[SerializeField] Image image;
-	[SerializeField] SpriteRenderer sRenderer;
+	public SpriteRenderer sRenderer;
 	[SerializeField] ImagePerSkinType[] imagePerSkinTypes;
 
     private void OnValidate()
