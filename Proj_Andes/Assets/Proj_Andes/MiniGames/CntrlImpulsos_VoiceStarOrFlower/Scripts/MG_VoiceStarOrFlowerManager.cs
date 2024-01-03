@@ -40,6 +40,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] ParticleSystem incorrectParticles;
 
     [Header("UI")]
+    [SerializeField] TMP_Text leftObjTxt;
+    [SerializeField] TMP_Text rightObjTxt;
     [SerializeField] TMP_Text currCoinsValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
@@ -105,6 +107,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
+        var textToUse = currSoundIsLeft ? leftObjTxt: rightObjTxt;
 
         currTargetImg.sprite = imgToUse;
         audioPlayer.clip = soundToUse;
