@@ -131,6 +131,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
             {
                 //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
                 hasPendingLineChange = true;
+                if (!UserDataManager.CurrUser.tutorialNarrative)
+                    TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepSkipButton);
+                     
             }
 		}
 	}
@@ -446,6 +449,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
             hasPendingLineChange = true;
             lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
             currResponsesDisplayer.ActiveConfirmationButton(false);
+
+           
+            if (!UserDataManager.CurrUser.tutorialNarrative)
+                TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepConfirmedButton);
         }
     }
 

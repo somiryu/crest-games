@@ -5,13 +5,17 @@ using UnityEngine.SceneManagement;
 
 public interface iTutorialUser
 {
-    public void ShowTutorial();
+    
+    public void OffTutorial(tutorialSteps tutorialSteps);
 }
 public class TutorialManager : MonoBehaviour
 {
-    public bool stepSkipButton = false;
-    public bool stepResponseButton = false;
-    public bool stepConfirmedButton = false;
+    public Dictionary<string, bool> stepsTutorialNarrativeScenes;
+    //{
+    //   {DataIds.stepConfirmedButton, false },
+    //   {DataIds.stepResponseButton, false },
+    //   {DataIds.stepSkipButton, false }
+    //};
 
     [SerializeField] List<iTutorialUser> usersTutorial = new List<iTutorialUser>(10);
 
@@ -34,6 +38,15 @@ public class TutorialManager : MonoBehaviour
 
         }
         instance = this;
+
+
+        stepsTutorialNarrativeScenes = new Dictionary<string, bool>()
+        {
+            {DataIds.stepConfirmedButton, UserDataManager.CurrUser.tutorialNarrative },
+            {DataIds.stepResponseButton, UserDataManager.CurrUser.tutorialNarrative },
+            {DataIds.stepSkipButton, UserDataManager.CurrUser.tutorialNarrative }
+        };   
+
 
         var rootObjs = SceneManager.GetActiveScene().GetRootGameObjects();
         for (int i = 0; i < rootObjs.Length; i++)
@@ -59,9 +72,6 @@ public class TutorialManager : MonoBehaviour
     {
         if (!usersTutorial.Contains(user))
             usersTutorial.Add(user);
-
-        ShowTutorial();
-
     }
     public void RemoveUser(iTutorialUser user)
     {
@@ -70,11 +80,6 @@ public class TutorialManager : MonoBehaviour
     }
 
 
-    void Start()
-    {
-        ShowTutorial(); 
-
-    }
 
     private void Update()
     {
@@ -82,13 +87,13 @@ public class TutorialManager : MonoBehaviour
     }
 
 
-    public void ShowTutorial()
+    public void TurnOffTutorial(tutorialSteps tutorialStep)
     {
         if (!UserDataManager.CurrUser.tutorialNarrative)
         {
             for (int i = 0; i < usersTutorial.Count; i++)
             {
-                usersTutorial[i].ShowTutorial();
+                usersTutorial[i].OffTutorial(tutorialStep);
             }
         }
     }
@@ -96,7 +101,7 @@ public class TutorialManager : MonoBehaviour
 
 public enum tutorialSteps
 {
-    StepSkipButton,
-    StepResponseButton,
-    StepConfirmedButton
+    stepSkipButton,
+    stepResponseButton,
+    stepConfirmedButton
 }

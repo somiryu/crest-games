@@ -11,6 +11,6 @@ public static class DataIds
 
     //Tutorial Ids
     public const string stepSkipButton = "stepSkipButton";
-    public const string stepResponseButton = "stepSkipButton";
-    public const string stepConfirmedButton = "stepSkipButton";
+    public const string stepResponseButton = "stepResponseButton";
+    public const string stepConfirmedButton = "stepConfirmedButton";
 }

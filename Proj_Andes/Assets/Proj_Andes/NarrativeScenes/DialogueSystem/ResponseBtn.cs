@@ -10,7 +10,7 @@ public class ResponseBtn : MonoBehaviour
 	[SerializeField] Button btn;
 	[SerializeField] TMP_Text responseTxt;
 	[SerializeField] Image responseImg;
-    [SerializeField] Image tutorialImg;
+    [SerializeField] TutorialUser tutorialSkipDialogueBtn;
 
 
     private DialogueResponse responseData;
@@ -54,9 +54,6 @@ public class ResponseBtn : MonoBehaviour
 			responseImg.gameObject.SetActive(responseData.responseImage != null);
 			responseImg.sprite = responseData.responseImage;
 		}
-        if(!UserDataManager.CurrUser.tutorialNarrative) { 
-            tutorialImg.gameObject.SetActive(true);
-        }
 
 		onClicked = null;
 		btn.interactable = true;
