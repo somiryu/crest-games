@@ -9,8 +9,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
     public Pool<ResponseBtn> responsesPool;
     private DialoguesDisplayerUI mainUi;
 
-    [SerializeField] Button confirmationButton; 
-    public TutorialUser tutorialconfirmationButton;
+    [SerializeField] Button confirmationButton;     
 
 
     public List<ResponseBtn> currResponses;
@@ -73,14 +72,10 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
         btn.transform.localScale = Vector3.one * 1.2f;
         currHighlightedResponse = btn;
         mainUi.OnClickResponse(response);
-
-        for (int i = 0;i < currResponses.Count;i++)
-        {
-            
-        }
+        if (!UserDataManager.CurrUser.tutorialNarrative)
+            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepResponseButton); 
 
     }
-
     
 
     public void Hide()

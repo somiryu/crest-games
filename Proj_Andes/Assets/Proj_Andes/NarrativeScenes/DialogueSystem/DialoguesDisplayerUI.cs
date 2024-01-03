@@ -23,8 +23,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] GameObject nameTxtContainer;
     [SerializeField] TMP_Text dialogueTxt;
     [SerializeField] GameObject dialogueTxtContainer;
-    [SerializeField] Button skipDialogueBtn;
-    [SerializeField] TutorialUser tutorialSkipDialogueBtn;
+    [SerializeField] Button skipDialogueBtn;    
     [SerializeField] Button dialogueBoxBtn;
     [SerializeField] Button repeatBtn;
     [SerializeField] PlayableDirector timeLinePlayer;

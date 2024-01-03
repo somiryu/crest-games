@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Linq;
 public interface iTutorialUser
 {
     
@@ -11,11 +11,6 @@ public interface iTutorialUser
 public class TutorialManager : MonoBehaviour
 {
     public Dictionary<string, bool> stepsTutorialNarrativeScenes;
-    //{
-    //   {DataIds.stepConfirmedButton, false },
-    //   {DataIds.stepResponseButton, false },
-    //   {DataIds.stepSkipButton, false }
-    //};
 
     [SerializeField] List<iTutorialUser> usersTutorial = new List<iTutorialUser>(10);
 
@@ -95,7 +90,14 @@ public class TutorialManager : MonoBehaviour
             {
                 usersTutorial[i].OffTutorial(tutorialStep);
             }
+
+            UserDataManager.CurrUser.tutorialNarrative = AreAllTutorialStepsComplete();
         }
+    }
+
+    public bool AreAllTutorialStepsComplete()
+    {
+        return stepsTutorialNarrativeScenes.All(kv => kv.Value);
     }
 }
 

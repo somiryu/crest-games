@@ -10,7 +10,7 @@ public class ResponseBtn : MonoBehaviour
 	[SerializeField] Button btn;
 	[SerializeField] TMP_Text responseTxt;
 	[SerializeField] Image responseImg;
-    [SerializeField] TutorialUser tutorialSkipDialogueBtn;
+   
 
 
     private DialogueResponse responseData;

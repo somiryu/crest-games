@@ -139,7 +139,6 @@ MonoBehaviour:
   btn: {fileID: 6894406546717336060}
   responseTxt: {fileID: 3624301558959741956}
   responseImg: {fileID: 0}
-  tutorialImg: {fileID: 1513437834215031918}
   RectTransform: {fileID: 0}
 --- !u!114 &3552753198929211197
 MonoBehaviour:
@@ -153,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e1a940fd090ec4f9deebacb85c8b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialStep: 0
+  tutorialStep: 1
   tutorialImage: {fileID: 1513437834215031918}
 --- !u!1 &6780492636219077862
 GameObject:

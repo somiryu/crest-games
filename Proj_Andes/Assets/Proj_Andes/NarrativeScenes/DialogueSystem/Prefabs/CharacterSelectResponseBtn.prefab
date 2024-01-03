@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 2977656061627523531}
   - component: {fileID: 6894406546717336060}
   - component: {fileID: 3933102859777142689}
+  - component: {fileID: 9105857694474916166}
   m_Layer: 5
   m_Name: CharacterSelectResponseBtn
   m_TagString: Untagged
@@ -212,5 +213,18 @@ MonoBehaviour:
   btn: {fileID: 6894406546717336060}
   responseTxt: {fileID: 0}
   responseImg: {fileID: 2977656061627523531}
-  tutorialImg: {fileID: 2619098327546152269}
   RectTransform: {fileID: 0}
+--- !u!114 &9105857694474916166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048870921668352140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e1a940fd090ec4f9deebacb85c8b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialStep: 1
+  tutorialImage: {fileID: 2619098327546152269}

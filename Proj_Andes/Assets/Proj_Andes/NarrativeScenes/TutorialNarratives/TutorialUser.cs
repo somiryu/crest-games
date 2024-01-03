@@ -21,13 +21,7 @@ public class TutorialUser : MonoBehaviour, iTutorialUser
         {
             Debug.LogError("TutorialManager.Instance is null.");
         }
-    }
-
-    public void TurnOffTutorialStep()
-    {
-        tutorialImage.gameObject.SetActive(false);
-        TutorialManager.Instance.stepsTutorialNarrativeScenes[tutorialStep.ToString()] = true;
-    }
+    }   
 
     public void OffTutorial(tutorialSteps _tutorialStep)
     {
