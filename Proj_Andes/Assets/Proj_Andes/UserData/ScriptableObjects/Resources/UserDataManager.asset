@@ -25,7 +25,7 @@ MonoBehaviour:
     CheckPointIdx: 0
     CheckPointSubIdx: 0
     narrativeNavCheckPointsNodes:
-    - sourceDialogIdx: 3
+    - sourceDialogIdx: 0
       responsePickedIdx: -1
       nextDialogCustomStartIdx: -1
     itemsPlayedIdxs: 
