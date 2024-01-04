@@ -17,6 +17,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[Header("Game UI")]
 	[SerializeField] Image EnergyFillImage;
 	[SerializeField] TMP_Text MagnetsAmount;
+	[SerializeField] Image trapImage;
 
 	[Header("after action UI")]
 	[SerializeField] GameObject afterActionPanel;
@@ -49,7 +50,9 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		EnergyFillImage.fillAmount = 0;
 		MagnetsAmount.SetText(availableMagnets.ToString());
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);
+		trapImage.gameObject.SetActive(gameConfigs.activeCheats);
 		eogManager.OnGameStart();
+
 	}
 
 	private void Update()

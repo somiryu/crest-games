@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
@@ -29,6 +30,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     [SerializeField] MG_BoostersAndScape_Spawner spawner;
     [SerializeField] Transform endOfGameContainer;
     [SerializeField] TextMeshProUGUI finalScoreText;
+    [SerializeField] Image trapImage;
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
@@ -53,6 +55,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         endOfGameContainer.gameObject.SetActive(false);
         catchBoosterRange = 1.5f;
         OnGameStart();
+        trapImage.gameObject.SetActive(gameConfig.forceToFail);
     }
 
     void Update()

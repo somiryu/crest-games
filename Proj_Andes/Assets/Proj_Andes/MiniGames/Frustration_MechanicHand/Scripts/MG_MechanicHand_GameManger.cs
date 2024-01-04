@@ -26,7 +26,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
-
+	[SerializeField] Image trapImage;
     public int asteroidsPerRound => gameConfigs.asteroidsPerRound;
 	public float sizeLoseOnRoundChange => gameConfigs.asteroidsSizeLoseAmountPerRound;
 	int initialPlayerLifes => gameConfigs.playerLifes;
@@ -83,8 +83,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 			curr.localScale = Vector3.one * currAsteroidsSize;
 			currRoundAsteroids.Add(curr);
 		}
-
-		eogManager.OnGameStart();
+        trapImage.gameObject.SetActive(gameConfigs.activeCheats);
+        eogManager.OnGameStart();
 	}
 
 	Vector3 GetNewRandomPosition(int trialIdx, Vector3 minPos, Vector3 maxPos)
