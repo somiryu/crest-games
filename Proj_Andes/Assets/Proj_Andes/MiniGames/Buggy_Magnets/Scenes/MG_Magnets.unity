@@ -2141,7 +2141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1269997039}
   m_Layer: 5
-  m_Name: Filled
+  m_Name: energy_Filled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2678,7 +2678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1847698785
 RectTransform:
   m_ObjectHideFlags: 0
