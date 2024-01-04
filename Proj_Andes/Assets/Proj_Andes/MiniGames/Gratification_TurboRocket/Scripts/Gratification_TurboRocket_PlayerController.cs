@@ -83,7 +83,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
-        camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
+        //camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
         eogManager.OnGameStart();
 	}
 
