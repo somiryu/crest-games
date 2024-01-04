@@ -10,13 +10,20 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
     [SerializeField] AudioSource capturedSFX;
 
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float screenWidthLimit = 5f;
+    [SerializeField] float step = 1f;
+    [SerializeField] float yOfsetLimit = 0.1f;
+
     Vector3 initialPosition;
+    bool isInitialPosition;
     public bool isCaptured;
+
+    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
 
     private void Start()
     {
         initialPosition = transform.position;
+        isInitialPosition = true;
+
     }
     public void OnCaptured()
     {
@@ -45,25 +52,34 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (player.onTurbo)
         {
             MoveObjectToNearestEdge();
+            isInitialPosition = false;
         }
-        else
+        else if (!isInitialPosition)
         {
             ReturnObjectToInitialPosition();
         }
     }
     private void MoveObjectToNearestEdge()
     {
-        float screenHeight = Camera.main.orthographicSize * 2f;
-        float newY = Mathf.Clamp(transform.position.y + moveSpeed * Time.deltaTime, initialPosition.y - screenHeight / 2, initialPosition.y + screenHeight / 2);
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        float currDistance = player.CurrPos.y - transform.position.y;
+        float newY = transform.position.y + (currDistance < 0 ? step : -step);
+
+        float yViewport = Camera.main.WorldToViewportPoint(transform.position).y;
+
+        if (yViewport > 0 + yOfsetLimit && yViewport < 1 - yOfsetLimit) 
+        {
+            var newPos = new Vector3(transform.position.x, newY, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, newPos, moveSpeed * Time.deltaTime);
+        }
     }
 
     private void ReturnObjectToInitialPosition()
     {
         transform.position = Vector3.MoveTowards(transform.position, initialPosition, moveSpeed * Time.deltaTime);
+        if(transform.position == initialPosition) isInitialPosition = true;
     }
 
     public void Deactivate()

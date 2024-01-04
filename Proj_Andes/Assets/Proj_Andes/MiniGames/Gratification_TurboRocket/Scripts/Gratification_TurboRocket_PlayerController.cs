@@ -53,7 +53,15 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         }
     }
 
-	private void Awake()
+    public Vector3 CurrPos
+    {
+        get
+        {
+            return transform.position;
+        }
+    }
+
+    private void Awake()
     {
         if (instance != null)
         {

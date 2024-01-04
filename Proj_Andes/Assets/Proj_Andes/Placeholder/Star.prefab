@@ -50,6 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capturedVFX: {fileID: 7350199771871375919}
   capturedSFX: {fileID: 6656296920743850740}
+  moveSpeed: 5
+  step: 1
+  yOfsetLimit: 0.2
   isCaptured: 0
 --- !u!65 &2140552201552578673
 BoxCollider:
