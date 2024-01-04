@@ -47,7 +47,8 @@ public class MonsterMarketManager : MonoBehaviour
     public void Init()
     {
         monsterImages = monsterImagesContainer.GetComponentsInChildren<Image>();
-        ResetList();
+        marketConfig.InitConfig();
+        InitLists();
         chestsContainer.gameObject.SetActive(false);
         chestOpenedContainer.gameObject.SetActive(false);
 
@@ -62,13 +63,21 @@ public class MonsterMarketManager : MonoBehaviour
         coinsAmtTxt.text = marketConfig.availableCoins.ToString();
     }
     [ContextMenu("ResetCollection")]
-    private void ResetList()
+    private void InitLists()
     {
-        totalCollection.Clear();
+        totalCollection = marketConfig.myCollectionMonsters;
         for (int i = 0; i < monsterImages.Length; i++) monsterImages[i].gameObject.SetActive(false);
-        for (int i = 0; i < regularMonsters.Count; i++) regularMonsters[i].monster.gameObject.SetActive(false);
-        for (int i = 0; i < rareMonsters.Count; i++) rareMonsters[i].monster.gameObject.SetActive(false);
-        for (int i = 0; i < legendaryMonsters.Count; i++) legendaryMonsters[i].monster.gameObject.SetActive(false);
+        ResetLists(regularMonsters);
+        ResetLists(rareMonsters);
+        ResetLists(legendaryMonsters);
+    }
+    void ResetLists(List<Monsters> monsterList)
+    {
+        for (int i = 0; i < monsterList.Count; i++)
+        {
+            monsterList[i].monsterIndex = i;
+            monsterList[i].monster.gameObject.SetActive(false);
+        }
     }
     void BuyChest(MonsterChestType type)
     {
@@ -169,7 +178,7 @@ public class MonsterMarketManager : MonoBehaviour
         chestsContainer.gameObject.SetActive(false);
         getChestButton.gameObject.SetActive(true);
         chestOpenedContainer.gameObject.SetActive(false);
-        //SceneManagement.GoToScene()
+        marketConfig.OnSequenceOver();
     }
 }
 
@@ -180,7 +189,7 @@ public enum MonsterChestType
     Legendary
 }
 [Serializable]
-public struct Monsters
+public class Monsters
 {
     public MonsterChestType monsterType;
     public int monsterIndex;

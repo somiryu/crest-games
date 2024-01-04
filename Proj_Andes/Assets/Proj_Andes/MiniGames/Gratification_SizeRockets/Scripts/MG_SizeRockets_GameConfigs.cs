@@ -13,7 +13,9 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	public int planetsAmountToGenerate;
 	public int shipsPerGame;
 
-	public SizeRockets_ShipConfig[] shipsConfigs;
+    [HideInInspector][NonSerialized] public int coinsCollected;
+
+    public SizeRockets_ShipConfig[] shipsConfigs;
 
 
     public SizeRockets_ShipConfig GetShipConfig(SizeRocketsRocketTypes shipType)
@@ -24,7 +26,10 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 		}
 		return null;
 	}
-
+    public override void SaveAnalytics()
+    {
+		SaveCoins(coinsCollected);
+    }
 }
 
 [Serializable]

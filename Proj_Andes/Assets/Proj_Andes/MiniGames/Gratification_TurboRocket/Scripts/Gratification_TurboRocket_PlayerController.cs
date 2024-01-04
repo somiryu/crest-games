@@ -159,6 +159,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         ui.EndOfGame();
         bk.EndOfGame();
         onPlay = false;
+        levelConfig.coinsCollected = starsGatheredCount;
         eogManager.OnGameOver();
         gameStages = GameStages.End;
     }

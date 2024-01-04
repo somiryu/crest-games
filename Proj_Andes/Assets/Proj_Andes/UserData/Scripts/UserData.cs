@@ -20,6 +20,8 @@ public class UserData
 	public List<NarrativeNavigationNode> narrativeNavCheckPointsNodes;
 	public List<int> itemsPlayedIdxs = new List<int>();
     public List<Dictionary<string, object>> userAnayticsResults = new List<Dictionary<string, object>>();
+	public int Coins;
+	public List<Monsters> myCollectionMonsters = new List<Monsters>();
 
 
     public UserData()
@@ -34,7 +36,9 @@ public class UserData
 		CheckPointSubIdx = -1;
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
 		itemsPlayedIdxs = new List<int>();
-	}
+		Coins = 0;
+        myCollectionMonsters = new List<Monsters>();
+    }
 }
 
 public enum UserGender

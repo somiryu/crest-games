@@ -13,5 +13,9 @@ public class MG_MagnetsConfigs : GameConfig
 	public int initialMagnetsCount;
 	public int neededEnergyToPick;
 	public bool activeCheats;
-    [NonSerialized] public Dictionary<string, object> analytics;
+	[HideInInspector] [NonSerialized] public int coinsCollected;
+    public override void SaveAnalytics()
+    {
+		SaveCoins(coinsCollected);
+    }
 }

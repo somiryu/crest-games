@@ -36,11 +36,11 @@ public class GameSequencesList : ScriptableObject
         var nextItem = GetGameSequence().GetNextItem();
         if (nextItem != null)
         {
+            if(prevGame != null) prevGame.SaveAnalytics();
             prevGame = nextItem;
             SceneManagement.GoToScene(nextItem.scene);
         }
         else GoToNextSequence();
-        Debug.Log(prevGame);
     }
 
     public void GoToItemIdx(int idx)

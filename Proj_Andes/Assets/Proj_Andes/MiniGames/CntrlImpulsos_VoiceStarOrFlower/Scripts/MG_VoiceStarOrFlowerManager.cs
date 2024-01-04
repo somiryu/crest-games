@@ -202,6 +202,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         afterActionPanel.SetActive(true);
         inGameUiPanel.SetActive(false);
 		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
+        gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();
 	}
 }
