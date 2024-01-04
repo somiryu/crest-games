@@ -118,14 +118,16 @@ public class MonsterMarketManager : MonoBehaviour
 
         currentMonstersFound.Clear();
 
+        var totalChance = regularMonstersLikelyness + rareMonstersLikelyness + legendaryMonstersLikelyness;
+
         for (int i = 0; i < totalMonstersPerChest; i++)
         {
-            var newProb = GetRandomItem(100);
-            if(newProb <= regularMonstersLikelyness)
+            var newProb = GetRandomItem(totalChance+1);
+            if(newProb <= regularMonstersLikelyness && regularMonstersLikelyness > 0)
             {
                 currentMonstersFound.Add(regularMonsters[GetRandomItem(regularMonsters.Count)]);
             }
-            else if(newProb > regularMonstersLikelyness && newProb <= regularMonstersLikelyness + rareMonstersLikelyness)
+            else if(newProb > regularMonstersLikelyness && newProb <= regularMonstersLikelyness + rareMonstersLikelyness && rareMonstersLikelyness > 0)
             {
                 currentMonstersFound.Add(rareMonsters[GetRandomItem(rareMonsters.Count)]);
             }
