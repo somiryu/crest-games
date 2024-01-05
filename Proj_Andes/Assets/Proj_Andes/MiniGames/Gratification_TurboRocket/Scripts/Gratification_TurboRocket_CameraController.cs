@@ -18,41 +18,32 @@ public class Gratification_TurboRocket_CameraController : MonoBehaviour
 
     private void Start()
     {
+        targetPos = Vector3.right * -visualOffset;
         lastPlayerPos = player.transform.position;
     }
     void Update()
-    {
-        if (!player.onTurbo)
-        {
-
-            var currPlayerPos = player.transform.position;
-            var dis = (currPlayerPos.y - lastPlayerPos.y) * movPercent;
-            var targetY = transform.position.y + dis;
-            var currPos = transform.position;
-            transform.position = new Vector3(player.transform.position.x - visualOffset, targetY, currPos.z);
-
-            lastPlayerPos = currPlayerPos;
-        }
-        else
-        {
-            var newPos = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
-           
-            transform.position = Vector3.MoveTowards(transform.position, newPos, player.playerCurrentSpeed * Time.deltaTime);
-            
-        }
+    {        
+        var currPlayerPos = player.transform.position;
+        var dis = (currPlayerPos.y - lastPlayerPos.y) * movPercent;
+        var targetY = transform.position.y + dis;
+        var currPos = transform.position;
+        currPos.x = Mathf.MoveTowards(currPos.x,targetPos.x + player.transform.position.x,player.levelConfig.accelerationSpeed*4* Time.deltaTime);   
+        transform.position = new Vector3(currPos.x, targetY, currPos.z);
+        lastPlayerPos = currPlayerPos;        
+ 
     }
     public void OnEnterTurbo()
     {        
-        targetPos.x = visualOffset;
+        targetPos.x = 0;
         
     }
     public void OnExitTurbo()
     {
-        targetPos.x = 0;
+        targetPos.x = -visualOffset;
     }
 
     public void OnGameFinishedSequence()
     {
-        targetPos = endSequenceCamPos;
+        targetPos.x = 0;
     }
 }
