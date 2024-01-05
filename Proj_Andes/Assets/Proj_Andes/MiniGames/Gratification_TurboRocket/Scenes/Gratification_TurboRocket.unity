@@ -34344,8 +34344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualOffset: -4.7
   endSequenceCamPos: {x: -3.5, y: 1.5}
-  movPercent: 1
-  speed: 4
+  movPercent: 0.45
+  moveSpeed: 1
 --- !u!1 &536217581
 GameObject:
   m_ObjectHideFlags: 0

@@ -61,6 +61,14 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         }
     }
 
+    public float playerCurrentSpeed
+    {
+        get
+        {
+            return currentSpeed;
+        }
+    }
+
     private void Awake()
     {
         if (instance != null)

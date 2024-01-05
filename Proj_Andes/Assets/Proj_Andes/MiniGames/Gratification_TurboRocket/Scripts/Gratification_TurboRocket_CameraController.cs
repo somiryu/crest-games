@@ -37,8 +37,8 @@ public class Gratification_TurboRocket_CameraController : MonoBehaviour
         {
             var newPos = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
            
-            transform.position = Vector3.MoveTowards(transform.position, newPos, moveSpeed * Time.deltaTime);
-            transform.position = newPos;
+            transform.position = Vector3.MoveTowards(transform.position, newPos, player.playerCurrentSpeed * Time.deltaTime);
+            
         }
     }
     public void OnEnterTurbo()
