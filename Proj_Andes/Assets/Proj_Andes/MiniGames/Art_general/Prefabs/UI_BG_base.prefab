@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5263881638892046489
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1478,7 +1478,7 @@ GameObject:
   - component: {fileID: 7955148422569394891}
   - component: {fileID: 4489643223288778679}
   m_Layer: 5
-  m_Name: QuitBtn
+  m_Name: ExitBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1869,6 +1869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6615924594159201872}
+  - component: {fileID: 7478221411695759421}
   m_Layer: 5
   m_Name: UI_BG_base
   m_TagString: Untagged
@@ -1899,6 +1900,25 @@ RectTransform:
   m_AnchoredPosition: {x: 11.808258, y: 288.38943}
   m_SizeDelta: {x: 1994.4407, y: 676.7789}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7478221411695759421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5560996765090473758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5391d0e281cc26841b03290afcbb59ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  homeBtn: {fileID: 6590862829430239310}
+  menuContainer: {fileID: 3265515377939409343}
+  continueBtn: {fileID: 6754887460281455210}
+  exitBtn: {fileID: 4489643223288778679}
+  musicBtn: {fileID: 6860224403714759037}
+  soundActivated: {fileID: 21300000, guid: 7ab2a5f1025ae774bad893062199ed58, type: 3}
+  soundDeactivated: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
 --- !u!1 &6285136659637102197
 GameObject:
   m_ObjectHideFlags: 0

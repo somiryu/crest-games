@@ -88,7 +88,13 @@ public class GameSequencesList : ScriptableObject
         else prevGame = targetSequence;
         GoToItemIdx(subIdx);
 	}
-
+    public void EndSequence()
+    {
+        prevGame.SaveAnalytics();
+        ResetSequence();
+        UserDataManager.OnUserQuit();
+        GoToNextItemInList();
+    }
 }
 
 public abstract class GameConfig : SimpleGameSequenceItem

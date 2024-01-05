@@ -48,7 +48,7 @@ public class UserDataManager : ScriptableObject
 		Debug.Log("aplying callback");
 		Application.wantsToQuit += WantsToQuit;
 	}
-	static void GetAllAnalyticsData()
+	public static void GetAllAnalyticsData()
 	{
 		for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
 		{
@@ -57,29 +57,33 @@ public class UserDataManager : ScriptableObject
         }
 		CurrUser.userAnayticsResults = anayticsResults;
 	}
+	public static void OnUserQuit()
+	{
+        CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
+        var currSequence = GameSequencesList.Instance.GetGameSequence();
+        CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
+        Debug.Log("Saving to server");
+        if (currSequence is MinigameGroups group)
+        {
+            CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
+        }
+        else CurrUser.itemsPlayedIdxs.Clear();
+
+        var dialogSystem = DialoguesDisplayerUI.Instance;
+        if (dialogSystem != null && dialogSystem.SaveNavSequence)
+        {
+            //Store navigation info
+            CurrUser.narrativeNavCheckPointsNodes = dialogSystem.GetCurrNavigationNodes();
+        }
+        else CurrUser.narrativeNavCheckPointsNodes = null;
+
+        GetAllAnalyticsData();
+        //TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
+        UserDataManager.Instance.SaveDataToRemoteDataBase();
+    }
 	static bool WantsToQuit()
 	{
-		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
-		var currSequence = GameSequencesList.Instance.GetGameSequence();
-		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
-		Debug.Log("Saving to server");
-		if (currSequence is MinigameGroups group)
-		{
-			CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
-		}
-		else CurrUser.itemsPlayedIdxs.Clear();
-
-		var dialogSystem = DialoguesDisplayerUI.Instance;
-		if (dialogSystem != null && dialogSystem.SaveNavSequence)
-		{
-			//Store navigation info
-			CurrUser.narrativeNavCheckPointsNodes = dialogSystem.GetCurrNavigationNodes();
-		}
-		else CurrUser.narrativeNavCheckPointsNodes = null;
-		
-		GetAllAnalyticsData();
-		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
-		UserDataManager.Instance.SaveDataToRemoteDataBase();
+		OnUserQuit();
 		return true;
 	}
 
