@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System;
 
 public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager
 {
@@ -16,6 +17,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     SphereCollider myCollider;
     Collider[] colls;
     [HideInInspector] public int starsGatheredCount;
+    public Action OnScoreChanged;
     public bool onTurbo = false;
     float currentSpeed;
     public Camera cam;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 
 
@@ -34,6 +35,8 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         StartCoroutine( _OnCapturedwithDelay());
        
         Debug.Log("caught star");
+        player.OnScoreChanged?.Invoke();
+
     }
     IEnumerator _OnCapturedwithDelay()
     {

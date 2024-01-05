@@ -45,8 +45,7 @@ public class Gratification_TurboRocket_CameraController : MonoBehaviour
     }
     public void OnEnterTurbo()
     {        
-        targetPos.x = 0;
-        targetY = 2;
+        targetPos.x = 0;        
     }
     public void OnExitTurbo()
     {

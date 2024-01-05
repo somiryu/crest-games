@@ -405,6 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assignOnAwake: 0
   image: {fileID: 2528929946212569382}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
@@ -502,6 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assignOnAwake: 0
   image: {fileID: 8214946581181469588}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
@@ -678,6 +680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6615924594159201872}
+  - component: {fileID: 2270978488955205838}
   m_Layer: 5
   m_Name: UI_BG_base
   m_TagString: Untagged
@@ -710,6 +713,19 @@ RectTransform:
   m_AnchoredPosition: {x: 11.808258, y: 288.38943}
   m_SizeDelta: {x: 1994.4407, y: 676.7789}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2270978488955205838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5560996765090473758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c50771f8e8b9d7459db831af4fbd227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starsScoreText: {fileID: 3489982151914542098}
 --- !u!1 &5675853605051017698
 GameObject:
   m_ObjectHideFlags: 0
