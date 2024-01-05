@@ -6,6 +6,7 @@ using System;
 using Random = UnityEngine.Random;
 using TMPro;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 public class MonsterMarketManager : MonoBehaviour
 {
@@ -70,6 +71,25 @@ public class MonsterMarketManager : MonoBehaviour
         ResetLists(regularMonsters);
         ResetLists(rareMonsters);
         ResetLists(legendaryMonsters);
+
+        for (int i = 0; i < totalCollection.Count; i++)
+        {
+            var monster = totalCollection[i].monster = GetMonster(totalCollection[i].monsterType, totalCollection[i].monsterIndex);
+            monster.gameObject.SetActive(true);
+        }
+    }
+    SkinnableImage GetMonster(MonsterChestType type, int idx)
+    {
+        switch (type)
+        {
+            case MonsterChestType.Regular:
+                return regularMonsters[idx].monster;
+            case MonsterChestType.Rare:
+                return rareMonsters[idx].monster;
+            case MonsterChestType.Legendary:
+                return legendaryMonsters[idx].monster;
+            default: return null;
+        }
     }
     void ResetLists(List<Monsters> monsterList)
     {
