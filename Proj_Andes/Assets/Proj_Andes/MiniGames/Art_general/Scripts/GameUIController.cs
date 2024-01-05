@@ -27,13 +27,6 @@ public class GameUIController : MonoBehaviour
         menuContainer.gameObject.SetActive(false);
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OpenMenu()
     {
         menuContainer.gameObject.SetActive(true);
@@ -52,12 +45,12 @@ public class GameUIController : MonoBehaviour
     {
         if(musicBtn.image.sprite == soundActivated)
         {
-            //AudioManager.PlayAudio();
+            AudioListener.volume = 0;
             musicBtn.image.sprite = soundDeactivated;
         }
         else
         {
-            //AudioManager.PauseAudio();
+            AudioListener.volume = 1;
             musicBtn.image.sprite = soundActivated;
         }
     }

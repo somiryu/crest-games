@@ -12,6 +12,6 @@ public static class AudioManager
     }
     public static void PauseAudio()
     {
-        currentAudio.Pause();
+        AudioListener audioListener = Utility.FindObjectByType<AudioListener>();
     }
 }
