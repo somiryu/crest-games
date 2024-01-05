@@ -34343,7 +34343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualOffset: -4.7
-  endSequenceCamPos: {x: -3.5, y: 1.5}
+  endSequenceCamPos: {x: 1, y: 1.5}
   movPercent: 0.45
   moveSpeed: 1
 --- !u!1 &536217581
