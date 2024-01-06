@@ -13,7 +13,11 @@ public class MG_MagnetsConfigs : GameConfig
 	public int initialMagnetsCount;
 	public int neededEnergyToPick;
 	public bool activeCheats;
+
+    public DifficultyModificatorFloat timeBetweenSpawnsPerDifficultLevel;
+    
 	[HideInInspector] [NonSerialized] public int coinsCollected;
+
     public override void SaveAnalytics()
     {
 		SaveCoins(coinsCollected);

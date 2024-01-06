@@ -10,11 +10,16 @@ public class SimpleGameSequenceItem : ScriptableObject
     public Dictionary<string, object> itemAnalytics;
 
     public virtual Dictionary<string, object> GetAnalytics() => itemAnalytics;
+    public virtual void ResetCurrentAnalytics()
+    {
+        if(itemAnalytics != null) itemAnalytics.Clear();
+        else itemAnalytics = new Dictionary<string, object>();
+
+	}
     public virtual int GetCurrItemIdx() => 0;
 
 	public virtual SimpleGameSequenceItem GetItemByIdx(int i) => this;
 
-	//public virtual SimpleGameSequenceItem GetNextItem() => this;
     public virtual SimpleGameSequenceItem GetNextItem()
     {
         if (GameSequencesList.Instance.prevGame != this) return this;

@@ -275,9 +275,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		nameTxtContainer.SetActive(!string.IsNullOrEmpty(currCharConfigs.name));
 		nameTxt.SetText(currCharConfigs.name);
 
-
-		currDialogueCharacters = curr.text.ToCharArray();
-		dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
+        currDialogueCharacters = SelectTextByGender(curr).ToCharArray();
+      
+        dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
 		dialogueTxt.SetText("");
 
 		if (currAnimSequence != null) StopCoroutine(currAnimSequence);
@@ -381,7 +381,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
             if (currResponsesDisplayer != null)
             {
-                currResponsesDisplayer.ShowResponses(dialogueData.responses);
+                currResponsesDisplayer.ShowResponses(dialogueData.responses);               
+
                 for (int i = 0; i < grayOutResponseIdxes.Count; i++)
                 {
                     currResponsesDisplayer.GrayOutResponse(grayOutResponseIdxes[i]);
@@ -420,29 +421,29 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 	}
 
-
     public void OnClickResponse(DialogueResponse responseClicked)
     {
         if (!audioIsDone) return;
+        
+        currResponsesDisplayer.ActiveConfirmationButton(true);
 
-        //Confirm the response
-        if (preselectedResponse == responseClicked)
-        {
-            if (preselectedResponseAudioIsDone)
-            {
-				if (responseClicked.dataAfterResponse != null) pendingSequenceToShow = responseClicked.dataAfterResponse;
-				hasPendingLineChange = true;
-                lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == responseClicked);
-            }
-            return;
-        }
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
         audioPlayer.clip = responseClicked.responseAudio;
         if(audioPlayer.clip != null) audioPlayer.Play();
         preselectedResponse = responseClicked;
-		
-	}
+
+    }
+    public void OnClickResponseConfirmation()
+    {   
+        if (preselectedResponseAudioIsDone)
+        {
+            if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
+            hasPendingLineChange = true;
+            lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
+            currResponsesDisplayer.ActiveConfirmationButton(false);
+        }
+    }
 
     public void AppearText() {
         var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
@@ -459,7 +460,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
        
         if (forceEndAppearingTxt) {
             isAppearingTxt = false;
-            dialogueTxt.SetText(currDialogue.text);
+            dialogueTxt.SetText(SelectTextByGender(currDialogue));
             var turnOnAutoSkip = AutoContinueActive();
             skipDialogueBtn.gameObject.SetActive(turnOnAutoSkip);
             dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);
@@ -481,6 +482,17 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		//Storing the last node so that we know on which dialog line we were at the moment this history was asked for
 		choicesTree.Add(new NarrativeNavigationNode(lastDisplayedDialogLineIdx));
         return choicesTree;
+    }
+
+    public string SelectTextByGender(DialogueData curr)
+    {
+        var text = curr.text;
+        if(UserDataManager.CurrUser.gender == UserGender.Femenino && !string.IsNullOrEmpty(curr.textAlternative))
+        {
+            text = curr.textAlternative;
+        }
+
+        return text;
     }
 }
 

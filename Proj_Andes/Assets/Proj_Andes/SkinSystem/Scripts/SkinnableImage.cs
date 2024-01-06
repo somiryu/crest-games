@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SkinnableImage : MonoBehaviour
 {
+    public bool assignOnAwake = false;
 
 	[SerializeField] Image image;
 	public SpriteRenderer sRenderer;
@@ -16,6 +17,11 @@ public class SkinnableImage : MonoBehaviour
         if (image == null) TryGetComponent(out image);
         if (sRenderer == null) TryGetComponent(out sRenderer);
     }
+
+	private void Awake()
+	{
+        if (assignOnAwake) SetSkinType(SkinManager.Instance.GetCurrSkin());
+	}
 
 	public void SetSkinType(SkinType skinType)
     {

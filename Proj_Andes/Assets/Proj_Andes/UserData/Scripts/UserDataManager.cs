@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
 public class UserDataManager : ScriptableObject
 {
+	[SerializeField] int maxAgeEasyLevel = 4;
+    [SerializeField] int maxAgeMediumLevel = 8;
+
 	private static string instancePath = "UserDataManager";
 
 	private static UserDataManager instance;
@@ -29,40 +33,50 @@ public class UserDataManager : ScriptableObject
 
 	[NonSerialized]
 	public List<UserData> usersDatas = new List<UserData>();
-	[NonSerialized] static List<Dictionary<string, object>> anayticsResults = new List<Dictionary<string, object>>();
 
-    [SerializeField] UserData currUserData;
+	int currUserDataIdx = -1;
 
 	public UserData CurrUserData
-	{
-		get 
-		{
-			if (currUserData != null) return currUserData;
+    {
+        get
+        {
+			if (currUserDataIdx != -1 && currUserDataIdx < usersDatas.Count) return usersDatas[currUserDataIdx];
 			return DefaultUserData;
 		}
 	}
 
-	[RuntimeInitializeOnLoadMethod]
-	static void RunOnStart()
-	{
-		Debug.Log("aplying callback");
-		Application.wantsToQuit += WantsToQuit;
-	}
-	static void GetAllAnalyticsData()
-	{
-		for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
-		{
-			var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
-            anayticsResults.Add(newData);
+    static void GetAllAnalyticsData()
+    {
+        for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
+        {
+            var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
+			if(newData != null)
+			{
+                List<string> currDictionaryKeys = newData.Keys.ToList();
+                for (int j = 0; j < currDictionaryKeys.Count; j++)
+                {
+                    if (CurrUser.userAnayticsResults.ContainsKey(currDictionaryKeys[j]))
+                    {
+                        CurrUser.userAnayticsResults[currDictionaryKeys[j]] = newData[currDictionaryKeys[j]];
+                    }
+                    else
+					{
+                        CurrUser.userAnayticsResults.Add(currDictionaryKeys[j], newData[currDictionaryKeys[j]]);
+						Debug.Log(CurrUser.userAnayticsResults[currDictionaryKeys[j]]);
+                    }
+                }
+            }
         }
-		CurrUser.userAnayticsResults = anayticsResults;
-	}
-	static bool WantsToQuit()
+    }
+    public static bool SaveToServer()
 	{
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
-		Debug.Log("Saving to server");
+
+        GetAllAnalyticsData();
+
+        Debug.Log("Saving to server");
 		if (currSequence is MinigameGroups group)
 		{
 			CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
@@ -77,9 +91,9 @@ public class UserDataManager : ScriptableObject
 		}
 		else CurrUser.narrativeNavCheckPointsNodes = null;
 		
-		GetAllAnalyticsData();
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
+		DatabaseManager.GetUserDatasList();
 		return true;
 	}
 
@@ -102,15 +116,15 @@ public class UserDataManager : ScriptableObject
 
 	public void SetCurrUser(string email, string id)
 	{
-		currUserData = new UserData();
-		currUserData.name = email;
-		currUserData.id = id;
+		var newuserData = new UserData();
+		newuserData.name = email;
+		newuserData.id = id;
+		RegisterNewUser(newuserData);
 	}
 
 	public void RegisterNewUser(UserData user)
 	{
-		currUserData = user;
-		usersDatas.Add(currUserData);
+		usersDatas.Add(user);
 		SaveDataToRemoteDataBase();
 	}
 
@@ -123,9 +137,17 @@ public class UserDataManager : ScriptableObject
 
 	public void SetCurrUser(string id)
 	{
-		var data = usersDatas.Find(x =>x.id == id);
-		currUserData = data;
+		var idx = usersDatas.FindIndex(x =>x.id == id);
+		currUserDataIdx = idx;
 	}
+
+    public DifficultyLevel GetDifficultyLevelUser()
+    {
+		var currAge = CurrUser.age;
+        if (currAge <= maxAgeEasyLevel) return DifficultyLevel.Easy;
+        else if (currAge <= maxAgeMediumLevel) return DifficultyLevel.Medium;
+        else return DifficultyLevel.Hard;        
+    }
 
 }
 
