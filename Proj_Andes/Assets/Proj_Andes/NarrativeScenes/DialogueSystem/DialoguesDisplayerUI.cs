@@ -130,10 +130,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
             {
                 //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
                 hasPendingLineChange = true;
-                if (!UserDataManager.CurrUser.tutorialNarrative)
-                    TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepSkipButton);
-                     
-            }
+                if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepSkipButton))
+                {
+					TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepSkipButton);
+				}
+
+			}
 		}
 	}
 
@@ -441,17 +443,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     }
     public void OnClickResponseConfirmation()
-    {   
-        if (preselectedResponseAudioIsDone)
-        {
-            if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
-            hasPendingLineChange = true;
-            lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
-            currResponsesDisplayer.ActiveConfirmationButton(false);
+    {
+        if (!preselectedResponseAudioIsDone) return;
 
-           
-            if (!UserDataManager.CurrUser.tutorialNarrative)
-                TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepConfirmedButton);
+        if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
+        hasPendingLineChange = true;
+        lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
+        currResponsesDisplayer.ActiveConfirmationButton(false);
+
+
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepConfirmedButton))
+        {
+            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepConfirmedButton);
         }
     }
 

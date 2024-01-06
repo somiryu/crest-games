@@ -190,6 +190,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         data = ride;
         bk.EndOfGame();
         onPlay = false;
+        levelConfig.coinsCollected = starsGatheredCount;
 		character.GetComponentInChildren<ParticleSystem>().Stop();
 		artParent.gameObject.SetActive(false);
 

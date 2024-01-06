@@ -72,9 +72,10 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
         btn.transform.localScale = Vector3.one * 1.2f;
         currHighlightedResponse = btn;
         mainUi.OnClickResponse(response);
-        if (!UserDataManager.CurrUser.tutorialNarrative)
-            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepResponseButton); 
-
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepResponseButton))
+        {
+            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepResponseButton);
+        }
     }
     
 

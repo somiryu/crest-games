@@ -8,7 +8,6 @@ public static class DataIds
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
     public const string voiceStarRoundResultWins = "voiceStarRoundResultWins";
 
-
     //Tutorial Ids
     public const string stepSkipButton = "stepSkipButton";
     public const string stepResponseButton = "stepResponseButton";

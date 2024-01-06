@@ -149,7 +149,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);
 		afterAction_WinLabel.SetActive(ratio >= gameConfigs.percentageNeededToWin);
 		afterAction_LoseLabel.SetActive(ratio < gameConfigs.percentageNeededToWin);
-		eogManager.OnGameOver();
+        gameConfigs.SaveCoins(totalCapturedAsteroids);
+        eogManager.OnGameOver();
 	}
 
 

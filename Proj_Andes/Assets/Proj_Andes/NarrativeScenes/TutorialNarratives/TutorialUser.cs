@@ -12,7 +12,7 @@ public class TutorialUser : MonoBehaviour
     private void Start()
     {
         TutorialManager.Instance.AddNewUser(this);
-        var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep.ToString());
+        var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
         tutorialImage.gameObject.SetActive(activeTut);
     }
 

@@ -193,6 +193,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         afterActionPanel.SetActive(true);
         inGameUIPaneltoDissapear.SetActive(false);
 		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
+        gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();
 	}
 }

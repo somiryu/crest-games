@@ -23,6 +23,8 @@ public class UserData
 	public int CheckPointSubIdx = -1;
 	public List<NarrativeNavigationNode> narrativeNavCheckPointsNodes;
 	public List<int> itemsPlayedIdxs = new List<int>();
+	public int Coins;
+	public List<Monsters> myCollectionMonsters = new List<Monsters>();
 
     public UserData()
 	{
@@ -38,13 +40,14 @@ public class UserData
 		CheckPointSubIdx = -1;
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
 		itemsPlayedIdxs = new List<int>();
-		tutorialNarrative = false;		
+		Coins = 0;
+        myCollectionMonsters = new List<Monsters>();
 	}
 
-	public bool IsTutorialStepDone(string id)
+	public bool IsTutorialStepDone(tutorialSteps step)
 	{
-		if (!tutorialStepsDone.ContainsKey(id)) return false;
-		else return tutorialStepsDone[id];
+		if (!tutorialStepsDone.ContainsKey(step.ToString())) return false;
+		else return tutorialStepsDone[step.ToString()];
 	}
 
 	public void RegisterTutorialStepDone(string id)
