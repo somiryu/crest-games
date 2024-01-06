@@ -13,4 +13,10 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public float accelerationSpeed;
     public float regularRideDuration;
     public int starsAmount;
+    [HideInInspector][NonSerialized] public int coinsCollected;
+
+    public override void SaveAnalytics()
+    {
+        SaveCoins(coinsCollected);
+    }
 }

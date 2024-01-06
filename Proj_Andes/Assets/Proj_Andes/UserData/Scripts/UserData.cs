@@ -12,6 +12,8 @@ public class UserData
 	public UserGender gender;
     public string city;
 	public string institution;
+	public bool tutorialNarrative;	
+    public Dictionary<string, bool> tutorialStepsDone = new Dictionary<string, bool>();
     public Dictionary<string, object> userAnayticsResults = new Dictionary<string, object>();
 
 
@@ -21,6 +23,8 @@ public class UserData
 	public int CheckPointSubIdx = -1;
 	public List<NarrativeNavigationNode> narrativeNavCheckPointsNodes;
 	public List<int> itemsPlayedIdxs = new List<int>();
+	public int Coins;
+	public List<Monsters> myCollectionMonsters = new List<Monsters>();
 
     public UserData()
 	{
@@ -36,6 +40,20 @@ public class UserData
 		CheckPointSubIdx = -1;
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
 		itemsPlayedIdxs = new List<int>();
+		Coins = 0;
+        myCollectionMonsters = new List<Monsters>();
+	}
+
+	public bool IsTutorialStepDone(tutorialSteps step)
+	{
+		if (!tutorialStepsDone.ContainsKey(step.ToString())) return false;
+		else return tutorialStepsDone[step.ToString()];
+	}
+
+	public void RegisterTutorialStepDone(string id)
+	{
+		if(tutorialStepsDone.ContainsKey(id)) tutorialStepsDone[id] = true;
+		else tutorialStepsDone.Add(id, true);
 	}
 }
 
