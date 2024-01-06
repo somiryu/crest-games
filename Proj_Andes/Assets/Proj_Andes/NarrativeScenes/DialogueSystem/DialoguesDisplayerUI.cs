@@ -23,12 +23,13 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] GameObject nameTxtContainer;
     [SerializeField] TMP_Text dialogueTxt;
     [SerializeField] GameObject dialogueTxtContainer;
-    [SerializeField] Button skipDialogueBtn;
+    [SerializeField] Button skipDialogueBtn;    
     [SerializeField] Button dialogueBoxBtn;
     [SerializeField] Button repeatBtn;
     [SerializeField] PlayableDirector timeLinePlayer;
     [SerializeField] Transform responseDisplayersContainer;
     [SerializeField] AudioSource audioPlayer;
+
 
     [SerializeField] bool forceDialogeAppear;
 
@@ -43,8 +44,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	private bool preselectedResponseAudioIsDone = false;
 
     public bool SaveNavSequence = true;
+    
 
-	public bool IsShowing => isShowing;
+    public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
 
     //Appear dialogue params
@@ -117,6 +119,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     private void OnDialogueBoxBtnPressed()
 	{
+        
 		if (isAppearingTxt)
 		{
             forceEndAppearingTxt = true;
@@ -127,7 +130,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
             {
                 //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
                 hasPendingLineChange = true;
-            }
+                if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepSkipButton))
+                {
+					TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepSkipButton);
+				}
+
+			}
 		}
 	}
 
@@ -216,7 +224,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	}
 
     public void NextDialogue() {
-
+        
         DialogueData lastPlayedDialog = null;
         if(currShowingIdx > -1 && currShowingIdx < dialoguesToShow.dialogues.Length) lastPlayedDialog = dialoguesToShow.dialogues[currShowingIdx];
 
@@ -262,10 +270,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 
 		repeatBtn.gameObject.SetActive(false);
-		skipDialogueBtn.gameObject.SetActive(false);
+		skipDialogueBtn.gameObject.SetActive(false);        
 
-		//Clean old responses if needed
-		if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
+        //Clean old responses if needed
+        if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
 
 
         //Image and name of character
@@ -435,13 +443,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     }
     public void OnClickResponseConfirmation()
-    {   
-        if (preselectedResponseAudioIsDone)
+    {
+        if (!preselectedResponseAudioIsDone) return;
+
+        if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
+        hasPendingLineChange = true;
+        lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
+        currResponsesDisplayer.ActiveConfirmationButton(false);
+
+
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepConfirmedButton))
         {
-            if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
-            hasPendingLineChange = true;
-            lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
-            currResponsesDisplayer.ActiveConfirmationButton(false);
+            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepConfirmedButton);
         }
     }
 
@@ -463,7 +476,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             dialogueTxt.SetText(SelectTextByGender(currDialogue));
             var turnOnAutoSkip = AutoContinueActive();
             skipDialogueBtn.gameObject.SetActive(turnOnAutoSkip);
-            dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);
+            dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);       
         }
     }
 
@@ -494,6 +507,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         return text;
     }
+
+   
 }
 
 [Serializable]
