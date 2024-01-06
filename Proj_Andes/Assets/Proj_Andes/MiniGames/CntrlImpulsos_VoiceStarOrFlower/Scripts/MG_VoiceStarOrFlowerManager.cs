@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 {
@@ -38,6 +40,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] ParticleSystem incorrectParticles;
 
     [Header("UI")]
+    [SerializeField] TMP_Text leftObjTxt;
+    [SerializeField] TMP_Text rightObjTxt;
     [SerializeField] TMP_Text currCoinsValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
@@ -57,8 +61,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private bool currSoundIsLeft = false;
 
     private bool gameoverFlag = false;
+    float totalGameTime;
 
-	public void Awake()
+    public void Awake()
 	{
         Init();
 	}
@@ -74,6 +79,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 		inGameUiPanel.SetActive(true);
         gameoverFlag = false;
 
+        gameConfigs.ResetCurrentAnalytics();
+
         timerUI.minValue = 0;
         timerUI.maxValue = gameConfigs.timePerChoice;
 
@@ -87,6 +94,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
         retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
 
+
         InitRound();
 	}
 
@@ -99,6 +107,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
+        var textToUse = currSoundIsLeft ? leftObjTxt: rightObjTxt;
 
         currTargetImg.sprite = imgToUse;
         audioPlayer.clip = soundToUse;
@@ -111,11 +120,12 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         if (gameoverFlag) return;
 
         timerUI.value = timerPerChoice;
+        totalGameTime += Time.deltaTime;
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            timerPerChoice = 0;
             OnWrongChoice();
+            timerPerChoice = 0;
         }
     }
 
@@ -145,6 +155,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Stop();
         correctParticles.Stop();
 
+        gameConfigs.roundResultWins.Add(false);
+
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
@@ -158,6 +170,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     {
         incorrectParticles.Stop();
         correctParticles.Stop();
+
+        gameConfigs.roundResultWins.Add(true);
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         if (currSoundIsLeft && !currImgIsLeft)
@@ -182,8 +196,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     void OnRoundEnded()
     {
         currCoinsValueTxt.text = currCoins.ToString();
+        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
-        if(lostRoundsCount >= gameConfigs.maxRounds ||
+        if (lostRoundsCount >= gameConfigs.maxRounds ||
             wonLeftCount >= gameConfigs.maxRounds ||
             wonRightCount >= gameConfigs.maxRounds)
         {
@@ -196,6 +211,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
+        gameConfigs.totalGameTime = totalGameTime;
+        gameConfigs.SaveAnalytics();
         audioPlayer.clip = finishAudio;
         audioPlayer.Play();
         gameoverFlag = true;

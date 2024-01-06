@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialoguesResponsesDisplayerUI : MonoBehaviour
 {
     public Pool<ResponseBtn> responsesPool;
     private DialoguesDisplayerUI mainUi;
+
+    [SerializeField] Button confirmationButton;     
+
 
     public List<ResponseBtn> currResponses;
     public IDialoguesResponseDisplayerUser[] users;
@@ -15,10 +19,13 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 
     public void Init(DialoguesDisplayerUI _mainUI)
     {
+        
         mainUi = _mainUI;
         responsesPool.Init(4);
         users = GetComponentsInChildren<IDialoguesResponseDisplayerUser>();
 		for (int i = 0; i < users.Length; i++) users[i].Init(this);
+        confirmationButton.onClick.AddListener(mainUi.OnClickResponseConfirmation);
+        confirmationButton.gameObject.SetActive(false);
 	}
 
 	public void ShowResponses(DialogueResponse[] responseDatas)
@@ -34,6 +41,12 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 			for (int j = 0; j < users.Length; j++) users[j].OnShowResponseBtn(newResponse);
 		}
 		gameObject.SetActive(true);
+    }
+
+    public void ActiveConfirmationButton(bool value)
+    {
+        confirmationButton.gameObject.SetActive(value);
+       
     }
 
     public void GrayOutResponse(int responseIdx)
@@ -59,7 +72,12 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
         btn.transform.localScale = Vector3.one * 1.2f;
         currHighlightedResponse = btn;
         mainUi.OnClickResponse(response);
-	}
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepResponseButton))
+        {
+            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepResponseButton);
+        }
+    }
+    
 
     public void Hide()
     {
@@ -72,6 +90,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
         gameObject.SetActive(false);
         currResponses.Clear();
     }
+  
 }
 
 public interface IDialoguesResponseDisplayerUser

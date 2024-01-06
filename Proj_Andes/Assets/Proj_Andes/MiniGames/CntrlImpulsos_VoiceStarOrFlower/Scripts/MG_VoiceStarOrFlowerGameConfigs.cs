@@ -22,5 +22,12 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
         itemAnalytics.Add(DataIds.voiceStartimeToMakeAChoice, timeToMakeAChoice);
         itemAnalytics.Add(DataIds.voiceStarRoundResultWins, roundResultWins);
     }
+    public override void ResetCurrentAnalytics()
+    {
+        timeToMakeAChoice.Clear();
+        roundResultWins.Clear();
+        totalGameTime = 0;
+        base.ResetCurrentAnalytics();
+    }
 }
 

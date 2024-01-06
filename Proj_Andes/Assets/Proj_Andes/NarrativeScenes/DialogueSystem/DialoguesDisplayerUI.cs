@@ -23,12 +23,13 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] GameObject nameTxtContainer;
     [SerializeField] TMP_Text dialogueTxt;
     [SerializeField] GameObject dialogueTxtContainer;
-    [SerializeField] Button skipDialogueBtn;
+    [SerializeField] Button skipDialogueBtn;    
     [SerializeField] Button dialogueBoxBtn;
     [SerializeField] Button repeatBtn;
     [SerializeField] PlayableDirector timeLinePlayer;
     [SerializeField] Transform responseDisplayersContainer;
     [SerializeField] AudioSource audioPlayer;
+
 
     [SerializeField] bool forceDialogeAppear;
 
@@ -43,8 +44,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	private bool preselectedResponseAudioIsDone = false;
 
     public bool SaveNavSequence = true;
+    
 
-	public bool IsShowing => isShowing;
+    public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
 
     //Appear dialogue params
@@ -117,6 +119,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     private void OnDialogueBoxBtnPressed()
 	{
+        
 		if (isAppearingTxt)
 		{
             forceEndAppearingTxt = true;
@@ -127,7 +130,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
             {
                 //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
                 hasPendingLineChange = true;
-            }
+                if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepSkipButton))
+                {
+					TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepSkipButton);
+				}
+
+			}
 		}
 	}
 
@@ -216,7 +224,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 	}
 
     public void NextDialogue() {
-
+        
         DialogueData lastPlayedDialog = null;
         if(currShowingIdx > -1 && currShowingIdx < dialoguesToShow.dialogues.Length) lastPlayedDialog = dialoguesToShow.dialogues[currShowingIdx];
 
@@ -262,10 +270,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 
 		repeatBtn.gameObject.SetActive(false);
-		skipDialogueBtn.gameObject.SetActive(false);
+		skipDialogueBtn.gameObject.SetActive(false);        
 
-		//Clean old responses if needed
-		if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
+        //Clean old responses if needed
+        if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
 
 
         //Image and name of character
@@ -275,9 +283,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		nameTxtContainer.SetActive(!string.IsNullOrEmpty(currCharConfigs.name));
 		nameTxt.SetText(currCharConfigs.name);
 
-
-		currDialogueCharacters = curr.text.ToCharArray();
-		dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
+        currDialogueCharacters = SelectTextByGender(curr).ToCharArray();
+      
+        dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
 		dialogueTxt.SetText("");
 
 		if (currAnimSequence != null) StopCoroutine(currAnimSequence);
@@ -381,7 +389,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
             if (currResponsesDisplayer != null)
             {
-                currResponsesDisplayer.ShowResponses(dialogueData.responses);
+                currResponsesDisplayer.ShowResponses(dialogueData.responses);               
+
                 for (int i = 0; i < grayOutResponseIdxes.Count; i++)
                 {
                     currResponsesDisplayer.GrayOutResponse(grayOutResponseIdxes[i]);
@@ -420,29 +429,34 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 	}
 
-
     public void OnClickResponse(DialogueResponse responseClicked)
     {
         if (!audioIsDone) return;
+        
+        currResponsesDisplayer.ActiveConfirmationButton(true);
 
-        //Confirm the response
-        if (preselectedResponse == responseClicked)
-        {
-            if (preselectedResponseAudioIsDone)
-            {
-				if (responseClicked.dataAfterResponse != null) pendingSequenceToShow = responseClicked.dataAfterResponse;
-				hasPendingLineChange = true;
-                lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == responseClicked);
-            }
-            return;
-        }
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
         audioPlayer.clip = responseClicked.responseAudio;
         if(audioPlayer.clip != null) audioPlayer.Play();
         preselectedResponse = responseClicked;
-		
-	}
+
+    }
+    public void OnClickResponseConfirmation()
+    {
+        if (!preselectedResponseAudioIsDone) return;
+
+        if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
+        hasPendingLineChange = true;
+        lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
+        currResponsesDisplayer.ActiveConfirmationButton(false);
+
+
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepConfirmedButton))
+        {
+            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepConfirmedButton);
+        }
+    }
 
     public void AppearText() {
         var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
@@ -459,10 +473,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
        
         if (forceEndAppearingTxt) {
             isAppearingTxt = false;
-            dialogueTxt.SetText(currDialogue.text);
+            dialogueTxt.SetText(SelectTextByGender(currDialogue));
             var turnOnAutoSkip = AutoContinueActive();
             skipDialogueBtn.gameObject.SetActive(turnOnAutoSkip);
-            dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);
+            dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);       
         }
     }
 
@@ -482,6 +496,19 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		choicesTree.Add(new NarrativeNavigationNode(lastDisplayedDialogLineIdx));
         return choicesTree;
     }
+
+    public string SelectTextByGender(DialogueData curr)
+    {
+        var text = curr.text;
+        if(UserDataManager.CurrUser.gender == UserGender.Femenino && !string.IsNullOrEmpty(curr.textAlternative))
+        {
+            text = curr.textAlternative;
+        }
+
+        return text;
+    }
+
+   
 }
 
 [Serializable]
