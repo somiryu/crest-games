@@ -3,25 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
-public interface iTutorialUser
-{
-    
-    public void OffTutorial(tutorialSteps tutorialSteps);
-}
+
 public class TutorialManager : MonoBehaviour
 {
     public Dictionary<string, bool> stepsTutorialNarrativeScenes;
 
-    [SerializeField] List<iTutorialUser> usersTutorial = new List<iTutorialUser>(10);
+    [SerializeField] List<TutorialUser> usersTutorial = new List<TutorialUser>(10);
 
     private static TutorialManager instance;
-    public static TutorialManager Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    public static TutorialManager Instance => instance;
+
     private void Awake()
     {
         if (instance != this)
@@ -34,15 +25,6 @@ public class TutorialManager : MonoBehaviour
         }
         instance = this;
 
-
-        stepsTutorialNarrativeScenes = new Dictionary<string, bool>()
-        {
-            {DataIds.stepConfirmedButton, UserDataManager.CurrUser.tutorialNarrative },
-            {DataIds.stepResponseButton, UserDataManager.CurrUser.tutorialNarrative },
-            {DataIds.stepSkipButton, UserDataManager.CurrUser.tutorialNarrative }
-        };   
-
-
         var rootObjs = SceneManager.GetActiveScene().GetRootGameObjects();
         for (int i = 0; i < rootObjs.Length; i++)
         {
@@ -51,9 +33,9 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void GetIUsers(GameObject currObj, List<iTutorialUser> usersList)
+    public void GetIUsers(GameObject currObj, List<TutorialUser> usersList)
     {
-        if (currObj.TryGetComponent(out iTutorialUser user))
+        if (currObj.TryGetComponent(out TutorialUser user))
         {
             usersList.Add(user);
         }
@@ -63,41 +45,22 @@ public class TutorialManager : MonoBehaviour
             GetIUsers(currChild.gameObject, usersList);
         }
     }
-    public void AddNewUser(iTutorialUser user)
+
+    public void AddNewUser(TutorialUser user)
     {
-        if (!usersTutorial.Contains(user))
-            usersTutorial.Add(user);
-    }
-    public void RemoveUser(iTutorialUser user)
+        if (!usersTutorial.Contains(user)) usersTutorial.Add(user);
+	}
+
+    public void RemoveUser(TutorialUser user)
     {
-        if (usersTutorial.Contains(user))
-            usersTutorial.Remove(user);
-    }
-
-
-
-    private void Update()
-    {
-        
-    }
-
+        if (usersTutorial.Contains(user)) usersTutorial.Remove(user);
+	}
 
     public void TurnOffTutorial(tutorialSteps tutorialStep)
     {
-        if (!UserDataManager.CurrUser.tutorialNarrative)
-        {
-            for (int i = 0; i < usersTutorial.Count; i++)
-            {
-                usersTutorial[i].OffTutorial(tutorialStep);
-            }
-
-            UserDataManager.CurrUser.tutorialNarrative = AreAllTutorialStepsComplete();
-        }
-    }
-
-    public bool AreAllTutorialStepsComplete()
-    {
-        return stepsTutorialNarrativeScenes.All(kv => kv.Value);
+        var user = usersTutorial.Find(x => x.tutorialStep == tutorialStep); 
+        user.OffTutorial();
+        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
 }
 

@@ -13,6 +13,7 @@ public class UserData
     public string city;
 	public string institution;
 	public bool tutorialNarrative;	
+    public Dictionary<string, bool> tutorialStepsDone = new Dictionary<string, bool>();
     public Dictionary<string, object> userAnayticsResults = new Dictionary<string, object>();
 
 
@@ -38,6 +39,18 @@ public class UserData
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
 		itemsPlayedIdxs = new List<int>();
 		tutorialNarrative = false;		
+	}
+
+	public bool IsTutorialStepDone(string id)
+	{
+		if (!tutorialStepsDone.ContainsKey(id)) return false;
+		else return tutorialStepsDone[id];
+	}
+
+	public void RegisterTutorialStepDone(string id)
+	{
+		if(tutorialStepsDone.ContainsKey(id)) tutorialStepsDone[id] = true;
+		else tutorialStepsDone.Add(id, true);
 	}
 }
 

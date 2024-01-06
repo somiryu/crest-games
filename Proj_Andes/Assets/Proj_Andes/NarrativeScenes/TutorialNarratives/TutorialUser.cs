@@ -3,33 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialUser : MonoBehaviour, iTutorialUser
+public class TutorialUser : MonoBehaviour
 {
     public tutorialSteps tutorialStep;
-    [SerializeField] Image tutorialImage;    
+    [SerializeField] Image tutorialImage;
 
 
     private void Start()
     {
-        if (TutorialManager.Instance != null)
-        {
-            TutorialManager.Instance.AddNewUser(this);
-            if (TutorialManager.Instance.stepsTutorialNarrativeScenes[tutorialStep.ToString()] == false)
-                tutorialImage.gameObject.SetActive(true);
-        }
-        else
-        {
-            Debug.LogError("TutorialManager.Instance is null.");
-        }
-    }   
+        TutorialManager.Instance.AddNewUser(this);
+        var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep.ToString());
+        tutorialImage.gameObject.SetActive(activeTut);
+    }
 
-    public void OffTutorial(tutorialSteps _tutorialStep)
+    public void OffTutorial()
     {
-        if (tutorialStep == _tutorialStep)
-        {
-            tutorialImage.gameObject.SetActive(false);
-            TutorialManager.Instance.stepsTutorialNarrativeScenes[tutorialStep.ToString()] = true;
-        }
+        tutorialImage.gameObject.SetActive(false);
+        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
 }
 
