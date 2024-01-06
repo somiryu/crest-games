@@ -90,8 +90,8 @@ public class GameSequencesList : ScriptableObject
 	}
     public void EndSequence()
     {
-        prevGame.SaveAnalytics();
-        UserDataManager.OnUserQuit();
+        if(prevGame != null) prevGame.SaveAnalytics();
+		UserDataManager.OnUserQuit();
         ResetSequence();
 
         GoToNextItemInList();
