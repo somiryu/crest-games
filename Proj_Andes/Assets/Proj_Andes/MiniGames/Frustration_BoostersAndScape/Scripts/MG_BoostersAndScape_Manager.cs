@@ -109,6 +109,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         endOfGameContainer.gameObject.SetActive(true);
         onPlay = false;
         spawner.OnGameEnd();
+        gameConfig.SaveCoins(successfulAttempts);
         eogManager.OnGameOver();
         Debug.Log("Game over!");
     }

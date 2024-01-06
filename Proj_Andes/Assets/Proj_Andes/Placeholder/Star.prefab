@@ -50,6 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capturedVFX: {fileID: 7350199771871375919}
   capturedSFX: {fileID: 6656296920743850740}
+  moveSpeed: 5
+  step: 1
+  yOfsetLimit: 0.2
   isCaptured: 0
 --- !u!65 &2140552201552578673
 BoxCollider:
@@ -5093,7 +5096,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.270052, y: 2.270052, z: 2.270052}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1749575123402190614}

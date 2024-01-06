@@ -35,7 +35,6 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	private Collider[] overlayResults = new Collider[20];
 	[SerializeField] EndOfGameManager eogManager;
 	public EndOfGameManager EndOfGameManager => eogManager;
-
     public void Awake()
 	{
 		Init();
@@ -92,9 +91,9 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			MagnetsAmount.SetText(availableMagnets.ToString());
 			if(availableMagnets == 0)
 			{
-				OnGameOver();
-			}
-		}
+                OnGameOver();
+            }
+        }
 	}
 
 	Vector2 GetBadMousePosition(int currTrialIdx)
@@ -127,8 +126,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
 		EnergyFillImage.fillAmount = currEneryProgress;
-		var won = Mathf.Abs(currEneryProgress - 1f) < 0.02f;
-		if (won) OnGameOver();
+        var won = Mathf.Abs(currEneryProgress - 1f) < 0.02f;
+		if (won) OnGameOver();   
 	}
 
 	void SpawnNewItem()
@@ -153,7 +152,9 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		var won = Mathf.Abs(afterActionEnergyFillImage.fillAmount - 1f) < 0.02f;
 		winTitle.SetActive(won);
 		loseTitle.SetActive(!won);
-		eogManager.OnGameOver();
+		gameConfigs.coinsCollected = currEnergyPicked;
+        eogManager.OnGameOver();
+
 	}
 
 }

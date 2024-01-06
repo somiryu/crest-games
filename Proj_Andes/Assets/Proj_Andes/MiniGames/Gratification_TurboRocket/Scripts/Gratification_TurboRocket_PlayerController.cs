@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System;
 
 public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager
 {
@@ -16,6 +17,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     SphereCollider myCollider;
     Collider[] colls;
     [HideInInspector] public int starsGatheredCount;
+    public Action OnScoreChanged;
     public bool onTurbo = false;
     float currentSpeed;
     public Camera cam;
@@ -53,7 +55,23 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         }
     }
 
-	private void Awake()
+    public Vector3 CurrPos
+    {
+        get
+        {
+            return transform.position;
+        }
+    }
+
+    public float playerCurrentSpeed
+    {
+        get
+        {
+            return currentSpeed;
+        }
+    }
+
+    private void Awake()
     {
         if (instance != null)
         {
@@ -75,7 +93,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
-        camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
+        //camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
         eogManager.OnGameStart();
 	}
 
@@ -190,6 +208,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         data = ride;
         bk.EndOfGame();
         onPlay = false;
+        levelConfig.coinsCollected = starsGatheredCount;
 		character.GetComponentInChildren<ParticleSystem>().Stop();
 		artParent.gameObject.SetActive(false);
 
