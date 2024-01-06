@@ -211,7 +211,8 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 		afterActionPanel.SetActive(true);
 		ingameObj.SetActive(false);
 		afterAction_CoinsCountTxt.SetText(totalCoinsWon.ToString());
-		eogManager.OnGameOver();
+		gameConfigs.coinsCollected = totalCoinsWon;
+        eogManager.OnGameOver();
 	}
 
 }

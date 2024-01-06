@@ -62,4 +62,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/Menu/Scenes/ClosingScene.unity
     guid: f4ce91e5e357a9b41be85cac20f52314
+  - enabled: 1
+    path: Assets/Proj_Andes/Menu/Scenes/MarketScene.unity
+    guid: f114701dcf9496d4c9c31319667c098d
   m_configObjects: {}

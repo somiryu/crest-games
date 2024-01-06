@@ -21,7 +21,11 @@ MonoBehaviour:
     gender: 0
     city: 
     institution: 
+    tutorialNarrative: 0
     CheckPointIdx: 0
     CheckPointSubIdx: 0
-    narrativeNavCheckPointsNodes: []
+    narrativeNavCheckPointsNodes:
+    - sourceDialogIdx: 0
+      responsePickedIdx: -1
+      nextDialogCustomStartIdx: -1
     itemsPlayedIdxs: 

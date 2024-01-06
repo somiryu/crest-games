@@ -176,6 +176,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 		inGameUIPanel.SetActive(false);
         afterActionPanel.SetActive(true);
         afterActionFinalCoinsTxt.SetText(currCoins.ToString());
+        gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();
 	}
 }
