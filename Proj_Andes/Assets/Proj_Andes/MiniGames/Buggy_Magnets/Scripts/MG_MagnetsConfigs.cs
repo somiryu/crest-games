@@ -16,5 +16,10 @@ public class MG_MagnetsConfigs : GameConfig
 
     public DifficultyModificatorFloat timeBetweenSpawnsPerDifficultLevel;
     
-    [NonSerialized] public Dictionary<string, object> analytics;
+	[HideInInspector] [NonSerialized] public int coinsCollected;
+
+    public override void SaveAnalytics()
+    {
+		SaveCoins(coinsCollected);
+    }
 }

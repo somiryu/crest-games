@@ -45,6 +45,13 @@ public class UserDataManager : ScriptableObject
 		}
 	}
 
+	[RuntimeInitializeOnLoadMethod]
+	static void RunOnStart()
+	{
+		Debug.Log("aplying callback");
+		Application.wantsToQuit += SaveToServer;
+	}
+
     static void GetAllAnalyticsData()
     {
         for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
@@ -70,13 +77,19 @@ public class UserDataManager : ScriptableObject
     }
     public static bool SaveToServer()
 	{
+		OnUserQuit();
+		return true;
+	}
+
+	public static void OnUserQuit()
+	{
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
 
-        GetAllAnalyticsData();
+		GetAllAnalyticsData();
 
-        Debug.Log("Saving to server");
+		Debug.Log("Saving to server");
 		if (currSequence is MinigameGroups group)
 		{
 			CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
@@ -90,11 +103,10 @@ public class UserDataManager : ScriptableObject
 			CurrUser.narrativeNavCheckPointsNodes = dialogSystem.GetCurrNavigationNodes();
 		}
 		else CurrUser.narrativeNavCheckPointsNodes = null;
-		
+
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
 		DatabaseManager.GetUserDatasList();
-		return true;
 	}
 
 

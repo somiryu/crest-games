@@ -12,6 +12,10 @@ public class SkinManager : MonoBehaviour
 	List<SkinnableImage> allSkinnableImages = new List<SkinnableImage>();
 	List<SkinnableObject> allItems = new List<SkinnableObject>();
 	public Transform currentSkinObject;
+
+	public bool forceSkinType = false;
+	public SkinType skinTypeToForce;
+
 	private void Awake()
 	{
 		if(instance != null && instance != this) Destroy(instance);
@@ -19,9 +23,14 @@ public class SkinManager : MonoBehaviour
 
 		Utility.FindObjectsByType(allSkinnableImages);
 		Utility.FindObjectsByType(allItems);
-		SetSkin(SceneManagement.currSkinType);
-    }
-    public void SetSkin(SkinType skinToSet)
+	}
+
+	private void Start()
+	{
+		if (forceSkinType) SetSkin(skinTypeToForce);
+		else SetSkin(SceneManagement.currSkinType);
+	}
+	public void SetSkin(SkinType skinToSet)
 	{
 		for(int i = 0; i < allSkinnableImages.Count; i++)
 		{
@@ -33,11 +42,17 @@ public class SkinManager : MonoBehaviour
         }
     }
 
+	public SkinType GetCurrSkin()
+	{
+		if (forceSkinType) return skinTypeToForce;
+		else return SceneManagement.currSkinType;
+	}
+
 }
 
 public enum SkinType
 {
 	Galactic,
-	flowers,
-	Hearths
+	Aquatic,
+	Magic
 }
