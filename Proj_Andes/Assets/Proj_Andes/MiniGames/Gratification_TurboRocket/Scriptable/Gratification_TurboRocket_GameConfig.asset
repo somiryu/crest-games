@@ -17,6 +17,6 @@ MonoBehaviour:
     scenePath: Assets/Proj_Andes/MiniGames/Gratification_TurboRocket/Scenes/Gratification_TurboRocket.unity
   regularSpeed: 3
   turboSpeed: 15
-  accelerationSpeed: 2
+  accelerationSpeed: 5
   regularRideDuration: 30
   starsAmount: 15

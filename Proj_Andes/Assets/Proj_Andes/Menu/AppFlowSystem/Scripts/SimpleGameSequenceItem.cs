@@ -27,7 +27,14 @@ public class SimpleGameSequenceItem : ScriptableObject
     }
     public virtual void OnReset() { }
 
-	public virtual void OnSequenceOver() => GameSequencesList.Instance.GoToNextSequence();
+	public virtual void OnSequenceOver() => GameSequencesList.Instance.GoToNextItemInList();
+    public void SaveCoins(int coinsAmt)
+    {
+        if(UserDataManager.CurrUser != null)
+        {
+            UserDataManager.CurrUser.Coins += coinsAmt;
+        }
+    }
     public virtual void SaveAnalytics()
     {
 

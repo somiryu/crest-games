@@ -36,6 +36,7 @@ public class GameSequencesList : ScriptableObject
         var nextItem = GetGameSequence().GetNextItem();
         if (nextItem != null)
         {
+            if (prevGame != null) prevGame.SaveAnalytics();
             prevGame = nextItem;
             SceneManagement.GoToScene(nextItem.scene);
         }
@@ -71,7 +72,7 @@ public class GameSequencesList : ScriptableObject
             for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
             Debug.LogWarning("Game sequence done, restarting the app");
         }
-		prevGame = null;
+		//prevGame = null;
         GoToNextItemInList();
     }
 
@@ -87,7 +88,14 @@ public class GameSequencesList : ScriptableObject
         else prevGame = targetSequence;
         GoToItemIdx(subIdx);
 	}
+    public void EndSequence()
+    {
+        if(prevGame != null) prevGame.SaveAnalytics();
+		UserDataManager.OnUserQuit();
+        ResetSequence();
 
+        GoToNextItemInList();
+    }
 }
 
 public abstract class GameConfig : SimpleGameSequenceItem

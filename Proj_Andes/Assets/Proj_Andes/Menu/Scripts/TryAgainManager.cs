@@ -33,12 +33,11 @@ public class TryAgainManager : MonoBehaviour
     IEnumerator GoToNextScene()
     {
         var timer = 0f;
-        var stuckTimeLimit = waitFor / 3;
         while (timer < waitFor)
         {
             timer += Time.deltaTime;
-            var clampSliderValue = Mathf.Clamp(timer, 0, stuckTimeLimit);
-            var progress = Mathf.InverseLerp(0, waitFor, clampSliderValue);
+            var sliderValue = Mathf.Lerp(0, waitFor*2, timer);
+            var progress = Mathf.InverseLerp(0, 10, sliderValue);
             fakeLoadingSlider.value = progress;
             yield return null;
         }
