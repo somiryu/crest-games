@@ -9,11 +9,11 @@ using Random = UnityEngine.Random;
 
 public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 {
-	[SerializeField] MG_FightTheAlienGameConfigs gameConfigs;
+    [SerializeField] MG_FightTheAlienGameConfigs gameConfigs;
     [Space(20)]
     [SerializeField] Image alienAttackImage;
-	[Space(20)]
-	[SerializeField] Button[] answerBtns;
+    [Space(20)]
+    [SerializeField] Button[] answerBtns;
 
     [SerializeField] GameObject afterActionPanel;
 
@@ -23,8 +23,8 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] Slider timerUI;
     [SerializeField] Slider playerHealthUI;
     [SerializeField] Slider enemyHealthUI;
-	[Header("After Action UI")]
-	[SerializeField] TMP_Text afterActionFinalCoinsTxt;
+    [Header("After Action UI")]
+    [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
     [SerializeField] Button retryBtn2;
     [SerializeField] GameObject inGameUIPaneltoDissapear;
@@ -38,6 +38,8 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     [Header("GameParticles")]
     [SerializeField] ParticleSystem correctParticles;
     [SerializeField] ParticleSystem incorrectParticles;
+    [SerializeField] GameObject skinObj;
+    [SerializeField] Animator[] skinObjAnim;
 
     [Header("Posible Answer")]
 	[SerializeField] AlienAttackConfig[] alienAttacksConfigs;
@@ -62,7 +64,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 	public void Init()
     {
         audiosource = GetComponent<AudioSource>();
-
+        skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
         currCoins = gameConfigs.initialCoins;
         currPlayerHealth = gameConfigs.PlayerHealth;
         currEnemyHealth = gameConfigs.EnemyHealth;
@@ -150,7 +152,15 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         currPlayerHealth += gameConfigs.playerHealthLostOnWrongAnswer;
-       
+
+        for (int i = 0; i <= skinObjAnim.Length ; i++)
+        {
+
+            skinObjAnim[i].SetTrigger("Incorrect");
+
+        }
+
+        incorrectParticles.Play();
         incorrectParticles.Play();
         OnRoundEnded();
     }
@@ -164,6 +174,12 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         audiosource.Play();
 
         correctParticles.Play();
+        for (int i = 0; i <= skinObjAnim.Length; i++)
+        {
+
+            skinObjAnim[i].SetTrigger("Correct");
+        }
+
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         currEnemyHealth += gameConfigs.EnemyHealthLostOnRightAnswer;
