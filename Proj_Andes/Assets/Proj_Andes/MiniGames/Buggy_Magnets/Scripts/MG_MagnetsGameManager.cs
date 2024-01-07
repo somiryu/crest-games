@@ -124,7 +124,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	void OnPicketEnergyItem(MG_MagnetsEnergyItem itemPicked)
 	{
-		energyItemsPool.RecycleItem(itemPicked);
+		itemPicked.OnWasPicked(energyItemsPool);
 		currEnergyPicked++;
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
