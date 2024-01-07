@@ -9,7 +9,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
     public Pool<ResponseBtn> responsesPool;
     private DialoguesDisplayerUI mainUi;
 
-    [SerializeField] Button confirmationButton;
+    [SerializeField] Button confirmationButton;     
 
 
     public List<ResponseBtn> currResponses;
@@ -19,6 +19,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 
     public void Init(DialoguesDisplayerUI _mainUI)
     {
+        
         mainUi = _mainUI;
         responsesPool.Init(4);
         users = GetComponentsInChildren<IDialoguesResponseDisplayerUser>();
@@ -44,7 +45,8 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 
     public void ActiveConfirmationButton(bool value)
     {
-        confirmationButton.gameObject.SetActive(value);        
+        confirmationButton.gameObject.SetActive(value);
+       
     }
 
     public void GrayOutResponse(int responseIdx)
@@ -70,7 +72,12 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
         btn.transform.localScale = Vector3.one * 1.2f;
         currHighlightedResponse = btn;
         mainUi.OnClickResponse(response);
-	}
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepResponseButton))
+        {
+            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepResponseButton);
+        }
+    }
+    
 
     public void Hide()
     {
@@ -83,6 +90,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
         gameObject.SetActive(false);
         currResponses.Clear();
     }
+  
 }
 
 public interface IDialoguesResponseDisplayerUser

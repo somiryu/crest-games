@@ -10,6 +10,8 @@ public class ResponseBtn : MonoBehaviour
 	[SerializeField] Button btn;
 	[SerializeField] TMP_Text responseTxt;
 	[SerializeField] Image responseImg;
+   
+
 
     private DialogueResponse responseData;
 	public Button Btn => btn;
@@ -20,11 +22,14 @@ public class ResponseBtn : MonoBehaviour
 
 	public RectTransform RectTransform;
 
+
+
 	private void Awake()
 	{
 		TryGetComponent(out RectTransform);
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(() => onClicked?.Invoke(ResponseData));
+       
 	}
 
 	public void SetData(DialogueResponse _responseData)
@@ -49,6 +54,7 @@ public class ResponseBtn : MonoBehaviour
 			responseImg.gameObject.SetActive(responseData.responseImage != null);
 			responseImg.sprite = responseData.responseImage;
 		}
+
 		onClicked = null;
 		btn.interactable = true;
 	}
@@ -58,4 +64,6 @@ public class ResponseBtn : MonoBehaviour
         responseTxt.SetText(text);
         responseTxt.gameObject.SetActive(!string.IsNullOrEmpty(text));
     }
+
+
 }

@@ -8,7 +8,14 @@ public class SkinnableObject : MonoBehaviour
     [SerializeField] ChangeableItem[] items;
     public Action<Transform> OnCurrSkinObjChanged;
     [SerializeField] Transform item;
+    [SerializeField] bool assignOnAwake;
 
+    private void Awake()
+    {
+        if (!assignOnAwake) return;
+        SwitchItem(SkinManager.Instance.GetCurrSkin(), out var Item);
+            
+    }
     public void SwitchItem(SkinType skinType, out Transform currObject)
     {
         var previousItem = item;

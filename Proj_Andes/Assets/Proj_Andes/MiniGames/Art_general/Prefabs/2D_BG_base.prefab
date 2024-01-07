@@ -301,14 +301,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assignOnAwake: 0
   image: {fileID: 0}
   sRenderer: {fileID: 8231027633529393261}
   imagePerSkinTypes:
   - skinType: 0
     sprite: {fileID: 21300000, guid: 349f36dac0292ba47aafa0180d973238, type: 3}
-  - skinType: 0
+  - skinType: 1
     sprite: {fileID: 21300000, guid: c7c7328f8751bcc4883eee072ac700b1, type: 3}
-  - skinType: 0
+  - skinType: 2
     sprite: {fileID: 21300000, guid: 5c16bf33ffe89d14a9b05c2878743872, type: 3}
 --- !u!1 &3651692681245747173
 GameObject:
@@ -407,14 +408,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assignOnAwake: 0
   image: {fileID: 0}
   sRenderer: {fileID: 5406450676736389236}
   imagePerSkinTypes:
   - skinType: 0
     sprite: {fileID: 21300000, guid: 623c7ff69f1d97b4eab6d833268113eb, type: 3}
-  - skinType: 0
+  - skinType: 1
     sprite: {fileID: 21300000, guid: 7332b9dda349e2543b03e5aed75cba64, type: 3}
-  - skinType: 0
+  - skinType: 2
     sprite: {fileID: 21300000, guid: 687495aa122c3034c8d6fb8b0975467b, type: 3}
 --- !u!1 &5412423533330894440
 GameObject:
