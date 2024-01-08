@@ -9,18 +9,37 @@ public class MG_MagnetsEnergyItem : MonoBehaviour
     [SerializeField] AudioSource capturedSFX;
     [SerializeField] SpriteRenderer spriteRef;
 
-      public void OnWasPicked(Pool <MG_MagnetsEnergyItem> pool)
+    float timer = 0;
+    float lifeTime = 1;
+    Pool<MG_MagnetsEnergyItem> pool;
+    bool wasCaptured = false;
+
+	public void Init(float _lifeTime, Pool<MG_MagnetsEnergyItem> ownerPool)
     {
-        StartCoroutine(_OnCapturedwithDelay(pool));
+        lifeTime = _lifeTime;
+        pool = ownerPool;
+        timer = 0;
     }
-    IEnumerator _OnCapturedwithDelay(Pool<MG_MagnetsEnergyItem> pool)
+
+    public void OnWasPicked() => StartCoroutine(_OnCapturedwithDelay());
+    
+    IEnumerator _OnCapturedwithDelay()
     {
-        capturedVFX.Play();
+		wasCaptured = true;
+		capturedVFX.Play();
         capturedSFX.Play();
         spriteRef.enabled = false;
         yield return new WaitForSeconds(0.7f);
         pool.RecycleItem(this);
         spriteRef.enabled = true;
+        wasCaptured = false;
 
     }
+	private void Update()
+	{
+        if (wasCaptured) return;
+        timer += Time.deltaTime;
+        if (timer > lifeTime) pool.RecycleItem(this);
+	}
+
 }
