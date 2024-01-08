@@ -34,8 +34,14 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     [SerializeField] PlayableDirector endTimelineDirector;
     [SerializeField] Transform artParent;
     [SerializeField] SkinnableObject artSkinnableObj;
+	public float ySpeed;
+    [SerializeField] AnimationCurve ySpeedCurve;
+	float yMoveProgress = 0f;
+    float startYPos = 0f;
 
-    Animator characterAnimator;
+
+
+	Animator characterAnimator;
 
     public EndOfGameManager EndOfGameManager => eogManager;
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
@@ -47,38 +53,17 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     float targetYPos;
     float playerRanXSpace;
 
-    public float CurrProgress
-    {
-        get
-        {
-            return playerRanXSpace / bk.bkSize.localScale.x;
-        }
-    }
+    public float CurrProgress => playerRanXSpace / bk.bkSize.localScale.x;
 
-    public Vector3 CurrPos
-    {
-        get
-        {
-            return transform.position;
-        }
-    }
+    public Vector3 CurrPos => transform.position;
 
-    public float playerCurrentSpeed
-    {
-        get
-        {
-            return currentSpeed;
-        }
-    }
+    public float playerCurrentSpeed => currentSpeed;
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null && instance != this)
         {
-            if(instance != this)
-            {
-                DestroyImmediate(this);
-            }
+            DestroyImmediate(this);
         }
         instance = this;
         Init();
@@ -140,7 +125,9 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         if (Input.GetMouseButtonDown(0) &&!EventSystem.current.IsPointerOverGameObject())
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            targetYPos = mouseWorldPos.y;
+            startYPos = transform.position.y;
+            yMoveProgress = 0;
+			targetYPos = mouseWorldPos.y;
             targetYPos = Mathf.Clamp( targetYPos, -RoadSize.y / 2, RoadSize.y / 2);
         }
 
@@ -148,6 +135,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
 
     }
+
+
     void ContinuousMovement()
     {
         currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, levelConfig.accelerationSpeed * Time.deltaTime);
@@ -155,11 +144,15 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         if (timer <= levelConfig.regularRideDuration)
         {
             var movementToAdd = Vector3.right * currentSpeed * Time.deltaTime;
-            playerRanXSpace += movementToAdd.x;
+			playerRanXSpace += movementToAdd.x;
             transform.position += movementToAdd;
-            var currPos = transform.position;
-            currPos.y = Mathf.MoveTowards(currPos.y, targetYPos, currentSpeed * Time.deltaTime);
-            transform.position = currPos;
+            var newPos = transform.position;
+
+			yMoveProgress = Mathf.Clamp01(yMoveProgress + ySpeed * Time.deltaTime);
+            var yAnimProgress = ySpeedCurve.Evaluate(yMoveProgress);
+            newPos.y = Mathf.Lerp(startYPos, targetYPos, yAnimProgress);
+
+            transform.position = newPos;
         }
         else
         {

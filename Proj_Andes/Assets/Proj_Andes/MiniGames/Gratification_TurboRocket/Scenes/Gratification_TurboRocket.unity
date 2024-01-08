@@ -34169,6 +34169,7 @@ MonoBehaviour:
   - skinType: 2
     item: {fileID: 1726166933}
   item: {fileID: 0}
+  assignOnAwake: 0
 --- !u!1 &316382275
 GameObject:
   m_ObjectHideFlags: 0
@@ -63675,6 +63676,7 @@ MonoBehaviour:
   - skinType: 2
     item: {fileID: 1932261918}
   item: {fileID: 0}
+  assignOnAwake: 0
 --- !u!1001 &565471026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88719,11 +88721,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5608591365498785612, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
       propertyPath: forceSkinType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5608591365498785612, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
       propertyPath: skinTypeToForce
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7102062956067746015, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
       propertyPath: m_Name
@@ -98847,6 +98849,31 @@ MonoBehaviour:
   endTimelineDirector: {fileID: 1562149744}
   artParent: {fileID: 1977104383}
   artSkinnableObj: {fileID: 1771975083}
+  ySpeed: 2
+  ySpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.008203446
+      outSlope: 0.008203446
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.2875
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.6583333
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!82 &1380917382
 AudioSource:
   m_ObjectHideFlags: 0
@@ -144321,6 +144348,7 @@ MonoBehaviour:
   - skinType: 1
     item: {fileID: 8848403450023947730}
   item: {fileID: 0}
+  assignOnAwake: 0
 --- !u!212 &2331042373808841735
 SpriteRenderer:
   m_ObjectHideFlags: 0
