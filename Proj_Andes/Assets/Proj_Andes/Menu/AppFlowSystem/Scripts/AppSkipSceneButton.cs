@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.PlayerSettings.SplashScreen;
@@ -10,6 +11,7 @@ public class AppSkipSceneButton : MonoBehaviour
     static AppSkipSceneButton instance;
     public static AppSkipSceneButton Instance => instance;
     [SerializeField] Button skipSceneBtn;
+    public TMP_Dropdown skinSelector;
 
     [RuntimeInitializeOnLoadMethod]
     static void RunOnStart()
@@ -27,5 +29,16 @@ public class AppSkipSceneButton : MonoBehaviour
         Object.DontDestroyOnLoad(this);
 
         skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
+        skinSelector.onValueChanged.AddListener(ForceSkinChange);
+	}
+
+    void ForceSkinChange(int skinIdx)
+    {
+        SceneManagement.currSkinType = (SkinType)skinIdx;
+        var skinManager = SkinManager.Instance;
+        if (skinManager == null) return;
+        skinManager.forceSkinType = true;
+        skinManager.skinTypeToForce = (SkinType)skinIdx;
+        skinManager.SetSkin(skinManager.skinTypeToForce);
     }
 }

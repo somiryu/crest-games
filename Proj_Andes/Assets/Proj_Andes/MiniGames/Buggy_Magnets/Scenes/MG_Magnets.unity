@@ -461,7 +461,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 21387ef3f0166b2498a26c7bb6e8186a, type: 3}
   - skinType: 1
     sprite: {fileID: 21300000, guid: 0d9c83d2f41c75546a0081d6b5d37c3a, type: 3}
-  - skinType: 0
+  - skinType: 2
     sprite: {fileID: 21300000, guid: b7c84e9f6ae98c946a8d8f9fb26964c5, type: 3}
 --- !u!114 &334742228
 MonoBehaviour:
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignOnAwake: 0
+  assignOnAwake: 1
   image: {fileID: 0}
   sRenderer: {fileID: 368259149}
   imagePerSkinTypes:
@@ -7234,7 +7234,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 21387ef3f0166b2498a26c7bb6e8186a, type: 3}
   - skinType: 1
     sprite: {fileID: 21300000, guid: 0d9c83d2f41c75546a0081d6b5d37c3a, type: 3}
-  - skinType: 0
+  - skinType: 2
     sprite: {fileID: 21300000, guid: b7c84e9f6ae98c946a8d8f9fb26964c5, type: 3}
 --- !u!114 &1272452603
 MonoBehaviour:
@@ -22525,7 +22525,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 21387ef3f0166b2498a26c7bb6e8186a, type: 3}
   - skinType: 1
     sprite: {fileID: 21300000, guid: 0d9c83d2f41c75546a0081d6b5d37c3a, type: 3}
-  - skinType: 0
+  - skinType: 2
     sprite: {fileID: 21300000, guid: b7c84e9f6ae98c946a8d8f9fb26964c5, type: 3}
 --- !u!114 &1847698787
 MonoBehaviour:
