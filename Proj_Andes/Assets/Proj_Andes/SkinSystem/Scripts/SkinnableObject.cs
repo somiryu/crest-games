@@ -14,6 +14,7 @@ public class SkinnableObject : MonoBehaviour
     {
         if (!assignOnAwake) return;
         SwitchItem(SkinManager.Instance.GetCurrSkin(), out var Item);
+        SkinManager.Instance.RegisterSkinObj(this);
             
     }
     public void SwitchItem(SkinType skinType, out Transform currObject)

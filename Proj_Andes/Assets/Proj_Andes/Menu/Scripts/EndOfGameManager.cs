@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public interface IEndOfGameManager
@@ -34,6 +35,8 @@ public class EndOfGameManager : MonoBehaviour
     }
     public void ResetAction()
     {
-        SceneManagement.GoToScene(SceneManagement.currentScene);
-    }
+        if (SceneManagement.currentScene != null) SceneManagement.GoToScene(SceneManagement.currentScene);
+        else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+	}
 }

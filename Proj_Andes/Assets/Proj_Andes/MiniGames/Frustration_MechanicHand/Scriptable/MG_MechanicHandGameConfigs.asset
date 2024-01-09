@@ -21,4 +21,4 @@ MonoBehaviour:
   hookRotationSpeed: 15
   hookMoveSpeed: 12
   percentageNeededToWin: 0.8
-  activeCheats: 0
+  activeCheats: 1
