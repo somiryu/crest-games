@@ -42,10 +42,10 @@ EditorBuildSettings:
     path: Assets/Proj_Andes/NarrativeScenes/DialogueSystem/TestSenes/DialogsTestScene.unity
     guid: aa71629bf033a30449e6fb7f6c27e4b4
   - enabled: 1
-    path: Assets/Proj_Andes/NarrativeScenes/Narrative_2/DialogsNarrative2.unity
+    path: Assets/Proj_Andes/NarrativeScenes/Narrative_2/Scenes/DialogsNarrative2.unity
     guid: 79156b56a878386439c2187d80e9487e
   - enabled: 1
-    path: Assets/Proj_Andes/NarrativeScenes/Narrative_1/DialogsNarrative1.unity
+    path: Assets/Proj_Andes/NarrativeScenes/Narrative_1/Scenes/DialogsNarrative1.unity
     guid: 136d5b9d50c51fa49b33ac348168a23f
   - enabled: 1
     path: Assets/Proj_Andes/FireBaseTesting/Scenes/FirebaseTestsScene.unity
