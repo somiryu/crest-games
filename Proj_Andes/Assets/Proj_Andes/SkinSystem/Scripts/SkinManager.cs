@@ -48,6 +48,18 @@ public class SkinManager : MonoBehaviour
 		else return SceneManagement.currSkinType;
 	}
 
+	public void RegisterSkinImg(SkinnableImage img)
+	{
+		if (allSkinnableImages.Contains(img)) return;
+		allSkinnableImages.Add(img);
+	}
+
+	public void RegisterSkinObj(SkinnableObject obj)
+	{
+		if (allItems.Contains(obj)) return;
+		allItems.Add(obj);
+	}
+
 }
 
 public enum SkinType

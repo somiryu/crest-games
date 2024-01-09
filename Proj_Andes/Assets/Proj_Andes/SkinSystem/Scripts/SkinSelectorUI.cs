@@ -23,6 +23,7 @@ public class SkinSelectorUI : MonoBehaviour
         if (SceneManagement.currSkinType == skinType) return;
         SkinManager.Instance.SetSkin(skinType);
         SceneManagement.currSkinType = skinType;
+		AppSkipSceneButton.Instance.skinSelector.SetValueWithoutNotify((int)skinType);
     }
 
 }
