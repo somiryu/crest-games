@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialImageType : TutorialType
+public class TutorialImageType : MonoBehaviour, iTutorialType
 {
     [SerializeField] Image tutorialImage;
-    public override void StepStart(bool stepCompleted)
+    public void StepStart(bool stepCompleted)
     {
         tutorialImage.gameObject.SetActive(true);
     }
-    public override void StepDone()
+    public void StepDone()
     {
         tutorialImage.gameObject.SetActive(false);
     }
