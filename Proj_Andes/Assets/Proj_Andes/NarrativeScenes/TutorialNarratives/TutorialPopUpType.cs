@@ -11,7 +11,11 @@ public class TutorialPopUpType : MonoBehaviour
     PopUpObj currPopUp;
     void Start()
     {
-        for (int i = 0; i < popUpObjs.Count; i++) popUpObjs[i].stepIdx = i;
+        for (int i = 0; i < popUpObjs.Count; i++)
+        {
+            popUpObjs[i].stepIdx = i;
+            popUpObjs[i].popUpObj.gameObject.SetActive(false);
+        }
         PopObject(popUpObjs[0]);
     }
 
@@ -26,7 +30,10 @@ public class TutorialPopUpType : MonoBehaviour
     void GoToNextStep()
     {
         HideObject(currPopUp);
-        PopObject(popUpObjs[currPopUp.stepIdx+1]);
+        if (currPopUp.stepIdx +1 < popUpObjs.Count)
+        {
+            PopObject(popUpObjs[currPopUp.stepIdx + 1]);
+        }
     }
     void PopObject(PopUpObj tutoObj)
     {
