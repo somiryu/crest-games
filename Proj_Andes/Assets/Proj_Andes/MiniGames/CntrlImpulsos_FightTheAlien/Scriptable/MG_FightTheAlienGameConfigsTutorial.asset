@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba276ebf56407d468f85e385bb58b5f, type: 3}
+  m_Name: MG_FightTheAlienGameConfigsTutorial
+  m_EditorClassIdentifier: 
+  alienAttacksConfigsMatch:
+  - attackSprite: {fileID: 21300000, guid: eebc61383fcbcb546a54c4ac9579def6, type: 3}
+    wrongAnswer1: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+    wrongAnswer2: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+    rightAnswer: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+  - attackSprite: {fileID: 21300000, guid: d6abb41e2a9d7a64f89089ab167fb843, type: 3}
+    wrongAnswer1: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+    wrongAnswer2: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+    rightAnswer: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+  - attackSprite: {fileID: 21300000, guid: 811c77aad97344a4794f94d9f430d4b1, type: 3}
+    wrongAnswer1: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+    wrongAnswer2: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+    rightAnswer: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+  alienAttacksConfigsNoMatch:
+  - attackSprite: {fileID: 21300000, guid: 3d2a3396b97fb2d46bbd70fd23160859, type: 3}
+    wrongAnswer1: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+    wrongAnswer2: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+    rightAnswer: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+  - attackSprite: {fileID: 21300000, guid: 1af6195b70d81a04d9c127886b0de0cf, type: 3}
+    wrongAnswer1: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+    wrongAnswer2: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+    rightAnswer: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+  - attackSprite: {fileID: 21300000, guid: e03b3f55e3112bb44b1ebf86d53c3778, type: 3}
+    wrongAnswer1: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+    wrongAnswer2: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+    rightAnswer: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+  - attackSprite: {fileID: 21300000, guid: 0eb0917f1a00b7442b29f1c106ae8af7, type: 3}
+    wrongAnswer1: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+    wrongAnswer2: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+    rightAnswer: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+  mG_FightTheAlienTutorialSteps:
+  - stepsAmount: 4
+    alienAttacksConfigsType: 0
+    helpButton: 1
+    time: 0
+    life: 0
+    helpPopUp: 0
+  - stepsAmount: 5
+    alienAttacksConfigsType: 1
+    helpButton: 1
+    time: 0
+    life: 0
+    helpPopUp: 1
+  - stepsAmount: 8
+    alienAttacksConfigsType: 2
+    helpButton: 0
+    time: 0
+    life: 0
+    helpPopUp: 1
+  - stepsAmount: -1
+    alienAttacksConfigsType: 3
+    helpButton: 0
+    time: 0
+    life: 1
+    helpPopUp: 0
