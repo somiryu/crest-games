@@ -9,16 +9,12 @@ using Random = UnityEngine.Random;
 
 public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 {
-    public Dictionary<string, bool> tutorialStepsDone = new Dictionary<string, bool>()
-    {
-        {tutorialFightTheAlien.match.ToString(), false},
-        {tutorialFightTheAlien.noMatch.ToString(), false},
-        {tutorialFightTheAlien.interval.ToString(), false},
-        {tutorialFightTheAlien.winAlien.ToString(), false},
-    };
 
-    tutorialFightTheAlien currentTutorialStep;
+    int currentTutorialStep;
+    MG_FightTheAlienTutorialStep currStepConfig;
 
+    [SerializeField] MG_FightTheAlienGameConfigsTutorial tutorialStepsConfigs;
+    [Space(20)]
     [SerializeField] MG_FightTheAlienGameConfigs gameConfigs;
     [Space(20)]
     [SerializeField] Image alienAttackImage;
@@ -72,11 +68,13 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     public void Awake()
     {
         Init();
+        currentTutorialStep = 0;
     }
+
 
     public void Init()
     {
-        currentTutorialStep = tutorialFightTheAlien.match;
+
         audiosource = GetComponent<AudioSource>();
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
         currCoins = gameConfigs.initialCoins;
@@ -109,10 +107,20 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         InitRound();
     }
 
+    public void InitTutorialStep()
+    {
+        currStepConfig = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep];
+
+        timerUI.gameObject.SetActive(currStepConfig.time);
+        enemyHealthUI.gameObject.SetActive(currStepConfig.life);
+        playerHealthUI.gameObject.SetActive(currStepConfig.life);
+    }
+
 
 
     void InitRound()
     {
+        InitTutorialStep();
         timerPerChoice = 0;
         eogManager.OnGameStart();
         var randomAttack = Random.Range(0, alienAttacksConfigs.Length);
@@ -127,24 +135,21 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         for (int i = 0; i < 3; i++)
         {
             var currBtnImage = answerBtns[i];
+            currBtnImage.ShowHighlightImg(false);
+            var helpButton = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep].helpButton;
             if (i == currCorrectAnswerIdx)
             {
                 currBtnImage.SetAnswerImage(currConfig.rightAnswer);
-                if (currentTutorialStep == tutorialFightTheAlien.match || currentTutorialStep == tutorialFightTheAlien.noMatch)
-                    currBtnImage.ShowHighlightImg(true);
+                currBtnImage.ShowHighlightImg(helpButton);
             }
             else if (!firstWrongImageUsedFlag)
             {
                 currBtnImage.SetAnswerImage(currConfig.wrongAnswer1);
                 firstWrongImageUsedFlag = true;
-                if (currentTutorialStep == tutorialFightTheAlien.match || currentTutorialStep == tutorialFightTheAlien.noMatch)
-                    currBtnImage.ShowHighlightImg(false);
             }
             else
             { 
                 currBtnImage.SetAnswerImage(currConfig.wrongAnswer2);
-                if (currentTutorialStep == tutorialFightTheAlien.match || currentTutorialStep == tutorialFightTheAlien.noMatch)
-                    currBtnImage.ShowHighlightImg(false);
             }
         }
     }
@@ -152,6 +157,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     private void Update()
     {
         if (gameoverFlag) return;
+        if (!currStepConfig.time) return;
 
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
