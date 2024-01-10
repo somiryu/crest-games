@@ -11,6 +11,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 {
 
     int currentTutorialStep;
+    int currPointsAmount;
     MG_FightTheAlienTutorialStep currStepConfig;
 
     [SerializeField] MG_FightTheAlienGameConfigsTutorial tutorialStepsConfigs;
@@ -172,6 +173,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     {
         if (idx == currCorrectAnswerIdx) OnCorrectChoice();
         else OnWrongChoice();
+        
     }
     private void OnWrongChoice()
     {
@@ -194,6 +196,9 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
         incorrectParticles.Play();
         incorrectParticles.Play();
+
+        if (!currStepConfig.wrongChoices) return;
+
         OnRoundEnded();
     }
 

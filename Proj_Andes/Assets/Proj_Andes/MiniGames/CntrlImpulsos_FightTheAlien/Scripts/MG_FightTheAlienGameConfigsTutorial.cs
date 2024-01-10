@@ -20,6 +20,7 @@ public class MG_FightTheAlienTutorialStep
     public int stepsAmount;
     public alienAttacksConfigsType alienAttacksConfigsType;
     public bool helpButton;
+    public bool wrongChoices;
     public bool time;
     public bool life;
     public bool helpPopUp;
