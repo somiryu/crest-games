@@ -30,6 +30,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     [SerializeField] EndOfGameManager eogManager;
 
     [SerializeField] ParticleSystem turboParticles;
+    [SerializeField] GameObject turboAnimObj;
     [SerializeField] AudioSource turboSFX;
     [SerializeField] PlayableDirector endTimelineDirector;
     [SerializeField] Transform artParent;
@@ -172,6 +173,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     {
         characterAnimator.SetTrigger("Turbo");
         turboParticles.Play();
+        turboAnimObj.SetActive(true);
         turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
         camCC.OnEnterTurbo();
@@ -183,6 +185,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 		currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
         turboParticles.Stop();
+        turboAnimObj.SetActive(false);
         turboSFX.Stop();
 
 

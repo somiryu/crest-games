@@ -30,9 +30,23 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     [SerializeField] MG_BoostersAndScape_Spawner spawner;
     [SerializeField] Transform endOfGameContainer;
     [SerializeField] TextMeshProUGUI finalScoreText;
+    [SerializeField] TextMeshProUGUI constantScoreText;
     [SerializeField] Image trapImage;
 
     [SerializeField] EndOfGameManager eogManager;
+    [SerializeField] GameObject inGameObj;
+
+    [Header("Game Audio")]
+    [SerializeField] AudioClip boosteredAudio;
+    private AudioSource audiosource;
+
+
+    [Header("GameParticles")]
+    [SerializeField] ParticleSystem boostedParticles;
+    [SerializeField] ParticleSystem incorrectParticles;
+    [SerializeField] GameObject skinObj;
+    [SerializeField] Animator[] skinObjAnim;
+
     public EndOfGameManager EndOfGameManager => eogManager;
     private void Awake()
     {
@@ -43,9 +57,13 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         instance = this;
         spawner.Init();
         Init();
+        audiosource = GetComponent<AudioSource>();
+
     }
     void Init()
     {
+        skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
+
         alien.TryGetComponent(out alienMov);
         alienMov.Init();
         startPos = rocket.transform.position;
@@ -60,6 +78,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
     void Update()
     {
+        constantScoreText.text = successfulAttempts.ToString();
+
         if (!onPlay) return;
         timer += Time.deltaTime;
         spawner.spawner.timer = timer;
@@ -92,6 +112,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     void OnGameStart()
     {
         endOfGameContainer.gameObject.SetActive(false);
+        inGameObj.SetActive(true);
         eogManager.OnGameStart();
         spawner.OnGameStart();
         successfulAttempts = 0;
@@ -114,6 +135,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         spawner.OnGameEnd();
         gameConfig.SaveCoins(successfulAttempts);
         eogManager.OnGameOver();
+
+        inGameObj.SetActive(false);
         Debug.Log("Game over!");
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
@@ -126,6 +149,17 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         successfulAttempts++;
         Debug.Log("boosted");
         timer = 0;
+         
+        
+        audiosource.clip = boosteredAudio;
+        audiosource.Play();
+        boostedParticles.Play();
+        for (int i = 0; i <= skinObjAnim.Length; i++)
+        {
+
+            skinObjAnim[i].SetTrigger("Correct");
+
+        }
     }
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
     {

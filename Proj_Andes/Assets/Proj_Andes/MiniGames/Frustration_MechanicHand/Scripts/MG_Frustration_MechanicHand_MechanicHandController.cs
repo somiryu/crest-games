@@ -19,6 +19,18 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     public float dragDeathZone = 0.02f;
     bool canDrag = true;
 
+    [Header("Game Audio")]
+    [SerializeField] AudioClip selectinAudio;
+    [SerializeField] AudioClip toHookAudio;
+    [SerializeField] AudioClip onHookedAudio;
+
+    [Header("GameParticles")]
+    [SerializeField] ParticleSystem correctParticles;
+    [SerializeField] ParticleSystem incorrectParticles;
+    [SerializeField] GameObject skinObj;
+    [SerializeField] Animator[] skinObjAnim;
+
+
     IEnumerator hookShootingRoutine;
 
 
@@ -31,6 +43,8 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 	void Update()
     {
         DragBehaviour();
+        //progressSlider.value = player.CurrProgress;
+
     }
 
     void DragBehaviour()
