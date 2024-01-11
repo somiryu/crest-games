@@ -20,9 +20,11 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     bool canDrag = true;
 
     [Header("Game Audio")]
-    [SerializeField] AudioClip selectinAudio;
+    [SerializeField] AudioClip selectingAudio;
     [SerializeField] AudioClip toHookAudio;
     [SerializeField] AudioClip onHookedAudio;
+    [SerializeField] AudioClip notHookedAudio;
+    private AudioSource audioSource;
 
     [Header("GameParticles")]
     [SerializeField] ParticleSystem correctParticles;
@@ -38,9 +40,11 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 	{
         hook.TryGetComponent(out hookCollider);
         hook.Init(this);
-	}
+        audioSource = GetComponent<AudioSource>();
 
-	void Update()
+    }
+
+    void Update()
     {
         DragBehaviour();
         //progressSlider.value = player.CurrProgress;
@@ -100,6 +104,10 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         if (hookShootingRoutine != null) StopCoroutine(hookShootingRoutine);
         hookShootingRoutine = SendHookRoutine();
         StartCoroutine(hookShootingRoutine);
+        
+        audioSource.Stop();
+        audioSource.clip = toHookAudio;
+        audioSource.Play();
     }
 
     RaycastHit[] hitResults = new RaycastHit[20];
@@ -144,6 +152,9 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 		   BoxCastNonAlloc(hook.transform.position, hookCollider.size / 2, transform.right, hitResults, transform.rotation, Mathf.Infinity);
 
         var correctHit = false;
+        audioSource.Stop();
+        audioSource.clip = notHookedAudio;
+        audioSource.Play();
         for (int i = 0; i < hitAmount; i++)
         {
             var curr = hitResults[i];
@@ -157,7 +168,10 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             currRotation.z += 0.2f;
             transform.eulerAngles = currRotation;
             CorrectRotationToFail();
-		}
+            audioSource.Stop();
+            audioSource.clip = onHookedAudio;
+            audioSource.Play();
+        }
 	}
 
 
