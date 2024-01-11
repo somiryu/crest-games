@@ -22,6 +22,7 @@ public class MG_FightTheAlienTutorialStep
     public bool helpButton;
     public bool wrongChoices;
     public bool time;
+    public bool score;
     public bool life;
     public bool helpPopUp;
 }

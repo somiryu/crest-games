@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,7 +14,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
     int currentTutorialStep;
     int currPointsAmount;
-    MG_FightTheAlienTutorialStep currStepConfig;
+    MG_FightTheAlienTutorialStep currStepConfigTutorial;
 
     [SerializeField] MG_FightTheAlienGameConfigsTutorial tutorialStepsConfigs;
     [Space(20)]
@@ -21,10 +23,13 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     [SerializeField] Image alienAttackImage;
     [Space(20)]
     [SerializeField] MG_FightTheAlienAnswerBtnTutorial [] answerBtns;
+    [Space(20)]
+    [SerializeField] MG_FightTheAlienPopUP tutorialPopUp;
 
     [SerializeField] GameObject afterActionPanel;
 
     [Header("Game UI")]
+    [SerializeField] GameObject startCounter;
     [SerializeField] TMP_Text currCoinsValueTxt;
     [SerializeField] TMP_Text currRoundValueTxt;
     [SerializeField] Slider timerUI;
@@ -52,6 +57,9 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     [SerializeField] AlienAttackConfig[] alienAttacksConfigs;
     [SerializeField] AlienAttackConfig[] alienAttacksConfigsMatch;
     [SerializeField] AlienAttackConfig[] alienAttacksConfigsNoMatch;
+    AlienAttackConfig[] currAlienAttacksConfigs;
+    AlienAttackConfig currAttack;
+    bool isMatchAttack = true;
 
 
     [SerializeField] EndOfGameManager eogManager;
@@ -104,30 +112,63 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         }
 
         retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
-
+        InitTutorialStep();
         InitRound();
     }
 
     public void InitTutorialStep()
     {
-        currStepConfig = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep];
+        Debug.Log("tutorial" + currentTutorialStep);
+        currStepConfigTutorial = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep];
+        currPointsAmount = 0;
+        timerUI.gameObject.SetActive(currStepConfigTutorial.time);
+        enemyHealthUI.gameObject.SetActive(currStepConfigTutorial.life);
+        playerHealthUI.gameObject.SetActive(currStepConfigTutorial.life);
+        startCounter.SetActive(currStepConfigTutorial.score);
+        SetAlienAttackCOnfig();
 
-        timerUI.gameObject.SetActive(currStepConfig.time);
-        enemyHealthUI.gameObject.SetActive(currStepConfig.life);
-        playerHealthUI.gameObject.SetActive(currStepConfig.life);
+
     }
 
-
+    public void SetAlienAttackCOnfig()
+    {        
+        switch (currStepConfigTutorial.alienAttacksConfigsType)
+        {
+            case alienAttacksConfigsType.Match:
+                currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsMatch;
+                break;
+            case alienAttacksConfigsType.NoMatch:
+                currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsNoMatch;
+                break;
+            case alienAttacksConfigsType.Interval:
+                if (isMatchAttack)
+                    currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsMatch;                
+                else
+                    currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsNoMatch;
+                break;
+            case alienAttacksConfigsType.Random:
+                currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsMatch.Concat(tutorialStepsConfigs.alienAttacksConfigsNoMatch).ToArray();
+                break;
+            default:
+                break;
+        }
+    }
 
     void InitRound()
-    {
-        InitTutorialStep();
+    {        
         timerPerChoice = 0;
         eogManager.OnGameStart();
-        var randomAttack = Random.Range(0, alienAttacksConfigs.Length);
-        var currConfig = alienAttacksConfigs[randomAttack];
 
-        alienAttackImage.sprite = currConfig.attackSprite;
+        if (currStepConfigTutorial.alienAttacksConfigsType == alienAttacksConfigsType.Interval)
+        {
+            SetAlienAttackCOnfig();
+            isMatchAttack = !isMatchAttack;
+        }
+
+        var randomAttack = Random.Range(0, currAlienAttacksConfigs.Length);
+        currAttack = currAlienAttacksConfigs[randomAttack];
+
+        alienAttackImage.sprite = currAttack.attackSprite;
 
         currCorrectAnswerIdx = Random.Range(0, 3);
 
@@ -140,17 +181,17 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
             var helpButton = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep].helpButton;
             if (i == currCorrectAnswerIdx)
             {
-                currBtnImage.SetAnswerImage(currConfig.rightAnswer);
+                currBtnImage.SetAnswerImage(currAttack.rightAnswer);
                 currBtnImage.ShowHighlightImg(helpButton);
             }
             else if (!firstWrongImageUsedFlag)
             {
-                currBtnImage.SetAnswerImage(currConfig.wrongAnswer1);
+                currBtnImage.SetAnswerImage(currAttack.wrongColor);
                 firstWrongImageUsedFlag = true;
             }
             else
             { 
-                currBtnImage.SetAnswerImage(currConfig.wrongAnswer2);
+                currBtnImage.SetAnswerImage(currAttack.wrongShape);
             }
         }
     }
@@ -158,7 +199,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     private void Update()
     {
         if (gameoverFlag) return;
-        if (!currStepConfig.time) return;
+        if (!currStepConfigTutorial.time) return;
 
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
@@ -183,10 +224,8 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         audiosource.clip = wrongAudio;
         audiosource.Play();
 
-        currCoins += gameConfigs.coinsOnWrongAnswer;
-        currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
-        currPlayerHealth += gameConfigs.playerHealthLostOnWrongAnswer;
-
+        currPointsAmount = 0;
+        
         for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
@@ -197,7 +236,10 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Play();
         incorrectParticles.Play();
 
-        if (!currStepConfig.wrongChoices) return;
+        if (!currStepConfigTutorial.wrongChoices) return;
+        currCoins += gameConfigs.coinsOnWrongAnswer;
+        currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
+        currPlayerHealth += gameConfigs.playerHealthLostOnWrongAnswer;
 
         OnRoundEnded();
     }
@@ -219,19 +261,30 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
-        currEnemyHealth += gameConfigs.EnemyHealthLostOnRightAnswer;
+        if (currStepConfigTutorial.alienAttacksConfigsType == alienAttacksConfigsType.Random)
+            currEnemyHealth += gameConfigs.EnemyHealthLostOnRightAnswer;
+        currPointsAmount += 1;
         OnRoundEnded();
     }
 
     void OnRoundEnded()
     {
+        if (currStepConfigTutorial.helpPopUp) 
+            ActivePopUp();
+        
         currCoinsValueTxt.text = currCoins.ToString();
         playerHealthUI.value = currPlayerHealth;
         enemyHealthUI.value = currEnemyHealth;
-        if (currPlayerHealth <= 0 || currEnemyHealth <= 0)
+        if ((currPlayerHealth <= 0 || currEnemyHealth <= 0) && currStepConfigTutorial.alienAttacksConfigsType == alienAttacksConfigsType.Random)
         {
             GameOver();
             return;
+        }
+
+        if(currPointsAmount == currStepConfigTutorial.stepsAmount)
+        {
+            currentTutorialStep += 1;
+            InitTutorialStep();
         }
 
         InitRound();
@@ -249,12 +302,14 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();
     }
+
+    public void ActivePopUp()
+    {
+        tutorialPopUp.gameObject.SetActive(true);
+        tutorialPopUp.SetAlienAttackImage(currAttack.attackSprite);
+        tutorialPopUp.SetColorImage(currAttack.colorAlienAttackConfig);
+        tutorialPopUp.SetShapeImage(currAttack.shapeAlienAttackConfig);
+    }
 }
 
-public enum tutorialFightTheAlien
-{
-    match,
-    noMatch,
-    interval,
-    winAlien,
-}
+

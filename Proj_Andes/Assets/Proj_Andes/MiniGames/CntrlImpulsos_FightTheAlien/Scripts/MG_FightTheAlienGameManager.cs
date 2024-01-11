@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -14,9 +15,9 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] Image alienAttackImage;
     [Space(20)]
     [SerializeField] Button[] answerBtns;
-
+    [Space(20)]
     [SerializeField] GameObject afterActionPanel;
-
+    
     [Header("Game UI")]
     [SerializeField] TMP_Text currCoinsValueTxt;
     [SerializeField] TMP_Text currRoundValueTxt;
@@ -116,10 +117,10 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
             if (i == currCorrectAnswerIdx) currBtnImage.sprite = currConfig.rightAnswer;
             else if (!firstWrongImageUsedFlag)
             {
-                currBtnImage.sprite = currConfig.wrongAnswer1;
+                currBtnImage.sprite = currConfig.wrongColor;
                 firstWrongImageUsedFlag=true;
             }
-            else currBtnImage.sprite = currConfig.wrongAnswer2;
+            else currBtnImage.sprite = currConfig.wrongShape;
 		}
 	}
 
@@ -188,6 +189,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
     void OnRoundEnded()
     {
+
         currCoinsValueTxt.text = currCoins.ToString();
         playerHealthUI.value = currPlayerHealth;
         enemyHealthUI.value = currEnemyHealth;
@@ -218,7 +220,23 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 public struct AlienAttackConfig
 {
     public Sprite attackSprite;
-    public Sprite wrongAnswer1;
-    public Sprite wrongAnswer2;
+    public colorAlienAttackConfig colorAlienAttackConfig;
+    public shapeAlienAttackConfig shapeAlienAttackConfig;
+    public Sprite wrongColor;
+    public Sprite wrongShape;
     public Sprite rightAnswer;
+}
+
+public enum colorAlienAttackConfig
+{
+    blue,
+    red,
+    green
+}
+
+public enum shapeAlienAttackConfig
+{
+    Circle,
+    Heart,
+    Star
 }
