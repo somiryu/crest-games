@@ -19,6 +19,9 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     public float dragDeathZone = 0.02f;
     bool canDrag = true;
 
+    [SerializeField] Transform startPointLine;
+    [SerializeField] Transform endPointLine;
+
     [Header("Game Audio")]
     [SerializeField] AudioClip selectingAudio;
     [SerializeField] AudioClip toHookAudio;
@@ -65,6 +68,12 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             var diff = mouseDragStartPosition - Input.mousePosition.y;
             if (Mathf.Abs(diff) > dragDeathZone)
             {
+                if(isDragging== false)
+                {
+                    audioSource.Stop();
+                    audioSource.clip = selectingAudio;
+                    audioSource.Play();
+                }
                 isDragging = true;
                 OnMouseDragging();
             }
@@ -75,7 +84,13 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             {
                 ShootHook();
             }
+            else
+            {
+                audioSource.Stop();
+            }
             isDragging = false;
+
+
         }
     }
 
@@ -134,7 +149,18 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             if (hookedObj) break;
             yield return null;
         }
-
+        if (hookedObj)
+        {
+            audioSource.Stop();
+            audioSource.clip = onHookedAudio;
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.Stop();
+            audioSource.clip = notHookedAudio;
+            audioSource.Play();
+        }
         //animacion agarrar
         //Esperar 2 segundos
         //Animacion moverse
