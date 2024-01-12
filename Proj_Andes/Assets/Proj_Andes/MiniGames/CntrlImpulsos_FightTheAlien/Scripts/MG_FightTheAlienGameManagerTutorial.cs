@@ -61,6 +61,10 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     AlienAttackConfig currAttack;
     bool isMatchAttack = true;
 
+    bool isCorrect;
+    bool wrongColor;
+    bool wrongShape;
+    Sprite playerAnswer;
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
@@ -108,7 +112,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         for (int i = 0; i < answerBtns.Length; i++)
         {
             var currIdx = i;
-            answerBtns[i].button.onClick.AddListener(() => OnAnswerBtnClicked(currIdx));
+            answerBtns[i].button.onClick.AddListener(() => OnAnswerBtnClicked(currIdx, answerBtns[currIdx]));
         }
 
         retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
@@ -187,11 +191,13 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
             else if (!firstWrongImageUsedFlag)
             {
                 currBtnImage.SetAnswerImage(currAttack.wrongColor);
+                currBtnImage.isWrongColorBtn = true;
                 firstWrongImageUsedFlag = true;
             }
             else
             { 
                 currBtnImage.SetAnswerImage(currAttack.wrongShape);
+                currBtnImage.isWrongColorBtn = false;
             }
         }
     }
@@ -210,14 +216,30 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         }
     }
 
-    void OnAnswerBtnClicked(int idx)
+    void OnAnswerBtnClicked(int idx, MG_FightTheAlienAnswerBtnTutorial button)
     {
+        playerAnswer = button.button.image.sprite;
         if (idx == currCorrectAnswerIdx) OnCorrectChoice();
-        else OnWrongChoice();
-        
+        else
+        {
+            if (button.isWrongColorBtn) { 
+                wrongColor = true;
+                wrongShape = false;
+
+            }
+            else { 
+                wrongColor = false;
+                wrongShape = true;
+            }
+            OnWrongChoice();
+        }
+
     }
     private void OnWrongChoice()
     {
+        isCorrect = false;
+        
+
         correctParticles.Stop();
         incorrectParticles.Stop();
 
@@ -236,6 +258,12 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Play();
         incorrectParticles.Play();
 
+        if (currStepConfigTutorial.helpPopUp)
+            ActivePopUp();
+
+        wrongColor = true;
+        wrongShape = true;
+
         if (!currStepConfigTutorial.wrongChoices) return;
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
@@ -246,6 +274,13 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
     private void OnCorrectChoice()
     {
+        isCorrect = true;
+        if (currStepConfigTutorial.helpPopUp)
+            ActivePopUp();
+
+        wrongColor = false;
+        wrongShape = false;
+
         correctParticles.Stop();
         incorrectParticles.Stop();
 
@@ -269,8 +304,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
     void OnRoundEnded()
     {
-        if (currStepConfigTutorial.helpPopUp) 
-            ActivePopUp();
+        
         
         currCoinsValueTxt.text = currCoins.ToString();
         playerHealthUI.value = currPlayerHealth;
@@ -307,8 +341,10 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     {
         tutorialPopUp.gameObject.SetActive(true);
         tutorialPopUp.SetAlienAttackImage(currAttack.attackSprite);
-        tutorialPopUp.SetColorImage(currAttack.colorAlienAttackConfig);
-        tutorialPopUp.SetShapeImage(currAttack.shapeAlienAttackConfig);
+        tutorialPopUp.SetAnswerSelectedImage(playerAnswer);
+        tutorialPopUp.SetColorImage(currAttack.colorAlienAttackConfig,wrongColor);
+        tutorialPopUp.SetShapeImage(currAttack.shapeAlienAttackConfig,wrongShape);
+        tutorialPopUp.SetFaceFeedbackImage(isCorrect);
     }
 }
 

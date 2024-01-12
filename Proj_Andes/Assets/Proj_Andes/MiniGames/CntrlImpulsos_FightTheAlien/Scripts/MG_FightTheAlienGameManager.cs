@@ -223,8 +223,14 @@ public struct AlienAttackConfig
     public colorAlienAttackConfig colorAlienAttackConfig;
     public shapeAlienAttackConfig shapeAlienAttackConfig;
     public Sprite wrongColor;
+    public colorAlienAttackConfig wrongAnswer1ColorAlienAttackConfig;
+    public shapeAlienAttackConfig wrongAnswer1ShapeAlienAttackConfig;
     public Sprite wrongShape;
+    public colorAlienAttackConfig wrongAnswer2ColorAlienAttackConfig;
+    public shapeAlienAttackConfig wrongAnswer2ShapeAlienAttackConfig;
     public Sprite rightAnswer;
+    public colorAlienAttackConfig rightAnswerClorAlienAttackConfig;
+    public shapeAlienAttackConfig rightAnswerShapeAlienAttackConfig;
 }
 
 public enum colorAlienAttackConfig

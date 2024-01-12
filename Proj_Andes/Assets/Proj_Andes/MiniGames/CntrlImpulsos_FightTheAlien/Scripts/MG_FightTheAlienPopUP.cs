@@ -11,10 +11,17 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
     [SerializeField] Image colorImage;
     [SerializeField] Image shapeImage;
     [SerializeField] Image faceFeedbackImage;
+    [SerializeField] Image colorFeedbackImage;
+    [SerializeField] Image shapeFeedbackImage;
     [SerializeField] Button closeButton;
     [SerializeField] Sprite shapeHeart;
     [SerializeField] Sprite shapeCirlce;
     [SerializeField] Sprite shapeStar;
+    [SerializeField] Sprite happyFace;
+    [SerializeField] Sprite sadFace;
+    [SerializeField] Sprite correctFeedback;
+    [SerializeField] Sprite wrongFeedback;
+
 
 
     private void Start()
@@ -37,7 +44,7 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
        answerSelectedImage.sprite = sprite;        
     }
 
-    public void SetColorImage(colorAlienAttackConfig color)
+    public void SetColorImage(colorAlienAttackConfig color, bool value)
     {
         switch (color)
         {
@@ -50,9 +57,12 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
             case colorAlienAttackConfig.red:
                 colorImage.color = Color.red;
                 break;
-        }       
+        }
+
+        if (value) colorFeedbackImage.sprite = correctFeedback;
+        else colorFeedbackImage.sprite = wrongFeedback;
     }
-    public void SetShapeImage(shapeAlienAttackConfig shape)
+    public void SetShapeImage(shapeAlienAttackConfig shape, bool value)
     {
         switch (shape)
         {
@@ -66,11 +76,17 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
                 shapeImage.sprite = shapeCirlce;
                 break;
         }
+
+        if (value) shapeFeedbackImage.sprite = correctFeedback;
+        else shapeFeedbackImage.sprite = wrongFeedback;
     }
 
-    public void SetFaceFeedbackImage(Sprite sprite)
+    public void SetFaceFeedbackImage(bool value)
     {
-        faceFeedbackImage.sprite = sprite;
+        if (value)
+            faceFeedbackImage.sprite = happyFace;
+        else
+            faceFeedbackImage.sprite = sadFace;       
     }
 
 
