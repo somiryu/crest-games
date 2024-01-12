@@ -21,7 +21,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] ParticleSystem LCorrectparticle;
     [SerializeField] ParticleSystem RCorrectparticle;
 
-    [SerializeField] GameObject afterActionPanel;
+	[SerializeField] ParticleSystem LIncorrectparticle;
+	[SerializeField] ParticleSystem RIncorrectparticle;
+
+	[SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUIPanel;
    
     [SerializeField] AudioClip correctAudio;
@@ -129,16 +132,27 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     private void OnWrongChoice()
     {
-        audiosource.clip = wrongAudio;
+		LIncorrectparticle.Stop();
+		RIncorrectparticle.Stop();
+		RCorrectparticle.Stop();
+		LCorrectparticle.Stop();
+
+		audiosource.clip = wrongAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
-        OnRoundEnded();
+
+		if (currShowingRight) RIncorrectparticle.Play();
+		else LIncorrectparticle.Play();
+
+		OnRoundEnded();
     }
 
     private void OnCorrectChoice()
     {
-        RCorrectparticle.Stop();
+		LIncorrectparticle.Stop();
+		RIncorrectparticle.Stop();
+		RCorrectparticle.Stop();
         LCorrectparticle.Stop();
         
         audiosource.clip = correctAudio;

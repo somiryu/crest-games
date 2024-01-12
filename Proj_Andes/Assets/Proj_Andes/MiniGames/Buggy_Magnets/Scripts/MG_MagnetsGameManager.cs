@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,11 +14,14 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] MG_MagnetsConfigs gameConfigs;
 	[SerializeField] BoxCollider spawnArea;
 	[SerializeField] MG_MagnetRangeHandler magnetRangeIndicator;
+	[SerializeField] AudioSource lostGameAudio;
 
 	[Header("Game UI")]
 	[SerializeField] Image EnergyFillImage;
-	[SerializeField] TMP_Text MagnetsAmount;
+	[SerializeField] List<Image> magnetsAvailable;
 	[SerializeField] Image trapImage;
+	[SerializeField] TMP_Text inGame_currPointsTextUI;
+	[SerializeField] Animator noLeftMagnetsAnims;
 
 	[Header("after action UI")]
 	[SerializeField] GameObject afterActionPanel;
@@ -26,6 +30,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] Image afterActionEnergyFillImage;
 	[SerializeField] GameObject winTitle;
 	[SerializeField] GameObject loseTitle;
+	[SerializeField] TMP_Text afterAction_currPointsTextUI;
+
 
 	private float timer;
 	private int currSpawnedItems;
@@ -49,12 +55,15 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 		energyItemsPool.Init(30);
 		availableMagnets = gameConfigs.initialMagnetsCount;
-		timer = 0;
+		timer = gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify();
 		currSpawnedItems = 0;
 		currEnergyPicked = 0;
 		currEneryProgress = 0;
 		EnergyFillImage.fillAmount = 0;
-		MagnetsAmount.SetText(availableMagnets.ToString());
+		for (int i = 0; i < magnetsAvailable.Count; i++)
+		{
+			magnetsAvailable[i].gameObject.SetActive(true);
+		}
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);
 		trapImage.gameObject.SetActive(gameConfigs.activeCheats);
 		eogManager.OnGameStart();
@@ -63,11 +72,12 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	private void Update()
 	{
+		if (availableMagnets == 0) return;
 		timer += Time.deltaTime;
 		if (timer > gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify())
 		{
 			timer = 0;
-			SpawnNewItem();
+			for (int i = 0; i < gameConfigs.itemsAmountToSpawn; i++) SpawnNewItem();
 		}
 
 		if(Input.GetMouseButtonDown(0))
@@ -91,7 +101,10 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 				
 			}
 			availableMagnets--;
-			MagnetsAmount.SetText(availableMagnets.ToString());
+			for (int i = 0; i < magnetsAvailable.Count; i++)
+			{
+				magnetsAvailable[i].gameObject.SetActive(i < availableMagnets);
+			}
 			if(availableMagnets == 0)
 			{
                 OnGameOver();
@@ -124,14 +137,16 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	void OnPicketEnergyItem(MG_MagnetsEnergyItem itemPicked)
 	{
-		itemPicked.OnWasPicked(energyItemsPool);
+		itemPicked.OnWasPicked();
 		currEnergyPicked++;
+		inGame_currPointsTextUI.text = currEnergyPicked.ToString();
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
 		EnergyFillImage.fillAmount = currEneryProgress;
         var won = Mathf.Abs(currEneryProgress - 1f) < 0.02f;
 		if (won) OnGameOver();   
 	}
+
 
 	void SpawnNewItem()
 	{
@@ -142,22 +157,37 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		var randomX = Random.Range(-halfContainerSize.x, halfContainerSize.x);
 		var randomY = Random.Range(-halfContainerSize.y, halfContainerSize.y);
 		newItem.transform.position = new Vector2(randomX, randomY);
+		newItem.Init(gameConfigs.energyItemsLifeTime, energyItemsPool);
 	}
 
 	void OnGameOver()
 	{
-		afterActionPanel.SetActive(true);
-		ingameObj.SetActive(false);
-		ingameObjUI.SetActive(false);
+		StartCoroutine(EndGameAfterTime());
+	}
+
+	IEnumerator EndGameAfterTime()
+	{
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
 		afterActionEnergyFillImage.fillAmount = currEneryProgress;
 		var won = Mathf.Abs(afterActionEnergyFillImage.fillAmount - 1f) < 0.02f;
+		if (!won)
+		{
+			lostGameAudio.Play();
+			noLeftMagnetsAnims.SetTrigger("Play");
+			yield return new WaitForSeconds(1);
+		}
+		
+		afterActionPanel.SetActive(true);
+		ingameObj.SetActive(false);
+		ingameObjUI.SetActive(false);
+
 		winTitle.SetActive(won);
 		loseTitle.SetActive(!won);
-		gameConfigs.coinsCollected = currEnergyPicked;
-        eogManager.OnGameOver();
+		afterAction_currPointsTextUI.SetText(currEnergyPicked.ToString());
 
+		gameConfigs.coinsCollected = currEnergyPicked;
+		eogManager.OnGameOver();
 	}
 
 }

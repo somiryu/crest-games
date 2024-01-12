@@ -15,21 +15,22 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: 1854d9b868866b04a9628e64dac549d7, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/Buggy_Magnets/Scenes/MG_Magnets.unity
-  timeBetweenSpawns: 1
+  timeBetweenSpawns: 5
   maxSpawnsOnScreen: 30
-  userMagnetRadius: 1
-  initialMagnetsCount: 5
-  neededEnergyToPick: 10
+  userMagnetRadius: 1.5
+  initialMagnetsCount: 3
+  neededEnergyToPick: 8
   activeCheats: 1
+  energyItemsLifeTime: 5
   timeBetweenSpawnsPerDifficultLevel:
     valueBase: 2
     modifierPerDifficultLevel:
     - difficultyLevel: 0
       difficultyOperation: 1
-      valueModificator: 1
+      valueModificator: 0
     - difficultyLevel: 1
       difficultyOperation: 0
       valueModificator: 2
     - difficultyLevel: 2
-      difficultyOperation: 2
-      valueModificator: 2
+      difficultyOperation: 0
+      valueModificator: 4

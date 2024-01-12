@@ -154,7 +154,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         audiosource.clip = boosteredAudio;
         audiosource.Play();
         boostedParticles.Play();
-        for (int i = 0; i <= skinObjAnim.Length; i++)
+        for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
             skinObjAnim[i].SetTrigger("Correct");

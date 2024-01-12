@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3c24ec7631d0641a3355cb6d91a02e, type: 3}
   m_Name: DialoguesConfigs
   m_EditorClassIdentifier: 
-  appearTime: 0.08
+  appearTime: 0.04
   skipKey: 32
   charactersUIConfigs:
   - chType: 0

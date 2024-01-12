@@ -153,7 +153,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         currPlayerHealth += gameConfigs.playerHealthLostOnWrongAnswer;
 
-        for (int i = 0; i <= skinObjAnim.Length ; i++)
+        for (int i = 0; i < skinObjAnim.Length ; i++)
         {
 
             skinObjAnim[i].SetTrigger("Incorrect");
@@ -174,7 +174,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         audiosource.Play();
 
         correctParticles.Play();
-        for (int i = 0; i <= skinObjAnim.Length; i++)
+        for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
             skinObjAnim[i].SetTrigger("Correct");
