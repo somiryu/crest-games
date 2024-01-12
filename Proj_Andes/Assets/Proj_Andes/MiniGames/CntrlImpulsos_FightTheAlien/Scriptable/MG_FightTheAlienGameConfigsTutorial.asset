@@ -118,7 +118,7 @@ MonoBehaviour:
     time: 0
     score: 0
     life: 0
-    helpPopUp: 1
+    helpPopUp: 0
   - stepsAmount: 2
     alienAttacksConfigsType: 1
     helpButton: 1

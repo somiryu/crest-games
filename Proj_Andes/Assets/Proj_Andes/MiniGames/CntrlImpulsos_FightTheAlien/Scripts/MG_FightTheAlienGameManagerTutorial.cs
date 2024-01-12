@@ -51,7 +51,9 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     [SerializeField] ParticleSystem correctParticles;
     [SerializeField] ParticleSystem incorrectParticles;
     [SerializeField] GameObject skinObj;
+    [SerializeField] GameObject skinObjPopUp;
     [SerializeField] Animator[] skinObjAnim;
+    [SerializeField] Animator[] skinObjAnimPopUp;
 
     [Header("Posible Answer")]
     [SerializeField] AlienAttackConfig[] alienAttacksConfigsMatch;
@@ -88,6 +90,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
         audiosource = GetComponent<AudioSource>();
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
+        skinObjAnimPopUp = skinObjPopUp.GetComponentsInChildren<Animator>(true);
         currCoins = gameConfigs.initialCoins;
         currPlayerHealth = gameConfigs.PlayerHealth;
         currEnemyHealth = gameConfigs.EnemyHealth;
@@ -234,19 +237,22 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         audiosource.Play();
 
         currPointsAmount = 0;
-        
+
+        if (currStepConfigTutorial.helpPopUp)
+            ActivePopUp();
+
         for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
             skinObjAnim[i].SetTrigger("Incorrect");
+            skinObjAnimPopUp[i].SetTrigger("Incorrect");
 
         }
 
         incorrectParticles.Play();
         incorrectParticles.Play();
 
-        if (currStepConfigTutorial.helpPopUp)
-            ActivePopUp();
+        
 
 
         if (!currStepConfigTutorial.wrongChoices) return;
@@ -274,6 +280,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         {
 
             skinObjAnim[i].SetTrigger("Correct");
+            skinObjAnimPopUp[i].SetTrigger("Correct");
         }
 
 
