@@ -54,7 +54,6 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     [SerializeField] Animator[] skinObjAnim;
 
     [Header("Posible Answer")]
-    [SerializeField] AlienAttackConfig[] alienAttacksConfigs;
     [SerializeField] AlienAttackConfig[] alienAttacksConfigsMatch;
     [SerializeField] AlienAttackConfig[] alienAttacksConfigsNoMatch;
     AlienAttackConfig[] currAlienAttacksConfigs;
@@ -64,7 +63,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     bool isCorrect;
     bool wrongColor;
     bool wrongShape;
-    Sprite playerAnswer;
+    MG_FightTheAlienAnswerBtnTutorial playerAnswer;
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
@@ -84,8 +83,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         currentTutorialStep = 0;
     }
 
-
-    public void Init()
+    private void Init()
     {
 
         audiosource = GetComponent<AudioSource>();
@@ -120,7 +118,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         InitRound();
     }
 
-    public void InitTutorialStep()
+    private void InitTutorialStep()
     {
         Debug.Log("tutorial" + currentTutorialStep);
         currStepConfigTutorial = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep];
@@ -129,12 +127,12 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         enemyHealthUI.gameObject.SetActive(currStepConfigTutorial.life);
         playerHealthUI.gameObject.SetActive(currStepConfigTutorial.life);
         startCounter.SetActive(currStepConfigTutorial.score);
-        SetAlienAttackCOnfig();
+        SetAlienAttackConfig();
 
 
     }
 
-    public void SetAlienAttackCOnfig()
+    private void SetAlienAttackConfig()
     {        
         switch (currStepConfigTutorial.alienAttacksConfigsType)
         {
@@ -165,14 +163,14 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
         if (currStepConfigTutorial.alienAttacksConfigsType == alienAttacksConfigsType.Interval)
         {
-            SetAlienAttackCOnfig();
+            SetAlienAttackConfig();
             isMatchAttack = !isMatchAttack;
         }
 
         var randomAttack = Random.Range(0, currAlienAttacksConfigs.Length);
         currAttack = currAlienAttacksConfigs[randomAttack];
 
-        alienAttackImage.sprite = currAttack.attackSprite;
+        alienAttackImage.sprite = currAttack.alienAtack.attackSprite;
 
         currCorrectAnswerIdx = Random.Range(0, 3);
 
@@ -185,19 +183,20 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
             var helpButton = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep].helpButton;
             if (i == currCorrectAnswerIdx)
             {
-                currBtnImage.SetAnswerImage(currAttack.rightAnswer);
+                currBtnImage.SetAnswerImage(currAttack.rightAnswer.attackSprite);
                 currBtnImage.ShowHighlightImg(helpButton);
+                currBtnImage.alienAttackOption = currAttack.rightAnswer;
             }
             else if (!firstWrongImageUsedFlag)
             {
-                currBtnImage.SetAnswerImage(currAttack.wrongColor);
-                currBtnImage.isWrongColorBtn = true;
+                currBtnImage.SetAnswerImage(currAttack.wrongAnswer1.attackSprite);
+                currBtnImage.alienAttackOption = currAttack.wrongAnswer1;
                 firstWrongImageUsedFlag = true;
             }
             else
             { 
-                currBtnImage.SetAnswerImage(currAttack.wrongShape);
-                currBtnImage.isWrongColorBtn = false;
+                currBtnImage.SetAnswerImage(currAttack.wrongAnswer2.attackSprite);
+                currBtnImage.alienAttackOption = currAttack.wrongAnswer2;
             }
         }
     }
@@ -218,21 +217,9 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
     void OnAnswerBtnClicked(int idx, MG_FightTheAlienAnswerBtnTutorial button)
     {
-        playerAnswer = button.button.image.sprite;
+        playerAnswer = button;
         if (idx == currCorrectAnswerIdx) OnCorrectChoice();
-        else
-        {
-            if (button.isWrongColorBtn) { 
-                wrongColor = true;
-                wrongShape = false;
-
-            }
-            else { 
-                wrongColor = false;
-                wrongShape = true;
-            }
-            OnWrongChoice();
-        }
+        else OnWrongChoice();     
 
     }
     private void OnWrongChoice()
@@ -261,8 +248,6 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         if (currStepConfigTutorial.helpPopUp)
             ActivePopUp();
 
-        wrongColor = true;
-        wrongShape = true;
 
         if (!currStepConfigTutorial.wrongChoices) return;
         currCoins += gameConfigs.coinsOnWrongAnswer;
@@ -277,9 +262,6 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         isCorrect = true;
         if (currStepConfigTutorial.helpPopUp)
             ActivePopUp();
-
-        wrongColor = false;
-        wrongShape = false;
 
         correctParticles.Stop();
         incorrectParticles.Stop();
@@ -337,15 +319,24 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         eogManager.OnGameOver();
     }
 
-    public void ActivePopUp()
+    private void ActivePopUp()
     {
-        tutorialPopUp.gameObject.SetActive(true);
-        tutorialPopUp.SetAlienAttackImage(currAttack.attackSprite);
-        tutorialPopUp.SetAnswerSelectedImage(playerAnswer);
-        tutorialPopUp.SetColorImage(currAttack.colorAlienAttackConfig,wrongColor);
-        tutorialPopUp.SetShapeImage(currAttack.shapeAlienAttackConfig,wrongShape);
+        if (playerAnswer.alienAttackOption.shapeAlienAttack == currAttack.alienAtack.shapeAlienAttack) wrongShape = false;
+        else wrongShape = true;
+        if (playerAnswer.alienAttackOption.colorAlienAttack == currAttack.alienAtack.colorAlienAttack) wrongColor = false;
+        else wrongColor = true;
+        tutorialPopUp.SetAlienAttackImage(currAttack.alienAtack.attackSprite);
+        tutorialPopUp.SetAnswerSelectedImage(playerAnswer.alienAttackOption.attackSprite);
+        tutorialPopUp.SetColorImage(playerAnswer.alienAttackOption.colorAlienAttack, wrongColor);
+        tutorialPopUp.SetShapeImage(playerAnswer.alienAttackOption.shapeAlienAttack,wrongShape);
         tutorialPopUp.SetFaceFeedbackImage(isCorrect);
+        tutorialPopUp.gameObject.SetActive(true);
+
+
+
     }
+
+   
 }
 
 

@@ -59,7 +59,7 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
                 break;
         }
 
-        if (value) colorFeedbackImage.sprite = correctFeedback;
+        if (!value) colorFeedbackImage.sprite = correctFeedback;
         else colorFeedbackImage.sprite = wrongFeedback;
     }
     public void SetShapeImage(shapeAlienAttackConfig shape, bool value)
@@ -77,7 +77,7 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
                 break;
         }
 
-        if (value) shapeFeedbackImage.sprite = correctFeedback;
+        if (!value) shapeFeedbackImage.sprite = correctFeedback;
         else shapeFeedbackImage.sprite = wrongFeedback;
     }
 

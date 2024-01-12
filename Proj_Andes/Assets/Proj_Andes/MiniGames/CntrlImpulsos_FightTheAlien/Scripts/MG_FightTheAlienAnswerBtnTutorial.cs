@@ -8,7 +8,7 @@ public class MG_FightTheAlienAnswerBtnTutorial : MonoBehaviour
     [SerializeField] Image hiHighlightImg;
 
     public Button button;
-    public bool isWrongColorBtn;
+    public AlienAttackOption alienAttackOption;
     public void ShowHighlightImg(bool value)
     {
         hiHighlightImg.gameObject.SetActive(value);

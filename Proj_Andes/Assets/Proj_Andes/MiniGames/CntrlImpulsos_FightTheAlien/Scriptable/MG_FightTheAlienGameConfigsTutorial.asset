@@ -13,49 +13,103 @@ MonoBehaviour:
   m_Name: MG_FightTheAlienGameConfigsTutorial
   m_EditorClassIdentifier: 
   alienAttacksConfigsMatch:
-  - attackSprite: {fileID: 21300000, guid: eebc61383fcbcb546a54c4ac9579def6, type: 3}
-    colorAlienAttackConfig: 0
-    shapeAlienAttackConfig: 2
-    wrongColor: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
-    wrongShape: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-    rightAnswer: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
-  - attackSprite: {fileID: 21300000, guid: d6abb41e2a9d7a64f89089ab167fb843, type: 3}
-    colorAlienAttackConfig: 2
-    shapeAlienAttackConfig: 0
-    wrongColor: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
-    wrongShape: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
-    rightAnswer: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-  - attackSprite: {fileID: 21300000, guid: 811c77aad97344a4794f94d9f430d4b1, type: 3}
-    colorAlienAttackConfig: 1
-    shapeAlienAttackConfig: 1
-    wrongColor: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-    wrongShape: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
-    rightAnswer: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+  - alienAtack:
+      attackSprite: {fileID: 21300000, guid: d6abb41e2a9d7a64f89089ab167fb843, type: 3}
+      colorAlienAttack: 2
+      shapeAlienAttack: 0
+    wrongAnswer1:
+      attackSprite: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+      colorAlienAttack: 0
+      shapeAlienAttack: 2
+    wrongAnswer2:
+      attackSprite: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+      colorAlienAttack: 1
+      shapeAlienAttack: 1
+    rightAnswer:
+      attackSprite: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      colorAlienAttack: 2
+      shapeAlienAttack: 0
+  - alienAtack:
+      attackSprite: {fileID: 21300000, guid: 811c77aad97344a4794f94d9f430d4b1, type: 3}
+      colorAlienAttack: 1
+      shapeAlienAttack: 1
+    wrongAnswer1:
+      attackSprite: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      colorAlienAttack: 2
+      shapeAlienAttack: 0
+    wrongAnswer2:
+      attackSprite: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+      colorAlienAttack: 0
+      shapeAlienAttack: 2
+    rightAnswer:
+      attackSprite: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+      colorAlienAttack: 1
+      shapeAlienAttack: 1
+  - alienAtack:
+      attackSprite: {fileID: 21300000, guid: eebc61383fcbcb546a54c4ac9579def6, type: 3}
+      colorAlienAttack: 0
+      shapeAlienAttack: 2
+    wrongAnswer1:
+      attackSprite: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      colorAlienAttack: 2
+      shapeAlienAttack: 0
+    wrongAnswer2:
+      attackSprite: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+      colorAlienAttack: 1
+      shapeAlienAttack: 1
+    rightAnswer:
+      attackSprite: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+      colorAlienAttack: 0
+      shapeAlienAttack: 2
   alienAttacksConfigsNoMatch:
-  - attackSprite: {fileID: 21300000, guid: 3d2a3396b97fb2d46bbd70fd23160859, type: 3}
-    colorAlienAttackConfig: 0
-    shapeAlienAttackConfig: 0
-    wrongColor: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-    wrongShape: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
-    rightAnswer: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
-  - attackSprite: {fileID: 21300000, guid: 1af6195b70d81a04d9c127886b0de0cf, type: 3}
-    colorAlienAttackConfig: 2
-    shapeAlienAttackConfig: 1
-    wrongColor: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-    wrongShape: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
-    rightAnswer: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
-  - attackSprite: {fileID: 21300000, guid: e03b3f55e3112bb44b1ebf86d53c3778, type: 3}
-    colorAlienAttackConfig: 1
-    shapeAlienAttackConfig: 2
-    wrongColor: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
-    wrongShape: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
-    rightAnswer: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-  - attackSprite: {fileID: 21300000, guid: 0eb0917f1a00b7442b29f1c106ae8af7, type: 3}
-    colorAlienAttackConfig: 1
-    shapeAlienAttackConfig: 0
-    wrongColor: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-    wrongShape: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
-    rightAnswer: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+  - alienAtack:
+      attackSprite: {fileID: 21300000, guid: 3d2a3396b97fb2d46bbd70fd23160859, type: 3}
+      colorAlienAttack: 0
+      shapeAlienAttack: 0
+    wrongAnswer1:
+      attackSprite: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+      colorAlienAttack: 0
+      shapeAlienAttack: 2
+    wrongAnswer2:
+      attackSprite: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      colorAlienAttack: 2
+      shapeAlienAttack: 0
+    rightAnswer:
+      attackSprite: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+      colorAlienAttack: 1
+      shapeAlienAttack: 1
+  - alienAtack:
+      attackSprite: {fileID: 21300000, guid: 1af6195b70d81a04d9c127886b0de0cf, type: 3}
+      colorAlienAttack: 2
+      shapeAlienAttack: 1
+    wrongAnswer1:
+      attackSprite: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      colorAlienAttack: 2
+      shapeAlienAttack: 0
+    wrongAnswer2:
+      attackSprite: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+      colorAlienAttack: 1
+      shapeAlienAttack: 1
+    rightAnswer:
+      attackSprite: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+      colorAlienAttack: 0
+      shapeAlienAttack: 2
+  - alienAtack:
+      attackSprite: {fileID: 21300000, guid: e03b3f55e3112bb44b1ebf86d53c3778, type: 3}
+      colorAlienAttack: 1
+      shapeAlienAttack: 2
+    wrongAnswer1:
+      attackSprite: {fileID: 21300000, guid: 7ff699a95deacb744913796ce3ce6eec, type: 3}
+      colorAlienAttack: 1
+      shapeAlienAttack: 1
+    wrongAnswer2:
+      attackSprite: {fileID: 21300000, guid: c4b1d29dd1132fc4b9b60d66854457dd, type: 3}
+      colorAlienAttack: 0
+      shapeAlienAttack: 2
+    rightAnswer:
+      attackSprite: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      colorAlienAttack: 2
+      shapeAlienAttack: 0
   mG_FightTheAlienTutorialSteps:
   - stepsAmount: 2
     alienAttacksConfigsType: 0

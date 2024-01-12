@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -43,7 +44,9 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] Animator[] skinObjAnim;
 
     [Header("Posible Answer")]
-	[SerializeField] AlienAttackConfig[] alienAttacksConfigs;
+    [SerializeField] AlienAttackConfig[] alienAttacksConfigsMatch;
+    [SerializeField] AlienAttackConfig[] alienAttacksConfigsNoMatch;
+    AlienAttackConfig[] currAlienAttacksConfigs;
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
@@ -59,6 +62,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
 	public void Awake()
 	{
+        currAlienAttacksConfigs = alienAttacksConfigsMatch.Concat(alienAttacksConfigsNoMatch).ToArray();
         Init();
 	}
 
@@ -102,10 +106,10 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     {
         timerPerChoice = 0;
         eogManager.OnGameStart();
-        var randomAttack = Random.Range(0, alienAttacksConfigs.Length);
-        var currConfig = alienAttacksConfigs[randomAttack];
+        var randomAttack = Random.Range(0, currAlienAttacksConfigs.Length);
+        var currConfig = currAlienAttacksConfigs[randomAttack];
 
-        alienAttackImage.sprite = currConfig.attackSprite;
+        alienAttackImage.sprite = currConfig.alienAtack.attackSprite;
 
 		currCorrectAnswerIdx = Random.Range(0, 3);
 
@@ -114,13 +118,13 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         for (int i = 0; i < 3; i++)
         {
             var currBtnImage = answerBtns[i].targetGraphic as Image;
-            if (i == currCorrectAnswerIdx) currBtnImage.sprite = currConfig.rightAnswer;
+            if (i == currCorrectAnswerIdx) currBtnImage.sprite = currConfig.rightAnswer.attackSprite;
             else if (!firstWrongImageUsedFlag)
             {
-                currBtnImage.sprite = currConfig.wrongColor;
+                currBtnImage.sprite = currConfig.wrongAnswer1.attackSprite;
                 firstWrongImageUsedFlag=true;
             }
-            else currBtnImage.sprite = currConfig.wrongShape;
+            else currBtnImage.sprite = currConfig.wrongAnswer2.attackSprite;
 		}
 	}
 
@@ -219,18 +223,18 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 [Serializable]
 public struct AlienAttackConfig
 {
+    public AlienAttackOption alienAtack;
+    public AlienAttackOption wrongAnswer1;
+    public AlienAttackOption wrongAnswer2;
+    public AlienAttackOption rightAnswer;
+}
+
+[Serializable]
+public class AlienAttackOption
+{
     public Sprite attackSprite;
-    public colorAlienAttackConfig colorAlienAttackConfig;
-    public shapeAlienAttackConfig shapeAlienAttackConfig;
-    public Sprite wrongColor;
-    public colorAlienAttackConfig wrongAnswer1ColorAlienAttackConfig;
-    public shapeAlienAttackConfig wrongAnswer1ShapeAlienAttackConfig;
-    public Sprite wrongShape;
-    public colorAlienAttackConfig wrongAnswer2ColorAlienAttackConfig;
-    public shapeAlienAttackConfig wrongAnswer2ShapeAlienAttackConfig;
-    public Sprite rightAnswer;
-    public colorAlienAttackConfig rightAnswerClorAlienAttackConfig;
-    public shapeAlienAttackConfig rightAnswerShapeAlienAttackConfig;
+    public colorAlienAttackConfig colorAlienAttack;
+    public shapeAlienAttackConfig shapeAlienAttack;
 }
 
 public enum colorAlienAttackConfig
