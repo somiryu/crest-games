@@ -126,7 +126,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         {
             CorrectRotationToFail();
         }
-
+        //Anim de moverse
         while ((originalPosition - currPosition).magnitude < hookMaxDistance)
         {
             hook.transform.position += transform.right * hookSpeed * Time.deltaTime;
@@ -134,6 +134,10 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             if (hookedObj) break;
             yield return null;
         }
+
+        //animacion agarrar
+        //Esperar 2 segundos
+        //Animacion moverse
         while ((currPosition != originalPosition))
         {
             hook.transform.localPosition = Vector3.MoveTowards(hook.transform.localPosition, originalPosition, hookSpeed * Time.deltaTime);
@@ -141,6 +145,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             yield return null;
         }
 
+        //Anim idle
         canDrag = true;
         hookShootingRoutine = null;
         CheckIfScored();
