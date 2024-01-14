@@ -13,32 +13,55 @@ MonoBehaviour:
   m_Name: 2_0_AfterMaterial
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 1
+  - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "Al final, hicimos otra actividad y ni siquiera usamos los materiales \xBFpuedes
-      creerlo?"
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Para Cami no es tan chevere, porque no encuentra con quien jugar\ty se
+      queda sola todo el descanso"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 5df9dd154a3f3e941b9255f95da5115d, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 0
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: 
+    changeToSequence: {fileID: 11400000, guid: 0ee258ae4c5cd9d44a23b392968e829e, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que Cami no tuvo con quien jugar?\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
-    - response: "SI\t"
-      responseImage: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
-      changeSequence: 1
-      dataAfterResponse: {fileID: 11400000, guid: daec2499c7e37ae448ac440d03c4d46c, type: 2}
-    - response: NO
-      responseImage: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
-      changeSequence: 1
-      dataAfterResponse: {fileID: 11400000, guid: 381e946ad44109546a96d39533e94ceb, type: 2}
-    audio: {fileID: 0}
+    - response: MUY BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: ME DA IGUAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: MAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: MUY MAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: a2fa011b8482ec441b83012654062e22, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

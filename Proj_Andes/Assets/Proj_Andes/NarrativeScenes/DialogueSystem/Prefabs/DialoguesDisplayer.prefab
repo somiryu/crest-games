@@ -466,7 +466,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialStep: 0
-  tutorialImage: {fileID: 7848560186216171963}
 --- !u!1 &3063343628042118865
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,8 +501,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25855914}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2.203125, y: -121.90723}
-  m_SizeDelta: {x: -34.329, y: -236.1855}
+  m_AnchoredPosition: {x: 21.795, y: -129.96}
+  m_SizeDelta: {x: -100.22, y: -206.1381}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3063343628042118868
 CanvasRenderer:
@@ -533,7 +532,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1199115066, guid: 432526d69bc8ac543ba94762f009d269, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 92b01798dd06d4f49bc2e41f15d6e596, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -577,7 +576,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 28, y: -10}
   m_SizeDelta: {x: -20.000023, y: -19.999996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3063343628096675028
@@ -1105,7 +1104,6 @@ MonoBehaviour:
   dialogueTxt: {fileID: 3063343628096675031}
   dialogueTxtContainer: {fileID: 3063343628042118865}
   skipDialogueBtn: {fileID: 3063343627693124700}
-  tutorialSkipDialogueBtn: {fileID: 8310555950675730054}
   dialogueBoxBtn: {fileID: 7763545073195453280}
   repeatBtn: {fileID: 1591285189274973370}
   timeLinePlayer: {fileID: 0}
