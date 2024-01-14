@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e1a940fd090ec4f9deebacb85c8b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialStep: 1
+  tutorialStep: 2
 --- !u!114 &896040511226923422
 MonoBehaviour:
   m_ObjectHideFlags: 0

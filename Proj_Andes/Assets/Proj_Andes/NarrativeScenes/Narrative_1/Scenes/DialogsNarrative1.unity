@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueDisplayerUI: {fileID: 1527390312}
-  _startingSequence: {fileID: 11400000, guid: f8d273cd4b2ae5146833e143cb618c67, type: 2}
+  _startingSequence: {fileID: 11400000, guid: 674759f1b6d1b754396734dda00717e1, type: 2}
 --- !u!4 &1180631021
 Transform:
   m_ObjectHideFlags: 0
@@ -2276,6 +2276,10 @@ PrefabInstance:
     - target: {fileID: 7575762649437056078, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310555950675730054, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: tutorialStep
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

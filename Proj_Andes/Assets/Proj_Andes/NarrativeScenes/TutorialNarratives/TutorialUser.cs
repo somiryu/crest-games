@@ -8,11 +8,19 @@ public class TutorialUser : MonoBehaviour
     public tutorialSteps tutorialStep;
     [SerializeField] iTutorialType tutorialType;
 
-    private void Start()
-    {
+	private void Awake()
+	{
+		TryGetComponent(out tutorialType);
+	}
+
+	private void Start()
+	{
         TutorialManager.Instance.AddNewUser(this);
+	}
+
+	private void OnEnable()
+    {
         var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
-        TryGetComponent<iTutorialType>(out tutorialType);
         tutorialType.StepStart(activeTut);
     }
 
