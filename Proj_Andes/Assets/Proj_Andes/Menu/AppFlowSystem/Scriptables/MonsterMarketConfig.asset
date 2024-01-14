@@ -18,4 +18,5 @@ MonoBehaviour:
   RegularChestPrice: 5
   RareChestPrice: 10
   LegendaryChestPrice: 15
-  availableCoins: 2
+  availableCoins: 95
+  monstersLibrary: {fileID: 11400000, guid: 7e6f7958bfb83d84898f138f3ee9fcef, type: 2}
