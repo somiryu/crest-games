@@ -66,45 +66,32 @@ MonoBehaviour:
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
-  - characterType: 1
+  - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "T\xFA no estabas, y no encontr\xE9 con quien jugar. Me qued\xE9 sola todo
-      el tiempo."
+    text: " Menos mal, ya lleg\xF3 el final del d\xEDa de colegio y comienzas a alistarte
+      para regresar a tu casa.\r\n"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: a4078d4c7aeb6b647b25fb0e52a6abdc, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "A la salida ves a Alex, la compa\xF1era que hizo caer a tu amiga y que
+      te ray\xF3 tu cuaderno. Parece que est\xE1 buscando a alguien que la acompa\xF1e
+      caminando a su casa.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFC\xF3mo te sientes tu al saber lo que le pas\xF3 a Cami?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses:
-    - response: BIEN
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: NADA
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5e90a61f787052a4888cb4b2b05925ce, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: MAL
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5598b4484487242429598640ff99888f, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 8300000, guid: 93c1173e071e3e447a494a7fb21c78cc, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
