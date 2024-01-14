@@ -20,7 +20,11 @@ public class SkinnableImage : MonoBehaviour
 
 	private void Awake()
 	{
-        if (assignOnAwake) SetSkinType(SkinManager.Instance.GetCurrSkin());
+        if (assignOnAwake)
+        {
+            SkinManager.Instance.RegisterSkinImg(this);
+            SetSkinType(SkinManager.Instance.GetCurrSkin());
+        }
 	}
 
 	public void SetSkinType(SkinType skinType)

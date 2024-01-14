@@ -9,12 +9,14 @@ public class MG_MagnetsConfigs : GameConfig
 {
 	public float timeBetweenSpawns;
 	public int maxSpawnsOnScreen;
-	public int userMagnetRadius;
+	public float userMagnetRadius;
 	public int initialMagnetsCount;
 	public int neededEnergyToPick;
 	public bool activeCheats;
+	public float energyItemsLifeTime = 5;
+	public int itemsAmountToSpawn = 3;
 
-    public DifficultyModificatorFloat timeBetweenSpawnsPerDifficultLevel;
+	public DifficultyModificatorFloat timeBetweenSpawnsPerDifficultLevel;
     
 	[HideInInspector] [NonSerialized] public int coinsCollected;
 
