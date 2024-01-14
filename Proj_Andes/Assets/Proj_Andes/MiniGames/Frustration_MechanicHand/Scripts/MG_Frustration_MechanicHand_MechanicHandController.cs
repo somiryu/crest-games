@@ -19,6 +19,20 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     public float dragDeathZone = 0.02f;
     bool canDrag = true;
 
+    [Header("Game Audio")]
+    [SerializeField] AudioClip selectingAudio;
+    [SerializeField] AudioClip toHookAudio;
+    [SerializeField] AudioClip onHookedAudio;
+    [SerializeField] AudioClip notHookedAudio;
+    private AudioSource audioSource;
+
+    [Header("GameParticles")]
+    [SerializeField] ParticleSystem correctParticles;
+    [SerializeField] ParticleSystem incorrectParticles;
+    [SerializeField] GameObject skinObj;
+    [SerializeField] Animator[] skinObjAnim;
+
+
     IEnumerator hookShootingRoutine;
 
 
@@ -26,11 +40,15 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 	{
         hook.TryGetComponent(out hookCollider);
         hook.Init(this);
-	}
+        audioSource = GetComponent<AudioSource>();
 
-	void Update()
+    }
+
+    void Update()
     {
         DragBehaviour();
+        //progressSlider.value = player.CurrProgress;
+
     }
 
     void DragBehaviour()
@@ -86,6 +104,10 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         if (hookShootingRoutine != null) StopCoroutine(hookShootingRoutine);
         hookShootingRoutine = SendHookRoutine();
         StartCoroutine(hookShootingRoutine);
+        
+        audioSource.Stop();
+        audioSource.clip = toHookAudio;
+        audioSource.Play();
     }
 
     RaycastHit[] hitResults = new RaycastHit[20];
@@ -104,7 +126,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         {
             CorrectRotationToFail();
         }
-
+        //Anim de moverse
         while ((originalPosition - currPosition).magnitude < hookMaxDistance)
         {
             hook.transform.position += transform.right * hookSpeed * Time.deltaTime;
@@ -112,6 +134,10 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             if (hookedObj) break;
             yield return null;
         }
+
+        //animacion agarrar
+        //Esperar 2 segundos
+        //Animacion moverse
         while ((currPosition != originalPosition))
         {
             hook.transform.localPosition = Vector3.MoveTowards(hook.transform.localPosition, originalPosition, hookSpeed * Time.deltaTime);
@@ -119,6 +145,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             yield return null;
         }
 
+        //Anim idle
         canDrag = true;
         hookShootingRoutine = null;
         CheckIfScored();
@@ -130,6 +157,9 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 		   BoxCastNonAlloc(hook.transform.position, hookCollider.size / 2, transform.right, hitResults, transform.rotation, Mathf.Infinity);
 
         var correctHit = false;
+        audioSource.Stop();
+        audioSource.clip = notHookedAudio;
+        audioSource.Play();
         for (int i = 0; i < hitAmount; i++)
         {
             var curr = hitResults[i];
@@ -143,7 +173,10 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             currRotation.z += 0.2f;
             transform.eulerAngles = currRotation;
             CorrectRotationToFail();
-		}
+            audioSource.Stop();
+            audioSource.clip = onHookedAudio;
+            audioSource.Play();
+        }
 	}
 
 

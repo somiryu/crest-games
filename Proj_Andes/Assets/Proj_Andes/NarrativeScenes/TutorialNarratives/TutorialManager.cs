@@ -8,7 +8,7 @@ public class TutorialManager : MonoBehaviour
 {
     public Dictionary<string, bool> stepsTutorialNarrativeScenes;
 
-    [SerializeField] List<TutorialUser> usersTutorial = new List<TutorialUser>(10);
+    public List<TutorialUser> usersTutorial = new List<TutorialUser>(10);
 
     private static TutorialManager instance;
     public static TutorialManager Instance => instance;
@@ -62,10 +62,16 @@ public class TutorialManager : MonoBehaviour
         user.OffTutorial();
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
+
+    public void GetCurrentStep(TutorialUser tutorialUser)
+    {
+        return;
+    }
 }
 
 public enum tutorialSteps
 {
+    stepStartPopUp,
     stepSkipButton,
     stepResponseButton,
     stepConfirmedButton

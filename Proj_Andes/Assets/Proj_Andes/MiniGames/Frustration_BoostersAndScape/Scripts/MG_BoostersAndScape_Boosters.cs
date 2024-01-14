@@ -13,6 +13,9 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
     Vector3 initPos;
     Vector3 targetPos;
     public bool boosted;
+
+    [Header("GameParticles")]
+    [SerializeField] ParticleSystem boostedParticles;
     public void Init(Pool<MG_BoostersAndScape_Boosters> _pool)
     {
         pool = _pool;
@@ -41,6 +44,7 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
     public void Boosted()
     {
         boosted = true;
+        boostedParticles.Play();
         Recycle();
     }
     public void NotBoosted()

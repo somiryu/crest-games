@@ -6,21 +6,26 @@ using UnityEngine.UI;
 public class TutorialUser : MonoBehaviour
 {
     public tutorialSteps tutorialStep;
-    [SerializeField] Image tutorialImage;
-
+    [SerializeField] iTutorialType tutorialType;
 
     private void Start()
     {
         TutorialManager.Instance.AddNewUser(this);
         var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
-        tutorialImage.gameObject.SetActive(activeTut);
+        TryGetComponent<iTutorialType>(out tutorialType);
+        tutorialType.StepStart(activeTut);
     }
 
     public void OffTutorial()
     {
-        tutorialImage.gameObject.SetActive(false);
+        tutorialType.StepDone();
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
 }
 
+public interface iTutorialType
+{
+    public void StepStart(bool stepCompleted);
+    public void StepDone();
 
+}
