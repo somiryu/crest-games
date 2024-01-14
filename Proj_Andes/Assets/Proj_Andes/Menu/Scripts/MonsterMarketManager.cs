@@ -16,8 +16,7 @@ public class MonsterMarketManager : MonoBehaviour
 
     [SerializeField] Transform chestsContainer;
     [SerializeField] Transform chestOpenedContainer;
-    [SerializeField] Transform monsterImagesContainer;
-    Image[] monsterImages;
+
     [SerializeField] Button regularChest;
     [SerializeField] Button rareChest;
     [SerializeField] Button legendaryChest;
@@ -26,13 +25,16 @@ public class MonsterMarketManager : MonoBehaviour
     [SerializeField] Button getChestButton;
     [SerializeField] Button collectBtn;
     [SerializeField] TextMeshProUGUI coinsAmtTxt;
-    [SerializeField] List<Monsters> regularMonsters = new List<Monsters>();
-    [SerializeField] List<Monsters> rareMonsters = new List<Monsters>();
-    [SerializeField] List<Monsters> legendaryMonsters = new List<Monsters>();
 
 
-    [SerializeField] List<Monsters> totalCollection = new List<Monsters>();
+    [SerializeField] Pool<MonsterItemUI> monstersUIInCollection;
+    [SerializeField] Pool<MonsterItemUI> monstersUIInChestOpenning;
+
+
+    List<Monsters> totalDataCollection = new List<Monsters>();
     List<Monsters> currentMonstersFound = new List<Monsters>();
+
+
     private void Awake()
     {
         if(instance != null)
@@ -47,10 +49,13 @@ public class MonsterMarketManager : MonoBehaviour
     }
     public void Init()
     {
-        monsterImages = monsterImagesContainer.GetComponentsInChildren<Image>();
-        marketConfig.InitConfig();
-        InitLists();
-        chestsContainer.gameObject.SetActive(false);
+		monstersUIInCollection.Init(10);
+		monstersUIInChestOpenning.Init(5);
+
+		monstersUIInChestOpenning.RecycleAll();
+		RefreshCollectionFromData();
+
+		chestsContainer.gameObject.SetActive(false);
         chestOpenedContainer.gameObject.SetActive(false);
 
         getChestButton.onClick.AddListener(GetChest);
@@ -61,75 +66,41 @@ public class MonsterMarketManager : MonoBehaviour
         rareChest.onClick.AddListener(() => BuyChest(MonsterChestType.Rare));
         legendaryChest.onClick.AddListener(() => BuyChest(MonsterChestType.Legendary));
 
-        coinsAmtTxt.text = marketConfig.availableCoins.ToString();
+        coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
     }
-    [ContextMenu("ResetCollection")]
-    private void InitLists()
-    {
-        totalCollection = marketConfig.myCollectionMonsters;
-        for (int i = 0; i < monsterImages.Length; i++) monsterImages[i].gameObject.SetActive(false);
-        ResetLists(regularMonsters);
-        ResetLists(rareMonsters);
-        ResetLists(legendaryMonsters);
 
-        for (int i = 0; i < totalCollection.Count; i++)
-        {
-            var monster = totalCollection[i].monster = GetMonster(totalCollection[i].monsterType, totalCollection[i].monsterIndex);
-            monster.gameObject.SetActive(true);
-        }
-    }
-    SkinnableImage GetMonster(MonsterChestType type, int idx)
-    {
-        switch (type)
-        {
-            case MonsterChestType.Regular:
-                return regularMonsters[idx].monster;
-            case MonsterChestType.Rare:
-                return rareMonsters[idx].monster;
-            case MonsterChestType.Legendary:
-                return legendaryMonsters[idx].monster;
-            default: return null;
-        }
-    }
-    void ResetLists(List<Monsters> monsterList)
-    {
-        for (int i = 0; i < monsterList.Count; i++)
-        {
-            monsterList[i].monsterIndex = i;
-            monsterList[i].monster.gameObject.SetActive(false);
-        }
-    }
     void BuyChest(MonsterChestType type)
     {
         switch (type)
         {
             case MonsterChestType.Regular:
-                if(marketConfig.availableCoins >= marketConfig.RegularChestPrice)
+                if(marketConfig.AvailableCoins >= marketConfig.RegularChestPrice)
                 {
-                    marketConfig.availableCoins -= marketConfig.RegularChestPrice;
+                    marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
                     OpenChest(80, 20, 0, 2);
                 }
                 else Debug.Log("¡No tienes suficientes monedas!");
                 break;
             case MonsterChestType.Rare:
-                if (marketConfig.availableCoins >= marketConfig.RareChestPrice)
+                if (marketConfig.AvailableCoins >= marketConfig.RareChestPrice)
                 {
-                    marketConfig.availableCoins -= marketConfig.RareChestPrice;
+                    marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
                     OpenChest(20, 70, 10, 5);
                 }
                 else Debug.Log("¡No tienes suficientes monedas!");
                 break;
             case MonsterChestType.Legendary:
-                if (marketConfig.availableCoins >= marketConfig.LegendaryChestPrice)
+                if (marketConfig.AvailableCoins >= marketConfig.LegendaryChestPrice)
                 {
-                    marketConfig.availableCoins -= marketConfig.LegendaryChestPrice;
+                    marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
                     OpenChest(5, 50, 45, 8);
                 }
                 else Debug.Log("¡No tienes suficientes monedas!");
                 break;
         }
-        coinsAmtTxt.text = marketConfig.availableCoins.ToString();
+        coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
     }
+
     void OpenChest(int regularMonstersLikelyness, int rareMonstersLikelyness, int legendaryMonstersLikelyness, int totalMonstersPerChest)
     {
         chestOpenedContainer.gameObject.SetActive(true);
@@ -145,22 +116,24 @@ public class MonsterMarketManager : MonoBehaviour
             var newProb = GetRandomItem(totalChance+1);
             if(newProb <= regularMonstersLikelyness && regularMonstersLikelyness > 0)
             {
-                currentMonstersFound.Add(regularMonsters[GetRandomItem(regularMonsters.Count)]);
+                currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Regular));
             }
             else if(newProb > regularMonstersLikelyness && newProb <= regularMonstersLikelyness + rareMonstersLikelyness && rareMonstersLikelyness > 0)
             {
-                currentMonstersFound.Add(rareMonsters[GetRandomItem(rareMonsters.Count)]);
+				currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Rare));
             }
             else if(newProb > 0 && newProb > regularMonstersLikelyness + rareMonstersLikelyness && legendaryMonstersLikelyness > 0)
             {
-                currentMonstersFound.Add(legendaryMonsters[GetRandomItem(legendaryMonsters.Count)]);
+				currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Legendary));
             }
         }
-        for (int i = 0; i < monsterImages.Length; i++) monsterImages[i].gameObject.SetActive(false);
+
+        monstersUIInChestOpenning.RecycleAll();
+
         for (int i = 0; i < currentMonstersFound.Count; i++)
         {
-            monsterImages[i].sprite = currentMonstersFound[i].monster.sRenderer.sprite;
-            monsterImages[i].gameObject.SetActive(true);
+            var newItem = monstersUIInChestOpenning.GetNewItem();
+            newItem.Show(currentMonstersFound[i]);
         }
     }
     
@@ -174,6 +147,7 @@ public class MonsterMarketManager : MonoBehaviour
         chestsContainer.gameObject.SetActive(true);
         getChestButton.gameObject.SetActive(false);
     }
+
     void Collect()
     {
         chestsContainer.gameObject.SetActive(false);
@@ -182,18 +156,36 @@ public class MonsterMarketManager : MonoBehaviour
 
         for (int i = 0; i < currentMonstersFound.Count; i++)
         {
-            if (!totalCollection.Contains(currentMonstersFound[i]))
+            if (!totalDataCollection.Contains(currentMonstersFound[i]))
             {
-                totalCollection.Add(currentMonstersFound[i]);
-                currentMonstersFound[i].monster.gameObject.SetActive(true);
-                Debug.Log("Encontraste un nuevo monstruo "+ currentMonstersFound[i].monsterType);
+                marketConfig.AddMonsterToCollection(currentMonstersFound[i]);
+                Debug.Log("Encontraste un nuevo monstruo "+ currentMonstersFound[i].Name);
             }
-            else
-            {
-                Debug.Log("Monstruo repetido!");
-            }
+            else Debug.Log("Monstruo repetido!");
         }
-    }
+        RefreshCollectionFromData();
+
+	}
+
+    void RefreshCollectionFromData()
+    {
+		totalDataCollection.Clear();
+		for (int i = 0; i < marketConfig.MyCollectionMonsters.Count; i++)
+		{
+			var currID = marketConfig.MyCollectionMonsters[i];
+			var monsterFound = marketConfig.monstersLibrary.GetMonsterByID(currID);
+			if (monsterFound == null) continue;
+			totalDataCollection.Add(monsterFound);
+		}
+		monstersUIInCollection.RecycleAll();
+
+		for (int i = 0; i < totalDataCollection.Count; i++)
+		{
+			var item = monstersUIInCollection.GetNewItem();
+			item.Show(totalDataCollection[i]);
+		}
+
+	}
     
     void SaveForLater()
     {
@@ -213,7 +205,22 @@ public enum MonsterChestType
 [Serializable]
 public class Monsters
 {
+    public string Name;
+    public string guid = new Guid().ToString();
     public MonsterChestType monsterType;
     public int monsterIndex;
-    public SkinnableImage monster;
+    public Sprite sprite;
+
+    public void OnValidate()
+    {
+        if (string.IsNullOrEmpty(guid))
+        {
+            guid = Guid.NewGuid().ToString();  
+        }
+        var currName = monsterType.ToString() + " : " + sprite.name;
+		if (Name != currName)
+        {
+            Name = currName;
+        }
+    }
 }

@@ -28,7 +28,8 @@ public class UserData
 	public List<NarrativeNavigationNode> narrativeNavCheckPointsNodes;
 	public List<int> itemsPlayedIdxs = new List<int>();
 	public int Coins;
-	public List<Monsters> myCollectionMonsters = new List<Monsters>();
+	//This are the IDXs of the monsters
+	public List<string> myCollectionMonsters = new List<string>();
 
     public UserData()
 	{
@@ -47,8 +48,8 @@ public class UserData
 		CheckPointSubIdx = -1;
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
 		itemsPlayedIdxs = new List<int>();
-		Coins = 0;
-        myCollectionMonsters = new List<Monsters>();
+		Coins = 10;
+        myCollectionMonsters = new List<string>();
 	}
 
 	public bool IsTutorialStepDone(tutorialSteps step)
@@ -85,8 +86,8 @@ public enum UserLivingWith
 	NONE = 0,
 	Father = 1,
 	Mother = 2,
-	Siblings = 3,
-	Uncles = 4,
-	Grandparents = 5,
-	Other = 6,
+	Siblings = 4,
+	Uncles = 8,
+	Grandparents = 16,
+	Other = 32,
 }

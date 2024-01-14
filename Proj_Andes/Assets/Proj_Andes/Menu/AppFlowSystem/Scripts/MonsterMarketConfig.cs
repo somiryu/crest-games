@@ -3,27 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MonsterMarketConfig", menuName = "GameSequencesList/MonsterMarketConfig")]
+[CreateAssetMenu(fileName = "MonsterMarketConfig", menuName = "MonsterMarket/MonsterMarketConfig")]
 public class MonsterMarketConfig : SimpleGameSequenceItem
 {
     public int RegularChestPrice;
     public int RareChestPrice;
     public int LegendaryChestPrice;
-    public int availableCoins;
-    [NonSerialized] public List<Monsters> myCollectionMonsters = new List<Monsters>();
+    public MonstersLibrary monstersLibrary;
 
-    public void InitConfig()
+	public int AvailableCoins => UserDataManager.CurrUser.Coins;
+    public List<string> MyCollectionMonsters => UserDataManager.CurrUser.myCollectionMonsters;
+
+    public void ConsumeCoins(int amountToSubstract)
     {
-        myCollectionMonsters = UserDataManager.CurrUser.myCollectionMonsters;
-        availableCoins = UserDataManager.CurrUser.Coins;
-    }
-    public override void SaveAnalytics()
+        UserDataManager.CurrUser.Coins -= amountToSubstract;
+	}
+
+    public void AddMonsterToCollection(Monsters monster)
     {
-        if(UserDataManager.CurrUser != null)
-        {
-            UserDataManager.CurrUser.Coins = availableCoins;
-            UserDataManager.CurrUser.myCollectionMonsters = myCollectionMonsters;
-        }
-        Debug.Log("Storing market stuff");
+        MyCollectionMonsters.Add(monster.guid);
     }
 }
