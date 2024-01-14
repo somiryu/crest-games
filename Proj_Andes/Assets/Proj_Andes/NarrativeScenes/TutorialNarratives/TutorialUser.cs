@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class TutorialUser : MonoBehaviour
 {
-    public tutorialSteps tutorialStep;
-    [SerializeField] iTutorialType tutorialType;
+	public tutorialSteps tutorialStep;
+    iTutorialType tutorialType;
 
 	private void Awake()
 	{
-		TryGetComponent(out tutorialType);
+        tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
 	}
 
 	private void Start()

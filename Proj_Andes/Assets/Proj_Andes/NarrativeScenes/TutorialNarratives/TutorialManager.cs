@@ -58,8 +58,12 @@ public class TutorialManager : MonoBehaviour
 
     public void TurnOffTutorial(tutorialSteps tutorialStep)
     {
-        var user = usersTutorial.Find(x => x.tutorialStep == tutorialStep); 
-        user.OffTutorial();
+        var users = usersTutorial.FindAll(x => x.tutorialStep == tutorialStep);
+        for (int i = 0; i < usersTutorial.Count; i++)
+        {
+            if (usersTutorial[i].tutorialStep != tutorialStep) continue;
+            usersTutorial[i].OffTutorial();
+        }
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
 

@@ -23,7 +23,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] GameObject nameTxtContainer;
     [SerializeField] TMP_Text dialogueTxt;
     [SerializeField] GameObject dialogueTxtContainer;
-    [SerializeField] Button skipDialogueBtn;    
+    [SerializeField] Image skipDialogueTutImg;    
     [SerializeField] Button dialogueBoxBtn;
     [SerializeField] Button repeatBtn;
     [SerializeField] PlayableDirector timeLinePlayer;
@@ -93,7 +93,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if(instance != null && instance != this) DestroyImmediate(instance);
         instance = this;
 
-        skipDialogueBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
 		choicesTree.Clear();
@@ -270,7 +269,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 
 		repeatBtn.gameObject.SetActive(false);
-		skipDialogueBtn.gameObject.SetActive(false);        
+		skipDialogueTutImg.gameObject.SetActive(false);        
 
         //Clean old responses if needed
         if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
@@ -475,7 +474,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             isAppearingTxt = false;
             dialogueTxt.SetText(SelectTextByGender(currDialogue));
             var turnOnAutoSkip = AutoContinueActive();
-            skipDialogueBtn.gameObject.SetActive(turnOnAutoSkip);
+            skipDialogueTutImg.gameObject.SetActive(turnOnAutoSkip);
             dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);       
         }
     }
