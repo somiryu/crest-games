@@ -18,14 +18,15 @@ MonoBehaviour:
     id: 23e04b5e-5cd7-4efd-954a-ff9d7582611b
     name: Unnamed
     age: 2
+    grade: -1
     gender: 0
-    city: 
-    institution: 
+    schoolType: 3
+    country: 
+    livingWith: 0
     tutorialNarrative: 0
     CheckPointIdx: 0
     CheckPointSubIdx: 0
-    narrativeNavCheckPointsNodes:
-    - sourceDialogIdx: 0
-      responsePickedIdx: -1
-      nextDialogCustomStartIdx: -1
+    narrativeNavCheckPointsNodes: []
     itemsPlayedIdxs: 
+    Coins: 100
+    myCollectionMonsters: []

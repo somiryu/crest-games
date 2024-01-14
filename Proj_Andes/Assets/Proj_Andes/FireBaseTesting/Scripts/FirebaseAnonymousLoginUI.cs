@@ -24,9 +24,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	public GameObject createNewUserPanel;
 	[SerializeField] TMP_InputField nameField;
 	[SerializeField] TMP_InputField ageField;
-	[SerializeField] TMP_Dropdown sexField;
-	[SerializeField] TMP_InputField cityField;
-	[SerializeField] TMP_InputField institutionField;
+    [SerializeField] TMP_InputField gradeField;
+    [SerializeField] TMP_Dropdown sexField;
+    [SerializeField] TMP_Dropdown schoolTypeField;
+    [SerializeField] TMP_InputField countryField;
+	[SerializeField] List<LivingWithType> livingWithToggles;
 	[SerializeField] Button createBtn;
 	[SerializeField] Button cancelBtn;
 	[SerializeField] Button wrongNewUserDataPopUp;
@@ -50,8 +52,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
 		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(OnNewGameBtnPressed);
-
-
 		correctlyLoggedInFlag = false;
 		doneInitialization = false;
 		userBtnsPool.Init(10);
@@ -156,17 +156,22 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		var newUser = new UserData();
 		newUser.name = nameField.text;
-		newUser.age = int.TryParse(ageField.text, out var result)? result : -1;
-		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true ,out var found)? found : UserGender.NONE;
-		newUser.city = cityField.text;
-		newUser.institution = institutionField.text;
+		newUser.age = int.TryParse(ageField.text, out var ageResult)? ageResult : -1;
+        newUser.grade = int.TryParse(gradeField.text, out var gradeResult) ? gradeResult : -1;
+		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true ,out var genderFound)? genderFound : UserGender.NONE;
+		newUser.schoolType = Enum.TryParse<UserSchoolType>(schoolTypeField.options[schoolTypeField.value].text, true ,out var schoolFound)? schoolFound : UserSchoolType.NONE;
+		newUser.country = countryField.text;
+		newUser.livingWith = GetUserLivingWith();
 
 		var validData = true;
 		validData &= !string.IsNullOrEmpty(newUser.name);
 		validData &= newUser.age != -1;
-		validData &= newUser.gender != UserGender.NONE;
-		validData &= !string.IsNullOrEmpty(newUser.city);
-		validData &= !string.IsNullOrEmpty(newUser.institution);
+        validData &= newUser.grade != -1;
+        validData &= newUser.gender != UserGender.NONE;
+        validData &= newUser.schoolType != UserSchoolType.NONE;
+        validData &= !string.IsNullOrEmpty(newUser.country);
+		validData &= newUser.livingWith != UserLivingWith.NONE;
+		
 
 		if(!validData) wrongNewUserDataPopUp.gameObject.SetActive(true);
 		else
@@ -176,7 +181,18 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			createNewUserPanel.SetActive(false);
 			RebuildUsersList();
 		}
+	}
 
+	public UserLivingWith GetUserLivingWith()
+	{
+		var currUserLivingWith = UserLivingWith.NONE;
+
+		for (int i = 0; i < livingWithToggles.Count; i++)
+		{
+			if (livingWithToggles[i].GetValue())
+				currUserLivingWith |= livingWithToggles[i].livingWithType;			
+		}
+		return currUserLivingWith;
 	}
 
 	public void RemoveUserOfBtn(UsersListItem item)
