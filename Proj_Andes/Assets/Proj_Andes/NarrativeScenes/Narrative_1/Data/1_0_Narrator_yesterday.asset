@@ -24,7 +24,7 @@ MonoBehaviour:
     responses:
     - response: MUY BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 3b5f00c24140b624caeb38085397749e, type: 3}
+      responseImage: {fileID: 21300000, guid: 22b3ae11835a11146b3d0df936120a95, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: BIEN
@@ -70,7 +70,7 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy buena."
-    textAlternative: 
+    textAlternative: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy bueno."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 558a5f057478b8544a2970137112af85, type: 3}
@@ -85,7 +85,9 @@ MonoBehaviour:
     text: "Cami comienza a saltar lazo, pero llega Alex, una compa\xF1era del curso,
       y empuja a Cami. La hace caer y todos los dem\xE1s empiezan a re\xEDrse al
       verla en el piso\u2026"
-    textAlternative: 
+    textAlternative: "Cami comienza a saltar lazo, pero llega Alex, un compa\xF1ero
+      del curso, y empuja a Cami. Lo hace caer y todos los dem\xE1s empiezan a re\xEDrse
+      al verlo en el piso\u2026"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 638d9f775e9508e46b0463f53f75239c, type: 3}

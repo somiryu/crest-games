@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: 4_0_AfterPencil
+  m_Name: 6_0_afterSchoolBro
   m_EditorClassIdentifier: 
   dialogues:
   - characterType: 5
@@ -18,13 +18,12 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Te levantas para ir donde la profe a hacerle una pregunta. Cuando est\xE1s
-      regresando a tu puesto, te das cuenta de que Alex est\xE1 rayando el cuaderno
-      que ten\xEDas en tu mesa.\r\n"
-    textAlternative: 
+    text: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que caminar sola.\r"
+    textAlternative: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que
+      caminar solo."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 8300000, guid: 93c1173e071e3e447a494a7fb21c78cc, type: 3}
+    audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -33,7 +32,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFQu\xE9 sientes al ver que Alex est\xE1 rayando tu cuaderno?\r"
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que nadie quiere acompa\xF1ar a
+      Alex?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
@@ -71,28 +71,60 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: " Menos mal, ya lleg\xF3 el final del d\xEDa de colegio y comienzas a alistarte
-      para regresar a tu casa.\r\n"
+    text: " A la salida, est\xE1 Carlos, el hermano mayor de Alex, que se le acerca
+      y le habla."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 8300000, guid: a4078d4c7aeb6b647b25fb0e52a6abdc, type: 3}
+    audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
-  - characterType: 5
+  - characterType: 7
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "A la salida ves a Alex, la compa\xF1era que hizo caer a tu amiga y que
-      te ray\xF3 tu cuaderno. Parece que est\xE1 buscando a alguien que la acompa\xF1e
-      caminando a su casa.\r"
-    textAlternative: "A la salida ves a Alex, el compa\xF1ero que hizo caer a tu
-      amiga y que te ray\xF3 tu cuaderno. Parece que est\xE1 buscando a alguien que
-      lo acompa\xF1e caminando a su casa."
+    text: "\xA1Alex! Vamos a la casa. \xBFS\xED supiste de lo que le pas\xF3 a Tomy?"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: Tomy es la mascota de Alex.
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFCu\xE1l crees que es la mascota de Alex?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses:
+    - response: GATO
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: b0f708513ba71ea41b405909e3b38af3, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 94461d5f3c91b8f4c80d61c781ec0ba2, type: 2}
+    - response: PERRO
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 476b61bddb25c77419a142a987f9861a, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 46302d381b6ba134cb1c2c84cc82023f, type: 2}
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

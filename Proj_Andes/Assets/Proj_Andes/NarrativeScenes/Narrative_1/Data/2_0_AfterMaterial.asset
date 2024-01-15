@@ -20,7 +20,8 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Para Cami no es tan chevere, porque no encuentra con quien jugar\ty se
       queda sola todo el descanso"
-    textAlternative: 
+    textAlternative: "Para Cami no es tan chevere, porque no encuentra con quien
+      jugar\ty se queda solo todo el descanso"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 5df9dd154a3f3e941b9255f95da5115d, type: 3}
