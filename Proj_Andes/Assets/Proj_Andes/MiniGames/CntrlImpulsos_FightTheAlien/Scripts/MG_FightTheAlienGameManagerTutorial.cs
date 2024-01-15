@@ -45,6 +45,8 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     [SerializeField] AudioClip correctAudio;
     [SerializeField] AudioClip wrongAudio;
     [SerializeField] AudioClip finishAudio;
+    [SerializeField] Color disabledBtnColor;
+    [SerializeField] Color enabledBtnColor;
 
     [Header("GameParticles")]
     [SerializeField] ParticleSystem correctParticles;
@@ -187,19 +189,26 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
             {
                 currBtnImage.SetAnswerImage(currAttack.rightAnswer.attackSprite);
                 currBtnImage.ShowHighlightImg(helpButton);
-                currBtnImage.alienAttackOption = currAttack.rightAnswer;
-            }
-            else if (!firstWrongImageUsedFlag)
-            {
-                currBtnImage.SetAnswerImage(currAttack.wrongAnswer1.attackSprite);
-                currBtnImage.alienAttackOption = currAttack.wrongAnswer1;
-                firstWrongImageUsedFlag = true;
+				currBtnImage.button.image.color = enabledBtnColor;
+				currBtnImage.alienAttackOption = currAttack.rightAnswer;
             }
             else
-            { 
-                currBtnImage.SetAnswerImage(currAttack.wrongAnswer2.attackSprite);
-                currBtnImage.alienAttackOption = currAttack.wrongAnswer2;
-            }
+            {
+				if (helpButton) currBtnImage.button.image.color = disabledBtnColor;
+				else currBtnImage.button.image.color = enabledBtnColor;
+
+				if (!firstWrongImageUsedFlag)
+				{
+					currBtnImage.SetAnswerImage(currAttack.wrongAnswer1.attackSprite);
+					currBtnImage.alienAttackOption = currAttack.wrongAnswer1;
+					firstWrongImageUsedFlag = true;
+				}
+				else
+				{
+					currBtnImage.SetAnswerImage(currAttack.wrongAnswer2.attackSprite);
+					currBtnImage.alienAttackOption = currAttack.wrongAnswer2;
+				}
+			}
         }
     }
 
@@ -237,10 +246,10 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
         currPointsAmount = 0;
 
-        if (currStepConfigTutorial.helpPopUp)
-            ActivePopUp();
+        if (currStepConfigTutorial.helpPopUp) ActivePopUp();
 
-        for (int i = 0; i < skinObjAnim.Length; i++)
+
+		for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
             skinObjAnim[i].SetTrigger("Incorrect");
@@ -303,7 +312,9 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
         if(currPointsAmount == currStepConfigTutorial.stepsAmount)
         {
-            currentTutorialStep += 1;
+			audiosource.clip = finishAudio;
+			audiosource.Play();
+			currentTutorialStep += 1;
             InitTutorialStep();
         }
 
@@ -318,9 +329,15 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
         inGameUIPaneltoDissapear.SetActive(false);
-        afterActionFinalCoinsTxt.SetText(currCoins.ToString());
-        gameConfigs.SaveCoins(currCoins);
-        eogManager.OnGameOver();
+
+        StartCoroutine(NextSceneAfterTime());   
+
+    }
+
+    IEnumerator NextSceneAfterTime()
+    {
+        yield return new WaitForSeconds(1);
+        GameSequencesList.Instance.GoToNextSequence();
     }
 
     private void ActivePopUp()

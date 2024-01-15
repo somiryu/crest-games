@@ -111,7 +111,7 @@ MonoBehaviour:
       colorAlienAttack: 2
       shapeAlienAttack: 0
   mG_FightTheAlienTutorialSteps:
-  - stepsAmount: 2
+  - stepsAmount: 4
     alienAttacksConfigsType: 0
     helpButton: 1
     wrongChoices: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
     score: 0
     life: 0
     helpPopUp: 1
-  - stepsAmount: 2
+  - stepsAmount: 8
     alienAttacksConfigsType: 2
     helpButton: 0
     wrongChoices: 0
