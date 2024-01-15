@@ -8,7 +8,7 @@ public class TutorialManager : MonoBehaviour
 {
     public Dictionary<string, bool> stepsTutorialNarrativeScenes;
 
-    [SerializeField] List<TutorialUser> usersTutorial = new List<TutorialUser>(10);
+    public List<TutorialUser> usersTutorial = new List<TutorialUser>(10);
 
     private static TutorialManager instance;
     public static TutorialManager Instance => instance;
@@ -58,14 +58,24 @@ public class TutorialManager : MonoBehaviour
 
     public void TurnOffTutorial(tutorialSteps tutorialStep)
     {
-        var user = usersTutorial.Find(x => x.tutorialStep == tutorialStep); 
-        user.OffTutorial();
+        var users = usersTutorial.FindAll(x => x.tutorialStep == tutorialStep);
+        for (int i = 0; i < usersTutorial.Count; i++)
+        {
+            if (usersTutorial[i].tutorialStep != tutorialStep) continue;
+            usersTutorial[i].OffTutorial();
+        }
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
+    }
+
+    public void GetCurrentStep(TutorialUser tutorialUser)
+    {
+        return;
     }
 }
 
 public enum tutorialSteps
 {
+    stepStartPopUp,
     stepSkipButton,
     stepResponseButton,
     stepConfirmedButton

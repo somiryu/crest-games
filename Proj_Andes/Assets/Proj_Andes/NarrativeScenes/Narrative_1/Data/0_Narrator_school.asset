@@ -18,24 +18,12 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: ' Acabas de llegar a tu colegio'
+    text: ' Acabas de llegar a tu colegio Y te encuentras con tu mejor amiga Cami
+      que te saluda en la puerta.'
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: Y te encuentras con tu mejor amiga Cami que te saluda en la puerta.
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 9b441ded4345fe1468a2f0c0969f30db, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -44,11 +32,11 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xA1Hola! Creo que hoy va a estar chevere el d\xEDa, \xBFcierto?"
+    text: "\xA1Hola! Creo que hoy va a ser un gran d\xEDa, \xBFno te parece?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 956d207487d5faa408c3c9a3404254bd, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -80,11 +68,12 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: Uy, si! Seguro! Pero me da una pereza encontrarme con Alex
+    text: "As\xED ser\xE1. La verdad, s\xF3lo me da pereza tener que encontrarme
+      con Alex"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: a1a0d5f8bd5875845bd5b6da9734fa92, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -93,11 +82,13 @@ MonoBehaviour:
     changeToSequence: {fileID: 11400000, guid: 597d97972322d5341aaa5042f655e5bf, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Verdad que ayer no viniste al colegio! No  te imaginas lo que pas\xF3!"
+    text: "El d\xEDa inicia con la clase de educaci\xF3n f\xEDsica. La profe empez\xF3
+      a calificar ejercicios de lanzar la pelota y a Cami le fue muy mal! Se equivoc\xF3
+      en todo y sac\xF3 mala nota\u201D."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: a3d4c8a3aec97d545832274cf580f73a, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
