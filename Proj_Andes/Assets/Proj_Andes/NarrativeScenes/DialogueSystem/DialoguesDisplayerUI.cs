@@ -29,6 +29,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] PlayableDirector timeLinePlayer;
     [SerializeField] Transform responseDisplayersContainer;
     [SerializeField] AudioSource audioPlayer;
+    [SerializeField] Toggle canSkipAudio;
 
 
     [SerializeField] bool forceDialogeAppear;
@@ -42,6 +43,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private DialogueSequenceData pendingSequenceToShow;
     private DialogueResponse preselectedResponse;
 	private bool preselectedResponseAudioIsDone = false;
+
 
     public bool SaveNavSequence = true;
     
@@ -373,6 +375,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         while (!audioIsDone)
         {
             audioIsDone = !audioPlayer.isPlaying;
+            if (canSkipAudio.isOn) audioIsDone = true;
             yield return null;
         }
 
@@ -403,6 +406,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             if(preselectedResponse != null)
             {
                 preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
+                if (canSkipAudio.isOn) preselectedResponseAudioIsDone = true;
             }
             yield return null;
         }
