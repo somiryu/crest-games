@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 5_0_AfterAlexPick
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 33fd788718578e34bb20eb4b1475c2bb, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Selecciona a cada ni\xF1a para ver qui\xE9n la va a acompa\xF1ar.\r\n"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 7facfc8951404814f8194d328efb0cef, type: 3}
+    responses:
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 85bf1b508128b1c43b218246a546e93e, type: 2}
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 074da9b17032e1a40b4fa747e4066c49, type: 2}
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 2bf34f6fb373bcc4ba83890e964d1e31, type: 2}
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 4bfac2c7158f7e44d9cb280b1e8cf268, type: 2}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}

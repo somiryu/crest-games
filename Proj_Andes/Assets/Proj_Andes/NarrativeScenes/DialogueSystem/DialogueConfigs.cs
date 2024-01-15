@@ -40,6 +40,8 @@ public enum CharactersTypes {
     Tomas = 2,
     Alex = 3,
     Profe = 4,
+    Estudiante  = 5,
+    Carlos = 6 ,
 }
 
 [Serializable]
