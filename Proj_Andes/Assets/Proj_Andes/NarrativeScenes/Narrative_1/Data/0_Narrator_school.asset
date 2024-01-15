@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 0_Narrator_school
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
@@ -47,16 +47,16 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: 
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses:
     - response: 'SI '
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
+      responseImage: {fileID: 21300000, guid: 8551865e58ca5f946b79432459c2b6c1, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: NO
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
+      responseImage: {fileID: 21300000, guid: ca7c20384cea0414d93f757cf6423205, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
@@ -77,7 +77,7 @@ MonoBehaviour:
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
-  - characterType: 1
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 597d97972322d5341aaa5042f655e5bf, type: 2}
     changeToSequenceStartDialogIdx: -1

@@ -65,4 +65,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/Menu/Scenes/MarketScene.unity
     guid: f114701dcf9496d4c9c31319667c098d
+  - enabled: 1
+    path: Assets/Proj_Andes/MiniGames/CntrlImpulsos_EstrellasYCorazones/Scenes/TutorialCntrlImpulsos_EstrellasYCorazones.unity
+    guid: c05d762b1b42ee448a5ad8b23015492b
+  - enabled: 1
+    path: Assets/Proj_Andes/MiniGames/CntrlImpulsos_FightTheAlien/Scenes/CntrlImpulsos_FightTheAlienTutorial.unity
+    guid: e2fac0d6ef7c9ec448420162f4399b39
   m_configObjects: {}

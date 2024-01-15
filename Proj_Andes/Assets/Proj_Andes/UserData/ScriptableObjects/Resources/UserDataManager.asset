@@ -15,8 +15,8 @@ MonoBehaviour:
   maxAgeEasyLevel: 4
   maxAgeMediumLevel: 8
   DefaultUserData:
-    id: 23e04b5e-5cd7-4efd-954a-ff9d7582611b
-    name: Unnamed
+    id: DefaultUserId
+    name: DefaultUserName
     age: 2
     grade: -1
     gender: 0
@@ -26,7 +26,13 @@ MonoBehaviour:
     tutorialNarrative: 0
     CheckPointIdx: 0
     CheckPointSubIdx: 0
-    narrativeNavCheckPointsNodes: []
+    narrativeNavCheckPointsNodes:
+    - sourceDialogIdx: 1
+      responsePickedIdx: -1
+      nextDialogCustomStartIdx: -1
+    - sourceDialogIdx: 1
+      responsePickedIdx: -1
+      nextDialogCustomStartIdx: -1
     itemsPlayedIdxs: 
-    Coins: 100
+    Coins: 10
     myCollectionMonsters: []
