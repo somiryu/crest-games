@@ -19,7 +19,7 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Selecciona a cada ni\xF1a para ver qui\xE9n la va a acompa\xF1ar.\r\n"
-    textAlternative: 
+    textAlternative: "Selecciona a cada ni\xF1o para ver qui\xE9n la va a acompa\xF1ar."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 7facfc8951404814f8194d328efb0cef, type: 3}
     responses:
     - response: 

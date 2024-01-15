@@ -13,20 +13,21 @@ MonoBehaviour:
   m_Name: 6_0_afterSchoolBro
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que caminar sola.\r"
-    textAlternative: 
+    textAlternative: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que
+      caminar solo."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
@@ -65,7 +66,7 @@ MonoBehaviour:
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
@@ -79,7 +80,7 @@ MonoBehaviour:
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
-  - characterType: 6
+  - characterType: 7
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1

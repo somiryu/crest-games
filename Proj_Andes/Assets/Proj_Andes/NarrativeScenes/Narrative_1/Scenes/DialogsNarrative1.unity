@@ -1258,7 +1258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueDisplayerUI: {fileID: 1527390312}
-  _startingSequence: {fileID: 11400000, guid: 33fd788718578e34bb20eb4b1475c2bb, type: 2}
+  _startingSequence: {fileID: 11400000, guid: aaa3eb360ed99c544b70bf5bf3b7a06c, type: 2}
 --- !u!4 &1180631021
 Transform:
   m_ObjectHideFlags: 0

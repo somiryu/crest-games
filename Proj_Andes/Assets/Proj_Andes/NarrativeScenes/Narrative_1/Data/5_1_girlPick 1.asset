@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5_1_girlPick 1
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 6
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: aaa3eb360ed99c544b70bf5bf3b7a06c, type: 2}
     changeToSequenceStartDialogIdx: 0

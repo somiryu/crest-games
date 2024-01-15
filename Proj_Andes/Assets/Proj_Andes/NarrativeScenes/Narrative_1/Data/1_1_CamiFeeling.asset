@@ -151,7 +151,8 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: Una profe te llama para hablar contigo asi que Cami y tu no pueden estar
       juntas en el recreo
-    textAlternative: 
+    textAlternative: Una profe te llama para hablar contigo asi que Cami y tu no
+      pueden estar juntos en el recreo
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 4c425019d9e5b9e4ea93d0ffe2e5e869, type: 3}
