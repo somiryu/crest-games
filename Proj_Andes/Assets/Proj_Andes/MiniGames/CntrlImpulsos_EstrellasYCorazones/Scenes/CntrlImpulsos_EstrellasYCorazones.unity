@@ -34939,8 +34939,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfigs: {fileID: 11400000, guid: 6a8e85563e4d0f345872afaa7882124f, type: 2}
-  sameDirectionSprite: {fileID: 21300000, guid: 730553421d8251946ae2458614062649, type: 3}
-  opositeDirectionSprite: {fileID: 21300000, guid: 404fe95afc1881f4daf3fdd0641edefd, type: 3}
+  sameDirectionSprite: {fileID: 21300000, guid: 404fe95afc1881f4daf3fdd0641edefd, type: 3}
+  opositeDirectionSprite: {fileID: 21300000, guid: 730553421d8251946ae2458614062649, type: 3}
   leftImg: {fileID: 946864922}
   rightImg: {fileID: 597656416}
   leftBtn: {fileID: 227213638}
