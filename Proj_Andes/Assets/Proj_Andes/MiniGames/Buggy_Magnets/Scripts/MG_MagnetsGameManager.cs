@@ -65,7 +65,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			magnetsAvailable[i].gameObject.SetActive(true);
 		}
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);
-		trapImage.gameObject.SetActive(gameConfigs.activeCheats);
+		trapImage.gameObject.SetActive(false);
 		eogManager.OnGameStart();
 
 	}
@@ -87,6 +87,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			if (gameConfigs.activeCheats && currEneryProgress >= 0.5f)
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
+				StartCoroutine(ShowTrapSign());
 			}
 
 			magnetRangeIndicator.ShowAt(mouseGlobalPosition);
@@ -110,6 +111,13 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
                 OnGameOver();
             }
         }
+	}
+
+	IEnumerator ShowTrapSign()
+	{
+		trapImage.gameObject.SetActive(true);
+		yield return new WaitForSeconds(1);
+		trapImage.gameObject.SetActive(false);
 	}
 
 	Vector2 GetBadMousePosition(int currTrialIdx)
