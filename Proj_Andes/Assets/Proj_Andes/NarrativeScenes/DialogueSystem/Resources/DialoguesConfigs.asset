@@ -39,3 +39,6 @@ MonoBehaviour:
   - chType: 7
     image: {fileID: 21300000, guid: e03b3f55e3112bb44b1ebf86d53c3778, type: 3}
     name: Profe
+  - chType: 8
+    image: {fileID: 8375390331906302623, guid: 6d6487d2e7a25214e8ca2a99f95390f8, type: 3}
+    name: Profe
