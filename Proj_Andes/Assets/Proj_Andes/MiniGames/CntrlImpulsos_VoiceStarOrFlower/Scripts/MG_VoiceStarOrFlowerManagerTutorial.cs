@@ -76,6 +76,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     bool hasScore;
     bool hasDiscardButtton;
     bool hasButtonHelp;
+    bool hasWrongChoice;
     int currScoreStepTutorial;
     int goalScoreStepTutorial;
 
@@ -130,8 +131,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             soundAndImgSameQuestion = false;
             hasDiscardButtton = false;
             hasButtonHelp = true;
-            goalScoreStepTutorial = 2;
-            
+            goalScoreStepTutorial = 4;
+            hasWrongChoice = false;
         }
 
         if (currStepTutorial == 1)
@@ -142,7 +143,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             soundAndImgSameQuestion = false;
             hasDiscardButtton = false;
             hasButtonHelp = true;
-            goalScoreStepTutorial = 2;
+            goalScoreStepTutorial = 6;
+            hasWrongChoice = false;
         }
 
         if (currStepTutorial == 2)
@@ -153,7 +155,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             soundAndImgSameQuestion = true;
             hasDiscardButtton = true;
             hasButtonHelp = true;
-            goalScoreStepTutorial = 2;
+            hasWrongChoice = false;
+            goalScoreStepTutorial = 4;
         }
 
         if (currStepTutorial == 3)
@@ -164,7 +167,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             soundAndImgSameQuestion = false;
             hasDiscardButtton = true;
             hasButtonHelp = true;
-            goalScoreStepTutorial = 2;
+            hasWrongChoice = false;
+            goalScoreStepTutorial = 4;
         }
 
         if (currStepTutorial == 4)
@@ -174,6 +178,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             intervalQuestion = false;
             soundAndImgSameQuestion = false;
             hasDiscardButtton = true;
+            hasWrongChoice = true;
             hasButtonHelp = false;
             goalScoreStepTutorial = 5;
         }
@@ -301,6 +306,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         audioPlayer.clip = wrongAudio;
         incorrectParticles.Play();
         audioPlayer.Play();
+
+        if (!hasWrongChoice) return;
+
         OnRoundEnded();
     }
 
@@ -338,13 +346,13 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         currCoinsValueTxt.text = currCoins.ToString();
         gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
-        if (lostRoundsCount >= gameConfigs.maxRounds ||
-            wonLeftCount >= gameConfigs.maxRounds ||
-            wonRightCount >= gameConfigs.maxRounds)
-        {
-            GameOver();
-            return;
-        }
+        //if (lostRoundsCount >= gameConfigs.maxRounds ||
+        //    wonLeftCount >= gameConfigs.maxRounds ||
+        //    wonRightCount >= gameConfigs.maxRounds)
+        //{
+        //    GameOver();
+        //    return;
+        //}
 
         if (currScoreStepTutorial == goalScoreStepTutorial)
         {
