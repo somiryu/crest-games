@@ -163,7 +163,9 @@ MonoBehaviour:
   confirmationButton: {fileID: 4596808888548888361}
   currResponses: []
   currHighlightedResponse: {fileID: 0}
-  highlightBtnContainer: {fileID: 21300000, guid: b209aadac3ff0a4459993001e36722e2, type: 3}
+  highlightBtnsSprites:
+  - {fileID: 21300000, guid: b209aadac3ff0a4459993001e36722e2, type: 3}
+  - {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
   disableBtnContainer: {fileID: 21300000, guid: 0ee5b8a5d212f2942b7429ba05d4e952, type: 3}
 --- !u!114 &1793937690743282274
 MonoBehaviour:

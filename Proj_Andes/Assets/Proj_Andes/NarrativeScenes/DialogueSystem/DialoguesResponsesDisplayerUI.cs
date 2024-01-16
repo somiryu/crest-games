@@ -17,7 +17,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 
 	public ResponseBtn currHighlightedResponse;
 
-	public Sprite highlightBtnContainer;
+	public List<Sprite> highlightBtnsSprites;
 	public Sprite disableBtnContainer;
 
 	public void Init(DialoguesDisplayerUI _mainUI)
@@ -41,7 +41,16 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 			newResponse.SetData(responseDatas[i]);
 			newResponse.onClicked = HighlightResponse;
 			currResponses.Add(newResponse);
-			if(highlightBtnContainer != null ) newResponse.Btn.image.sprite = highlightBtnContainer;
+			Sprite highlightSprite = null;
+			if(i < highlightBtnsSprites.Count)
+			{
+				highlightSprite = highlightBtnsSprites[i];
+			}
+			else if(highlightBtnsSprites.Count > 0)
+			{
+				highlightSprite = highlightBtnsSprites[0];
+			}
+			if(highlightSprite != null ) newResponse.Btn.image.sprite = highlightSprite;
 			for (int j = 0; j < users.Length; j++) users[j].OnShowResponseBtn(newResponse);
 		}
 		gameObject.SetActive(true);
@@ -77,7 +86,16 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 			{
 				curr.transform.localScale = Vector3.one * 1.1f;
 				currHighlightedResponse = curr;
-				if (highlightBtnContainer) curr.Btn.image.sprite = highlightBtnContainer;
+				Sprite highlightSprite = null;
+				if (i < highlightBtnsSprites.Count)
+				{
+					highlightSprite = highlightBtnsSprites[i];
+				}
+				else if (highlightBtnsSprites.Count > 0)
+				{
+					highlightSprite = highlightBtnsSprites[0];
+				}
+				if (highlightSprite) curr.Btn.image.sprite = highlightSprite;
 			}
 			else
 			{
