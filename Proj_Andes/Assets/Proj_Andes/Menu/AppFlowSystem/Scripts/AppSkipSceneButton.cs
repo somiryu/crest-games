@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AppSkipSceneButton : MonoBehaviour
 {
-    public static string instancePrefabPath = "AppSkipSceneButton";
+    public static string instancePrefabPath = "DebugGlobalUI";
     static AppSkipSceneButton instance;
     public static AppSkipSceneButton Instance => instance;
     [SerializeField] Button skipSceneBtn;
