@@ -4,27 +4,28 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
-public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
+public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRocketManager
 {
-    static TutorialManager_Gratification_TurboRocket instance;
-    public static TutorialManager_Gratification_TurboRocket Instance => instance;
-
-    public Gratification_TurboRocket_GameConfig tutorialConfig;
+    [SerializeField] Gratification_TurboRocket_GameConfig gameConfig;
+    public Gratification_TurboRocket_GameConfig levelConfig { get => gameConfig; set { } }
 
     [SerializeField] List<TutorialStepsTurbo> tutorialSteps = new List<TutorialStepsTurbo>();
-    TutorialStepsTurbo currTutoStep => tutorialSteps[currTutoStepIndex];
+    public TutorialStepsTurbo currTutoStep => tutorialSteps[currTutoStepIndex];
     int currTutoStepIndex;
 
-    bool onPlay;
+    public bool onPlay { get; set; }
     public Transform character;
     Vector3 firstPos;
     float currentTargetSpeed;
     SphereCollider myCollider;
     Collider[] colls;
-    [HideInInspector] public int starsGatheredCount;
+    [HideInInspector] public int starsGatheredCount { get; set; }
     public Action OnScoreChanged;
-    public bool onTurbo = false;
+    public bool onTurbo { get; set; }
     float currentSpeed;
 
     public Camera cam;
@@ -35,6 +36,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
     public Gratification_TurboRocket_UIController ui;
     public GameRideData data;
 
+    [SerializeField] Image turboBtn;
     [SerializeField] ParticleSystem turboParticles;
     [SerializeField] GameObject turboAnimObj;
     [SerializeField] AudioSource turboSFX;
@@ -59,19 +61,15 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
     float targetYPos;
     float playerRanXSpace;
 
-    public float CurrProgress => playerRanXSpace / bk.bkSize.localScale.x;
+    float iTurboRocketManager.CurrProgress { get => playerRanXSpace / bk.bkSize.localScale.x; }
+    float iTurboRocketManager.playerCurrentSpeed { get => currentSpeed; }
+    Action iTurboRocketManager.OnScoreChanges { get => OnScoreChanged; set { } }
 
-    public Vector3 CurrPos => transform.position;
-
-    public float playerCurrentSpeed => currentSpeed;
-
+    public Transform myTransform => transform;
+    public bool endOfTuto;
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            DestroyImmediate(this);
-        }
-        instance = this;
+        iTurboRocketManager.Instance = this;
         Init();
     }
     public void Init()
@@ -101,8 +99,8 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
     {
         ui.StartUi();
         colls = new Collider[5];
-        currentSpeed = tutorialConfig.regularSpeed;
-        currentTargetSpeed = tutorialConfig.regularSpeed;
+        currentSpeed = levelConfig.regularSpeed;
+        currentTargetSpeed = levelConfig.regularSpeed;
         bk.Init();
 
         InitTuto();
@@ -117,6 +115,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
     {
         tutorialSteps[0].stepClickableObj = bk.starsSpawner.stars[0].starColl;
         tutorialSteps[1].stepClickableObj = bk.starsSpawner.stars[1].starColl;
+        tutorialSteps[2].stepClickableObj = bk.starsSpawner.stars[2].starColl;
 
         for (int i = 0; i < tutorialSteps.Count; i++)
         {
@@ -124,6 +123,9 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
             if(bk.starsSpawner is TutorialStarsSpawner_Gratification_TurboRocket spawner) tutorialSteps[i].signHand = spawner.GetHand(tutorialSteps[i].stepClickableObj);
             tutorialSteps[i].signHand.gameObject.SetActive(false);
         }
+
+        ui.progressSlider.gameObject.SetActive(false);
+        turboBtn.gameObject.SetActive(false);
 
         currTutoStepIndex = 0;
         currTutoStep.InitTutoStep();
@@ -145,7 +147,17 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
     {
         if (!onPlay) return;
 
-        if (transform.position.x >= currTutoStep.stepClickableObj.transform.position.x) StandStill();
+        if (!endOfTuto)
+        {
+            if (transform.position.x >= currTutoStep.stepClickableObj.transform.position.x) StandStill();
+            if (playerRanXSpace / bk.bkSize.localScale.x >= 0.9)
+            {
+                if (onTurbo)
+                {
+                    StandStill();
+                }
+            }
+        }
         ContinuousMovement();
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
@@ -165,9 +177,8 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
 
     void ContinuousMovement()
     {
-        currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, tutorialConfig.accelerationSpeed * Time.deltaTime);
-        timer += Time.deltaTime;
-        if (timer <= tutorialConfig.regularRideDuration)
+        currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, levelConfig.accelerationSpeed * Time.deltaTime);
+        if (onPlay)
         {
             var movementToAdd = Vector3.right * currentSpeed * Time.deltaTime;
             playerRanXSpace += movementToAdd.x;
@@ -193,14 +204,14 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
         turboParticles.Play();
         turboAnimObj.SetActive(true);
         turboSFX.Play();
-        currentTargetSpeed = tutorialConfig.turboSpeed;
+        currentTargetSpeed = levelConfig.turboSpeed;
         camCC.OnEnterTurbo();
         onTurbo = true;
     }
     public void OnExitTurboMode()
     {
         characterAnimator.SetTrigger("Normal");
-        currentTargetSpeed = tutorialConfig.regularSpeed;
+        currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
         turboParticles.Stop();
         turboAnimObj.SetActive(false);
@@ -220,29 +231,40 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour
         }
     }
 
-    void GoToNextStep()
+    public void GoToNextStep()
     {
         currTutoStep.EndTutoStep();
         currTutoStepIndex++;
         currTutoStep.InitTutoStep();
-        currentTargetSpeed = tutorialConfig.regularSpeed;
+        currentTargetSpeed = levelConfig.regularSpeed;
+
+        if(currTutoStep.step == TutorialStepsTurboRocket.TurboAppear)
+        {
+            currentSpeed = 0;
+            turboBtn.color = Color.red;
+            turboBtn.gameObject.SetActive(true);
+            ui.progressSlider.gameObject.SetActive(true);
+        }
     }
     void StandStill()
     {
         currentSpeed = 0;
     }
-        
+    public void Continue()
+    {
+        currentTargetSpeed = levelConfig.regularSpeed;
+    }
     void EndOfRide()
     {
         bk.EndOfGame();
         onPlay = false;
-        tutorialConfig.coinsCollected = starsGatheredCount;
+        levelConfig.coinsCollected = starsGatheredCount;
         character.GetComponentInChildren<ParticleSystem>().Stop();
         artParent.gameObject.SetActive(false);
 
         StartCoroutine(_OnFinishSequence());
     }
-    IEnumerator _OnFinishSequence()
+    public IEnumerator _OnFinishSequence()
     {
         camCC.OnGameFinishedSequence();
         endTimelineDirector.Play();

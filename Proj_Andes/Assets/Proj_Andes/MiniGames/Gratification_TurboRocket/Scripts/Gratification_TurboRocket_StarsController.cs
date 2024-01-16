@@ -20,7 +20,7 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
     bool isInitialPosition;
     public bool isCaptured;
 
-    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
+    iTurboRocketManager player => iTurboRocketManager.Instance;
 
     public void Init()
     {
@@ -33,11 +33,11 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         if (isCaptured) return;
          isCaptured = true;
         GetComponentInChildren<SpriteRenderer>().enabled = false;
-        Gratification_TurboRocket_PlayerController.Instance.starsGatheredCount++;
+        iTurboRocketManager.Instance.starsGatheredCount++;
         StartCoroutine( _OnCapturedwithDelay());
        
         Debug.Log("caught star");
-        player.OnScoreChanged?.Invoke();
+        player.OnScoreChanges?.Invoke();
 
     }
     IEnumerator _OnCapturedwithDelay()

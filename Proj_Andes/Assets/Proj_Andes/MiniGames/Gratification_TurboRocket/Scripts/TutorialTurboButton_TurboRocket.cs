@@ -8,13 +8,21 @@ public class TutorialTurboButton_TurboRocket : Image, IPointerDownHandler, IPoin
 {
     public void OnPointerDown(PointerEventData eventData)
     {
-        TutorialManager_Gratification_TurboRocket.Instance.OnEnterTurboMode();
+        iTurboRocketManager.Instance.OnEnterTurboMode();
+        color = Color.white;
+        if(iTurboRocketManager.Instance is TutorialManager_Gratification_TurboRocket manager)
+        {
+            if(manager.currTutoStep.step == TutorialStepsTurboRocket.TurboAppear) manager.GoToNextStep();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        TutorialManager_Gratification_TurboRocket.Instance.OnExitTurboMode();
-
+        iTurboRocketManager.Instance.OnExitTurboMode();
+        if (iTurboRocketManager.Instance is TutorialManager_Gratification_TurboRocket manager)
+        {
+            if (manager.currTutoStep.step == TutorialStepsTurboRocket.UnclickTurbo) manager.endOfTuto = true;
+        }
     }
 
 }

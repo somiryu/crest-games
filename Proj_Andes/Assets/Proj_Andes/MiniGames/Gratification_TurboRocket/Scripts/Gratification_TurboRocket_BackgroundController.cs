@@ -6,7 +6,7 @@ using UnityEngine;
 public class Gratification_TurboRocket_BackgroundController : MonoBehaviour
 {
     public Transform bkSize;
-    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
+    iTurboRocketManager player => iTurboRocketManager.Instance;
     public Gratification_TurboRocket_StarsSpawner starsSpawner;
     public void Init()
     {

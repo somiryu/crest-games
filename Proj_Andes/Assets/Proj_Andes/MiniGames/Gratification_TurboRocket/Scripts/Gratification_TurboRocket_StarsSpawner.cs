@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Gratification_TurboRocket_StarsSpawner : MonoBehaviour
 {
-    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
+    iTurboRocketManager player => iTurboRocketManager.Instance;
     public BoxCollider spawnArea;
     public Gratification_TurboRocket_StarsController starSample;
     public Gratification_TurboRocket_BackgroundController backgroundController;

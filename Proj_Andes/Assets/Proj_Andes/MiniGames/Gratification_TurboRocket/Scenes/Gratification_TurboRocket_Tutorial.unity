@@ -98860,7 +98860,6 @@ GameObject:
   - component: {fileID: 1380917377}
   - component: {fileID: 1380917380}
   - component: {fileID: 1380917379}
-  - component: {fileID: 1380917381}
   - component: {fileID: 1380917383}
   - component: {fileID: 1380917382}
   m_Layer: 0
@@ -98928,61 +98927,6 @@ MonoBehaviour:
   finishText: {fileID: 1431312399}
   starsText: {fileID: 1383071271}
   progressSlider: {fileID: 922937575}
---- !u!114 &1380917381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1380917376}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0eccab82038aa9458f9419c1702b1b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelConfig: {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
-  onPlay: 0
-  character: {fileID: 1380917377}
-  starsGatheredCount: 0
-  onTurbo: 0
-  cam: {fileID: 519420031}
-  camCC: {fileID: 519420033}
-  finalSpin: {fileID: 1389171913}
-  bk: {fileID: 1668721505}
-  gameStages: 0
-  ui: {fileID: 1380917380}
-  eogManager: {fileID: 2013050662}
-  turboParticles: {fileID: 239183779}
-  turboAnimObj: {fileID: 1281107971}
-  turboSFX: {fileID: 1380917382}
-  endTimelineDirector: {fileID: 1562149744}
-  artParent: {fileID: 1977104383}
-  artSkinnableObj: {fileID: 1771975083}
-  ySpeed: 2
-  ySpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.008203446
-      outSlope: 0.008203446
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0
-      outWeight: 0.2875
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0
-      outSlope: -0
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.6583333
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!82 &1380917382
 AudioSource:
   m_ObjectHideFlags: 0
@@ -99091,7 +99035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffa53da6d1e6cca4fa97ab52c1094f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialConfig: {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
+  gameConfig: {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
   tutorialSteps:
   - step: 0
     stepClickableObj: {fileID: 0}
@@ -99106,24 +99050,23 @@ MonoBehaviour:
     stepDone: 0
     signHand: {fileID: 0}
   - step: 3
-    stepClickableObj: {fileID: 1094411127}
+    stepClickableObj: {fileID: 1389171914}
     stepDone: 0
     signHand: {fileID: 0}
   character: {fileID: 1380917377}
-  starsGatheredCount: 0
-  onTurbo: 0
   cam: {fileID: 519420031}
   camCC: {fileID: 519420033}
   finalSpin: {fileID: 1389171913}
   bk: {fileID: 1668721505}
   gameStages: 0
   ui: {fileID: 1380917380}
+  turboBtn: {fileID: 1094411126}
   turboParticles: {fileID: 239183779}
   turboAnimObj: {fileID: 1281107971}
   turboSFX: {fileID: 1380917382}
   endTimelineDirector: {fileID: 1562149744}
   artParent: {fileID: 1977104383}
-  artSkinnableObj: {fileID: 2032169887065738987}
+  artSkinnableObj: {fileID: 1596655858}
   ySpeed: 2
   ySpeedCurve:
     serializedVersion: 2
@@ -109625,6 +109568,17 @@ PrefabInstance:
       addedObject: {fileID: 1773098440}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
+--- !u!114 &1596655858 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3292803586448024577, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
+  m_PrefabInstance: {fileID: 1596655857}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a35ba0d429cf04588650adc47e3db2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1668721503
 GameObject:
   m_ObjectHideFlags: 0
@@ -114837,17 +114791,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1410902767965579119, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
   m_PrefabInstance: {fileID: 1596655857}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1771975083 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3292803586448024577, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
-  m_PrefabInstance: {fileID: 1596655857}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a35ba0d429cf04588650adc47e3db2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1773098439
 PrefabInstance:
   m_ObjectHideFlags: 0
