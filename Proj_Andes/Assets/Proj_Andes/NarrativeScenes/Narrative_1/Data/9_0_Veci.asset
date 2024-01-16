@@ -10,17 +10,53 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: 6_0_afterSchoolBro
+  m_Name: 9_0_Veci
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 5
+  - characterType: 8
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que caminar sola.\r"
-    textAlternative: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que
-      caminar solo."
+    text: "Veci, qu\xE9 se le ofrece? Hoy no me ha llegado el pedido, entonces tengo
+      pocas cosas"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 0
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: 
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses:
+    - response: a
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: b
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 3
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Eso no es lo que yo quer\xEDa"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 0}
@@ -32,8 +68,21 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFC\xF3mo te sientes t\xFA al saber que nadie quiere acompa\xF1ar a
-      Alex?\r"
+    text: "Alex se fue sin comprar nada. Parece que este no es su d\xEDa de suerte"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no pudo comprar lo que
+      quer\xEDa?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses:
@@ -68,63 +117,14 @@ MonoBehaviour:
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
+    changeToSequence: {fileID: 11400000, guid: e5ab07e27ab18b747bfa5c696fd4dddf, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: " A la salida, est\xE1 Carlos, el hermano mayor de Alex, que se le acerca
-      y le habla."
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 7
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xA1Alex! Vamos a la casa. \xBFS\xED supiste de lo que le pas\xF3 a Tomy?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: Tomy es la mascota de Alex.
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFCu\xE1l crees que es la mascota de Alex?"
+    text: " Alex sigue caminando hacia la casa con Carlos. Hoy definitivamente fue
+      un mal d\xEDa, y lo peor, parece que Fran los sigue persiguiendo.\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
-    responses:
-    - response: GATO
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: b0f708513ba71ea41b405909e3b38af3, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: 94461d5f3c91b8f4c80d61c781ec0ba2, type: 2}
-    - response: PERRO
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 476b61bddb25c77419a142a987f9861a, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: 46302d381b6ba134cb1c2c84cc82023f, type: 2}
+    responses: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

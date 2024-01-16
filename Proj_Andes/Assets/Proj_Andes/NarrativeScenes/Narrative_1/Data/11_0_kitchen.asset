@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: 7_0_afterCatDog
+  m_Name: 11_0_kitchen
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 7
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "No, nada de eso. Est\xE1 enfermo y tuvieron que llevarlo al veterinario.\r"
+    text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
+      partes de la cocina.0\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -31,7 +32,62 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFC\xF3mo te sientes t\xFA al saber que la mascota de Alex est\xE1 enferma?\r\r"
+    text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
+      partes de la cocina.1\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
+      partes de la cocina.2\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
+      partes de la cocina.3\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: " \xA1Parece que la llave se perdi\xF3!\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no puede comer nada?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses:
@@ -69,25 +125,9 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "N: Mientras caminan y hablan de Tomy, llegan al parque del barrio. Ah\xED
-      se encuentran a Fran, la peor enemiga de Alex. \r"
-    textAlternative: "N: Mientras caminan y hablan de Tomy, llegan al parque del
-      barrio. Ah\xED se encuentran a Fran, el peor enemigo de Alex. \r\n"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 3
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Ah\xED est\xE1 Fran. La \xFAltima vez que me la encontr\xE9, me quit\xF3
-      mi maleta.\r\r"
-    textAlternative: "Ah\xED est\xE1 Fran. La \xFAltima vez que me lo encontr\xE9,
-      me quit\xF3 mi maleta.\r"
+    text: " De repente, llega la mam\xE1 de Alex, lo abraza y le muestra que le ha
+      tra\xEDdo su comida favorita.\r\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses: []
     audio: {fileID: 0}
@@ -99,21 +139,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Fran voltea a mirarles y empieza a caminar hacia ellos.\r\r"
-    textAlternative: "\r"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: 482723598c896f84da8e3bcbb95e331d, type: 2}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFC\xF3mo te sientes t\xFA al saber que Fran est\xE1 persiguiendo a
-      Alex?\r\r\r"
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no puede comer nada?\xBFC\xF3mo
+      te sientes t\xFA al saber que la mam\xE1 de Alex le trajo su comida favorita?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses:
@@ -142,6 +169,20 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Parece que el d\xEDa de Alex tampoco fue muy bueno. Pero al menos termin\xF3
+      con un abrazo de mam\xE1. Ma\xF1ana seguramente ser\xE1 mejor.\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responses: []
     audio: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
