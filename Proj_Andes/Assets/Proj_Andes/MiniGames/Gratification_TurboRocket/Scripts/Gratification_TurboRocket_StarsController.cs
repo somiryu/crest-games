@@ -14,17 +14,19 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
     [SerializeField] float step = 1f;
     [SerializeField] float yOfsetLimit = 0.1f;
 
+    public Collider starColl;
+
     Vector3 initialPosition;
     bool isInitialPosition;
     public bool isCaptured;
 
     Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
 
-    private void Start()
+    public void Init()
     {
         initialPosition = transform.position;
         isInitialPosition = true;
-
+        TryGetComponent(out starColl);
     }
     public void OnCaptured()
     {
@@ -52,7 +54,10 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         
 
     }
-
+    public Vector3 GetPos()
+    {
+        return transform.position;
+    } 
     private void Update()
     {
         if (player.onTurbo)
