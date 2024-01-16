@@ -74,15 +74,36 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	{
 		if (availableMagnets == 0) return;
 		timer += Time.deltaTime;
-		if (timer > gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify())
+
+		
+        if (timer > gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify())
 		{
 			timer = 0;
-			for (int i = 0; i < gameConfigs.itemsAmountToSpawn; i++) SpawnNewItem();
-		}
+			for (int i = 0; i < gameConfigs.itemsAmountToSpawn; i++)
+			{
+				if (currSpawnedItems >= 4 && !UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
+				{
+					UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick.ToString());
+					return;
+				}
+                SpawnNewItem();
 
-		if(Input.GetMouseButtonDown(0))
+            }
+        }
+
+        
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick)) return;
+				
+
+		if (Input.GetMouseButtonDown(0))
 		{
-			var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
+			{
+				UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick.ToString());
+                TutorialManager.Instance.TurnOffTutorial(tutorialSteps.MG_Magnets_2FourItemEnergyClick);
+            }
+
+            var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseGlobalPosition.z = 0;
 			if (gameConfigs.activeCheats && currEneryProgress >= 0.5f)
 			{
@@ -159,16 +180,22 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	void SpawnNewItem()
 	{
 		if (currSpawnedItems >= gameConfigs.maxSpawnsOnScreen) return;
-		currSpawnedItems++;
 		var newItem = energyItemsPool.GetNewItem();
-		var halfContainerSize = spawnArea.size / 2;
+		var halfContainerSize = Vector3.zero;
+		
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick)) 
+			halfContainerSize = new Vector3(gameConfigs.userMagnetRadius, gameConfigs.userMagnetRadius, gameConfigs.userMagnetRadius);
+		else halfContainerSize = spawnArea.size / 2;
+
 		var randomX = Random.Range(-halfContainerSize.x, halfContainerSize.x);
 		var randomY = Random.Range(-halfContainerSize.y, halfContainerSize.y);
 		newItem.transform.position = new Vector2(randomX, randomY);
 		newItem.Init(gameConfigs.energyItemsLifeTime, energyItemsPool);
-	}
+        currSpawnedItems++;
 
-	void OnGameOver()
+    }
+
+    void OnGameOver()
 	{
 		StartCoroutine(EndGameAfterTime());
 	}

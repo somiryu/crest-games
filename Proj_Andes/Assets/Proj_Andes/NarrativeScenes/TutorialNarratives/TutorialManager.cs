@@ -78,5 +78,7 @@ public enum tutorialSteps
     stepStartPopUp,
     stepSkipButton,
     stepResponseButton,
-    stepConfirmedButton
+    stepConfirmedButton,
+    MG_Magnets_1NoClick, 
+    MG_Magnets_2FourItemEnergyClick
 }
