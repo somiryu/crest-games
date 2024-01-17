@@ -15,10 +15,10 @@ public class TutorialUser : MonoBehaviour
 
 	private void Start()
 	{
-        TutorialManager.Instance.AddNewUser(this);
+        TutorialManager.Instance.AddNewUser(this);        
 	}
 
-	private void OnEnable()
+    private void OnEnable()
     {
         var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
         tutorialType.StepStart(activeTut);
@@ -28,6 +28,12 @@ public class TutorialUser : MonoBehaviour
     {
         tutorialType.StepDone();
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
+    }
+    
+    public void OnTutorial()
+    {
+        if(tutorialType == null) GetComponentInChildren<iTutorialType>(includeInactive: true);
+        tutorialType.StepStart(true);
     }
 }
 

@@ -56,7 +56,7 @@ public class TutorialManager : MonoBehaviour
         if (usersTutorial.Contains(user)) usersTutorial.Remove(user);
 	}
 
-    public void TurnOffTutorial(tutorialSteps tutorialStep)
+    public void TurnOffTutorialStep(tutorialSteps tutorialStep)
     {
         var users = usersTutorial.FindAll(x => x.tutorialStep == tutorialStep);
         for (int i = 0; i < usersTutorial.Count; i++)
@@ -65,6 +65,16 @@ public class TutorialManager : MonoBehaviour
             usersTutorial[i].OffTutorial();
         }
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
+    }
+
+    public void TurnOnTutorialStep(tutorialSteps tutorialStep)
+    {
+        var users = usersTutorial.FindAll(x => x.tutorialStep == tutorialStep);
+        for (int i = 0; i < usersTutorial.Count; i++)
+        {
+            if (usersTutorial[i].tutorialStep != tutorialStep) continue;
+            usersTutorial[i].OnTutorial();
+        }        
     }
 
     public void GetCurrentStep(TutorialUser tutorialUser)
@@ -78,5 +88,7 @@ public enum tutorialSteps
     stepStartPopUp,
     stepSkipButton,
     stepResponseButton,
-    stepConfirmedButton
+    stepConfirmedButton,
+    MG_MechanicHand_1HoldClickAndMove,
+    MG_MechanicHand_2JustClickToGrab,
 }
