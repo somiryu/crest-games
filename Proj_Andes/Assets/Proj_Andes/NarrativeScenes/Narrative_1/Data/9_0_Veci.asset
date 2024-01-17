@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 9_0_Veci
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 8
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Veci, qu\xE9 se le ofrece? Hoy no me ha llegado el pedido, entonces tengo
+      pocas cosas"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 0
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: 
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses:
+    - response: a
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: b
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 3
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Eso no es lo que yo quer\xEDa"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Alex se fue sin comprar nada. Parece que este no es su d\xEDa de suerte"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no pudo comprar lo que
+      quer\xEDa?\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responses:
+    - response: MUY BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 22b3ae11835a11146b3d0df936120a95, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 5237432f2024ee143818de407fb93aab, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: ME DA IGUAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: d97e8ea1297153648a97659683c15303, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: MAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 6bd4f9ffa7c9f5b44ac5a4062c36b142, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: MUY MAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: e5ab07e27ab18b747bfa5c696fd4dddf, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: " Alex sigue caminando hacia la casa con Carlos. Hoy definitivamente fue
+      un mal d\xEDa, y lo peor, parece que Fran los sigue persiguiendo.\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}

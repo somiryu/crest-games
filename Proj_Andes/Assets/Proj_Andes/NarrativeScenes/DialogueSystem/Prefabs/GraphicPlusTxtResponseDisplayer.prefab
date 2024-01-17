@@ -55,9 +55,15 @@ MonoBehaviour:
     hierarchyParent: {fileID: 5120906064912766403}
     growBy: 3
   confirmationButton: {fileID: 5143395251117733759}
-  tutorialconfirmationButton: {fileID: 5878009723207846473}
   currResponses: []
   currHighlightedResponse: {fileID: 0}
+  highlightBtnsSprites:
+  - {fileID: 21300000, guid: ac3e1f75cb35ecf41966d8c666fc4b97, type: 3}
+  - {fileID: 21300000, guid: ccac3589e61ae7945af5475957720630, type: 3}
+  - {fileID: 21300000, guid: bee27151efb6a6c44ada4ef7885bbb92, type: 3}
+  - {fileID: 21300000, guid: 21ac469cc544447459c55ec36378a22c, type: 3}
+  - {fileID: 21300000, guid: 55712ee0c4d48ca468ced295ac669cca, type: 3}
+  disableBtnContainer: {fileID: 21300000, guid: ef6da9c952a4e2943842f58bde91a373, type: 3}
 --- !u!1 &6003461480772472012
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +98,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -460.21387}
+  m_AnchoredPosition: {x: 0, y: -375}
   m_SizeDelta: {x: 0, y: -920.4277}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5816003764276134044
@@ -246,16 +252,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5878009723207846473 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1398012969412301663, guid: 201580b8da22bdf479902780eb1f374b, type: 3}
-  m_PrefabInstance: {fileID: 4824586451052992790}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e1a940fd090ec4f9deebacb85c8b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
