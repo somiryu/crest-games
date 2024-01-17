@@ -78,5 +78,6 @@ public enum tutorialSteps
     stepStartPopUp,
     stepSkipButton,
     stepResponseButton,
-    stepConfirmedButton
+    stepConfirmedButton,
+    MG_BoostersAndScape_1Pause
 }

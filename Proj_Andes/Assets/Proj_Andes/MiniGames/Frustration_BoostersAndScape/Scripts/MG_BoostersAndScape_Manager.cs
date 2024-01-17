@@ -93,8 +93,20 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
             timer = 0;
             MoveToNextPos(currentBooster);
         }
+
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScape_1Pause))
+        {
+            if (currentBooster.Boosteable()) Time.timeScale = 0;            
+        }        
+
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+            if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScape_1Pause))
+            {
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScape_1Pause.ToString());
+                Time.timeScale = 1;
+            }
+
             if (gameConfig.forceToFail) ForcedToFail();
             if (currentBooster.Boosteable())
             {
