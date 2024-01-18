@@ -23520,7 +23520,7 @@ MonoBehaviour:
   finishAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
   currRoundValueTxt: {fileID: 1134041796}
   bkColor: {fileID: 742774094}
-  tutorialSteps:
+  myTutorialSteps:
   - tutorialSteps: 0
     trialsAmt: 3
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
