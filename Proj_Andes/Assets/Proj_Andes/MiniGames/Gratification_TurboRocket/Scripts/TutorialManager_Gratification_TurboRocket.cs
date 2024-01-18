@@ -172,14 +172,11 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
                 StandStill();
                 turboBtn.color = Color.red;
             }
-            if (playerRanXSpace / bk.bkSize.localScale.x >= 0.9)
-            {
-                if (onTurbo && currTutoStep.step == TutorialStepsTurboRocket.TurboAppear) GoToNextStep();
-            }
+            if (playerRanXSpace / bk.bkSize.localScale.x >= 0.9) if (onTurbo && currTutoStep.step == TutorialStepsTurboRocket.TurboAppear) GoToNextStep();
         }
         ContinuousMovement();
 
-        if (Input.GetMouseButtonDown(0))// && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             startYPos = transform.position.y;
