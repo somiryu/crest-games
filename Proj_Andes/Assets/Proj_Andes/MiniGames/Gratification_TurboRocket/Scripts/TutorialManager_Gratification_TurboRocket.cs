@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
+using Debug = UnityEngine.Debug;
+using System.Diagnostics;
+using Unity.VisualScripting;
 
 public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRocketManager
 {
@@ -121,7 +124,11 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         for (int i = 0; i < 2; i++)
         {
             tutorialSteps[i].stepDone = false;
-            if(bk.starsSpawner is TutorialStarsSpawner_Gratification_TurboRocket spawner) tutorialSteps[i].signHand = spawner.GetHand(tutorialSteps[i].stepClickableObj);
+            if(bk.starsSpawner is TutorialStarsSpawner_Gratification_TurboRocket spawner)
+            {
+                tutorialSteps[i].signHand = spawner.GetHand(tutorialSteps[i].stepClickableObj);
+                tutorialSteps[i].signHand.transform.position = tutorialSteps[i].stepClickableObj.transform.position;
+            }
         }
         for (int i = 0; i < tutorialSteps.Count; i++) tutorialSteps[i].signHand.gameObject.SetActive(false);
 
@@ -163,7 +170,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
             else if (currTutoStep.step == TutorialStepsTurboRocket.UnclickTurbo && onTurbo)
             {
                 StandStill();
-                turboBtn.color = Color.yellow;
+                turboBtn.color = Color.red;
             }
             if (playerRanXSpace / bk.bkSize.localScale.x >= 0.9)
             {
@@ -256,8 +263,6 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
         if (currTutoStep.step == TutorialStepsTurboRocket.TurboAppear)
         {
-            currentSpeed = 0;
-            turboBtn.color = Color.red;
             turboBtn.gameObject.SetActive(true);
             ui.progressSlider.gameObject.SetActive(true);
         }
@@ -306,11 +311,10 @@ public class TutorialStepsTurbo
     public Collider stepClickableObj;
     public bool stepDone;
     public TutorialHand_TurboRocket signHand;
-
     public void InitTutoStep()
     {
         Debug.Log("starting " + step.ToString());
-        signHand.Init(stepClickableObj);
+        if(step != TutorialStepsTurboRocket.TurboAppear) signHand.Init(stepClickableObj);
         signHand.gameObject.SetActive(true);
     }
 
