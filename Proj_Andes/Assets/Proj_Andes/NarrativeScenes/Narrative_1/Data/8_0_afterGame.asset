@@ -21,24 +21,24 @@ MonoBehaviour:
     text: "Alex, no te preocupes por Fran. Mientras est\xE9s conmigo no se va a acercar.
       Vamos a la tienda de la esquina y compramos algo. \xBFQu\xE9 te gustar\xEDa?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a59a9a59427f04f4ab590842ae924c11, type: 3}
     responses:
     - response: HELADO
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 66384e1a24c7c134bad336720e1699df, type: 3}
+      responseImage: {fileID: 21300000, guid: 99e628ca9f943e14aa92adbd53373a4d, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: DULCE
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 7e15f4dd65138484a90daef9e9b0e33b, type: 3}
+      responseImage: {fileID: 21300000, guid: 43f522dac1955f2419eabe9e780e07cb, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: GASEOSA
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 1a662129e4ee9a7479a85d8c638de341, type: 3}
+      responseImage: {fileID: 21300000, guid: b52d5bac3ab0c0447988e8735ff2e9f9, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 4961b3f25c3677943ab4c5b92d448684, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -47,11 +47,11 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Carlos: \u201CListo, \xA1vamos entonces!\u201D\r\n"
+    text: "Listo, \xA1vamos entonces!\r\n"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 8d23f4340e1e2ed4784294f213c90373, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

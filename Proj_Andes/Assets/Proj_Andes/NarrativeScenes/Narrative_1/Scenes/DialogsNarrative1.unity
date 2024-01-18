@@ -1258,7 +1258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueDisplayerUI: {fileID: 1527390312}
-  _startingSequence: {fileID: 11400000, guid: 979b15a5d9b0e4b49b5204e26e5bafdf, type: 2}
+  _startingSequence: {fileID: 11400000, guid: 674759f1b6d1b754396734dda00717e1, type: 2}
 --- !u!4 &1180631021
 Transform:
   m_ObjectHideFlags: 0
@@ -1947,6 +1947,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1463956197}
     m_Modifications:
+    - target: {fileID: 138452822383681570, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063343628042118870, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -19.017944
+      objectReference: {fileID: 0}
     - target: {fileID: 3063343628931919240, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2034,6 +2042,10 @@ PrefabInstance:
     - target: {fileID: 3063343628931919348, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Name
       value: DialoguesDisplayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466929433441695099, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.4299316
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

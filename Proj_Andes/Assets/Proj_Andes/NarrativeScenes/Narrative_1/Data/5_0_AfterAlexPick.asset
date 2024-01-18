@@ -42,7 +42,7 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 4bfac2c7158f7e44d9cb280b1e8cf268, type: 2}
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: a0613a539b6a2f641a9a4049755c6e59, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
