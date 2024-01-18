@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MG_MechanicHand_TutorialAnimation : MonoBehaviour, iTutorialType
 {
-    TutorialUser tutorialUser;
-    Animator animator;
+    [SerializeField] TutorialUser tutorialUser;
+    [SerializeField] Animator animator;
 
     private void Start()
     {
@@ -15,11 +15,25 @@ public class MG_MechanicHand_TutorialAnimation : MonoBehaviour, iTutorialType
     public void StepStart(bool stepCompleted)
     {
        this.gameObject.SetActive(stepCompleted);
+        ChangePlayerAnims(tutorialUser.tutorialStep);
     }
 
     public void StepDone()
     {
         this.gameObject.SetActive(false);
+    }
+
+    private void ChangePlayerAnims(tutorialSteps step)
+    {
+        switch (step)
+        {
+            case tutorialSteps.MG_MechanicHand_1HoldClickAndMove:
+                animator.SetTrigger("ClickAndMove");
+                break;
+            case tutorialSteps.MG_MechanicHand_2JustClickToGrab:
+                animator.SetTrigger("JustClick");
+                break;        
+        }
     }
 }
 
