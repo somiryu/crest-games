@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Linq;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -75,6 +73,16 @@ public class TutorialManager : MonoBehaviour
             if (usersTutorial[i].tutorialStep != tutorialStep) continue;
             usersTutorial[i].OnTutorial();
         }        
+    }
+
+    public void ChangeUserTutorialStep(tutorialSteps prevTutorialStep, tutorialSteps newTutorialStep)
+    {
+        var users = usersTutorial.FindAll(x => x.tutorialStep == prevTutorialStep);
+        for (int i = 0; i < usersTutorial.Count; i++)
+        {
+            if (usersTutorial[i].tutorialStep != prevTutorialStep) continue;
+            usersTutorial[i].SetNewStep(newTutorialStep);
+        }
     }
 
     public void GetCurrentStep(TutorialUser tutorialUser)
