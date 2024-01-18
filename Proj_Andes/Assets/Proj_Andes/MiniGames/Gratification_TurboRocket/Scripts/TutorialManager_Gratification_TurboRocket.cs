@@ -54,6 +54,8 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
 
+    public float tutorialProgress;
+    public bool stopped;
 
     Ray hit;
     float timer;
@@ -115,15 +117,15 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     {
         tutorialSteps[0].stepClickableObj = bk.starsSpawner.stars[0].starColl;
         tutorialSteps[1].stepClickableObj = bk.starsSpawner.stars[1].starColl;
-        tutorialSteps[2].stepClickableObj = bk.starsSpawner.stars[2].starColl;
 
-        for (int i = 0; i < tutorialSteps.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
             tutorialSteps[i].stepDone = false;
             if(bk.starsSpawner is TutorialStarsSpawner_Gratification_TurboRocket spawner) tutorialSteps[i].signHand = spawner.GetHand(tutorialSteps[i].stepClickableObj);
-            tutorialSteps[i].signHand.gameObject.SetActive(false);
         }
+        for (int i = 0; i < tutorialSteps.Count; i++) tutorialSteps[i].signHand.gameObject.SetActive(false);
 
+        ui.progressSlider.value = 0.8f;
         ui.progressSlider.gameObject.SetActive(false);
         turboBtn.gameObject.SetActive(false);
 
@@ -143,24 +145,34 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         finalSpin.transform.position = finalSpinPos;
     }
 
+    void TutoProgress()
+    {
+        var sliderValue = Mathf.Lerp(8, 10, playerRanXSpace / bk.bkSize.localScale.x);
+        var prog = Mathf.InverseLerp(1, 10, sliderValue);
+        tutorialProgress = prog;
+    }
     void Update()
     {
         if (!onPlay) return;
 
         if (!endOfTuto)
         {
+            TutoProgress();
             if (transform.position.x >= currTutoStep.stepClickableObj.transform.position.x) StandStill();
+            if (currTutoStep.step == TutorialStepsTurboRocket.TurboAppear && !onTurbo) StandStill();
+            else if (currTutoStep.step == TutorialStepsTurboRocket.UnclickTurbo && onTurbo)
+            {
+                StandStill();
+                turboBtn.color = Color.yellow;
+            }
             if (playerRanXSpace / bk.bkSize.localScale.x >= 0.9)
             {
-                if (onTurbo)
-                {
-                    StandStill();
-                }
+                if (onTurbo && currTutoStep.step == TutorialStepsTurboRocket.TurboAppear) GoToNextStep();
             }
         }
         ContinuousMovement();
 
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0))// && !EventSystem.current.IsPointerOverGameObject())
         {
             var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             startYPos = transform.position.y;
@@ -234,11 +246,15 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     public void GoToNextStep()
     {
         currTutoStep.EndTutoStep();
-        currTutoStepIndex++;
-        currTutoStep.InitTutoStep();
-        currentTargetSpeed = levelConfig.regularSpeed;
+        if (currTutoStepIndex + 1 <= tutorialSteps.Count)
+        {
+            currTutoStepIndex++;
+            currTutoStep.InitTutoStep();
+            currentTargetSpeed = levelConfig.regularSpeed;
+        }
+        else EndOfTuto();
 
-        if(currTutoStep.step == TutorialStepsTurboRocket.TurboAppear)
+        if (currTutoStep.step == TutorialStepsTurboRocket.TurboAppear)
         {
             currentSpeed = 0;
             turboBtn.color = Color.red;
@@ -250,9 +266,11 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     {
         currentSpeed = 0;
     }
-    public void Continue()
+    public void EndOfTuto()
     {
+        endOfTuto = true;
         currentTargetSpeed = levelConfig.regularSpeed;
+        Debug.Log("Succeeded tuto!");
     }
     void EndOfRide()
     {

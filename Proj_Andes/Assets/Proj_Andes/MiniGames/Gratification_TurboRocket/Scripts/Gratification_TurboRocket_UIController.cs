@@ -28,7 +28,12 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
 	{
         if (!player.onPlay) return;
 
-        progressSlider.value = player.CurrProgress;
+        if (player is TutorialManager_Gratification_TurboRocket manager)
+        {
+            progressSlider.value = manager.tutorialProgress;
+        }
+        else progressSlider.value = player.CurrProgress;
+
 	}
 
 	public void EndOfGame()

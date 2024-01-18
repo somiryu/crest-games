@@ -10,10 +10,11 @@ public class TutorialTurboButton_TurboRocket : Image, IPointerDownHandler, IPoin
     {
         iTurboRocketManager.Instance.OnEnterTurboMode();
         color = Color.white;
-        if(iTurboRocketManager.Instance is TutorialManager_Gratification_TurboRocket manager)
+        if (iTurboRocketManager.Instance is TutorialManager_Gratification_TurboRocket manager)
         {
-            if(manager.currTutoStep.step == TutorialStepsTurboRocket.TurboAppear) manager.GoToNextStep();
+            if (manager.currTutoStep.step == TutorialStepsTurboRocket.TurboAppear) manager.currTutoStep.EndTutoStep();
         }
+
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -21,7 +22,12 @@ public class TutorialTurboButton_TurboRocket : Image, IPointerDownHandler, IPoin
         iTurboRocketManager.Instance.OnExitTurboMode();
         if (iTurboRocketManager.Instance is TutorialManager_Gratification_TurboRocket manager)
         {
-            if (manager.currTutoStep.step == TutorialStepsTurboRocket.UnclickTurbo) manager.endOfTuto = true;
+            if (manager.currTutoStep.step == TutorialStepsTurboRocket.TurboAppear || manager.currTutoStep.step == TutorialStepsTurboRocket.UnclickTurbo)
+            {
+                manager.currTutoStep.EndTutoStep();
+                color = Color.white;
+                manager.EndOfTuto();
+            }
         }
     }
 
