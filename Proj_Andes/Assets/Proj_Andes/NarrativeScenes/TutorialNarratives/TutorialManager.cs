@@ -78,5 +78,7 @@ public enum tutorialSteps
     stepStartPopUp,
     stepSkipButton,
     stepResponseButton,
-    stepConfirmedButton
+    stepConfirmedButton,
+    heartsAndStarsDone
+    
 }
