@@ -336,6 +336,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
     IEnumerator NextSceneAfterTime()
     {
+        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.FightTheAlienDone.ToString());
         yield return new WaitForSeconds(1);
         GameSequencesList.Instance.GoToNextSequence();
     }

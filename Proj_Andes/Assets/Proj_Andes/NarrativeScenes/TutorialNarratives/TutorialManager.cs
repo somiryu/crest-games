@@ -99,4 +99,6 @@ public enum tutorialSteps
     stepConfirmedButton,
     MG_MechanicHand_1HoldClickAndMove,
     MG_MechanicHand_2JustClickToGrab,
+    heartsAndStarsDone,
+	FightTheAlienDone
 }

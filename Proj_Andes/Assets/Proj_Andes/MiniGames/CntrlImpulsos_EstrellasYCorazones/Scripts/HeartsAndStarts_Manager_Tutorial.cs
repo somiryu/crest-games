@@ -42,7 +42,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     [SerializeField] TMP_Text currRoundValueTxt;
     [SerializeField] Image bkColor;
 
-    [SerializeField] List<TutorialConfigHeartsAndStars> tutorialSteps = new List<TutorialConfigHeartsAndStars>();
+    [SerializeField] List<TutorialConfigHeartsAndStars> myTutorialSteps = new List<TutorialConfigHeartsAndStars>();
     [SerializeField] TutorialConfigHeartsAndStars currTutoStep;
     private AudioSource audiosource;
 
@@ -66,7 +66,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     public void Init()
     {
         currRound = 0;
-        currTutoStep = tutorialSteps[0];
+        currTutoStep = myTutorialSteps[0];
         currConsecutiveLoses = 0;
         currConsecutiveWins = 0;
         currTutoStep.InitTutoStep(bkColor);
@@ -161,9 +161,9 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         {
 			Debug.Log("tuto step passed");
 			Victory();
-			var currIdx = tutorialSteps.IndexOf(currTutoStep);
-			if (currIdx + 1 >= tutorialSteps.Count) allTutorialsDoneFlag = true;
-			else currTutoStep = tutorialSteps[currIdx + 1];
+			var currIdx = myTutorialSteps.IndexOf(currTutoStep);
+			if (currIdx + 1 >= myTutorialSteps.Count) allTutorialsDoneFlag = true;
+			else currTutoStep = myTutorialSteps[currIdx + 1];
             currConsecutiveWins = 0;
             currConsecutiveLoses = 0;
             currTutoStep.InitTutoStep(bkColor);
@@ -263,6 +263,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     IEnumerator GoToNextScene()
     {
+        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.heartsAndStarsDone.ToString());
         yield return new WaitForSeconds(1);
         GameSequencesList.Instance.GoToNextSequence();
     }
