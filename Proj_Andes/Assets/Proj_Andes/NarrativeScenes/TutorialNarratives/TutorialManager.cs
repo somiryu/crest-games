@@ -80,8 +80,7 @@ public enum tutorialSteps
     stepResponseButton,
     stepConfirmedButton,
     MG_Magnets_1NoClick, 
-    MG_Magnets_2FourItemEnergyClick
-    stepConfirmedButton,
+    MG_Magnets_2FourItemEnergyClick,
     heartsAndStarsDone,
     FightTheAlienDone
 }
