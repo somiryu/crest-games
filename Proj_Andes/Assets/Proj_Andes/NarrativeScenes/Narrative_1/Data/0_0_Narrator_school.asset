@@ -26,7 +26,7 @@ MonoBehaviour:
     responses: []
     audio: {fileID: 8300000, guid: 9b441ded4345fe1468a2f0c0969f30db, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: a84591b2924f10e44a611cccdef653cc, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 1
     autoContinueOnClickDialog: 1
@@ -49,5 +49,5 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: eb4cab89b61f5a4479e882ee1e5b486f, type: 2}
     audio: {fileID: 8300000, guid: 9bc9d0c8b48a6fc4ea7cc7473258218d, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 9fd4de8220459ad45b6f8078a7d82d9c, type: 2}
     ExitAnim: {fileID: 0}
