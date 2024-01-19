@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MG_MagnetsEnergyItem : MonoBehaviour
+public class MG_MagnetsEnergyItem : MonoBehaviour, iTutorialType
 {
 
     [SerializeField] ParticleSystem capturedVFX;
@@ -13,6 +13,7 @@ public class MG_MagnetsEnergyItem : MonoBehaviour
     float lifeTime = 1;
     Pool<MG_MagnetsEnergyItem> pool;
     bool wasCaptured = false;
+    bool hasLifeTime = false;
 
 	public void Init(float _lifeTime, Pool<MG_MagnetsEnergyItem> ownerPool)
     {
@@ -38,8 +39,18 @@ public class MG_MagnetsEnergyItem : MonoBehaviour
 	private void Update()
 	{
         if (wasCaptured) return;
+        if (!hasLifeTime) return;
         timer += Time.deltaTime;
         if (timer > lifeTime) pool.RecycleItem(this);
 	}
 
+    public void StepStart(bool stepCompleted)
+    {
+        hasLifeTime = !stepCompleted;
+    }
+
+    public void StepDone()
+    {
+        hasLifeTime = true;
+    }
 }

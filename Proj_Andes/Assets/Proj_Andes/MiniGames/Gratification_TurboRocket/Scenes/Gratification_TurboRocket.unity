@@ -98916,11 +98916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0eccab82038aa9458f9419c1702b1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelConfig: {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
-  onPlay: 0
+  gameConfig: {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
   character: {fileID: 1380917377}
-  starsGatheredCount: 0
-  onTurbo: 0
   cam: {fileID: 519420031}
   camCC: {fileID: 519420033}
   finalSpin: {fileID: 1389171913}
