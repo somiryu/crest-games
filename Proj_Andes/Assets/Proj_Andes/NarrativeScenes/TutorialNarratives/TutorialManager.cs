@@ -79,5 +79,7 @@ public enum tutorialSteps
     stepSkipButton,
     stepResponseButton,
     stepConfirmedButton,
-    MG_BoostersAndScape_1Pause
+    MG_BoostersAndScape_1Pause,
+    heartsAndStarsDone,
+    FightTheAlienDone
 }
