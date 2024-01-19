@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WorldStatus : MonoBehaviour
 {
     public Image worldStatus;
-    void Start()
+    public void Init()
     {
         TryGetComponent(out worldStatus);
     }

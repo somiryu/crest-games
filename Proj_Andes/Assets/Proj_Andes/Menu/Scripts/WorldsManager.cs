@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tymski;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,13 +13,19 @@ public class WorldsManager : MonoBehaviour
     [SerializeField] Sprite worldDone;
     [SerializeField] Sprite worldUndone;
     [SerializeField] WorldStatus[] worldStatusSprite;
+
+    [SerializeField] Button myCollBtn;
+    [SerializeField] SceneReference myCollScene;
     int currActivePlanet => config.worldsConfig.gameIndex;
     void Start()
     {
         worlds = GetComponentsInChildren<Button>();
         for (int i = 0; i < worlds.Length; i++) worlds[i].onClick.AddListener(ClickedActivePlanet);
         for (int i = 0; i < worlds.Length; i++) worldStatusSprite = GetComponentsInChildren<WorldStatus>();
+        for (int i = 0; i < worldStatusSprite.Length; i++) worldStatusSprite[i].Init();
         SetCurrentProgress();
+
+        myCollBtn.onClick.AddListener(GoToMyCollection);
     }
     void SetCurrentProgress()
     {
@@ -33,5 +40,10 @@ public class WorldsManager : MonoBehaviour
     {
         config.worldsConfig.OnSequenceOver();
         config.worldsConfig.AssignPlanetIdx();
+    }
+
+    void GoToMyCollection()
+    {
+        SceneManagement.GoToScene(myCollScene);
     }
 }
