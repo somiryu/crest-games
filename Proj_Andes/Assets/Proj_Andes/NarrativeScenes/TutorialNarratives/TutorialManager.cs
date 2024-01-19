@@ -75,10 +75,14 @@ public class TutorialManager : MonoBehaviour
 
 public enum tutorialSteps
 {
-    stepStartPopUp,
-    stepSkipButton,
-    stepResponseButton,
-    stepConfirmedButton,
-    heartsAndStarsDone,
-    FightTheAlienDone
+    stepStartPopUp = 0,
+    stepSkipButton = 1,
+    stepResponseButton = 2,
+    stepConfirmedButton = 3,
+    MG_Magnets_1NoClick = 4, 
+    MG_Magnets_2FourItemEnergyClick = 5,
+    heartsAndStarsDone = 6,
+    FightTheAlienDone = 7,
+    VoiceStarOrFlowerDone = 8,
+    TurboRocketDone = 9,
 }

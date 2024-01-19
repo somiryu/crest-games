@@ -4,12 +4,8 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine.UI;
-using Image = UnityEngine.UI.Image;
-using Debug = UnityEngine.Debug;
-using System.Diagnostics;
-using Unity.VisualScripting;
+using TutorialSteps = tutorialSteps;
 
 public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRocketManager
 {
@@ -272,9 +268,9 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     {
         endOfTuto = true;
         currentTargetSpeed = levelConfig.regularSpeed;
-        Debug.Log("Succeeded tuto!");
-    }
-    void EndOfRide()
+		UserDataManager.CurrUser.RegisterTutorialStepDone(TutorialSteps.TurboRocketDone.ToString());
+	}
+	void EndOfRide()
     {
         bk.EndOfGame();
         onPlay = false;
@@ -289,7 +285,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         camCC.OnGameFinishedSequence();
         endTimelineDirector.Play();
         yield return new WaitForSeconds(2f);
-        ui.EndOfGame();
+        GameSequencesList.Instance.GoToNextItemInList();
     }
 }
 

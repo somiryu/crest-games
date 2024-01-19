@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Tymski;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
@@ -94,6 +95,12 @@ public class GameSequencesList : ScriptableObject
         ResetSequence();
 
         GoToNextItemInList();
+    }
+
+    [MenuItem("Hi Hat Games/ Clean tutorial data")]
+    private static void CleanCurrUserTutorial()
+    {
+        UserDataManager.CurrUser.tutorialStepsDone.Clear();
     }
 }
 
