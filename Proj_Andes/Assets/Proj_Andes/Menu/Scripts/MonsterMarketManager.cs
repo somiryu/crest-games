@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 using TMPro;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using Tymski;
 
 public class MonsterMarketManager : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class MonsterMarketManager : MonoBehaviour
     List<Monsters> totalDataCollection = new List<Monsters>();
     List<Monsters> currentMonstersFound = new List<Monsters>();
 
+    [SerializeField] Button backToWorldsBtn;
+    [SerializeField] SceneReference worldsScene;
 
     private void Awake()
     {
@@ -67,6 +70,8 @@ public class MonsterMarketManager : MonoBehaviour
         legendaryChest.onClick.AddListener(() => BuyChest(MonsterChestType.Legendary));
 
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
+
+        backToWorldsBtn.onClick.AddListener(BackToWorlds);
     }
 
     void BuyChest(MonsterChestType type)
@@ -193,6 +198,11 @@ public class MonsterMarketManager : MonoBehaviour
         getChestButton.gameObject.SetActive(true);
         chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
+    }
+
+    void BackToWorlds()
+    {
+        SceneManagement.GoToScene(worldsScene);
     }
 }
 

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Gratification_TurboRocket_CameraController : MonoBehaviour
 {
-    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
+    [SerializeField] iTurboRocketManager player => iTurboRocketManager.Instance;
+
     [SerializeField] float visualOffset = -4.7f;
     [SerializeField] Vector2 endSequenceCamPos = new Vector2(1, 2);
     [SerializeField] float movPercent = 1f;
@@ -24,12 +25,12 @@ public class Gratification_TurboRocket_CameraController : MonoBehaviour
 
     private void Start()
     {
-        lastPlayerPos = player.transform.position;
+        lastPlayerPos = player.CurrPos;
 
     }
     void Update()
     {
-        var currPlayerPos = player.transform.position;
+        var currPlayerPos = player.CurrPos;
 
         if (player.onPlay)
         {
@@ -37,7 +38,7 @@ public class Gratification_TurboRocket_CameraController : MonoBehaviour
             targetY = transform.position.y + verticalDisplacement;
         }
         var currPos = transform.position;
-        currPos.x = Mathf.MoveTowards(currPos.x,targetPos.x + player.transform.position.x,player.levelConfig.accelerationSpeed*4* Time.deltaTime);
+        currPos.x = Mathf.MoveTowards(currPos.x,targetPos.x + player.CurrPos.x,player.levelConfig.accelerationSpeed*4* Time.deltaTime);
         currPos.y = Mathf.MoveTowards(currPos.y, targetY, player.levelConfig.accelerationSpeed * 4 * Time.deltaTime);
         
         transform.position = new Vector3(currPos.x, targetY, currPos.z);

@@ -3,22 +3,24 @@ using UnityEngine.Playables;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+using Transform = UnityEngine.Transform;
 
-public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager
+public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager, iTurboRocketManager
 {
-    static Gratification_TurboRocket_PlayerController instance;
-    public static Gratification_TurboRocket_PlayerController Instance => instance;
+    [SerializeField] Gratification_TurboRocket_GameConfig gameConfig;
+    public Gratification_TurboRocket_GameConfig levelConfig { get => gameConfig; set { } }
+    public bool onPlay { get; set; }
 
-    public Gratification_TurboRocket_GameConfig levelConfig;
-    public bool onPlay;
     public Transform character;
     Vector3 firstPos;
     float currentTargetSpeed;
     SphereCollider myCollider;
     Collider[] colls;
-    [HideInInspector] public int starsGatheredCount;
+    [HideInInspector] public int starsGatheredCount { get; set; }
     public Action OnScoreChanged;
-    public bool onTurbo = false;
+    public Action OnScoreChanges { get => OnScoreChanged; set { } }
+    public bool onTurbo { get; set; }
     float currentSpeed;
     public Camera cam;
     [SerializeField] Gratification_TurboRocket_CameraController camCC;
@@ -42,7 +44,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
 
 
-	Animator characterAnimator;
+	[SerializeField] Animator characterAnimator;
 
     public EndOfGameManager EndOfGameManager => eogManager;
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
@@ -54,19 +56,15 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     float targetYPos;
     float playerRanXSpace;
 
-    public float CurrProgress => playerRanXSpace / bk.bkSize.localScale.x;
-
+    public float CurrProgress { get => playerRanXSpace / bk.bkSize.localScale.x; }
     public Vector3 CurrPos => transform.position;
-
-    public float playerCurrentSpeed => currentSpeed;
+    float iTurboRocketManager.playerCurrentSpeed { get => currentSpeed; }
+    public Transform myTransform { get => transform; }
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            DestroyImmediate(this);
-        }
-        instance = this;
+        iTurboRocketManager.Instance = this;
+        
         Init();
     }
     public void Init()
@@ -210,7 +208,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
         StartCoroutine(_OnFinishSequence());
     }
-    IEnumerator _OnFinishSequence()
+    public IEnumerator _OnFinishSequence()
     {
         camCC.OnGameFinishedSequence();
         endTimelineDirector.Play();
@@ -234,4 +232,22 @@ public enum GameStages
 {
     Start,
     End
+}
+
+public interface iTurboRocketManager
+{
+    public static iTurboRocketManager Instance { get; set; }
+    public Gratification_TurboRocket_GameConfig levelConfig { get; set; }
+    public Transform myTransform { get; }
+    public int starsGatheredCount { get; set; }
+    public float CurrProgress { get; }
+    Vector3 CurrPos => myTransform.position;
+    public float playerCurrentSpeed { get; }
+    public bool onPlay { get; set; }
+    public bool onTurbo { get; set; }
+    public Action OnScoreChanges { get; set; }
+    public void RideBegining();
+    public void OnEnterTurboMode();
+    public void OnExitTurboMode();
+    public IEnumerator _OnFinishSequence();
 }
