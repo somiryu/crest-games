@@ -9,5 +9,6 @@ public class WorldStatus : MonoBehaviour
     public void Init()
     {
         TryGetComponent(out worldStatus);
+        gameObject.SetActive(true);
     }
 }

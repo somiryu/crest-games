@@ -5,15 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WorldsConfig", menuName = "GameSequencesList/WorldsConfig")]
 public class WorldsConfig : SimpleGameSequenceItem
 {
-    public PickAWorld pickAWorld;
     public int gameIndex;
-    public void Init()
-    {
-        pickAWorld.gameIdx = gameIndex;
-        pickAWorld.worldsConfig = this;
-    }
-    public void AssignPlanetIdx()
-    {
-        GameSequencesList.CurrPlanetIdx = gameIndex;
+    public override SimpleGameSequenceItem GetNextItem()
+    { 
+        var currItem = base.GetNextItem();
+        if (currItem != null) WorldsManager.index = gameIndex;
+        return currItem;
     }
 }

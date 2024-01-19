@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Tymski;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 public class WorldsManager : MonoBehaviour
 {
-    [SerializeField] PickAWorld config;
+    public static int index;
     [SerializeField] Button[] worlds;
     [SerializeField] Sprite worldDone;
     [SerializeField] Sprite worldUndone;
@@ -16,16 +17,24 @@ public class WorldsManager : MonoBehaviour
 
     [SerializeField] Button myCollBtn;
     [SerializeField] SceneReference myCollScene;
-    int currActivePlanet => config.worldsConfig.gameIndex;
+    [SerializeField] TextMeshProUGUI coinsAmt;
+    int currActivePlanet => index;
+
     void Start()
     {
         worlds = GetComponentsInChildren<Button>();
-        for (int i = 0; i < worlds.Length; i++) worlds[i].onClick.AddListener(ClickedActivePlanet);
+        for (int i = 0; i < worlds.Length; i++)
+        {
+            worlds[i].onClick.AddListener(ClickedActivePlanet);
+            var txt = worlds[i].GetComponentInChildren<TextMeshProUGUI>();
+            txt.text = (i + 1).ToString();
+        }
         for (int i = 0; i < worlds.Length; i++) worldStatusSprite = GetComponentsInChildren<WorldStatus>();
         for (int i = 0; i < worldStatusSprite.Length; i++) worldStatusSprite[i].Init();
         SetCurrentProgress();
 
         myCollBtn.onClick.AddListener(GoToMyCollection);
+        coinsAmt.text = UserDataManager.CurrUser.Coins.ToString();
     }
     void SetCurrentProgress()
     {
@@ -33,13 +42,12 @@ public class WorldsManager : MonoBehaviour
         for (int i = 0; i < currActivePlanet; i++) worldStatusSprite[i].worldStatus.sprite = worldDone;
         for (int i = currActivePlanet+1; i < worldStatusSprite.Length; i++) worldStatusSprite[i].worldStatus.sprite = worldUndone;
 
-        worldStatusSprite[currActivePlanet].worldStatus.sprite = null;
+        worldStatusSprite[currActivePlanet].worldStatus.gameObject.SetActive(false);
         worlds[currActivePlanet].interactable = true;
     }
     void ClickedActivePlanet()
     {
-        config.worldsConfig.OnSequenceOver();
-        config.worldsConfig.AssignPlanetIdx();
+        GameSequencesList.Instance.GoToNextItemInList();
     }
 
     void GoToMyCollection()

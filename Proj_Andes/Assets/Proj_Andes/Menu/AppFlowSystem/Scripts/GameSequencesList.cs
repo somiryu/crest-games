@@ -37,13 +37,11 @@ public class GameSequencesList : ScriptableObject
         if (nextItem != null)
         {
             if (prevGame != null) prevGame.SaveAnalytics();
-            if (nextItem is WorldsConfig worlds) worlds.Init();
             prevGame = nextItem;
             SceneManagement.GoToScene(nextItem.scene);
         }
         else GoToNextSequence();
     }
-    public static int CurrPlanetIdx;
     public void GoToItemIdx(int idx)
     {
         var nextItem = GetGameSequence().GetItemByIdx(idx);
