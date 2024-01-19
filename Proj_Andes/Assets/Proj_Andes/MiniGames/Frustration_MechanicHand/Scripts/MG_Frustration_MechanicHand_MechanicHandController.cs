@@ -21,6 +21,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
     [SerializeField] Transform startPointLine;
     [SerializeField] Transform endPointLine;
+    [SerializeField] LineRenderer lineRenderer;
 
     [Header("Game Audio")]
     [SerializeField] AudioClip selectingAudio;
@@ -44,12 +45,14 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         hook.TryGetComponent(out hookCollider);
         hook.Init(this);
         audioSource = GetComponent<AudioSource>();
-
+        lineRenderer.SetPosition(0, startPointLine.position);
     }
 
     void Update()
     {
         DragBehaviour();
+        lineRenderer.SetPosition(1, endPointLine.position);
+
         //progressSlider.value = player.CurrProgress;
 
     }
@@ -152,6 +155,9 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         }
         if (hookedObj)
         {
+            correctParticles.transform.position = hookedObj.position;
+            correctParticles.Play();
+
             audioSource.Stop();
             audioSource.clip = onHookedAudio;
             audioSource.Play();
