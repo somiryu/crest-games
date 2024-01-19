@@ -319,6 +319,7 @@ MonoBehaviour:
   afterActionPanel: {fileID: 49564639}
   inGameObjs: {fileID: 1207398770}
   afterAction_ResultsTxt: {fileID: 49564638}
+  constant_ResultsTxt: {fileID: 796055149}
   afterAction_WinLabel: {fileID: 7630630}
   afterAction_LoseLabel: {fileID: 735443156}
   eogManager: {fileID: 49564637}
@@ -759,6 +760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 481375690}
   - component: {fileID: 481375691}
+  - component: {fileID: 481375692}
   m_Layer: 0
   m_Name: handBasePivot
   m_TagString: Untagged
@@ -835,6 +837,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
+--- !u!95 &481375692
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481375689}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d3f5a048c7c80564dafdb42a13235986, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519031128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,6 +1580,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790462227}
   m_CullTransparentMesh: 1
+--- !u!114 &796055149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3489982151914542098, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
+  m_PrefabInstance: {fileID: 693965088}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &868590307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7072,6 +7106,7 @@ GameObject:
   - component: {fileID: 1331616365}
   - component: {fileID: 1331616364}
   - component: {fileID: 1331616366}
+  - component: {fileID: 1331616367}
   m_Layer: 0
   m_Name: MechanicHand
   m_TagString: Untagged
@@ -7105,7 +7140,7 @@ MonoBehaviour:
   correctParticles: {fileID: 1600877462}
   incorrectParticles: {fileID: 0}
   skinObj: {fileID: 0}
-  skinObjAnim: []
+  objAnim: {fileID: 1331616367}
 --- !u!4 &1331616365
 Transform:
   m_ObjectHideFlags: 0
@@ -7218,6 +7253,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1331616367
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331616363}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d3f5a048c7c80564dafdb42a13235986, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1377652486
 GameObject:
   m_ObjectHideFlags: 0
@@ -13284,7 +13340,6 @@ GameObject:
   - component: {fileID: 2142186869}
   - component: {fileID: 2142186870}
   - component: {fileID: 2142186871}
-  - component: {fileID: 2142186872}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Untagged
@@ -13329,7 +13384,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.43, y: 0.43, z: 1}
-  m_Center: {x: 0.2, y: 0, z: 0}
+  m_Center: {x: -0.16, y: 0, z: 0}
 --- !u!114 &2142186870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13369,27 +13424,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &2142186872
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142186867}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2145750356
 PrefabInstance:
   m_ObjectHideFlags: 0

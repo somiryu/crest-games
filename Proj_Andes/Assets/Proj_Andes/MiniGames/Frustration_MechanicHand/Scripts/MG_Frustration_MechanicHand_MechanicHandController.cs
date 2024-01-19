@@ -34,7 +34,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     [SerializeField] ParticleSystem correctParticles;
     [SerializeField] ParticleSystem incorrectParticles;
     [SerializeField] GameObject skinObj;
-    [SerializeField] Animator[] skinObjAnim;
+    [SerializeField] Animator objAnim;
 
 
     IEnumerator hookShootingRoutine;
@@ -145,7 +145,8 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             StartCoroutine(ShowTrapSign());
 			CorrectRotationToFail();
         }
-        //Anim de moverse
+        objAnim.SetTrigger("Open");
+
         while ((originalPosition - currPosition).magnitude < hookMaxDistance)
         {
             hook.transform.position += transform.right * hookSpeed * Time.deltaTime;
@@ -168,6 +169,8 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             audioSource.clip = notHookedAudio;
             audioSource.Play();
         }
+        objAnim.SetTrigger("Close");
+
         //animacion agarrar
         //Esperar 2 segundos
         //Animacion moverse
@@ -178,7 +181,8 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
             yield return null;
         }
 
-        //Anim idle
+        objAnim.SetTrigger("Idle");
+
         canDrag = true;
         hookShootingRoutine = null;
         CheckIfScored();

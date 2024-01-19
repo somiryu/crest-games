@@ -19,6 +19,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public GameObject afterActionPanel;
 	public GameObject inGameObjs;
 	public TMP_Text afterAction_ResultsTxt;
+	public TMP_Text constant_ResultsTxt;
 	public GameObject afterAction_WinLabel;
 	public GameObject afterAction_LoseLabel;
 
@@ -122,6 +123,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public void OnCapturedAsteroid(Transform asteroid)
 	{
 		totalCapturedAsteroids++;
+		constant_ResultsTxt.SetText(totalCapturedAsteroids.ToString());
+
 		asteroidsPool.RecycleItem(asteroid);
 		asteroid.SetParent(asteroidsPool.hierarchyParent);
 		currRoundAsteroids.Remove(asteroid);
