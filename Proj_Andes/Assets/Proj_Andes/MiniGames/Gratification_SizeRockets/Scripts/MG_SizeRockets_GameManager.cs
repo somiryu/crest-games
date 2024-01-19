@@ -182,7 +182,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 		currRocket.Init(rocketsPool, currTargetPlanet, basePlanet);
 		activeShips.Add(currRocket);
 		shipsLeft--;
-		shipsLeftTxt.SetText("Naves: " + shipsLeft.ToString());
+		shipsLeftTxt.SetText(shipsLeft.ToString());
 	}
 
 

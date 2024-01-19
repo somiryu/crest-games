@@ -17,6 +17,6 @@ public class MG_SizeRockets_Planet : MonoBehaviour
     public void UpdateCoinsAmount(int _coinsAmount)
     {
 		coinsAmount = _coinsAmount;
-		coinsAmountTxtUI.SetText(coinsAmount.ToString() + " monedas");
+		coinsAmountTxtUI.SetText(coinsAmount.ToString());
 	}
 }
