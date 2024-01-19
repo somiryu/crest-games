@@ -23,12 +23,13 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] GameObject nameTxtContainer;
     [SerializeField] TMP_Text dialogueTxt;
     [SerializeField] GameObject dialogueTxtContainer;
-    [SerializeField] Button skipDialogueBtn;    
+    [SerializeField] Image skipDialogueTutImg;    
     [SerializeField] Button dialogueBoxBtn;
     [SerializeField] Button repeatBtn;
     [SerializeField] PlayableDirector timeLinePlayer;
     [SerializeField] Transform responseDisplayersContainer;
     [SerializeField] AudioSource audioPlayer;
+    [SerializeField] Toggle canSkipAudio;
 
 
     [SerializeField] bool forceDialogeAppear;
@@ -42,6 +43,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private DialogueSequenceData pendingSequenceToShow;
     private DialogueResponse preselectedResponse;
 	private bool preselectedResponseAudioIsDone = false;
+
 
     public bool SaveNavSequence = true;
     
@@ -93,7 +95,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if(instance != null && instance != this) DestroyImmediate(instance);
         instance = this;
 
-        skipDialogueBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
 		choicesTree.Clear();
@@ -134,7 +135,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
                 {
 					TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepSkipButton);
 				}
-
 			}
 		}
 	}
@@ -270,7 +270,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 
 		repeatBtn.gameObject.SetActive(false);
-		skipDialogueBtn.gameObject.SetActive(false);        
+		skipDialogueTutImg.gameObject.SetActive(false);        
 
         //Clean old responses if needed
         if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
@@ -336,7 +336,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     private IEnumerator DialogAnimSequence(DialogueData dialogueData, bool skipEnterAnim = false)
     {
-        state = dialogLineState.Entering;
+
+		state = dialogLineState.Entering;
         if (dialogueData.EnterAnim != null && !skipEnterAnim)
         {
             timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
@@ -374,6 +375,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         while (!audioIsDone)
         {
             audioIsDone = !audioPlayer.isPlaying;
+            if (canSkipAudio.isOn) audioIsDone = true;
             yield return null;
         }
 
@@ -381,8 +383,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
         repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || dialogueData.audio != null);
 
 
-        //Get new response handler
-        lastPickedResponseIdx = -1;
+		//Get new response handler
+		lastPickedResponseIdx = -1;
         preselectedResponse = null;
         if (dialogueData.responses.Length > 0)
         {
@@ -399,11 +401,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 
 
-        while (!hasPendingLineChange)
+		while (!hasPendingLineChange)
         {
             if(preselectedResponse != null)
             {
                 preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
+                if (canSkipAudio.isOn) preselectedResponseAudioIsDone = true;
             }
             yield return null;
         }
@@ -475,7 +478,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             isAppearingTxt = false;
             dialogueTxt.SetText(SelectTextByGender(currDialogue));
             var turnOnAutoSkip = AutoContinueActive();
-            skipDialogueBtn.gameObject.SetActive(turnOnAutoSkip);
+            skipDialogueTutImg.gameObject.SetActive(turnOnAutoSkip);
             dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);       
         }
     }

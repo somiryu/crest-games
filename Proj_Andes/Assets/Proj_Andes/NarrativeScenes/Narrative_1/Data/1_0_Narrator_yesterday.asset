@@ -13,60 +13,84 @@ MonoBehaviour:
   m_Name: 1_0_Narrator_yesterday
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "Efectivamente no fuiste al colegio porque ten\xEDas gripa, pero estas
-      de buenas porque la profe se demora recogiendo un material para la clase, asi
-      que Cami comienza a ponerte al d\xEDa."
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "Ayer fue horrible! Me despert\xE9 tarde y tuve que correr un mont\xF3n
-      para llegar."
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "cuando porfin llegu\xE9, no me quer\xEDan dejar entrar. Me dijeron que
-      ten\xEDan que llamar a mi casa para que me recogieran. El colmo!,\xA1hab\xEDa
-      llegado 2 minutos tarde!"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: f8d273cd4b2ae5146833e143cb618c67, type: 2}
-    text: "\xBFC\xF3mo te sientes t\xFA, al saber lo que le pas\xF3 a Cami?"
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que Cami sac\xF3 mala nota?\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
-    - response: "BIEN\t"
-      responseImage: {fileID: 21300000, guid: b799d874948b84e47a5f3a021c70058c, type: 3}
-      changeSequence: 0
+    - response: MUY BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    - response: NADA
-      responseImage: {fileID: 21300000, guid: 098bcf0e01978024385c25352552b6d7, type: 3}
-      changeSequence: 0
+    - response: BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: ME DA IGUAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MAL
-      responseImage: {fileID: 21300000, guid: 098bcf0e01978024385c25352552b6d7, type: 3}
-      changeSequence: 0
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
+    - response: MUY MAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 84dd25dc6dc66ae419d46a695ec7f660, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: A mitad de clase, la profe cambia de actividad y comienzan a saltar lazo.
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 1c4a8ebe05cdaf544a3fa4f751f328e4, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy buena."
+    textAlternative: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy bueno."
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 558a5f057478b8544a2970137112af85, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: f8d273cd4b2ae5146833e143cb618c67, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Cami comienza a saltar lazo, pero llega Alex, una compa\xF1era del curso,
+      y empuja a Cami. La hace caer y todos los dem\xE1s empiezan a re\xEDrse al
+      verla en el piso\u2026"
+    textAlternative: "Cami comienza a saltar lazo, pero llega Alex, un compa\xF1ero
+      del curso, y empuja a Cami. Lo hace caer y todos los dem\xE1s empiezan a re\xEDrse
+      al verlo en el piso\u2026"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 638d9f775e9508e46b0463f53f75239c, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

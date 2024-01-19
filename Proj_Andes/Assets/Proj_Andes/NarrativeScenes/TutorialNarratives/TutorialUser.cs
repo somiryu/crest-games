@@ -5,14 +5,22 @@ using UnityEngine.UI;
 
 public class TutorialUser : MonoBehaviour
 {
-    public tutorialSteps tutorialStep;
-    [SerializeField] iTutorialType tutorialType;
+	public tutorialSteps tutorialStep;
+    iTutorialType tutorialType;
 
-    private void Start()
-    {
+	private void Awake()
+	{
+        tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
+	}
+
+	private void Start()
+	{
         TutorialManager.Instance.AddNewUser(this);
+	}
+
+	private void OnEnable()
+    {
         var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
-        TryGetComponent<iTutorialType>(out tutorialType);
         tutorialType.StepStart(activeTut);
     }
 

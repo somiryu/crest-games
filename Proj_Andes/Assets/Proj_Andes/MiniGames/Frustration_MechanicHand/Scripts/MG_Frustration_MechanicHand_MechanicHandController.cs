@@ -139,7 +139,8 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
 		if (gameManager.gameConfigs.activeCheats && currProgress >= neededAmount - 1)
         {
-            CorrectRotationToFail();
+            StartCoroutine(ShowTrapSign());
+			CorrectRotationToFail();
         }
         //Anim de moverse
         while ((originalPosition - currPosition).magnitude < hookMaxDistance)
@@ -177,7 +178,15 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         CheckIfScored();
     }
 
-    void CorrectRotationToFail()
+
+	IEnumerator ShowTrapSign()
+	{
+		MG_MechanicHand_GameManger.Instance.trapImage.gameObject.SetActive(true);
+		yield return new WaitForSeconds(1);
+		MG_MechanicHand_GameManger.Instance.trapImage.gameObject.SetActive(false);
+	}
+
+	void CorrectRotationToFail()
     {
 		var hitAmount = Physics.
 		   BoxCastNonAlloc(hook.transform.position, hookCollider.size / 2, transform.right, hitResults, transform.rotation, Mathf.Infinity);

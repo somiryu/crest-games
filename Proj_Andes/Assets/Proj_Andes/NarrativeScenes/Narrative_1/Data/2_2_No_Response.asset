@@ -16,7 +16,10 @@ MonoBehaviour:
   - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 0ee258ae4c5cd9d44a23b392968e829e, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Es en ser\xEDo? Yo tengo mucha suerte. Bueno, casi siempre."
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 0}

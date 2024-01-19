@@ -13,119 +13,149 @@ MonoBehaviour:
   m_Name: 1_1_CamiFeeling
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "\xBFQu\xE9 crees que sinti\xF3 Cami cuando le pas\xF3 eso?"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "C\xF3mo te sientes t\xFA al saber que Alex empuj\xF3 a Cami?\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses:
-    - response: RABIA
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
+    - response: MUY BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 3b5f00c24140b624caeb38085397749e, type: 3}
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    - response: MIEDO
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: ALEGRIA
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: TRISTEZA
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: "NO S\xC9"
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "T\xFA si que conoces bien a Cami."
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "Menos mal la coordinadora me vio y me dio permiso para entrar al colegio.Uff!
-      me salv\xE9 de un rega\xF1o!"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "La coordinadora me acompa\xF1\xF3 hasta el sal\xF3n y, antes de abrir
-      la puerta, me acord\xE9 que la profe Silvia nos hab\xEDa pedido unos materiales.
-      Del af\xE1n, los dej\xE9 en la casa. Como es de ella de brava, \xA1fijo me
-      iba a rega\xF1ar!"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "\xBFC\xF3mo te sientes tu al saber lo que le pas\xF3 a Cami?"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses:
     - response: BIEN
-      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
-      changeSequence: 0
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 5237432f2024ee143818de407fb93aab, type: 3}
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    - response: NADA
-      responseImage: {fileID: 21300000, guid: 0c343c4df81426643b4765725573ef16, type: 3}
-      changeSequence: 0
+    - response: ME DA IGUAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: d97e8ea1297153648a97659683c15303, type: 3}
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MAL
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      changeSequence: 0
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 6bd4f9ffa7c9f5b44ac5a4062c36b142, type: 3}
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
+    - response: MUY MAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 1530dbbdb8d3f8844b5b387330c4c855, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "El profe se da cuenta y para ayudar a Cami a sentirse mejor le deja escojer
+      el deporte que va a practicar ahora. Adivina qu\xE9 eligio"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses:
+    - response: Basquetbol
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: Voleybol
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: "F\xFAtbol"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 40945b4f781f2a14cbafe55736d233fd, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: Si! Ese es mi deporte favorito
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 801ffbb28c2e67c49b20afe2de8c0a55, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 0
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
-    text: "\xBFQu\xE9 crees que sinti\xF3 Cami cuando le pas\xF3 esto?"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "C\xF3mo te sientes al escuchar que Cami pudo jugar lo que m\xE1s le gusta\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses:
-    - response: RABIA
-      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
-    - response: MIEDO
-      responseImage: {fileID: 21300000, guid: 0c343c4df81426643b4765725573ef16, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
-    - response: ALGRIA
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
-    - response: TRISTEZA
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
-    - response: "NO S\xC9"
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      changeSequence: 0
+    - response: MUY BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 3b5f00c24140b624caeb38085397749e, type: 3}
+      responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
+    - response: BIEN
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 5237432f2024ee143818de407fb93aab, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: ME DA IGUAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: d97e8ea1297153648a97659683c15303, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: MAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 6bd4f9ffa7c9f5b44ac5a4062c36b142, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    - response: MUY MAL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 97b257484664f9d4cb5130f92817387b, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Uy! Son\xF3 la campana! Vamos al recreo y juguemos un rato"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: f27a333d37809d54084173200c1cbde0, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: f18b99be47ab0e343bba684e5ebbbeca, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: Una profe te llama para hablar contigo asi que Cami y tu no pueden estar
+      juntas en el recreo
+    textAlternative: Una profe te llama para hablar contigo asi que Cami y tu no
+      pueden estar juntos en el recreo
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 4c425019d9e5b9e4ea93d0ffe2e5e869, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

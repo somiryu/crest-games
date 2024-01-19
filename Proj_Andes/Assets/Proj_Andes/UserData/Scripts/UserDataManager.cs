@@ -10,6 +10,7 @@ public class UserDataManager : ScriptableObject
     [SerializeField] int maxAgeMediumLevel = 8;
 
 	private static string instancePath = "UserDataManager";
+	private static string defaultUserID = "DefaultUserId";
 
 	private static UserDataManager instance;
 
@@ -30,6 +31,7 @@ public class UserDataManager : ScriptableObject
 	public static UserData CurrUser => Instance.CurrUserData;
 
 	public UserData DefaultUserData = new UserData();
+
 
 	[NonSerialized]
 	public List<UserData> usersDatas = new List<UserData>();
@@ -103,6 +105,9 @@ public class UserDataManager : ScriptableObject
 			CurrUser.narrativeNavCheckPointsNodes = dialogSystem.GetCurrNavigationNodes();
 		}
 		else CurrUser.narrativeNavCheckPointsNodes = null;
+
+		//Don't save if we are using the default user
+		if (CurrUser.id == defaultUserID) return;
 
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
