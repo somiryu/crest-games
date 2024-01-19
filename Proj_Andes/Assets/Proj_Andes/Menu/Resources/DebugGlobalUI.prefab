@@ -1460,7 +1460,7 @@ GameObject:
   - component: {fileID: 4942579118086746860}
   - component: {fileID: 9196556499082876844}
   m_Layer: 5
-  m_Name: AppSkipSceneButton
+  m_Name: DebugGlobalUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -29,6 +29,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] PlayableDirector timeLinePlayer;
     [SerializeField] Transform responseDisplayersContainer;
     [SerializeField] AudioSource audioPlayer;
+    [SerializeField] Toggle canSkipAudio;
 
 
     [SerializeField] bool forceDialogeAppear;
@@ -42,6 +43,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private DialogueSequenceData pendingSequenceToShow;
     private DialogueResponse preselectedResponse;
 	private bool preselectedResponseAudioIsDone = false;
+
 
     public bool SaveNavSequence = true;
     
@@ -133,7 +135,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
                 {
 					TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepSkipButton);
 				}
-
 			}
 		}
 	}
@@ -335,7 +336,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     private IEnumerator DialogAnimSequence(DialogueData dialogueData, bool skipEnterAnim = false)
     {
-        state = dialogLineState.Entering;
+
+		state = dialogLineState.Entering;
         if (dialogueData.EnterAnim != null && !skipEnterAnim)
         {
             timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
@@ -373,6 +375,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         while (!audioIsDone)
         {
             audioIsDone = !audioPlayer.isPlaying;
+            if (canSkipAudio.isOn) audioIsDone = true;
             yield return null;
         }
 
@@ -380,8 +383,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
         repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || dialogueData.audio != null);
 
 
-        //Get new response handler
-        lastPickedResponseIdx = -1;
+		//Get new response handler
+		lastPickedResponseIdx = -1;
         preselectedResponse = null;
         if (dialogueData.responses.Length > 0)
         {
@@ -398,11 +401,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		}
 
 
-        while (!hasPendingLineChange)
+		while (!hasPendingLineChange)
         {
             if(preselectedResponse != null)
             {
                 preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
+                if (canSkipAudio.isOn) preselectedResponseAudioIsDone = true;
             }
             yield return null;
         }

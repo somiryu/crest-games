@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
-
+using System.Collections;
 
 public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 {
@@ -73,7 +73,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         endOfGameContainer.gameObject.SetActive(false);
         catchBoosterRange = 1.5f;
         OnGameStart();
-        trapImage.gameObject.SetActive(gameConfig.forceToFail);
+        trapImage.gameObject.SetActive(false);
     }
 
     void Update()
@@ -166,20 +166,31 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         totalAttempts++;
         alienMov.MoveToNextPoint();
     }
+
     public void ForcedToFail()
     {
-        for (int i = 0; i < forcedFails.Count; i++)
+
+		for (int i = 0; i < forcedFails.Count; i++)
         {
             if (totalAttempts == forcedFails[i])
             {
                 forcedFails.Remove(forcedFails[i]);
                 onTrapMode = true;
-            }
-            else onTrapMode = false;
+				StartCoroutine(ShowTrapSign());
+			}
+			else onTrapMode = false;
         }
         if (successfulAttempts >= gameConfig.boostersPerRun - gameConfig.forcedFails) onTrapMode = true;
     }
-    int GenerateRandom()
+
+	IEnumerator ShowTrapSign()
+	{
+		trapImage.gameObject.SetActive(true);
+		yield return new WaitForSeconds(1);
+		trapImage.gameObject.SetActive(false);
+	}
+
+	int GenerateRandom()
     {
         return Random.Range((gameConfig.boostersPerRun-gameConfig.forcedFails), totalAttempts);
     }
