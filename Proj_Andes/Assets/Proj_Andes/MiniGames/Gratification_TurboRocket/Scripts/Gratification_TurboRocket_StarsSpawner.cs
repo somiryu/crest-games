@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Gratification_TurboRocket_StarsSpawner : MonoBehaviour
 {
-    Gratification_TurboRocket_PlayerController player => Gratification_TurboRocket_PlayerController.Instance;
-    [SerializeField] BoxCollider spawnArea;
-    [SerializeField] Gratification_TurboRocket_StarsController starSample;
-    [SerializeField] Gratification_TurboRocket_BackgroundController backgroundController;
+    iTurboRocketManager player => iTurboRocketManager.Instance;
+    public BoxCollider spawnArea;
+    public Gratification_TurboRocket_StarsController starSample;
+    public Gratification_TurboRocket_BackgroundController backgroundController;
     public List<Gratification_TurboRocket_StarsController> stars = new List<Gratification_TurboRocket_StarsController>();
 
     public BoxCollider SpawnArea => spawnArea;
-    public void Init()
+    public virtual void Init()
     {
         //backgroundController = GetComponentInParent<Gratification_TurboRocket_BackgroundController>();
         var newSize = spawnArea.size;

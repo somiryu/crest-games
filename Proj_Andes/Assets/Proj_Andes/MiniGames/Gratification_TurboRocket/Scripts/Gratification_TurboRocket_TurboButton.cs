@@ -8,12 +8,12 @@ public class Gratification_TurboRocket_TurboButton : Image, IPointerDownHandler,
 {
     public void OnPointerDown(PointerEventData eventData)
     {
-        Gratification_TurboRocket_PlayerController.Instance.OnEnterTurboMode();
+        iTurboRocketManager.Instance.OnEnterTurboMode();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Gratification_TurboRocket_PlayerController.Instance.OnExitTurboMode();
+        iTurboRocketManager.Instance.OnExitTurboMode();
 
     }
 }

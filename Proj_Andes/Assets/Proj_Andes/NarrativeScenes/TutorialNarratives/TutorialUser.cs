@@ -16,16 +16,18 @@ public class TutorialUser : MonoBehaviour
 	private void Start()
 	{
         TutorialManager.Instance.AddNewUser(this);
-	}
+    }
 
-	private void OnEnable()
+    private void OnEnable()
     {
+        if(tutorialType == null) tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
         var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
         tutorialType.StepStart(activeTut);
     }
 
     public void OffTutorial()
     {
+        if (tutorialType == null) tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
         tutorialType.StepDone();
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
