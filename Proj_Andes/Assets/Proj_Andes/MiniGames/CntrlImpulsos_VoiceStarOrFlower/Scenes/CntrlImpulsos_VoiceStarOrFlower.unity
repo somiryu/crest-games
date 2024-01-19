@@ -12589,11 +12589,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399102442}
   m_CullTransparentMesh: 1
---- !u!1 &1476035754 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1307520066272712462, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
-  m_PrefabInstance: {fileID: 2610515073907893259}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1504520893 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8191652133869606255, guid: 67c539ab53012e24cb36584fe83a0b6b, type: 3}
@@ -13022,7 +13017,6 @@ GameObject:
   - component: {fileID: 1951022618}
   - component: {fileID: 1951022617}
   - component: {fileID: 1951022622}
-  - component: {fileID: 1951022624}
   - component: {fileID: 1951022623}
   m_Layer: 5
   m_Name: MainUI
@@ -13261,53 +13255,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1951022624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1951022616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cac974081a8dfcb41a96dce022173ff5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameConfigs: {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
-  leftTargetSprite: {fileID: 21300000, guid: 3ea023f6b1c9e2c4194b88a88cb8a814, type: 3}
-  rightTargetSprite: {fileID: 21300000, guid: bb6115a739570b24bb07ad5301bbc228, type: 3}
-  currTargetImg: {fileID: 597656416}
-  leftBtn: {fileID: 657391130}
-  rightBtn: {fileID: 1390768956}
-  discardBtn: {fileID: 227213638}
-  afterActionPanel: {fileID: 180080037}
-  inGameUiPanel: {fileID: 1631699888}
-  correctAudio: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
-  wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
-  finishAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
-  leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
-  rightAudio: {fileID: 8300000, guid: dc7b0595b4e4fe741bf177d1c46e4872, type: 3}
-  discardAudio: {fileID: 8300000, guid: ab8bfe04f8cf41740b85e1491a589c5d, type: 3}
-  audioPlayer: {fileID: 1951022623}
-  leftWonItemsPool:
-    itemPrefab: {fileID: 793727092}
-    hierarchyParent: {fileID: 1366486297}
-    growBy: 5
-  rightWonItemsPool:
-    itemPrefab: {fileID: 927028293}
-    hierarchyParent: {fileID: 697622371}
-    growBy: 5
-  correctParticles: {fileID: 777806502}
-  incorrectParticles: {fileID: 1348141903}
-  leftObjTxt: {fileID: 453458884}
-  rightObjTxt: {fileID: 895435230}
-  StarsCounter: {fileID: 1476035754}
-  currCoinsValueTxt: {fileID: 1220886920}
-  afterActionFinalCoinsTxt: {fileID: 2055457787}
-  retryBtn: {fileID: 0}
-  retryBtn2: {fileID: 1798341356}
-  timerUI: {fileID: 1936779544}
-  eogManager: {fileID: 1504520893}
 --- !u!114 &2055457787 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1493603089339741428, guid: 67c539ab53012e24cb36584fe83a0b6b, type: 3}

@@ -80,5 +80,6 @@ public enum tutorialSteps
     stepResponseButton,
     stepConfirmedButton,
     heartsAndStarsDone,
-    FightTheAlienDone
+    FightTheAlienDone,
+    VoiceStarOrFlowerDone,
 }
