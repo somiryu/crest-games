@@ -98,7 +98,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		inGameUiPanel.SetActive(true);
         gameoverFlag = false;
 
-        gameConfigs.ResetCurrentAnalytics();
 
         timerUI.minValue = 0;
         timerUI.maxValue = gameConfigs.timePerChoice;
@@ -187,7 +186,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         {
             UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
 
-            //load new scene
+            GameSequencesList.Instance.GoToNextItemInList();
         }
 
         currScoreStepTutorial = 0;
@@ -321,8 +320,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        gameConfigs.roundResultWins.Add(true);
-
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         if (currSoundIsLeft && !currImgIsLeft)
         {
@@ -364,18 +361,4 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         InitRound();
     }
-
-    void GameOver()
-    {
-        gameConfigs.totalGameTime = totalGameTime;
-        gameConfigs.SaveAnalytics();
-        audioPlayer.clip = finishAudio;
-        audioPlayer.Play();
-        gameoverFlag = true;
-        afterActionPanel.SetActive(true);
-        inGameUiPanel.SetActive(false);
-		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
-        gameConfigs.SaveCoins(currCoins);
-        eogManager.OnGameOver();
-	}
 }
