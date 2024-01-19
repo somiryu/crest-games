@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7384c6fb496f2140a013b706f05af4d, type: 3}
-  m_Name: FightTheAlienTutorialAppFLow
+  m_Name: VoiceStartOrFlowerTutorialAppFLow
   m_EditorClassIdentifier: 
   scene:
-    sceneAsset: {fileID: 102900000, guid: e2fac0d6ef7c9ec448420162f4399b39, type: 3}
-    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_FightTheAlien/Scenes/CntrlImpulsos_FightTheAlienTutorial.unity
-  tutorialID: 5
+    sceneAsset: {fileID: 102900000, guid: 61a67eb858e0b994294af9d2a8e152b5, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlowerTutorial.unity
+  tutorialID: 6

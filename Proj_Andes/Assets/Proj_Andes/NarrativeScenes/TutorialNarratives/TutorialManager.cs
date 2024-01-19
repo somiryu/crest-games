@@ -82,5 +82,6 @@ public enum tutorialSteps
     MG_Magnets_1NoClick, 
     MG_Magnets_2FourItemEnergyClick,
     heartsAndStarsDone,
-    FightTheAlienDone
+    FightTheAlienDone,
+    VoiceStarOrFlowerDone,
 }
