@@ -16,9 +16,10 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    changeToDialogIdx: -1
-    targetSequenceResponseIdxToGrayOut: -1
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: Intro text
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: f30613af19a1c2b4aa12c0ac691e8593, type: 3}
     responses: []
     audio: {fileID: 0}
@@ -28,22 +29,23 @@ MonoBehaviour:
   - characterType: 0
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 3102791644e6a954496f8d944359146a, type: 2}
-    changeToDialogIdx: -1
-    targetSequenceResponseIdxToGrayOut: -1
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: This is a test text
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: f30613af19a1c2b4aa12c0ac691e8593, type: 3}
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
     - response: Text Response 1
+      responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 9bc5e14102d7b3a48b69aa3a67d6a707, type: 3}
-      changeSequence: 1
       dataAfterResponse: {fileID: 11400000, guid: 49cbb393d09fa094dbe8e6554a6070ec, type: 2}
     - response: Text Response 2
+      responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 0}
-      changeSequence: 1
       dataAfterResponse: {fileID: 11400000, guid: f9ad59c23839e4149bb8d85aaebb766d, type: 2}
     audio: {fileID: 8300000, guid: e393447a0053736468fcdd2ab9fd04f9, type: 3}
-    EnterAnim: {fileID: 11400000, guid: c804c90ba8d5f3c4c98669eb0326bfa4, type: 2}
-    IdleAnim: {fileID: 11400000, guid: e6e044e50b64f624bbeb65bd7ec4e825, type: 2}
-    ExitAnim: {fileID: 11400000, guid: dcaefd57a7a9fda4f8900fc59eb6ce9f, type: 2}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}

@@ -161,9 +161,12 @@ MonoBehaviour:
     hierarchyParent: {fileID: 5120906064912766403}
     growBy: 3
   confirmationButton: {fileID: 4596808888548888361}
-  tutorialconfirmationButton: {fileID: 2970340961332605471}
   currResponses: []
   currHighlightedResponse: {fileID: 0}
+  highlightBtnsSprites:
+  - {fileID: 21300000, guid: b209aadac3ff0a4459993001e36722e2, type: 3}
+  - {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
+  disableBtnContainer: {fileID: 21300000, guid: 0ee5b8a5d212f2942b7429ba05d4e952, type: 3}
 --- !u!114 &1793937690743282274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,17 +319,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 201580b8da22bdf479902780eb1f374b, type: 3}
---- !u!114 &2970340961332605471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1398012969412301663, guid: 201580b8da22bdf479902780eb1f374b, type: 3}
-  m_PrefabInstance: {fileID: 4205931311425134912}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e1a940fd090ec4f9deebacb85c8b31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4596808888548888361 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 402330452127428201, guid: 201580b8da22bdf479902780eb1f374b, type: 3}
