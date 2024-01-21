@@ -23,7 +23,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 45d862a498829074b9dfdfef300f182d, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -78,7 +78,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 1a3a2c40047047f4e859292065fdc4c7, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -89,31 +89,31 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no puede comer nada?\r\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
     - response: MUY BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 22b3ae11835a11146b3d0df936120a95, type: 3}
+      responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5237432f2024ee143818de407fb93aab, type: 3}
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: ME DA IGUAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: d97e8ea1297153648a97659683c15303, type: 3}
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 6bd4f9ffa7c9f5b44ac5a4062c36b142, type: 3}
+      responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MUY MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 99afde1bb36d88549bd97ec32bd9468f, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -142,31 +142,31 @@ MonoBehaviour:
     text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no puede comer nada?\xBFC\xF3mo
       te sientes t\xFA al saber que la mam\xE1 de Alex le trajo su comida favorita?\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
     - response: MUY BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 22b3ae11835a11146b3d0df936120a95, type: 3}
+      responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5237432f2024ee143818de407fb93aab, type: 3}
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: ME DA IGUAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: d97e8ea1297153648a97659683c15303, type: 3}
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 6bd4f9ffa7c9f5b44ac5a4062c36b142, type: 3}
+      responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MUY MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
@@ -183,7 +183,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: d3ee38bbb67742946932d96faa9a324e, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

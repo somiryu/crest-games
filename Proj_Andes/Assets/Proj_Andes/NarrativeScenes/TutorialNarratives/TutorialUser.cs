@@ -21,17 +21,18 @@ public class TutorialUser : MonoBehaviour
 
     private void OnEnable()
     {
-        CheckTutorialStepDone();
+        if(tutorialType == null) tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
+      CheckTutorialStepDone();
     }
 
     private void CheckTutorialStepDone()
-    {
-        var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
+    {        var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
         tutorialType.StepStart(activeTut);
     }
 
     public void OffTutorial()
     {
+        if (tutorialType == null) tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
         tutorialType.StepDone();
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }

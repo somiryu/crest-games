@@ -16,7 +16,6 @@ public class UserData
 	public UserLivingWith livingWith;
 
 
-    public bool tutorialNarrative;	
     public Dictionary<string, bool> tutorialStepsDone = new Dictionary<string, bool>();
     public Dictionary<string, object> userAnayticsResults = new Dictionary<string, object>();
 

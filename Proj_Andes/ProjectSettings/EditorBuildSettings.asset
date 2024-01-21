@@ -71,4 +71,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/MiniGames/CntrlImpulsos_FightTheAlien/Scenes/CntrlImpulsos_FightTheAlienTutorial.unity
     guid: e2fac0d6ef7c9ec448420162f4399b39
+  - enabled: 1
+    path: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlowerTutorial.unity
+    guid: 61a67eb858e0b994294af9d2a8e152b5
+  - enabled: 1
+    path: Assets/Proj_Andes/Menu/Scenes/WorldsScene.unity
+    guid: d0a02c46dbaca8d4d8d079b4ed434481
+  - enabled: 1
+    path: Assets/Proj_Andes/MiniGames/Gratification_TurboRocket/Scenes/Gratification_TurboRocket_Tutorial.unity
+    guid: d344826eb183389438fd74cae0531927
   m_configObjects: {}
