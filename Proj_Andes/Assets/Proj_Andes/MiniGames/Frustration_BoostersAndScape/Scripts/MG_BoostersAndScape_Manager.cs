@@ -47,6 +47,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     [SerializeField] GameObject skinObj;
     [SerializeField] Animator[] skinObjAnim;
 
+    [Header("Player Anims")]
+    [SerializeField] SkinnableObject charactetSkinableObj;
+    [SerializeField] Animator characterAnims;
+
     public EndOfGameManager EndOfGameManager => eogManager;
     private void Awake()
     {
@@ -63,8 +67,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     void Init()
     {
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
+        charactetSkinableObj.OnCurrSkinObjChanged += UpdateCharacterAnimRef;
 
-        alien.TryGetComponent(out alienMov);
+
+		alien.TryGetComponent(out alienMov);
         alienMov.Init();
         startPos = rocket.transform.position;
         startPos.x = 0;
@@ -75,6 +81,11 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         OnGameStart();
         trapImage.gameObject.SetActive(false);
     }
+
+    void UpdateCharacterAnimRef(Transform newCharacterArtObj)
+    {
+		characterAnims = newCharacterArtObj.GetComponentInChildren<Animator>(true);
+	}
 
     void Update()
     {
@@ -160,6 +171,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         spawner.spawner.nextSpawnTime = targetTime;
         successfulAttempts++;
         Debug.Log("boosted");
+        characterAnims.SetTrigger("Turbo");
         timer = 0;
          
         
@@ -173,6 +185,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
         }
     }
+
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
     {
         totalAttempts++;

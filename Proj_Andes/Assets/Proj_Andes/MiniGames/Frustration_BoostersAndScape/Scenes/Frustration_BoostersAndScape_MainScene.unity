@@ -10296,6 +10296,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6266147547664329625, guid: f0ca62dd801136442aae5d2792140fc9, type: 3}
   m_PrefabInstance: {fileID: 349665551}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &353381527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3292803586448024577, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
+  m_PrefabInstance: {fileID: 197859550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a35ba0d429cf04588650adc47e3db2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &436927392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15333,6 +15344,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5427500902119626279, guid: ca01eba2bdec4f74ba2bc126c8ff3c51, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d6ee781d34e61f04094abb12fb916240, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -50158,6 +50173,8 @@ MonoBehaviour:
   incorrectParticles: {fileID: 0}
   skinObj: {fileID: 45429923}
   skinObjAnim: []
+  charactetSkinableObj: {fileID: 353381527}
+  characterAnims: {fileID: 0}
 --- !u!82 &1323460061
 AudioSource:
   m_ObjectHideFlags: 0
@@ -65274,6 +65291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket
       objectReference: {fileID: 0}
+    - target: {fileID: 6708223319015349660, guid: 2982bddfd086fb040b1081d4691cd3cf, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: baabe0107b51f6f408156d7eae23c82b, type: 2}
     - target: {fileID: 8346228167066307341, guid: 2982bddfd086fb040b1081d4691cd3cf, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.28
@@ -75303,6 +75324,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 197859551}
     m_Modifications:
+    - target: {fileID: 1680425819035905664, guid: fb3272de139d0a04d8b2fb4b26ec1213, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e79749abaf2c1684eabc2840498e5cb0, type: 2}
     - target: {fileID: 2462018690950850116, guid: fb3272de139d0a04d8b2fb4b26ec1213, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
