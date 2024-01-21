@@ -14,13 +14,13 @@ public class MG_MechanicHand_TutorialAnimation : MonoBehaviour, iTutorialType
     }
     public void StepStart(bool stepCompleted)
     {
-       this.gameObject.SetActive(stepCompleted);
+        gameObject.SetActive(stepCompleted);
         ChangePlayerAnims(tutorialUser.tutorialStep);
     }
 
     public void StepDone()
     {
-        this.gameObject.SetActive(false);
+       gameObject.SetActive(false);
     }
 
     private void ChangePlayerAnims(tutorialSteps step)

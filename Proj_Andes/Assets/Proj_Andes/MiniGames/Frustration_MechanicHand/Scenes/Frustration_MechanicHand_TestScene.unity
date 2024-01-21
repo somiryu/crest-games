@@ -3703,10 +3703,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialManger
       objectReference: {fileID: 0}
-    - target: {fileID: 8095206362882903094, guid: 9295fb4f80d5058418158ec7fc3f8e0f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
