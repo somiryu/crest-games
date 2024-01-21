@@ -29,7 +29,7 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
 
     void Update()
     {
-        if (!manager.onPlay) return;
+        if (!manager.onPlay) return;        
         timer += Time.deltaTime;
         if(timer > lifetime) Recycle(); 
         var currentProgress = Mathf.InverseLerp(0, manager.gameConfig.boosterTriggerRate*2, timer);
@@ -55,10 +55,11 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
     {
         if(manager.onTrapMode) return false;
         if (transform.position.x > manager.rocket.transform.position.x - manager.catchBoosterRange && transform.position.x < manager.rocket.transform.position.x + manager.catchBoosterRange)
-        {
-            //Debug.Log("boosteable");
             return true;
+        else
+        {
+            Debug.Log("not boosteable");
+            return false;
         }
-        else { Debug.Log("not boosteable"); return false; }
     }
 }

@@ -121,7 +121,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
                 if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
                 {
                     UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick.ToString());
-                    TutorialManager.Instance.TurnOffTutorial(tutorialSteps.MG_Magnets_2FourItemEnergyClick);
+                    TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_Magnets_2FourItemEnergyClick);
                 }
 				hitEnergyItem++;
                 OnPicketEnergyItem(energyItem);

@@ -17,6 +17,6 @@ public class TutorialPopUpType : MonoBehaviour
     }
     void GoToNextStep()
     {
-        TutorialManager.Instance.TurnOffTutorial(popUpUser.tutorialStep);
+        TutorialManager.Instance.TurnOffTutorialStep(popUpUser.tutorialStep);
     }
 }

@@ -107,7 +107,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 		mainUi.OnClickResponse(response);
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepResponseButton))
 		{
-			TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepResponseButton);
+			TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.stepResponseButton);
 		}
 	}
 
