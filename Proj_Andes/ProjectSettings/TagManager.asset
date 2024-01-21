@@ -46,3 +46,6 @@ TagManager:
   - name: MaskableItem
     uniqueID: 2031708503
     locked: 0
+  - name: Front
+    uniqueID: 3877277235
+    locked: 0

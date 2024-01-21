@@ -23,7 +23,7 @@ MonoBehaviour:
       caminar solo."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 1bcb10dcfddc837469cc7f546462567c, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -35,31 +35,31 @@ MonoBehaviour:
     text: "\xBFC\xF3mo te sientes t\xFA al saber que nadie quiere acompa\xF1ar a
       Alex?\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
     - response: MUY BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 22b3ae11835a11146b3d0df936120a95, type: 3}
+      responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5237432f2024ee143818de407fb93aab, type: 3}
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: ME DA IGUAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: d97e8ea1297153648a97659683c15303, type: 3}
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 6bd4f9ffa7c9f5b44ac5a4062c36b142, type: 3}
+      responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MUY MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: d9affa6b35c964440940acbce1a0db4e, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: d0ed0ec7a4fbd55448944181dabb8eb3, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 96f4e9b558e518347b126b29c9c2c677, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -113,16 +113,16 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "\xBFCu\xE1l crees que es la mascota de Alex?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a59a9a59427f04f4ab590842ae924c11, type: 3}
     responses:
     - response: GATO
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: b0f708513ba71ea41b405909e3b38af3, type: 3}
+      responseImage: {fileID: 21300000, guid: 5ce5e7b194e32474cb4a97b932a57dfe, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 94461d5f3c91b8f4c80d61c781ec0ba2, type: 2}
     - response: PERRO
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 476b61bddb25c77419a142a987f9861a, type: 3}
+      responseImage: {fileID: 21300000, guid: 45885cad430310645ab81cb6263e3576, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 46302d381b6ba134cb1c2c84cc82023f, type: 2}
     audio: {fileID: 0}

@@ -14,7 +14,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] MG_MagnetsConfigs gameConfigs;
 	[SerializeField] BoxCollider spawnArea;
 	[SerializeField] MG_MagnetRangeHandler magnetRangeIndicator;
-	[SerializeField] AudioSource lostGameAudio;
+	[SerializeField] AudioClip lostGameAudio;
+	[SerializeField] AudioClip failEveryEnergyItemAudio;
 
 	[Header("Game UI")]
 	[SerializeField] Image EnergyFillImage;
@@ -38,8 +39,10 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	private int availableMagnets;
 	private int currEnergyPicked;
 	private float currEneryProgress;
+    private AudioSource audiosource;
 
-	private Collider[] overlayResults = new Collider[20];
+
+    private Collider[] overlayResults = new Collider[20];
 	[SerializeField] EndOfGameManager eogManager;
 	public EndOfGameManager EndOfGameManager => eogManager;
     public void Awake()
@@ -49,8 +52,9 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	public void Init()
     {
+        audiosource = GetComponent<AudioSource>();
 
-		ingameObj.SetActive(true);
+        ingameObj.SetActive(true);
 		ingameObjUI.SetActive(true);
 
 		energyItemsPool.Init(30);
@@ -74,15 +78,30 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	{
 		if (availableMagnets == 0) return;
 		timer += Time.deltaTime;
-		if (timer > gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify())
+
+		
+        if (timer > gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify())
 		{
 			timer = 0;
-			for (int i = 0; i < gameConfigs.itemsAmountToSpawn; i++) SpawnNewItem();
-		}
+			for (int i = 0; i < gameConfigs.itemsAmountToSpawn; i++)
+			{
+				if (currSpawnedItems >= 4 && !UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
+				{
+					UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick.ToString());
+					return;
+				}
+                SpawnNewItem();
 
-		if(Input.GetMouseButtonDown(0))
-		{
-			var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+        }
+
+        
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick)) return;
+				
+
+		if (Input.GetMouseButtonDown(0))
+		{			
+            var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseGlobalPosition.z = 0;
 			if (gameConfigs.activeCheats && currEneryProgress >= 0.5f)
 			{
@@ -93,14 +112,30 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			magnetRangeIndicator.ShowAt(mouseGlobalPosition);
 
 			var hitAmount = Physics.OverlapSphereNonAlloc(mouseGlobalPosition, gameConfigs.userMagnetRadius, overlayResults);
+			var hitEnergyItem = 0;          
 
-			for (int i = 0; i < hitAmount; i++)
+            for (int i = 0; i < hitAmount; i++)
 			{
 				var curr = overlayResults[i];
 				if (!curr.TryGetComponent(out MG_MagnetsEnergyItem energyItem)) continue;
-				OnPicketEnergyItem(energyItem);
+                if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
+                {
+                    UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick.ToString());
+                    TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_Magnets_2FourItemEnergyClick);
+                }
+				hitEnergyItem++;
+                OnPicketEnergyItem(energyItem);
 				
 			}
+
+			if(hitEnergyItem == 0)
+			{
+                audiosource.clip = failEveryEnergyItemAudio;
+                audiosource.Play();
+            }
+
+			if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick)) return;
+                
 			availableMagnets--;
 			for (int i = 0; i < magnetsAvailable.Count; i++)
 			{
@@ -159,16 +194,22 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	void SpawnNewItem()
 	{
 		if (currSpawnedItems >= gameConfigs.maxSpawnsOnScreen) return;
-		currSpawnedItems++;
 		var newItem = energyItemsPool.GetNewItem();
-		var halfContainerSize = spawnArea.size / 2;
+		var halfContainerSize = Vector3.zero;
+		
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick)) 
+			halfContainerSize = new Vector3(gameConfigs.userMagnetRadius, gameConfigs.userMagnetRadius, gameConfigs.userMagnetRadius);
+		else halfContainerSize = spawnArea.size / 2;
+
 		var randomX = Random.Range(-halfContainerSize.x, halfContainerSize.x);
 		var randomY = Random.Range(-halfContainerSize.y, halfContainerSize.y);
 		newItem.transform.position = new Vector2(randomX, randomY);
 		newItem.Init(gameConfigs.energyItemsLifeTime, energyItemsPool);
-	}
+        currSpawnedItems++;
 
-	void OnGameOver()
+    }
+
+    void OnGameOver()
 	{
 		StartCoroutine(EndGameAfterTime());
 	}
@@ -181,8 +222,9 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		var won = Mathf.Abs(afterActionEnergyFillImage.fillAmount - 1f) < 0.02f;
 		if (!won)
 		{
-			lostGameAudio.Play();
-			noLeftMagnetsAnims.SetTrigger("Play");
+            audiosource.clip = lostGameAudio;
+            audiosource.Play();
+            noLeftMagnetsAnims.SetTrigger("Play");
 			yield return new WaitForSeconds(1);
 		}
 		

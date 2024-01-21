@@ -17,7 +17,9 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public List<BoxCollider> asteroidsAreaPerRound = new List<BoxCollider>();
 	public TMP_Text playerLifesAmountTxt;
 	public GameObject afterActionPanel;
+	public GameObject inGameObjs;
 	public TMP_Text afterAction_ResultsTxt;
+	public TMP_Text constant_ResultsTxt;
 	public GameObject afterAction_WinLabel;
 	public GameObject afterAction_LoseLabel;
 
@@ -59,6 +61,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		playerLifesAmountTxt.SetText(currPlayerLifes.ToString());
 
 		afterActionPanel.SetActive(false);
+		inGameObjs.SetActive(true);
         currAsteroidsSize = 1;
 
         asteroidsPool.Init(10);
@@ -120,6 +123,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public void OnCapturedAsteroid(Transform asteroid)
 	{
 		totalCapturedAsteroids++;
+		constant_ResultsTxt.SetText(totalCapturedAsteroids.ToString());
+
 		asteroidsPool.RecycleItem(asteroid);
 		asteroid.SetParent(asteroidsPool.hierarchyParent);
 		currRoundAsteroids.Remove(asteroid);
@@ -144,6 +149,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	void GameOver()
 	{
 		afterActionPanel.SetActive(true);
+		inGameObjs.SetActive(false);
 		//afterAction_ResultsTxt.SetText("Capturaste: " + totalCapturedAsteroids + " de " + asteroidsPerRound * 3);
 		afterAction_ResultsTxt.SetText( totalCapturedAsteroids.ToString());
 		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);

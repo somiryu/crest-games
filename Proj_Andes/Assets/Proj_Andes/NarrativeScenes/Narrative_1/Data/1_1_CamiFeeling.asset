@@ -20,34 +20,34 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "C\xF3mo te sientes t\xFA al saber que Alex empuj\xF3 a Cami?\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
     - response: MUY BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 3b5f00c24140b624caeb38085397749e, type: 3}
+      responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5237432f2024ee143818de407fb93aab, type: 3}
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: ME DA IGUAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: d97e8ea1297153648a97659683c15303, type: 3}
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 6bd4f9ffa7c9f5b44ac5a4062c36b142, type: 3}
+      responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MUY MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 8300000, guid: 1530dbbdb8d3f8844b5b387330c4c855, type: 3}
+    audio: {fileID: 8300000, guid: e2da1cdfa5b319c468e3e773a989eaac, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -59,22 +59,22 @@ MonoBehaviour:
     text: "El profe se da cuenta y para ayudar a Cami a sentirse mejor le deja escojer
       el deporte que va a practicar ahora. Adivina qu\xE9 eligio"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: b5b6f53a1a199de4697789283ba5dd1c, type: 3}
     responses:
     - response: Basquetbol
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 0ae72c8a4132bbe4daf410fee5f20508, type: 3}
+      responseAudio: {fileID: 8300000, guid: 17c47853299c2854882e179ff28880e3, type: 3}
       dataAfterResponse: {fileID: 0}
     - response: Voleybol
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 433e9ab08d934d9409a14c87568a2d67, type: 3}
+      responseAudio: {fileID: 8300000, guid: d6ff82b6370b5124aa9112fd80e034f8, type: 3}
       dataAfterResponse: {fileID: 0}
     - response: "F\xFAtbol"
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: e9bd8354896d42d44b17dfb6572aad2f, type: 3}
+      responseAudio: {fileID: 8300000, guid: 1af867d44dfda554993c8f85898e2d25, type: 3}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 8300000, guid: 40945b4f781f2a14cbafe55736d233fd, type: 3}
     EnterAnim: {fileID: 0}
@@ -100,34 +100,34 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "C\xF3mo te sientes al escuchar que Cami pudo jugar lo que m\xE1s le gusta\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
     - response: MUY BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 3b5f00c24140b624caeb38085397749e, type: 3}
+      responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: BIEN
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5237432f2024ee143818de407fb93aab, type: 3}
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: ME DA IGUAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: d97e8ea1297153648a97659683c15303, type: 3}
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 6bd4f9ffa7c9f5b44ac5a4062c36b142, type: 3}
+      responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     - response: MUY MAL
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: db7dde3abc23a02468e321352f77990b, type: 3}
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 8300000, guid: 97b257484664f9d4cb5130f92817387b, type: 3}
+    audio: {fileID: 8300000, guid: c5f5817b0a763604c83496806ec83fa3, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

@@ -133,7 +133,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
                 hasPendingLineChange = true;
                 if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepSkipButton))
                 {
-					TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepSkipButton);
+					TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.stepSkipButton);
 				}
 			}
 		}
@@ -457,7 +457,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepConfirmedButton))
         {
-            TutorialManager.Instance.TurnOffTutorial(tutorialSteps.stepConfirmedButton);
+            TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.stepConfirmedButton);
         }
     }
 
