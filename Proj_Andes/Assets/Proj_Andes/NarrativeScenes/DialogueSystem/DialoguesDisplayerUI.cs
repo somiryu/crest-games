@@ -503,7 +503,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public string SelectTextByGender(DialogueData curr)
     {
         var text = curr.text;
-        if(UserDataManager.CurrUser.gender == UserGender.Femenino && !string.IsNullOrEmpty(curr.textAlternative))
+        if(UserDataManager.CurrUser.gender == UserGender.Masculino && !string.IsNullOrEmpty(curr.textAlternative))
         {
             text = curr.textAlternative;
         }

@@ -56,9 +56,6 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     public float tutorialProgress;
     public bool stopped;
 
-    Ray hit;
-    float timer;
-    float turboTimer;
     float targetYPos;
     float playerRanXSpace;
 
@@ -205,7 +202,6 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         }
         else
         {
-            timer = 0;
             transform.position = firstPos;
             onPlay = false;
         }
@@ -304,10 +300,11 @@ public class TutorialStepsTurbo
     public Collider stepClickableObj;
     public bool stepDone;
     public TutorialHand_TurboRocket signHand;
+    public Vector2 handOffset;
     public void InitTutoStep()
     {
         Debug.Log("starting " + step.ToString());
-        if(step != TutorialStepsTurboRocket.TurboAppear) signHand.Init(stepClickableObj);
+        if(step != TutorialStepsTurboRocket.TurboAppear) signHand.Init(stepClickableObj, handOffset);
         signHand.gameObject.SetActive(true);
     }
 

@@ -7,13 +7,11 @@ public class TutorialHand_TurboRocket : MonoBehaviour
     Collider objToFollow;
     [SerializeField] float xOffset;
     [SerializeField] float yOffset;
-    public void Init(Collider _objToFollow)
+    public void Init(Collider _objToFollow, Vector2 handOffset)
     {
         objToFollow = _objToFollow;
-        Vector3 newPosOffset = objToFollow.transform.position;
-        newPosOffset.x += xOffset;
-        newPosOffset.y -= yOffset;
-        transform.position = objToFollow.transform.position + newPosOffset * Time.deltaTime;
-    }
+        transform.SetParent(objToFollow.transform);
+        transform.localPosition = handOffset;
+	}
 
 }
