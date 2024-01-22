@@ -6,13 +6,17 @@ using UnityEngine.UI;
 public class TutorialImageType : MonoBehaviour, iTutorialType
 {
     [SerializeField] Image tutorialImage;
-    public void StepStart(bool stepCompleted)
+    [SerializeField] SpriteRenderer tutorialSprite;
+    public void StepStart(bool ShouldActiveTut)
     {
-        tutorialImage.gameObject.SetActive(stepCompleted);
-    }
+        if(tutorialImage) tutorialImage.gameObject.SetActive(ShouldActiveTut);
+        if(tutorialSprite) tutorialSprite.gameObject.SetActive(ShouldActiveTut);
+
+	}
     public void StepDone()
     {
-        tutorialImage.gameObject.SetActive(false);
+		if (tutorialImage) tutorialImage.gameObject.SetActive(false);
+		if (tutorialSprite) tutorialSprite.gameObject.SetActive(false);
     }
 
 }

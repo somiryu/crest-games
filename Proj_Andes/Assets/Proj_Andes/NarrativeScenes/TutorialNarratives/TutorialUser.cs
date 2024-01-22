@@ -7,11 +7,11 @@ public class TutorialUser : MonoBehaviour
 {
 	public tutorialSteps tutorialStep;
     
-    iTutorialType tutorialType;
+    List<iTutorialType> tutorialsListeners = new List<iTutorialType>();
 
 	private void Awake()
 	{
-        tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
+        tutorialsListeners = new List<iTutorialType>(GetComponentsInChildren<iTutorialType>(includeInactive: true));
 	}
 
 	private void Start()
@@ -21,27 +21,42 @@ public class TutorialUser : MonoBehaviour
 
     private void OnEnable()
     {
-        if (tutorialType == null) tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
+        if (tutorialsListeners == null || tutorialsListeners.Count == 0)
+        {
+			tutorialsListeners = new List<iTutorialType>(GetComponentsInChildren<iTutorialType>(includeInactive: true));
+		}
         CheckTutorialStepDone();
     }
 
     private void CheckTutorialStepDone()
     {
         var activeTut = !UserDataManager.CurrUser.IsTutorialStepDone(tutorialStep);
-        tutorialType.StepStart(activeTut);
+        for (int i = 0; i < tutorialsListeners.Count; i++)
+        {
+            tutorialsListeners[i].StepStart(activeTut);
+        }
     }
 
 
     public void OffTutorial()
     {
-        if (tutorialType == null) tutorialType = GetComponentInChildren<iTutorialType>(includeInactive: true);
-        tutorialType.StepDone();
-        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
+		if (tutorialsListeners == null || tutorialsListeners.Count == 0)
+		{
+			tutorialsListeners = new List<iTutorialType>(GetComponentsInChildren<iTutorialType>(includeInactive: true));
+		}
+		for (int i = 0; i < tutorialsListeners.Count; i++)
+		{
+			tutorialsListeners[i].StepDone();
+		}
+		UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
     
     public void OnTutorial()
     {
-        tutorialType.StepStart(true);
+        for (int i = 0; i < tutorialsListeners.Count; i++)
+		{
+			tutorialsListeners[i].StepStart(true);
+		}
     }
 
     public void SetNewStep(tutorialSteps newTutorialStep)
@@ -53,7 +68,7 @@ public class TutorialUser : MonoBehaviour
 
 public interface iTutorialType
 {
-    public void StepStart(bool stepCompleted);
+    public void StepStart(bool ShouldActiveTut);
     public void StepDone();
 
 }

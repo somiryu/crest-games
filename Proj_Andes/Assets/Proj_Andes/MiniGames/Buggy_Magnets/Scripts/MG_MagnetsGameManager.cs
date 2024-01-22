@@ -87,11 +87,13 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			{
 				if (currSpawnedItems >= 4 && !UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
 				{
-					UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick.ToString());
+					if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick))
+					{
+						TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_Magnets_1NoClick);
+					}
 					return;
 				}
                 SpawnNewItem();
-
             }
         }
 
