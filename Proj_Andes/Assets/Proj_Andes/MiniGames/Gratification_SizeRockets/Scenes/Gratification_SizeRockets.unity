@@ -518,6 +518,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_BG_base
       objectReference: {fileID: 0}
+    - target: {fileID: 5560996765090473758, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1273,6 +1277,10 @@ PrefabInstance:
     - target: {fileID: 7064607272639147133, guid: a226bcb4cd9a71f46b489fe0ba599930, type: 3}
       propertyPath: m_Name
       value: 2D_BG_base
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064607272639147133, guid: a226bcb4cd9a71f46b489fe0ba599930, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2953,8 +2961,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.2, y: 27}
-  m_SizeDelta: {x: 1626.3, y: 968.8}
+  m_AnchoredPosition: {x: 18.16, y: 26.631}
+  m_SizeDelta: {x: 1692.022, y: 993.922}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2056762478
 MonoBehaviour:
@@ -2969,14 +2977,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.3882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8156863}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a9baac483a1612440bcbedb208cef274, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb67dc56c3a91f649b106d0e39c00c06, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

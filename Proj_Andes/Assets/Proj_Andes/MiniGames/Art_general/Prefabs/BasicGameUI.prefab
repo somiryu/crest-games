@@ -1515,6 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assignOnAwake: 0
   image: {fileID: 940683575808817720}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
@@ -1675,7 +1676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1497525659102668841
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2097,6 +2098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  assignOnAwake: 0
   image: {fileID: 950290199928291779}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
