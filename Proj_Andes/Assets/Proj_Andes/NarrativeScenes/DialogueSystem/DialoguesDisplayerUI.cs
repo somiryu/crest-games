@@ -348,9 +348,11 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         audioIsDone = true;
         //Start playing audio
-        if (dialogueData.audio != null)
+        var audio = SelectAudioByGender(dialogueData);
+
+        if (audio != null)
         {
-            audioPlayer.clip = dialogueData.audio;
+            audioPlayer.clip = audio;
             audioPlayer.Play();
             audioIsDone = false;
         }
@@ -380,7 +382,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
 
 
-        repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || dialogueData.audio != null);
+        repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || audio != null);
 
 
 		//Get new response handler
@@ -503,12 +505,22 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public string SelectTextByGender(DialogueData curr)
     {
         var text = curr.text;
-        if(UserDataManager.CurrUser.gender == UserGender.Masculino && !string.IsNullOrEmpty(curr.textAlternative))
+        if(UserDataManager.CurrUser.gender == UserGender.Femenino && !string.IsNullOrEmpty(curr.textAlternative))
         {
             text = curr.textAlternative;
         }
 
         return text;
+    }
+
+    public AudioClip SelectAudioByGender(DialogueData curr)
+    {
+        var audio = curr.audio;
+        if(UserDataManager.CurrUser.gender == UserGender.Femenino && curr.audioAlternative != null)
+        {
+            audio = curr.audioAlternative;
+        }
+        return audio;
     }
 
    

@@ -23,6 +23,7 @@ public class DialogueSequenceData : ScriptableObject {
 public class DialogueData
 {
     public CharactersTypes characterType;
+	[Tooltip("If true, the dialog will continue to the next line automatically when pressing the dialog box, (only works if no responses are present)")]
 	public bool autoContinueOnClickDialog = true;
     [Header("Change sequence on continue configs")]
     public DialogueSequenceData changeToSequence;
@@ -37,10 +38,10 @@ public class DialogueData
 	public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
 	public DialogueResponse[] responses;
     
-    [Tooltip("If true, the dialog will continue to the next line automatically when pressing the dialog box, (only works of no responses are present)")]
 
     [Space(20)]
 	public AudioClip audio;
+	public AudioClip audioAlternative;
 	[Header("Anims")]
     public TimelineAsset EnterAnim;
     public TimelineAsset IdleAnim;
