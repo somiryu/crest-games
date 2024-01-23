@@ -4116,14 +4116,11 @@ MonoBehaviour:
   getChestButton: {fileID: 1894849314}
   collectBtn: {fileID: 864212429}
   coinsAmtTxt: {fileID: 639061120}
-  monstersUIInCollection:
-    itemPrefab: {fileID: 5709938591456280814, guid: 9a2f725d671cefb478c186ac3d3c218d, type: 3}
-    hierarchyParent: {fileID: 2041385473}
-    growBy: 5
+  myCollectionManager: {fileID: 1879702826}
   monstersUIInChestOpenning:
     itemPrefab: {fileID: 5709938591456280814, guid: 9a2f725d671cefb478c186ac3d3c218d, type: 3}
-    hierarchyParent: {fileID: 1853098241}
-    growBy: 5
+    hierarchyParent: {fileID: 759812491}
+    growBy: 10
   backToWorldsBtn: {fileID: 206250880}
   worldsScene:
     sceneAsset: {fileID: 102900000, guid: d0a02c46dbaca8d4d8d079b4ed434481, type: 3}
@@ -4421,6 +4418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1879702825}
+  - component: {fileID: 1879702826}
   m_Layer: 5
   m_Name: CollectionPanel
   m_TagString: Untagged
@@ -4450,6 +4448,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1879702826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879702824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a5eed6fe1d75743863794554d4a129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monstersUIInCollection:
+    itemPrefab: {fileID: 5709938591456280814, guid: 9a2f725d671cefb478c186ac3d3c218d, type: 3}
+    hierarchyParent: {fileID: 2041385473}
+    growBy: 10
 --- !u!1 &1894849312
 GameObject:
   m_ObjectHideFlags: 0

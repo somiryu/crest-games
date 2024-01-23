@@ -27,10 +27,9 @@ public class MonsterMarketManager : MonoBehaviour
     [SerializeField] Button collectBtn;
     [SerializeField] TextMeshProUGUI coinsAmtTxt;
 
+    [SerializeField] MyCollectionManager myCollectionManager;
 
-    [SerializeField] Pool<MonsterItemUI> monstersUIInCollection;
-    [SerializeField] Pool<MonsterItemUI> monstersUIInChestOpenning;
-
+    public Pool<MonsterItemUI> monstersUIInChestOpenning;
 
     List<Monsters> totalDataCollection = new List<Monsters>();
     List<Monsters> currentMonstersFound = new List<Monsters>();
@@ -52,13 +51,14 @@ public class MonsterMarketManager : MonoBehaviour
     }
     public void Init()
     {
-		monstersUIInCollection.Init(10);
-		monstersUIInChestOpenning.Init(5);
+        myCollectionManager.Init();
 
-		monstersUIInChestOpenning.RecycleAll();
-		RefreshCollectionFromData();
+        RefreshCollectionFromData();
 
-		chestsContainer.gameObject.SetActive(false);
+        monstersUIInChestOpenning.Init(5);
+        monstersUIInChestOpenning.RecycleAll();
+
+        chestsContainer.gameObject.SetActive(false);
         chestOpenedContainer.gameObject.SetActive(false);
 
         getChestButton.onClick.AddListener(GetChest);
@@ -141,7 +141,21 @@ public class MonsterMarketManager : MonoBehaviour
             newItem.Show(currentMonstersFound[i]);
         }
     }
-    
+    public void RefreshCollectionFromData()
+    {
+        totalDataCollection.Clear();
+        for (int i = 0; i < marketConfig.MyCollectionMonsters.Count; i++)
+        {
+            var currID = marketConfig.MyCollectionMonsters[i];
+            var monsterFound = marketConfig.monstersLibrary.GetMonsterByID(currID);
+            if (monsterFound == null) continue;
+            totalDataCollection.Add(monsterFound);
+        }
+        myCollectionManager.monstersUIInCollection.RecycleAll();
+        myCollectionManager.ShowItemsSaved();
+    }
+
+
     int GetRandomItem(int itemList)
     {
         return Random.Range(0, itemList);
@@ -172,25 +186,7 @@ public class MonsterMarketManager : MonoBehaviour
 
 	}
 
-    void RefreshCollectionFromData()
-    {
-		totalDataCollection.Clear();
-		for (int i = 0; i < marketConfig.MyCollectionMonsters.Count; i++)
-		{
-			var currID = marketConfig.MyCollectionMonsters[i];
-			var monsterFound = marketConfig.monstersLibrary.GetMonsterByID(currID);
-			if (monsterFound == null) continue;
-			totalDataCollection.Add(monsterFound);
-		}
-		monstersUIInCollection.RecycleAll();
 
-		for (int i = 0; i < totalDataCollection.Count; i++)
-		{
-			var item = monstersUIInCollection.GetNewItem();
-			item.Show(totalDataCollection[i]);
-		}
-
-	}
     
     void SaveForLater()
     {
