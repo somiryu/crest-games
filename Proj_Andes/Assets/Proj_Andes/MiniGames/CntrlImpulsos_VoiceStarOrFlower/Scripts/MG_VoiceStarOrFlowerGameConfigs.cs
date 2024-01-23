@@ -21,6 +21,9 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
         itemAnalytics.Add(DataIds.voiceStarTotalGametime, totalGameTime);
         itemAnalytics.Add(DataIds.voiceStartimeToMakeAChoice, timeToMakeAChoice);
         itemAnalytics.Add(DataIds.voiceStarRoundResultWins, roundResultWins);
+
+        FireStoreManager.AddData(DataIds.voiceStarGame, UserDataManager.CurrUser.id, itemAnalytics);
+        Debug.Log("save in firestore");
     }
     public override void ResetCurrentAnalytics()
     {
