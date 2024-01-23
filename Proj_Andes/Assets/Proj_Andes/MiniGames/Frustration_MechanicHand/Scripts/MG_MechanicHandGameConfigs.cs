@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Tymski;
 using UnityEngine;
 
@@ -13,4 +14,19 @@ public class MG_MechanicHandGameConfigs : GameConfig
 	[Range(0f,1f)]
 	public float percentageNeededToWin = 0.8f;
 	public bool activeCheats;
+
+    [NonSerialized] public int totalSuccessfulAttempts;
+    [NonSerialized] public int totalFailedAttempts;
+    public override void SaveAnalytics()
+    {
+        itemAnalytics = new Dictionary<string, object>();
+        itemAnalytics.Add(DataIds.voiceStarTotalGametime, totalSuccessfulAttempts);
+        itemAnalytics.Add(DataIds.voiceStarRoundResultWins, totalSuccessfulAttempts);
+    }
+    public override void ResetCurrentAnalytics()
+    {
+        totalSuccessfulAttempts = 0; 
+        totalFailedAttempts = 0;
+        base.ResetCurrentAnalytics();
+    }
 }
