@@ -18,13 +18,14 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: ' Acabas de llegar a tu colegio Y te encuentras con tu mejor amiga Cami
+    text: ' Acabas de llegar a tu colegio Y te encuentras con tu mejor amigo Cami
       que te saluda en la puerta.'
     textAlternative: "Acabas de llegar a tu colegio y te encuentras con tu mejor
-      amigo Cami que te saluda en la puerta.\r"
+      amiga Cami que te saluda en la puerta.\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 9b441ded4345fe1468a2f0c0969f30db, type: 3}
+    audioAlternative: {fileID: 8300000, guid: b7f68e72bde35db4da4aaf3ecf4baa5e, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: a84591b2924f10e44a611cccdef653cc, type: 2}
     ExitAnim: {fileID: 0}
@@ -48,6 +49,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: eb4cab89b61f5a4479e882ee1e5b486f, type: 2}
     audio: {fileID: 8300000, guid: 9bc9d0c8b48a6fc4ea7cc7473258218d, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 75c8d6af87dd0914483451a5151a026f, type: 2}
+    IdleAnim: {fileID: 11400000, guid: c65e7e7699c510042a1f8df69416c094, type: 2}
     ExitAnim: {fileID: 0}

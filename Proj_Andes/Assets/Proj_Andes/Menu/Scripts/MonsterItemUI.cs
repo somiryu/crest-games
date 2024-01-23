@@ -8,7 +8,7 @@ public class MonsterItemUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text rankTxt;
     [SerializeField] private Image image;
-    private Monsters monster;
+    public Monsters monster;
 
     public void Show(Monsters _monster)
     {
