@@ -168,6 +168,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
         camCC.OnEnterTurbo();
+
+        gameConfig.turboUsedTimes++;
         onTurbo = true;
     }
     public void OnExitTurboMode()
@@ -189,6 +191,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         {
             if (onTurbo) return;
             star.OnCaptured();
+            gameConfig.coinsCollected++;
         }
     }
  
@@ -201,10 +204,14 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         ride.totalStars = levelConfig.starsAmount;
         data = ride;
         bk.EndOfGame();
+
+        gameConfig.totalRideTime = timer;
+
         onPlay = false;
         levelConfig.coinsCollected = starsGatheredCount;
 		character.GetComponentInChildren<ParticleSystem>().Stop();
 		artParent.gameObject.SetActive(false);
+
 
         StartCoroutine(_OnFinishSequence());
     }
