@@ -25,8 +25,9 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 601b4710ad54fca44b1029a23f09e4bf, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: e2aa8aa273106a248b0a2ff133cdf2ea, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
@@ -63,6 +64,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 8300000, guid: 84dd25dc6dc66ae419d46a695ec7f660, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -76,36 +78,39 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 46875a07c966e4d44ac600cbfcb5c7d1, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: c76dd43844ab861409ffce3cd83df089, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy buena."
-    textAlternative: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy bueno."
+    text: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy bueno."
+    textAlternative: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy buena."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 558a5f057478b8544a2970137112af85, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 162ba66c204fba74ea6b3bb8c848f134, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 38b166f81e6bb1d439f215da3d1adad8, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: f8d273cd4b2ae5146833e143cb618c67, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cami comienza a saltar lazo, pero llega Alex, una compa\xF1era del curso,
+    text: "Cami comienza a saltar lazo, pero llega Alex, una compa\xF1ero del curso,
       y empuja a Cami. La hace caer y todos los dem\xE1s empiezan a re\xEDrse al
       verla en el piso\u2026"
-    textAlternative: "Cami comienza a saltar lazo, pero llega Alex, un compa\xF1ero
+    textAlternative: "Cami comienza a saltar lazo, pero llega Alex, un compa\xF1era
       del curso, y empuja a Cami. Lo hace caer y todos los dem\xE1s empiezan a re\xEDrse
       al verlo en el piso\u2026"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 5c4d5c7bcb5ae2b4799df0d473b22486, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 3ea59ff2bb8b8af4997fd2dabdb62716, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

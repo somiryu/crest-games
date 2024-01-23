@@ -19,12 +19,13 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: Para Cami no es tan chevere, porque no encuentra con quien juga y se queda
-      sola todo el descanso
+      solo todo el descanso
     textAlternative: Para Cami no es tan chevere, porque no encuentra con quien jugar
-      y se queda solo todo el descanso
+      y se queda sola todo el descanso
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 8300000, guid: 5df9dd154a3f3e941b9255f95da5115d, type: 3}
+    audio: {fileID: 8300000, guid: 3cd219e9350952e46bd992e7ddf8c9d1, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 4b6ce3af95ad6b64ba83aef987064cc3, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -63,6 +64,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

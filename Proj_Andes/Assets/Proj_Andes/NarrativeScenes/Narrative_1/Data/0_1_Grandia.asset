@@ -24,6 +24,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 912b0fcb7d97bd443907db862f4bc5af, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: bd350c715fd78b946a9d009079f3c73a, type: 2}
     ExitAnim: {fileID: 0}

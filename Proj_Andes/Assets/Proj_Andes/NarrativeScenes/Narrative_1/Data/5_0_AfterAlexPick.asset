@@ -18,8 +18,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 11400000, guid: 33fd788718578e34bb20eb4b1475c2bb, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Selecciona a cada ni\xF1a para ver qui\xE9n la va a acompa\xF1ar.\r\n"
-    textAlternative: "Selecciona a cada ni\xF1o para ver qui\xE9n la va a acompa\xF1ar."
+    text: "Selecciona a cada ni\xF1o para ver qui\xE9n lo va a acompa\xF1ar.\r\n"
+    textAlternative: "Selecciona a cada ni\xF1a para ver qui\xE9n la va a acompa\xF1ar."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 7facfc8951404814f8194d328efb0cef, type: 3}
     responses:
     - response: 
@@ -43,6 +43,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 4bfac2c7158f7e44d9cb280b1e8cf268, type: 2}
     audio: {fileID: 8300000, guid: a0613a539b6a2f641a9a4049755c6e59, type: 3}
+    audioAlternative: {fileID: 8300000, guid: ca4f995e6827caf45afe416af9665331, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

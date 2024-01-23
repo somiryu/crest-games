@@ -18,12 +18,13 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que caminar sola.\r"
+    text: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que caminar solo\t.\r"
     textAlternative: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que
-      caminar solo."
+      caminar sola."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 1bcb10dcfddc837469cc7f546462567c, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 6ca4776e19bb41e4f9954a7c739e0b94, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -63,6 +64,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -77,6 +79,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: d9affa6b35c964440940acbce1a0db4e, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -90,6 +93,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: d0ed0ec7a4fbd55448944181dabb8eb3, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -103,6 +107,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 96f4e9b558e518347b126b29c9c2c677, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -126,6 +131,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 46302d381b6ba134cb1c2c84cc82023f, type: 2}
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
