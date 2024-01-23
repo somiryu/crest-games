@@ -125,7 +125,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 		if (currRequiresSameDirection && currShowingRight) succed = true;
 		if (!currRequiresSameDirection && !currShowingRight) succed = true;
         if (succed)OnCorrectChoice();
-     
+
 
         else OnWrongChoice();
 	}
@@ -137,7 +137,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 		RCorrectparticle.Stop();
 		LCorrectparticle.Stop();
 
-		audiosource.clip = wrongAudio;
+        gameConfigs.roundResultWins.Add(false);
+
+        audiosource.clip = wrongAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
@@ -154,7 +156,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 		RIncorrectparticle.Stop();
 		RCorrectparticle.Stop();
         LCorrectparticle.Stop();
-        
+
+        gameConfigs.roundResultWins.Add(true);
+
         audiosource.clip = correctAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnCorrectAnswer;
@@ -169,7 +173,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         currRound++;
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
-        if(currRound >= gameConfigs.maxRounds)
+        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
+
+        if (currRound >= gameConfigs.maxRounds)
         {
             GameOver();
             return;
