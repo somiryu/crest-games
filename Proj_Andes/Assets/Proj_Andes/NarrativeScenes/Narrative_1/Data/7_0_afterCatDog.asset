@@ -23,6 +23,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 191d94022263b2047bc3caa47d7eb7ae, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -61,6 +62,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 8300000, guid: 452e96763e83b5e4c9abc629baaf5c93, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -70,12 +72,13 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Mientras caminan y hablan de Tomy, llegan al parque del barrio. Ah\xED
-      se encuentran a Fran, la peor enemiga de Alex. \r"
+      se encuentran a Fran, el peor enemigo de Alex. \r"
     textAlternative: "Mientras caminan y hablan de Tomy, llegan al parque del barrio.
-      Ah\xED se encuentran a Fran, el peor enemigo de Alex. \r\n"
+      Ah\xED se encuentran a Fran, la peor enemiga de Alex. \r\n"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 90d3482e70484ca4dbc439639a8243f4, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 0d35db8d7b5073748a389828c207da48, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -84,13 +87,14 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Ah\xED est\xE1 Fran. La \xFAltima vez que me la encontr\xE9, me quit\xF3
+    text: "Ah\xED est\xE1 Fran. La \xFAltima vez que me lo encontr\xE9, me quit\xF3
       mi maleta.\r\r"
-    textAlternative: "Ah\xED est\xE1 Fran. La \xFAltima vez que me lo encontr\xE9,
+    textAlternative: "Ah\xED est\xE1 Fran. La \xFAltima vez que me la encontr\xE9,
       me quit\xF3 mi maleta.\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 641e201216aa66344a0f9a24e8a7c9fb, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -104,6 +108,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 766bf4463eccb3148a34054a24198c14, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -143,6 +148,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

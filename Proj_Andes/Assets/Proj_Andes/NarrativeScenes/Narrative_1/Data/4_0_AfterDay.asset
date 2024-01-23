@@ -25,6 +25,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 93c1173e071e3e447a494a7fb21c78cc, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -63,6 +64,7 @@ MonoBehaviour:
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -77,6 +79,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: a4078d4c7aeb6b647b25fb0e52a6abdc, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -85,15 +88,16 @@ MonoBehaviour:
     changeToSequence: {fileID: 11400000, guid: aaa3eb360ed99c544b70bf5bf3b7a06c, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "A la salida ves a Alex, la compa\xF1era que hizo caer a tu amiga y que
+    text: "A la salida ves a Alex,el compa\xF1era que hizo caer a tu amigo y que
       te ray\xF3 tu cuaderno. Parece que est\xE1 buscando a alguien que la acompa\xF1e
       caminando a su casa.\r"
-    textAlternative: "A la salida ves a Alex, el compa\xF1ero que hizo caer a tu
+    textAlternative: "A la salida ves a Alex, la compa\xF1era que hizo caer a tu
       amiga y que te ray\xF3 tu cuaderno. Parece que est\xE1 buscando a alguien que
       lo acompa\xF1e caminando a su casa."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 2b98246d86a55cd4cbfa9fc55e8b920b, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 938709b64ac281d4298d07914778af1b, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

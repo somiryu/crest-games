@@ -27,16 +27,11 @@ public class MonsterMarketManager : MonoBehaviour
     [SerializeField] Button collectBtn;
     [SerializeField] TextMeshProUGUI coinsAmtTxt;
 
+    [SerializeField] MyCollectionManager myCollectionManager;
 
-    [SerializeField] Pool<MonsterItemUI> monstersUIInCollection;
-    [SerializeField] Pool<MonsterItemUI> monstersUIInChestOpenning;
-
-
-    List<Monsters> totalDataCollection = new List<Monsters>();
+    public Pool<MonsterItemUI> monstersUIInChestOpenning;
+    List<Monsters> totalDataCollection => MyCollectionManager.totalDataCollection;
     List<Monsters> currentMonstersFound = new List<Monsters>();
-
-    [SerializeField] Button backToWorldsBtn;
-    [SerializeField] SceneReference worldsScene;
 
     private void Awake()
     {
@@ -52,13 +47,14 @@ public class MonsterMarketManager : MonoBehaviour
     }
     public void Init()
     {
-		monstersUIInCollection.Init(10);
-		monstersUIInChestOpenning.Init(5);
+        myCollectionManager.Init();
 
-		monstersUIInChestOpenning.RecycleAll();
-		RefreshCollectionFromData();
+        RefreshCollectionFromData();
 
-		chestsContainer.gameObject.SetActive(false);
+        monstersUIInChestOpenning.Init(5);
+        monstersUIInChestOpenning.RecycleAll();
+
+        chestsContainer.gameObject.SetActive(false);
         chestOpenedContainer.gameObject.SetActive(false);
 
         getChestButton.onClick.AddListener(GetChest);
@@ -70,8 +66,6 @@ public class MonsterMarketManager : MonoBehaviour
         legendaryChest.onClick.AddListener(() => BuyChest(MonsterChestType.Legendary));
 
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
-
-        backToWorldsBtn.onClick.AddListener(BackToWorlds);
     }
 
     void BuyChest(MonsterChestType type)
@@ -141,7 +135,20 @@ public class MonsterMarketManager : MonoBehaviour
             newItem.Show(currentMonstersFound[i]);
         }
     }
-    
+    public void RefreshCollectionFromData()
+    {
+        totalDataCollection.Clear();
+        for (int i = 0; i < marketConfig.MyCollectionMonsters.Count; i++)
+        {
+            var currID = marketConfig.MyCollectionMonsters[i];
+            var monsterFound = marketConfig.monstersLibrary.GetMonsterByID(currID);
+            if (monsterFound == null) continue;
+            totalDataCollection.Add(monsterFound);
+        }
+        myCollectionManager.monstersUIInCollection.RecycleAll();
+    }
+
+
     int GetRandomItem(int itemList)
     {
         return Random.Range(0, itemList);
@@ -172,37 +179,14 @@ public class MonsterMarketManager : MonoBehaviour
 
 	}
 
-    void RefreshCollectionFromData()
-    {
-		totalDataCollection.Clear();
-		for (int i = 0; i < marketConfig.MyCollectionMonsters.Count; i++)
-		{
-			var currID = marketConfig.MyCollectionMonsters[i];
-			var monsterFound = marketConfig.monstersLibrary.GetMonsterByID(currID);
-			if (monsterFound == null) continue;
-			totalDataCollection.Add(monsterFound);
-		}
-		monstersUIInCollection.RecycleAll();
 
-		for (int i = 0; i < totalDataCollection.Count; i++)
-		{
-			var item = monstersUIInCollection.GetNewItem();
-			item.Show(totalDataCollection[i]);
-		}
 
-	}
-    
     void SaveForLater()
     {
         chestsContainer.gameObject.SetActive(false);
         getChestButton.gameObject.SetActive(true);
         chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
-    }
-
-    void BackToWorlds()
-    {
-        SceneManagement.GoToScene(worldsScene);
     }
 }
 
