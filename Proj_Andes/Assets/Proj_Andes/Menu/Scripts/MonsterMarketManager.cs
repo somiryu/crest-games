@@ -30,12 +30,8 @@ public class MonsterMarketManager : MonoBehaviour
     [SerializeField] MyCollectionManager myCollectionManager;
 
     public Pool<MonsterItemUI> monstersUIInChestOpenning;
-
-    List<Monsters> totalDataCollection = new List<Monsters>();
+    List<Monsters> totalDataCollection => MyCollectionManager.totalDataCollection;
     List<Monsters> currentMonstersFound = new List<Monsters>();
-
-    [SerializeField] Button backToWorldsBtn;
-    [SerializeField] SceneReference worldsScene;
 
     private void Awake()
     {
@@ -70,8 +66,6 @@ public class MonsterMarketManager : MonoBehaviour
         legendaryChest.onClick.AddListener(() => BuyChest(MonsterChestType.Legendary));
 
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
-
-        backToWorldsBtn.onClick.AddListener(BackToWorlds);
     }
 
     void BuyChest(MonsterChestType type)
@@ -152,7 +146,6 @@ public class MonsterMarketManager : MonoBehaviour
             totalDataCollection.Add(monsterFound);
         }
         myCollectionManager.monstersUIInCollection.RecycleAll();
-        myCollectionManager.ShowItemsSaved();
     }
 
 
@@ -187,18 +180,13 @@ public class MonsterMarketManager : MonoBehaviour
 	}
 
 
-    
+
     void SaveForLater()
     {
         chestsContainer.gameObject.SetActive(false);
         getChestButton.gameObject.SetActive(true);
         chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
-    }
-
-    void BackToWorlds()
-    {
-        SceneManagement.GoToScene(worldsScene);
     }
 }
 
