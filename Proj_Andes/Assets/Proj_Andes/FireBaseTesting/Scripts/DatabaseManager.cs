@@ -37,12 +37,7 @@ public static class DatabaseManager
         
 
     public static async void SaveUserDatasList(List<UserData> userDatas)
-    {
-        UserDataList.userDatas = userDatas;
-        var jsonData = JsonConvert.SerializeObject(UserDataList);
-        Debug.Log("Saving data: " +  jsonData);
-        PlayerPrefs.SetString(UserDatasJSONKey, jsonData);
-
+    {       
         for (int i = 0; i < userDatas.Count; i++)
         {
             DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].name + " " + userDatas[i].id);      

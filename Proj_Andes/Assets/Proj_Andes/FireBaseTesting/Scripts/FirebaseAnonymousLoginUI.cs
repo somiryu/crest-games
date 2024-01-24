@@ -132,7 +132,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         if (correctlyLoggedInFlag && !doneInitialization && DatabaseManager.userListDone)
 		{
 			Debug.Log("Correctly logged in");
-
             logInsuccedIDUITxt.SetText(logInsuccedID);
 			RebuildUsersList();
 			correctlyLoggedInFlag = false;
