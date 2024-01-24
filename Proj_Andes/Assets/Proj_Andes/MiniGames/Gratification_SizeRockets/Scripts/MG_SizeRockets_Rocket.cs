@@ -26,9 +26,9 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 		state = SizeRocketsTravelState.GoingToPlanet;
 		pool = _pool;
 
-		var config = MG_SizeRockets_GameManager.Instance.gameConfigs.GetShipConfig(rocketType);
+		var config = ISizeRocketsManager.Instance.gameConfigs.GetShipConfig(rocketType);
 
-		speed = config.speed;
+        speed = config.speed;
 		coinsCapacity = config.coinsCapacity;
 
 		coinsCarrying = 0;
@@ -55,7 +55,7 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 			var currDist = transform.position - basePlanet.position;
 			if (currDist.magnitude < 0.1f)
 			{
-				MG_SizeRockets_GameManager.Instance.OnShipDeliveredCoins(this, coinsCarrying);
+				ISizeRocketsManager.Instance.OnShipDeliveredCoins(this, coinsCarrying);
 				pool.RecycleItem(this);
 			}
 		}
