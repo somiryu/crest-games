@@ -15,6 +15,9 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 	[NonSerialized] public List<float> timeToMakeAChoice = new List<float>();
     [NonSerialized] public List<bool> roundResultWins = new List<bool>();
     [NonSerialized] public float totalGameTime;
+
+    public override string GetSceneID() => DataIds.voiceStarGame;
+    
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();

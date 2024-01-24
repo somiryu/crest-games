@@ -4,6 +4,10 @@ using UnityEngine;
 
 public static class DataIds
 {
+    public const string usersCollection = "users";
+
+
+
     public const string voiceStarGame = "voiceStarGame";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";

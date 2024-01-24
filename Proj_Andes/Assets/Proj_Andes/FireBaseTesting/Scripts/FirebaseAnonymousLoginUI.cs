@@ -12,6 +12,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
     bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
+	bool checkUserList = false;
 
 	string logInFailedWarning = string.Empty;
 
@@ -123,16 +124,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			logInFailedWarning = string.Empty;
 		}
 
-		if (correctlyLoggedInFlag && !doneInitialization)
+		if (!DatabaseManager.userListDone && !checkUserList) { 
+			UserDataManager.Instance.LoadDataFromRemoteDataBase();
+            checkUserList = true;
+        }
+
+        if (correctlyLoggedInFlag && !doneInitialization && DatabaseManager.userListDone)
 		{
 			Debug.Log("Correctly logged in");
 
             logInsuccedIDUITxt.SetText(logInsuccedID);
-			UserDataManager.Instance.LoadDataFromRemoteDataBase();
 			RebuildUsersList();
 			correctlyLoggedInFlag = false;
 			doneInitialization = true;
-		}
+			checkUserList = false;
+		}		
 	}
 
 	void RebuildUsersList()
