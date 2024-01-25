@@ -15,12 +15,14 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 	Pool<MG_SizeRockets_Rocket> pool;
 
 	public int coinsCarrying;
-
+	float initialXscale;
+	[SerializeField] Transform graphicGameObj;
 	public void Init(
 		Pool<MG_SizeRockets_Rocket> _pool,
 		MG_SizeRockets_Planet _targetPlanet, 
 		Transform _basePlanet)
 	{
+		initialXscale = graphicGameObj.localScale.x;
 		targetPlanet = _targetPlanet;
 		basePlanet = _basePlanet;
 		state = SizeRocketsTravelState.GoingToPlanet;
@@ -37,20 +39,24 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 
 	private void Update()
 	{
-		if(state == SizeRocketsTravelState.GoingToPlanet)
+		Vector3 currentTargetPos = Vector3.zero;
+		Vector3 currentInitialPos = transform.position;
+		if (state == SizeRocketsTravelState.GoingToPlanet)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, targetPlanet.transform.position, speed * Time.deltaTime);
 
+			currentTargetPos = targetPlanet.transform.position;
 			var currDist = transform.position - targetPlanet.transform.position;
-			if(currDist.magnitude < 0.1f)
+			if (currDist.magnitude < 0.1f)
 			{
 				coinsCarrying = Mathf.Min(coinsCapacity, targetPlanet.coinsAmount);
 				targetPlanet.UpdateCoinsAmount(targetPlanet.coinsAmount - coinsCarrying);
 				state = SizeRocketsTravelState.BackToBase;
 			}
 		}
-		else if(state == SizeRocketsTravelState.BackToBase)
+		else if (state == SizeRocketsTravelState.BackToBase)
 		{
+			currentTargetPos = basePlanet.position;
 			transform.position = Vector3.MoveTowards(transform.position, basePlanet.position, speed * Time.deltaTime);
 			var currDist = transform.position - basePlanet.position;
 			if (currDist.magnitude < 0.1f)
@@ -59,6 +65,15 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 				pool.RecycleItem(this);
 			}
 		}
+		var currentDeltaPos = currentTargetPos - currentInitialPos;
+		if (currentDeltaPos.magnitude <= 0.2f) return;
+		graphicGameObj.up = currentDeltaPos.normalized;
+
+		var scale = graphicGameObj.localScale;
+		scale.x = initialXscale * Mathf.Sign(currentDeltaPos.x);
+		graphicGameObj.localScale = scale;
+
+
 	}
 
 }

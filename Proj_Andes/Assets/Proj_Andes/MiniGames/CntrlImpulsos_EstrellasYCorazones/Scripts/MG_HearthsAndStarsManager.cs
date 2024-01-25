@@ -35,7 +35,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TMP_Text currCoinsValueTxt;
     [SerializeField] TMP_Text currRoundValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
-    [SerializeField] Button retryBtn2;
     [SerializeField] Slider timerUI;
 
     [SerializeField] EndOfGameManager eogManager;
@@ -72,7 +71,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
 		leftBtn.onClick.AddListener(OnClickedLeft);
 		rightBtn.onClick.AddListener(OnClickedRight);
-		retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
         eogManager.OnGameStart();
 
         InitRound();
