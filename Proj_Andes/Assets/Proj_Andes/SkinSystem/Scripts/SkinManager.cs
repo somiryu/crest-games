@@ -10,6 +10,7 @@ public class SkinManager : MonoBehaviour
     public static SkinManager Instance => instance;
 
 	List<SkinnableImage> allSkinnableImages = new List<SkinnableImage>();
+	List<SkinnableImageRandom> allSkinnableImagesRandom = new List<SkinnableImageRandom>();
 	List<SkinnableObject> allItems = new List<SkinnableObject>();
 	public Transform currentSkinObject;
 
@@ -22,6 +23,7 @@ public class SkinManager : MonoBehaviour
 		instance = this;
 
 		Utility.FindObjectsByType(allSkinnableImages);
+		Utility.FindObjectsByType(allSkinnableImagesRandom);
 		Utility.FindObjectsByType(allItems);
 	}
 
@@ -40,7 +42,11 @@ public class SkinManager : MonoBehaviour
 		{
             allItems[i].SwitchItem(skinToSet, out currentSkinObject);
         }
-    }
+		for (int i = 0; i < allSkinnableImagesRandom.Count; i++)
+		{
+			allSkinnableImagesRandom[i].SetSkinType(skinToSet);
+		}
+	}
 
 	public SkinType GetCurrSkin()
 	{
@@ -52,6 +58,11 @@ public class SkinManager : MonoBehaviour
 	{
 		if (allSkinnableImages.Contains(img)) return;
 		allSkinnableImages.Add(img);
+	}
+	public void RegisterSkinRandomImg(SkinnableImageRandom img)
+	{
+		if (allSkinnableImagesRandom.Contains(img)) return;
+		allSkinnableImagesRandom.Add(img);
 	}
 
 	public void RegisterSkinObj(SkinnableObject obj)

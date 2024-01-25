@@ -510,10 +510,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 753804734}
     m_Modifications:
-    - target: {fileID: 4011995734049722785, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5560996765090473758, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_Name
       value: UI_BG_base
@@ -544,11 +540,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1994.4407
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 676.7789
+      value: 1146.3
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -580,11 +576,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 11.808258
+      value: -0.00014496
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 288.38943
+      value: -0.0023651
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -597,10 +593,6 @@ PrefabInstance:
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8720056815985764546, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2366,11 +2358,11 @@ MonoBehaviour:
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
   - skinType: 0
-    sprite: {fileID: 21300000, guid: 7ceb82320977a8f43b3a69428dbd4af8, type: 3}
-  - skinType: 1
-    sprite: {fileID: 21300000, guid: a62bb30cbbf7bd647934ff8ef152ab55, type: 3}
-  - skinType: 2
     sprite: {fileID: 21300000, guid: 3579c1e9ffd416848ac227e968fd4e82, type: 3}
+  - skinType: 1
+    sprite: {fileID: 21300000, guid: 542a5f11e56a2be4f84fe55e6551f8ec, type: 3}
+  - skinType: 2
+    sprite: {fileID: 21300000, guid: e8f9bcd1d8e659d4a97e0e6012730383, type: 3}
 --- !u!1 &1420377327 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7958913155370981083, guid: 67c539ab53012e24cb36584fe83a0b6b, type: 3}
@@ -2436,11 +2428,11 @@ MonoBehaviour:
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
   - skinType: 0
-    sprite: {fileID: 21300000, guid: 7ceb82320977a8f43b3a69428dbd4af8, type: 3}
-  - skinType: 1
     sprite: {fileID: 21300000, guid: a62bb30cbbf7bd647934ff8ef152ab55, type: 3}
+  - skinType: 1
+    sprite: {fileID: 21300000, guid: e9a282592598bb14ead3c6ad20fd16ea, type: 3}
   - skinType: 2
-    sprite: {fileID: 21300000, guid: 3579c1e9ffd416848ac227e968fd4e82, type: 3}
+    sprite: {fileID: 21300000, guid: 0b46e53fda2a1dc4eabe1227ad9f6c74, type: 3}
 --- !u!114 &1495111177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2640,6 +2632,14 @@ PrefabInstance:
     - target: {fileID: 3112339166151665776, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608591365498785612, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
+      propertyPath: forceSkinType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5608591365498785612, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
+      propertyPath: skinTypeToForce
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7102062956067746015, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
       propertyPath: m_Name
@@ -2878,9 +2878,9 @@ MonoBehaviour:
   - skinType: 0
     sprite: {fileID: 21300000, guid: 7ceb82320977a8f43b3a69428dbd4af8, type: 3}
   - skinType: 1
-    sprite: {fileID: 21300000, guid: a62bb30cbbf7bd647934ff8ef152ab55, type: 3}
+    sprite: {fileID: 21300000, guid: 8f99cf12229936245b88ebca189a3ac7, type: 3}
   - skinType: 2
-    sprite: {fileID: 21300000, guid: 3579c1e9ffd416848ac227e968fd4e82, type: 3}
+    sprite: {fileID: 21300000, guid: 93d16e3917a80c348af164aa205f58ae, type: 3}
 --- !u!114 &1936449774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3021,6 +3021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7956680007140860034}
   - component: {fileID: 3155156491730892958}
+  - component: {fileID: 7956680007140860035}
   m_Layer: 0
   m_Name: Art
   m_TagString: Untagged
@@ -3119,12 +3120,34 @@ Transform:
   m_GameObject: {fileID: 2348546590549463009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.95, y: 1, z: 1}
+  m_LocalPosition: {x: 0.2421, y: 0, z: 0}
+  m_LocalScale: {x: 1.07103, y: 1.1274, z: 1.1274}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3787378177825030208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7956680007140860035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2348546590549463009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignOnAwake: 0
+  image: {fileID: 0}
+  sRenderer: {fileID: 3155156491730892958}
+  imagePerSkinTypes:
+  - skinType: 0
+    sprite: {fileID: 21300000, guid: dc449eaa44287e244a0b250e14cb4517, type: 3}
+  - skinType: 1
+    sprite: {fileID: 21300000, guid: d5eebbc28f76a0641a773f7e0aca78de, type: 3}
+  - skinType: 2
+    sprite: {fileID: 21300000, guid: 6a14655ac827d254f9e40cfbfff9290e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
