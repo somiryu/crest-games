@@ -33,6 +33,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] TextMeshProUGUI constantScoreText;
     [SerializeField] Image trapImage;
+    [SerializeField] GameUIController gameUIController;
 
     [SerializeField] EndOfGameManager eogManager;
     [SerializeField] GameObject inGameObj;
@@ -61,6 +62,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         }
         instance = this;
         spawner.Init();
+
         Init();
         audiosource = GetComponent<AudioSource>();
 
@@ -69,10 +71,11 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     {
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
         charactetSkinableObj.OnCurrSkinObjChanged += UpdateCharacterAnimRef;
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone)) gameUIController.TurnOnTurboBtn(true);
 
         totalTime = 0;
 
-		alien.TryGetComponent(out alienMov);
+        alien.TryGetComponent(out alienMov);
         alienMov.Init();
         startPos = rocket.transform.position;
         startPos.x = 0;
@@ -119,6 +122,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
             if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
             {
                 UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
+                gameUIController.TurnOnTurboBtn(false);
                 Time.timeScale = 1;
             }
             gameConfig.totalAttemptsToBoost++;

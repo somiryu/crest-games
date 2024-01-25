@@ -16,6 +16,8 @@ public class TutorialUser : MonoBehaviour
 
 	private void Start()
 	{
+        Debug.Log("ontuto");
+        if(TutorialManager.Instance.gameUIController != null) TutorialManager.Instance.gameUIController.TurnOnTurboBtn(true);
         TutorialManager.Instance.AddNewUser(this);
     }
 
@@ -48,6 +50,7 @@ public class TutorialUser : MonoBehaviour
 		{
 			tutorialsListeners[i].StepDone();
 		}
+        if (TutorialManager.Instance.gameUIController != null) TutorialManager.Instance.gameUIController.TurnOnTurboBtn(false);
 		UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
     

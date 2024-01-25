@@ -13464,7 +13464,6 @@ MonoBehaviour:
   currCoinsValueTxt: {fileID: 1220886920}
   afterActionFinalCoinsTxt: {fileID: 2055457787}
   retryBtn: {fileID: 0}
-  retryBtn2: {fileID: 0}
   timerUI: {fileID: 1936779544}
   eogManager: {fileID: 1504520893}
 --- !u!1 &2016063569
@@ -14102,6 +14101,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2090366101268415852, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309134055484977744, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
+      propertyPath: isaTuto
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4894996673415563231, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}

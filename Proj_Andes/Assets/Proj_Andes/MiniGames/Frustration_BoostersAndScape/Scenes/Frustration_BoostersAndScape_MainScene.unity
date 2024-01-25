@@ -60153,6 +60153,7 @@ MonoBehaviour:
   finalScoreText: {fileID: 1081376034}
   constantScoreText: {fileID: 2057876333}
   trapImage: {fileID: 915688071}
+  gameUIController: {fileID: 1747915128}
   eogManager: {fileID: 1081376033}
   inGameObj: {fileID: 29129434}
   boosteredAudio: {fileID: 8300000, guid: a6edc9da5ed60c64899f020ecce72b72, type: 3}
@@ -75501,6 +75502,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714624600}
   m_CullTransparentMesh: 1
+--- !u!114 &1747915128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2309134055484977744, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
+  m_PrefabInstance: {fileID: 1346589909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5391d0e281cc26841b03290afcbb59ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1748139511
 GameObject:
   m_ObjectHideFlags: 0

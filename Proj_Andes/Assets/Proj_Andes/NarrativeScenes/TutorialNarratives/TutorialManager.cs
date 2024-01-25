@@ -11,6 +11,8 @@ public class TutorialManager : MonoBehaviour
     private static TutorialManager instance;
     public static TutorialManager Instance => instance;
 
+    public GameUIController gameUIController;
+
     private void Awake()
     {
         if (instance != this)
@@ -29,6 +31,8 @@ public class TutorialManager : MonoBehaviour
             var curr = rootObjs[i];
             GetIUsers(curr, usersTutorial);
         }
+        gameUIController = Utility.FindObjectByType<GameUIController>();
+
     }
 
     public void GetIUsers(GameObject currObj, List<TutorialUser> usersList)
