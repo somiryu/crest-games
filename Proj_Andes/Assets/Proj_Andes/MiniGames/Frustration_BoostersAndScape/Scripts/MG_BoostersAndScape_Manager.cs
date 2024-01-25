@@ -25,6 +25,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     bool onBoost;
     float targetTime;
     Vector3 startPos;
+    float totalTime;
 
     public List<int> forcedFails = new List<int>();
     [SerializeField] MG_BoostersAndScape_Spawner spawner;
@@ -69,6 +70,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
         charactetSkinableObj.OnCurrSkinObjChanged += UpdateCharacterAnimRef;
 
+        totalTime = 0;
 
 		alien.TryGetComponent(out alienMov);
         alienMov.Init();
@@ -92,6 +94,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         constantScoreText.text = successfulAttempts.ToString();
 
         if (!onPlay) return;
+
+        totalTime += Time.deltaTime;
         timer += Time.deltaTime;
         spawner.spawner.timer = timer;
         if(timer >= targetTime)
@@ -117,12 +121,13 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
                 UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
                 Time.timeScale = 1;
             }
-
+            gameConfig.totalAttemptsToBoost++;
             if (gameConfig.forceToFail) ForcedToFail();
             if (currentBooster.Boosteable())
             {
                 OnBoostered(currentBooster);
             }
+            else Onfailed();
         }
         if (successfulAttempts == 10)
         {
@@ -151,7 +156,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     }
     void OnGameEnd()
     {
-        //finalScoreText.text = "Boosters captured " + successfulAttempts + "/10";
+        gameConfig.totalGameTime = totalTime;
         finalScoreText.text =   successfulAttempts.ToString() ;
         endOfGameContainer.gameObject.SetActive(true);
         onPlay = false;
@@ -162,10 +167,16 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         inGameObj.SetActive(false);
         Debug.Log("Game over!");
     }
+    void Onfailed()
+    {
+        gameConfig.timeToMakeAChoice.Add(timer);
+        gameConfig.roundResultWins.Add(false);
+    }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
         onBoost = true;
         targetTime = 0.3f;
+
         alienMov.OnBoosted();
         booster.Boosted();
         spawner.spawner.nextSpawnTime = targetTime;
@@ -184,6 +195,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
             skinObjAnim[i].SetTrigger("Correct");
 
         }
+
+        gameConfig.timeToMakeAChoice.Add(timer);
+        gameConfig.roundResultWins.Add(true);
     }
 
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
