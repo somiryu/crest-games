@@ -24,6 +24,9 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
         itemAnalytics.Add(DataIds.voiceStarTotalGametime, totalGameTime);
         itemAnalytics.Add(DataIds.voiceStartimeToMakeAChoice, timeToMakeAChoice);
         itemAnalytics.Add(DataIds.voiceStarRoundResultWins, roundResultWins);
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, itemAnalytics);     
+
     }
     public override void ResetCurrentAnalytics()
     {

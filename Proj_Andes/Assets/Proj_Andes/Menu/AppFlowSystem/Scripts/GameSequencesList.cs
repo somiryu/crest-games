@@ -97,6 +97,8 @@ public class GameSequencesList : ScriptableObject
         GoToNextItemInList();
     }
 
+
+
 #if UNITY_EDITOR
     [MenuItem("Hi Hat Games/ Clean tutorial data")]
 #endif

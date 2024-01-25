@@ -21,12 +21,17 @@ public class MG_FightTheAlienGameConfigs : GameConfig
     [NonSerialized] public List<bool> roundResultWins = new List<bool>();
     [NonSerialized] public float totalGameTime;
 
+    public override string GetSceneID() => DataIds.fightTheAlienGame;
+
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.fightTheAlienTotalGametime, totalGameTime);
         itemAnalytics.Add(DataIds.fightTheAlientimeToMakeAChoice, timeToMakeAChoice);
         itemAnalytics.Add(DataIds.fightTheAlienRoundResultWins, roundResultWins);
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
+
         Debug.Log(timeToMakeAChoice.Count + "fight " + roundResultWins.Count + " " + totalGameTime);
     }
     public override void ResetCurrentAnalytics()

@@ -1,3 +1,4 @@
+using Firebase.Firestore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,12 @@ public class UserDataManager : ScriptableObject
 
 	[NonSerialized]
 	public List<UserData> usersDatas = new List<UserData>();
+    
+	
+    public static Dictionary<string, Dictionary<string, object>> userAnayticsPerGame = new Dictionary<string, Dictionary<string, object>>();
 
-	int currUserDataIdx = -1;
+
+    int currUserDataIdx = -1;
 
 	public UserData CurrUserData
     {
@@ -65,6 +70,21 @@ public class UserDataManager : ScriptableObject
 			if(CurrUser.userAnaytics.ContainsKey(sceneID)) CurrUser.userAnaytics[sceneID] = newData;
 			else CurrUser.userAnaytics.Add(sceneID, newData);			
         }
+    }
+
+	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics)
+	{
+        var userID = CurrUser.name + " " + CurrUser.id;
+        var playerItemAnalytics = new Dictionary<string, object>();
+        playerItemAnalytics.Add(userID, itemAnalytics);
+
+
+        if (userAnayticsPerGame.ContainsKey(gameKey))
+		{
+			if (userAnayticsPerGame[gameKey].ContainsKey(userID)) userAnayticsPerGame[gameKey][userID] = playerItemAnalytics;			
+			else userAnayticsPerGame[gameKey].Add(userID, playerItemAnalytics);
+		}
+		else userAnayticsPerGame.Add(gameKey, playerItemAnalytics);
     }
     public static bool SaveToServer()
 	{
@@ -123,7 +143,7 @@ public class UserDataManager : ScriptableObject
 
 	public void SaveDataToRemoteDataBase()
 	{
-		DatabaseManager.SaveUserDatasList(usersDatas);
+		DatabaseManager.SaveUserDatasList(usersDatas, userAnayticsPerGame);
 	}
 
 	public void SetCurrUser(string email, string id)

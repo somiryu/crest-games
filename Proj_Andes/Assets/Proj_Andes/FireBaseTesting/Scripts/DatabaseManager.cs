@@ -28,21 +28,42 @@ public static class DatabaseManager
             {
                 Debug.Log(String.Format("Document data for {0} document:", documentSnapshot.Id));
                 UserData currUserDate = documentSnapshot.ConvertTo<UserData>();
+                
                 userDatas.Add(currUserDate);
             }
             userListDone = true;
         });
         
     }
+
+  
         
 
-    public static async void SaveUserDatasList(List<UserData> userDatas)
+    public static async void SaveUserDatasList(List<UserData> userDatas, Dictionary<string, Dictionary<string, object>> dataPerGame)
     {       
         for (int i = 0; i < userDatas.Count; i++)
         {
             DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].name + " " + userDatas[i].id);      
             await docRef.SetAsync(userDatas[i]);
-        }       
+        }
+
+        foreach (string gameKey in dataPerGame.Keys)
+        {
+            CollectionReference collRef = db.Collection(gameKey);
+            foreach (string playerId in dataPerGame[gameKey].Keys)
+            {
+                DocumentReference docRef = collRef.Document(playerId);
+                await docRef.SetAsync(dataPerGame[gameKey][playerId]);
+            }            
+        }
+    }
+
+    public static async void SaveGameDatasList(string colletionGame, string userID, Dictionary<string, object> itemAnalytics)
+    {
+        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
+        DocumentReference docRef = db.Collection(colletionGame).Document(userID);
+        Debug.Log("I am here");
+        await docRef.SetAsync(itemAnalytics, SetOptions.MergeAll);
     }
 }
 
@@ -52,3 +73,4 @@ public class UserDataListWrapper
 {
     public List<UserData> userDatas;
 }
+
