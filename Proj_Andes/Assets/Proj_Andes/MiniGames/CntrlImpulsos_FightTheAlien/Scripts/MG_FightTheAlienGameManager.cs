@@ -28,7 +28,6 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     [Header("After Action UI")]
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
-    [SerializeField] Button retryBtn2;
     [SerializeField] GameObject inGameUIPaneltoDissapear;
 
 
@@ -59,6 +58,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     private AudioSource audiosource;
 
     private bool gameoverFlag = false;
+    float totalTime;
 
 	public void Awake()
 	{
@@ -95,8 +95,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
             answerBtns[i].onClick.AddListener(() => OnAnswerBtnClicked(currIdx));
         }
 
-		retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
-
+        totalTime = 0;
 		InitRound();
 	}
 
@@ -132,6 +131,8 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 	{
         if (gameoverFlag) return;
 
+        totalTime += Time.deltaTime;
+
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
@@ -164,6 +165,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
             skinObjAnim[i].SetTrigger("Incorrect");
 
         }
+        gameConfigs.roundResultWins.Add(false);
 
         incorrectParticles.Play();
         incorrectParticles.Play();
@@ -185,6 +187,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
             skinObjAnim[i].SetTrigger("Correct");
         }
 
+        gameConfigs.roundResultWins.Add(true);
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         currEnemyHealth += gameConfigs.EnemyHealthLostOnRightAnswer;
@@ -193,6 +196,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
     void OnRoundEnded()
     {
+        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
         currCoinsValueTxt.text = currCoins.ToString();
         playerHealthUI.value = currPlayerHealth;
@@ -210,6 +214,8 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     {
         audiosource.clip = finishAudio;
         audiosource.Play();
+
+        gameConfigs.totalGameTime = totalTime;
 
         gameoverFlag = true;
         afterActionPanel.SetActive(true);

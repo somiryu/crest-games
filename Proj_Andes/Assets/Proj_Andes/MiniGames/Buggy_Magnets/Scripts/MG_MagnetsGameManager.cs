@@ -184,6 +184,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	{
 		itemPicked.OnWasPicked();
 		currEnergyPicked++;
+		gameConfigs.energyCaptured++;
 		inGame_currPointsTextUI.text = currEnergyPicked.ToString();
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
