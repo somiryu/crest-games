@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7384c6fb496f2140a013b706f05af4d, type: 3}
-  m_Name: Hearth&FlowersTutorialAppFLow
+  m_Name: SizeRocketsTutorialAppItem
   m_EditorClassIdentifier: 
   scene:
-    sceneAsset: {fileID: 102900000, guid: c05d762b1b42ee448a5ad8b23015492b, type: 3}
-    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_EstrellasYCorazones/Scenes/TutorialCntrlImpulsos_EstrellasYCorazones.unity
-  tutorialID: 6
+    sceneAsset: {fileID: 102900000, guid: 9832958c95b64cb44bbdea587de23024, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/Gratification_SizeRockets/Scenes/Tutorial_Gratification_SizeRockets.unity
+  tutorialID: 7

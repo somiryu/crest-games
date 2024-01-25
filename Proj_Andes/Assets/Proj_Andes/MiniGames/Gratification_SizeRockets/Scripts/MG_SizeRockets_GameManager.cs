@@ -12,8 +12,8 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 {
 	private static MG_SizeRockets_GameManager instance;
 	public static MG_SizeRockets_GameManager Instance => instance;
-
-	public MG_SizeRockets_GameConfigs gameConfigs { get; set; }
+	public MG_SizeRockets_GameConfigs gameConfig;
+    public MG_SizeRockets_GameConfigs gameConfigs { get => gameConfig; set { } }
 	[Header("UI")]
 	public Button smallRocketBtn;
 	public Button mediumRocketBtn;
