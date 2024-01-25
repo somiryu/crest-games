@@ -20,8 +20,8 @@ public class MG_MechanicHandGameConfigs : GameConfig
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.voiceStarTotalGametime, totalSuccessfulAttempts);
-        itemAnalytics.Add(DataIds.voiceStarRoundResultWins, totalSuccessfulAttempts);
+        itemAnalytics.Add(DataIds.mechanicHandtotalSuccessfulAttempts, totalSuccessfulAttempts);
+        itemAnalytics.Add(DataIds.mechanicHandtotalFailedAttempts, totalFailedAttempts);
     }
     public override void ResetCurrentAnalytics()
     {
