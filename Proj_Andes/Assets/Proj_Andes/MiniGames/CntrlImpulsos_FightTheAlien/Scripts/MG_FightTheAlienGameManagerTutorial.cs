@@ -37,7 +37,6 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     [Header("After Action UI")]
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
-    [SerializeField] Button retryBtn2;
     [SerializeField] GameObject inGameUIPaneltoDissapear;
 
 
@@ -117,14 +116,12 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
             answerBtns[i].button.onClick.AddListener(() => OnAnswerBtnClicked(currIdx, answerBtns[currIdx]));
         }
 
-        retryBtn2.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single));
         InitTutorialStep();
         InitRound();
     }
 
     private void InitTutorialStep()
     {
-        Debug.Log("tutorial" + currentTutorialStep);
         currStepConfigTutorial = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep];
         currPointsAmount = 0;
         timerUI.gameObject.SetActive(currStepConfigTutorial.time);

@@ -446,6 +446,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3264664213342957759}
   - component: {fileID: 7560693429857609891}
+  - component: {fileID: 7867495837656090888}
   m_Layer: 0
   m_Name: Art
   m_TagString: Untagged
@@ -520,3 +521,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7867495837656090888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183824349320585180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1977cf6cc135947b28b752137e60a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignOnAwake: 1
+  image: {fileID: 0}
+  sRenderer: {fileID: 7560693429857609891}
+  imagePerSkinTypes:
+  - skinType: 0
+    sprites:
+    - {fileID: 21300000, guid: 504b9308980952e4f9842806cec292f9, type: 3}
+    - {fileID: 21300000, guid: 637d7943c4041b743835dbb1464e1dbf, type: 3}
+    - {fileID: 21300000, guid: 339e38f72864db74b801dcbf5930abcd, type: 3}
+    - {fileID: 21300000, guid: 8d4573ef2092fc943837287e9542cef6, type: 3}
+  - skinType: 1
+    sprites:
+    - {fileID: 21300000, guid: c05dea2106f67624ab5c50bfc9e02740, type: 3}
+    - {fileID: 21300000, guid: b0f708513ba71ea41b405909e3b38af3, type: 3}
+    - {fileID: 21300000, guid: db13bb500812c3f4b9e070b6da09bc76, type: 3}
+    - {fileID: 21300000, guid: 476b61bddb25c77419a142a987f9861a, type: 3}
+  - skinType: 2
+    sprites:
+    - {fileID: 21300000, guid: 68a8984e6d649b642a0e1ca80c430d0c, type: 3}
+    - {fileID: 21300000, guid: b88048ad2100ae144af19e31796a7e99, type: 3}
+    - {fileID: 21300000, guid: dc0d1fa9b464d3e45bac63a046413fcb, type: 3}
+    - {fileID: 21300000, guid: 89ecee483563e1140afaced0704eaf9a, type: 3}

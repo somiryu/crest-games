@@ -8,9 +8,18 @@ public static class DataIds
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
     public const string voiceStarRoundResultWins = "voiceStarRoundResultWins";
 
+    public const string heartsAndStarstimeToMakeAChoice = "heartsAndStarstimeToMakeAChoice";
+    public const string heartsAndStarsRoundResultWins = "heartsAndStarsRoundResultWins";
+    public const string turboRocketCoinsCollected = "turboRocketCoinsCollected";
+    public const string turboRockettotalRideTime= "turboRockettotalRideTime";
+    public const string turboRocketturboUsedTimes = "turboRocketturboUsedTimes";
+    public const string mechanicHandtotalSuccessfulAttempts = "mechanicHandtotalSuccessfulAttempts";
+    public const string mechanicHandtotalFailedAttempts = "mechanicHandtotalFailedAttempts";
     public const string fightTheAlienTotalGametime = "fightTheAlienTotalGametime";
     public const string fightTheAlientimeToMakeAChoice = "fightTheAlientimeToMakeAChoice";
     public const string fightTheAlienRoundResultWins = "fightTheAlienRoundResultWins";
+
+    public const string magnetsEneryPicked = "magnetsEneryPicked";
 
 
 }

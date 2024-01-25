@@ -6,15 +6,14 @@ using UnityEngine;
 public class Gratification_TurboRocket_UI_BG_Base : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI starsScoreText;    
-    iTurboRocketManager player => iTurboRocketManager.Instance;
 
     void Start()
     {
-        player.OnScoreChanges += ScoreChanged;
+		iTurboRocketManager.Instance.OnScoreChanges = ScoreChanged;
     }
 
     private void ScoreChanged()
     {
-        starsScoreText.text = player.starsGatheredCount.ToString(); 
+        starsScoreText.text = iTurboRocketManager.Instance.starsGatheredCount.ToString(); 
     }
 }
