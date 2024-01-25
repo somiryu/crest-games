@@ -39,6 +39,7 @@ public class GameUIController : MonoBehaviour
     }
     void ExitGame()
     {
+        Time.timeScale = 1;
         GameSequencesList.Instance.EndSequence();
     }
     void ActivateSound()
