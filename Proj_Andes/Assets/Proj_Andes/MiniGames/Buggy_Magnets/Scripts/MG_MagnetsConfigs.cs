@@ -15,6 +15,7 @@ public class MG_MagnetsConfigs : GameConfig
 	public bool activeCheats;
 	public float energyItemsLifeTime = 5;
 	public int itemsAmountToSpawn = 3;
+	[NonSerialized] public int energyCaptured;
 
 	public DifficultyModificatorFloat timeBetweenSpawnsPerDifficultLevel;
     
@@ -22,6 +23,13 @@ public class MG_MagnetsConfigs : GameConfig
 
     public override void SaveAnalytics()
     {
-		SaveCoins(coinsCollected);
+        itemAnalytics = new Dictionary<string, object>();
+        itemAnalytics.Add(DataIds.magnetsEneryPicked, energyCaptured);
+        SaveCoins(coinsCollected);
+    }
+    public override void ResetCurrentAnalytics()
+    {
+		energyCaptured = 0;
+        base.ResetCurrentAnalytics();
     }
 }

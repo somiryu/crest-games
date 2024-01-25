@@ -18,8 +18,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     SphereCollider myCollider;
     Collider[] colls;
     [HideInInspector] public int starsGatheredCount { get; set; }
-    public Action OnScoreChanged;
-    public Action OnScoreChanges { get => OnScoreChanged; set { } }
+    public Action OnScoreChanges { get; set; }
     public bool onTurbo { get; set; }
     float currentSpeed;
     public Camera cam;

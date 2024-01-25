@@ -8,9 +8,13 @@ public static class DataIds
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
     public const string voiceStarRoundResultWins = "voiceStarRoundResultWins";
 
+    public const string heartsAndStarstimeToMakeAChoice = "heartsAndStarstimeToMakeAChoice";
+    public const string heartsAndStarsRoundResultWins = "heartsAndStarsRoundResultWins";
     public const string turboRocketCoinsCollected = "turboRocketCoinsCollected";
     public const string turboRockettotalRideTime= "turboRockettotalRideTime";
     public const string turboRocketturboUsedTimes = "turboRocketturboUsedTimes";
+
+    public const string magnetsEneryPicked = "magnetsEneryPicked";
 
 
 }
