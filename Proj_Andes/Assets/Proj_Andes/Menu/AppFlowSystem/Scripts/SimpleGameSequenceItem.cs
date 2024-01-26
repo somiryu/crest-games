@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Tymski;
 using UnityEngine;
 
@@ -7,7 +8,9 @@ public class SimpleGameSequenceItem : ScriptableObject
 {
     public SceneReference scene;
 
-    public Dictionary<string, object> itemAnalytics;
+    [NonSerialized] public Dictionary<string, object> itemAnalytics;
+
+    public virtual string GetSceneID() => string.Empty;
 
     public virtual Dictionary<string, object> GetAnalytics() => itemAnalytics;
     public virtual void ResetCurrentAnalytics()
