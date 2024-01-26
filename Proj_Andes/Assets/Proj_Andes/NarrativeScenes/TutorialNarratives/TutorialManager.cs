@@ -11,7 +11,6 @@ public class TutorialManager : MonoBehaviour
     private static TutorialManager instance;
     public static TutorialManager Instance => instance;
 
-    public GameUIController gameUIController;
 
     private void Awake()
     {
@@ -21,7 +20,6 @@ public class TutorialManager : MonoBehaviour
             {
                 DestroyImmediate(instance.gameObject);
             }
-
         }
         instance = this;
 
@@ -31,8 +29,6 @@ public class TutorialManager : MonoBehaviour
             var curr = rootObjs[i];
             GetIUsers(curr, usersTutorial);
         }
-        gameUIController = Utility.FindObjectByType<GameUIController>();
-
     }
 
     public void GetIUsers(GameObject currObj, List<TutorialUser> usersList)
@@ -87,11 +83,6 @@ public class TutorialManager : MonoBehaviour
             if (usersTutorial[i].tutorialStep != prevTutorialStep) continue;
             usersTutorial[i].SetNewStep(newTutorialStep);
         }
-    }
-
-    public void GetCurrentStep(TutorialUser tutorialUser)
-    {
-        return;
     }
 }
 

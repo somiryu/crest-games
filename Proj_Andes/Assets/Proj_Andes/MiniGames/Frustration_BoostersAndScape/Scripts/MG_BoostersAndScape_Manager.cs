@@ -115,14 +115,12 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         {
             if (currentBooster.Boosteable()) Time.timeScale = 0;
         }
-        else gameUIController.TurnOnTurboBtn(false);
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
             {
                 UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
-                gameUIController.TurnOnTurboBtn(false);
                 Time.timeScale = 1;
             }
             gameConfig.totalAttemptsToBoost++;
@@ -185,7 +183,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         booster.Boosted();
         spawner.spawner.nextSpawnTime = targetTime;
         successfulAttempts++;
-        Debug.Log("boosted");
         characterAnims.SetTrigger("Turbo");
         timer = 0;
          

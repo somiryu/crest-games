@@ -54,11 +54,11 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
     public bool Boosteable()
     {
         if(manager.onTrapMode) return false;
-        if (transform.position.x > manager.rocket.transform.position.x - manager.catchBoosterRange && transform.position.x < manager.rocket.transform.position.x + manager.catchBoosterRange)
+        if (transform.position.x > manager.rocket.transform.position.x - manager.catchBoosterRange 
+            && transform.position.x < manager.rocket.transform.position.x + manager.catchBoosterRange)
             return true;
         else
         {
-            Debug.Log("not boosteable");
             return false;
         }
     }
