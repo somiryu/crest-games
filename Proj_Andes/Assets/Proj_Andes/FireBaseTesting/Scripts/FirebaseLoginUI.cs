@@ -8,7 +8,6 @@ using System;
 
 public class FirebaseLoginUI : MonoBehaviour
 {
-
 	[Header("RegisterPanel")]
 	public GameObject registerNewPanel;
 	public TMP_InputField emailField;
@@ -177,7 +176,6 @@ public class FirebaseLoginUI : MonoBehaviour
 	IEnumerator CorrectlyLoggedRoutine()
 	{
 		while (!onCorrectlyLoggegFlag && !logFailedFlag) yield return null;
-
 		if (onCorrectlyLoggegFlag) OnCorrectlyLogIn(LogemailField.text, currLogUserID);
 
 		logFailedFlag = false;

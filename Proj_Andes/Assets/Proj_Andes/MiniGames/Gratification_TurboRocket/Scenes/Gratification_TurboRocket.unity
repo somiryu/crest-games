@@ -34168,7 +34168,6 @@ MonoBehaviour:
     item: {fileID: 395380817}
   - skinType: 2
     item: {fileID: 1726166933}
-  item: {fileID: 0}
   assignOnAwake: 0
 --- !u!1 &316382275
 GameObject:
@@ -63675,7 +63674,6 @@ MonoBehaviour:
     item: {fileID: 396627543}
   - skinType: 2
     item: {fileID: 1932261918}
-  item: {fileID: 0}
   assignOnAwake: 0
 --- !u!1001 &565471026
 PrefabInstance:
@@ -88372,6 +88370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2D_BG_base
       objectReference: {fileID: 0}
+    - target: {fileID: 7064607272639147133, guid: a226bcb4cd9a71f46b489fe0ba599930, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -98612,27 +98614,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1994.4407
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 676.7789
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -98664,11 +98666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 11.808258
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 288.38943
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -98956,6 +98958,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  characterAnimator: {fileID: 0}
 --- !u!82 &1380917382
 AudioSource:
   m_ObjectHideFlags: 0
@@ -144452,7 +144455,6 @@ MonoBehaviour:
     item: {fileID: 3246674771270764819}
   - skinType: 1
     item: {fileID: 8848403450023947730}
-  item: {fileID: 0}
   assignOnAwake: 0
 --- !u!212 &2331042373808841735
 SpriteRenderer:

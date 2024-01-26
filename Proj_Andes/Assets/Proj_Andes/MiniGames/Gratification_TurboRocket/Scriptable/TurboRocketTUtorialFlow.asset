@@ -15,4 +15,4 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: d344826eb183389438fd74cae0531927, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/Gratification_TurboRocket/Scenes/Gratification_TurboRocket_Tutorial.unity
-  tutorialID: 9
+  tutorialID: 10

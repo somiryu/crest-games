@@ -1,6 +1,8 @@
+using Firebase.Firestore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
@@ -35,8 +37,12 @@ public class UserDataManager : ScriptableObject
 
 	[NonSerialized]
 	public List<UserData> usersDatas = new List<UserData>();
+    
+	
+    public static Dictionary<string, Dictionary<string, object>> userAnayticsPerGame = new Dictionary<string, Dictionary<string, object>>();
 
-	int currUserDataIdx = -1;
+
+    int currUserDataIdx = -1;
 
 	public UserData CurrUserData
     {
@@ -59,23 +65,26 @@ public class UserDataManager : ScriptableObject
         for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
         {
             var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
-			if(newData != null)
-			{
-                List<string> currDictionaryKeys = newData.Keys.ToList();
-                for (int j = 0; j < currDictionaryKeys.Count; j++)
-                {
-                    if (CurrUser.userAnayticsResults.ContainsKey(currDictionaryKeys[j]))
-                    {
-                        CurrUser.userAnayticsResults[currDictionaryKeys[j]] = newData[currDictionaryKeys[j]];
-                    }
-                    else
-					{
-                        CurrUser.userAnayticsResults.Add(currDictionaryKeys[j], newData[currDictionaryKeys[j]]);
-						Debug.Log(CurrUser.userAnayticsResults[currDictionaryKeys[j]]);
-                    }
-                }
-            }
+			var sceneID = GameSequencesList.Instance.gameSequences[i].GetSceneID();
+			if (string.IsNullOrEmpty(sceneID)) continue;
+			if(CurrUser.userAnalytics.ContainsKey(sceneID)) CurrUser.userAnalytics[sceneID] = newData;
+			else CurrUser.userAnalytics.Add(sceneID, newData);			
         }
+    }
+
+	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics)
+	{
+        var userID = CurrUser.name + " " + CurrUser.id;
+        var playerItemAnalytics = new Dictionary<string, object>();
+        playerItemAnalytics.Add(userID, itemAnalytics);
+
+
+        if (userAnayticsPerGame.ContainsKey(gameKey))
+		{
+			if (userAnayticsPerGame[gameKey].ContainsKey(userID)) userAnayticsPerGame[gameKey][userID] = playerItemAnalytics;			
+			else userAnayticsPerGame[gameKey].Add(userID, playerItemAnalytics);
+		}
+		else userAnayticsPerGame.Add(gameKey, playerItemAnalytics);
     }
     public static bool SaveToServer()
 	{
@@ -123,12 +132,18 @@ public class UserDataManager : ScriptableObject
 
 	public void LoadDataFromRemoteDataBase()
 	{
-		usersDatas = DatabaseManager.GetUserDatasList();
+		DatabaseManager.GetUserDatasList();
+		usersDatas = DatabaseManager.userDatas;
+	}
+
+	public void Update()
+	{
+
 	}
 
 	public void SaveDataToRemoteDataBase()
 	{
-		DatabaseManager.SaveUserDatasList(usersDatas);
+		DatabaseManager.SaveUserDatasList(usersDatas, userAnayticsPerGame);
 	}
 
 	public void SetCurrUser(string email, string id)

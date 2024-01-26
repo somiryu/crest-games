@@ -8,9 +8,11 @@ using Firebase.Auth;
 using System.Threading.Tasks;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
-{
-	bool correctlyLoggedInFlag = false;
+{   
+
+    bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
+	bool checkUserList = false;
 
 	string logInFailedWarning = string.Empty;
 
@@ -92,9 +94,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		logInsuccedID = ("Firebase ID:" + result.User.UserId);
 		correctlyLoggedInFlag = true;
-	}
+    }
 
-	void OnFailedLogIn(Task<AuthResult> taskResult)
+    void OnFailedLogIn(Task<AuthResult> taskResult)
 	{
 		var errMsg = GetErrorMessage(taskResult.Exception.InnerExceptions[0]);
 		logInFailedWarning = "Log in failed: " + errMsg;
@@ -122,15 +124,20 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			logInFailedWarning = string.Empty;
 		}
 
-		if (correctlyLoggedInFlag && !doneInitialization)
+		if (!DatabaseManager.userListDone && !checkUserList) { 
+			UserDataManager.Instance.LoadDataFromRemoteDataBase();
+            checkUserList = true;
+        }
+
+        if (correctlyLoggedInFlag && !doneInitialization && DatabaseManager.userListDone)
 		{
 			Debug.Log("Correctly logged in");
-			logInsuccedIDUITxt.SetText(logInsuccedID);
-			UserDataManager.Instance.LoadDataFromRemoteDataBase();
+            logInsuccedIDUITxt.SetText(logInsuccedID);
 			RebuildUsersList();
 			correctlyLoggedInFlag = false;
 			doneInitialization = true;
-		}
+			checkUserList = false;
+		}		
 	}
 
 	void RebuildUsersList()

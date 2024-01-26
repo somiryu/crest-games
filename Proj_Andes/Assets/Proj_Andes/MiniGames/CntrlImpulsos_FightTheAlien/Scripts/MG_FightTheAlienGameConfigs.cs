@@ -16,4 +16,29 @@ public class MG_FightTheAlienGameConfigs : GameConfig
 
 	public int playerHealthLostOnWrongAnswer = -1;
 	public int EnemyHealthLostOnRightAnswer = -1;
+
+    [NonSerialized] public List<float> timeToMakeAChoice = new List<float>();
+    [NonSerialized] public List<bool> roundResultWins = new List<bool>();
+    [NonSerialized] public float totalGameTime;
+
+    public override string GetSceneID() => DataIds.fightTheAlienGame;
+
+    public override void SaveAnalytics()
+    {
+        itemAnalytics = new Dictionary<string, object>();
+        itemAnalytics.Add(DataIds.fightTheAlienTotalGametime, totalGameTime);
+        itemAnalytics.Add(DataIds.fightTheAlientimeToMakeAChoice, timeToMakeAChoice);
+        itemAnalytics.Add(DataIds.fightTheAlienRoundResultWins, roundResultWins);
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
+
+        Debug.Log(timeToMakeAChoice.Count + "fight " + roundResultWins.Count + " " + totalGameTime);
+    }
+    public override void ResetCurrentAnalytics()
+    {
+        timeToMakeAChoice.Clear();
+        roundResultWins.Clear();
+        totalGameTime = 0;
+        base.ResetCurrentAnalytics();
+    }
 }

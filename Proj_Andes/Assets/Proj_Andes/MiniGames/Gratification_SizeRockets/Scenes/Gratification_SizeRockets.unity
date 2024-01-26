@@ -510,10 +510,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 753804734}
     m_Modifications:
-    - target: {fileID: 4011995734049722785, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5560996765090473758, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_Name
       value: UI_BG_base
@@ -544,11 +540,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1994.4407
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 676.7789
+      value: 1146.3
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -580,11 +576,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 11.808258
+      value: -0.00014496
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 288.38943
+      value: -0.0023651
       objectReference: {fileID: 0}
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -597,10 +593,6 @@ PrefabInstance:
     - target: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8720056815985764546, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2862,7 +2854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70cc40ad73157b41bd7c9ef7c54dd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameConfigs: {fileID: 11400000, guid: 90f7abf53fcb1084185c23a779968874, type: 2}
+  gameConfig: {fileID: 11400000, guid: 90f7abf53fcb1084185c23a779968874, type: 2}
   smallRocketBtn: {fileID: 493516326}
   mediumRocketBtn: {fileID: 834736015}
   largeRocketBtn: {fileID: 875205639}

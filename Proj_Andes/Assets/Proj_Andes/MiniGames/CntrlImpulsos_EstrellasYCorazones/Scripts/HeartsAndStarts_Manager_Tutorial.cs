@@ -40,7 +40,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] TMP_Text currRoundValueTxt;
-    [SerializeField] Image bkColor;
 
     [SerializeField] List<TutorialConfigHeartsAndStars> myTutorialSteps = new List<TutorialConfigHeartsAndStars>();
     [SerializeField] TutorialConfigHeartsAndStars currTutoStep;
@@ -68,8 +67,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         currRound = 0;
         currTutoStep = myTutorialSteps[0];
         currConsecutiveLoses = 0;
-        currConsecutiveWins = 0;
-        currTutoStep.InitTutoStep(bkColor);
+        currConsecutiveWins = 0;        
         allTutorialsDoneFlag = false;
 
         audiosource = GetComponent<AudioSource>();
@@ -166,7 +164,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 			else currTutoStep = myTutorialSteps[currIdx + 1];
             currConsecutiveWins = 0;
             currConsecutiveLoses = 0;
-            currTutoStep.InitTutoStep(bkColor);
         }
     }
     private void OnClickedLeft()
@@ -263,7 +260,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     IEnumerator GoToNextScene()
     {
-        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.heartsAndStarsDone.ToString());
+        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.HeartsAndStarsDone.ToString());
         yield return new WaitForSeconds(1);
         GameSequencesList.Instance.GoToNextSequence();
     }
