@@ -2795,7 +2795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70cc40ad73157b41bd7c9ef7c54dd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameConfigs: {fileID: 11400000, guid: 90f7abf53fcb1084185c23a779968874, type: 2}
+  gameConfig: {fileID: 11400000, guid: 90f7abf53fcb1084185c23a779968874, type: 2}
   smallRocketBtn: {fileID: 493516326}
   mediumRocketBtn: {fileID: 834736015}
   largeRocketBtn: {fileID: 875205639}
