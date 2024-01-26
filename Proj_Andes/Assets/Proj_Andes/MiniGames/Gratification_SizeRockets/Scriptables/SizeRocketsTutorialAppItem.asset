@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7384c6fb496f2140a013b706f05af4d, type: 3}
-  m_Name: TurboRocketTUtorialFlow
+  m_Name: SizeRocketsTutorialAppItem
   m_EditorClassIdentifier: 
   scene:
-    sceneAsset: {fileID: 102900000, guid: d344826eb183389438fd74cae0531927, type: 3}
-    scenePath: Assets/Proj_Andes/MiniGames/Gratification_TurboRocket/Scenes/Gratification_TurboRocket_Tutorial.unity
-  tutorialID: 10
+    sceneAsset: {fileID: 102900000, guid: 9832958c95b64cb44bbdea587de23024, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/Gratification_SizeRockets/Scenes/Tutorial_Gratification_SizeRockets.unity
+  tutorialID: 7
