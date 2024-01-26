@@ -71,7 +71,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     {
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
         charactetSkinableObj.OnCurrSkinObjChanged += UpdateCharacterAnimRef;
-        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone)) gameUIController.TurnOnTurboBtn(true);
 
         totalTime = 0;
 
@@ -114,8 +113,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
         {
-            if (currentBooster.Boosteable()) Time.timeScale = 0;            
-        }        
+            if (currentBooster.Boosteable()) Time.timeScale = 0;
+        }
+        else gameUIController.TurnOnTurboBtn(false);
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {

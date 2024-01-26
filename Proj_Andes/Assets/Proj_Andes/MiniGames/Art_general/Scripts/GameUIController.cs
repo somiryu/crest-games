@@ -17,11 +17,13 @@ public class GameUIController : MonoBehaviour
     [SerializeField] Image tutorialImg;
     [SerializeField] bool isaTuto;
     EndOfGameManager eogManager;
+    TutorialManager tutorialManager;
     void Start()
     {
         eogManager = Utility.FindObjectByType<EndOfGameManager>();
+        tutorialManager = Utility.FindObjectByType<TutorialManager>();
 
-        tutorialImg.gameObject.SetActive(TurnOnTurboBtn(isaTuto));
+        if(!tutorialManager) tutorialImg.gameObject.SetActive(TurnOnTurboBtn(isaTuto));
 
         homeBtn.onClick.AddListener(OpenMenu);
         continueBtn.onClick.AddListener(Continue);

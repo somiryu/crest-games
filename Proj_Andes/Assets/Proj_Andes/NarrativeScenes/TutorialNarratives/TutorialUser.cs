@@ -16,7 +16,6 @@ public class TutorialUser : MonoBehaviour
 
 	private void Start()
 	{
-        Debug.Log("ontuto");
         if(TutorialManager.Instance.gameUIController != null) TutorialManager.Instance.gameUIController.TurnOnTurboBtn(true);
         TutorialManager.Instance.AddNewUser(this);
     }
