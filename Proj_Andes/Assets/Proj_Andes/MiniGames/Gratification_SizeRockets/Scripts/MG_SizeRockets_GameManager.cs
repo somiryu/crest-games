@@ -8,12 +8,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
+public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISizeRocketsManager
 {
 	private static MG_SizeRockets_GameManager instance;
 	public static MG_SizeRockets_GameManager Instance => instance;
-
-	public MG_SizeRockets_GameConfigs gameConfigs;
+	public MG_SizeRockets_GameConfigs gameConfig;
+    public MG_SizeRockets_GameConfigs gameConfigs { get => gameConfig; set { } }
 	[Header("UI")]
 	public Button smallRocketBtn;
 	public Button mediumRocketBtn;
@@ -56,7 +56,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 
 	private void Awake()
 	{
-		ingameObj.SetActive(true);
+        ISizeRocketsManager.Instance = this;
+
+        ingameObj.SetActive(true);
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
 		GeneratePlanets();
@@ -224,4 +226,11 @@ public enum SizeRocketsRocketTypes
 	medium,
 	large,
 	NONE
+}
+
+public interface ISizeRocketsManager
+{
+	public static ISizeRocketsManager Instance { get; set; }
+    public MG_SizeRockets_GameConfigs gameConfigs { get; set; }
+    public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount);
 }

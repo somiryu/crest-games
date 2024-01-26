@@ -260,7 +260,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     IEnumerator GoToNextScene()
     {
-        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.heartsAndStarsDone.ToString());
+        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.HeartsAndStarsDone.ToString());
         yield return new WaitForSeconds(1);
         GameSequencesList.Instance.GoToNextSequence();
     }
