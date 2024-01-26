@@ -2281,9 +2281,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3063343627534065056, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_characterSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063343627534065056, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4284698937
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063343627534065056, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3063343628042118870, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -19.017944
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063343628096675025, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063343628096675031, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4288387995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063343628096675031, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3063343628931919240, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Pivot.x
@@ -2682,25 +2706,29 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: a84591b2924f10e44a611cccdef653cc, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: ab9fd1472e664e54abc1e6fd98e16f01, type: 2}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 2681229895518889507, guid: a84591b2924f10e44a611cccdef653cc, type: 2}
-    value: {fileID: 2138338499}
+    value: {fileID: 0}
   - key: {fileID: 2681229895518889507, guid: 9fd4de8220459ad45b6f8078a7d82d9c, type: 2}
     value: {fileID: 0}
   - key: {fileID: 2681229895518889507, guid: c65e7e7699c510042a1f8df69416c094, type: 2}
-    value: {fileID: 2138338499}
+    value: {fileID: 0}
   - key: {fileID: 2681229895518889507, guid: bd350c715fd78b946a9d009079f3c73a, type: 2}
-    value: {fileID: 2138338499}
+    value: {fileID: 0}
   - key: {fileID: 2681229895518889507, guid: e2aa8aa273106a248b0a2ff133cdf2ea, type: 2}
-    value: {fileID: 2138338499}
+    value: {fileID: 0}
   - key: {fileID: 2681229895518889507, guid: c76dd43844ab861409ffce3cd83df089, type: 2}
-    value: {fileID: 2138338499}
+    value: {fileID: 0}
   - key: {fileID: 2681229895518889507, guid: 38b166f81e6bb1d439f215da3d1adad8, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2681229895518889507, guid: b25174171c3b36b4b9dd23a0afbed29d, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: ab9fd1472e664e54abc1e6fd98e16f01, type: 2}
     value: {fileID: 2138338499}
   m_ExposedReferences:
     m_References: []
@@ -2781,7 +2809,7 @@ Animator:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5f8b2a0bf47fa8a489b641fea4dc346d, type: 2}
+  m_Controller: {fileID: 9100000, guid: dda45896b31c23e4b8552ebfae76c045, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
