@@ -20,9 +20,12 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 	public Button largeRocketBtn;
 	public TMP_Text currCoinsLabel;
 	public TMP_Text shipsLeftTxt;
+	public Color selectedColor;
+
 	[Header("After Action")]
 	public GameObject afterActionPanel;
 	public GameObject ingameObj;
+	public GameObject ingameObjUI;
 	public TMP_Text afterAction_CoinsCountTxt;
 
 	[Header("Rockets")]
@@ -42,10 +45,10 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 	private SizeRocketsRocketTypes selectedRocketType;
 	private MG_SizeRockets_Planet currTargetPlanet;
 
-    [SerializeField] EndOfGameManager eogManager;
-    public EndOfGameManager EndOfGameManager => eogManager;
+	[SerializeField] EndOfGameManager eogManager;
+	public EndOfGameManager EndOfGameManager => eogManager;
 
-    public int minCoinsToGive => gameConfigs.minCoinsToGive;
+	public int minCoinsToGive => gameConfigs.minCoinsToGive;
 	public int maxCoinsToGive => gameConfigs.maxCoinsToGive;
 	public int planetsAmountToGenerate => gameConfigs.planetsAmountToGenerate;
 	public int shipsPerGame => gameConfigs.shipsPerGame;
@@ -57,6 +60,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 	private void Awake()
 	{
 		ingameObj.SetActive(true);
+		ingameObjUI.SetActive(true);
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
 		GeneratePlanets();
@@ -76,7 +80,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 
 	public void GeneratePlanets()
 	{
-		for(int i = 0; i < planetsAmountToGenerate; i++)
+		for (int i = 0; i < planetsAmountToGenerate; i++)
 		{
 			var newPlanet = Instantiate(planetPrefab);
 			newPlanet.transform.SetParent(planetsParent);
@@ -152,17 +156,17 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 			GenerateNewShip(selectedRocketType);
 			currTargetPlanet = null;
 		}
-		if(shipsLeft <= 0 && activeShips.Count == 0) GameOver();
+		if (shipsLeft <= 0 && activeShips.Count == 0) GameOver();
 	}
 
 
 	MG_SizeRockets_Planet GetPlanetUnderMouse(Vector3 position)
 	{
-		for(int i = 0;i < planets.Count;i++)
+		for (int i = 0; i < planets.Count; i++)
 		{
 			var curr = planets[i];
 			var dist = curr.transform.position - position;
-			if(dist.magnitude <= 1.5f)
+			if (dist.magnitude <= 1.5f)
 			{
 				return curr;
 			}
@@ -170,7 +174,25 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 		return null;
 	}
 
-	public void OnPressedRocketBtn(SizeRocketsRocketTypes types) => selectedRocketType = types;
+	public void OnPressedRocketBtn(SizeRocketsRocketTypes types)
+	{
+		smallRocketBtn.image.color = Color.white;
+		mediumRocketBtn.image.color = Color.white;
+		largeRocketBtn.image.color = Color.white;
+		switch (types) 
+		{
+			case SizeRocketsRocketTypes.small:
+				smallRocketBtn.image.color = selectedColor;
+				break;
+			case SizeRocketsRocketTypes.medium:
+				mediumRocketBtn.image.color = selectedColor;
+				break;
+			case SizeRocketsRocketTypes.large:
+				largeRocketBtn.image.color = selectedColor;
+				break;
+		}
+		selectedRocketType = types;
+	}
 
 	void GenerateNewShip(SizeRocketsRocketTypes types)
 	{
@@ -210,6 +232,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager
 	{
 		afterActionPanel.SetActive(true);
 		ingameObj.SetActive(false);
+		ingameObjUI.SetActive(false);
 		afterAction_CoinsCountTxt.SetText(totalCoinsWon.ToString());
 		gameConfigs.coinsCollected = totalCoinsWon;
         eogManager.OnGameOver();
