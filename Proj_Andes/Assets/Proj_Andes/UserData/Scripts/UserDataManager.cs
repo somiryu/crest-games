@@ -67,8 +67,8 @@ public class UserDataManager : ScriptableObject
             var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
 			var sceneID = GameSequencesList.Instance.gameSequences[i].GetSceneID();
 			if (string.IsNullOrEmpty(sceneID)) continue;
-			if(CurrUser.userAnaytics.ContainsKey(sceneID)) CurrUser.userAnaytics[sceneID] = newData;
-			else CurrUser.userAnaytics.Add(sceneID, newData);			
+			if(CurrUser.userAnalytics.ContainsKey(sceneID)) CurrUser.userAnalytics[sceneID] = newData;
+			else CurrUser.userAnalytics.Add(sceneID, newData);			
         }
     }
 
