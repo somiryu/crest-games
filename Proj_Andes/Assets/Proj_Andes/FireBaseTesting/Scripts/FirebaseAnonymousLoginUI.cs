@@ -18,7 +18,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	public Dictionary<UsersListItem, string> currBtnsByDataID;
 
 	[SerializeField] Button goToUserCreationPanel;
-
+	[SerializeField] Button goToExistingUserPanel;
+	[SerializeField] Transform selectUserContainer;
+	[SerializeField] Transform loadingScreen;
 
 	[Header("Create new user panel")]
 	public GameObject createNewUserPanel;
@@ -45,8 +47,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	private void Awake()
 	{
-		cancelBtn.onClick.AddListener(() => createNewUserPanel.SetActive(false));
+		loadingScreen.gameObject.SetActive(true);
+		selectUserContainer.gameObject.SetActive(true);
+
+		cancelBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
 		createBtn.onClick.AddListener(OnFinishedUserCreation);
+		goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
+
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
@@ -124,7 +131,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		if (correctlyLoggedInFlag && !doneInitialization)
 		{
-			Debug.Log("Correctly logged in");
+            loadingScreen.gameObject.SetActive(false);
+
+            Debug.Log("Correctly logged in");
 			logInsuccedIDUITxt.SetText(logInsuccedID);
 			UserDataManager.Instance.LoadDataFromRemoteDataBase();
 			RebuildUsersList();
@@ -150,9 +159,15 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	void OnWantsToCreateNewUser()
 	{
 		createNewUserPanel.SetActive(true);
-	}
+        selectUserContainer.gameObject.SetActive(false);
+    }	
+	void OnWantsToAccessExistingUser()
+	{
+        createNewUserPanel.SetActive(false);
+        selectUserContainer.gameObject.SetActive(false);
+    }
 
-	void OnFinishedUserCreation()
+    void OnFinishedUserCreation()
 	{
 		var newUser = new UserData();
 		newUser.name = nameField.text;
