@@ -1122,7 +1122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -1.2000122, y: -171.00403}
+  m_AnchoredPosition: {x: -1.2000122, y: -179}
   m_SizeDelta: {x: 310, y: 318}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &890523149
@@ -1147,8 +1147,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "M\xE1gico"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
+  m_sharedMaterial: {fileID: -2667132593029464860, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1815,7 +1815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -13.045, y: -171}
+  m_AnchoredPosition: {x: -13.045, y: -178.99602}
   m_SizeDelta: {x: 310, y: 318}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1192087002
@@ -1840,8 +1840,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Espacial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
+  m_sharedMaterial: {fileID: -2667132593029464860, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2083,7 +2083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35.68, y: 281}
+  m_AnchoredPosition: {x: 34.823, y: 287.1}
   m_SizeDelta: {x: 723.87, y: 84.833405}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1428332451
@@ -2108,8 +2108,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Selecciona un tema
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e46f67f487211ab49bf55bbdc66670b0, type: 2}
+  m_sharedMaterial: {fileID: 1914995512169818216, guid: e46f67f487211ab49bf55bbdc66670b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2892,7 +2892,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.07666, y: -183}
+  m_AnchoredPosition: {x: -0.07666, y: -199}
   m_SizeDelta: {x: 390, y: 366}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1913156295
@@ -2917,8 +2917,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Acu\xE1tico"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
+  m_sharedMaterial: {fileID: -2667132593029464860, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

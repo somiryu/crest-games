@@ -349,7 +349,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &575718697
 Animator:
   serializedVersion: 5
@@ -2706,26 +2706,26 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: ab9fd1472e664e54abc1e6fd98e16f01, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: a84591b2924f10e44a611cccdef653cc, type: 2}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 2681229895518889507, guid: a84591b2924f10e44a611cccdef653cc, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: 9fd4de8220459ad45b6f8078a7d82d9c, type: 2}
     value: {fileID: 0}
   - key: {fileID: 2681229895518889507, guid: c65e7e7699c510042a1f8df69416c094, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: bd350c715fd78b946a9d009079f3c73a, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: e2aa8aa273106a248b0a2ff133cdf2ea, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: c76dd43844ab861409ffce3cd83df089, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: 38b166f81e6bb1d439f215da3d1adad8, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: b25174171c3b36b4b9dd23a0afbed29d, type: 2}
     value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: ab9fd1472e664e54abc1e6fd98e16f01, type: 2}
