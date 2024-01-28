@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0ee5b8a5d212f2942b7429ba05d4e952, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7459,8 +7459,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0c801d74c12bae649b77b7a65cb63fc2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8048,13 +8048,13 @@ MonoBehaviour:
   colorFeedbackImage: {fileID: 1532140609}
   shapeFeedbackImage: {fileID: 1916087324}
   closeButton: {fileID: 857584641}
-  shapeHeart: {fileID: 21300000, guid: f446df9b80d88dd488ada48447cd250b, type: 3}
-  shapeCirlce: {fileID: 21300000, guid: 15754e5e8733b3e43bf7bb5b948861eb, type: 3}
-  shapeStar: {fileID: 21300000, guid: fe22c7c174fb30745986a95144f84c87, type: 3}
-  happyFace: {fileID: 21300000, guid: 5d1eb03fa1f47824cb2fe58e38d1dfc4, type: 3}
-  sadFace: {fileID: 21300000, guid: 00983f462c228a545ac3540f1a651415, type: 3}
-  correctFeedback: {fileID: 21300000, guid: 5d1eb03fa1f47824cb2fe58e38d1dfc4, type: 3}
-  wrongFeedback: {fileID: 21300000, guid: 00983f462c228a545ac3540f1a651415, type: 3}
+  shapeHeart: {fileID: 21300000, guid: 811c77aad97344a4794f94d9f430d4b1, type: 3}
+  shapeCirlce: {fileID: 21300000, guid: 7f06882fc641a6d4598aecb5c12442ab, type: 3}
+  shapeStar: {fileID: 21300000, guid: c7bbe22080599a443b559e226cc425d2, type: 3}
+  happyFace: {fileID: 21300000, guid: 2dd8c9a5c4a96f44eb600086f249a37b, type: 3}
+  sadFace: {fileID: 21300000, guid: 4e1ea84521a2c024eb804d36555c1b14, type: 3}
+  correctFeedback: {fileID: 21300000, guid: ce1a71c38b35e5a41876a18ba6610c8e, type: 3}
+  wrongFeedback: {fileID: 21300000, guid: 142ff1eaa8d811642a5189805446e5d7, type: 3}
 --- !u!1001 &1110930487
 PrefabInstance:
   m_ObjectHideFlags: 0
