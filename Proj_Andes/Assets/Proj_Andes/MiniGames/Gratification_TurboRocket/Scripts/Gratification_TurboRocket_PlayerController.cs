@@ -18,8 +18,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     SphereCollider myCollider;
     Collider[] colls;
     [HideInInspector] public int starsGatheredCount { get; set; }
-    public Action OnScoreChanged;
-    public Action OnScoreChanges { get => OnScoreChanged; set { } }
+    public Action OnScoreChanges { get; set; }
     public bool onTurbo { get; set; }
     float currentSpeed;
     public Camera cam;
@@ -168,6 +167,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
         camCC.OnEnterTurbo();
+
+        gameConfig.turboUsedTimes++;
         onTurbo = true;
     }
     public void OnExitTurboMode()
@@ -189,6 +190,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         {
             if (onTurbo) return;
             star.OnCaptured();
+            gameConfig.coinsCollected++;
         }
     }
  
@@ -201,10 +203,14 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         ride.totalStars = levelConfig.starsAmount;
         data = ride;
         bk.EndOfGame();
+
+        gameConfig.totalRideTime = timer;
+
         onPlay = false;
         levelConfig.coinsCollected = starsGatheredCount;
 		character.GetComponentInChildren<ParticleSystem>().Stop();
 		artParent.gameObject.SetActive(false);
+
 
         StartCoroutine(_OnFinishSequence());
     }

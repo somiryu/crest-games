@@ -22,6 +22,10 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
     [SerializeField] Sprite correctFeedback;
     [SerializeField] Sprite wrongFeedback;
 
+    [SerializeField] Color greenColor;
+    [SerializeField] Color redColor;
+    [SerializeField] Color blueColor;
+
 
 
     private void Start()
@@ -49,13 +53,13 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
         switch (color)
         {
             case colorAlienAttackConfig.green:
-                colorImage.color = Color.green;
+                colorImage.color = greenColor;
                 break;
             case colorAlienAttackConfig.blue:
-                colorImage.color = Color.blue;
+                colorImage.color = blueColor;
                 break;
             case colorAlienAttackConfig.red:
-                colorImage.color = Color.red;
+                colorImage.color = redColor;
                 break;
         }
 
@@ -64,6 +68,8 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
     }
     public void SetShapeImage(shapeAlienAttackConfig shape, bool value)
     {
+		//Comented this as we don't have the right sprites to fill this, but maybe will add later again
+		/*
         switch (shape)
         {
             case shapeAlienAttackConfig.Star:
@@ -76,9 +82,10 @@ public class MG_FightTheAlienPopUP : MonoBehaviour
                 shapeImage.sprite = shapeCirlce;
                 break;
         }
-
-        if (!value) shapeFeedbackImage.sprite = correctFeedback;
+        */
+		if (!value) shapeFeedbackImage.sprite = correctFeedback;
         else shapeFeedbackImage.sprite = wrongFeedback;
+        
     }
 
     public void SetFaceFeedbackImage(bool value)

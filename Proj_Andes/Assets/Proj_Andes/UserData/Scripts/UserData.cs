@@ -1,34 +1,35 @@
+using Firebase.Firestore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
+[FirestoreData]
 public class UserData 
 {
-	public string id;
-	public string name;
-	public int age;
-    public int grade;
-    public UserGender gender;
-    public UserSchoolType schoolType;
-    public string country;
-	public UserLivingWith livingWith;
+    [FirestoreProperty] public string id { get; set; }
+    [FirestoreProperty] public string name { get; set; }
+    [FirestoreProperty] public int age { get; set; }
+    [FirestoreProperty] public int grade { get; set; }
+    [FirestoreProperty] public UserGender gender { get; set; }
+    [FirestoreProperty] public UserSchoolType schoolType { get; set; }
+    [FirestoreProperty] public string country { get; set; }
+    [FirestoreProperty] public UserLivingWith livingWith { get; set; }
 
 
-    public Dictionary<string, bool> tutorialStepsDone = new Dictionary<string, bool>();
-    public Dictionary<string, object> userAnayticsResults = new Dictionary<string, object>();
-
-
-    //This refers to the Game group index
-    public int CheckPointIdx = -1;
-	//This refers to the item idx inside of the game group index
-	public int CheckPointSubIdx = -1;
-	public List<NarrativeNavigationNode> narrativeNavCheckPointsNodes;
-	public List<int> itemsPlayedIdxs = new List<int>();
-	public int Coins;
-	//This are the IDXs of the monsters
-	public List<string> myCollectionMonsters = new List<string>();
+    [FirestoreProperty] public Dictionary<string, Dictionary<string, object>> userAnalytics { get; set; } = new Dictionary<string, Dictionary<string, object>>();
+    [FirestoreProperty] public Dictionary<string, bool> tutorialStepsDone { get; set; } = new Dictionary<string, bool>();
+	   
+	//This refers to the Game group index
+    [FirestoreProperty] public int CheckPointIdx { get; set; } = -1;
+    //This refers to the item idx inside of the game group index
+    [FirestoreProperty] public int CheckPointSubIdx { get; set; } = -1;
+    [FirestoreProperty] public List<NarrativeNavigationNode> narrativeNavCheckPointsNodes { get; set; }
+    [FirestoreProperty] public List<int> itemsPlayedIdxs { get; set; } = new List<int>();
+    [FirestoreProperty] public int Coins { get; set; }
+    //This are the IDXs of the monsters
+    [FirestoreProperty] public List<string> myCollectionMonsters { get; set; } = new List<string>();
 
     public UserData()
 	{
@@ -41,7 +42,7 @@ public class UserData
 		country = string.Empty;
 		livingWith = UserLivingWith.NONE;
 
-        userAnayticsResults = new Dictionary<string, object>();
+		userAnalytics = new Dictionary<string, Dictionary<string, object>>();
 
         CheckPointIdx = -1;
 		CheckPointSubIdx = -1;
@@ -63,6 +64,8 @@ public class UserData
 		else tutorialStepsDone.Add(id, true);
 	}
 }
+
+
 
 public enum UserGender
 {

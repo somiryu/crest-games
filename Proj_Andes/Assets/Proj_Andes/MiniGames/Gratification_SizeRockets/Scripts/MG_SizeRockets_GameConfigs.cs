@@ -16,6 +16,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
     [HideInInspector][NonSerialized] public int coinsCollected;
 
     public SizeRockets_ShipConfig[] shipsConfigs;
+    public override string GetSceneID() => DataIds.sizeRocketsGame;
 
 
     public SizeRockets_ShipConfig GetShipConfig(SizeRocketsRocketTypes shipType)
@@ -28,7 +29,10 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	}
     public override void SaveAnalytics()
     {
-		SaveCoins(coinsCollected);
+        itemAnalytics = new Dictionary<string, object>();
+        SaveCoins(coinsCollected);
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics);
+
     }
 }
 

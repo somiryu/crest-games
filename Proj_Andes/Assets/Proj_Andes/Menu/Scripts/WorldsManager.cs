@@ -15,13 +15,12 @@ public class WorldsManager : MonoBehaviour
     [SerializeField] Sprite worldUndone;
     [SerializeField] WorldStatus[] worldStatusSprite;
 
-    [SerializeField] Button myCollBtn;
     [SerializeField] SceneReference myCollScene;
     [SerializeField] TextMeshProUGUI coinsAmt;
     int currActivePlanet => index;
 
     void Start()
-    {
+    {   
         worlds = GetComponentsInChildren<Button>();
         for (int i = 0; i < worlds.Length; i++)
         {
@@ -33,7 +32,6 @@ public class WorldsManager : MonoBehaviour
         for (int i = 0; i < worldStatusSprite.Length; i++) worldStatusSprite[i].Init();
         SetCurrentProgress();
 
-        myCollBtn.onClick.AddListener(GoToMyCollection);
         coinsAmt.text = UserDataManager.CurrUser.Coins.ToString();
     }
     void SetCurrentProgress()
@@ -48,10 +46,5 @@ public class WorldsManager : MonoBehaviour
     void ClickedActivePlanet()
     {
         GameSequencesList.Instance.GoToNextItemInList();
-    }
-
-    void GoToMyCollection()
-    {
-        SceneManagement.GoToScene(myCollScene);
     }
 }

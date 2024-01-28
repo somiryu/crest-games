@@ -134,9 +134,11 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 			if(currRound == 3) GameOver();
 			else OnRoundStart();
 		}
-	}
+		gameConfigs.totalSuccessfulAttempts++;
 
-	public void OnPlayerFailedHook()
+    }
+
+    public void OnPlayerFailedHook()
 	{
 		currPlayerLifes--;
 		playerLifesAmountTxt.SetText(currPlayerLifes.ToString());
@@ -144,6 +146,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		{
 			GameOver();
 		}
+		gameConfigs.totalFailedAttempts++;
 	}
 
 	void GameOver()

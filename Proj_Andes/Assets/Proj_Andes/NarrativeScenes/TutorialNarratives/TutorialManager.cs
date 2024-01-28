@@ -11,6 +11,7 @@ public class TutorialManager : MonoBehaviour
     private static TutorialManager instance;
     public static TutorialManager Instance => instance;
 
+
     private void Awake()
     {
         if (instance != this)
@@ -19,7 +20,6 @@ public class TutorialManager : MonoBehaviour
             {
                 DestroyImmediate(instance.gameObject);
             }
-
         }
         instance = this;
 
@@ -84,11 +84,6 @@ public class TutorialManager : MonoBehaviour
             usersTutorial[i].SetNewStep(newTutorialStep);
         }
     }
-
-    public void GetCurrentStep(TutorialUser tutorialUser)
-    {
-        return;
-    }
 }
 
 public enum tutorialSteps
@@ -99,11 +94,12 @@ public enum tutorialSteps
     stepConfirmedButton = 3,
     MG_Magnets_1NoClick = 4, 
     MG_Magnets_2FourItemEnergyClick = 5,
-    heartsAndStarsDone = 6,
-    FightTheAlienDone = 7,
-    VoiceStarOrFlowerDone = 8,
-    TurboRocketDone = 9,
-	MG_BoostersAndScapeDone = 10,
-    MG_MechanicHand_1HoldClickAndMove = 11,
-    MG_MechanicHand_2JustClickToGrab = 12,
+    HeartsAndStarsDone = 6,
+    SizeRocketsDone = 7,
+    FightTheAlienDone = 8,
+    VoiceStarOrFlowerDone = 9,
+    TurboRocketDone = 10,
+	MG_BoostersAndScapeDone = 11,
+    MG_MechanicHand_1HoldClickAndMove = 12,
+    MG_MechanicHand_2JustClickToGrab = 13,
 }

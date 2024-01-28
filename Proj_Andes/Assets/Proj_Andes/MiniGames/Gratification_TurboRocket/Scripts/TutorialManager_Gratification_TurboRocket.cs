@@ -304,7 +304,7 @@ public class TutorialStepsTurbo
     public void InitTutoStep()
     {
         Debug.Log("starting " + step.ToString());
-        if(step != TutorialStepsTurboRocket.TurboAppear) signHand.Init(stepClickableObj, handOffset);
+        if(step != TutorialStepsTurboRocket.TurboAppear || step != TutorialStepsTurboRocket.UnclickTurbo) signHand.Init(stepClickableObj, handOffset);
         signHand.gameObject.SetActive(true);
     }
 

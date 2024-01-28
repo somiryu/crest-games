@@ -15,4 +15,4 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: e2fac0d6ef7c9ec448420162f4399b39, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_FightTheAlien/Scenes/CntrlImpulsos_FightTheAlienTutorial.unity
-  tutorialID: 5
+  tutorialID: 8
