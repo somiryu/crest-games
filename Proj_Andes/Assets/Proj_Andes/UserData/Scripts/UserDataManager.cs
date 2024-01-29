@@ -1,5 +1,6 @@
 using Firebase.Firestore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -35,8 +36,7 @@ public class UserDataManager : ScriptableObject
 	public UserData DefaultUserData = new UserData();
 
 
-	[NonSerialized]
-	public List<UserData> usersDatas = new List<UserData>();
+	public List<UserData> usersDatas => DatabaseManager.userDatas;
     
 	
     public static Dictionary<string, Dictionary<string, object>> userAnayticsPerGame = new Dictionary<string, Dictionary<string, object>>();
@@ -133,12 +133,12 @@ public class UserDataManager : ScriptableObject
 	public void LoadDataFromRemoteDataBase()
 	{
 		DatabaseManager.GetUserDatasList();
-		usersDatas = DatabaseManager.userDatas;
 	}
 
-	public void Update()
+	public IEnumerator LoadDataFromRemoteDataBaseRoutine()
 	{
-
+		DatabaseManager.GetUserDatasList();
+		while (!DatabaseManager.userListDone) yield return null;
 	}
 
 	public void SaveDataToRemoteDataBase()
@@ -156,6 +156,11 @@ public class UserDataManager : ScriptableObject
 
 	public void RegisterNewUser(UserData user)
 	{
+		if(usersDatas.Exists(x => x.id == user.id))
+		{
+			Debug.Log("Trying to add user: " + user.name + " " + user.id + " But ID already existed");
+			return;
+		}
 		usersDatas.Add(user);
 		SaveDataToRemoteDataBase();
 	}

@@ -19,17 +19,26 @@ public static class DatabaseManager
     static FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
     public static void GetUserDatasList()
     {
+
         userListDone = false;
-        Query allCitiesQuery = db.Collection(DataIds.usersCollection);
+
+        if(userDatas == null) userDatas = new List<UserData>();
+        else userDatas.Clear();
+
+		Query allCitiesQuery = db.Collection(DataIds.usersCollection);
         allCitiesQuery.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allUsersQuerySnapshot = task.Result;
             foreach (DocumentSnapshot documentSnapshot in allUsersQuerySnapshot.Documents)
             {
                 Debug.Log(String.Format("Document data for {0} document:", documentSnapshot.Id));
-                UserData currUserDate = documentSnapshot.ConvertTo<UserData>();
-                
-                userDatas.Add(currUserDate);
+                UserData currUserData = documentSnapshot.ConvertTo<UserData>();
+				if (userDatas.Exists(x => x.id == currUserData.id))
+				{
+					Debug.Log("Trying to add user: " + currUserData.name + " " + currUserData.id + " But ID already existed");
+					continue;
+				}
+				userDatas.Add(currUserData);
             }
             userListDone = true;
         });

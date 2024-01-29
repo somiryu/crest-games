@@ -124,20 +124,14 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			logInFailedWarning = string.Empty;
 		}
 
-		if (!DatabaseManager.userListDone && !checkUserList) { 
-			UserDataManager.Instance.LoadDataFromRemoteDataBase();
-            checkUserList = true;
-        }
-
-        if (correctlyLoggedInFlag && !doneInitialization && DatabaseManager.userListDone)
+        if (correctlyLoggedInFlag && !doneInitialization)
 		{
 			Debug.Log("Correctly logged in");
             logInsuccedIDUITxt.SetText(logInsuccedID);
-			RebuildUsersList();
+			StartCoroutine(LoadUsers());
 			correctlyLoggedInFlag = false;
 			doneInitialization = true;
-			checkUserList = false;
-		}		
+		}
 	}
 
 	void RebuildUsersList()
@@ -152,6 +146,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			newBtn.Init(users[i].name, this);
 			currBtnsByDataID.Add(newBtn, users[i].id);
 		}
+	}
+
+	IEnumerator LoadUsers()
+	{
+		yield return UserDataManager.Instance.LoadDataFromRemoteDataBaseRoutine();
+		Debug.Log("Corretly retrieved users from server");
+		RebuildUsersList();
 	}
 
 	void OnWantsToCreateNewUser()

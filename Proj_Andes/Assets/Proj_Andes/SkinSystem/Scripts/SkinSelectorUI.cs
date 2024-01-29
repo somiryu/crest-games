@@ -30,7 +30,7 @@ public class SkinSelectorUI : MonoBehaviour
 		firstAssignFlag = true;
         SkinManager.Instance.SetSkin(skinType);
         SceneManagement.currSkinType = skinType;
-		AppSkipSceneButton.Instance.skinSelector.SetValueWithoutNotify((int)skinType);
+		if(AppSkipSceneButton.Instance) AppSkipSceneButton.Instance.skinSelector.SetValueWithoutNotify((int)skinType);
 		for (int i = 0;i < btnsPerSkins.Count;i++)
 		{
 			btnsPerSkins[i].highlight.gameObject.SetActive(skinType == btnsPerSkins[i].skinType);
