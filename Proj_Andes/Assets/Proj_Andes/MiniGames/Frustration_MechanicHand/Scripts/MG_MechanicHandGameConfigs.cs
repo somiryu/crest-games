@@ -17,11 +17,17 @@ public class MG_MechanicHandGameConfigs : GameConfig
 
     [NonSerialized] public int totalSuccessfulAttempts;
     [NonSerialized] public int totalFailedAttempts;
+
+    public override string GetSceneID() => DataIds.mechanicHandGame;
+
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.mechanicHandtotalSuccessfulAttempts, totalSuccessfulAttempts);
         itemAnalytics.Add(DataIds.mechanicHandtotalFailedAttempts, totalFailedAttempts);
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.mechanicHandGame, itemAnalytics);
+
     }
     public override void ResetCurrentAnalytics()
     {

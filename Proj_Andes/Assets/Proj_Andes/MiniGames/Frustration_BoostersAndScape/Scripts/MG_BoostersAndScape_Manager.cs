@@ -33,6 +33,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] TextMeshProUGUI constantScoreText;
     [SerializeField] Image trapImage;
+    [SerializeField] GameUIController gameUIController;
 
     [SerializeField] EndOfGameManager eogManager;
     [SerializeField] GameObject inGameObj;
@@ -61,6 +62,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         }
         instance = this;
         spawner.Init();
+
         Init();
         audiosource = GetComponent<AudioSource>();
 
@@ -72,7 +74,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
         totalTime = 0;
 
-		alien.TryGetComponent(out alienMov);
+        alien.TryGetComponent(out alienMov);
         alienMov.Init();
         startPos = rocket.transform.position;
         startPos.x = 0;
@@ -111,8 +113,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
         {
-            if (currentBooster.Boosteable()) Time.timeScale = 0;            
-        }        
+            if (currentBooster.Boosteable()) Time.timeScale = 0;
+        }
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
@@ -181,7 +183,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         booster.Boosted();
         spawner.spawner.nextSpawnTime = targetTime;
         successfulAttempts++;
-        Debug.Log("boosted");
         characterAnims.SetTrigger("Turbo");
         timer = 0;
          

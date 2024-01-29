@@ -21,11 +21,15 @@ public class MG_MagnetsConfigs : GameConfig
     
 	[HideInInspector] [NonSerialized] public int coinsCollected;
 
+    public override string GetSceneID() => DataIds.magnetsGame;
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.magnetsEneryPicked, energyCaptured);
         SaveCoins(coinsCollected);
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.magnetsGame, itemAnalytics);
+
     }
     public override void ResetCurrentAnalytics()
     {

@@ -14,11 +14,9 @@ public class GameUIController : MonoBehaviour
     [SerializeField] Button musicBtn;
     [SerializeField] Sprite soundActivated;
     [SerializeField] Sprite soundDeactivated;
-    EndOfGameManager eogManager;
+    [SerializeField] Image tutorialImg;
     void Start()
     {
-        eogManager = Utility.FindObjectByType<EndOfGameManager>();
-
         homeBtn.onClick.AddListener(OpenMenu);
         continueBtn.onClick.AddListener(Continue);
         exitBtn.onClick.AddListener(ExitGame);
@@ -27,6 +25,7 @@ public class GameUIController : MonoBehaviour
         menuContainer.gameObject.SetActive(false);
 
     }
+
     void OpenMenu()
     {
         menuContainer.gameObject.SetActive(true);

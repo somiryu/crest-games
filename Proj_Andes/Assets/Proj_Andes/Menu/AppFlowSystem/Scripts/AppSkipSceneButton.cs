@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class AppSkipSceneButton : MonoBehaviour
 {
+    public static bool ActiveDebugGlobalUI = true;
+
     public static string instancePrefabPath = "DebugGlobalUI";
     static AppSkipSceneButton instance;
     public static AppSkipSceneButton Instance => instance;
@@ -15,7 +17,9 @@ public class AppSkipSceneButton : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     static void RunOnStart()
     {
-        if(instance == null)
+        if (!ActiveDebugGlobalUI) return;
+
+		if (instance == null)
         {
             var instancePref = Resources.Load<AppSkipSceneButton>(instancePrefabPath);
             instance = GameObject.Instantiate(instancePref);
@@ -23,7 +27,7 @@ public class AppSkipSceneButton : MonoBehaviour
     }
     private void Awake()
     {
-        if(instance != null && instance != this) DestroyImmediate(instance);
+		if (instance != null && instance != this) DestroyImmediate(instance);
         instance = this;
         Object.DontDestroyOnLoad(this);
 

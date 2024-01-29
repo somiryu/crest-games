@@ -11,6 +11,7 @@ public class TutorialManager : MonoBehaviour
     private static TutorialManager instance;
     public static TutorialManager Instance => instance;
 
+
     private void Awake()
     {
         if (instance != this)
@@ -19,7 +20,6 @@ public class TutorialManager : MonoBehaviour
             {
                 DestroyImmediate(instance.gameObject);
             }
-
         }
         instance = this;
 
@@ -83,11 +83,6 @@ public class TutorialManager : MonoBehaviour
             if (usersTutorial[i].tutorialStep != prevTutorialStep) continue;
             usersTutorial[i].SetNewStep(newTutorialStep);
         }
-    }
-
-    public void GetCurrentStep(TutorialUser tutorialUser)
-    {
-        return;
     }
 }
 
