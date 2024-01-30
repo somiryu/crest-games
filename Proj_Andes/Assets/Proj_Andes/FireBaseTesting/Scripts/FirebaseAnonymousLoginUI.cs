@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using Firebase.Auth;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {
@@ -21,6 +22,17 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button goToExistingUserPanel;
 	[SerializeField] Transform selectUserContainer;
 	[SerializeField] Transform loadingScreen;
+	[SerializeField] Transform closeSessionPanel;
+	[SerializeField] Transform headerPanel;
+	[SerializeField] Button musicBtn;
+	[SerializeField] Button wantsToExitSessionBtn;
+	[SerializeField] Button exitSessionBtn;
+	[SerializeField] Button cancelSessionBtn;
+	[SerializeField] TMP_Text userNameHeader;
+	[SerializeField] TMP_Text userNameExitPanel;
+
+	[SerializeField] Transform uReadyPanel;
+	[SerializeField] Button readyBtb;
 
 	[Header("Create new user panel")]
 	public GameObject createNewUserPanel;
@@ -50,16 +62,28 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		loadingScreen.gameObject.SetActive(true);
 		selectUserContainer.gameObject.SetActive(true);
 
+        closeSessionPanel.gameObject.SetActive(false);
+        wantsToExitSessionBtn.gameObject.SetActive(false);
+		uReadyPanel.gameObject.SetActive(false);
+
 		cancelBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
 		createBtn.onClick.AddListener(OnFinishedUserCreation);
-		goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
+		wantsToExitSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(true));
+		exitSessionBtn.onClick.AddListener(OnExitSession);
+		cancelSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(false));
+        musicBtn.onClick.AddListener(MusicBtn);
+        goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
 
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
-		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
-		afterLogInNewGameBtn.onClick.AddListener(OnNewGameBtnPressed);
-		correctlyLoggedInFlag = false;
+		afterLogInContinueBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
+		afterLogInNewGameBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
+
+		readyBtb.onClick.AddListener(() => GameSequencesList.Instance.GoToNextSequence());
+
+
+        correctlyLoggedInFlag = false;
 		doneInitialization = false;
 		userBtnsPool.Init(10);
 		currBtnsByDataID = new Dictionary<UsersListItem, string>();
@@ -169,7 +193,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
     void OnFinishedUserCreation()
 	{
-		var newUser = new UserData();
+        var newUser = new UserData();
 		newUser.name = nameField.text;
 		newUser.age = int.TryParse(ageField.text, out var ageResult)? ageResult : -1;
         newUser.grade = int.TryParse(gradeField.text, out var gradeResult) ? gradeResult : -1;
@@ -197,8 +221,15 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			RebuildUsersList();
 		}
 	}
-
-	public UserLivingWith GetUserLivingWith()
+	void OnExitSession()
+	{
+        closeSessionPanel.gameObject.SetActive(false);
+        wantsToExitSessionBtn.gameObject.SetActive(false);
+        uReadyPanel.gameObject.SetActive(false);
+		afterLogInPanel.gameObject.SetActive(false);
+        selectUserContainer.gameObject.SetActive(true);
+    }
+    public UserLivingWith GetUserLivingWith()
 	{
 		var currUserLivingWith = UserLivingWith.NONE;
 
@@ -219,7 +250,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnSelectedUser(UsersListItem data)
 	{
-		if (!currBtnsByDataID.TryGetValue(data, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
+        userNameHeader.text = UserDataManager.CurrUser.name;
+        userNameExitPanel.text = UserDataManager.CurrUser.name;
+
+        wantsToExitSessionBtn.gameObject.SetActive(true);
+
+        if (!currBtnsByDataID.TryGetValue(data, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
 		UserDataManager.Instance.SetCurrUser(idFound);
 		var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
 		afterLogInPanel.SetActive(true);
@@ -236,9 +272,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
         GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
 	}
-
-	void OnNewGameBtnPressed()
+	void MusicBtn()
 	{
-		GameSequencesList.Instance.GoToNextSequence();
+		if (AudioListener.volume == 1) AudioListener.volume = 0;
+		else if (AudioListener.volume == 0) AudioListener.volume = 1;
 	}
 }
