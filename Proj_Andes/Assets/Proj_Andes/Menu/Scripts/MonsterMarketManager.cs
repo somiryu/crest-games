@@ -29,6 +29,7 @@ public class MonsterMarketManager : MonoBehaviour
     [SerializeField] List<MonsterMarketButtonBehaviour> userMonsterButtonBehaviours;
 
     [SerializeField] Button saveForLaterButton;
+    [SerializeField] Button confirmButton;
     [SerializeField] Button collectBtn;
     [SerializeField] TextMeshProUGUI coinsAmtTxt;
 
@@ -37,7 +38,7 @@ public class MonsterMarketManager : MonoBehaviour
     public Pool<MonsterItemUI> monstersUIInChestOpenning;
     List<Monsters> totalDataCollection => MyCollectionManager.totalDataCollection;
     List<Monsters> currentMonstersFound = new List<Monsters>();
-
+    MonsterChestType currMonsterShestType;
     private void Awake()
     {
         if(instance != null)
@@ -74,18 +75,29 @@ public class MonsterMarketManager : MonoBehaviour
         chestOpenedContainer.gameObject.SetActive(false);
 
         saveForLaterButton.onClick.AddListener(SaveForLater);
+        confirmButton.onClick.AddListener(BuyChest);
         collectBtn.onClick.AddListener(Collect);
 
-        regularChest.onClick.AddListener(() => BuyChest(MonsterChestType.Regular));
-        rareChest.onClick.AddListener(() => BuyChest(MonsterChestType.Rare));
-        legendaryChest.onClick.AddListener(() => BuyChest(MonsterChestType.Legendary));
+        regularChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Regular));
+        rareChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Rare));
+        legendaryChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Legendary));
 
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
     }
 
-    void BuyChest(MonsterChestType type)
+    void ActiveConfirmationButton(MonsterChestType monsterChestType) 
     {
-        switch (type)
+        confirmButton.gameObject.SetActive(true);
+        currMonsterShestType = monsterChestType;
+
+        for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
+        {
+            userMonsterButtonBehaviours[i].SetInactiveState(currMonsterShestType);
+        }
+    }
+    void BuyChest()
+    {
+        switch (currMonsterShestType)
         {
             case MonsterChestType.Regular:
                 if (marketConfig.AvailableCoins >= marketConfig.RegularChestPrice)
@@ -207,7 +219,8 @@ public enum MonsterChestType
 {
     Regular,
     Rare,
-    Legendary
+    Legendary,
+    NONE
 }
 [Serializable]
 public class Monsters

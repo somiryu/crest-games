@@ -1825,6 +1825,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353938634}
   m_CullTransparentMesh: 1
+--- !u!1 &1369443932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1369443935}
+  - component: {fileID: 1369443934}
+  - component: {fileID: 1369443933}
+  m_Layer: 5
+  m_Name: DisablePanel (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1369443933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369443932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.47843137}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 479c9560c33adf442b6cd4d768d9e8a0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1369443934
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369443932}
+  m_CullTransparentMesh: 1
+--- !u!224 &1369443935
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369443932}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1709434042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 300, y: 358}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1439763231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,6 +2282,22 @@ PrefabInstance:
       propertyPath: costChest
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: disableColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: disableColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: disableColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: monsterChestType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4851165091639796028, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2531,6 +2622,7 @@ GameObject:
   - component: {fileID: 1709434045}
   - component: {fileID: 1709434044}
   - component: {fileID: 1709434043}
+  - component: {fileID: 1709434046}
   m_Layer: 5
   m_Name: SaveForLater
   m_TagString: Untagged
@@ -2551,6 +2643,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 695097282}
+  - {fileID: 1369443935}
   m_Father: {fileID: 1292687390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2640,6 +2733,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1709434041}
   m_CullTransparentMesh: 1
+--- !u!114 &1709434046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709434041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91947867f0bde449acbaa0a643ee2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterChestType: 3
+  button: {fileID: 1709434043}
+  lockedImage: {fileID: 0}
+  panelDisable: {fileID: 1369443932}
+  spriteAbleBtn: {fileID: 21300000, guid: 3fb9957f0e23cf340b58221286b6f56f, type: 3}
+  spriteDesableBtn: {fileID: 21300000, guid: 479c9560c33adf442b6cd4d768d9e8a0, type: 3}
+  costChest: 0
 --- !u!1 &1757229507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,6 +2959,7 @@ MonoBehaviour:
   legendaryChest: {fileID: 1544392744}
   userMonsterButtonBehaviours: []
   saveForLaterButton: {fileID: 1709434043}
+  confirmButton: {fileID: 1894849314}
   collectBtn: {fileID: 864212429}
   coinsAmtTxt: {fileID: 1797973395}
   myCollectionManager: {fileID: 1879702826}
@@ -3103,7 +3216,7 @@ GameObject:
   - component: {fileID: 1894849315}
   - component: {fileID: 1894849314}
   m_Layer: 5
-  m_Name: GetChestBtn
+  m_Name: ConfirmBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3635,6 +3748,10 @@ PrefabInstance:
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: costChest
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: monsterChestType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9118698994634603792, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_Pivot.x
