@@ -17,12 +17,17 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 	public int coinsCarrying;
 	float initialXscale;
 	[SerializeField] Transform graphicGameObj;
+
+	private void Awake()
+	{
+		initialXscale = graphicGameObj.localScale.x;
+	}
+
 	public void Init(
 		Pool<MG_SizeRockets_Rocket> _pool,
 		MG_SizeRockets_Planet _targetPlanet, 
 		Transform _basePlanet)
 	{
-		initialXscale = graphicGameObj.localScale.x;
 		targetPlanet = _targetPlanet;
 		basePlanet = _basePlanet;
 		state = SizeRocketsTravelState.GoingToPlanet;

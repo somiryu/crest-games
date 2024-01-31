@@ -15,6 +15,9 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     [NonSerialized] public int totalAttemptsToBoost;
     [NonSerialized] public List<bool> roundResultWins = new List<bool>();
     [NonSerialized] public float totalGameTime;
+
+    public override string GetSceneID() => DataIds.boostersAndScapeGame;
+
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
@@ -22,6 +25,8 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
         itemAnalytics.Add(DataIds.boostersAndScapeTotalGametime, totalGameTime);
         itemAnalytics.Add(DataIds.boostersAndScapetimeToMakeAChoice, timeToMakeAChoice);
         itemAnalytics.Add(DataIds.boostersAndScapeRoundResultWins, roundResultWins);
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.boostersAndScapeGame, itemAnalytics);
     }
     public override void ResetCurrentAnalytics()
     {

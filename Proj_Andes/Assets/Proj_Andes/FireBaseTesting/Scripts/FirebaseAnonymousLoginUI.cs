@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
-{
-	bool correctlyLoggedInFlag = false;
+{   
+
+    bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
+	bool checkUserList = false;
 
 	string logInFailedWarning = string.Empty;
 
@@ -73,7 +75,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		cancelSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(false));
         musicBtn.onClick.AddListener(MusicBtn);
         goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
-
+		
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
@@ -123,9 +125,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		logInsuccedID = ("Firebase ID:" + result.User.UserId);
 		correctlyLoggedInFlag = true;
-	}
+    }
 
-	void OnFailedLogIn(Task<AuthResult> taskResult)
+    void OnFailedLogIn(Task<AuthResult> taskResult)
 	{
 		var errMsg = GetErrorMessage(taskResult.Exception.InnerExceptions[0]);
 		logInFailedWarning = "Log in failed: " + errMsg;
@@ -153,14 +155,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			logInFailedWarning = string.Empty;
 		}
 
-		if (correctlyLoggedInFlag && !doneInitialization)
+        if (correctlyLoggedInFlag && !doneInitialization)
 		{
             loadingScreen.gameObject.SetActive(false);
 
             Debug.Log("Correctly logged in");
-			logInsuccedIDUITxt.SetText(logInsuccedID);
-			UserDataManager.Instance.LoadDataFromRemoteDataBase();
-			RebuildUsersList();
+            logInsuccedIDUITxt.SetText(logInsuccedID);
+			StartCoroutine(LoadUsers());
 			correctlyLoggedInFlag = false;
 			doneInitialization = true;
 		}
@@ -178,6 +179,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			newBtn.Init(users[i].name, this);
 			currBtnsByDataID.Add(newBtn, users[i].id);
 		}
+	}
+
+	IEnumerator LoadUsers()
+	{
+		yield return UserDataManager.Instance.LoadDataFromRemoteDataBaseRoutine();
+		Debug.Log("Corretly retrieved users from server");
+		RebuildUsersList();
 	}
 
 	void OnWantsToCreateNewUser()
@@ -227,6 +235,15 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         wantsToExitSessionBtn.gameObject.SetActive(false);
         uReadyPanel.gameObject.SetActive(false);
 		afterLogInPanel.gameObject.SetActive(false);
+
+        nameField.text = "Nombre";
+        ageField.text = "Edad";
+        gradeField.text = "Grado";
+		sexField.options[sexField.value] = sexField.options[0];
+        schoolTypeField.options[schoolTypeField.value] = schoolTypeField.options[0];
+        countryField.text = "Lugar de Nacimiento";
+        for (int i = 0; i < livingWithToggles.Count; i++) livingWithToggles[i].toggle.isOn = false;
+
         selectUserContainer.gameObject.SetActive(true);
     }
     public UserLivingWith GetUserLivingWith()

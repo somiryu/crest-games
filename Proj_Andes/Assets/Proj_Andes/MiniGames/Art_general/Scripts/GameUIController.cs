@@ -15,16 +15,8 @@ public class GameUIController : MonoBehaviour
     [SerializeField] Sprite soundActivated;
     [SerializeField] Sprite soundDeactivated;
     [SerializeField] Image tutorialImg;
-    [SerializeField] bool isaTuto;
-    EndOfGameManager eogManager;
-    TutorialManager tutorialManager;
     void Start()
     {
-        eogManager = Utility.FindObjectByType<EndOfGameManager>();
-        tutorialManager = Utility.FindObjectByType<TutorialManager>();
-
-        if(!tutorialManager) tutorialImg.gameObject.SetActive(TurnOnTurboBtn(isaTuto));
-
         homeBtn.onClick.AddListener(OpenMenu);
         continueBtn.onClick.AddListener(Continue);
         exitBtn.onClick.AddListener(ExitGame);
@@ -33,11 +25,7 @@ public class GameUIController : MonoBehaviour
         menuContainer.gameObject.SetActive(false);
 
     }
-    public bool TurnOnTurboBtn(bool isATuto)
-    {
-        tutorialImg.gameObject.SetActive(isATuto);
-        return isATuto;
-    }
+
     void OpenMenu()
     {
         menuContainer.gameObject.SetActive(true);

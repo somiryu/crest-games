@@ -77,5 +77,5 @@ public enum SkinType
 {
 	Galactic,
 	Aquatic,
-	Magic
+	Magic,
 }
