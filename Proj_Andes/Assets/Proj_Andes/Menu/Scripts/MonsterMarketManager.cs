@@ -32,6 +32,8 @@ public class MonsterMarketManager : MonoBehaviour
     [SerializeField] Button confirmButton;
     [SerializeField] Button collectBtn;
     [SerializeField] TextMeshProUGUI coinsAmtTxt;
+    [SerializeField] Button chestOpenButton;
+    [SerializeField] Image chestOpenImg;
 
     [SerializeField] MyCollectionManager myCollectionManager;
 
@@ -39,6 +41,7 @@ public class MonsterMarketManager : MonoBehaviour
     List<Monsters> totalDataCollection => MyCollectionManager.totalDataCollection;
     List<Monsters> currentMonstersFound = new List<Monsters>();
     MonsterChestType currMonsterShestType;
+    MonsterMarketButtonBehaviour currButton;
     private void Awake()
     {
         if(instance != null)
@@ -66,7 +69,8 @@ public class MonsterMarketManager : MonoBehaviour
     public void Init()
     {        
         myCollectionManager.Init();
-
+        confirmButton.gameObject.SetActive(false);
+        chestOpenButton.gameObject.SetActive(false);
         RefreshCollectionFromData();
 
         monstersUIInChestOpenning.Init(5);
@@ -75,28 +79,53 @@ public class MonsterMarketManager : MonoBehaviour
         chestOpenedContainer.gameObject.SetActive(false);
 
         saveForLaterButton.onClick.AddListener(SaveForLater);
-        confirmButton.onClick.AddListener(BuyChest);
+        confirmButton.onClick.AddListener(OpenButtonBeforeBuyChest);
+        chestOpenButton.onClick.AddListener(BuyChest);
         collectBtn.onClick.AddListener(Collect);
 
-        regularChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Regular));
-        rareChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Rare));
-        legendaryChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Legendary));
+        regularChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Regular, regularChest));
+        rareChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Rare, rareChest));
+        legendaryChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Legendary, legendaryChest));
 
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
     }
 
-    void ActiveConfirmationButton(MonsterChestType monsterChestType) 
+    void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
-        confirmButton.gameObject.SetActive(true);
+        chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out MonsterMarketButtonBehaviour currButton);    
+        
         currMonsterShestType = monsterChestType;
 
         for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
         {
-            userMonsterButtonBehaviours[i].SetInactiveState(currMonsterShestType);
+            if (currButton.monsterMarketButton.costChest > marketConfig.AvailableCoins)
+            {
+                userMonsterButtonBehaviours[i].SetActiveState();
+                confirmButton.gameObject.SetActive(false);
+                BuyChest();
+            }
+            else
+            {
+                if (userMonsterButtonBehaviours[i].monsterMarketButton.monsterChestType == monsterChestType) userMonsterButtonBehaviours[i].SetActiveState();
+                else userMonsterButtonBehaviours[i].SetInactiveState();
+                confirmButton.gameObject.SetActive(true);
+
+            }
         }
+
+
     }
+
+    void OpenButtonBeforeBuyChest()
+    {
+        chestOpenButton.gameObject.SetActive(true);
+        chestOpenImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
+    }
+
     void BuyChest()
     {
+        chestOpenButton.gameObject.SetActive(false);
+
         switch (currMonsterShestType)
         {
             case MonsterChestType.Regular:
