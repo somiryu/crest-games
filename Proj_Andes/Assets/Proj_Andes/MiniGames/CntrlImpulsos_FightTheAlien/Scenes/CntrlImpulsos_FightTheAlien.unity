@@ -248,7 +248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5.0000305, y: 0}
+  m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &152391223
@@ -261,11 +261,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6411324075031295426, guid: a226bcb4cd9a71f46b489fe0ba599930, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.23
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6411324075031295426, guid: a226bcb4cd9a71f46b489fe0ba599930, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.49
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 6411324075031295426, guid: a226bcb4cd9a71f46b489fe0ba599930, type: 3}
       propertyPath: m_LocalPosition.z
@@ -302,10 +302,6 @@ PrefabInstance:
     - target: {fileID: 7064607272639147133, guid: a226bcb4cd9a71f46b489fe0ba599930, type: 3}
       propertyPath: m_Name
       value: 2D_BG_base
-      objectReference: {fileID: 0}
-    - target: {fileID: 7064607272639147133, guid: a226bcb4cd9a71f46b489fe0ba599930, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -404,8 +400,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -201, y: -84.959}
-  m_SizeDelta: {x: 292.6, y: 83.6192}
+  m_AnchoredPosition: {x: -187.3367, y: -82.20001}
+  m_SizeDelta: {x: 334.3249, y: 108.6542}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &227213636
 GameObject:
@@ -443,8 +439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -253, y: 38.09961}
-  m_SizeDelta: {x: 202.8919, y: 144.2856}
+  m_AnchoredPosition: {x: -276.96, y: -26}
+  m_SizeDelta: {x: 229.3906, y: 191.0006}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &227213638
 MonoBehaviour:
@@ -6847,7 +6843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 76.253, y: 15.301}
+  m_AnchoredPosition: {x: 118, y: 15.301}
   m_SizeDelta: {x: 76.2534, y: 88.1267}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &996938485
@@ -7486,8 +7482,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 259.8501, y: 38.09961}
-  m_SizeDelta: {x: 202.1391, y: 144.2856}
+  m_AnchoredPosition: {x: 190.99995, y: -26}
+  m_SizeDelta: {x: 228.5394, y: 191.0006}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1390524406
 MonoBehaviour:
@@ -7607,8 +7603,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.00002670288, y: 38.09961}
-  m_SizeDelta: {x: 201.3864, y: 144.2856}
+  m_AnchoredPosition: {x: -48.42, y: -26}
+  m_SizeDelta: {x: 227.6884, y: 191.0006}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1390768956
 MonoBehaviour:
@@ -7938,8 +7934,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0}
-  m_SizeDelta: {x: 132.30493, y: 375.341}
+  m_AnchoredPosition: {x: 36, y: -26.89}
+  m_SizeDelta: {x: 132.3049, y: 347.59}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1411725340
 MonoBehaviour:
@@ -8250,8 +8246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 184.51, y: -0.000022888}
-  m_SizeDelta: {x: 167.6354, y: 178.1967}
+  m_AnchoredPosition: {x: 134, y: 29}
+  m_SizeDelta: {x: 226.8077, y: 235.8119}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1486827252
 MonoBehaviour:
@@ -8305,8 +8301,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1579605641}
-  - component: {fileID: 1579605643}
-  - component: {fileID: 1579605644}
   m_Layer: 5
   m_Name: InGameUI
   m_TagString: Untagged
@@ -8342,37 +8336,6 @@ RectTransform:
   m_AnchoredPosition: {x: 5.3743286, y: -43.77539}
   m_SizeDelta: {x: -471.1818, y: -381.2682}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1579605643
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579605640}
-  m_CullTransparentMesh: 1
---- !u!223 &1579605644
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579605640}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!1 &1595118829
 GameObject:
   m_ObjectHideFlags: 0
@@ -18784,8 +18747,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -69.01358, y: 0}
-  m_SizeDelta: {x: 1020.7021, y: 57.5244}
+  m_AnchoredPosition: {x: -91, y: 16}
+  m_SizeDelta: {x: 1058.0742, y: 57.5244}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1936779544
 MonoBehaviour:
@@ -19047,6 +19010,7 @@ MonoBehaviour:
   afterActionFinalCoinsTxt: {fileID: 1863668703}
   retryBtn: {fileID: 2110321248}
   inGameUIPaneltoDissapear: {fileID: 1579605640}
+  inGameGameObjtoDissapear: {fileID: 924499170}
   correctAudio: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   finishAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
