@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51813b6438b1ee541af7d1a4288e7529, type: 3}
-  m_Name: TryAgainItem
+  m_Script: {fileID: 11500000, guid: 95306dea87b20044e81d9a686f57f0a4, type: 3}
+  m_Name: TryAgainSequenceItem 1
   m_EditorClassIdentifier: 
   scene:
     sceneAsset: {fileID: 102900000, guid: bf533393218d3b640be24309f529e496, type: 3}
     scenePath: Assets/Proj_Andes/Menu/Scenes/TryAgainScene.unity
+  tryAgainTrial: 1
