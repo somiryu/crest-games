@@ -239,8 +239,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         nameField.text = "Nombre";
         ageField.text = "Edad";
         gradeField.text = "Grado";
-		sexField.options[sexField.value] = sexField.options[0];
-        schoolTypeField.options[schoolTypeField.value] = schoolTypeField.options[0];
+		sexField.captionText.text = "Género";
+        schoolTypeField.captionText.text = "Tipo de Colegio";
         countryField.text = "Lugar de Nacimiento";
         for (int i = 0; i < livingWithToggles.Count; i++) livingWithToggles[i].toggle.isOn = false;
 
