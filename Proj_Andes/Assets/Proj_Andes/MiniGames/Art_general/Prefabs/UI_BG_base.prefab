@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.28235295}
+  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 0.6156863}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -804,9 +804,9 @@ RectTransform:
   - {fileID: 975144563569133670}
   - {fileID: 8195193729174505574}
   - {fileID: 6873104097902060623}
+  - {fileID: 5123703475052139281}
   - {fileID: 268242522402725869}
   - {fileID: 8006955126746615591}
-  - {fileID: 5123703475052139281}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -831,8 +831,8 @@ MonoBehaviour:
   continueBtn: {fileID: 712139639811707206}
   exitBtn: {fileID: 8058029177892931354}
   musicBtn: {fileID: 7931542327029095560}
-  soundActivated: {fileID: 21300000, guid: 7ab2a5f1025ae774bad893062199ed58, type: 3}
-  soundDeactivated: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
+  soundActivated: {fileID: 21300000, guid: 92d758c1508c20b419fa3bf7f48264c9, type: 3}
+  soundDeactivated: {fileID: 21300000, guid: 23efe5aa7a048ae46b1e2e03a7321882, type: 3}
   tutorialImg: {fileID: 4132604566032206740}
 --- !u!1 &5675853605051017698
 GameObject:
