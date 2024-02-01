@@ -27,7 +27,7 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 93c1173e071e3e447a494a7fb21c78cc, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 665c81deb03db294a8a4ee5390963661, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
@@ -81,7 +81,7 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: a4078d4c7aeb6b647b25fb0e52a6abdc, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 528185122f52de849a7bd33445c9d389, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
