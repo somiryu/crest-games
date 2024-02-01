@@ -16,10 +16,14 @@ public interface iMonsterMarketButton
 public class MonsterMarketManager : MonoBehaviour
 {
     static MonsterMarketManager instance;
+
+    [SerializeField] GameObject UI_BG_base;
+
     public static MonsterMarketManager Instance => instance;
     [SerializeField] MonsterMarketConfig marketConfig;
 
     [SerializeField] Transform chestOpenedContainer;
+    [SerializeField] Image chestOpenedContainerImg;
     [SerializeField] GameObject chestNoEnoughCoins;
 
     [SerializeField] Button regularChest;
@@ -33,6 +37,7 @@ public class MonsterMarketManager : MonoBehaviour
     [SerializeField] Button collectBtn;
     [SerializeField] TextMeshProUGUI coinsAmtTxt;
     [SerializeField] Button chestOpenButton;
+    [SerializeField] GameObject chestOpenButtonParent;
     [SerializeField] Image chestOpenImg;
 
     [SerializeField] MyCollectionManager myCollectionManager;
@@ -70,7 +75,7 @@ public class MonsterMarketManager : MonoBehaviour
     {        
         myCollectionManager.Init();
         confirmButton.gameObject.SetActive(false);
-        chestOpenButton.gameObject.SetActive(false);
+        chestOpenButtonParent.gameObject.SetActive(false);
         RefreshCollectionFromData();
 
         monstersUIInChestOpenning.Init(5);
@@ -92,7 +97,7 @@ public class MonsterMarketManager : MonoBehaviour
 
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
-        chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out MonsterMarketButtonBehaviour currButton);    
+        chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out currButton);    
         
         currMonsterShestType = monsterChestType;
 
@@ -118,13 +123,15 @@ public class MonsterMarketManager : MonoBehaviour
 
     void OpenButtonBeforeBuyChest()
     {
-        chestOpenButton.gameObject.SetActive(true);
+        chestOpenButtonParent.gameObject.SetActive(true);
         chestOpenImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
+        confirmButton.gameObject.SetActive(false);
+        UI_BG_base.SetActive(false);
     }
 
     void BuyChest()
     {
-        chestOpenButton.gameObject.SetActive(false);
+        chestOpenButtonParent.gameObject.SetActive(false);
 
         switch (currMonsterShestType)
         {
@@ -168,9 +175,10 @@ public class MonsterMarketManager : MonoBehaviour
     }
     void OpenChest(int regularMonstersLikelyness, int rareMonstersLikelyness, int legendaryMonstersLikelyness, int totalMonstersPerChest)
     {
+        chestOpenButtonParent.gameObject.SetActive(false);
         chestOpenedContainer.gameObject.SetActive(true);
         saveForLaterButton.gameObject.SetActive(true);
-
+        chestOpenedContainerImg.sprite = currButton.monsterMarketButton.chestOpenSprite;
         currentMonstersFound.Clear();
 
         var totalChance = regularMonstersLikelyness + rareMonstersLikelyness + legendaryMonstersLikelyness;
