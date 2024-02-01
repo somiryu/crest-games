@@ -83,23 +83,12 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (!isDragging)
-            {
-                if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) return;
-                if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_2JustClickToGrab))
-                {
-                    UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_MechanicHand_2JustClickToGrab.ToString());
-                    TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_MechanicHand_2JustClickToGrab);
-                }
-                ShootHook();
-            }
-            else
+            if (isDragging)
             {
                 audioSource.Stop();
                 if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove))
                 {
-                    UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove.ToString());
-                    TutorialManager.Instance.ChangeUserTutorialStep(tutorialSteps.MG_MechanicHand_1HoldClickAndMove, tutorialSteps.MG_MechanicHand_2JustClickToGrab);
+                    TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_MechanicHand_1HoldClickAndMove);
                 }
             }
             isDragging = false;
@@ -107,6 +96,17 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
         }
     }
+
+    public void OnClickSendHook()
+    {
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) return;
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_2JustClickToGrab))
+		{
+			TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_MechanicHand_2JustClickToGrab);
+		}
+		ShootHook();
+	}
+
 
     void OnMouseDragging()
     {
