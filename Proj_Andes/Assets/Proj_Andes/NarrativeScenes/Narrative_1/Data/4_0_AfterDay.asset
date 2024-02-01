@@ -99,5 +99,5 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 2b98246d86a55cd4cbfa9fc55e8b920b, type: 3}
     audioAlternative: {fileID: 8300000, guid: 938709b64ac281d4298d07914778af1b, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 08e0cb7ea5b73cc4cb981ad5494f157f, type: 2}
     ExitAnim: {fileID: 0}
