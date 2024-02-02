@@ -35,6 +35,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
     [SerializeField] AudioClip discardAudio;
+    [SerializeField] AudioClip inicialAudio;
     [SerializeField] AudioSource audioPlayer;
     [Space(20)]
     [SerializeField] Pool<Transform> leftWonItemsPool;
@@ -109,9 +110,12 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
 
-        InitTutorialStep();
+        audioPlayer.clip = inicialAudio;
+        audioPlayer.Play();
 
-        InitRound();
+        Invoke("InitTutorialStep", inicialAudio.length + 0.1f); 
+        Invoke("InitRound", inicialAudio.length + 0.1f);
+        
 	}
 
 
