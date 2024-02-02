@@ -607,9 +607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c6a2870ee22e049976ea7b566139ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tryAgainSeqItem: {fileID: 11400000, guid: 146ae5b82e8ba6640b9771335a662527, type: 2}
   retryBtn: {fileID: 800960292}
-  waitFor: 6
+  waitFor: 15
   fakeLoadingSlider: {fileID: 1379565383}
 --- !u!1 &1307287086
 GameObject:

@@ -10,7 +10,6 @@ public class TryAgainManager : MonoBehaviour
     [SerializeField] float waitFor;
     [SerializeField] Slider fakeLoadingSlider;
 
-    IEnumerator changeSceneRoutineRef;
     void Start()
     {
         clickCounts = 0;
