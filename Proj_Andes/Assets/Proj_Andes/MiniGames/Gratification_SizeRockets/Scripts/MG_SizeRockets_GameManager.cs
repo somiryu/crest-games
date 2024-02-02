@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -150,14 +151,34 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		{
 			var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseWorldPos.z = 0;
+			var newPlanet = GetPlanetUnderMouse(mouseWorldPos);
+			if(newPlanet != currTargetPlanet)
+			{
+				currTargetPlanet = newPlanet;
+				for (int i = 0; i < planets.Count; i++)
+				{
+					var curr = planets[i];
+					curr.SetSelected(curr == currTargetPlanet);
+				}
+			}
 			currTargetPlanet = GetPlanetUnderMouse(mouseWorldPos);
 		}
 
 		if (currTargetPlanet != null && selectedRocketType != SizeRocketsRocketTypes.NONE)
 		{
 			GenerateNewShip(selectedRocketType);
+			currTargetPlanet.OnMatchHappend();
 			currTargetPlanet = null;
+			OnPressedRocketBtn(SizeRocketsRocketTypes.NONE);
 		}
+
+		if(shipsLeft <= 0)
+		{
+			smallRocketBtn.interactable = false;
+			mediumRocketBtn.interactable = false;
+			largeRocketBtn.interactable = false;
+		}
+
 		if (shipsLeft <= 0 && activeShips.Count == 0) GameOver();
 	}
 
@@ -168,10 +189,21 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		{
 			var curr = planets[i];
 			var dist = curr.transform.position - position;
-			if (dist.magnitude <= 1.5f)
+			if (dist.magnitude > 1.5f) continue;
+			if (curr.coinsAmount == 0) continue;
+
+			var actualCurrentCoins = curr.coinsAmount;
+			for (int j = 0; j < activeShips.Count; j++)
 			{
-				return curr;
+				var currShip = activeShips[j];
+				if(currShip.targetPlanet == planets[i])
+				{
+					actualCurrentCoins -= currShip.coinsCapacity;
+				}
 			}
+			if (actualCurrentCoins <= 0) continue;
+			return curr;
+
 		}
 		return null;
 	}

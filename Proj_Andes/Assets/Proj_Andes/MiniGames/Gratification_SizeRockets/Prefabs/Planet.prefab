@@ -5149,6 +5149,9 @@ MonoBehaviour:
   coinsAmount: 0
   coinsAmountTxtUI: {fileID: 7389932375576665436}
   audioCorrect: {fileID: 6170176522705427406}
+  graphic: {fileID: 7560693429857609891}
+  normalColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
+  selectedColor: {r: 0.8726415, g: 0.977525, b: 1, a: 1}
 --- !u!82 &6170176522705427406
 AudioSource:
   m_ObjectHideFlags: 0

@@ -12,9 +12,9 @@ public static class DatabaseManager
 {
     public static string UserDatasJSONKey = "UserDatasList";
 
-    public static UserDataListWrapper UserDataList = new UserDataListWrapper();
     public static List<UserData> userDatas = new List<UserData>();
     public static bool userListDone = false;
+    public static bool UserDeletionCompleted = false;
 
     static FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
     public static void GetUserDatasList()
@@ -42,13 +42,17 @@ public static class DatabaseManager
             }
             userListDone = true;
         });
-        
     }
 
-  
-        
+  public static async void DeleteUserFromDataList(UserData dataToDelete)
+    {
+        UserDeletionCompleted = false;
+		await db.Collection(DataIds.usersCollection).Document(dataToDelete.name + " " + dataToDelete.id).DeleteAsync()
+            .ContinueWithOnMainThread(task =>UserDeletionCompleted = true);
+	}
 
-    public static async void SaveUserDatasList(List<UserData> userDatas, Dictionary<string, Dictionary<string, object>> dataPerGame)
+
+	public static async void SaveUserDatasList(List<UserData> userDatas, Dictionary<string, Dictionary<string, object>> dataPerGame)
     {       
         for (int i = 0; i < userDatas.Count; i++)
         {
@@ -71,15 +75,8 @@ public static class DatabaseManager
     {
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
         DocumentReference docRef = db.Collection(colletionGame).Document(userID);
-        Debug.Log("I am here");
         await docRef.SetAsync(itemAnalytics, SetOptions.MergeAll);
     }
 }
 
-//Wrapping the list so that the JSON serializer works :| 
-[Serializable]
-public class UserDataListWrapper
-{
-    public List<UserData> userDatas;
-}
 
