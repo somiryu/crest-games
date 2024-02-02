@@ -56,13 +56,13 @@ public class TutorialManager : MonoBehaviour
 
     public void TurnOffTutorialStep(tutorialSteps tutorialStep)
     {
-        var users = usersTutorial.FindAll(x => x.tutorialStep == tutorialStep);
+		UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
+		var users = usersTutorial.FindAll(x => x.tutorialStep == tutorialStep);
         for (int i = 0; i < usersTutorial.Count; i++)
         {
             if (usersTutorial[i].tutorialStep != tutorialStep) continue;
             usersTutorial[i].OffTutorial();
         }
-        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialStep.ToString());
     }
 
     public void TurnOnTutorialStep(tutorialSteps tutorialStep)
@@ -73,16 +73,6 @@ public class TutorialManager : MonoBehaviour
             if (usersTutorial[i].tutorialStep != tutorialStep) continue;
             usersTutorial[i].OnTutorial();
         }        
-    }
-
-    public void ChangeUserTutorialStep(tutorialSteps prevTutorialStep, tutorialSteps newTutorialStep)
-    {
-        var users = usersTutorial.FindAll(x => x.tutorialStep == prevTutorialStep);
-        for (int i = 0; i < usersTutorial.Count; i++)
-        {
-            if (usersTutorial[i].tutorialStep != prevTutorialStep) continue;
-            usersTutorial[i].SetNewStep(newTutorialStep);
-        }
     }
 }
 

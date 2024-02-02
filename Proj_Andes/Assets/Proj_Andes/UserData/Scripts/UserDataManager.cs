@@ -168,8 +168,7 @@ public class UserDataManager : ScriptableObject
 	public void RemoveUser(string id)
 	{
 		var data = usersDatas.Find(x => x.id == id);
-		usersDatas.Remove(data);
-		SaveDataToRemoteDataBase();
+		DatabaseManager.DeleteUserFromDataList(data);
 	}
 
 	public void SetCurrUser(string id)

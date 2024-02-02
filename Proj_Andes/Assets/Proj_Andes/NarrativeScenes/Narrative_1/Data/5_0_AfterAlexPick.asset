@@ -20,28 +20,23 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Selecciona a cada ni\xF1o para ver qui\xE9n lo va a acompa\xF1ar.\r\n"
     textAlternative: "Selecciona a cada ni\xF1a para ver qui\xE9n la va a acompa\xF1ar."
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 7facfc8951404814f8194d328efb0cef, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: fda6a2115d437bc45acd83ef388a6d93, type: 3}
     responses:
     - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
+      responseImage: {fileID: 21300000, guid: 0c343c4df81426643b4765725573ef16, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 85bf1b508128b1c43b218246a546e93e, type: 2}
     - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
+      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 074da9b17032e1a40b4fa747e4066c49, type: 2}
     - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
+      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 2bf34f6fb373bcc4ba83890e964d1e31, type: 2}
-    - response: 
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: 4bfac2c7158f7e44d9cb280b1e8cf268, type: 2}
     audio: {fileID: 8300000, guid: a0613a539b6a2f641a9a4049755c6e59, type: 3}
     audioAlternative: {fileID: 8300000, guid: ca4f995e6827caf45afe416af9665331, type: 3}
     EnterAnim: {fileID: 0}

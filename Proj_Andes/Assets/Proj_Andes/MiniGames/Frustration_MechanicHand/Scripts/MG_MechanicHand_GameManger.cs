@@ -22,6 +22,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public TMP_Text constant_ResultsTxt;
 	public GameObject afterAction_WinLabel;
 	public GameObject afterAction_LoseLabel;
+	public Button sendHookBtn;
 
 	private List<Transform> currRoundAsteroids = new List<Transform>();
     BoxCollider CurrAsteroidsSpawnArea => asteroidsAreaPerRound[currRound];
@@ -67,6 +68,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
         asteroidsPool.Init(10);
 		player.Init();
 		OnRoundStart();
+		sendHookBtn.onClick.AddListener(player.OnClickSendHook);
     }
 
 	void OnRoundStart()
