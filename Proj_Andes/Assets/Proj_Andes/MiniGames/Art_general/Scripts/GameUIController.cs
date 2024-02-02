@@ -28,17 +28,12 @@ public class GameUIController : MonoBehaviour
         continueBtn.onClick.AddListener(Continue);
         exitBtn.onClick.AddListener(ExitGame);
 
-        Debug.Log(AudioListener.volume +  "vol");
-        soundActive = (int)PlayerPrefs.GetInt("isTheSoundActive", (int)AudioListener.volume);
-
-        ActivateSound(soundActive);
+        soundActive = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundActive);
+        var findConfig = soundActive == 1 ? 0 : 1;
+        ActivateSound(findConfig);
         musicBtn.onClick.AddListener(() => ActivateSound((int)AudioListener.volume));
 
         menuContainer.gameObject.SetActive(false);
-    }
-    private void Update()
-    {
-        Debug.Log("vol "+ AudioListener.volume);
     }
     void OpenMenu()
     {
@@ -59,7 +54,7 @@ public class GameUIController : MonoBehaviour
     }
     void ActivateSound(int activated)
     {
-        if(activated >= 0 && activated < 1)
+        if(activated == 0)
         {
             AudioListener.volume = 1;
             musicBtn.image.sprite = soundActivated;
@@ -69,6 +64,7 @@ public class GameUIController : MonoBehaviour
             AudioListener.volume = 0;
             musicBtn.image.sprite = soundDeactivated;
         }
-        PlayerPrefs.SetInt(UserDataManager.CurrUser.name + " isTheSoundActive", (int)AudioListener.volume);
+        PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", (int)AudioListener.volume);
+        Debug.Log("THIS IS WHATS BEING SAVED " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", (int)AudioListener.volume));
     }
 }
