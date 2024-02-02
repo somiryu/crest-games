@@ -58,6 +58,10 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
+    
+    private int amountImgIsLeft = 0;
+    private int amountSoundIsLeft = 0;
+    private int amountDiscardButton = 0;
 
     private bool gameoverFlag = false;
     float totalGameTime;
@@ -94,12 +98,44 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         InitRound();
 	}
 
+    void GetRandomSoundImage()
+    {
+        currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
+        currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
+
+        if (currSoundIsLeft && !currImgIsLeft)
+        {
+            amountSoundIsLeft++;
+            amountDiscardButton = 0;
+            amountImgIsLeft = 0;
+        }
+
+
+        if (!currSoundIsLeft && currImgIsLeft) 
+        { 
+            amountImgIsLeft++;
+            amountDiscardButton = 0;
+            amountSoundIsLeft = 0;
+        }
+
+
+        if (currImgIsLeft && currImgIsLeft || !currImgIsLeft && !currImgIsLeft)
+        {
+            amountDiscardButton++;
+            amountSoundIsLeft = 0;
+            amountImgIsLeft = 0;
+        }
+    }
 	void InitRound()
     {
         timerPerChoice = 0;
+        GetRandomSoundImage();
 
-		currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
-		currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
+        if (amountSoundIsLeft >= 2 || amountImgIsLeft >= 2 ||amountDiscardButton >= 2)
+        {
+            GetRandomSoundImage();
+        }
+
 
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
