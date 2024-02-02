@@ -230,6 +230,7 @@ public class MonsterMarketManager : MonoBehaviour
     void Collect()
     {
         chestOpenedContainer.gameObject.SetActive(false);
+        UI_BG_base.SetActive(true);
 
         for (int i = 0; i < currentMonstersFound.Count; i++)
         {
