@@ -236,12 +236,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         uReadyPanel.gameObject.SetActive(false);
 		afterLogInPanel.gameObject.SetActive(false);
 
-        nameField.text = "Nombre";
-        ageField.text = "Edad";
-        gradeField.text = "Grado";
-		sexField.captionText.text = "Género";
-        schoolTypeField.captionText.text = "Tipo de Colegio";
-        countryField.text = "Lugar de Nacimiento";
+        nameField.text = string.Empty;
+        ageField.text = string.Empty;
+		gradeField.text = string.Empty;
+		sexField.SetValueWithoutNotify(0);
+		schoolTypeField.SetValueWithoutNotify(0);
+		countryField.text = string.Empty;
         for (int i = 0; i < livingWithToggles.Count; i++) livingWithToggles[i].toggle.isOn = false;
 
         selectUserContainer.gameObject.SetActive(true);
@@ -267,8 +267,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnSelectedUser(UsersListItem data)
 	{
-        userNameHeader.text = UserDataManager.CurrUser.name;
-        userNameExitPanel.text = UserDataManager.CurrUser.name;
+        userNameHeader.text = data.label.text;
+        userNameExitPanel.text = data.label.text;
 
         wantsToExitSessionBtn.gameObject.SetActive(true);
 
