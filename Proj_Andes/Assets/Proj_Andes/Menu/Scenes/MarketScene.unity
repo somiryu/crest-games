@@ -2185,7 +2185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2261139383427928640, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_text
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2261139383427928640, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_margin.x
@@ -2213,7 +2213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: monsterMarketButton.costChest
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: monsterMarketButton.chestOpenSprite
@@ -3665,9 +3665,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1292687390}
     m_Modifications:
+    - target: {fileID: 1892369284581236593, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 297.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892369284581236593, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 73.0285
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892369284581236593, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 178.76
+      objectReference: {fileID: 0}
     - target: {fileID: 2203416364341220686, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_Name
       value: Chest2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261139383427928640, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: m_text
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261139383427928640, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: m_margin.x
+      value: -2.0765686
       objectReference: {fileID: 0}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: costChest
@@ -3679,7 +3699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: monsterMarketButton.costChest
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: monsterMarketButton.chestOpenSprite
@@ -4091,7 +4111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2261139383427928640, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_text
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: costChest
@@ -4103,7 +4123,7 @@ PrefabInstance:
       objectReference: {fileID: 145023351}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: monsterMarketButton.costChest
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: monsterMarketButton.chestOpenSprite

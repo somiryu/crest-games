@@ -25,7 +25,7 @@ MonoBehaviour:
     coinsCapacity: 1
   - rocketType: 1
     speed: 2
-    coinsCapacity: 3
+    coinsCapacity: 2
   - rocketType: 2
     speed: 1
-    coinsCapacity: 5
+    coinsCapacity: 4

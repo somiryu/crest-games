@@ -18,5 +18,5 @@ MonoBehaviour:
   timePerChoice: 3
   maxRounds: 10
   initialCoins: 0
-  coinsOnCorrectAnswer: 2
+  coinsOnCorrectAnswer: 1
   coinsOnWrongAnswer: -1
