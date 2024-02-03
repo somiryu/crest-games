@@ -744,10 +744,8 @@ MonoBehaviour:
   worldDone: {fileID: 21300000, guid: 11d595126935ddd4e906ac51c52fb757, type: 3}
   worldUndone: {fileID: 21300000, guid: db0704339aafef447a2f3d5a85d76814, type: 3}
   worldStatusSprite: []
-  myCollScene:
-    sceneAsset: {fileID: 102900000, guid: f114701dcf9496d4c9c31319667c098d, type: 3}
-    scenePath: Assets/Proj_Andes/Menu/Scenes/MarketScene.unity
   coinsAmt: {fileID: 743536589}
+  collectionManager: {fileID: 1559255141}
 --- !u!1001 &913927697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1123,15 +1121,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2648767253427986052, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4407125513294044846, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4407125513294044846, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5701906812698843163, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1143,15 +1141,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5818896063512055524, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 136.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6168274172214277386, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6168274172214277386, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7979620439849410278, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_Pivot.x
@@ -1239,7 +1237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8311879784496504085, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1251,6 +1249,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7979620439849410278, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
   m_PrefabInstance: {fileID: 1559255139}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1559255141 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2385125533940275338, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
+  m_PrefabInstance: {fileID: 1559255139}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a5eed6fe1d75743863794554d4a129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1723770262
 GameObject:
   m_ObjectHideFlags: 0

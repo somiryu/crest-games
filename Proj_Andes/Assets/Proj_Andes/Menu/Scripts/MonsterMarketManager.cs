@@ -45,8 +45,9 @@ public class MonsterMarketManager : MonoBehaviour
     public Pool<MonsterItemUI> monstersUIInChestOpenning;
     List<Monsters> totalDataCollection => MyCollectionManager.totalDataCollection;
     List<Monsters> currentMonstersFound = new List<Monsters>();
-    MonsterChestType currMonsterShestType;
+    MonsterChestType currMonsterChestType;
     MonsterMarketButtonBehaviour currButton;
+
     private void Awake()
     {
         if(instance != null)
@@ -73,7 +74,8 @@ public class MonsterMarketManager : MonoBehaviour
 
     public void Init()
     {        
-        myCollectionManager.Init();
+        myCollectionManager.Init(false);
+        myCollectionManager.HideCollection();
         confirmButton.gameObject.SetActive(false);
         chestOpenButtonParent.gameObject.SetActive(false);
         RefreshCollectionFromData();
@@ -99,7 +101,7 @@ public class MonsterMarketManager : MonoBehaviour
     {
         chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out currButton);    
         
-        currMonsterShestType = monsterChestType;
+        currMonsterChestType = monsterChestType;
 
         for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
         {
@@ -133,7 +135,7 @@ public class MonsterMarketManager : MonoBehaviour
     {
         chestOpenButtonParent.gameObject.SetActive(false);
 
-        switch (currMonsterShestType)
+        switch (currMonsterChestType)
         {
             case MonsterChestType.Regular:
                 if (marketConfig.AvailableCoins >= marketConfig.RegularChestPrice)
@@ -218,7 +220,6 @@ public class MonsterMarketManager : MonoBehaviour
             if (monsterFound == null) continue;
             totalDataCollection.Add(monsterFound);
         }
-        myCollectionManager.monstersUIInCollection.RecycleAll();
     }
 
 
@@ -242,11 +243,11 @@ public class MonsterMarketManager : MonoBehaviour
             else Debug.Log("Monstruo repetido!");
         }
         RefreshCollectionFromData();
-
+		myCollectionManager.ShowCollection();
 	}
 
 
-    void SaveForLater()
+	void SaveForLater()
     {
         chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
