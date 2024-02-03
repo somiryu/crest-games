@@ -19,7 +19,7 @@ MonoBehaviour:
   PlayerHealth: 10
   EnemyHealth: 10
   initialCoins: 0
-  coinsOnCorrectAnswer: 2
-  coinsOnWrongAnswer: -1
+  coinsOnCorrectAnswer: 1
+  coinsOnWrongAnswer: -2
   playerHealthLostOnWrongAnswer: -1
   EnemyHealthLostOnRightAnswer: -1

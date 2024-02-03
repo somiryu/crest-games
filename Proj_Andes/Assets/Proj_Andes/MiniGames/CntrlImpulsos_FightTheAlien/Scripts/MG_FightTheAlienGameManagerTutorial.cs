@@ -301,18 +301,19 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         currCoinsValueTxt.text = currCoins.ToString();
         playerHealthUI.value = currPlayerHealth;
         enemyHealthUI.value = currEnemyHealth;
-        if ((currPlayerHealth <= 0 || currEnemyHealth <= 0) && currStepConfigTutorial.alienAttacksConfigsType == alienAttacksConfigsType.Random)
-        {
-            GameOver();
-            return;
-        }
+        
 
         if(currPointsAmount == currStepConfigTutorial.stepsAmount)
         {
 			audiosource.clip = finishAudio;
 			audiosource.Play();
 			currentTutorialStep += 1;
-            InitTutorialStep();
+			if (currentTutorialStep >= tutorialStepsConfigs.mG_FightTheAlienTutorialSteps.Count)
+			{
+				GameOver();
+				return;
+			}
+			InitTutorialStep();
         }
 
         InitRound();
@@ -324,8 +325,6 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         audiosource.Play();
 
         gameoverFlag = true;
-        afterActionPanel.SetActive(true);
-        inGameUIPaneltoDissapear.SetActive(false);
 
         StartCoroutine(NextSceneAfterTime());   
 

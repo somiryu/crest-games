@@ -43,15 +43,15 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private List<MG_SizeRockets_Planet> planets = new List<MG_SizeRockets_Planet>();
 	private List<MG_SizeRockets_Rocket> activeShips = new List<MG_SizeRockets_Rocket>();
 
+	[SerializeField] private List<MG_SizeRockets_Planet> closePlanets;
+	[SerializeField] private List<MG_SizeRockets_Planet> middleDistancePlanets;
+	[SerializeField] private List<MG_SizeRockets_Planet> farPlanets;
+
 	private SizeRocketsRocketTypes selectedRocketType;
 	private MG_SizeRockets_Planet currTargetPlanet;
 
 	[SerializeField] EndOfGameManager eogManager;
 	public EndOfGameManager EndOfGameManager => eogManager;
-
-	public int minCoinsToGive => gameConfigs.minCoinsToGive;
-	public int maxCoinsToGive => gameConfigs.maxCoinsToGive;
-	public int planetsAmountToGenerate => gameConfigs.planetsAmountToGenerate;
 	public int shipsPerGame => gameConfigs.shipsPerGame;
 
 	private int totalCoinsWon = 0;
@@ -67,6 +67,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
 		GeneratePlanets();
+		eogManager.OnGameStart();
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
 
 		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
@@ -83,36 +84,14 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	public void GeneratePlanets()
 	{
-		for (int i = 0; i < planetsAmountToGenerate; i++)
-		{
-			var newPlanet = Instantiate(planetPrefab);
-			newPlanet.transform.SetParent(planetsParent);
-			planets.Add(newPlanet);
-			var halfSize = planetsSpawnArea.size / 2;
-			var minRange = transform.position - halfSize;
-			var maxRange = transform.position + halfSize;
-			newPlanet.transform.position = GetNewRandomPosition(0, minRange, maxRange);
-		}
+		planets.AddRange(closePlanets);
+		planets.AddRange(middleDistancePlanets);
+		planets.AddRange(farPlanets);
 
-		var minDist = Mathf.Infinity;
-		var maxDist = Mathf.NegativeInfinity;
-		for (int i = 0; i < planets.Count; i++)
-		{
-			var currDist = planets[i].transform.position.x - basePlanet.position.x;
-			maxDist = Mathf.Max(maxDist, currDist);
-			minDist = Mathf.Min(minDist, currDist);
-		}
+		for (int i = 0; i < closePlanets.Count; i++) closePlanets[i].Init(gameConfigs.closePlanetCoins);
+		for (int i = 0; i < middleDistancePlanets.Count; i++) middleDistancePlanets[i].Init(gameConfigs.middlePlanetCoins);
+		for (int i = 0; i < farPlanets.Count; i++) farPlanets[i].Init(gameConfigs.FarPlanetCoins);
 
-		for (int i = 0; i < planets.Count; i++)
-		{
-			var currDist = planets[i].transform.position.x - basePlanet.position.x;
-			var percentage = Mathf.InverseLerp(minDist, maxDist, currDist);
-
-			var coinsToGive = Mathf.Lerp(minCoinsToGive, maxCoinsToGive, percentage);
-
-			planets[i].Init(Mathf.RoundToInt(coinsToGive));
-		}
-		eogManager.OnGameStart();
 	}
 
 	Vector3 GetNewRandomPosition(int trialIdx, Vector3 minPos, Vector3 maxPos)

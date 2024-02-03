@@ -7,10 +7,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MG_SizeRockets_GameConfigs", menuName = "MiniGames/MG_SizeRockets_GameConfigs")]
 public class MG_SizeRockets_GameConfigs : GameConfig
 {
-	public int minCoinsToGive;
-	public int maxCoinsToGive;
+	public int closePlanetCoins;
+	public int middlePlanetCoins;
+	public int FarPlanetCoins;
 
-	public int planetsAmountToGenerate;
 	public int shipsPerGame;
 
     [HideInInspector][NonSerialized] public int coinsCollected;
