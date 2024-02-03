@@ -40,4 +40,8 @@ public static class DataIds
 
     public const string sizeRocketsGame = "Postergación de la gratificación: El rocket grande y el pequeño";
 
+    public const string tryAgainClicks1 = "tryAgainClicks1";
+    public const string tryAgainClicks2 = "tryAgainClicks2";
+    public const string tryAgainClicks3 = "tryAgainClicks3";
+
 }

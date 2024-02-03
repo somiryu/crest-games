@@ -7,17 +7,20 @@ public class TurnOffObjOnTutorialStep : MonoBehaviour, iTutorialType
 
 	[SerializeField] GameObject objToHide;
 	[SerializeField] bool ShowObjOnTutorialDone;
+	[SerializeField] bool HideOnlyOnTutEnd;
 
 	public void StepStart(bool ShouldActiveTut)
 	{
-		objToHide.SetActive(!ShouldActiveTut);
+		if(ShouldActiveTut && !HideOnlyOnTutEnd) objToHide.SetActive(false);
+		if(!ShouldActiveTut && HideOnlyOnTutEnd) objToHide.SetActive(false);
+		if (!ShouldActiveTut && ShowObjOnTutorialDone) objToHide.SetActive(true);
+
 	}
 
 	public void StepDone()
 	{
-		if (!ShowObjOnTutorialDone) return;
-		objToHide.SetActive(true);
+		if (ShowObjOnTutorialDone) objToHide.SetActive(true);
+		if(HideOnlyOnTutEnd) objToHide.SetActive(false);
 	}
-
-	
 }
+

@@ -13,16 +13,16 @@ public class SetAnimOnTutStep : MonoBehaviour, iTutorialType
 	{
 		if (ShouldActiveTut)
 		{
-			if(string.IsNullOrEmpty(animTriggerOnStepStart)) animator.SetTrigger(animTriggerOnStepStart);
+			if(!string.IsNullOrEmpty(animTriggerOnStepStart)) animator.SetTrigger(animTriggerOnStepStart);
 		}
 		else
 		{
-			if(string.IsNullOrEmpty(animTriggerOnStepEnd)) animator.SetTrigger(animTriggerOnStepEnd);
+			if(!string.IsNullOrEmpty(animTriggerOnStepEnd)) animator.SetTrigger(animTriggerOnStepEnd);
 		}
 	}
 
 	public void StepDone()
 	{
-		if (string.IsNullOrEmpty(animTriggerOnStepEnd)) animator.SetTrigger(animTriggerOnStepEnd);
+		if (!string.IsNullOrEmpty(animTriggerOnStepEnd)) animator.SetTrigger(animTriggerOnStepEnd);
 	}
 }

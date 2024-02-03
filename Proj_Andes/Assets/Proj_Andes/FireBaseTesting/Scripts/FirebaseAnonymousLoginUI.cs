@@ -14,6 +14,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
 	bool checkUserList = false;
+	bool userDeletionInProgress = false;
 
 	string logInFailedWarning = string.Empty;
 
@@ -165,6 +166,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			correctlyLoggedInFlag = false;
 			doneInitialization = true;
 		}
+
+		if(userDeletionInProgress && DatabaseManager.UserDeletionCompleted)
+		{
+			userDeletionInProgress = false;
+			StartCoroutine(LoadUsers());
+		}
 	}
 
 	void RebuildUsersList()
@@ -262,7 +269,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		if (!currBtnsByDataID.TryGetValue(item, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
 		UserDataManager.Instance.RemoveUser(idFound);
-		RebuildUsersList();
+		userDeletionInProgress = true;
 	}
 
 	public void OnSelectedUser(UsersListItem data)
