@@ -27,6 +27,7 @@ public class MG_MagnetsEnergyItem : MonoBehaviour, iTutorialType
     IEnumerator _OnCapturedwithDelay()
     {
 		wasCaptured = true;
+        MG_MagnetsGameManager.Instance.currSpawnedItems -= 1;
 		capturedVFX.Play();
         capturedSFX.Play();
         spriteRef.enabled = false;
@@ -41,7 +42,11 @@ public class MG_MagnetsEnergyItem : MonoBehaviour, iTutorialType
         if (wasCaptured) return;
         if (!hasLifeTime) return;
         timer += Time.deltaTime;
-        if (timer > lifeTime) pool.RecycleItem(this);
+        if (timer > lifeTime)
+        {
+			MG_MagnetsGameManager.Instance.currSpawnedItems -= 1;
+			pool.RecycleItem(this);
+        }
 	}
 
     public void StepStart(bool stepCompleted)

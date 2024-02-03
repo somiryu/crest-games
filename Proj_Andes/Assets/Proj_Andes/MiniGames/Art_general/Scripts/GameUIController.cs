@@ -28,10 +28,11 @@ public class GameUIController : MonoBehaviour
         continueBtn.onClick.AddListener(Continue);
         exitBtn.onClick.AddListener(ExitGame);
 
+        //Audio active by default
+        soundActive = 1;
         soundActive = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundActive);
-        var findConfig = soundActive == 1 ? 0 : 1;
-        ActivateSound(findConfig);
-        musicBtn.onClick.AddListener(() => ActivateSound((int)AudioListener.volume));
+        ActivateSound(soundActive);
+        musicBtn.onClick.AddListener(SwitchAudioActive);
 
         menuContainer.gameObject.SetActive(false);
     }
@@ -52,18 +53,19 @@ public class GameUIController : MonoBehaviour
 
         GameSequencesList.Instance.EndSequence();
     }
+
+    void SwitchAudioActive()
+    {
+        var newValue = AudioListener.volume == 1 ? 0 : 1;
+        ActivateSound(newValue);
+	}
+
     void ActivateSound(int activated)
     {
-        if(activated == 0)
-        {
-            AudioListener.volume = 1;
-            musicBtn.image.sprite = soundActivated;
-        }
-        else
-        {
-            AudioListener.volume = 0;
-            musicBtn.image.sprite = soundDeactivated;
-        }
+		AudioListener.volume = activated;
+		if (activated == 1) musicBtn.image.sprite = soundActivated;
+        else musicBtn.image.sprite = soundDeactivated;
+
         PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", (int)AudioListener.volume);
         Debug.Log("THIS IS WHATS BEING SAVED " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", (int)AudioListener.volume));
     }
