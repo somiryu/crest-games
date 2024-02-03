@@ -113,10 +113,22 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         audioPlayer.clip = inicialAudio;
         audioPlayer.Play();
 
-        Invoke("InitTutorialStep", inicialAudio.length + 0.1f); 
-        Invoke("InitRound", inicialAudio.length + 0.1f);
-        
+        StartCoroutine(InitTutorialAfterTime());
 	}
+
+    IEnumerator InitTutorialAfterTime()
+    {
+        leftBtn.gameObject.SetActive(false);
+        rightBtn.gameObject.SetActive(false);
+        discardBtn.gameObject.SetActive(false);
+        var waitTime = inicialAudio.length + 0.1f;
+        yield return new WaitForSeconds(waitTime);
+		leftBtn.gameObject.SetActive(true);
+		rightBtn.gameObject.SetActive(true);
+		discardBtn.gameObject.SetActive(true);
+		InitTutorialStep();
+        InitRound();
+    }
 
 
     private void InitTutorialStep()
