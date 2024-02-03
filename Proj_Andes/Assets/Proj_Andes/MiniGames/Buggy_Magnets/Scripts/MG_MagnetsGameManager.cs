@@ -1,13 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 {
+	private static MG_MagnetsGameManager instance;
+	public static MG_MagnetsGameManager Instance => instance;
+
+
+
     public Pool<MG_MagnetsEnergyItem> energyItemsPool;
 
 
@@ -34,8 +39,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] TMP_Text afterAction_currPointsTextUI;
 
 
+	public int currSpawnedItems;
 	private float timer;
-	private int currSpawnedItems;
 	private int availableMagnets;
 	private int currEnergyPicked;
 	private float currEneryProgress;
@@ -47,6 +52,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	public EndOfGameManager EndOfGameManager => eogManager;
     public void Awake()
 	{
+		if(instance != null && instance != this) DestroyImmediate(instance);
+		instance = this;
 		Init();
 	}
 
@@ -189,7 +196,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
 		EnergyFillImage.fillAmount = currEneryProgress;
-        var won = Mathf.Abs(currEneryProgress - 1f) < 0.02f;
+		var won = Mathf.Abs(currEneryProgress - 1f) < 0.02f;
 		if (won) OnGameOver();   
 	}
 

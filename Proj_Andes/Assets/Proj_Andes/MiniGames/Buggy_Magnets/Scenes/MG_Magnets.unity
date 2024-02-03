@@ -2328,7 +2328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1135345533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23332,6 +23332,7 @@ MonoBehaviour:
   winTitle: {fileID: 743223156}
   loseTitle: {fileID: 1116128807}
   afterAction_currPointsTextUI: {fileID: 1728065427}
+  currSpawnedItems: 0
   eogManager: {fileID: 2121471078}
 --- !u!4 &2104352831
 Transform:
