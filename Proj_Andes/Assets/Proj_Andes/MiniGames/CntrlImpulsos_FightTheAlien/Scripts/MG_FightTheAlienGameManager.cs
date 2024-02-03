@@ -29,6 +29,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
     [SerializeField] GameObject inGameUIPaneltoDissapear;
+    [SerializeField] GameObject inGameGameObjtoDissapear;
 
 
     [Header("Game Audio")]
@@ -76,6 +77,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
 		afterActionPanel.SetActive(false);
 		inGameUIPaneltoDissapear.SetActive(true);
+		inGameGameObjtoDissapear.SetActive(true);
         gameoverFlag = false;
 
         timerUI.minValue = 0;
@@ -220,6 +222,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
         inGameUIPaneltoDissapear.SetActive(false);
+        inGameGameObjtoDissapear.SetActive(false);
 		afterActionFinalCoinsTxt.SetText(currCoins.ToString());
         gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();

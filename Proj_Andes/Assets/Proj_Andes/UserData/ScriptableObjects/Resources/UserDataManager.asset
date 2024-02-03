@@ -23,16 +23,11 @@ MonoBehaviour:
     schoolType: 3
     country: 
     livingWith: 0
-    tutorialNarrative: 0
     CheckPointIdx: 0
     CheckPointSubIdx: 0
-    narrativeNavCheckPointsNodes:
-    - sourceDialogIdx: 1
-      responsePickedIdx: -1
-      nextDialogCustomStartIdx: -1
-    - sourceDialogIdx: 1
-      responsePickedIdx: -1
-      nextDialogCustomStartIdx: -1
+    narrativeNavCheckPointsNodes: []
     itemsPlayedIdxs: 
-    Coins: 10
-    myCollectionMonsters: []
+    Coins: 0
+    myCollectionMonsters:
+    - f8c63292-d984-4534-a77b-14a17417a26f
+    - b8684fad-b1d0-450d-b034-bf253dabf2e5

@@ -239,6 +239,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		activeShips.Add(currRocket);
 		shipsLeft--;
 		shipsLeftTxt.SetText(shipsLeft.ToString());
+		shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
 	}
 
 

@@ -15,12 +15,13 @@ public class WorldsManager : MonoBehaviour
     [SerializeField] Sprite worldUndone;
     [SerializeField] WorldStatus[] worldStatusSprite;
 
-    [SerializeField] SceneReference myCollScene;
     [SerializeField] TextMeshProUGUI coinsAmt;
+    [SerializeField] MyCollectionManager collectionManager;
     int currActivePlanet => index;
 
     void Start()
-    {   
+    {
+        collectionManager.Init(true);
         worlds = GetComponentsInChildren<Button>();
         for (int i = 0; i < worlds.Length; i++)
         {

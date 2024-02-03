@@ -94,7 +94,21 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 801ffbb28c2e67c49b20afe2de8c0a55, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: a3fb024b73684dd4bbdbce81588c8526, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Juegan un partido y el equipo gana!\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: c5f5817b0a763604c83496806ec83fa3, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 06495169e397c504aa389987ea0e9c46, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 0
     autoContinueOnClickDialog: 1
@@ -133,7 +147,7 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: c5f5817b0a763604c83496806ec83fa3, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: fcff98fc74ab03849b67f34b8824f9e6, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 1
     autoContinueOnClickDialog: 1
@@ -147,7 +161,7 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: f27a333d37809d54084173200c1cbde0, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 055d4de95d0987141bba58bf1a46dadf, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
@@ -163,5 +177,5 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 4c425019d9e5b9e4ea93d0ffe2e5e869, type: 3}
     audioAlternative: {fileID: 8300000, guid: 3788191c3089b0b498c2a80d0989ce34, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: a5310fd5fee7f1a458c4b389e7201d5d, type: 2}
     ExitAnim: {fileID: 0}

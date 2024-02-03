@@ -15,8 +15,7 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: f114701dcf9496d4c9c31319667c098d, type: 3}
     scenePath: Assets/Proj_Andes/Menu/Scenes/MarketScene.unity
-  RegularChestPrice: 5
-  RareChestPrice: 10
-  LegendaryChestPrice: 15
-  availableCoins: 95
+  RegularChestPrice: 1
+  RareChestPrice: 5
+  LegendaryChestPrice: 10
   monstersLibrary: {fileID: 11400000, guid: 7e6f7958bfb83d84898f138f3ee9fcef, type: 2}

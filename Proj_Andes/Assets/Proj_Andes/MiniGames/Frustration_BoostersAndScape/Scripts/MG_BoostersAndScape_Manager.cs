@@ -53,6 +53,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     [SerializeField] SkinnableObject charactetSkinableObj;
     [SerializeField] Animator characterAnims;
 
+    [Header("Tutorial Anims")]
+    [SerializeField] Animator tutorialAnims;
+    int currStepTurorial;
     public EndOfGameManager EndOfGameManager => eogManager;
     private void Awake()
     {
@@ -69,8 +72,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     }
     void Init()
     {
+        currStepTurorial = 0;
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
         charactetSkinableObj.OnCurrSkinObjChanged += UpdateCharacterAnimRef;
+        tutorialAnims.gameObject.SetActive(false);
 
         totalTime = 0;
 
@@ -113,15 +118,21 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
         {
-            if (currentBooster.Boosteable()) Time.timeScale = 0;
+            if (currentBooster.Boosteable())
+            {
+                Time.timeScale = 0;
+                tutorialAnims.gameObject.SetActive(true);
+            }
         }
 
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
             {
-                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
                 Time.timeScale = 1;
+                currStepTurorial++;
+                tutorialAnims.gameObject.SetActive(false);
+                if (currStepTurorial == 3) UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
             }
             gameConfig.totalAttemptsToBoost++;
             if (gameConfig.forceToFail) ForcedToFail();

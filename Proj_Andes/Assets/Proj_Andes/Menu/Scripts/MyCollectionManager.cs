@@ -11,15 +11,17 @@ public class MyCollectionManager : MonoBehaviour
 
     public static List<Monsters> totalDataCollection = new List<Monsters>();
     public Pool<MonsterItemUI> monstersUIInCollection;
-    private void Awake()
+
+    bool useShowCollectionBtn;
+
+
+	public void Init(bool inUseShowCollectionBtn)
     {
-        Init();
-    }
-    public void Init()
-    {
+        useShowCollectionBtn = inUseShowCollectionBtn;
         monstersUIInCollection.Init(10);
 
         myCollBtn.onClick.AddListener(ShowCollection);
+        myCollBtn.gameObject.SetActive(useShowCollectionBtn);
         hideCollectionBtn.onClick.AddListener(HideCollection);
 
         HideCollection();
@@ -44,7 +46,7 @@ public class MyCollectionManager : MonoBehaviour
     }
     public void HideCollection()
     {
-        myCollBtn.gameObject.SetActive(true);
+        myCollBtn.gameObject.SetActive(useShowCollectionBtn);
         monstersUIInCollection.RecycleAll();
         collectionSet.gameObject.SetActive(false);
     }

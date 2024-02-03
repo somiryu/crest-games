@@ -5,29 +5,17 @@ using UnityEngine.UI;
 
 public class TryAgainManager : MonoBehaviour
 {
-    [SerializeField] SimpleGameSequenceItem tryAgainSeqItem;
+    public static int clickCounts;
     [SerializeField] Button retryBtn;
     [SerializeField] float waitFor;
     [SerializeField] Slider fakeLoadingSlider;
 
-    IEnumerator changeSceneRoutineRef;
-
     void Start()
     {
-		fakeLoadingSlider.gameObject.SetActive(false);
-		retryBtn.onClick.AddListener(StartChangeSceneRoutine);
-    }
-
-    void StartChangeSceneRoutine()
-    {
-        if (changeSceneRoutineRef != null)
-        {
-            //TO DO: Store analytics of click counts.
-            return;
-        }
+        clickCounts = 0;
         fakeLoadingSlider.gameObject.SetActive(true);
-        changeSceneRoutineRef = GoToNextScene();
-        StartCoroutine(changeSceneRoutineRef);
+		retryBtn.onClick.AddListener(() => clickCounts++);
+        StartCoroutine(GoToNextScene());
     }
 
     IEnumerator GoToNextScene()
@@ -36,12 +24,11 @@ public class TryAgainManager : MonoBehaviour
         while (timer < waitFor)
         {
             timer += Time.deltaTime;
-            var sliderValue = Mathf.Lerp(0, waitFor*2, timer);
-            var progress = Mathf.InverseLerp(0, 10, sliderValue);
+            var progress = Mathf.Clamp01(timer / waitFor);
             fakeLoadingSlider.value = progress;
             yield return null;
         }
-        tryAgainSeqItem.OnSequenceOver();
+        GameSequencesList.Instance.GoToNextItemInList();
     }
 
 }
