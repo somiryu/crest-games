@@ -145,9 +145,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             hasButtonHelp = true;
             goalScoreStepTutorial = 4;
             hasWrongChoice = false;
-        }
+			ResetScore();
+		}
 
-        if (currStepTutorial == 1)
+		if (currStepTutorial == 1)
         {
             hasTimer = false;
             hasScore = false;
@@ -157,6 +158,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             hasButtonHelp = true;
             goalScoreStepTutorial = 6;
             hasWrongChoice = false;
+            ResetScore();
         }
 
         if (currStepTutorial == 2)
@@ -169,9 +171,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             hasButtonHelp = true;
             hasWrongChoice = false;
             goalScoreStepTutorial = 4;
-        }
+			ResetScore();
+		}
 
-        if (currStepTutorial == 3)
+		if (currStepTutorial == 3)
         {
             hasTimer = false;
             hasScore = false;
@@ -181,9 +184,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             hasButtonHelp = true;
             hasWrongChoice = false;
             goalScoreStepTutorial = 4;
-        }
+			ResetScore();
+		}
 
-        if (currStepTutorial == 4)
+		if (currStepTutorial == 4)
         {
             hasTimer = false;
             hasScore = false;
@@ -193,9 +197,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             hasWrongChoice = true;
             hasButtonHelp = false;
             goalScoreStepTutorial = 5;
-        }
+			ResetScore();
+		}
 
-        if (currStepTutorial == 5)
+		if (currStepTutorial == 5)
         {
             UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
 
@@ -208,6 +213,14 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         StarsCounter.SetActive(hasScore);
         discardBtn.gameObject.SetActive(hasDiscardButtton);
         
+    }
+
+    void ResetScore()
+    {
+        leftWonItemsPool.RecycleAll();
+        rightWonItemsPool.RecycleAll();
+        currCoins = 0;
+        currCoinsValueTxt.SetText(0.ToString());
     }
 
     void InitRound()
