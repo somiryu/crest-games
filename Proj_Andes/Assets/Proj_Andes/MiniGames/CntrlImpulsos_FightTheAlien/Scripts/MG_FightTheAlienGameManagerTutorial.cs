@@ -44,6 +44,8 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     [SerializeField] AudioClip correctAudio;
     [SerializeField] AudioClip wrongAudio;
     [SerializeField] AudioClip finishAudio;
+    [SerializeField] AudioClip equalFeedbackAudio;
+    [SerializeField] AudioClip differentFeedbackAudio;
     [SerializeField] Color disabledBtnColor;
     [SerializeField] Color enabledBtnColor;
 
@@ -66,6 +68,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     bool wrongColor;
     bool wrongShape;
     MG_FightTheAlienAnswerBtnTutorial playerAnswer;
+    MG_FightTheAlienAnswerBtnTutorial currCorrectButtonAnswer;
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
@@ -138,19 +141,24 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         switch (currStepConfigTutorial.alienAttacksConfigsType)
         {
             case alienAttacksConfigsType.Match:
+                isMatchAttack = true;
                 currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsMatch;
                 break;
             case alienAttacksConfigsType.NoMatch:
+                isMatchAttack = false;
                 currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsNoMatch;
                 break;
             case alienAttacksConfigsType.Interval:
+                isMatchAttack = !isMatchAttack;
                 if (isMatchAttack)
                     currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsMatch;                
                 else
                     currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsNoMatch;
                 break;
             case alienAttacksConfigsType.Random:
-                currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsMatch.Concat(tutorialStepsConfigs.alienAttacksConfigsNoMatch).ToArray();
+                isMatchAttack = Random.Range(0, 2) == 0;
+                if (isMatchAttack) currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsMatch;
+                else currAlienAttacksConfigs = tutorialStepsConfigs.alienAttacksConfigsNoMatch;
                 break;
             default:
                 break;
@@ -162,10 +170,10 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         timerPerChoice = 0;
         eogManager.OnGameStart();
 
-        if (currStepConfigTutorial.alienAttacksConfigsType == alienAttacksConfigsType.Interval)
+        if (currStepConfigTutorial.alienAttacksConfigsType == alienAttacksConfigsType.Interval 
+            || currStepConfigTutorial.alienAttacksConfigsType == alienAttacksConfigsType.Random)
         {
             SetAlienAttackConfig();
-            isMatchAttack = !isMatchAttack;
         }
 
         var randomAttack = Random.Range(0, currAlienAttacksConfigs.Length);
@@ -188,6 +196,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
                 currBtnImage.ShowHighlightImg(helpButton);
 				currBtnImage.button.image.color = enabledBtnColor;
 				currBtnImage.alienAttackOption = currAttack.rightAnswer;
+                currCorrectButtonAnswer = currBtnImage;
             }
             else
             {
@@ -232,8 +241,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     }
     private void OnWrongChoice()
     {
-        isCorrect = false;
-        
+        isCorrect = false;        
 
         correctParticles.Stop();
         incorrectParticles.Stop();
@@ -243,10 +251,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
         currPointsAmount = 0;
 
-        if (currStepConfigTutorial.helpPopUp) ActivePopUp();
-
-
-		for (int i = 0; i < skinObjAnim.Length; i++)
+        for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
             skinObjAnim[i].SetTrigger("Incorrect");
@@ -257,8 +262,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Play();
         incorrectParticles.Play();
 
-        
-
+        if (currStepConfigTutorial.helpAudioFeedback && !currStepConfigTutorial.wrongChoices) StartCoroutine(PlayAudioFeedback());
 
         if (!currStepConfigTutorial.wrongChoices) return;
         currCoins += gameConfigs.coinsOnWrongAnswer;
@@ -268,11 +272,22 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         OnRoundEnded();
     }
 
+    IEnumerator PlayAudioFeedback()
+    {
+        currCorrectButtonAnswer.ShowHighlightImg(true);
+
+        AudioClip feedbackAudio = isMatchAttack ? equalFeedbackAudio : differentFeedbackAudio;
+
+        audiosource.clip = feedbackAudio;
+        audiosource.Play();
+
+        var waitTime = feedbackAudio.length + 0.1f;        
+        yield return new WaitForSeconds(waitTime);        
+    }
+
     private void OnCorrectChoice()
     {
         isCorrect = true;
-        if (currStepConfigTutorial.helpPopUp)
-            ActivePopUp();
 
         correctParticles.Stop();
         incorrectParticles.Stop();

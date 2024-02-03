@@ -118,7 +118,7 @@ MonoBehaviour:
     time: 0
     score: 0
     life: 0
-    helpPopUp: 0
+    helpAudioFeedback: 1
   - stepsAmount: 2
     alienAttacksConfigsType: 1
     helpButton: 1
@@ -126,7 +126,7 @@ MonoBehaviour:
     time: 0
     score: 0
     life: 0
-    helpPopUp: 1
+    helpAudioFeedback: 1
   - stepsAmount: 8
     alienAttacksConfigsType: 2
     helpButton: 0
@@ -134,4 +134,4 @@ MonoBehaviour:
     time: 0
     score: 0
     life: 0
-    helpPopUp: 1
+    helpAudioFeedback: 1
