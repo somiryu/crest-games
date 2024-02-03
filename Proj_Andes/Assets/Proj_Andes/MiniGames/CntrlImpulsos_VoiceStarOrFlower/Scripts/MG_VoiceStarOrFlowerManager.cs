@@ -98,44 +98,35 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         InitRound();
 	}
 
+    int repeatedPuzzleCounter = 0;
+
     void GetRandomSoundImage()
     {
+        var previousSoundIsLeft = currSoundIsLeft;
+        var previousImgIsLeft = currImgIsLeft;
+
         currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
         currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
 
-        if (currSoundIsLeft && !currImgIsLeft)
+        if(previousSoundIsLeft == currSoundIsLeft &&  previousImgIsLeft == currImgIsLeft)
         {
-            amountSoundIsLeft++;
-            amountDiscardButton = 0;
-            amountImgIsLeft = 0;
+            repeatedPuzzleCounter++;
+            if(repeatedPuzzleCounter >= 2)
+            {
+                GetRandomSoundImage();
+                return;
+            }
         }
-
-
-        if (!currSoundIsLeft && currImgIsLeft) 
-        { 
-            amountImgIsLeft++;
-            amountDiscardButton = 0;
-            amountSoundIsLeft = 0;
-        }
-
-
-        if (currImgIsLeft && currImgIsLeft || !currImgIsLeft && !currImgIsLeft)
+        else
         {
-            amountDiscardButton++;
-            amountSoundIsLeft = 0;
-            amountImgIsLeft = 0;
+            repeatedPuzzleCounter = 0;
         }
     }
+
 	void InitRound()
     {
         timerPerChoice = 0;
         GetRandomSoundImage();
-
-        if (amountSoundIsLeft >= 2 || amountImgIsLeft >= 2 ||amountDiscardButton >= 2)
-        {
-            GetRandomSoundImage();
-        }
-
 
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
@@ -230,9 +221,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         currCoinsValueTxt.text = currCoins.ToString();
         gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
-        if (lostRoundsCount >= gameConfigs.maxRounds ||
-            wonLeftCount >= gameConfigs.maxRounds ||
-            wonRightCount >= gameConfigs.maxRounds)
+        var totalRounds = lostRoundsCount + wonLeftCount + wonRightCount;
+
+        if (totalRounds >= gameConfigs.maxRounds)
         {
             GameOver();
             return;
