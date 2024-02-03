@@ -112,7 +112,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		{			
             var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseGlobalPosition.z = 0;
-			if (gameConfigs.activeCheats && currEneryProgress >= 0.5f)
+			if (gameConfigs.activeCheats && PredictIfWouldWin(mouseGlobalPosition))
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
 				StartCoroutine(ShowTrapSign());
@@ -155,6 +155,12 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
                 OnGameOver();
             }
         }
+	}
+
+	bool PredictIfWouldWin(Vector3 posToTest)
+	{
+		var hitAmount = Physics.OverlapSphereNonAlloc(posToTest, gameConfigs.userMagnetRadius, overlayResults);
+		return currEnergyPicked + hitAmount >= gameConfigs.neededEnergyToPick;
 	}
 
 	IEnumerator ShowTrapSign()

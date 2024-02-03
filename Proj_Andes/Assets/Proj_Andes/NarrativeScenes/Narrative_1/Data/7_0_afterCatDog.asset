@@ -25,7 +25,7 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 191d94022263b2047bc3caa47d7eb7ae, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 2cdb454e51cb05642b2df55e0edadaf4, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1

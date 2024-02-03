@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -2, y: -420.6333}
+  m_AnchoredPosition: {x: 33, y: -420.6333}
   m_SizeDelta: {x: 646.0588, y: 89.4555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &43872804
@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\xA1Intentalo de nuevo!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d8b07a8911fc48d4cb163301aedc11b8, type: 2}
+  m_sharedMaterial: {fileID: 606339856969581449, guid: d8b07a8911fc48d4cb163301aedc11b8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -51.78537, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -607,9 +607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3c6a2870ee22e049976ea7b566139ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tryAgainSeqItem: {fileID: 11400000, guid: 665034d8149ea2348816692b842306dc, type: 2}
   retryBtn: {fileID: 800960292}
-  waitFor: 6
+  waitFor: 15
   fakeLoadingSlider: {fileID: 1379565383}
 --- !u!1 &1307287086
 GameObject:

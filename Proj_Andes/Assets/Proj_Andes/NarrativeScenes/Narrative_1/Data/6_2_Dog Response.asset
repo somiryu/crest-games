@@ -23,6 +23,7 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 780359ab53cb7de43894ebda7f0416cc, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: fb1b88d4069224f4ca99290c4e343635, type: 2}
     ExitAnim: {fileID: 0}
