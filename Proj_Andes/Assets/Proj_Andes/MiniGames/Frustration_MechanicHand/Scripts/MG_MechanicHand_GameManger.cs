@@ -143,6 +143,9 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
     public void OnPlayerFailedHook()
 	{
 		currPlayerLifes--;
+		totalCapturedAsteroids -= 2;
+		totalCapturedAsteroids = Mathf.Max(totalCapturedAsteroids, 0);
+		constant_ResultsTxt.SetText(totalCapturedAsteroids.ToString());
 		playerLifesAmountTxt.SetText(currPlayerLifes.ToString());
 		if(currPlayerLifes <= 0)
 		{
