@@ -82,6 +82,8 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
     private bool gameoverFlag = false;
 
+    IEnumerator currTutorialStartSequence;
+
     public void Awake()
     {
         Init();
@@ -119,11 +121,14 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
             answerBtns[i].button.onClick.AddListener(() => OnAnswerBtnClicked(currIdx, answerBtns[currIdx]));
         }
 
-        InitTutorialStep();
-        InitRound();
+        if(currTutorialStartSequence != null) StopCoroutine(currTutorialStartSequence);
+
+        currTutorialStartSequence = InitTutorialStep();
+
+        StartCoroutine(currTutorialStartSequence);
     }
 
-    private void InitTutorialStep()
+    private IEnumerator InitTutorialStep()
     {
         currStepConfigTutorial = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep];
         currPointsAmount = 0;
@@ -132,11 +137,22 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         playerHealthUI.gameObject.SetActive(currStepConfigTutorial.life);
         startCounter.SetActive(currStepConfigTutorial.score);
         SetAlienAttackConfig();
+		InitRound();
 
+        audiosource.clip = currStepConfigTutorial.tutorialStartAudio;
+		if (audiosource.clip != null)
+        {
+            var time = audiosource.clip.length;
+            audiosource.Play();
+            for (int i = 0; i < answerBtns.Length; i++) answerBtns[i].button.interactable = false;
+            yield return new WaitForSeconds(time);
+			for (int i = 0; i < answerBtns.Length; i++) answerBtns[i].button.interactable = true;
+		}
 
-    }
+        currTutorialStartSequence = null;
+	}
 
-    private void SetAlienAttackConfig()
+	private void SetAlienAttackConfig()
     {        
         switch (currStepConfigTutorial.alienAttacksConfigsType)
         {
@@ -221,6 +237,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     private void Update()
     {
         if (gameoverFlag) return;
+        if (currStepConfigTutorial == null) return;
         if (!currStepConfigTutorial.time) return;
 
         timerUI.value = timerPerChoice;
@@ -328,7 +345,9 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 				GameOver();
 				return;
 			}
-			InitTutorialStep();
+            if(currTutorialStartSequence != null) StopCoroutine(currTutorialStartSequence);
+            currTutorialStartSequence = InitTutorialStep();
+            StartCoroutine(currTutorialStartSequence);
         }
 
         InitRound();

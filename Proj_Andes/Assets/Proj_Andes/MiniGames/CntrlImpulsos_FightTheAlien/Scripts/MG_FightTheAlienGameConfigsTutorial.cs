@@ -25,6 +25,7 @@ public class MG_FightTheAlienTutorialStep
     public bool score;
     public bool life;
     public bool helpAudioFeedback;
+    public AudioClip tutorialStartAudio;
 }
 
 public enum alienAttacksConfigsType
