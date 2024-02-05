@@ -13447,7 +13447,7 @@ MonoBehaviour:
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
   rightAudio: {fileID: 8300000, guid: dc7b0595b4e4fe741bf177d1c46e4872, type: 3}
   discardAudio: {fileID: 8300000, guid: ab8bfe04f8cf41740b85e1491a589c5d, type: 3}
-  inicialAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
+  inicialAudio: {fileID: 8300000, guid: 90d1999b7ff039043820510ee9e8883f, type: 3}
   audioPlayer: {fileID: 1951022623}
   leftWonItemsPool:
     itemPrefab: {fileID: 793727092}

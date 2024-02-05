@@ -23022,7 +23022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialConfig: {fileID: 11400000, guid: 70400e764fc186843b80b22a056b1f6c, type: 2}
-  sameDirectionSprite: {fileID: 21300000, guid: 1af6195b70d81a04d9c127886b0de0cf, type: 3}
+  sameDirectionSprite: {fileID: 21300000, guid: 811c77aad97344a4794f94d9f430d4b1, type: 3}
   opositeDirectionSprite: {fileID: 21300000, guid: 730553421d8251946ae2458614062649, type: 3}
   leftImg: {fileID: 946864922}
   rightImg: {fileID: 597656416}
