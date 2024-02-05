@@ -20,3 +20,4 @@ MonoBehaviour:
   boosterTriggerRate: 2
   forceToFail: 1
   updateScene: 0
+  extraAttemptsBeforeFailing: 3
