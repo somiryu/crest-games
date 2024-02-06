@@ -183,6 +183,8 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         activeShips.Add(currRocket);
         shipsLeft--;
         shipsLeftTxt.SetText(shipsLeft.ToString());
+        shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
+
     }
 
 
