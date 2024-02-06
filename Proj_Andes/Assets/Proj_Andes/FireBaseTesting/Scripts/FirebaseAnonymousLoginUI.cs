@@ -303,7 +303,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnReadyConfirmBtnPressed()
 	{
-		UserDataManager.currTestID = Guid.NewGuid().ToString();
+		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		GameSequencesList.Instance.GoToNextSequence();
 	}
 

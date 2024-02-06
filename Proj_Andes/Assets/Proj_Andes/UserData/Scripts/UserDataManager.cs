@@ -15,7 +15,13 @@ public class UserDataManager : ScriptableObject
 	private static string instancePath = "UserDataManager";
 	private static string defaultUserID = "DefaultUserId";
 
-	public static string currTestID;
+	private static string currTestID;
+
+	public static string CurrTestID
+	{
+		get => string.IsNullOrEmpty(currTestID) ? "Default Test ID" : currTestID;
+		set => currTestID = value;
+	}
 
 	private static UserDataManager instance;
 
@@ -79,18 +85,18 @@ public class UserDataManager : ScriptableObject
         var playerItemAnalytics = new Dictionary<string, object>();
 
 		var analyticsWithExtraFields = new Dictionary<string, object>();
-		analyticsWithExtraFields.Add(DataIds.TestID, currTestID);
+		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
-        playerItemAnalytics.Add(currTestID, analyticsWithExtraFields);
+        playerItemAnalytics.Add(CurrTestID, analyticsWithExtraFields);
 
 
         if (userAnayticsPerGame.ContainsKey(gameKey))
 		{
-			if (userAnayticsPerGame[gameKey].ContainsKey(currTestID)) userAnayticsPerGame[gameKey][currTestID] = playerItemAnalytics;			
-			else userAnayticsPerGame[gameKey].Add(currTestID, playerItemAnalytics);
+			if (userAnayticsPerGame[gameKey].ContainsKey(CurrTestID)) userAnayticsPerGame[gameKey][CurrTestID] = playerItemAnalytics;			
+			else userAnayticsPerGame[gameKey].Add(CurrTestID, playerItemAnalytics);
 		}
 		else userAnayticsPerGame.Add(gameKey, playerItemAnalytics);
     }
