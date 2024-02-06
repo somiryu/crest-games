@@ -70,13 +70,6 @@ public static class DatabaseManager
             }            
         }
     }
-
-    public static async void SaveGameDatasList(string colletionGame, string userID, Dictionary<string, object> itemAnalytics)
-    {
-        FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-        DocumentReference docRef = db.Collection(colletionGame).Document(userID);
-        await docRef.SetAsync(itemAnalytics, SetOptions.MergeAll);
-    }
 }
 
 
