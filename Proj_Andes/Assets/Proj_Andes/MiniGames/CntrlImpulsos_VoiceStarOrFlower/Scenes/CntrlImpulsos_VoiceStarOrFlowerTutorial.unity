@@ -13448,6 +13448,8 @@ MonoBehaviour:
   rightAudio: {fileID: 8300000, guid: dc7b0595b4e4fe741bf177d1c46e4872, type: 3}
   discardAudio: {fileID: 8300000, guid: ab8bfe04f8cf41740b85e1491a589c5d, type: 3}
   inicialAudio: {fileID: 8300000, guid: 90d1999b7ff039043820510ee9e8883f, type: 3}
+  onFailSelectDiscardAdvice: {fileID: 8300000, guid: 12878952d3c5018448ca5ee47e6c5f76, type: 3}
+  onFailSelectInstructionAdvice: {fileID: 8300000, guid: e490104774d7a29468d076ceb1569457, type: 3}
   audioPlayer: {fileID: 1951022623}
   leftWonItemsPool:
     itemPrefab: {fileID: 793727092}
