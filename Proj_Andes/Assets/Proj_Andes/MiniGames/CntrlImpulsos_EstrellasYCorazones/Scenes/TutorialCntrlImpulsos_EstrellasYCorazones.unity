@@ -23042,6 +23042,8 @@ MonoBehaviour:
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   succeedStepAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
   finishAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
+  ifHeartAudio: {fileID: 0}
+  ifStarAudio: {fileID: 0}
   currRoundValueTxt: {fileID: 1134041796}
   myTutorialSteps:
   - tutorialSteps: 0
@@ -23050,18 +23052,24 @@ MonoBehaviour:
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
     background: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    audioInstruction: {fileID: 8300000, guid: 0d4fe8e299e31a44e86346c37284fd28, type: 3}
+    tutoRoundsCount: 0
   - tutorialSteps: 1
     trialsAmt: 3
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
     background: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+    audioInstruction: {fileID: 8300000, guid: 14250fc2226cf9441ab2abdf3ff8ff57, type: 3}
+    tutoRoundsCount: 0
   - tutorialSteps: 3
     trialsAmt: 5
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
     passedTuto: 
     background: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
+    audioInstruction: {fileID: 0}
+    tutoRoundsCount: 0
   currTutoStep:
     tutorialSteps: 0
     trialsAmt: 0
@@ -23069,6 +23077,8 @@ MonoBehaviour:
     ifLeftBtnIsTheRightChoice: {fileID: 0}
     passedTuto: 
     background: {r: 0, g: 0, b: 0, a: 0}
+    audioInstruction: {fileID: 0}
+    tutoRoundsCount: 0
 --- !u!1 &2059959326
 GameObject:
   m_ObjectHideFlags: 0
