@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -134,7 +135,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         InitRound();
     }
 
-
     private void InitTutorialStep()
     {
         Debug.Log("tutorial" + currStepTutorial);
@@ -225,9 +225,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         leftBtn.interactable = false;
         discardBtn.interactable = false;
         audioPlayer.clip = adviceClip ;
-        Debug.Log("should play audios");
         audioPlayer.Play();
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(6);
         rightBtn.interactable = true;
         leftBtn.interactable = true;
         discardBtn.interactable = true;
@@ -247,7 +246,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         timerPerChoice = 0;
 
         trialsPerTutoCount++;
-    
+
+        audioPlayer.volume = 1;
 
         if (intervalQuestion)
         {
@@ -314,20 +314,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         button.image.color = color;
         highlightImg.gameObject.SetActive(highlight);
     }
-    private void Update()
-	{
-        if (gameoverFlag) return;
-        if (!hasTimer) return;
-
-        timerUI.value = timerPerChoice;
-        totalGameTime += Time.deltaTime;
-        timerPerChoice += Time.deltaTime;
-        if (timerPerChoice >= gameConfigs.timePerChoice)
-        {
-            OnWrongChoice();
-            timerPerChoice = 0;
-        }
-    }
 
 	private void OnClickedLeft()
     {
@@ -344,7 +330,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 	private void OnClickedDiscard()
     {
         audioPlayer.clip = discardAudio;
-        audioPlayer.Play();
+        audioPlayer.PlayOneShot(discardAudio);
         if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
@@ -362,9 +348,12 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
-        audioPlayer.clip = wrongAudio;
         incorrectParticles.Play();
-        audioPlayer.Play();
+
+        audioPlayer.volume = 0.8f;
+
+        audioPlayer.clip = wrongAudio;
+        audioPlayer.PlayOneShot(wrongAudio);
 
         if (!hasWrongChoice) return;
 
@@ -392,9 +381,11 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         }
 
         correctParticles.Play();
+        audioPlayer.volume = 0.8f;
 
-        audioPlayer.clip = rightAudio;
-        audioPlayer.Play();
+        audioPlayer.clip = correctAudio;
+        audioPlayer.PlayOneShot(correctAudio);
+
         OnRoundEnded();
     }
     IEnumerator Hold()
@@ -405,14 +396,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     {        
         currCoinsValueTxt.text = currCoins.ToString();
         gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
-
-        //if (lostRoundsCount >= gameConfigs.maxRounds ||
-        //    wonLeftCount >= gameConfigs.maxRounds ||
-        //    wonRightCount >= gameConfigs.maxRounds)
-        //{
-        //    GameOver();
-        //    return;
-        //}
 
         if (currScoreStepTutorial == goalScoreStepTutorial)
         {
