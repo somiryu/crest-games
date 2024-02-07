@@ -219,20 +219,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         discardBtn.gameObject.SetActive(hasDiscardButtton);
         
     }
-    IEnumerator PlayOnFailAdvices(AudioClip adviceClip)
-    {
-        rightBtn.interactable = false;
-        leftBtn.interactable = false;
-        discardBtn.interactable = false;
-        audioPlayer.clip = adviceClip ;
-        audioPlayer.Play();
-        yield return new WaitForSeconds(6);
-        rightBtn.interactable = true;
-        leftBtn.interactable = true;
-        discardBtn.interactable = true;
-        audioPlayer.clip = currSound;
-        audioPlayer.Play();
-    }
+
     void ResetScore()
     {
         leftWonItemsPool.RecycleAll();
@@ -295,18 +282,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         currSound = soundToUse;
 
-        if (currStepTutorial == 4 && trialsPerTutoCount > goalScoreStepTutorial)
-        {
-            if (currSoundIsLeft && currImgIsLeft || !currSoundIsLeft && !currImgIsLeft) StartCoroutine(PlayOnFailAdvices(onFailSelectDiscardAdvice));
-            else StartCoroutine(PlayOnFailAdvices(onFailSelectInstructionAdvice));
-        }
-        else
-        {
-            audioPlayer.clip = soundToUse; 
-            audioPlayer.Play();
-        }
-
-        eogManager.OnGameStart();
+		audioPlayer.clip = soundToUse;
+		audioPlayer.Play();
+		eogManager.OnGameStart();
     }
 
     void SetButtonState(Button button, Image highlightImg, Color color, bool highlight)
@@ -353,12 +331,34 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         audioPlayer.volume = 0.8f;
 
         audioPlayer.clip = wrongAudio;
-        audioPlayer.PlayOneShot(wrongAudio);
+        audioPlayer.Play();
 
         if (!hasWrongChoice) return;
 
-        OnRoundEnded();
+        StartCoroutine(PlayOnWrongChoice());  
     }
+
+
+    IEnumerator PlayOnWrongChoice()
+    {
+        AudioClip clipToPlay = onFailSelectDiscardAdvice;
+        if (currImgIsLeft != currSoundIsLeft) clipToPlay = onFailSelectInstructionAdvice;
+
+        audioPlayer.clip = clipToPlay;
+        audioPlayer.Play();
+        var timeToWait = clipToPlay.length;
+		rightBtn.interactable = false;
+		leftBtn.interactable = false;
+		discardBtn.interactable = false;
+
+		yield return new WaitForSeconds(timeToWait);
+
+		rightBtn.interactable = true;
+		leftBtn.interactable = true;
+		discardBtn.interactable = true;
+		OnRoundEnded();
+	}
+
 
     private void OnCorrectChoice()
     {
@@ -388,10 +388,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         OnRoundEnded();
     }
-    IEnumerator Hold()
-    {
-        yield return new WaitForSeconds(0.2f);
-    }
+
     void OnRoundEnded()
     {        
         currCoinsValueTxt.text = currCoins.ToString();
