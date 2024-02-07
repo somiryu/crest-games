@@ -83,14 +83,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		afterLogInContinueBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
 		afterLogInNewGameBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
 
-		readyBtb.onClick.AddListener(() => GameSequencesList.Instance.GoToNextSequence());
+		readyBtb.onClick.AddListener(OnReadyConfirmBtnPressed);
 
 
         correctlyLoggedInFlag = false;
 		doneInitialization = false;
 		userBtnsPool.Init(10);
 		currBtnsByDataID = new Dictionary<UsersListItem, string>();
-		
 	}
 
 	private void Start()
@@ -301,4 +300,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		if (AudioListener.volume == 1) AudioListener.volume = 0;
 		else if (AudioListener.volume == 0) AudioListener.volume = 1;
 	}
+
+	public void OnReadyConfirmBtnPressed()
+	{
+		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
+		GameSequencesList.Instance.GoToNextSequence();
+	}
+
 }
