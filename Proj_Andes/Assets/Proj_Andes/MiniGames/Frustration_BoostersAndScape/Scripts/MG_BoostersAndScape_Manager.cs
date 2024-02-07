@@ -247,6 +247,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
 	int GenerateRandom()
     {
-        return Random.Range(((gameConfig.boostersPerRun-gameConfig.forcedFails)-gameConfig.extraAttemptsBeforeFailing), gameConfig.boostersPerRun);
+        return Random.Range((gameConfig.boostersPerRun - gameConfig.extraAttemptsBeforeFailing), gameConfig.boostersPerRun);
     }
 }
