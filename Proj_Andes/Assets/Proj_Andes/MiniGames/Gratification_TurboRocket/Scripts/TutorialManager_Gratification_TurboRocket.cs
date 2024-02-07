@@ -59,7 +59,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     float targetYPos;
     float playerRanXSpace;
 
-    float iTurboRocketManager.CurrProgress { get => playerRanXSpace / bk.bkSize.localScale.x; }
+    float iTurboRocketManager.CurrProgress => tutorialProgress;
     float iTurboRocketManager.playerCurrentSpeed { get => currentSpeed; }
     Action iTurboRocketManager.OnScoreChanges { get => OnScoreChanged; set { } }
 
@@ -154,10 +154,9 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     void Update()
     {
         if (!onPlay) return;
-
-        if (!endOfTuto)
+		TutoProgress();
+		if (!endOfTuto)
         {
-            TutoProgress();
             if (transform.position.x >= currTutoStep.stepClickableObj.transform.position.x) StandStill();
             if (currTutoStep.step == TutorialStepsTurboRocket.TurboAppear && !onTurbo) StandStill();
             else if (currTutoStep.step == TutorialStepsTurboRocket.UnclickTurbo && onTurbo)

@@ -13448,6 +13448,8 @@ MonoBehaviour:
   rightAudio: {fileID: 8300000, guid: dc7b0595b4e4fe741bf177d1c46e4872, type: 3}
   discardAudio: {fileID: 8300000, guid: ab8bfe04f8cf41740b85e1491a589c5d, type: 3}
   inicialAudio: {fileID: 8300000, guid: 90d1999b7ff039043820510ee9e8883f, type: 3}
+  onFailSelectDiscardAdvice: {fileID: 8300000, guid: 12878952d3c5018448ca5ee47e6c5f76, type: 3}
+  onFailSelectInstructionAdvice: {fileID: 8300000, guid: e490104774d7a29468d076ceb1569457, type: 3}
   audioPlayer: {fileID: 1951022623}
   leftWonItemsPool:
     itemPrefab: {fileID: 793727092}
@@ -13539,7 +13541,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 21300000, guid: f79744f05e3f2914cb3dc78b99b90dfa, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 5b19df90ec6b4ef4089daf58ae78950c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -13660,7 +13662,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 21300000, guid: 7155a2f4cd87fa444ae694007e6df6d8, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted

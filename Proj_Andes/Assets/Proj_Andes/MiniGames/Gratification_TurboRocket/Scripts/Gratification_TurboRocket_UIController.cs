@@ -28,17 +28,13 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
 	{
         if (!player.onPlay) return;
 
-        if (player is TutorialManager_Gratification_TurboRocket manager)
-        {
-            progressSlider.value = manager.tutorialProgress;
-        }
-        else progressSlider.value = player.CurrProgress;
-
+        progressSlider.value = player.CurrProgress;
 	}
 
 	public void EndOfGame()
     {
-        progressSlider.value = 1;
+
+        progressSlider.value = 10;
         starsText.text =  player.starsGatheredCount.ToString();
         inGameObj.gameObject.SetActive(false);
         inGameObj2.gameObject.SetActive(false);
