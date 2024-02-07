@@ -23021,7 +23021,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd220db87ba136445a36c3bbbde64079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialConfig: {fileID: 11400000, guid: 70400e764fc186843b80b22a056b1f6c, type: 2}
   sameDirectionSprite: {fileID: 21300000, guid: 811c77aad97344a4794f94d9f430d4b1, type: 3}
   opositeDirectionSprite: {fileID: 21300000, guid: 730553421d8251946ae2458614062649, type: 3}
   leftImg: {fileID: 946864922}

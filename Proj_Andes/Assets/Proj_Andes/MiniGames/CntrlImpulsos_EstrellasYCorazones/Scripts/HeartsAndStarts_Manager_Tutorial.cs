@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 
 public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 {
-    [SerializeField] HeartsAndStarts_TutorialConfig tutorialConfig;
     [Space(20)]
     [SerializeField] Sprite sameDirectionSprite;
     [SerializeField] Sprite opositeDirectionSprite;
@@ -132,7 +131,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         audiosource.PlayOneShot(clip);
         rightBtn.interactable = false;
         leftBtn.interactable = false;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(clip.length);
         rightBtn.interactable = true;
         leftBtn.interactable = true;
     }
