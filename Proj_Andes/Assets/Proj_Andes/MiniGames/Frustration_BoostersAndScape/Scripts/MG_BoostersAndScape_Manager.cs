@@ -220,7 +220,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
     public void ForcedToFail()
     {
-
 		for (int i = 0; i < forcedFails.Count; i++)
         {
             if (totalAttempts == forcedFails[i])
@@ -231,7 +230,12 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 			}
 			else onTrapMode = false;
         }
-        if (successfulAttempts >= gameConfig.boostersPerRun - gameConfig.forcedFails) onTrapMode = true;
+        if (successfulAttempts >= gameConfig.boostersPerRun - gameConfig.forcedFails-1)
+        {
+            onTrapMode = true;
+            StartCoroutine(ShowTrapSign());
+
+        }
     }
 
 	IEnumerator ShowTrapSign()
@@ -243,6 +247,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
 	int GenerateRandom()
     {
-        return Random.Range((gameConfig.boostersPerRun-gameConfig.forcedFails), totalAttempts);
+        return Random.Range((gameConfig.boostersPerRun - gameConfig.extraAttemptsBeforeFailing), gameConfig.boostersPerRun);
     }
 }
