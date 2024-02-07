@@ -55,7 +55,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     float targetYPos;
     float playerRanXSpace;
 
-    public float CurrProgress { get => playerRanXSpace / bk.bkSize.localScale.x; }
+    //public float CurrProgress { get => (playerRanXSpace / bk.bkSize.localScale.x); }
+    public float CurrProgress { get => (playerRanXSpace / (finalSpin.transform.position -firstPos).magnitude); }
     public Vector3 CurrPos => transform.position;
     float iTurboRocketManager.playerCurrentSpeed { get => currentSpeed; }
     public Transform myTransform { get => transform; }
@@ -218,6 +219,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     {
         camCC.OnGameFinishedSequence();
         endTimelineDirector.Play();
+        ui.progressSlider.value = 1;
         yield return new WaitForSeconds(2f);
         ui.EndOfGame();
         eogManager.OnGameOver();

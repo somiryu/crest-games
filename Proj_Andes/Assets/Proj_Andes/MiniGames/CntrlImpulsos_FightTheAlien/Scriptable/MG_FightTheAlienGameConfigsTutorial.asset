@@ -118,7 +118,8 @@ MonoBehaviour:
     time: 0
     score: 0
     life: 0
-    helpPopUp: 0
+    helpAudioFeedback: 1
+    tutorialStartAudio: {fileID: 8300000, guid: cdb2f181695b92d4599a75f046950bde, type: 3}
   - stepsAmount: 2
     alienAttacksConfigsType: 1
     helpButton: 1
@@ -126,20 +127,14 @@ MonoBehaviour:
     time: 0
     score: 0
     life: 0
-    helpPopUp: 1
-  - stepsAmount: 8
+    helpAudioFeedback: 1
+    tutorialStartAudio: {fileID: 8300000, guid: 081d1fd2958e8c44f9851b747a15633a, type: 3}
+  - stepsAmount: 5
     alienAttacksConfigsType: 2
     helpButton: 0
     wrongChoices: 0
     time: 0
     score: 0
     life: 0
-    helpPopUp: 1
-  - stepsAmount: -1
-    alienAttacksConfigsType: 3
-    helpButton: 0
-    wrongChoices: 1
-    time: 0
-    score: 0
-    life: 1
-    helpPopUp: 0
+    helpAudioFeedback: 1
+    tutorialStartAudio: {fileID: 8300000, guid: e005d4fda4b50e1469c24c04435b434f, type: 3}

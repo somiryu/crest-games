@@ -58,6 +58,10 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
+    
+    private int amountImgIsLeft = 0;
+    private int amountSoundIsLeft = 0;
+    private int amountDiscardButton = 0;
 
     private bool gameoverFlag = false;
     float totalGameTime;
@@ -94,12 +98,35 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         InitRound();
 	}
 
+    int repeatedPuzzleCounter = 0;
+
+    void GetRandomSoundImage()
+    {
+        var previousSoundIsLeft = currSoundIsLeft;
+        var previousImgIsLeft = currImgIsLeft;
+
+        currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
+        currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
+
+        if(previousSoundIsLeft == currSoundIsLeft &&  previousImgIsLeft == currImgIsLeft)
+        {
+            repeatedPuzzleCounter++;
+            if(repeatedPuzzleCounter >= 2)
+            {
+                GetRandomSoundImage();
+                return;
+            }
+        }
+        else
+        {
+            repeatedPuzzleCounter = 0;
+        }
+    }
+
 	void InitRound()
     {
         timerPerChoice = 0;
-
-		currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
-		currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
+        GetRandomSoundImage();
 
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
@@ -194,9 +221,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         currCoinsValueTxt.text = currCoins.ToString();
         gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
-        if (lostRoundsCount >= gameConfigs.maxRounds ||
-            wonLeftCount >= gameConfigs.maxRounds ||
-            wonRightCount >= gameConfigs.maxRounds)
+        var totalRounds = lostRoundsCount + wonLeftCount + wonRightCount;
+
+        if (totalRounds >= gameConfigs.maxRounds)
         {
             GameOver();
             return;

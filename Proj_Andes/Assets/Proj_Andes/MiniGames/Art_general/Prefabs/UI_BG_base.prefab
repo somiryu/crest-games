@@ -416,7 +416,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -731,7 +731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -141}
+  m_AnchoredPosition: {x: 0, y: -91}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3385919489717880399
@@ -907,7 +907,7 @@ MonoBehaviour:
   exitBtn: {fileID: 8058029177892931354}
   musicBtn: {fileID: 7931542327029095560}
   soundActivated: {fileID: 21300000, guid: 7ab2a5f1025ae774bad893062199ed58, type: 3}
-  soundDeactivated: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
+  soundDeactivated: {fileID: 21300000, guid: bae30125c1cf1f3409c7c66b16f6a665, type: 3}
   tutorialImg: {fileID: 4132604566032206740}
 --- !u!1 &5675853605051017698
 GameObject:

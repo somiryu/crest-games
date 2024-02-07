@@ -99,6 +99,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
     public void OnClickSendHook()
     {
+        if (hookShootingRoutine != null) return;
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) return;
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_2JustClickToGrab))
 		{
@@ -144,6 +145,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     IEnumerator SendHookRoutine()
     {
         canDrag = false;
+        MG_MechanicHand_GameManger.Instance.sendHookBtn.interactable = false;
         var originalPosition = hook.transform.localPosition;
         var currPosition = originalPosition;
 
@@ -196,7 +198,8 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
         canDrag = true;
         hookShootingRoutine = null;
-        CheckIfScored();
+		MG_MechanicHand_GameManger.Instance.sendHookBtn.interactable = true;
+		CheckIfScored();
     }
 
 

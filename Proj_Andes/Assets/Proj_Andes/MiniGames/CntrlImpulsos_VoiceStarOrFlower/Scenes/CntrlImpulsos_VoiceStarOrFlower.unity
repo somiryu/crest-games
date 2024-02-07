@@ -13209,12 +13209,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2610515073907893260}
   - {fileID: 1631699889}
   - {fileID: 1579605641}
   - {fileID: 892286841}
   - {fileID: 67471439}
   - {fileID: 180080038}
+  - {fileID: 2610515073907893260}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13462,9 +13462,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6529028605063483499, guid: 67c539ab53012e24cb36584fe83a0b6b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7958913155370981083, guid: 67c539ab53012e24cb36584fe83a0b6b, type: 3}
       propertyPath: m_Name
       value: AfterActionUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958913155370981083, guid: 67c539ab53012e24cb36584fe83a0b6b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8014406162903860483, guid: 67c539ab53012e24cb36584fe83a0b6b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -15,9 +15,9 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: 9bd58a801a9eb5e47a14b0c0ef4faeda, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/Gratification_SizeRockets/Scenes/Gratification_SizeRockets.unity
-  minCoinsToGive: 1
-  maxCoinsToGive: 5
-  planetsAmountToGenerate: 5
+  closePlanetCoins: 2
+  middlePlanetCoins: 4
+  FarPlanetCoins: 8
   shipsPerGame: 5
   shipsConfigs:
   - rocketType: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     coinsCapacity: 1
   - rocketType: 1
     speed: 2
-    coinsCapacity: 3
+    coinsCapacity: 2
   - rocketType: 2
     speed: 1
-    coinsCapacity: 5
+    coinsCapacity: 4

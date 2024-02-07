@@ -6,6 +6,12 @@ public static class DataIds
 {
     public const string usersCollection = "users";
 
+    public const string TestID = "Test ID";
+    public const string UserID = "User ID";
+    public const string GameID = "Game ID";
+
+
+
     public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
@@ -39,5 +45,9 @@ public static class DataIds
     public const string magnetsEneryPicked = "magnetsEneryPicked";
 
     public const string sizeRocketsGame = "Postergación de la gratificación: El rocket grande y el pequeño";
+
+    public const string tryAgainClicks1 = "tryAgainClicks1";
+    public const string tryAgainClicks2 = "tryAgainClicks2";
+    public const string tryAgainClicks3 = "tryAgainClicks3";
 
 }

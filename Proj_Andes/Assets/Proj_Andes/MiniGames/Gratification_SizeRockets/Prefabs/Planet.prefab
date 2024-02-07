@@ -5523,7 +5523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1977cf6cc135947b28b752137e60a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignOnAwake: 1
+  assignOnAwake: 0
   image: {fileID: 0}
   sRenderer: {fileID: 7560693429857609891}
   imagePerSkinTypes:

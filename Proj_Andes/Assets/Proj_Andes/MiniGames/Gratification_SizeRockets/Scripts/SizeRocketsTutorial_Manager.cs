@@ -45,9 +45,6 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     public SizeRocketTutoSteps currTutoStep => tutorialSteps[tutoStepIdx];
     public List<SizeRocketTutoSteps> tutorialSteps = new List<SizeRocketTutoSteps>();
 
-    public int minCoinsToGive => gameConfigs.minCoinsToGive;
-    public int maxCoinsToGive => gameConfigs.maxCoinsToGive;
-    public int planetsAmountToGenerate => gameConfigs.planetsAmountToGenerate;
     public int shipsPerGame => gameConfigs.shipsPerGame;
 
     private int totalCoinsWon = 0;
