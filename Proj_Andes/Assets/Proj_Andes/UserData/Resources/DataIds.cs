@@ -18,6 +18,7 @@ public static class DataIds
     public const string voiceStarRoundResultWins = "voiceStarRoundResultWins";
 
     public const string heartsAndStarsGame = "Control de impulsos: estrellas y corazones";
+    public const string heartsAndStarsInGameOrder = "heartsAndStarsInGameOrder";
     public const string heartsAndStarstimeToMakeAChoice = "heartsAndStarstimeToMakeAChoice";
     public const string heartsAndStarsRoundResultWins = "heartsAndStarsRoundResultWins";
     public const string heartsAndStarsclickRepetitions = "heartsAndStarsclickRepetitions";

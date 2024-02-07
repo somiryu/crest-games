@@ -24,6 +24,7 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
+        itemAnalytics.Add(DataIds.heartsAndStarsInGameOrder, gameIdxInList);
         itemAnalytics.Add(DataIds.heartsAndStarstimeToMakeAChoice, timeToMakeAChoice);
         itemAnalytics.Add(DataIds.heartsAndStarsRoundResultWins, roundResultWins);
         itemAnalytics.Add(DataIds.heartsAndStarsclickRepetitions, clickRepetitions);
