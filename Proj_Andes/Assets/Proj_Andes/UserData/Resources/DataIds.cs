@@ -20,6 +20,9 @@ public static class DataIds
     public const string heartsAndStarsGame = "Control de impulsos: estrellas y corazones";
     public const string heartsAndStarstimeToMakeAChoice = "heartsAndStarstimeToMakeAChoice";
     public const string heartsAndStarsRoundResultWins = "heartsAndStarsRoundResultWins";
+    public const string heartsAndStarsclickRepetitions = "heartsAndStarsclickRepetitions";
+    public const string heartsAndStarschallengeOrder = "heartsAndStarschallengeOrder";
+    public const string heartsAndStarsifRanOutOfTime = "heartsAndStarsifRanOutOfTime";
 
     public const string turboRocketGame = "Postergación de la gratificación: El rocket propulsado";
     public const string turboRocketCoinsCollected = "turboRocketCoinsCollected";
