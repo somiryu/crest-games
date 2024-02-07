@@ -13,7 +13,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
     bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
-	bool checkUserList = false;
 	bool userDeletionInProgress = false;
 
 	string logInFailedWarning = string.Empty;
@@ -285,25 +284,30 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
 	}
 
-	public void OnContinueGameBtnPressed()
-	{
-		var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
-        if (targetSequence is MinigameGroups group)
-        {
-			group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
-        }
-		DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
-        GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
-	}
+
 	void MusicBtn()
 	{
 		if (AudioListener.volume == 1) AudioListener.volume = 0;
 		else if (AudioListener.volume == 0) AudioListener.volume = 1;
 	}
 
+	public void OnContinueGameBtnPressed()
+	{
+		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
+		var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
+		if (targetSequence is MinigameGroups group)
+		{
+			group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
+		}
+		DatabaseManager.pendingUserDatasToUpload.Add(UserDataManager.CurrUser);
+		DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
+		GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+	}
+
 	public void OnReadyConfirmBtnPressed()
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
+		DatabaseManager.pendingUserDatasToUpload.Add(UserDataManager.CurrUser);
 		GameSequencesList.Instance.GoToNextSequence();
 	}
 

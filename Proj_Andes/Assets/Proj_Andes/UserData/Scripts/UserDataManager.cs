@@ -61,6 +61,11 @@ public class UserDataManager : ScriptableObject
 		}
 	}
 
+	public bool HasInternetConnection()
+	{
+		return false;
+	}
+
 	[RuntimeInitializeOnLoadMethod]
 	static void RunOnStart()
 	{
