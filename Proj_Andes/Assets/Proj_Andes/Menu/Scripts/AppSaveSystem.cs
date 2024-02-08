@@ -38,11 +38,11 @@ public class AppSaveSystem : MonoBehaviour
 	{
 		UserDataManager.SaveToServer();
 	}
-#endif
+
 
 	private void OnApplicationQuit()
 	{
 		UserDataManager.SaveToServer();
 	}
-
+#endif
 }
