@@ -15,30 +15,36 @@ MonoBehaviour:
   monsters:
   - chestType: 0
     monsters:
-    - Name: 'Regular : Body'
+    - Name: 'Regular : 1'
       guid: 905aa9d6-3234-49d8-ac2b-e252fa36dac8
       monsterType: 0
       monsterIndex: 0
-      sprite: {fileID: 8672387737154267068, guid: d61de80995bf40e4eaade46e254aa7e9, type: 3}
-      monster: {fileID: 0}
-    - Name: 'Regular : BaseMagicMonster'
+      sprite: {fileID: 21300000, guid: b6627719b5ebae24fb80ddfe49c34fb1, type: 3}
+    - Name: 'Regular : 2'
       guid: f8c63292-d984-4534-a77b-14a17417a26f
       monsterType: 0
       monsterIndex: 0
-      sprite: {fileID: -5232026297073219891, guid: 0c0d7c96956b5224a92e481244225046, type: 3}
-      monster: {fileID: 0}
-    - Name: 'Regular : Cauldron'
+      sprite: {fileID: 21300000, guid: 2cdc8f7ec32c6ab489a2a90e80e033b3, type: 3}
+    - Name: 'Regular : 3'
       guid: 3d968f56-6d79-4466-b8de-5f8d84bffdc8
       monsterType: 0
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: 23e7d63d03b659b44a7fb3cbc454f60d, type: 3}
-      monster: {fileID: 0}
-    - Name: 'Regular : Cartoon_space_rocket'
+      sprite: {fileID: 21300000, guid: fdb492abf61927b4783cb971bea8e2c5, type: 3}
+    - Name: 'Regular : 4'
       guid: b8684fad-b1d0-450d-b034-bf253dabf2e5
       monsterType: 0
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: 60118e8b6f586184eb592051703ab77f, type: 3}
-      monster: {fileID: 0}
+      sprite: {fileID: 21300000, guid: 2e13c2cee3adf0747862b68a7ee21010, type: 3}
+    - Name: 'Regular : 5'
+      guid: b8684fad-b1d0-450d-b034-bf253dabf2e5
+      monsterType: 0
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: e16896ee6119c344386ad9ac91ec164e, type: 3}
+    - Name: 'Regular : 6'
+      guid: b8684fad-b1d0-450d-b034-bf253dabf2e5
+      monsterType: 0
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: 9ce19f2556bdd594eb84e73e82a78bf4, type: 3}
   - chestType: 1
     monsters:
     - Name: 'Rare : Fin_Front'
@@ -46,36 +52,65 @@ MonoBehaviour:
       monsterType: 1
       monsterIndex: 0
       sprite: {fileID: 8390514770920238483, guid: 3fa986674e1f55746af510eb92f4bd87, type: 3}
-      monster: {fileID: 0}
-    - Name: 'Rare : Body'
+    - Name: 'Rare : 7'
       guid: 226429bb-390f-4fbc-82dc-4b3dae25134d
       monsterType: 1
       monsterIndex: 0
-      sprite: {fileID: -3214848348637130624, guid: 6846b16312616694a86e31f35dd35744, type: 3}
-      monster: {fileID: 0}
-    - Name: 'Rare : chest'
+      sprite: {fileID: 21300000, guid: e86cb254a28cd1d46bc6ca04e3d3888c, type: 3}
+    - Name: 'Rare : 8'
       guid: bf4c4ec3-3e6e-4323-9289-250d4efc306e
       monsterType: 1
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: 2cf31bd679482f84c8c48256e51fbdd2, type: 3}
-      monster: {fileID: 0}
-    - Name: 'Rare : EnergyItem'
+      sprite: {fileID: 21300000, guid: d0930d083e2fbc445ac583579597ee8d, type: 3}
+    - Name: 'Rare : 9'
       guid: 8298110c-be4d-47a9-83ec-1df4bba5ef04
       monsterType: 1
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: f47293640440b1d41b81c91713e1518d, type: 3}
-      monster: {fileID: 0}
+      sprite: {fileID: 21300000, guid: 35d88543d44de0747aea0185b9a81a47, type: 3}
+    - Name: 'Rare : 10'
+      guid: 8298110c-be4d-47a9-83ec-1df4bba5ef04
+      monsterType: 1
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: 62429c850b26d4c4ab047dca2b28b486, type: 3}
+    - Name: 'Rare : 11'
+      guid: 8298110c-be4d-47a9-83ec-1df4bba5ef04
+      monsterType: 1
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: f2bee3bd5093c8f4d9a8f000e8f4abde, type: 3}
+    - Name: 'Rare : 12'
+      guid: 8298110c-be4d-47a9-83ec-1df4bba5ef04
+      monsterType: 1
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: ae93d21e2e5aec247aa2b972da31036b, type: 3}
   - chestType: 2
     monsters:
-    - Name: 'Legendary : AWorld_1'
+    - Name: 'Legendary : 13'
       guid: 622af89c-472f-4e0d-81e9-65ce3899b1a8
       monsterType: 2
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: c05dea2106f67624ab5c50bfc9e02740, type: 3}
-      monster: {fileID: 0}
-    - Name: 'Legendary : AWorld_2'
+      sprite: {fileID: 21300000, guid: 9eb7caf789472044db330629492b6c87, type: 3}
+    - Name: 'Legendary : 14'
       guid: 0cd2e233-b883-4570-9cff-34214383014b
       monsterType: 2
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: b0f708513ba71ea41b405909e3b38af3, type: 3}
-      monster: {fileID: 0}
+      sprite: {fileID: 21300000, guid: c32698c2240126b48b8fb01fcfb3325f, type: 3}
+    - Name: 'Legendary : 15'
+      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      monsterType: 2
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: 85ac8fa42c276b34db73775248a4014c, type: 3}
+    - Name: 'Legendary : 16'
+      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      monsterType: 2
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: b8c8c29935ef72f46b53d9b37f386dc7, type: 3}
+    - Name: 'Legendary : 17'
+      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      monsterType: 2
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: b82702d22aa9f274a98352d91150e2c0, type: 3}
+    - Name: 'Legendary : 18'
+      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      monsterType: 2
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: a2fdd7ef677b2e745aad04b6c515e494, type: 3}
