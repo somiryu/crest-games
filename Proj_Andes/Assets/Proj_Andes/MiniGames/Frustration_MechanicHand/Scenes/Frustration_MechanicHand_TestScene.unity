@@ -322,6 +322,7 @@ MonoBehaviour:
   constant_ResultsTxt: {fileID: 796055149}
   afterAction_WinLabel: {fileID: 7630630}
   afterAction_LoseLabel: {fileID: 735443156}
+  inGameUiContainer: {fileID: 941657810}
   sendHookBtn: {fileID: 1154508504}
   eogManager: {fileID: 49564637}
   trapImage: {fileID: 1762366230}
