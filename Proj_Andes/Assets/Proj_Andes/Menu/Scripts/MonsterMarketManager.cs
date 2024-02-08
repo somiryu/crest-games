@@ -48,6 +48,8 @@ public class MonsterMarketManager : MonoBehaviour
     MonsterChestType currMonsterChestType;
     MonsterMarketButtonBehaviour currButton;
 
+    Button currSelectedButton;
+
     private void Awake()
     {
         if(instance != null)
@@ -85,20 +87,21 @@ public class MonsterMarketManager : MonoBehaviour
 
         chestOpenedContainer.gameObject.SetActive(false);
 
-        saveForLaterButton.onClick.AddListener(SaveForLater);
-        confirmButton.onClick.AddListener(OpenButtonBeforeBuyChest);
+        confirmButton.onClick.AddListener(OpenButtonBeforeBuyChestOrContinuing);
         chestOpenButton.onClick.AddListener(BuyChest);
         collectBtn.onClick.AddListener(Collect);
 
         regularChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Regular, regularChest));
         rareChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Rare, rareChest));
         legendaryChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Legendary, legendaryChest));
+        saveForLaterButton.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.NONE, saveForLaterButton));
 
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
     }
 
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
+        currSelectedButton = chestBtn;
         chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out currButton);    
         
         currMonsterChestType = monsterChestType;
@@ -116,19 +119,21 @@ public class MonsterMarketManager : MonoBehaviour
                 if (userMonsterButtonBehaviours[i].monsterMarketButton.monsterChestType == monsterChestType) userMonsterButtonBehaviours[i].SetActiveState();
                 else userMonsterButtonBehaviours[i].SetInactiveState();
                 confirmButton.gameObject.SetActive(true);
-
             }
         }
 
-
     }
 
-    void OpenButtonBeforeBuyChest()
+    void OpenButtonBeforeBuyChestOrContinuing()
     {
-        chestOpenButtonParent.gameObject.SetActive(true);
-        chestOpenImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
-        confirmButton.gameObject.SetActive(false);
-        UI_BG_base.SetActive(false);
+        if(currSelectedButton == saveForLaterButton) SaveForLater();
+        else
+        {
+            chestOpenButtonParent.gameObject.SetActive(true);
+            chestOpenImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
+            confirmButton.gameObject.SetActive(false);
+            UI_BG_base.SetActive(false);
+        }
     }
 
     void BuyChest()
@@ -141,7 +146,7 @@ public class MonsterMarketManager : MonoBehaviour
                 if (marketConfig.AvailableCoins >= marketConfig.RegularChestPrice)
                 {
                     marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
-                    OpenChest(80, 20, 0, 2);
+                    OpenChest(100, 0, 0, 1);
                 }
                 else chestNoEnoughCoins.SetActive(true);
                 break;
@@ -149,7 +154,7 @@ public class MonsterMarketManager : MonoBehaviour
                 if (marketConfig.AvailableCoins >= marketConfig.RareChestPrice)
                 {
                     marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
-                    OpenChest(20, 70, 10, 5);
+                    OpenChest(50, 50, 0, 2);
                 }
                 else chestNoEnoughCoins.SetActive(true);
                 break;
@@ -157,7 +162,7 @@ public class MonsterMarketManager : MonoBehaviour
                 if (marketConfig.AvailableCoins >= marketConfig.LegendaryChestPrice)
                 {
                     marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
-                    OpenChest(5, 50, 45, 8);
+                    OpenChest(33, 33, 33, 3);
                 }
                 else chestNoEnoughCoins.SetActive(true);
                 break;
@@ -244,10 +249,12 @@ public class MonsterMarketManager : MonoBehaviour
         }
         RefreshCollectionFromData();
 		myCollectionManager.ShowCollection();
-	}
+        myCollectionManager.gameObject.SetActive(true);
+
+    }
 
 
-	void SaveForLater()
+    public void SaveForLater()
     {
         chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
