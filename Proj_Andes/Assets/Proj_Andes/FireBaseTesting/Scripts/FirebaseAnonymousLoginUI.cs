@@ -7,6 +7,7 @@ using System;
 using Firebase.Auth;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEditor.UI;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {   
@@ -37,7 +38,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Transform uReadyPanel;
 	[SerializeField] Button readyBtb;
 
-	[Header("Create new user panel")]
+	[Header("Search Bar")]
+	[SerializeField] Transform searchUserContainer;
+	[SerializeField] TMP_InputField searchField;
+	[SerializeField] Button confirmUserBtn;
+
+    [Header("Create new user panel")]
 	public GameObject createNewUserPanel;
 	[SerializeField] TMP_InputField nameField;
 	[SerializeField] TMP_InputField ageField;
@@ -85,6 +91,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		readyBtb.onClick.AddListener(OnReadyConfirmBtnPressed);
 
+		searchField.onValueChanged.AddListener(delegate { SearchUser(); });
 
         correctlyLoggedInFlag = false;
 		doneInitialization = false;
@@ -172,7 +179,22 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			StartCoroutine(LoadUsers());
 		}
 	}
-
+	void SearchUser()
+	{
+		Debug.Log("seaarching");
+		string searchText = searchField.text;
+		int textLenght = searchText.Length;
+		int searchElements = 0;
+		foreach (var item in currBtnsByDataID)
+		{
+			searchElements++;
+			if(item.Key.label.text.Length >= textLenght)
+			{
+				if (searchText.ToLower() == item.Key.label.text.ToLower()) item.Key.gameObject.SetActive(true);
+				else item.Key.gameObject.SetActive(false);
+            }
+		}
+	}
 	void RebuildUsersList()
 	{
 		currBtnsByDataID.Clear();
@@ -184,6 +206,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			var newBtn = userBtnsPool.GetNewItem();
 			newBtn.Init(users[i].name, this);
 			currBtnsByDataID.Add(newBtn, users[i].id);
+			newBtn.gameObject.SetActive(false);
 		}
 	}
 
