@@ -126,6 +126,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	private void Update()
 	{
+		if (activeShips.Count > 0) return;
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
 			var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -207,6 +208,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		selectedRocketType = types;
 	}
 
+
 	void GenerateNewShip(SizeRocketsRocketTypes types)
 	{
 		if (shipsLeft <= 0) return;
@@ -219,6 +221,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		shipsLeft--;
 		shipsLeftTxt.SetText(shipsLeft.ToString());
 		shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
+		smallRocketBtn.interactable = false;
+		mediumRocketBtn.interactable = false;
+		largeRocketBtn.interactable = false;
 	}
 
 
@@ -239,6 +244,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		activeShips.Remove(rocket);
 		totalCoinsWon += coinsAmount;
 		currCoinsLabel.SetText(totalCoinsWon.ToString());
+		smallRocketBtn.interactable = true;
+		mediumRocketBtn.interactable = true;
+		largeRocketBtn.interactable = true;
 	}
 
 

@@ -22,6 +22,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public TMP_Text constant_ResultsTxt;
 	public GameObject afterAction_WinLabel;
 	public GameObject afterAction_LoseLabel;
+	public GameObject inGameUiContainer;
 	public Button sendHookBtn;
 
 	private List<Transform> currRoundAsteroids = new List<Transform>();
@@ -156,6 +157,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 
 	void GameOver()
 	{
+		inGameUiContainer.gameObject.SetActive(false);
 		afterActionPanel.SetActive(true);
 		inGameObjs.SetActive(false);
 		//afterAction_ResultsTxt.SetText("Capturaste: " + totalCapturedAsteroids + " de " + asteroidsPerRound * 3);
