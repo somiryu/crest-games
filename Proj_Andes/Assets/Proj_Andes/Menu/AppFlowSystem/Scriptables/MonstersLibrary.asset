@@ -20,21 +20,25 @@ MonoBehaviour:
       monsterType: 0
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: 1b5b6421ccf37c644ab6c70aef34948a, type: 3}
+      cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
     - Name: 'Regular : 2'
       guid: f8c63292-d984-4534-a77b-14a17417a26f
       monsterType: 0
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: b97f1c41c7fbfe948a8bcfa3b50fb939, type: 3}
+      cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
     - Name: 'Regular : 3'
       guid: 3d968f56-6d79-4466-b8de-5f8d84bffdc8
       monsterType: 0
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: ebbbfa8258290ec489dfe2a150e3ef9d, type: 3}
+      cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
     - Name: 'Regular : 4'
       guid: b8684fad-b1d0-450d-b034-bf253dabf2e5
       monsterType: 0
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: b2264d5ee7b9f4543a6f0f37523b0634, type: 3}
+      cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
   - chestType: 1
     monsters:
     - Name: 'Rare : Fin_Front'
@@ -42,30 +46,36 @@ MonoBehaviour:
       monsterType: 1
       monsterIndex: 0
       sprite: {fileID: 8390514770920238483, guid: 3fa986674e1f55746af510eb92f4bd87, type: 3}
-    - Name: 'Rare : 8'
+      cardBk: {fileID: 0}
+    - Name: 'Rare : 7'
       guid: 226429bb-390f-4fbc-82dc-4b3dae25134d
       monsterType: 1
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: f3ac91e4e24310b4798fba4183b0e936, type: 3}
+      sprite: {fileID: 21300000, guid: fa2eeee1921806f4dadd1e9cea671ca8, type: 3}
+      cardBk: {fileID: 21300000, guid: dcf663ee427f14a418d14daa56128f0d, type: 3}
     - Name: 'Rare : 9'
       guid: bf4c4ec3-3e6e-4323-9289-250d4efc306e
       monsterType: 1
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: c894d3afc7918a0499133253df25832e, type: 3}
+      cardBk: {fileID: 21300000, guid: dcf663ee427f14a418d14daa56128f0d, type: 3}
     - Name: 'Rare : EnergyItem'
       guid: 8298110c-be4d-47a9-83ec-1df4bba5ef04
       monsterType: 1
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: f47293640440b1d41b81c91713e1518d, type: 3}
+      cardBk: {fileID: 0}
   - chestType: 2
     monsters:
-    - Name: 'Legendary : 13'
+    - Name: 'Legendary : 14'
       guid: 622af89c-472f-4e0d-81e9-65ce3899b1a8
       monsterType: 2
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: df9ded3823dc77d479089a6aa67bd426, type: 3}
-    - Name: 'Legendary : 14'
+      sprite: {fileID: 21300000, guid: 0c00e287d2ab85c4b9185f197a415abd, type: 3}
+      cardBk: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}
+    - Name: 'Legendary : 16'
       guid: 0cd2e233-b883-4570-9cff-34214383014b
       monsterType: 2
       monsterIndex: 0
-      sprite: {fileID: 21300000, guid: 0c00e287d2ab85c4b9185f197a415abd, type: 3}
+      sprite: {fileID: 21300000, guid: 6de84f070eec5c14cbbe8d76b22f80d8, type: 3}
+      cardBk: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}

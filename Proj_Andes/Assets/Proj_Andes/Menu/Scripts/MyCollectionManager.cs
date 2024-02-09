@@ -49,7 +49,7 @@ public class MyCollectionManager : MonoBehaviour
         for (int i = 0; i < totalDataCollection.Count; i++)
         {
             var item = monstersUIInCollection.GetNewItem();
-            item.Show(totalDataCollection[i]);
+            item.Show(totalDataCollection[i], true);
         }
     }
 
@@ -70,6 +70,10 @@ public class MyCollectionManager : MonoBehaviour
         if (toTheRight) scrollSpeed = 2;
         else scrollSpeed = -2;
         Debug.Log("moving");
+    }
+    public void OnStopScrolling()
+    {
+        scrollSpeed = 0;
     }
 }
 

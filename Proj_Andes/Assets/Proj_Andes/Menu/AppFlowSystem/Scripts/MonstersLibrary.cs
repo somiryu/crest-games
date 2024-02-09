@@ -43,7 +43,6 @@ public class MonstersList
 {
 	public MonsterChestType chestType;
 	public List<Monsters> monsters;
-
 	public void OnValidate()
 	{
 		for (int i = 0; i < monsters.Count; i++)

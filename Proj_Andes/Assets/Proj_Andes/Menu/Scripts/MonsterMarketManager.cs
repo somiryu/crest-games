@@ -45,6 +45,8 @@ public class MonsterMarketManager : MonoBehaviour
     public Pool<MonsterItemUI> monstersUIInChestOpenning;
     List<Monsters> totalDataCollection => MyCollectionManager.totalDataCollection;
     List<Monsters> currentMonstersFound = new List<Monsters>();
+    public List<Image> replaceableImg = new List<Image>();
+
     MonsterChestType currMonsterChestType;
     MonsterMarketButtonBehaviour currButton;
 
@@ -208,11 +210,13 @@ public class MonsterMarketManager : MonoBehaviour
         }
 
         monstersUIInChestOpenning.RecycleAll();
+        for (int i = 0; i < replaceableImg.Count; i++) replaceableImg[i].gameObject.SetActive(false);
 
         for (int i = 0; i < currentMonstersFound.Count; i++)
         {
             var newItem = monstersUIInChestOpenning.GetNewItem();
-            newItem.Show(currentMonstersFound[i]);
+            replaceableImg[i].sprite = currentMonstersFound[i].sprite;
+            replaceableImg[i].gameObject.SetActive(true);
         }
     }
     public void RefreshCollectionFromData()
@@ -276,6 +280,7 @@ public class Monsters
     public MonsterChestType monsterType;
     public int monsterIndex;
     public Sprite sprite;
+    public Sprite cardBk;
 
     public void OnValidate()
     {

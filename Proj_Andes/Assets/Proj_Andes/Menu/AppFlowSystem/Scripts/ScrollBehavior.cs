@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 
-public class ScrollBehavior : Image , IPointerDownHandler
+public class ScrollBehavior : Image , IPointerDownHandler, IPointerUpHandler
 {
     MyCollectionManager myColl => MyCollectionManager.Instance;
 
@@ -12,4 +12,8 @@ public class ScrollBehavior : Image , IPointerDownHandler
         myColl.OnScroll();
     }
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        myColl.OnStopScrolling();
+    }
 }
