@@ -864,7 +864,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3ea8cc0e679460a4480f74ce0e52a0e8, type: 3}
     - target: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: monsterMarketButton.monsterChestType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4851165091639796028, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_Sprite
