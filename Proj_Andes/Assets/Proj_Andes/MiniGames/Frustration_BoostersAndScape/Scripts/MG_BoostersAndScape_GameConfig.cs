@@ -10,6 +10,7 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     public float boosterTriggerRate;
     public bool forceToFail;
     public bool updateScene;
+    public int extraAttemptsBeforeFailing;
 
     [NonSerialized] public List<float> timeToMakeAChoice = new List<float>();
     [NonSerialized] public int totalAttemptsToBoost;

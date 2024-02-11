@@ -139,7 +139,6 @@ public class UserDataManager : ScriptableObject
 
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
-		DatabaseManager.GetUserDatasList();
 	}
 
 
