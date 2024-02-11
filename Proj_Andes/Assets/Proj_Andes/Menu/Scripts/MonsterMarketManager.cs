@@ -244,7 +244,8 @@ public class MonsterMarketManager : MonoBehaviour
 
         for (int i = 0; i < currentMonstersFound.Count; i++)
         {
-            if (!totalDataCollection.Contains(currentMonstersFound[i]))
+            var alreadyIn = totalDataCollection.Exists(x => x.guid == currentMonstersFound[i].guid);
+            if (!alreadyIn)
             {
                 marketConfig.AddMonsterToCollection(currentMonstersFound[i]);
                 Debug.Log("Encontraste un nuevo monstruo "+ currentMonstersFound[i].Name);

@@ -313,7 +313,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
 			GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
 		}
-		else GameSequencesList.Instance.GoToNextSequence();
+		else
+		{
+			UserDataManager.CurrUser.myCollectionMonsters.Clear();
+			UserDataManager.CurrUser.Coins = 10;
+			GameSequencesList.Instance.GoToNextSequence();
+		}
 	}
 
 }
