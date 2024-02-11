@@ -40,5 +40,5 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: a0613a539b6a2f641a9a4049755c6e59, type: 3}
     audioAlternative: {fileID: 8300000, guid: ca4f995e6827caf45afe416af9665331, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 528185122f52de849a7bd33445c9d389, type: 2}
+    IdleAnim: {fileID: 11400000, guid: 08e0cb7ea5b73cc4cb981ad5494f157f, type: 2}
     ExitAnim: {fileID: 0}
