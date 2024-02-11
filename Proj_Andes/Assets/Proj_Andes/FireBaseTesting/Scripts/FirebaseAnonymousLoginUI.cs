@@ -68,6 +68,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	 string logInsuccedID;
 
+	bool continueSelectedFlag;
+
 	private void Awake()
 	{
 		loadingScreen.gameObject.SetActive(true);
@@ -88,19 +90,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
-		afterLogInContinueBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
+		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
 
 		readyBtb.onClick.AddListener(OnReadyConfirmBtnPressed);
 
-		searchField.onValueChanged.AddListener(delegate { SearchUser(); });
-		confirmUserBtn.onClick.AddListener(ConfirmUserSelection);
+		continueSelectedFlag = false;
+		searchField.onValueChanged.AddListener((_) => SearchUser());
+		confirmUserBtn.onClick.AddListener(() => OnSelectedUser(selectedUser));
 
         correctlyLoggedInFlag = false;
 		doneInitialization = false;
 		userBtnsPool.Init(10);
 		currBtnsByDataID = new Dictionary<UsersListItem, string>();
 	}
+
 
 	private void Start()
 	{
@@ -193,7 +197,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			searchElements++;
 			if(item.Key.label.text.Length >= textLenght)
 			{
-				if (searchText.ToLower() == item.Key.label.text.Substring(0, textLenght).ToLower()) item.Key.gameObject.SetActive(true);
+				if (item.Key.label.text.Contains(searchText, StringComparison.OrdinalIgnoreCase)) item.Key.gameObject.SetActive(true);
 				else item.Key.gameObject.SetActive(false);
             }
 		}
@@ -212,16 +216,14 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			newBtn.gameObject.SetActive(false);
 		}
 	}
+
     public void ShowSelection(UsersListItem userSelected)
     {
 		selectedUser = userSelected;
 		searchField.text = userSelected.label.text;
 		foreach (var item in currBtnsByDataID) item.Key.gameObject.SetActive(false);
     }
-    void ConfirmUserSelection()
-	{
-		OnSelectedUser(selectedUser);
-	}
+
 	IEnumerator LoadUsers()
 	{
 		yield return UserDataManager.Instance.LoadDataFromRemoteDataBaseRoutine();
@@ -308,6 +310,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnSelectedUser(UsersListItem data)
 	{
+		if (data == null) return;
         userNameHeader.text = data.label.text;
         userNameExitPanel.text = data.label.text;
 
@@ -322,14 +325,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnContinueGameBtnPressed()
 	{
-		var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
-        if (targetSequence is MinigameGroups group)
-        {
-			group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
-        }
-		DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
-        GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+		continueSelectedFlag = true;
+		uReadyPanel.gameObject.SetActive(true);
 	}
+
 	void MusicBtn()
 	{
 		if (AudioListener.volume == 1) AudioListener.volume = 0;
@@ -339,7 +338,22 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	public void OnReadyConfirmBtnPressed()
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
-		GameSequencesList.Instance.GoToNextSequence();
+		if (continueSelectedFlag)
+		{
+			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
+			if (targetSequence is MinigameGroups group)
+			{
+				group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
+			}
+			DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
+			GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+		}
+		else
+		{
+			UserDataManager.CurrUser.myCollectionMonsters.Clear();
+			UserDataManager.CurrUser.Coins = 10;
+			GameSequencesList.Instance.GoToNextSequence();
+		}
 	}
 
 }

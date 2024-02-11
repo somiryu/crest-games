@@ -166,8 +166,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
 	private void OnClickedDiscard()
     {
-        audioPlayer.clip = discardAudio;
-        audioPlayer.Play();
+        audioPlayer.PlayOneShot(discardAudio);
         if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
@@ -183,9 +182,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
-        audioPlayer.clip = wrongAudio;
         incorrectParticles.Play();
-        audioPlayer.Play();
+        audioPlayer.PlayOneShot(wrongAudio);
+
         OnRoundEnded();
     }
 
@@ -211,8 +210,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
         correctParticles.Play();
 
-        audioPlayer.clip = rightAudio;
-        audioPlayer.Play();
+        audioPlayer.PlayOneShot(correctAudio);
         OnRoundEnded();
     }
 
