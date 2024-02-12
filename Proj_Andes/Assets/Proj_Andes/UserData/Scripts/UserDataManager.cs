@@ -5,17 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
 public class UserDataManager : ScriptableObject
 {
 	[SerializeField] int maxAgeEasyLevel = 4;
     [SerializeField] int maxAgeMediumLevel = 8;
+	public bool HasInternet = true;
 
 	private static string instancePath = "UserDataManager";
 	private static string defaultUserID = "DefaultUserId";
 
 	private static string currTestID;
+
 
 	public static string CurrTestID
 	{
@@ -64,7 +67,7 @@ public class UserDataManager : ScriptableObject
 
 	public bool HasInternetConnection()
 	{
-		return true;
+		return HasInternet;
 	}
 
 	[RuntimeInitializeOnLoadMethod]
@@ -157,8 +160,26 @@ public class UserDataManager : ScriptableObject
 
 	public IEnumerator LoadDataFromRemoteDataBaseRoutine()
 	{
+		yield return CheckInternetConnection();
+
 		DatabaseManager.GetUserDatasList();
 		while (!DatabaseManager.userListDone) yield return null;
+	}
+
+	public IEnumerator CheckInternetConnection()
+	{
+		UnityWebRequest www = new UnityWebRequest("http://unity3d.com/");
+
+		yield return www.SendWebRequest();
+
+		if (www.result == UnityWebRequest.Result.ConnectionError) // Error
+		{
+			HasInternet = false;
+		}
+		else // Success
+		{
+			HasInternet = true;
+		}
 	}
 
 	public void SaveDataToRemoteDataBase()

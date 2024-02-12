@@ -41,6 +41,12 @@ public static class DatabaseManager
     }
 #endif
 
+    public static void DisableFirebaseOfflineSave()
+    {
+        db.Settings.PersistenceEnabled = false;
+        db.ClearPersistenceAsync();
+	}
+
    public static void AddPendingUserData(UserData userData)
     {
         var alreadyIn = pendingUserDatasToUpload.FindIndex(x => x.id == userData.id);
@@ -75,6 +81,8 @@ public static void GetUserDatasList()
         allUsers.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allUsersQuerySnapshot = task.Result;
+            if (task.IsFaulted) Debug.LogError("FailedToGetUsersDataList");
+
             foreach (DocumentSnapshot documentSnapshot in allUsersQuerySnapshot.Documents)
             {
                 Debug.Log(String.Format("Document data for {0} document:", documentSnapshot.Id));
@@ -214,7 +222,7 @@ public static void GetUserDatasList()
             Debug.Log("Syncing GAME ID: " + GameDatas.Key);
             foreach(var sessionData in GameDatas.Value)
             {
-				Debug.Log("Syncing Test ID: " + GameDatas.Key);
+				Debug.Log("Syncing Test ID: " + sessionData.Key);
 				DocumentReference docRef = collRef.Document(sessionData.Key);
                 await docRef.SetAsync(sessionData.Value);
             }

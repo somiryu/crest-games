@@ -64,6 +64,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] GameObject afterLogInPanel;
 	[SerializeField] Button afterLogInContinueBtn;
 	[SerializeField] Button afterLogInNewGameBtn;
+	[Space(20)]
+	[SerializeField] GameObject checkingInternetPanel;
+	[SerializeField] GameObject NoInternetWarningIcon;
 
 	 string logInsuccedID;
 
@@ -71,6 +74,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	private void Awake()
 	{
+		DatabaseManager.DisableFirebaseOfflineSave();
 		loadingScreen.gameObject.SetActive(true);
 		selectUserContainer.gameObject.SetActive(true);
 
@@ -102,6 +106,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		doneInitialization = false;
 		userBtnsPool.Init(10);
 		currBtnsByDataID = new Dictionary<UsersListItem, string>();
+		checkingInternetPanel.SetActive(false);
 	}
 
 
@@ -127,11 +132,14 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		}
 		if (taskResult.IsFaulted)
 		{
+			UserDataManager.Instance.HasInternet = false;
 			OnFailedLogIn(taskResult);
 			return;
 		}
 
 		AuthResult result = taskResult.Result;
+
+		UserDataManager.Instance.HasInternet = true;
 
 		Debug.LogFormat("User signed in successfully: {0} ({1})",
 			result.User.DisplayName, result.User.UserId);
@@ -225,8 +233,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	IEnumerator LoadUsers()
 	{
+		checkingInternetPanel.SetActive(true);
 		yield return UserDataManager.Instance.LoadDataFromRemoteDataBaseRoutine();
 		Debug.Log("Corretly retrieved users from server");
+		checkingInternetPanel.SetActive(false);
+		NoInternetWarningIcon.SetActive(!UserDataManager.Instance.HasInternet);
 		RebuildUsersList();
 	}
 
