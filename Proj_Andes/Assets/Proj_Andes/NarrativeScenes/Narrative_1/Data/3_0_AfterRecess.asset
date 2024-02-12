@@ -89,10 +89,12 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "La profe llama a Cami para revisarle su tarea. Mientras tanto, Alex, la
-      misma compa\xF1era que la hab\xEDa empujado en clase de educaci\xF3n f\xEDsica,
+    text: "La profe llama a Cami para revisarle su tarea. Mientras tanto, Alex, el
+      mismo compa\xF1ero que lo hab\xEDa empujado en clase de educaci\xF3n f\xEDsica,
       pasa por su puesto, le quita su l\xE1piz y lo esconde."
-    textAlternative: 
+    textAlternative: "La profe llama a Cami para revisarle su tarea. Mientras tanto,
+      Alex, la misma compa\xF1era que la hab\xEDa empujado en clase de educaci\xF3n
+      f\xEDsica, pasa por su puesto, le quita su l\xE1piz y lo esconde."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: 8cccf6644b2ad154eb8563ab788269a8, type: 3}

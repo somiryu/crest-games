@@ -19,8 +19,8 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Te levantas para ir donde la profe a hacerle una pregunta. Cuando est\xE1s
-      regresando a tu puesto, te das cuenta de que Alex est\xE1 rayando el cuaderno
-      que ten\xEDas en tu mesa.\r\n"
+      regresando a tu puesto, te das cuenta de que Alex est\xE1 rompiendo unas hojas
+      que ten\xEDas en tu mesa."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -34,7 +34,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFQu\xE9 sientes al ver que Alex est\xE1 rayando tu cuaderno?\r"
+    text: "\xBFQu\xE9 sientes al ver que Alex est\xE1 rompiendo tus hojas?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
