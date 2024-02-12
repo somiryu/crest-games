@@ -41,29 +41,29 @@ MonoBehaviour:
     - response: MUY BIEN
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: d7352ef1843fdb045aaba3a00a855f7e, type: 3}
       dataAfterResponse: {fileID: 0}
     - response: BIEN
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 02f75c8a6f8937f4cb26f68be4354a30, type: 3}
       dataAfterResponse: {fileID: 0}
     - response: ME DA IGUAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 6b10eb33fdad503448cbe325332f025b, type: 3}
       dataAfterResponse: {fileID: 0}
     - response: MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 0b68589e4cc8c1046a9073e8b4b887bd, type: 3}
       dataAfterResponse: {fileID: 0}
     - response: MUY MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 42ea2c09276aef24c9e27f4a2d7c1d16, type: 3}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 8300000, guid: 84dd25dc6dc66ae419d46a695ec7f660, type: 3}
+    audio: {fileID: 8300000, guid: 52fb05e15daf2e749a32ba7dad06a49c, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -101,11 +101,11 @@ MonoBehaviour:
     changeToSequence: {fileID: 11400000, guid: f8d273cd4b2ae5146833e143cb618c67, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cami comienza a saltar lazo, pero llega Alex, una compa\xF1ero del curso,
-      y empuja a Cami. La hace caer y todos los dem\xE1s empiezan a re\xEDrse al
-      verla en el piso\u2026"
-    textAlternative: "Cami comienza a saltar lazo, pero llega Alex, un compa\xF1era
-      del curso, y empuja a Cami. Lo hace caer y todos los dem\xE1s empiezan a re\xEDrse
+    text: "Cami comienza a saltar lazo, pero llega Alex, un compa\xF1ero del curso,
+      y empuja a Cami. Lo hace caer y todos los dem\xE1s empiezan a re\xEDrse al
+      verlo en el piso\u2026"
+    textAlternative: "Cami comienza a saltar lazo, pero llega Alex, una compa\xF1era
+      del curso, y empuja a Cami. La hace caer y todos los dem\xE1s empiezan a re\xEDrse
       al verlo en el piso\u2026"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
