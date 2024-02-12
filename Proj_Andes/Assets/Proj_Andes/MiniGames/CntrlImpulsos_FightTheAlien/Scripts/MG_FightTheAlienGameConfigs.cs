@@ -27,8 +27,6 @@ public class MG_FightTheAlienGameConfigs : GameConfig
     {
         itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.fightTheAlienTotalGametime, totalGameTime);
-        itemAnalytics.Add(DataIds.fightTheAlientimeToMakeAChoice, timeToMakeAChoice);
-        itemAnalytics.Add(DataIds.fightTheAlienRoundResultWins, roundResultWins);
 
         UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
 

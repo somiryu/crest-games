@@ -335,16 +335,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		uReadyPanel.gameObject.SetActive(true);
 	}
 
-	void MusicBtn()
-	{
-		if (AudioListener.volume == 1) AudioListener.volume = 0;
-		else if (AudioListener.volume == 0) AudioListener.volume = 1;
-	}
-
 	public void OnReadyConfirmBtnPressed()
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
-		DatabaseManager.pendingUserDatasToUpload.Add(UserDataManager.CurrUser);
+		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 		if (continueSelectedFlag)
 		{
 			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];

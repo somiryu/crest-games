@@ -24,8 +24,6 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
         itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.boostersAndScapetotalAttemptsToBoost, totalAttemptsToBoost);
         itemAnalytics.Add(DataIds.boostersAndScapeTotalGametime, totalGameTime);
-        itemAnalytics.Add(DataIds.boostersAndScapetimeToMakeAChoice, timeToMakeAChoice);
-        itemAnalytics.Add(DataIds.boostersAndScapeRoundResultWins, roundResultWins);
 
         UserDataManager.SaveUserAnayticsPerGame(DataIds.boostersAndScapeGame, itemAnalytics);
     }

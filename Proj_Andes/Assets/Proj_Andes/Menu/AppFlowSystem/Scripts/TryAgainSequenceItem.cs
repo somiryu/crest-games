@@ -22,7 +22,7 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
     {
         clickAmounts = TryAgainManager.clickCounts;
         itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(GetSceneID(), clickAmounts.ToString());
+        itemAnalytics.Add(GetSceneID(), clickAmounts);
         UserDataManager.SaveUserAnayticsPerGame(GetSceneID(), itemAnalytics);
 
     }

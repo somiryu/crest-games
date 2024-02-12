@@ -19,9 +19,6 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.heartsAndStarstimeToMakeAChoice, timeToMakeAChoice);
-        itemAnalytics.Add(DataIds.heartsAndStarsRoundResultWins, roundResultWins);
-        Debug.Log(timeToMakeAChoice.Count + " handstarts " + roundResultWins.Count);
         UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, itemAnalytics);
     }
     public override void ResetCurrentAnalytics()

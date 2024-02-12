@@ -47,7 +47,8 @@ public class UserDataManager : ScriptableObject
 	public List<UserData> usersDatas => DatabaseManager.userDatas;
     
 	
-    public static Dictionary<string, Dictionary<string, object>> userAnayticsPerGame = new Dictionary<string, Dictionary<string, object>>();
+    public static Dictionary<string, Dictionary<string, Dictionary<string, object>>> userAnayticsPerGame = 
+		new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
 
 
     int currUserDataIdx = -1;
@@ -63,7 +64,7 @@ public class UserDataManager : ScriptableObject
 
 	public bool HasInternetConnection()
 	{
-		return false;
+		return true;
 	}
 
 	[RuntimeInitializeOnLoadMethod]
@@ -87,23 +88,24 @@ public class UserDataManager : ScriptableObject
 
 	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics)
 	{
-        var playerItemAnalytics = new Dictionary<string, object>();
-
 		var analyticsWithExtraFields = new Dictionary<string, object>();
 		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
-        playerItemAnalytics.Add(CurrTestID, analyticsWithExtraFields);
 
-
-        if (userAnayticsPerGame.ContainsKey(gameKey))
+		if (userAnayticsPerGame.ContainsKey(gameKey))
 		{
-			if (userAnayticsPerGame[gameKey].ContainsKey(CurrTestID)) userAnayticsPerGame[gameKey][CurrTestID] = playerItemAnalytics;			
-			else userAnayticsPerGame[gameKey].Add(CurrTestID, playerItemAnalytics);
+			if (userAnayticsPerGame[gameKey].ContainsKey(CurrTestID)) userAnayticsPerGame[gameKey][CurrTestID] = analyticsWithExtraFields;
+			else userAnayticsPerGame[gameKey].Add(CurrTestID, analyticsWithExtraFields);
 		}
-		else userAnayticsPerGame.Add(gameKey, playerItemAnalytics);
+		else 
+		{
+			var sessionAnalytics = new Dictionary<string, Dictionary<string, object>>();
+			sessionAnalytics.Add(CurrTestID, analyticsWithExtraFields);
+			userAnayticsPerGame.Add(gameKey, sessionAnalytics);
+		}
     }
     public static bool SaveToServer()
 	{
