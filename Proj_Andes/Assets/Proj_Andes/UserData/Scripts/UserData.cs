@@ -65,8 +65,6 @@ public class UserData
 	}
 }
 
-
-
 public enum UserGender
 {
 	Masculino,
@@ -76,10 +74,10 @@ public enum UserGender
 
 public enum UserSchoolType
 {
-    Privado,
-    PúblicoUrbano,
-    PúblicoRural,
-	NONE
+	NONE = 0,
+    Privado = 1,
+    PublicoUrbano = 2,
+    PublicoRural = 3,
 }
 
 [Flags]

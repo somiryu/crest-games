@@ -44,8 +44,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     [Header("Create new user panel")]
 	public GameObject createNewUserPanel;
 	[SerializeField] TMP_InputField nameField;
-	[SerializeField] TMP_InputField ageField;
-    [SerializeField] TMP_InputField gradeField;
+    [SerializeField] TMP_Dropdown ageField;
+    [SerializeField] TMP_Dropdown gradeField;
     [SerializeField] TMP_Dropdown sexField;
     [SerializeField] TMP_Dropdown schoolTypeField;
     [SerializeField] TMP_InputField countryField;
@@ -53,6 +53,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button createBtn;
 	[SerializeField] Button cancelBtn;
 	[SerializeField] Button wrongNewUserDataPopUp;
+	[SerializeField] TMP_Text wrongNewUserDataLabelPopUp;
 	[SerializeField] Button logInFailedPopUp;
 	[SerializeField] TMP_Text logInFailTxt;
 	[SerializeField] TMP_Text logInsuccedIDUITxt;
@@ -253,22 +254,48 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
         var newUser = new UserData();
 		newUser.name = nameField.text;
-		newUser.age = int.TryParse(ageField.text, out var ageResult)? ageResult : -1;
-        newUser.grade = int.TryParse(gradeField.text, out var gradeResult) ? gradeResult : -1;
+		newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult)? ageResult : -1;
+        newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
 		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true ,out var genderFound)? genderFound : UserGender.NONE;
-		newUser.schoolType = Enum.TryParse<UserSchoolType>(schoolTypeField.options[schoolTypeField.value].text, true ,out var schoolFound)? schoolFound : UserSchoolType.NONE;
+		newUser.schoolType =  (UserSchoolType) schoolTypeField.value ;
 		newUser.country = countryField.text;
 		newUser.livingWith = GetUserLivingWith();
 
 		var validData = true;
-		validData &= !string.IsNullOrEmpty(newUser.name);
-		validData &= newUser.age != -1;
-        validData &= newUser.grade != -1;
-        validData &= newUser.gender != UserGender.NONE;
-        validData &= newUser.schoolType != UserSchoolType.NONE;
-        validData &= !string.IsNullOrEmpty(newUser.country);
-		validData &= newUser.livingWith != UserLivingWith.NONE;
-		
+		var errMsg = "";
+
+		if (string.IsNullOrEmpty(newUser.name))
+		{
+			errMsg = "El nombre de usuario está vacío o es inválido";
+		}
+		else if(newUser.age == -1)
+		{
+			errMsg = "El campo de edad está vacío o es inválido";
+		}
+		else if (newUser.gender == UserGender.NONE)
+		{
+			errMsg = "El género está vacío o es inválido";
+		}
+		else if (newUser.schoolType == UserSchoolType.NONE)
+		{
+			errMsg = "El tipo de escuela está vacía o es inválida";
+		}
+		else if (newUser.grade == -1)
+		{
+			errMsg = "El campo de grado está vacío o es inválido";
+		}
+		else if (string.IsNullOrEmpty(newUser.country))
+		{
+			errMsg = "El lugar de nacimiento está vacío o es inválido";
+		}
+		else if (newUser.livingWith == UserLivingWith.NONE)
+		{
+			errMsg = "El campo 'Con quien vives' está vacío o es inválido";
+		}
+
+
+		validData = string.IsNullOrEmpty(errMsg);
+		wrongNewUserDataLabelPopUp.SetText(errMsg);
 
 		if(!validData) wrongNewUserDataPopUp.gameObject.SetActive(true);
 		else
@@ -287,8 +314,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		afterLogInPanel.gameObject.SetActive(false);
 
         nameField.text = string.Empty;
-        ageField.text = string.Empty;
-		gradeField.text = string.Empty;
+        ageField.SetValueWithoutNotify(0);
+		gradeField.SetValueWithoutNotify(0);
 		sexField.SetValueWithoutNotify(0);
 		schoolTypeField.SetValueWithoutNotify(0);
 		countryField.text = string.Empty;
