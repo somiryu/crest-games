@@ -12,26 +12,30 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 	public int initialCoins = 0;
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
-	[NonSerialized] public List<float> timeToMakeAChoice = new List<float>();
-    [NonSerialized] public List<bool> roundResultWins = new List<bool>();
-    [NonSerialized] public float totalGameTime;
 
     public override string GetSceneID() => DataIds.voiceStarGame;
     
     public override void SaveAnalytics()
     {
-        itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.voiceStarTotalGametime, totalGameTime);
-        itemAnalytics.Add(DataIds.voiceStarRoundResultWins, roundResultWins);
+        var currAnalyticsDictionary = new Dictionary<string, object>();
+        var currAnalytics = MG_VoiceStarOrFlowerManager.Instance.AllRoundsAnalytics;
+        for (int i = 0; i < currAnalytics.Count; i++)
+        {
+            currAnalyticsDictionary.Clear();
+            currAnalyticsDictionary.Add(DataIds.voiceStarChallengeType, currAnalytics[i].challengeType);
+            currAnalyticsDictionary.Add(DataIds.voiceStarImage, currAnalytics[i].image);
+            currAnalyticsDictionary.Add(DataIds.voiceStarSound, currAnalytics[i].audio);
+            currAnalyticsDictionary.Add(DataIds.voiceStarRoundResultWin, currAnalytics[i].wonRound);
+            currAnalyticsDictionary.Add(DataIds.voiceStartimeToMakeAChoice, currAnalytics[i].timeToMakeAChoice);
+            currAnalyticsDictionary.Add(DataIds.voiceStarClickRepetition, currAnalytics[i].clicks);
+            currAnalyticsDictionary.Add(DataIds.voiceStarRanOutOfTime, currAnalytics[i].ranOutOfTime);
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, itemAnalytics);     
+            UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
+        }
 
     }
     public override void ResetCurrentAnalytics()
     {
-        timeToMakeAChoice.Clear();
-        roundResultWins.Clear();
-        totalGameTime = 0;
         base.ResetCurrentAnalytics();
     }
 }

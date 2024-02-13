@@ -22,12 +22,14 @@ public static class DataIds
 	public const string challengeType = "challenge_type";
 
 
-
-
-	public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
-    public const string voiceStarTotalGametime = "voiceStarTotalGametime";
+    public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
+    public const string voiceStarRanOutOfTime = "voiceStarTotalGametime";
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
-    public const string voiceStarRoundResultWins = "voiceStarRoundResultWins";
+    public const string voiceStarRoundResultWin = "voiceStarRoundResultWin";
+    public const string voiceStarChallengeType = "voiceStarChallengeType";
+    public const string voiceStarImage = "voiceStarImage";
+    public const string voiceStarSound = "voiceStarSound";
+    public const string voiceStarClickRepetition = "voiceStarClickRepetition";
 
     public const string heartsAndStarsGame = "Control de impulsos: estrellas y corazones";
     public const string heartsAndStarsInGameOrder = "heartsAndStarsInGameOrder";

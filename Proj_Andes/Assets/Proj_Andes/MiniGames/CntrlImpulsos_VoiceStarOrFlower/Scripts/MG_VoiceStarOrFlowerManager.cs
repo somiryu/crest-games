@@ -9,6 +9,9 @@ using Random = UnityEngine.Random;
 
 public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 {
+    static MG_VoiceStarOrFlowerManager instance; 
+    public static MG_VoiceStarOrFlowerManager Instance => instance;
+
 	[SerializeField] MG_VoiceStarOrFlowerGameConfigs gameConfigs;
 	[Space(20)]
 	[SerializeField] Sprite leftTargetSprite;
@@ -71,12 +74,16 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     public void Awake()
 	{
+        if (instance != null && instance != this) DestroyImmediate(this);
+        instance = this;
         Init();
 	}
 
 	public void Init()
     {
         currCoins = gameConfigs.initialCoins;
+        AllRoundsAnalytics = new List<MG_FieldOfFlowers_RoundAnalytics>(gameConfigs.maxRounds);
+
         wonLeftCount = 0;
         wonRightCount = 0;
         lostRoundsCount = 0;
@@ -98,6 +105,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
 
+        roundAnalytics = new MG_FieldOfFlowers_RoundAnalytics();
         InitRound();
 	}
 
@@ -129,13 +137,21 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	void InitRound()
     {
         timerPerChoice = 0;
+        
         GetRandomSoundImage();
 
         AllRoundsAnalytics.Add(roundAnalytics);
-
+        roundAnalytics.clicks = 0;
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
         var textToUse = currSoundIsLeft ? leftObjTxt: rightObjTxt;
+
+        if (currSoundIsLeft) roundAnalytics.audio = "Flower";
+        else roundAnalytics.audio = "Star";
+        if (currImgIsLeft) roundAnalytics.image = "Flower";
+        else roundAnalytics.image = "Star";
+        if (currImgIsLeft && currSoundIsLeft || !currSoundIsLeft && !currSoundIsLeft) roundAnalytics.challengeType = "Same";
+        else roundAnalytics.challengeType = "Different";
 
         currTargetImg.sprite = imgToUse;
         audioPlayer.clip = soundToUse;
@@ -150,27 +166,32 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         timerUI.value = timerPerChoice;
         totalGameTime += Time.deltaTime;
         timerPerChoice += Time.deltaTime;
+        if (Input.GetMouseButtonDown(0)) roundAnalytics.clicks++;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
             OnWrongChoice();
+            roundAnalytics.ranOutOfTime = true;
             timerPerChoice = 0;
         }
     }
 
 	private void OnClickedLeft()
     {
-        if(currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+        roundAnalytics.ranOutOfTime = false;
+        if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
         else OnWrongChoice();
     }
 
     private void OnClickedRight()
     {
-		if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+        roundAnalytics.ranOutOfTime = false;
+        if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
 
 	private void OnClickedDiscard()
     {
+        roundAnalytics.ranOutOfTime = false;
         audioPlayer.PlayOneShot(discardAudio);
         if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
@@ -182,7 +203,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        gameConfigs.roundResultWins.Add(false);
+        roundAnalytics.wonRound = false;
 
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
@@ -198,7 +219,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        gameConfigs.roundResultWins.Add(true);
+        roundAnalytics.wonRound = true;
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         if (currSoundIsLeft && !currImgIsLeft)
@@ -222,7 +243,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     void OnRoundEnded()
     {
         currCoinsValueTxt.text = currCoins.ToString();
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
+        roundAnalytics.timeToMakeAChoice = timerPerChoice;
+
 
         var totalRounds = lostRoundsCount + wonLeftCount + wonRightCount;
 
@@ -237,7 +259,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
-        gameConfigs.totalGameTime = totalGameTime;
         gameConfigs.SaveAnalytics();
         audioPlayer.clip = finishAudio;
         audioPlayer.Play();
