@@ -18,14 +18,16 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Desde que entras al sal\xF3n, sientes en tu panza que algo raro va a pasar.
-      Te acercas a Cami, tu mejor amiga, y cuando le preguntas si ella tambien siente
-      lo mismo te responde:"
-    textAlternative: 
+    text: "Desde que entras al sal\xF3n, sientes que algo raro va a pasar. Te acercas
+      a Cami, tu mejor amigo, y cuando le preguntas si el tambi\xE9n siente lo mismo
+      te responde:\r"
+    textAlternative: "Desde que entras al sal\xF3n, sientes que algo raro va a pasar.
+      Te acercas a Cami, tu mejor amiga, y cuando le preguntas si ella tambi\xE9n
+      siente lo mismo te responde:\r\n"
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 8300000, guid: 3cf838d5883d30c49b4911ef81b2018a, type: 3}
-    audioAlternative: {fileID: 0}
+    audio: {fileID: 8300000, guid: 9596df2bad68d414d9432f9c8ac46857, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 2cf1c10c253683a44bf25ebf073f6c27, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 1bb9682e32c23d143956fb0e764730f5, type: 2}
     ExitAnim: {fileID: 0}
@@ -38,7 +40,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: ddcf6459d42053e46a7ed1ba0b0f0f56, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 33f0b9e041053ba4188e3d7a4a97a7ae, type: 2}
@@ -48,12 +50,13 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "No puedes creerlo, efectivamente se te pas\xF3 igual que a Cami y  no
-      tienes tu dibujo"
+    text: " No puedes creerlo, efectivamente te pas\xF3 igual que a Cami y no tienes
+      tu dibujo. En ese momento, la profe comienza revisar los dibujos. \xA1Ya se
+      est\xE1 acercando a tu puesto!\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: a51394199c6acd24998421cdc08064db, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: eb0820e5040a6ad4997aada49cdad9a7, type: 2}
@@ -63,83 +66,15 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Justo ah\xED ves que la profe Sandra comienza a revisar los dibujos.\xA1Ya
-      se est\xE1 acerdando a tu puesto!"
+    text: "Justo cuando la profe est\xE1 llegando a tu puesto, un compa\xF1ero le
+      hace una pregunta y la distrae... parece que te salvaste esta vez\u2026\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 8c81b89b12cdd1347a0a4917693fed1e, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 307b7e49fcb3323448a8647a77590d5c, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 sientes?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 0
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: 
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses:
-    - response: RABIA
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: "MIEDO\t"
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: ALEGRIA
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: TRISTEZA
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: "NO S\xC9"
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Justo cuando la profe esta llegando a tu puesto, un compa\xF1ero le hace
-      una pregunta y la distrae... parece que te salvaste esta vez"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 81a65bd75f70eb543a22390d2cd15afa, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 0
     autoContinueOnClickDialog: 1
@@ -151,101 +86,34 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 95fb0324abc1aa1408a882a73c155a00, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 81a65bd75f70eb543a22390d2cd15afa, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBF qu\xE9 sientes?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
     autoContinueOnClickDialog: 0
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: 
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses:
-    - response: RABIA
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: "MIEDO\t"
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: ALEGRIA
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: TRISTEZA
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: "NO S\xC9"
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 0
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: 
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
     - response: Le digo que eso me molesta mucho, que no lo haga
       responseAlternative: 
       responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 6f4aa8e4578721a4dad0da047b203157, type: 3}
       dataAfterResponse: {fileID: 0}
     - response: "Me levanto y tambi\xE9n le rayo el cuaderno"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 820c881f6f8f6004f9f7ee5ca0fe48ed, type: 3}
       dataAfterResponse: {fileID: 0}
     - response: Cierro mi cuarderno y hago como si no me hubiera dado cuenta
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 779fcb485b0b2674ebd22eca5315d51a, type: 3}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
@@ -257,11 +125,11 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: Alex te ignora
+    text: " Alex se va a su puesto a buscar su dibujo para mostr\xE1rselo a la profe."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 737c56201b7f6a84baa593462ed12d10, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: d49181d84fc7b6f4d85365fcc677af1e, type: 2}
@@ -276,7 +144,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 42be7ee02f0b27b40a38ac78e0d90738, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: f1c176df1fcd37140aa0f62f4525ab97, type: 2}
@@ -291,7 +159,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: a328a84375d53784387f9d0bd15a4a6b, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 4f83b75b8a28cbb41b9353848d7aa881, type: 2}
@@ -303,37 +171,23 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 0
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: 
-    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
+    - response: Le quito los colores a Alex.
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 9a5523db557df534a88e9eddd055d96d, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Dejo as\xED, y utilizo otros colores para mi dibujo."
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 98e8677afa6ce314d83437467d3db692, type: 3}
+      dataAfterResponse: {fileID: 0}
     - response: Le digo que podemos tomar turnos para usar los colores
       responseAlternative: 
       responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: 8702f028d206a664f85ee29e49df7b59, type: 2}
-    - response: Le quito los colores a Alex, sin decirle nada
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: 8702f028d206a664f85ee29e49df7b59, type: 2}
-    - response: "Dejo as\xED, y utilizo otros colores para mi dibujo"
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: 8702f028d206a664f85ee29e49df7b59, type: 2}
+      responseAudio: {fileID: 8300000, guid: ed7d97ff593d7cd449ac6e149a801434, type: 3}
+      dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 5329665876752624690}
   - component: {fileID: 1793937690743282274}
   m_Layer: 5
-  m_Name: CharacterSelectResponseDisplayer 3
+  m_Name: CharacterSelectResponseDisplayer 3_N1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

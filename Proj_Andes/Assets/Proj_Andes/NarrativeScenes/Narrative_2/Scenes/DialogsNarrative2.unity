@@ -2336,7 +2336,7 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 1bb9682e32c23d143956fb0e764730f5, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: d49181d84fc7b6f4d85365fcc677af1e, type: 2}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
@@ -2453,7 +2453,7 @@ SpriteRenderer:
   m_Size: {x: 13.4, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1660057539 &9223372036854775807

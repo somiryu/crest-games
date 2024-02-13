@@ -22,7 +22,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 36aaa415783dd74439d31c18036c9f10, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: c307db773ec41f84ca6f94b5cb6d2df4, type: 2}
@@ -33,29 +33,16 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Ves con emoci\xF3n el parque. No puedes esperar para ser el primero en
-      subirte al columpio.."
-    textAlternative: 
+      subirte al columpio\u2026 Aparece una profe que necesita hablar con Cami."
+    textAlternative: "Ves con emoci\xF3n el parque. No puedes esperar para ser la
+      primera en subirte al columpio\u2026 Aparece una profe que necesita hablar
+      con Cami."
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
+    audio: {fileID: 8300000, guid: 0d3fa8042c516ce4f9e94b5b0e7da71a, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 111edd3ce668bc341818a3b9c05d6c06, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 211acfd051f840748976e40f16ab6429, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Aparece Julieta quien les dice que la profe Mar\xEDa manda a llamar a
-      Cami."
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 5c55c79a114f54543b66be5f72c64a30, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 1
     autoContinueOnClickDialog: 1
@@ -66,7 +53,7 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 0841a4844b9516841a508d01e9cbd277, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: d28fbd2db618a7e44b870be8d34c919e, type: 2}
@@ -79,7 +66,7 @@ MonoBehaviour:
     text: "Ahora te toca buscar con qui\xE9n jugar! de estos tres personajes, \xBFa
       qui\xE9n le preguntarias?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 9c831892bf4d7574b8016314e8116aa2, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: fda6a2115d437bc45acd83ef388a6d93, type: 3}
     responses:
     - response: 
       responseAlternative: 
@@ -96,60 +83,7 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: 443d134371b17d34abaad5bc9a96af42, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo asi \xBFqu\xE9 sientes?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 0
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: 
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses:
-    - response: RABIA
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: "MIEDO\t"
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: ALEGRIA
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: TRISTEZA
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    - response: "NO S\xC9"
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 86741842a70893f4a854c00ec6afb368, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 2435c29d55f50af448f9501af2060ab7, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
