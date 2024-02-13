@@ -222,7 +222,7 @@ public static void GetUserDatasList()
             Debug.Log("Syncing GAME ID: " + GameDatas.Key);
             foreach(var sessionData in GameDatas.Value)
             {
-				Debug.Log("Syncing Test ID: " + sessionData.Key);
+				Debug.Log("Syncing DOC ID: " + sessionData.Key);
 				DocumentReference docRef = collRef.Document(sessionData.Key);
                 await docRef.SetAsync(sessionData.Value);
             }
@@ -246,63 +246,9 @@ public class LocalSaveUsersList
 }
 
 [Serializable]
-public class LocalPendingUserIDsList
-{
-	public List<string> userIdS;
-
-}
-
-
-
-[Serializable]
 public class FullSessionData
 {
 	public Dictionary<string, Dictionary<string, Dictionary<string, object>>> analytics;
-}
-
-[Serializable]
-public class ScreenSesionData
-{
-    public Dictionary<string, AnalyticData> analytics;
-    public ScreenSesionData(Dictionary<string, object> data)
-    {
-        analytics = new Dictionary<string, AnalyticData>();
-        foreach(var indata in data)
-        {
-            analytics.Add(indata.Key, new AnalyticData(indata.Value));
-        }
-    }
-}
-
-[Serializable]
-public class AnalyticData
-{
-    public int intValue = -1;
-    public string stringValue = null;
-    public bool boolValue = false;
-    public bool wasBoolValue = false;
-    public bool wasIntValue = false;
-
-    public AnalyticData(object value)
-    {
-        wasBoolValue = false;
-        stringValue = null;
-        if(value is int newIntValue) 
-        {
-            wasIntValue = true;
-            intValue = newIntValue;
-            return;
-        }
-        else if(value is bool newBoolValue)
-        {
-            wasBoolValue = true;
-            boolValue = newBoolValue;
-            return;
-        }
-
-        stringValue = value as string;
-    }
-
 }
 
 
