@@ -14,17 +14,17 @@ public static class DataIds
     public const string TotalCorrectAnswers = "Correct Answers";
     public const string TotalWrongAnswers = "Wrong Answers";
 
-	//Generic IDs
-	public const string totalClicks = "click_repetions";
-	public const string lostBecauseOfTime = "time_over";
-	public const string won = "correct";
-	public const string responseTime = "time_response";
-	public const string challengeType = "challenge_type";
+    //Generic IDs
+    public const string totalClicks = "click_repetions";
+    public const string lostBecauseOfTime = "time_over";
+    public const string won = "correct";
+    public const string responseTime = "time_response";
+    public const string challengeType = "challenge_type";
 
 
 
 
-	public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
+    public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
     public const string voiceStarRoundResultWins = "voiceStarRoundResultWins";
@@ -39,7 +39,7 @@ public static class DataIds
 
     public const string turboRocketGame = "Postergación de la gratificación: El rocket propulsado";
     public const string turboRocketCoinsCollected = "turboRocketCoinsCollected";
-    public const string turboRockettotalRideTime= "turboRockettotalRideTime";
+    public const string turboRockettotalRideTime = "turboRockettotalRideTime";
     public const string turboRocketturboUsedTimes = "turboRocketturboUsedTimes";
 
     public const string mechanicHandGame = "Por habilidad: la mano mecánica";
@@ -47,9 +47,11 @@ public static class DataIds
     public const string mechanicHandtotalFailedAttempts = "mechanicHandtotalFailedAttempts";
 
     public const string fightTheAlienGame = "Control de impulsos: derrotar al alien";
-    public const string fightTheAlienTotalGametime = "fightTheAlienTotalGametime";
+    public const string fightTheAlienChallengeType = "fightTheAlienTotalGametime";
+    public const string fightTheAlienRoundResultWin = "fightTheAlienRoundResultWins";
     public const string fightTheAlientimeToMakeAChoice = "fightTheAlientimeToMakeAChoice";
-    public const string fightTheAlienRoundResultWins = "fightTheAlienRoundResultWins";
+    public const string fightTheAlienClicks = "fightTheAlienClicks";
+    public const string fightTheAlienRanOutOfTime = "fightTheAlienRanOutOfTime";
 
     public const string boostersAndScapeGame = "Delay: boosters y escape";
     public const string boostersAndScapetotalAttemptsToBoost = "boostersAndScapetotalAttemptsToBoost";
