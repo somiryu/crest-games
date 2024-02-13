@@ -39,14 +39,20 @@ MonoBehaviour:
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: b2264d5ee7b9f4543a6f0f37523b0634, type: 3}
       cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
+    - Name: 'Regular : 5'
+      guid: 5b15685a-b4c5-4c5d-a908-328950c50072
+      monsterType: 0
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: 8be768ed4c047d74dbf6763289493640, type: 3}
+      cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
+    - Name: 'Regular : 6'
+      guid: 01234698-742f-4a04-865c-63136d442a12
+      monsterType: 0
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: 9f37cf233a335854999122479c765297, type: 3}
+      cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
   - chestType: 1
     monsters:
-    - Name: 'Rare : Fin_Front'
-      guid: 00000000-0000-0000-0000-000000000000
-      monsterType: 1
-      monsterIndex: 0
-      sprite: {fileID: 8390514770920238483, guid: 3fa986674e1f55746af510eb92f4bd87, type: 3}
-      cardBk: {fileID: 0}
     - Name: 'Rare : 7'
       guid: 226429bb-390f-4fbc-82dc-4b3dae25134d
       monsterType: 1
@@ -54,7 +60,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: fa2eeee1921806f4dadd1e9cea671ca8, type: 3}
       cardBk: {fileID: 21300000, guid: dcf663ee427f14a418d14daa56128f0d, type: 3}
     - Name: 'Rare : 8'
-      guid: bf4c4ec3-3e6e-4323-9289-250d4efc306e
+      guid: 63b4aed2-993a-411f-b8a4-0fa61603eb4f
       monsterType: 1
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: f3ac91e4e24310b4798fba4183b0e936, type: 3}
@@ -66,19 +72,19 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: c894d3afc7918a0499133253df25832e, type: 3}
       cardBk: {fileID: 21300000, guid: dcf663ee427f14a418d14daa56128f0d, type: 3}
     - Name: 'Rare : 10'
-      guid: 8298110c-be4d-47a9-83ec-1df4bba5ef04
+      guid: e69d6e68-9a90-4996-bcda-889e5b6a3492
       monsterType: 1
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: eb88cd68d48b40a4ea9015565574aeef, type: 3}
       cardBk: {fileID: 21300000, guid: dcf663ee427f14a418d14daa56128f0d, type: 3}
     - Name: 'Rare : 11'
-      guid: 8298110c-be4d-47a9-83ec-1df4bba5ef04
+      guid: 49b4ab42-b29f-4ef3-bc2b-dabfb8de485a
       monsterType: 1
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: 137c6956a1626d84da1ccf5463fdaacf, type: 3}
       cardBk: {fileID: 21300000, guid: dcf663ee427f14a418d14daa56128f0d, type: 3}
     - Name: 'Rare : 12'
-      guid: 8298110c-be4d-47a9-83ec-1df4bba5ef04
+      guid: c77bfd75-044b-4055-8224-ff32466bab4f
       monsterType: 1
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: 6a7e370f86cc4d543a86c781481c7e14, type: 3}
@@ -92,31 +98,31 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: df9ded3823dc77d479089a6aa67bd426, type: 3}
       cardBk: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}
     - Name: 'Legendary : 14'
-      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      guid: 71e950dc-3349-40f7-896c-99ad7a98955e
       monsterType: 2
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: 0c00e287d2ab85c4b9185f197a415abd, type: 3}
       cardBk: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}
     - Name: 'Legendary : 15'
-      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      guid: cbf76621-da3a-4ed3-bb82-e48352f21b44
       monsterType: 2
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: 79fc36c88c2a9484ab370addf7310a9b, type: 3}
       cardBk: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}
     - Name: 'Legendary : 16'
-      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      guid: 72acddf8-b0f9-4fb5-b90a-4e0e9007cfc4
       monsterType: 2
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: 6de84f070eec5c14cbbe8d76b22f80d8, type: 3}
       cardBk: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}
     - Name: 'Legendary : 17'
-      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      guid: 844e71f8-f1bf-47eb-b37b-954c7d5e028b
       monsterType: 2
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: 35c385e10a8b5c34b9aff29915c9739f, type: 3}
       cardBk: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}
     - Name: 'Legendary : 18'
-      guid: 0cd2e233-b883-4570-9cff-34214383014b
+      guid: a463b04a-2f2b-4865-a9c5-216cb315d7b6
       monsterType: 2
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: ce8931d7b2a475042b1ce3df17b72889, type: 3}

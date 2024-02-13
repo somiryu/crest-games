@@ -6,9 +6,6 @@ using TMPro;
 using System;
 using Firebase.Auth;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEditor.UI;
-using UnityEditor.Search;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {   

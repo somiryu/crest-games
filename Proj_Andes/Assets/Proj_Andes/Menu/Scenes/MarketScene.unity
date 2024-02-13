@@ -4141,6 +4141,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1760502172}
     m_Modifications:
+    - target: {fileID: 2385125533940275338, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
+      propertyPath: library
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e6f7958bfb83d84898f138f3ee9fcef, type: 2}
+    - target: {fileID: 2385125533940275338, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
+      propertyPath: monsterMarketConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 546c6b3abfa19514a990208b4a9039f0, type: 2}
     - target: {fileID: 7979620439849410278, guid: fdb432df0f5db9f4a86ecdd800597d8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
