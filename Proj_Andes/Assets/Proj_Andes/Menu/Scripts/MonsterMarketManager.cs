@@ -102,6 +102,12 @@ public class MonsterMarketManager : MonoBehaviour
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
     }
 
+    void OnCollectionsClosed()
+    {
+        if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
+        myCollectionManager.OnClosedCollections -= OnCollectionsClosed;
+    }
+
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
         currSelectedButton = chestBtn;
@@ -228,7 +234,8 @@ public class MonsterMarketManager : MonoBehaviour
         }
         RefreshCollectionFromData();
 		myCollectionManager.ShowCollection();
-        myCollectionManager.gameObject.SetActive(true);
+		myCollectionManager.OnClosedCollections += OnCollectionsClosed;
+		myCollectionManager.gameObject.SetActive(true);
 
     }
 
