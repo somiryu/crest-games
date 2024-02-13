@@ -28,7 +28,7 @@ public class MyCollectionManager : MonoBehaviour
     {
         if (instance != null && instance != this) DestroyImmediate(this);
         instance = this;
-        Init(true);
+        Init(false);
     }
     public void Init(bool inUseShowCollectionBtn)
     {
