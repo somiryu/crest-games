@@ -12,19 +12,27 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 	public int initialCoins = 0;
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
-    [NonSerialized] public List<float> timeToMakeAChoice = new List<float>();
-    [NonSerialized] public List<bool> roundResultWins = new List<bool>();
+
     public override string GetSceneID() => DataIds.heartsAndStarsGame;
 
     public override void SaveAnalytics()
     {
-        itemAnalytics = new Dictionary<string, object>();
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, itemAnalytics);
-    }
-    public override void ResetCurrentAnalytics()
-    {
-        timeToMakeAChoice.Clear();
-        roundResultWins.Clear();
-        base.ResetCurrentAnalytics();
-    }
+        var allRoundsAnalytics = MG_HearthsAndStarsManager.Instance.AllRoundsAnalytics;
+		var currRoundAnalyticsDic = new Dictionary<string, object>();
+
+        for (int i = 0; i < allRoundsAnalytics.Count; i++)
+        {
+            var currRound = allRoundsAnalytics[i];
+			currRoundAnalyticsDic.Clear();
+			currRoundAnalyticsDic.Add(DataIds.challengeType, currRound.challengeOrder);
+			currRoundAnalyticsDic.Add(DataIds.won, currRound.wonRound);
+			currRoundAnalyticsDic.Add(DataIds.responseTime, currRound.timeToMakeAChoice);
+			currRoundAnalyticsDic.Add(DataIds.totalClicks, currRound.clicks);
+			currRoundAnalyticsDic.Add(DataIds.lostBecauseOfTime, currRound.ranOutOfTime);
+
+			UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, currRoundAnalyticsDic);
+		}
+
+	}
+
 }

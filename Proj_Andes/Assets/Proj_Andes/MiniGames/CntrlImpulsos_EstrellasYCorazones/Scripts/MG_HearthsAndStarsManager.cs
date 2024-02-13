@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine.UI;
 
 public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 {
+    private static MG_HearthsAndStarsManager instance;
+    public static MG_HearthsAndStarsManager Instance => instance;
+
     [SerializeField] MG_HearthAndStarsGameConfigs gameConfigs;
     [Space(20)]
     [SerializeField] Sprite sameDirectionSprite;
@@ -43,19 +47,25 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     private int currCoins;
     private int currRound;
 
-    bool ranOutOfTime;
     private bool currShowingRight = false;
     private bool currRequiresSameDirection = false;
 
     private bool gameoverFlag = false;
 
+    private MG_HearthAndStars_RoundAnalytics roundAnalytics;
+
+    [SerializeField] public List<MG_HearthAndStars_RoundAnalytics> AllRoundsAnalytics;
+
     public void Awake()
     {
+        if(instance != null && instance != this) DestroyImmediate(instance);
+        instance = this;
         Init();
     }
 
     public void Init()
     {
+        AllRoundsAnalytics = new List<MG_HearthAndStars_RoundAnalytics>(gameConfigs.maxRounds);
         currCoins = gameConfigs.initialCoins;
         currRound = 0;
         audiosource = GetComponent<AudioSource>();
@@ -76,13 +86,13 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     void InitRound()
     {
+		roundAnalytics = new MG_HearthAndStars_RoundAnalytics();
+        AllRoundsAnalytics.Add(roundAnalytics);
+		
         timerPerChoice = 0;
 
         rightImg.gameObject.SetActive(false);
         leftImg.gameObject.SetActive(false);
-
-        gameConfigs.clickRepetitions.Add(0);
-
 
         currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;
@@ -96,11 +106,16 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         if (gameoverFlag) return;
 
+        if (Input.GetMouseButtonDown(0))
+        {
+            roundAnalytics.clicks++;
+        }
+
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            ranOutOfTime = true;
+            roundAnalytics.ranOutOfTime = true;
             timerPerChoice = 0;
             OnWrongChoice();
         }
@@ -109,8 +124,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     private void OnClickedLeft()
     {
         var succeed = false;
-        gameConfigs.clickRepetitions[currRound]++;
-        ranOutOfTime = false;
+
         if (!currRequiresSameDirection && currShowingRight) succeed = true;
         if (currRequiresSameDirection && !currShowingRight) succeed = true;
         if (succeed) OnCorrectChoice();
@@ -119,10 +133,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     private void OnClickedRight()
     {
-
         var succeed = false;
-        gameConfigs.clickRepetitions[currRound]++;
-        ranOutOfTime = false;
 
         if (currRequiresSameDirection && currShowingRight) succeed = true;
         if (!currRequiresSameDirection && !currShowingRight) succeed = true;
@@ -136,8 +147,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
-
-        gameConfigs.roundResultWins.Add(false);
 
         audiosource.clip = wrongAudio;
         audiosource.Play();
@@ -157,7 +166,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
 
-        gameConfigs.roundResultWins.Add(true);
+        roundAnalytics.wonRound = true;
 
         audiosource.clip = correctAudio;
         audiosource.Play();
@@ -172,11 +181,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         currRound++;
 
-        if (currRequiresSameDirection) gameConfigs.challengeOrder.Add("Same side");
-        else gameConfigs.challengeOrder.Add("Different side");
+        if (currRequiresSameDirection) roundAnalytics.challengeOrder = "Same side";
+        else roundAnalytics.challengeOrder = "Different side";
 
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
-        gameConfigs.ifRanOutOfTime.Add(ranOutOfTime);
+        roundAnalytics.timeToMakeAChoice = timerPerChoice;
 
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
@@ -206,4 +214,13 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();
     }
+}
+
+public class MG_HearthAndStars_RoundAnalytics
+{
+    public string challengeOrder = "NONE";
+    public bool wonRound = false;
+    public float timeToMakeAChoice = 0;
+    public int clicks = 0;
+    public bool ranOutOfTime = false;
 }

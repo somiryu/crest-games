@@ -14,9 +14,17 @@ public static class DataIds
     public const string TotalCorrectAnswers = "Correct Answers";
     public const string TotalWrongAnswers = "Wrong Answers";
 
+	//Generic IDs
+	public const string totalClicks = "click_repetions";
+	public const string lostBecauseOfTime = "time_over";
+	public const string won = "correct";
+	public const string responseTime = "time_response";
+	public const string challengeType = "challenge_type";
 
 
-    public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
+
+
+	public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
     public const string voiceStarRoundResultWins = "voiceStarRoundResultWins";
