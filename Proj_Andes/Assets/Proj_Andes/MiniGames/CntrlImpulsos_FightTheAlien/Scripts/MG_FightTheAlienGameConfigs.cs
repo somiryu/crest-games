@@ -26,11 +26,11 @@ public class MG_FightTheAlienGameConfigs : GameConfig
         for (int i = 0; i < currAnalytics.Count; i++)
         {
             itemAnalytics.Clear();
-            itemAnalytics.Add(DataIds.fightTheAlienChallengeType, currAnalytics[i].challengeOrder);
-            itemAnalytics.Add(DataIds.fightTheAlienRoundResultWin, currAnalytics[i].wonRound);
-            itemAnalytics.Add(DataIds.fightTheAlientimeToMakeAChoice, currAnalytics[i].timeToMakeAChoice);
-            itemAnalytics.Add(DataIds.fightTheAlienClicks, currAnalytics[i].clicks);
-            itemAnalytics.Add(DataIds.fightTheAlienRanOutOfTime, currAnalytics[i].ranOutOfTime);
+            itemAnalytics.Add(DataIds.challengeType, currAnalytics[i].challengeOrder);
+            itemAnalytics.Add(DataIds.won, currAnalytics[i].wonRound);
+            itemAnalytics.Add(DataIds.responseTime, currAnalytics[i].timeToMakeAChoice);
+            itemAnalytics.Add(DataIds.totalClicks, currAnalytics[i].clicks);
+            itemAnalytics.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
 
             UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
         }
