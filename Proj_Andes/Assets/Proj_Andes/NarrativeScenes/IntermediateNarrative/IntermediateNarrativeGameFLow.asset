@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51813b6438b1ee541af7d1a4288e7529, type: 3}
-  m_Name: EntranceNarrative
+  m_Name: IntermediateNarrativeGameFLow
   m_EditorClassIdentifier: 
   scene:
-    sceneAsset: {fileID: 102900000, guid: 58083e826f59d174fba58ef47259dee3, type: 3}
-    scenePath: Assets/Proj_Andes/NarrativeScenes/EntranceNarrative/Scene/EntranceNarrative.unity
+    sceneAsset: {fileID: 102900000, guid: 407cc9cd5843bb54b97a7ed9962a8e9d, type: 3}
+    scenePath: Assets/Proj_Andes/NarrativeScenes/IntermediateNarrative/Scene/IntermediateNarrative.unity

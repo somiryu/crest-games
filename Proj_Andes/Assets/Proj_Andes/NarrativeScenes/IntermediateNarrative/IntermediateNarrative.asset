@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: EntranceNarrative
+  m_Name: IntermediateNarrative
   m_EditorClassIdentifier: 
   dialogues:
   - characterType: 5
@@ -18,8 +18,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: 0
     changeToSequenceResponseIdxToGrayOut: 0
-    text: "Est\xE1s prepar\xE1ndote para ir al colegio, pero primero decides jugar
-      unos juegos"
+    text: "Ya terminaste de jugar por ahora, ahora tienes que seguir con tu d\xEDa"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []

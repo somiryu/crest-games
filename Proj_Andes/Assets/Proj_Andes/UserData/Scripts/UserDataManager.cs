@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -97,19 +98,17 @@ public class UserDataManager : ScriptableObject
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
+		if(!userAnayticsPerGame.TryGetValue(gameKey, out var analyticsDocsFound))
+		{
+			analyticsDocsFound = new Dictionary<string, Dictionary<string, object>>();
+			userAnayticsPerGame.Add(gameKey, analyticsDocsFound);
+		}
 
-		if (userAnayticsPerGame.ContainsKey(gameKey))
-		{
-			if (userAnayticsPerGame[gameKey].ContainsKey(CurrTestID)) userAnayticsPerGame[gameKey][CurrTestID] = analyticsWithExtraFields;
-			else userAnayticsPerGame[gameKey].Add(CurrTestID, analyticsWithExtraFields);
-		}
-		else 
-		{
-			var sessionAnalytics = new Dictionary<string, Dictionary<string, object>>();
-			sessionAnalytics.Add(CurrTestID, analyticsWithExtraFields);
-			userAnayticsPerGame.Add(gameKey, sessionAnalytics);
-		}
+		//Generating a new document ID each time
+		var newDocumentID = Guid.NewGuid().ToString();
+		analyticsDocsFound.Add(newDocumentID, analyticsWithExtraFields);
     }
+
     public static bool SaveToServer()
 	{
 		OnUserQuit();

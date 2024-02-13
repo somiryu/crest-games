@@ -1,32 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 {
-	[SerializeField] MG_HearthAndStarsGameConfigs gameConfigs;
-	[Space(20)]
-	[SerializeField] Sprite sameDirectionSprite;
+    private static MG_HearthsAndStarsManager instance;
+    public static MG_HearthsAndStarsManager Instance => instance;
+
+    [SerializeField] MG_HearthAndStarsGameConfigs gameConfigs;
+    [Space(20)]
+    [SerializeField] Sprite sameDirectionSprite;
     [SerializeField] Sprite opositeDirectionSprite;
     [Space(20)]
     [SerializeField] Image leftImg;
     [SerializeField] Image rightImg;
-	[Space(20)]
-	[SerializeField] Button leftBtn;
+    [Space(20)]
+    [SerializeField] Button leftBtn;
     [SerializeField] Button rightBtn;
 
     [SerializeField] ParticleSystem LCorrectparticle;
     [SerializeField] ParticleSystem RCorrectparticle;
 
-	[SerializeField] ParticleSystem LIncorrectparticle;
-	[SerializeField] ParticleSystem RIncorrectparticle;
+    [SerializeField] ParticleSystem LIncorrectparticle;
+    [SerializeField] ParticleSystem RIncorrectparticle;
 
-	[SerializeField] GameObject afterActionPanel;
+    [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUIPanel;
-   
+
     [SerializeField] AudioClip correctAudio;
     [SerializeField] AudioClip wrongAudio;
     [SerializeField] AudioClip finishAudio;
@@ -39,7 +41,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
-    private AudioSource audiosource; 
+    private AudioSource audiosource;
 
     private float timerPerChoice = 0;
     private int currCoins;
@@ -50,128 +52,142 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     private bool gameoverFlag = false;
 
-	public void Awake()
-	{
-        Init();
-	}
+    private MG_HearthAndStars_RoundAnalytics roundAnalytics;
 
-	public void Init()
+    [SerializeField] public List<MG_HearthAndStars_RoundAnalytics> AllRoundsAnalytics;
+
+    public void Awake()
     {
+        if(instance != null && instance != this) DestroyImmediate(instance);
+        instance = this;
+        Init();
+    }
+
+    public void Init()
+    {
+        AllRoundsAnalytics = new List<MG_HearthAndStars_RoundAnalytics>(gameConfigs.maxRounds);
         currCoins = gameConfigs.initialCoins;
         currRound = 0;
         audiosource = GetComponent<AudioSource>();
 
-
         afterActionPanel.SetActive(false);
-		inGameUIPanel.SetActive(true);
+        inGameUIPanel.SetActive(true);
         gameoverFlag = false;
 
         timerUI.minValue = 0;
         timerUI.maxValue = gameConfigs.timePerChoice;
 
-		leftBtn.onClick.AddListener(OnClickedLeft);
-		rightBtn.onClick.AddListener(OnClickedRight);
+        leftBtn.onClick.AddListener(OnClickedLeft);
+        rightBtn.onClick.AddListener(OnClickedRight);
         eogManager.OnGameStart();
 
         InitRound();
-	}
+    }
 
-	void InitRound()
+    void InitRound()
     {
+		roundAnalytics = new MG_HearthAndStars_RoundAnalytics();
+        AllRoundsAnalytics.Add(roundAnalytics);
+		
         timerPerChoice = 0;
 
-		rightImg.gameObject.SetActive(false);
-		leftImg.gameObject.SetActive(false);
+        rightImg.gameObject.SetActive(false);
+        leftImg.gameObject.SetActive(false);
 
-
-		currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+        currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;
-		currShowingRight = Random.Range(0f, 1f) > 0.5f;
-        var imgToUse = currShowingRight? rightImg: leftImg;
+        currShowingRight = Random.Range(0f, 1f) > 0.5f;
+        var imgToUse = currShowingRight ? rightImg : leftImg;
         imgToUse.gameObject.SetActive(true);
         imgToUse.sprite = spriteToShow;
-	}
+    }
 
-	private void Update()
-	{
+    private void Update()
+    {
         if (gameoverFlag) return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            roundAnalytics.clicks++;
+        }
 
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
+            roundAnalytics.ranOutOfTime = true;
             timerPerChoice = 0;
             OnWrongChoice();
         }
     }
 
-	private void OnClickedLeft()
+    private void OnClickedLeft()
     {
+        var succeed = false;
 
-
-        var succed = false;
-        if (!currRequiresSameDirection && currShowingRight) succed = true;
-        if (currRequiresSameDirection && !currShowingRight) succed = true;
-        if (succed) OnCorrectChoice();
+        if (!currRequiresSameDirection && currShowingRight) succeed = true;
+        if (currRequiresSameDirection && !currShowingRight) succeed = true;
+        if (succeed) OnCorrectChoice();
         else OnWrongChoice();
     }
 
     private void OnClickedRight()
     {
+        var succeed = false;
 
-        var succed = false;
-		if (currRequiresSameDirection && currShowingRight) succed = true;
-		if (!currRequiresSameDirection && !currShowingRight) succed = true;
-        if (succed)OnCorrectChoice();
-
-
+        if (currRequiresSameDirection && currShowingRight) succeed = true;
+        if (!currRequiresSameDirection && !currShowingRight) succeed = true;
+        if (succeed) OnCorrectChoice();
         else OnWrongChoice();
-	}
+    }
 
     private void OnWrongChoice()
     {
-		LIncorrectparticle.Stop();
-		RIncorrectparticle.Stop();
-		RCorrectparticle.Stop();
-		LCorrectparticle.Stop();
-
-        gameConfigs.roundResultWins.Add(false);
+        LIncorrectparticle.Stop();
+        RIncorrectparticle.Stop();
+        RCorrectparticle.Stop();
+        LCorrectparticle.Stop();
 
         audiosource.clip = wrongAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
 
-		if (currShowingRight) RIncorrectparticle.Play();
-		else LIncorrectparticle.Play();
+        if (currShowingRight) RIncorrectparticle.Play();
+        else LIncorrectparticle.Play();
 
-		OnRoundEnded();
+        OnRoundEnded();
     }
 
     private void OnCorrectChoice()
     {
-		LIncorrectparticle.Stop();
-		RIncorrectparticle.Stop();
-		RCorrectparticle.Stop();
+        LIncorrectparticle.Stop();
+        RIncorrectparticle.Stop();
+        RCorrectparticle.Stop();
         LCorrectparticle.Stop();
 
-        gameConfigs.roundResultWins.Add(true);
+        roundAnalytics.wonRound = true;
 
         audiosource.clip = correctAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnCorrectAnswer;
-        if (currShowingRight)RCorrectparticle.Play();
+        if (currShowingRight) RCorrectparticle.Play();
         else LCorrectparticle.Play();
-            
+
         OnRoundEnded();
     }
 
     void OnRoundEnded()
     {
         currRound++;
+
+        if (currRequiresSameDirection) roundAnalytics.challengeOrder = "Same side";
+        else roundAnalytics.challengeOrder = "Different side";
+
+        roundAnalytics.timeToMakeAChoice = timerPerChoice;
+
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
         if (currRound >= gameConfigs.maxRounds)
         {
@@ -192,10 +208,19 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         audiosource.clip = finishAudio;
         audiosource.Play();
         gameoverFlag = true;
-		inGameUIPanel.SetActive(false);
+        inGameUIPanel.SetActive(false);
         afterActionPanel.SetActive(true);
         afterActionFinalCoinsTxt.SetText(currCoins.ToString());
         gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();
-	}
+    }
+}
+
+public class MG_HearthAndStars_RoundAnalytics
+{
+    public string challengeOrder = "NONE";
+    public bool wonRound = false;
+    public float timeToMakeAChoice = 0;
+    public int clicks = 0;
+    public bool ranOutOfTime = false;
 }
