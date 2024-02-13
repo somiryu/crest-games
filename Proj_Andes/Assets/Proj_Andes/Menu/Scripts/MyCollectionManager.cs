@@ -7,6 +7,8 @@ public class MyCollectionManager : MonoBehaviour
 {
     static MyCollectionManager instance;
     public static MyCollectionManager Instance => instance;
+    [SerializeField] MonsterMarketConfig monsterMarketConfig;
+    [SerializeField] MonstersLibrary library;
     public Transform collectionSet;
     [SerializeField] Button myCollBtn;
     [SerializeField] Button hideCollectionBtn;
@@ -26,11 +28,13 @@ public class MyCollectionManager : MonoBehaviour
     {
         if (instance != null && instance != this) DestroyImmediate(this);
         instance = this;
+        Init(true);
     }
     public void Init(bool inUseShowCollectionBtn)
     {
         useShowCollectionBtn = inUseShowCollectionBtn;
         monstersUIInCollection.Init(10);
+        for (int i = 0; i < monsterMarketConfig.MyCollectionMonsters.Count; i++) totalDataCollection.Add(library.GetMonsterByID(monsterMarketConfig.MyCollectionMonsters[i]));
         scrollSpeed = 0;
         myCollBtn.onClick.AddListener(ShowCollection);
         myCollBtn.gameObject.SetActive(useShowCollectionBtn);

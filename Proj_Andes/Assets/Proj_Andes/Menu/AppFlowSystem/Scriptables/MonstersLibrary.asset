@@ -39,14 +39,20 @@ MonoBehaviour:
       monsterIndex: 0
       sprite: {fileID: 21300000, guid: b2264d5ee7b9f4543a6f0f37523b0634, type: 3}
       cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
+    - Name: 'Regular : 5'
+      guid: b8684fad-b1d0-450d-b034-bf253dabf2e5
+      monsterType: 0
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: 8be768ed4c047d74dbf6763289493640, type: 3}
+      cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
+    - Name: 'Regular : 6'
+      guid: b8684fad-b1d0-450d-b034-bf253dabf2e5
+      monsterType: 0
+      monsterIndex: 0
+      sprite: {fileID: 21300000, guid: 9f37cf233a335854999122479c765297, type: 3}
+      cardBk: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
   - chestType: 1
     monsters:
-    - Name: 'Rare : Fin_Front'
-      guid: 00000000-0000-0000-0000-000000000000
-      monsterType: 1
-      monsterIndex: 0
-      sprite: {fileID: 8390514770920238483, guid: 3fa986674e1f55746af510eb92f4bd87, type: 3}
-      cardBk: {fileID: 0}
     - Name: 'Rare : 7'
       guid: 226429bb-390f-4fbc-82dc-4b3dae25134d
       monsterType: 1
