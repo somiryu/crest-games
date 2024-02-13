@@ -46,7 +46,13 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 
 	public int NeededAsteroidsToWin => Mathf.FloorToInt((asteroidsPerRound * 3) * gameConfigs.percentageNeededToWin);
 
-	private void Awake()
+    //DATA ANALYTICS
+    public float timePlayed;
+    public int clickRepetitions;
+    public int lostByCheat;
+    public int magnetsCollected;
+
+    private void Awake()
 	{
 		instance = this;
 	}

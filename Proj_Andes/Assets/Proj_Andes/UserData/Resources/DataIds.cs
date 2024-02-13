@@ -9,7 +9,7 @@ public static class DataIds
     public const string TestID = "Test ID";
     public const string UserID = "User ID";
     public const string GameID = "Game ID";
-
+    public const string GameType = "Game Type";
 
     public const string TotalCorrectAnswers = "Correct Answers";
     public const string TotalWrongAnswers = "Wrong Answers";
@@ -21,8 +21,13 @@ public static class DataIds
 	public const string responseTime = "time_response";
 	public const string challengeType = "challenge_type";
 
+    //Frustration levels
+    public const string frustrationGames = "frustrationGames";
+    public const string timePlayed = "frustrationLevels";
+    public const string lostByCheat = "lostByCheat";
+    public const string frustrationLevel = "frustrationLevel";
 
-
+    //Data per game
 
 	public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";
@@ -62,8 +67,8 @@ public static class DataIds
 
     public const string sizeRocketsGame = "Postergación de la gratificación: El rocket grande y el pequeño";
 
-    public const string tryAgainClicks1 = "tryAgainClicks1";
-    public const string tryAgainClicks2 = "tryAgainClicks2";
-    public const string tryAgainClicks3 = "tryAgainClicks3";
+    public const string tryAgainClicks = "tryAgainClicks";
+    //public const string tryAgainClicks2 = "tryAgainClicks2";
+    //public const string tryAgainClicks3 = "tryAgainClicks3";
 
 }

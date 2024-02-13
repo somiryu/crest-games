@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424533fc7b6691542ba4e5e8c0dcb527, type: 3}
+  m_Name: FrustrationTermometer 1
+  m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 700607cb32029ec4b8cfc8228e6a2b10, type: 3}
+    scenePath: Assets/Proj_Andes/Menu/Scenes/FrustrationTermometer.unity
+  selectedFrustrationLevel: 0
+  defaultFrustrationLevel: 4
+  frustrationGameItem: {fileID: 11400000, guid: 078fe712dc14761499bafb51fa1715da, type: 2}

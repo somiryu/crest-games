@@ -8,8 +8,9 @@ public class FrustrationTermometer : SimpleGameSequenceItem
 {
     public FrustrationLevel selectedFrustrationLevel;
     public FrustrationLevel defaultFrustrationLevel;
-    public override Dictionary<string, object> GetAnalytics()
+    public SimpleGameSequenceItem frustrationGameItem;
+    public override void SaveAnalytics()
     {
-        return itemAnalytics;
+        frustrationGameItem.itemAnalytics.Add(DataIds.frustrationLevel, selectedFrustrationLevel.ToString());
     }
 }

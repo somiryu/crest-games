@@ -90,12 +90,13 @@ public class UserDataManager : ScriptableObject
         }
     }
 
-	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics)
+	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string collectionID = null)
 	{
 		var analyticsWithExtraFields = new Dictionary<string, object>();
 		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
+		if (collectionID != null) analyticsWithExtraFields.Add(DataIds.GameType, collectionID);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
 		if(!userAnayticsPerGame.TryGetValue(gameKey, out var analyticsDocsFound))
