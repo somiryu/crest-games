@@ -105,7 +105,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
 
-        roundAnalytics = new MG_FieldOfFlowers_RoundAnalytics();
         InitRound();
 	}
 
@@ -139,6 +138,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         timerPerChoice = 0;
         
         GetRandomSoundImage();
+        roundAnalytics = new MG_FieldOfFlowers_RoundAnalytics();
 
         AllRoundsAnalytics.Add(roundAnalytics);
         roundAnalytics.clicks = 0;

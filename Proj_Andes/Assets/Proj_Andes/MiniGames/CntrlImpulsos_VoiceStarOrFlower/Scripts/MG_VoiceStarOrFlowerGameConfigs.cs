@@ -29,7 +29,6 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
             currAnalyticsDictionary.Add(DataIds.voiceStartimeToMakeAChoice, currAnalytics[i].timeToMakeAChoice);
             currAnalyticsDictionary.Add(DataIds.voiceStarClickRepetition, currAnalytics[i].clicks);
             currAnalyticsDictionary.Add(DataIds.voiceStarRanOutOfTime, currAnalytics[i].ranOutOfTime);
-
             UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
         }
 
