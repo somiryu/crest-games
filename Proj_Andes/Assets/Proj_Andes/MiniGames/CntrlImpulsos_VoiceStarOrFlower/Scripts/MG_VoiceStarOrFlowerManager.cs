@@ -66,6 +66,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private bool gameoverFlag = false;
     float totalGameTime;
 
+    MG_FieldOfFlowers_RoundAnalytics roundAnalytics;
+    public List<MG_FieldOfFlowers_RoundAnalytics> AllRoundsAnalytics;
+
     public void Awake()
 	{
         Init();
@@ -127,6 +130,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     {
         timerPerChoice = 0;
         GetRandomSoundImage();
+
+        AllRoundsAnalytics.Add(roundAnalytics);
 
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
@@ -243,4 +248,14 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();
 	}
+}
+public class MG_FieldOfFlowers_RoundAnalytics
+{
+    public string challengeType = "NONE";
+    public string image;
+    public string audio;
+    public bool wonRound = false;
+    public float timeToMakeAChoice = 0;
+    public int clicks = 0;
+    public bool ranOutOfTime = false;
 }
