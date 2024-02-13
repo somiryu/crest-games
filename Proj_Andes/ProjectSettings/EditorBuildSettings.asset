@@ -83,4 +83,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/MiniGames/Gratification_SizeRockets/Scenes/Tutorial_Gratification_SizeRockets.unity
     guid: 9832958c95b64cb44bbdea587de23024
+  - enabled: 1
+    path: Assets/Proj_Andes/NarrativeScenes/EndGamesNarrative/Scene/EndGamesNarrative.unity
+    guid: de26d661c26b1904086198a3acfe9065
+  - enabled: 1
+    path: Assets/Proj_Andes/NarrativeScenes/IntermediateNarrative/Scene/IntermediateNarrative.unity
+    guid: 407cc9cd5843bb54b97a7ed9962a8e9d
   m_configObjects: {}
