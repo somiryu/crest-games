@@ -22,13 +22,13 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
         for (int i = 0; i < currAnalytics.Count; i++)
         {
             currAnalyticsDictionary.Clear();
-            currAnalyticsDictionary.Add(DataIds.voiceStarChallengeType, currAnalytics[i].challengeType);
+            currAnalyticsDictionary.Add(DataIds.challengeType, currAnalytics[i].challengeType);
             currAnalyticsDictionary.Add(DataIds.voiceStarImage, currAnalytics[i].image);
             currAnalyticsDictionary.Add(DataIds.voiceStarSound, currAnalytics[i].audio);
-            currAnalyticsDictionary.Add(DataIds.voiceStarRoundResultWin, currAnalytics[i].wonRound);
-            currAnalyticsDictionary.Add(DataIds.voiceStartimeToMakeAChoice, currAnalytics[i].timeToMakeAChoice);
-            currAnalyticsDictionary.Add(DataIds.voiceStarClickRepetition, currAnalytics[i].clicks);
-            currAnalyticsDictionary.Add(DataIds.voiceStarRanOutOfTime, currAnalytics[i].ranOutOfTime);
+            currAnalyticsDictionary.Add(DataIds.won, currAnalytics[i].wonRound);
+            currAnalyticsDictionary.Add(DataIds.responseTime, currAnalytics[i].timeToMakeAChoice);
+            currAnalyticsDictionary.Add(DataIds.totalClicks, currAnalytics[i].clicks);
+            currAnalyticsDictionary.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
             UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
         }
 

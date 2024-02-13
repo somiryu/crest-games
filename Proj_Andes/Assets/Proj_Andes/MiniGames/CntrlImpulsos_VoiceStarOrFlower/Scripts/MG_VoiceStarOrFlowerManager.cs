@@ -169,9 +169,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         if (Input.GetMouseButtonDown(0)) roundAnalytics.clicks++;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            OnWrongChoice();
             roundAnalytics.ranOutOfTime = true;
             timerPerChoice = 0;
+            OnWrongChoice();
         }
     }
 
@@ -244,6 +244,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     {
         currCoinsValueTxt.text = currCoins.ToString();
         roundAnalytics.timeToMakeAChoice = timerPerChoice;
+        if (roundAnalytics.ranOutOfTime) roundAnalytics.timeToMakeAChoice = gameConfigs.timePerChoice;
 
 
         var totalRounds = lostRoundsCount + wonLeftCount + wonRightCount;

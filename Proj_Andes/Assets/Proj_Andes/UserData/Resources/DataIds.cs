@@ -27,8 +27,8 @@ public static class DataIds
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
     public const string voiceStarRoundResultWin = "voiceStarRoundResultWin";
     public const string voiceStarChallengeType = "voiceStarChallengeType";
-    public const string voiceStarImage = "voiceStarImage";
-    public const string voiceStarSound = "voiceStarSound";
+    public const string voiceStarImage = "image";
+    public const string voiceStarSound = "audio";
     public const string voiceStarClickRepetition = "voiceStarClickRepetition";
 
     public const string heartsAndStarsGame = "Control de impulsos: estrellas y corazones";
