@@ -34,15 +34,41 @@ public class MyCollectionManager : MonoBehaviour
     {
         useShowCollectionBtn = inUseShowCollectionBtn;
         monstersUIInCollection.Init(10);
-        for (int i = 0; i < monsterMarketConfig.MyCollectionMonsters.Count; i++) totalDataCollection.Add(library.GetMonsterByID(monsterMarketConfig.MyCollectionMonsters[i]));
-        scrollSpeed = 0;
+
+        RefreshCollectionFromData();
+
+		scrollSpeed = 0;
         myCollBtn.onClick.AddListener(ShowCollection);
         myCollBtn.gameObject.SetActive(useShowCollectionBtn);
         hideCollectionBtn.onClick.AddListener(HideCollection);
 
         HideCollection();
     }
-    private void Update()
+
+	public void RefreshCollectionFromData()
+	{
+        totalDataCollection.Clear();
+		List<string> monstersIDToDelete = new List<string>();
+
+		for (int i = 0; i < monsterMarketConfig.MyCollectionMonsters.Count; i++)
+		{
+			var monster = library.GetMonsterByID(monsterMarketConfig.MyCollectionMonsters[i]);
+			if (monster == null)
+			{
+				monstersIDToDelete.Add(monsterMarketConfig.MyCollectionMonsters[i]);
+				continue;
+			}
+			totalDataCollection.Add(library.GetMonsterByID(monsterMarketConfig.MyCollectionMonsters[i]));
+		}
+
+		for (int i = 0; i < monstersIDToDelete.Count; i++)
+		{
+			monsterMarketConfig.MyCollectionMonsters.Remove(monstersIDToDelete[i]);
+		}
+	}
+
+
+	private void Update()
     {
         scrollbar.horizontalNormalizedPosition += scrollSpeed * Time.deltaTime;
     }

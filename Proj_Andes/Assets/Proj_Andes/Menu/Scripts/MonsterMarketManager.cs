@@ -5,9 +5,10 @@ using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 using TMPro;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
-using Tymski;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public interface iMonsterMarketButton
 {    
@@ -219,23 +220,11 @@ public class MonsterMarketManager : MonoBehaviour
             replaceableImg[i].gameObject.SetActive(true);
         }
     }
-    public void RefreshCollectionFromData()
-    {
-        totalDataCollection.Clear();
-        for (int i = 0; i < marketConfig.MyCollectionMonsters.Count; i++)
-        {
-            var currID = marketConfig.MyCollectionMonsters[i];
-            var monsterFound = marketConfig.monstersLibrary.GetMonsterByID(currID);
-            if (monsterFound == null) continue;
-            totalDataCollection.Add(monsterFound);
-        }
-    }
 
+    public void RefreshCollectionFromData() => myCollectionManager.RefreshCollectionFromData();
 
-    int GetRandomItem(int itemList)
-    {
-        return Random.Range(0, itemList);
-    }
+    int GetRandomItem(int itemList) => Random.Range(0, itemList);
+
 
     void Collect()
     {
@@ -257,6 +246,15 @@ public class MonsterMarketManager : MonoBehaviour
         myCollectionManager.gameObject.SetActive(true);
 
     }
+
+#if UNITY_EDITOR
+
+    [MenuItem("Hi Hat Games/Give100Coins")]
+    public static void Give100Coins()
+    {
+        UserDataManager.CurrUser.Coins += 100;
+    }
+#endif
 
 
     public void SaveForLater()
