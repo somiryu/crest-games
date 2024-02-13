@@ -26,50 +26,20 @@ MonoBehaviour:
     - response: HELADO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 99e628ca9f943e14aa92adbd53373a4d, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 2b54597401091f84ba995d56e32c34ec, type: 3}
+      dataAfterResponse: {fileID: 11400000, guid: 26bcca663d7cb4b40843a9c71d00619a, type: 2}
     - response: DULCE
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 43f522dac1955f2419eabe9e780e07cb, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: bb09a81853116bc4e84cf1be7bd68e35, type: 3}
+      dataAfterResponse: {fileID: 11400000, guid: 68b1e40cb2253d24c915b95044686946, type: 2}
     - response: GASEOSA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: b52d5bac3ab0c0447988e8735ff2e9f9, type: 3}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 4250bc2d406e6d241812ca8ca27b19df, type: 3}
+      dataAfterResponse: {fileID: 11400000, guid: 8d8e7aaf19f663649a78672fbb1fe1e2, type: 2}
     audio: {fileID: 8300000, guid: 4961b3f25c3677943ab4c5b92d448684, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 7
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Listo, \xA1vamos entonces!\r\n"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
-    responses: []
-    audio: {fileID: 8300000, guid: 8d23f4340e1e2ed4784294f213c90373, type: 3}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: 979b15a5d9b0e4b49b5204e26e5bafdf, type: 2}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: 
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses:
-    - response: Continuar
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 8c3fef998083aa24d874954dfefb25ec, type: 2}
     ExitAnim: {fileID: 0}

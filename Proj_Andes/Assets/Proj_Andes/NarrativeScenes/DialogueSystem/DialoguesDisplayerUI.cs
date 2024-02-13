@@ -30,6 +30,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] Transform responseDisplayersContainer;
     [SerializeField] AudioSource audioPlayer;
     [SerializeField] Toggle canSkipAudio;
+    [SerializeField] Button skipSceneBtn;
+    [SerializeField] bool activeSkipSceneBtn;
 
 
     [SerializeField] bool forceDialogeAppear;
@@ -98,6 +100,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
 		choicesTree.Clear();
+        skipSceneBtn.gameObject.SetActive(activeSkipSceneBtn && !AppSkipSceneButton.ActiveDebugGlobalUI);
+        skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
 	}
 
 	public bool OnWantsToChangeDialogFromTrigger()

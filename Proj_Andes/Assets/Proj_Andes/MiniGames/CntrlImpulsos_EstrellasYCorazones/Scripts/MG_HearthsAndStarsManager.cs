@@ -196,6 +196,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
+        timerUI.gameObject.SetActive(false);
         audiosource.clip = finishAudio;
         audiosource.Play();
         gameoverFlag = true;

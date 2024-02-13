@@ -162,9 +162,11 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
     public void OnPressedRocketBtn(SizeRocketsRocketTypes types)
     {
+        if (selectedRocketType != SizeRocketsRocketTypes.NONE) return;
         selectedRocketType = types;
         if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep)
         {
+            currTargetPlanet = null;
             handSignShip.gameObject.SetActive(false);
             handSignPlanet.gameObject.SetActive(true);
         }
@@ -183,6 +185,8 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         activeShips.Add(currRocket);
         shipsLeft--;
         shipsLeftTxt.SetText(shipsLeft.ToString());
+        shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
+
     }
 
 

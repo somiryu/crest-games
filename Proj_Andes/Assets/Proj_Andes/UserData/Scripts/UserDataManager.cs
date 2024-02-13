@@ -5,17 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
 public class UserDataManager : ScriptableObject
 {
 	[SerializeField] int maxAgeEasyLevel = 4;
     [SerializeField] int maxAgeMediumLevel = 8;
+	public bool HasInternet = true;
 
 	private static string instancePath = "UserDataManager";
 	private static string defaultUserID = "DefaultUserId";
 
 	private static string currTestID;
+
 
 	public static string CurrTestID
 	{
@@ -47,7 +50,8 @@ public class UserDataManager : ScriptableObject
 	public List<UserData> usersDatas => DatabaseManager.userDatas;
     
 	
-    public static Dictionary<string, Dictionary<string, object>> userAnayticsPerGame = new Dictionary<string, Dictionary<string, object>>();
+    public static Dictionary<string, Dictionary<string, Dictionary<string, object>>> userAnayticsPerGame = 
+		new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
 
 
     int currUserDataIdx = -1;
@@ -59,6 +63,11 @@ public class UserDataManager : ScriptableObject
 			if (currUserDataIdx != -1 && currUserDataIdx < usersDatas.Count) return usersDatas[currUserDataIdx];
 			return DefaultUserData;
 		}
+	}
+
+	public bool HasInternetConnection()
+	{
+		return HasInternet;
 	}
 
 	[RuntimeInitializeOnLoadMethod]
@@ -82,23 +91,24 @@ public class UserDataManager : ScriptableObject
 
 	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics)
 	{
-        var playerItemAnalytics = new Dictionary<string, object>();
-
 		var analyticsWithExtraFields = new Dictionary<string, object>();
 		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
-        playerItemAnalytics.Add(CurrTestID, analyticsWithExtraFields);
 
-
-        if (userAnayticsPerGame.ContainsKey(gameKey))
+		if (userAnayticsPerGame.ContainsKey(gameKey))
 		{
-			if (userAnayticsPerGame[gameKey].ContainsKey(CurrTestID)) userAnayticsPerGame[gameKey][CurrTestID] = playerItemAnalytics;			
-			else userAnayticsPerGame[gameKey].Add(CurrTestID, playerItemAnalytics);
+			if (userAnayticsPerGame[gameKey].ContainsKey(CurrTestID)) userAnayticsPerGame[gameKey][CurrTestID] = analyticsWithExtraFields;
+			else userAnayticsPerGame[gameKey].Add(CurrTestID, analyticsWithExtraFields);
 		}
-		else userAnayticsPerGame.Add(gameKey, playerItemAnalytics);
+		else 
+		{
+			var sessionAnalytics = new Dictionary<string, Dictionary<string, object>>();
+			sessionAnalytics.Add(CurrTestID, analyticsWithExtraFields);
+			userAnayticsPerGame.Add(gameKey, sessionAnalytics);
+		}
     }
     public static bool SaveToServer()
 	{
@@ -134,7 +144,6 @@ public class UserDataManager : ScriptableObject
 
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
-		DatabaseManager.GetUserDatasList();
 	}
 
 
@@ -151,8 +160,26 @@ public class UserDataManager : ScriptableObject
 
 	public IEnumerator LoadDataFromRemoteDataBaseRoutine()
 	{
+		yield return CheckInternetConnection();
+
 		DatabaseManager.GetUserDatasList();
 		while (!DatabaseManager.userListDone) yield return null;
+	}
+
+	public IEnumerator CheckInternetConnection()
+	{
+		UnityWebRequest www = new UnityWebRequest("http://unity3d.com/");
+
+		yield return www.SendWebRequest();
+
+		if (www.result == UnityWebRequest.Result.ConnectionError) // Error
+		{
+			HasInternet = false;
+		}
+		else // Success
+		{
+			HasInternet = true;
+		}
 	}
 
 	public void SaveDataToRemoteDataBase()

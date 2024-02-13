@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 5_0_AfterAlexPick
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 33fd788718578e34bb20eb4b1475c2bb, type: 2}
     changeToSequenceStartDialogIdx: -1
@@ -24,21 +24,21 @@ MonoBehaviour:
     responses:
     - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 0c343c4df81426643b4765725573ef16, type: 3}
+      responseImage: {fileID: 21300000, guid: 55712ee0c4d48ca468ced295ac669cca, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 85bf1b508128b1c43b218246a546e93e, type: 2}
     - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
+      responseImage: {fileID: 21300000, guid: 55712ee0c4d48ca468ced295ac669cca, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 074da9b17032e1a40b4fa747e4066c49, type: 2}
     - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
+      responseImage: {fileID: 21300000, guid: ac3e1f75cb35ecf41966d8c666fc4b97, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 2bf34f6fb373bcc4ba83890e964d1e31, type: 2}
     audio: {fileID: 8300000, guid: a0613a539b6a2f641a9a4049755c6e59, type: 3}
     audioAlternative: {fileID: 8300000, guid: ca4f995e6827caf45afe416af9665331, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 08e0cb7ea5b73cc4cb981ad5494f157f, type: 2}
     ExitAnim: {fileID: 0}

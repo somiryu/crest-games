@@ -2247,6 +2247,10 @@ PrefabInstance:
       propertyPath: timeLinePlayer
       value: 
       objectReference: {fileID: 2138338496}
+    - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: narrativeSceneItem
+      value: 
+      objectReference: {fileID: 11400000, guid: b2018ba47f9283944b03a35f619f98ff, type: 2}
     - target: {fileID: 3063343628931919348, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Name
       value: DialoguesDisplayer
@@ -2556,7 +2560,7 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: a0fd1e7adc166ed4d8b172ee50d6751d, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 08e0cb7ea5b73cc4cb981ad5494f157f, type: 2}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
@@ -2565,7 +2569,7 @@ PlayableDirector:
   - key: {fileID: 2681229895518889507, guid: a84591b2924f10e44a611cccdef653cc, type: 2}
     value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: 9fd4de8220459ad45b6f8078a7d82d9c, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: c65e7e7699c510042a1f8df69416c094, type: 2}
     value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: bd350c715fd78b946a9d009079f3c73a, type: 2}
@@ -2602,15 +2606,9 @@ PlayableDirector:
     value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: 665c81deb03db294a8a4ee5390963661, type: 2}
     value: {fileID: 2138338499}
-  - key: {fileID: 2681229895518889507, guid: 528185122f52de849a7bd33445c9d389, type: 2}
-    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: 08e0cb7ea5b73cc4cb981ad5494f157f, type: 2}
     value: {fileID: 2138338499}
-  - key: {fileID: -565202638740611200, guid: 08e0cb7ea5b73cc4cb981ad5494f157f, type: 2}
-    value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: 87cbf428c11f5f24ea8acc2aaff8e039, type: 2}
-    value: {fileID: 2138338499}
-  - key: {fileID: -565202638740611200, guid: 87cbf428c11f5f24ea8acc2aaff8e039, type: 2}
     value: {fileID: 2138338499}
   - key: {fileID: 2681229895518889507, guid: 070454cc5fc687348a9e8a567df40cc5, type: 2}
     value: {fileID: 2138338499}
@@ -2629,6 +2627,60 @@ PlayableDirector:
   - key: {fileID: -8237697060789216135, guid: fb1b88d4069224f4ca99290c4e343635, type: 2}
     value: {fileID: 1131407133}
   - key: {fileID: 2681229895518889507, guid: 2cdb454e51cb05642b2df55e0edadaf4, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: e6e2167ed57034e4b83da1bc075e0adc, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 48f3ab5542446684ab18601324692bdd, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 4422631882649700908, guid: 528185122f52de849a7bd33445c9d389, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 7e963f0e0fca0f14c82d7152fef39f71, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: d8d79d678997bc9499bf291bf43a9056, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 157f48c49be54b94aa83292dbb689a98, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 8c3fef998083aa24d874954dfefb25ec, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 4cffbfe03328e3741be66624b4a4c1e5, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 2a5812c220a2b4d41864e0b8dd1058ab, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: deae71acfa4c2484bbe1e05d52789803, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: c0c5bd2ff5de12c419dfc3a4f4695c92, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 0efe22ee029d502419ff9f8ee3b30f2f, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 88a66851fec9bd24e9ac83e106c8cf4f, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: cb3f03002397dac4e83d2df1653ce7e8, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 7d1ae18f9f11b634999e8825b29c53dd, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: aa98dbf2f21ae6c45addd7c70050af85, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 7d0fb2db7cb1e184ca5ca2376fc0d4b1, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: f1b1165b762b09540a833c14267a8690, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: ab4c12d6c8c2bc1439086380b54d6aba, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: b0ffe63c2d0be6f47a1d1bad31fdb072, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: cffc8f4f4eb510b4b8e3364bcfa2f586, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 5769122ac1bf8d84a8311e28d6634882, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: aad57d3751a8f084eb38d3b65d0f5872, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: d558ad32b46e45b459e80be1cff504c0, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: f0a3a2868fbe5c14d9459ab3d7fa1d00, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 3207d40ae3d9dc2478d5917f139ed845, type: 2}
+    value: {fileID: 2138338499}
+  - key: {fileID: 2681229895518889507, guid: 34ad2af94e75d5843a303eedb540ecff, type: 2}
     value: {fileID: 2138338499}
   m_ExposedReferences:
     m_References: []
@@ -2711,7 +2763,7 @@ Animator:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d4ec18062f5922c42b215f4301360e17, type: 2}
+  m_Controller: {fileID: 9100000, guid: 988b73debc4376141bd9357948c43088, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

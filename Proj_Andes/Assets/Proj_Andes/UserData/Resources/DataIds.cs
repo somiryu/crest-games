@@ -11,6 +11,10 @@ public static class DataIds
     public const string GameID = "Game ID";
 
 
+    public const string TotalCorrectAnswers = "Correct Answers";
+    public const string TotalWrongAnswers = "Wrong Answers";
+
+
 
     public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";

@@ -10,6 +10,7 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     public float boosterTriggerRate;
     public bool forceToFail;
     public bool updateScene;
+    public int extraAttemptsBeforeFailing;
 
     [NonSerialized] public List<float> timeToMakeAChoice = new List<float>();
     [NonSerialized] public int totalAttemptsToBoost;
@@ -23,8 +24,6 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
         itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.boostersAndScapetotalAttemptsToBoost, totalAttemptsToBoost);
         itemAnalytics.Add(DataIds.boostersAndScapeTotalGametime, totalGameTime);
-        itemAnalytics.Add(DataIds.boostersAndScapetimeToMakeAChoice, timeToMakeAChoice);
-        itemAnalytics.Add(DataIds.boostersAndScapeRoundResultWins, roundResultWins);
 
         UserDataManager.SaveUserAnayticsPerGame(DataIds.boostersAndScapeGame, itemAnalytics);
     }
