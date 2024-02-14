@@ -48,8 +48,7 @@ public static class DataIds
     public const string turboRocketturboUsedTimes = "turboRocketturboUsedTimes";
 
     public const string mechanicHandGame = "Por habilidad: la mano mecánica";
-    public const string mechanicHandtotalSuccessfulAttempts = "mechanicHandtotalSuccessfulAttempts";
-    public const string mechanicHandtotalFailedAttempts = "mechanicHandtotalFailedAttempts";
+    public const string mechanicHandClawThrows = "mechanicHandClawThrows";
 
     public const string fightTheAlienGame = "Control de impulsos: derrotar al alien";
     public const string fightTheAlienTotalGametime = "fightTheAlienTotalGametime";
@@ -57,10 +56,7 @@ public static class DataIds
     public const string fightTheAlienRoundResultWins = "fightTheAlienRoundResultWins";
 
     public const string boostersAndScapeGame = "Delay: boosters y escape";
-    public const string boostersAndScapetotalAttemptsToBoost = "boostersAndScapetotalAttemptsToBoost";
-    public const string boostersAndScapeTotalGametime = "boostersAndScapeTotalGametime";
-    public const string boostersAndScapetimeToMakeAChoice = "boostersAndScapetimeToMakeAChoice";
-    public const string boostersAndScapeRoundResultWins = "boostersAndScapeRoundResultWins";
+    public const string boostersAndScapeTotalBoostsActivated = "boostersAndScapeTotalBoostsActivated";
 
     public const string magnetsGame = "Buggy: los imanes y la energía";
     public const string magnetsEneryPicked = "magnetsEneryPicked";
@@ -68,7 +64,5 @@ public static class DataIds
     public const string sizeRocketsGame = "Postergación de la gratificación: El rocket grande y el pequeño";
 
     public const string tryAgainClicks = "tryAgainClicks";
-    //public const string tryAgainClicks2 = "tryAgainClicks2";
-    //public const string tryAgainClicks3 = "tryAgainClicks3";
 
 }

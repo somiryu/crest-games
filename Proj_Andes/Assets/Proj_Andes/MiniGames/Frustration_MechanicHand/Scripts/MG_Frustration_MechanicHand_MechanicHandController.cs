@@ -134,10 +134,12 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         if (hookShootingRoutine != null) StopCoroutine(hookShootingRoutine);
         hookShootingRoutine = SendHookRoutine();
         StartCoroutine(hookShootingRoutine);
-        
         audioSource.Stop();
         audioSource.clip = toHookAudio;
         audioSource.Play();
+
+        MG_MechanicHand_GameManger.Instance.clawThrows++;
+
     }
 
     RaycastHit[] hitResults = new RaycastHit[20];
@@ -155,6 +157,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
 		if (gameManager.gameConfigs.activeCheats && currProgress >= neededAmount - 1)
         {
+            MG_MechanicHand_GameManger.Instance.lostByCheat++;
             StartCoroutine(ShowTrapSign());
 			CorrectRotationToFail();
         }

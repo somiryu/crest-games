@@ -39,7 +39,6 @@ public class FrustrationThermometerController : MonoBehaviour
     void Continue()
     {
         frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
-        Debug.Log(currFrustratioNlevel);
         frustrationTermometer.OnSequenceOver();
     }
 

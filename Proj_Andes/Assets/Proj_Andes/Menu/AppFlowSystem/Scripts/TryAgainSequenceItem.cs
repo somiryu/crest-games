@@ -17,16 +17,12 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
         switch (tryAgainTrial)
         {
             case 1: UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, frustrationTermometer.frustrationGameItem.itemAnalytics, DataIds.mechanicHandGame);
-                Debug.Log(frustrationTermometer.frustrationGameItem.itemAnalytics[DataIds.timePlayed] + "mech hand");
                 break;            
             case 2: UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, frustrationTermometer.frustrationGameItem.itemAnalytics, DataIds.boostersAndScapeGame);
-                Debug.Log(frustrationTermometer.frustrationGameItem.itemAnalytics[DataIds.timePlayed] + "boosters and scape");
                 break;            
             case 3: UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, frustrationTermometer.frustrationGameItem.itemAnalytics, DataIds.magnetsGame);
-                Debug.Log(frustrationTermometer.frustrationGameItem.itemAnalytics[DataIds.timePlayed] + "magnets");
                 break;
         }
-
     }
     public override void ResetCurrentAnalytics()
     {

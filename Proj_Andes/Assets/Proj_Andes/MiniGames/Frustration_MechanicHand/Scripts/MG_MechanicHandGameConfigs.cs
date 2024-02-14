@@ -15,24 +15,19 @@ public class MG_MechanicHandGameConfigs : GameConfig
 	public float percentageNeededToWin = 0.8f;
 	public bool activeCheats;
 
-    [NonSerialized] public int totalSuccessfulAttempts;
-    [NonSerialized] public int totalFailedAttempts;
-
     public override string GetSceneID() => DataIds.mechanicHandGame;
-
     public override void SaveAnalytics()
     {
+        var currData = MG_MechanicHand_GameManger.Instance;
         itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.mechanicHandtotalSuccessfulAttempts, totalSuccessfulAttempts);
-        itemAnalytics.Add(DataIds.mechanicHandtotalFailedAttempts, totalFailedAttempts);
-
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.mechanicHandGame, itemAnalytics);
+        itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
+        itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
+        itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
+        itemAnalytics.Add(DataIds.mechanicHandClawThrows, currData.clawThrows);
 
     }
     public override void ResetCurrentAnalytics()
     {
-        totalSuccessfulAttempts = 0; 
-        totalFailedAttempts = 0;
         base.ResetCurrentAnalytics();
     }
 }
