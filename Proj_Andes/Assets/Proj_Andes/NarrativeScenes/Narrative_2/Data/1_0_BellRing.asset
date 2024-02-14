@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 1_0_BellRing
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xA1Son\xF3 la campana! Vamos, r\xE1pido..."
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 8300000, guid: 36aaa415783dd74439d31c18036c9f10, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 393979bd1d877e640b1d5bc537b0f75b, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Ves con emoci\xF3n el parque. No puedes esperar para ser el primero en
+      subirte al columpio\u2026 Aparece una profe que necesita hablar con Cami."
+    textAlternative: "Ves con emoci\xF3n el parque. No puedes esperar para ser la
+      primera en subirte al columpio\u2026 Aparece una profe que necesita hablar
+      con Cami."
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 8300000, guid: 0d3fa8042c516ce4f9e94b5b0e7da71a, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 111edd3ce668bc341818a3b9c05d6c06, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 211acfd051f840748976e40f16ab6429, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: Ya nos Vemos
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 0}
+    responses: []
+    audio: {fileID: 8300000, guid: 0841a4844b9516841a508d01e9cbd277, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: d28fbd2db618a7e44b870be8d34c919e, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 2be1a2c779afb9c409522332934eed41, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Ahora te toca buscar con qui\xE9n jugar! de estos tres personajes, \xBFa
+      qui\xE9n le preguntarias?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: fda6a2115d437bc45acd83ef388a6d93, type: 3}
+    responses:
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: f035d65cb8ef56b47ac8f6b12cfe59a0, type: 2}
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: a0b76e42646cad843baa1ebaf519c08e, type: 2}
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 443d134371b17d34abaad5bc9a96af42, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 3de27042ffd0b5d47bbc70cb2c52d864, type: 2}
+    audio: {fileID: 8300000, guid: 2435c29d55f50af448f9501af2060ab7, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 254fc7cdecb19c64d834d4b2880cf9c3, type: 2}
+    ExitAnim: {fileID: 0}

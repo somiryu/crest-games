@@ -34,7 +34,7 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 29c63d6bbd3e46143a504b9e87d7f3bd, type: 3}
     name: Narrador
   - chType: 6
-    image: {fileID: 1147799763612641204, guid: 2bbaa0fb7e0eb604996f313356024ff6, type: 3}
+    image: {fileID: 21300000, guid: e70296c352701174fba018db47e1014d, type: 3}
     name: Estudiante
   - chType: 7
     image: {fileID: 21300000, guid: e03b3f55e3112bb44b1ebf86d53c3778, type: 3}
@@ -42,3 +42,6 @@ MonoBehaviour:
   - chType: 8
     image: {fileID: 8375390331906302623, guid: 6d6487d2e7a25214e8ca2a99f95390f8, type: 3}
     name: Tendero
+  - chType: 9
+    image: {fileID: 8375390331906302623, guid: 6d6487d2e7a25214e8ca2a99f95390f8, type: 3}
+    name: Andre

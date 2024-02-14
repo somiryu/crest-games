@@ -13,58 +13,96 @@ MonoBehaviour:
   m_Name: 2_0_play
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "Tom\xE1s se acerca a ti  y te invita a jugar con su grupo de amigos. 
-      A\xFAn no han decidido qu\xE9 hacer y te cuenta el problema que tienen"
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Espera\u2026 Andre se acerca a ti y te invita a jugar con su grupo de
+      amigos. A\xFAn no han decidido qu\xE9 hacer y te cuenta el problema que tienen.\r"
+    textAlternative: "Espera\u2026 Andre se acerca a ti y te invita a jugar con su
+      grupo de amigas. A\xFAn no han decidido qu\xE9 hacer y te cuenta el problema
+      que tienen.\r\n"
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: a1740fda99422d648ab8e4659174624f, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 391d8fac970cc9a4c90cb39e55295405, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 6b5b4d93ab62b6a40a3bb2e8f048f369, type: 2}
     ExitAnim: {fileID: 0}
-  - characterType: 2
+  - characterType: 9
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "Yo quiero jugar a las escondidad, Juan quiere hacer carreras y Fernanda
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Yo quiero jugar escondidas, Juana quiere hacer carreras y Fernanda quiere
       jugar con el bal\xF3n. Todos queremos algo diferente. Ya se va a acabar el
       recreo y no hemos jugado nada. \xBFT\xFA qu\xE9 quieres?"
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
+    textAlternative: "Yo quiero jugar escondidas, Juana quiere hacer carreras y Fernanda
+      quiere jugar con el bal\xF3n. Todas queremos algo diferente. Ya se va a acabar
+      el recreo y no hemos jugado nada. \xBFT\xFA qu\xE9 quieres?"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responses:
+    - response: Basquetbol
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 0ae72c8a4132bbe4daf410fee5f20508, type: 3}
+      responseAudio: {fileID: 8300000, guid: 17c47853299c2854882e179ff28880e3, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: Voleybol
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 433e9ab08d934d9409a14c87568a2d67, type: 3}
+      responseAudio: {fileID: 8300000, guid: d6ff82b6370b5124aa9112fd80e034f8, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "F\xFAtbol"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: e9bd8354896d42d44b17dfb6572aad2f, type: 3}
+      responseAudio: {fileID: 8300000, guid: 1af867d44dfda554993c8f85898e2d25, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 5daf22789e0076447877b00ec4bb04a1, type: 3}
+    audioAlternative: {fileID: 8300000, guid: f44d1ae9648f6014f8cd4c185f4ac387, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 66af49869c56bec48bc333059d7d2d28, type: 2}
     ExitAnim: {fileID: 0}
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "Tienes poco tiempo para pensar y debes decidir qu\xE9 hacer..."
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: ' Eres muy bueno para jugar eso!'
+    textAlternative: ' Eres muy buena para jugar eso!'
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: d66875819476e3d479486e8f09446ba6, type: 3}
+    audioAlternative: {fileID: 8300000, guid: ea438607dd2a0f84fb3cf2545c1bb39f, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 0
-    changeToSequence: {fileID: 0}
-    text: 
+    changeToSequence: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Y ahora, tienes que ayudar a decidir qu\xE9 van jugar.\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
-    - response: Yo escojo el juego y ya
-      responseImage: {fileID: 0}
-      changeSequence: 1
-      dataAfterResponse: {fileID: 11400000, guid: fd70b9415d8aff2498755e72fb4ed7ce, type: 2}
     - response: Escojan ustedes. yo juego lo que digan
+      responseAlternative: 
       responseImage: {fileID: 0}
-      changeSequence: 1
-      dataAfterResponse: {fileID: 11400000, guid: c09c9c40e16abe24686f084df34ed4c0, type: 2}
+      responseAudio: {fileID: 8300000, guid: 4b02145e21c532d4d82b598f3e2d9db2, type: 3}
+      dataAfterResponse: {fileID: 11400000, guid: fd70b9415d8aff2498755e72fb4ed7ce, type: 2}
     - response: Busquemos algo que nos guste a todos
+      responseAlternative: 
       responseImage: {fileID: 0}
-      changeSequence: 1
+      responseAudio: {fileID: 8300000, guid: c60a0d130bb6ca74ea28595d8018cc49, type: 3}
+      dataAfterResponse: {fileID: 11400000, guid: c09c9c40e16abe24686f084df34ed4c0, type: 2}
+    - response: Yo escojo el juego y ya
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 31236373c665b694f8350c4357470342, type: 3}
       dataAfterResponse: {fileID: 11400000, guid: 7018a2356396fd2458dbcc24c35adaec, type: 2}
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: b8aa06ee88acec14dbefaa9225e0c664, type: 2}
     ExitAnim: {fileID: 0}

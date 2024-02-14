@@ -44,6 +44,7 @@ public enum CharactersTypes {
     Estudiante  = 6,
     Carlos = 7 ,
     Tendero = 8 ,
+    Andre = 9,
 }
 
 [Serializable]
