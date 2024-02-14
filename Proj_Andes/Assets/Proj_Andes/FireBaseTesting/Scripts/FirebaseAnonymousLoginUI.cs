@@ -66,6 +66,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] GameObject checkingInternetPanel;
 	[SerializeField] GameObject NoInternetWarningIcon;
 
+	[Header("No Internet Connection Warnings")]
+	[SerializeField] Button noInternetConnectionPopUpOkBtn;
+	[SerializeField] GameObject noInternetConnectionPopUp;
+
 	 string logInsuccedID;
 
 	bool continueSelectedFlag;
@@ -105,6 +109,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		userBtnsPool.Init(10);
 		currBtnsByDataID = new Dictionary<UsersListItem, string>();
 		checkingInternetPanel.SetActive(false);
+
+		noInternetConnectionPopUpOkBtn.onClick.AddListener(() => noInternetConnectionPopUp.SetActive(false));
 	}
 
 
@@ -236,6 +242,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		Debug.Log("Corretly retrieved users from server");
 		checkingInternetPanel.SetActive(false);
 		NoInternetWarningIcon.SetActive(!UserDataManager.Instance.HasInternet);
+		if (!UserDataManager.Instance.HasInternet)
+		{
+			noInternetConnectionPopUp.SetActive(true);
+		}
 		RebuildUsersList();
 	}
 

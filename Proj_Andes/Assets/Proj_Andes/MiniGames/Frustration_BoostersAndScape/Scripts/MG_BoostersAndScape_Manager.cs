@@ -142,7 +142,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
             }
             else Onfailed();
         }
-        if (successfulAttempts == 10)
+        if (successfulAttempts == gameConfig.boostersPerRun)
         {
             OnGameEnd();
             Debug.Log("You won!");
@@ -247,6 +247,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
 	int GenerateRandom()
     {
-        return Random.Range((gameConfig.boostersPerRun - gameConfig.extraAttemptsBeforeFailing), gameConfig.boostersPerRun);
+        var newRandomFailIdx = Random.Range(gameConfig.extraAttemptsBeforeFailing, gameConfig.boostersPerRun);
+        if (forcedFails.Contains(newRandomFailIdx)) return GenerateRandom();
+        Debug.Log("will fail at: " + newRandomFailIdx);
+        return newRandomFailIdx;
     }
 }

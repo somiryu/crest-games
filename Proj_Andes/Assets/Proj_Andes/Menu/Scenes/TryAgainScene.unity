@@ -609,6 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   retryBtn: {fileID: 800960292}
   waitFor: 15
+  extraWaitAtTheEnd: 8
   fakeLoadingSlider: {fileID: 1379565383}
 --- !u!1 &1307287086
 GameObject:
