@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tymski;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MG_MechanicHandGameConfigs", menuName = "MiniGames/MG_MechanicHandGameConfigs")]
