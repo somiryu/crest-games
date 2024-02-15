@@ -205,6 +205,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	{
 		itemPicked.OnWasPicked();
         magnetsCollected++;
+		currEnergyPicked++;
 		inGame_currPointsTextUI.text = currEnergyPicked.ToString();
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
