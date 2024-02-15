@@ -20,6 +20,9 @@ public class UserDataManager : ScriptableObject
 
 	private static string currTestID;
 
+	public static string LastCollectionIDStored = null;
+	public static string LastDocumentIDStored = null;
+
 
 	public static string CurrTestID
 	{
@@ -90,13 +93,13 @@ public class UserDataManager : ScriptableObject
         }
     }
 
-	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string collectionID = null)
+	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string documentID = null, string gameType = null)
 	{
 		var analyticsWithExtraFields = new Dictionary<string, object>();
 		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
-		if (collectionID != null) analyticsWithExtraFields.Add(DataIds.GameType, collectionID);
+		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
 		if(!userAnayticsPerGame.TryGetValue(gameKey, out var analyticsDocsFound))
@@ -105,8 +108,8 @@ public class UserDataManager : ScriptableObject
 			userAnayticsPerGame.Add(gameKey, analyticsDocsFound);
 		}
 
-		//Generating a new document ID each time
-		var newDocumentID = Guid.NewGuid().ToString();
+		//Generating a new document ID each time if an explicit documentID was not passed in 
+		var newDocumentID = string.IsNullOrEmpty(documentID)? Guid.NewGuid().ToString() : documentID;
 		analyticsDocsFound.Add(newDocumentID, analyticsWithExtraFields);
     }
 

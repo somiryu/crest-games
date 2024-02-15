@@ -24,11 +24,20 @@ public class MG_MagnetsConfigs : GameConfig
     public override void SaveAnalytics()
     {
         var currData = MG_MagnetsGameManager.Instance;  
+
         itemAnalytics = new Dictionary<string, object>(); 
         itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
         itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
         itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
         itemAnalytics.Add(DataIds.magnetsEneryPicked, currData.magnetsCollected);
+
+        var newDocID = Guid.NewGuid().ToString();
+
+        UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
+        UserDataManager.LastDocumentIDStored = newDocID;
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.magnetsGame);
+
         SaveCoins(coinsCollected);
     }
     public override void ResetCurrentAnalytics()

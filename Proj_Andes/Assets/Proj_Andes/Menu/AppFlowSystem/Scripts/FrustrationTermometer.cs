@@ -11,7 +11,12 @@ public class FrustrationTermometer : SimpleGameSequenceItem
     public SimpleGameSequenceItem frustrationGameItem;
     public override void SaveAnalytics()
     {
-        frustrationGameItem.itemAnalytics.Add(DataIds.frustrationLevel, selectedFrustrationLevel.ToString());
-        Debug.Log("saving frust " + frustrationGameItem.itemAnalytics[DataIds.frustrationLevel]);
+        //If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
+        if (string.IsNullOrEmpty(UserDataManager.LastDocumentIDStored) || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
+
+        if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
+        if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
+
+        DocumentFound.Add(DataIds.frustrationLevel, selectedFrustrationLevel.ToString());
     }
 }

@@ -22,8 +22,8 @@ public static class DataIds
 	public const string challengeType = "challenge_type";
 
     //Frustration levels
-    public const string frustrationGames = "frustrationGames";
-    public const string timePlayed = "frustrationLevels";
+    public const string frustrationGames = "frustration_levels";
+    public const string timePlayed = "time_played";
     public const string lostByCheat = "lostByCheat";
     public const string frustrationLevel = "frustrationLevel";
 
@@ -63,6 +63,6 @@ public static class DataIds
 
     public const string sizeRocketsGame = "Postergación de la gratificación: El rocket grande y el pequeño";
 
-    public const string tryAgainClicks = "tryAgainClicks";
+    public const string tryAgainClicks = "retry_clicks";
 
 }

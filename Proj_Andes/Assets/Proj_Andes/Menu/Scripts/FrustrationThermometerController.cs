@@ -56,9 +56,8 @@ public class FrustrationThermometerController : MonoBehaviour
 }
 public enum FrustrationLevel
 {
-    Frustrated,
-    Stressed,
-    Unsetlled,
-    Uneasy,
-    Tranquile,
+    Muy_Frustrado,
+    Frustrado,
+    Un_Poco_Tranquilo,
+    Muy_Tranquilo,
 }

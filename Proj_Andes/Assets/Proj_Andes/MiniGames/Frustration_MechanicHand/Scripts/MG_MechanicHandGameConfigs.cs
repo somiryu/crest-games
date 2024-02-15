@@ -25,7 +25,14 @@ public class MG_MechanicHandGameConfigs : GameConfig
         itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
         itemAnalytics.Add(DataIds.mechanicHandClawThrows, currData.clawThrows);
 
-    }
+		var newDocID = Guid.NewGuid().ToString();
+
+		UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
+		UserDataManager.LastDocumentIDStored = newDocID;
+
+		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.mechanicHandGame);
+
+	}
     public override void ResetCurrentAnalytics()
     {
         base.ResetCurrentAnalytics();

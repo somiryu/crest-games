@@ -12,18 +12,15 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
     public override void SaveAnalytics()
     {
         clickAmounts = TryAgainManager.clickCounts;
-        frustrationTermometer.frustrationGameItem.itemAnalytics.Add(DataIds.tryAgainClicks, clickAmounts);
+		//If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
+		if (string.IsNullOrEmpty(UserDataManager.LastDocumentIDStored) || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
 
-        switch (tryAgainTrial)
-        {
-            case 1: UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, frustrationTermometer.frustrationGameItem.itemAnalytics, DataIds.mechanicHandGame);
-                break;            
-            case 2: UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, frustrationTermometer.frustrationGameItem.itemAnalytics, DataIds.boostersAndScapeGame);
-                break;            
-            case 3: UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, frustrationTermometer.frustrationGameItem.itemAnalytics, DataIds.magnetsGame);
-                break;
-        }
+		if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
+		if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
+
+		DocumentFound.Add(DataIds.tryAgainClicks, clickAmounts);
     }
+
     public override void ResetCurrentAnalytics()
     {
         clickAmounts = 0;

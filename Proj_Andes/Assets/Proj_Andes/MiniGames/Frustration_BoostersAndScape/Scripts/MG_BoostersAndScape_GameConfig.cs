@@ -22,7 +22,15 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
         itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
         itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
         itemAnalytics.Add(DataIds.boostersAndScapeTotalBoostsActivated, currData.boostersActivated);
-    }
+
+		var newDocID = Guid.NewGuid().ToString();
+
+		UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
+		UserDataManager.LastDocumentIDStored = newDocID;
+
+		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.boostersAndScapeGame);
+
+	}
     public override void ResetCurrentAnalytics()
     {
         base.ResetCurrentAnalytics();
