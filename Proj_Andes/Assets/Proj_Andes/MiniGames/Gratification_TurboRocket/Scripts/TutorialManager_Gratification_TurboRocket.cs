@@ -106,7 +106,8 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
         SetSpeedway();
         firstPos = transform.position;
-        onPlay = true;
+        camCC.Init();
+		onPlay = true;
         gameStages = GameStages.Start;
     }
     void InitTuto()
