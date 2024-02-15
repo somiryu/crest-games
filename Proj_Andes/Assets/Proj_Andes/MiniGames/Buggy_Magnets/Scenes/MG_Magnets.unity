@@ -23589,6 +23589,11 @@ MonoBehaviour:
   afterAction_currPointsTextUI: {fileID: 1728065427}
   currSpawnedItems: 0
   eogManager: {fileID: 2121471078}
+  timePlayed: 0
+  clickRepetitions: 0
+  lostByCheat: 0
+  frustrationLevelSelected: 
+  magnetsCollected: 0
 --- !u!4 &2104352831
 Transform:
   m_ObjectHideFlags: 0

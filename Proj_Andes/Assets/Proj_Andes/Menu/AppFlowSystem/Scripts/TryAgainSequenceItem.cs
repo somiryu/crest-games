@@ -8,24 +8,19 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 {
     public int tryAgainTrial;
     [NonSerialized] public int clickAmounts;
-    public override string GetSceneID()
-    {
-        switch (tryAgainTrial)
-        {
-            case 1: return DataIds.tryAgainClicks1;
-            case 2: return DataIds.tryAgainClicks2;
-            case 3: return DataIds.tryAgainClicks3;
-            default: return DataIds.tryAgainClicks1;
-        }
-    }
+    public FrustrationTermometer frustrationTermometer;
     public override void SaveAnalytics()
     {
         clickAmounts = TryAgainManager.clickCounts;
-        itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(GetSceneID(), clickAmounts);
-        UserDataManager.SaveUserAnayticsPerGame(GetSceneID(), itemAnalytics);
+		//If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
+		if (string.IsNullOrEmpty(UserDataManager.LastDocumentIDStored) || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
 
+		if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
+		if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
+
+		DocumentFound.Add(DataIds.tryAgainClicks, clickAmounts);
     }
+
     public override void ResetCurrentAnalytics()
     {
         clickAmounts = 0;

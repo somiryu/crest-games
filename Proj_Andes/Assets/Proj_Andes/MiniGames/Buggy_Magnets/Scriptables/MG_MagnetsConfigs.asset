@@ -27,11 +27,11 @@ MonoBehaviour:
     valueBase: 2
     modifierPerDifficultLevel:
     - difficultyLevel: 0
-      difficultyOperation: 1
+      difficultyOperation: 0
       valueModificator: 0
     - difficultyLevel: 1
       difficultyOperation: 0
-      valueModificator: 2
+      valueModificator: 0
     - difficultyLevel: 2
       difficultyOperation: 0
-      valueModificator: 4
+      valueModificator: 0

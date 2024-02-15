@@ -16,3 +16,4 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: bf533393218d3b640be24309f529e496, type: 3}
     scenePath: Assets/Proj_Andes/Menu/Scenes/TryAgainScene.unity
   tryAgainTrial: 1
+  frustrationTermometer: {fileID: 11400000, guid: 93727676b642f1d419ff5fe923065d09, type: 2}

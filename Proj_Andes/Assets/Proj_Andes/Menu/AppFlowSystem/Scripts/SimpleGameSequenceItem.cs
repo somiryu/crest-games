@@ -42,4 +42,8 @@ public class SimpleGameSequenceItem : ScriptableObject
     {
 
     }
+    public SimpleGameSequenceItem()
+    {
+        itemAnalytics = new Dictionary<string, object>();
+    }
 }

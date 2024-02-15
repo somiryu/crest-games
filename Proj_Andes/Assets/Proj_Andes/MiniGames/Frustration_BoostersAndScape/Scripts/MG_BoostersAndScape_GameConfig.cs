@@ -12,26 +12,27 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     public bool updateScene;
     public int extraAttemptsBeforeFailing;
 
-    [NonSerialized] public List<float> timeToMakeAChoice = new List<float>();
-    [NonSerialized] public int totalAttemptsToBoost;
-    [NonSerialized] public List<bool> roundResultWins = new List<bool>();
-    [NonSerialized] public float totalGameTime;
-
     public override string GetSceneID() => DataIds.boostersAndScapeGame;
 
     public override void SaveAnalytics()
     {
+        var currData = MG_BoostersAndScape_Manager.Instance;
         itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.boostersAndScapetotalAttemptsToBoost, totalAttemptsToBoost);
-        itemAnalytics.Add(DataIds.boostersAndScapeTotalGametime, totalGameTime);
+        itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
+        itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
+        itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
+        itemAnalytics.Add(DataIds.boostersAndScapeTotalBoostsActivated, currData.boostersActivated);
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.boostersAndScapeGame, itemAnalytics);
-    }
+		var newDocID = Guid.NewGuid().ToString();
+
+		UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
+		UserDataManager.LastDocumentIDStored = newDocID;
+
+		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.boostersAndScapeGame);
+
+	}
     public override void ResetCurrentAnalytics()
     {
-        timeToMakeAChoice.Clear();
-        roundResultWins.Clear();
-        totalGameTime = 0;
         base.ResetCurrentAnalytics();
     }
 }

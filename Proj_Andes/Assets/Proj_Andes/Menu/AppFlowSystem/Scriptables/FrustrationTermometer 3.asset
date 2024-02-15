@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 424533fc7b6691542ba4e5e8c0dcb527, type: 3}
-  m_Name: FrustrationTermometer
+  m_Name: FrustrationTermometer 3
   m_EditorClassIdentifier: 
   scene:
     sceneAsset: {fileID: 102900000, guid: 700607cb32029ec4b8cfc8228e6a2b10, type: 3}
     scenePath: Assets/Proj_Andes/Menu/Scenes/FrustrationTermometer.unity
   selectedFrustrationLevel: 0
   defaultFrustrationLevel: 4
+  frustrationGameItem: {fileID: 11400000, guid: e9c5110f8800ba243aee031e543727e5, type: 2}

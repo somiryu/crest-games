@@ -45,8 +45,15 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public bool IsOnEndScreen => afterActionPanel.activeInHierarchy;
 
 	public int NeededAsteroidsToWin => Mathf.FloorToInt((asteroidsPerRound * 3) * gameConfigs.percentageNeededToWin);
+	float totalTime;
 
-	private void Awake()
+    //DATA ANALYTICS
+    public float timePlayed;
+    public int clickRepetitions;
+    public int lostByCheat;
+    public int clawThrows;
+
+    private void Awake()
 	{
 		instance = this;
 	}
@@ -59,6 +66,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	void Init()
     {
 		totalCapturedAsteroids = 0;
+		totalTime = 0;
 		currPlayerLifes = initialPlayerLifes;
 		playerLifesAmountTxt.SetText(currPlayerLifes.ToString());
 
@@ -71,7 +79,11 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		OnRoundStart();
 		sendHookBtn.onClick.AddListener(player.OnClickSendHook);
     }
-
+	void Update()
+	{
+		totalTime += Time.deltaTime;
+		if (Input.GetMouseButtonDown(0)) clickRepetitions++;
+	}
 	void OnRoundStart()
 	{
 		currAsteroidsSize = 1 - (sizeLoseOnRoundChange * currRound);
@@ -137,7 +149,6 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 			if(currRound == 3) GameOver();
 			else OnRoundStart();
 		}
-		gameConfigs.totalSuccessfulAttempts++;
 
     }
 
@@ -152,7 +163,6 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		{
 			GameOver();
 		}
-		gameConfigs.totalFailedAttempts++;
 	}
 
 	void GameOver()
@@ -165,6 +175,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);
 		afterAction_WinLabel.SetActive(ratio >= gameConfigs.percentageNeededToWin);
 		afterAction_LoseLabel.SetActive(ratio < gameConfigs.percentageNeededToWin);
+		timePlayed = totalTime;
         gameConfigs.SaveCoins(totalCapturedAsteroids);
         eogManager.OnGameOver();
 	}
