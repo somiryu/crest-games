@@ -23,7 +23,9 @@ public class NarrativeSceneManager : MonoBehaviour
 
 	private void Start()
 	{
-		if(_startingSequence != null) dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
+        AudioManager.Instance.backgroundSoundType = BackgroundSoundType.Narrative;
+		AudioManager.Instance.PlayMusic();
+        if (_startingSequence != null) dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
 	}
 
 	private void Update()

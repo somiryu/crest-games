@@ -52,7 +52,8 @@ public class MonsterMarketManager : MonoBehaviour
     MonsterMarketButtonBehaviour currButton;
 
     Button currSelectedButton;
-
+    AudioSource audioSource;
+    [SerializeField] AudioClip openChestSound;
     private void Awake()
     {
         if(instance != null)
@@ -89,6 +90,7 @@ public class MonsterMarketManager : MonoBehaviour
         monstersUIInChestOpenning.RecycleAll();
 
         chestOpenedContainer.gameObject.SetActive(false);
+        TryGetComponent(out audioSource);
 
         confirmButton.onClick.AddListener(OpenButtonBeforeBuyChestOrContinuing);
         chestOpenButton.onClick.AddListener(BuyChest);
@@ -196,6 +198,9 @@ public class MonsterMarketManager : MonoBehaviour
         saveForLaterButton.gameObject.SetActive(true);
         chestOpenedContainerImg.sprite = currButton.monsterMarketButton.chestOpenSprite;
         currentMonstersFound.Clear();
+
+        audioSource.clip = openChestSound;
+        audioSource.Play();
 
         for (int i = 0; i < regularMonstersAmount; i++) currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Regular));
         for (int i = 0; i < rareMonstersAmount; i++) currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Rare));
