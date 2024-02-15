@@ -337,8 +337,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        gameConfigs.roundResultWins.Add(false);
-
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
@@ -408,7 +406,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     void OnRoundEnded()
     {        
         currCoinsValueTxt.text = currCoins.ToString();
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
         if (currScoreStepTutorial == goalScoreStepTutorial)
         {

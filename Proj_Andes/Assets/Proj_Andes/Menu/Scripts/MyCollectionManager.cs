@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,13 @@ public class MyCollectionManager : MonoBehaviour
     [SerializeField] Button hideCollectionBtn;
     [SerializeField] Image leftArrow;
     [SerializeField] Image rightArrow;
-    [HideInInspector] public bool toTheRight;
     public ScrollRect scrollbar;
-    [HideInInspector] public float scrollSpeed = 2f;
+    [HideInInspector] public float scrollSpeed = 200f;
 
     public static List<Monsters> totalDataCollection = new List<Monsters>();
     public Pool<MonsterItemUI> monstersUIInCollection;
+
+    public Action OnClosedCollections;
 
     bool useShowCollectionBtn;
 
@@ -28,7 +30,7 @@ public class MyCollectionManager : MonoBehaviour
     {
         if (instance != null && instance != this) DestroyImmediate(this);
         instance = this;
-        Init(true);
+        Init(false);
     }
     public void Init(bool inUseShowCollectionBtn)
     {
@@ -70,7 +72,7 @@ public class MyCollectionManager : MonoBehaviour
 
 	private void Update()
     {
-        scrollbar.horizontalNormalizedPosition += scrollSpeed * Time.deltaTime;
+        scrollbar.horizontalScrollbar.value += scrollSpeed * Time.deltaTime;
     }
     public void ShowItemsSaved()
     {
@@ -94,12 +96,12 @@ public class MyCollectionManager : MonoBehaviour
         myCollBtn.gameObject.SetActive(useShowCollectionBtn);
         monstersUIInCollection.RecycleAll();
         collectionSet.gameObject.SetActive(false);
+        OnClosedCollections?.Invoke();
     }
-    public void OnScroll()
+    public void OnScroll(bool toTheRight)
     {
-        if (toTheRight) scrollSpeed = 2;
-        else scrollSpeed = -2;
-        Debug.Log("moving");
+        if (toTheRight) scrollSpeed = 1;
+        else scrollSpeed = -1;
     }
     public void OnStopScrolling()
     {

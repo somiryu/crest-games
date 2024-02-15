@@ -102,6 +102,12 @@ public class MonsterMarketManager : MonoBehaviour
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
     }
 
+    void OnCollectionsClosed()
+    {
+        if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
+        myCollectionManager.OnClosedCollections -= OnCollectionsClosed;
+    }
+
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
         currSelectedButton = chestBtn;
@@ -149,7 +155,7 @@ public class MonsterMarketManager : MonoBehaviour
                 if (marketConfig.AvailableCoins >= marketConfig.RegularChestPrice)
                 {
                     marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
-                    OpenChest(100, 0, 0, 1);
+                    OpenChest(1, 0, 0);
                 }
                 else chestNoEnoughCoins.SetActive(true);
                 break;
@@ -157,7 +163,7 @@ public class MonsterMarketManager : MonoBehaviour
                 if (marketConfig.AvailableCoins >= marketConfig.RareChestPrice)
                 {
                     marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
-                    OpenChest(50, 50, 0, 2);
+                    OpenChest(1, 1, 0);
                 }
                 else chestNoEnoughCoins.SetActive(true);
                 break;
@@ -165,7 +171,7 @@ public class MonsterMarketManager : MonoBehaviour
                 if (marketConfig.AvailableCoins >= marketConfig.LegendaryChestPrice)
                 {
                     marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
-                    OpenChest(33, 33, 33, 3);
+                    OpenChest(1, 1, 1);
                 }
                 else chestNoEnoughCoins.SetActive(true);
                 break;
@@ -183,7 +189,7 @@ public class MonsterMarketManager : MonoBehaviour
         }
 
     }
-    void OpenChest(int regularMonstersLikelyness, int rareMonstersLikelyness, int legendaryMonstersLikelyness, int totalMonstersPerChest)
+    void OpenChest(int regularMonstersAmount, int rareMonstersAmount, int legendaryMonstersAmount)
     {
         chestOpenButtonParent.gameObject.SetActive(false);
         chestOpenedContainer.gameObject.SetActive(true);
@@ -191,24 +197,9 @@ public class MonsterMarketManager : MonoBehaviour
         chestOpenedContainerImg.sprite = currButton.monsterMarketButton.chestOpenSprite;
         currentMonstersFound.Clear();
 
-        var totalChance = regularMonstersLikelyness + rareMonstersLikelyness + legendaryMonstersLikelyness;
-
-        for (int i = 0; i < totalMonstersPerChest; i++)
-        {
-            var newProb = GetRandomItem(totalChance+1);
-            if(newProb <= regularMonstersLikelyness && regularMonstersLikelyness > 0)
-            {
-                currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Regular));
-            }
-            else if(newProb > regularMonstersLikelyness && newProb <= regularMonstersLikelyness + rareMonstersLikelyness && rareMonstersLikelyness > 0)
-            {
-				currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Rare));
-            }
-            else if(newProb > 0 && newProb > regularMonstersLikelyness + rareMonstersLikelyness && legendaryMonstersLikelyness > 0)
-            {
-				currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Legendary));
-            }
-        }
+        for (int i = 0; i < regularMonstersAmount; i++) currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Regular));
+        for (int i = 0; i < rareMonstersAmount; i++) currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Rare));
+        for (int i = 0; i < legendaryMonstersAmount; i++) currentMonstersFound.Add(marketConfig.monstersLibrary.GetRandomMonster(MonsterChestType.Legendary));
 
         monstersUIInChestOpenning.RecycleAll();
         for (int i = 0; i < replaceableImg.Count; i++) replaceableImg[i].gameObject.SetActive(false);
@@ -243,7 +234,8 @@ public class MonsterMarketManager : MonoBehaviour
         }
         RefreshCollectionFromData();
 		myCollectionManager.ShowCollection();
-        myCollectionManager.gameObject.SetActive(true);
+		myCollectionManager.OnClosedCollections += OnCollectionsClosed;
+		myCollectionManager.gameObject.SetActive(true);
 
     }
 

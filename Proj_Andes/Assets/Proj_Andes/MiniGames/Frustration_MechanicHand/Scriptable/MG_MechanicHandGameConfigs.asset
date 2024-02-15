@@ -17,7 +17,7 @@ MonoBehaviour:
     scenePath: Assets/Proj_Andes/MiniGames/Frustration_MechanicHand/Scenes/Frustration_MechanicHand_TestScene.unity
   asteroidsPerRound: 5
   asteroidsSizeLoseAmountPerRound: 0.2
-  playerLifes: 5
+  playerLifes: 10
   hookRotationSpeed: 15
   hookMoveSpeed: 12
   percentageNeededToWin: 0.8

@@ -11,6 +11,8 @@ using Random = UnityEngine.Random;
 
 public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 {
+    static MG_FightTheAlienManager instance;
+    public static MG_FightTheAlienManager Instance => instance;
     [SerializeField] MG_FightTheAlienGameConfigs gameConfigs;
     [Space(20)]
     [SerializeField] Image alienAttackImage;
@@ -61,8 +63,13 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     private bool gameoverFlag = false;
     float totalTime;
 
-	public void Awake()
+    MG_FightTheAlien_RoundAnalytics roundAnalytics;
+    public List<MG_FightTheAlien_RoundAnalytics> AllRoundsAnalytics;
+
+    public void Awake()
 	{
+        if (instance != null && instance != this) DestroyImmediate(instance);
+        instance = this;
         currAlienAttacksConfigs = alienAttacksConfigsMatch.Concat(alienAttacksConfigsNoMatch).ToArray();
         Init();
 	}
@@ -71,6 +78,9 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     {
         audiosource = GetComponent<AudioSource>();
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
+
+        AllRoundsAnalytics = new List<MG_FightTheAlien_RoundAnalytics>(gameConfigs.EnemyHealth);
+
         currCoins = gameConfigs.initialCoins;
         currPlayerHealth = gameConfigs.PlayerHealth;
         currEnemyHealth = gameConfigs.EnemyHealth;
@@ -107,6 +117,11 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     {
         timerPerChoice = 0;
         eogManager.OnGameStart();
+
+        roundAnalytics = new MG_FightTheAlien_RoundAnalytics();
+        AllRoundsAnalytics.Add(roundAnalytics);
+        roundAnalytics.clicks = 0;
+
         var randomAttack = Random.Range(0, currAlienAttacksConfigs.Length);
         var currConfig = currAlienAttacksConfigs[randomAttack];
 
@@ -127,7 +142,9 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
             }
             else currBtnImage.sprite = currConfig.wrongAnswer2.attackSprite;
 		}
-	}
+        if (currConfig.rightAnswer.shapeAlienAttack == currConfig.alienAtack.shapeAlienAttack) roundAnalytics.challengeOrder = "Same";
+        else roundAnalytics.challengeOrder = "Different";
+    }
 
 	private void Update()
 	{
@@ -137,15 +154,18 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
+        if(Input.GetMouseButtonDown(0)) roundAnalytics.clicks++;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
             timerPerChoice = 0;
+            roundAnalytics.ranOutOfTime = true;
             OnWrongChoice();
         }
     }
 
 	void OnAnswerBtnClicked(int idx)
 	{
+        roundAnalytics.ranOutOfTime = false;
         if (idx == currCorrectAnswerIdx) OnCorrectChoice();
         else OnWrongChoice();
 	}
@@ -167,7 +187,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
             skinObjAnim[i].SetTrigger("Incorrect");
 
         }
-        gameConfigs.roundResultWins.Add(false);
+        roundAnalytics.wonRound = false;
 
         incorrectParticles.Play();
         incorrectParticles.Play();
@@ -188,8 +208,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
             skinObjAnim[i].SetTrigger("Correct");
         }
-
-        gameConfigs.roundResultWins.Add(true);
+        roundAnalytics.wonRound = true;
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         currEnemyHealth += gameConfigs.EnemyHealthLostOnRightAnswer;
@@ -198,7 +217,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
     void OnRoundEnded()
     {
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
+        roundAnalytics.timeToMakeAChoice = timerPerChoice;
 
         currCoinsValueTxt.text = currCoins.ToString();
         playerHealthUI.value = currPlayerHealth;
@@ -216,9 +235,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
     {
         audiosource.clip = finishAudio;
         audiosource.Play();
-
-        gameConfigs.totalGameTime = totalTime;
-
+        gameConfigs.SaveAnalytics();
         gameoverFlag = true;
         afterActionPanel.SetActive(true);
         inGameUIPaneltoDissapear.SetActive(false);
@@ -258,4 +275,13 @@ public enum shapeAlienAttackConfig
     Circle,
     Heart,
     Star
+}
+
+public class MG_FightTheAlien_RoundAnalytics
+{
+    public string challengeOrder = "NONE";
+    public bool wonRound = false;
+    public float timeToMakeAChoice = 0;
+    public int clicks = 0;
+    public bool ranOutOfTime = false;
 }

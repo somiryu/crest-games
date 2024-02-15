@@ -23,11 +23,17 @@ public class Gratification_TurboRocket_CameraController : MonoBehaviour
         targetPos = Vector3.right * -visualOffset;
     }
 
-    private void Start()
-    {
-        lastPlayerPos = player.CurrPos;
+ 
 
-    }
+    public void Init()
+    {
+		lastPlayerPos = player.CurrPos;
+		var currPos = transform.position;
+		currPos.y = lastPlayerPos.y;
+		currPos.x = lastPlayerPos.x;
+		transform.position = currPos;
+	}
+
     void Update()
     {
         var currPlayerPos = player.CurrPos;
