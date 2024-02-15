@@ -47,6 +47,7 @@ public class GameSequencesList : ScriptableObject
     }
     public void GoToItemIdx(int idx)
     {
+        AudioManager.Instance.PlayMusic();
         var nextItem = GetGameSequence().GetItemByIdx(idx);
         SceneManagement.GoToScene(nextItem.scene);
     }

@@ -34,11 +34,10 @@ public class AudioManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this);
         PlayMusic();
-        currentBkMusic.volume = 0.7f;
     }
     public void PlayMusic()
     {
-        if (GameSequencesList.Instance.currItem is GameConfig)
+        if (GameSequencesList.Instance.currItem is GameConfig || GameSequencesList.Instance.currItem is SimpleGameSequenceItemTutorial)
         {
             backgroundSoundType = BackgroundSoundType.Game;
             currBkAudio = gameBackgroundMusic;
@@ -49,8 +48,11 @@ public class AudioManager : MonoBehaviour
             currBkAudio = appBackgroundMusic;
             backgroundSoundType = BackgroundSoundType.App;
         }
-        currentBkMusic.clip = currBkAudio;
-        currentBkMusic.Play();
+        if (currentBkMusic.clip != currBkAudio)
+        {
+            currentBkMusic.clip = currBkAudio;
+            currentBkMusic.Play();
+        }
         if(backgroundSoundType == BackgroundSoundType.Narrative) backgroundSoundType = BackgroundSoundType.App;
     }
 
@@ -58,7 +60,9 @@ public class AudioManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && backgroundSoundType != BackgroundSoundType.Game)
         {
-            if(EventSystem.current.currentSelectedGameObject.TryGetComponent(out currBtn))
+            var selectedElement = EventSystem.current.currentSelectedGameObject;
+            if (selectedElement == null) return;
+            if(selectedElement.TryGetComponent(out currBtn))
             {
                 currentSoundEffect.clip = clickSound;
                 currentSoundEffect.Play();

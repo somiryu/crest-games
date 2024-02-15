@@ -17,7 +17,7 @@ public class AudioInstruction : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(FirstInstruction());
+        //StartCoroutine(FirstInstruction());
     }
     private void Update()
     {
