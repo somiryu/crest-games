@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 
-public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
+public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
     static MG_BoostersAndScape_Manager instance;
     public static MG_BoostersAndScape_Manager Instance => instance;
@@ -57,13 +57,14 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     [SerializeField] Animator tutorialAnims;
     int currStepTurorial;
     public EndOfGameManager EndOfGameManager => eogManager;
+    [SerializeField] AudioInstruction audioInstruction;
 
     //DATA ANALYTICS
     public float timePlayed;
     public int clickRepetitions;
     public int lostByCheat;
     public int boostersActivated;
-
+    bool addedTimeManagUser;
     private void Awake()
     {
         if(instance != null)
@@ -127,16 +128,24 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         {
             if (currentBooster.Boosteable())
             {
-                Time.timeScale = 0;
+                if(!addedTimeManagUser)
+                {
+                    TimeManager.Instance.SetNewStopTimeUser(this);
+                    addedTimeManagUser = true;
+                }
                 tutorialAnims.gameObject.SetActive(true);
             }
         }
         if (Input.GetMouseButtonDown(0)) clickRepetitions++;
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && audioInstruction.doneAudio)
         {
             if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
             {
-                Time.timeScale = 1;
+                if(addedTimeManagUser)
+                {
+                    TimeManager.Instance.RemoveNewStopTimeUser(this);
+                    addedTimeManagUser = false;
+                }
                 currStepTurorial++;
                 tutorialAnims.gameObject.SetActive(false);
                 if (currStepTurorial == 3) UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());

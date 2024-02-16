@@ -327,6 +327,10 @@ MonoBehaviour:
   eogManager: {fileID: 49564637}
   trapImage: {fileID: 1762366230}
   totalCapturedAsteroids: 0
+  timePlayed: 0
+  clickRepetitions: 0
+  lostByCheat: 0
+  clawThrows: 0
 --- !u!1001 &49564635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -591,6 +595,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135871905}
   m_CullTransparentMesh: 1
+--- !u!1001 &188913191
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2500960040834178063, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_Name
+      value: AudioInstruction
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 595.78015
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 463.94012
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.6663737
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
 --- !u!1 &340098848
 GameObject:
   m_ObjectHideFlags: 0
@@ -14206,6 +14267,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2085659409}
+  - {fileID: 188913191}
   - {fileID: 2087937365}
   - {fileID: 1207398771}
   - {fileID: 1504072535}

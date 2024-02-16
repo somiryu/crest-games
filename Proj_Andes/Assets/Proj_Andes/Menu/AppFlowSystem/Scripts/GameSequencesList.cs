@@ -41,6 +41,7 @@ public class GameSequencesList : ScriptableObject
             if (prevGame != null) prevGame.SaveAnalytics();
             prevGame = nextItem;
             AudioManager.Instance.PlayMusic();
+            TimeManager.Instance.ResetUsers();
             SceneManagement.GoToScene(nextItem.scene);
         }
         else GoToNextSequence();
