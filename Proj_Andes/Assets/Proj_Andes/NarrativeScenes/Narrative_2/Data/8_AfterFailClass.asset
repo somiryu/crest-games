@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: 6_3_gymChoose 3
+  m_Name: 8_AfterFailClass
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 4
+  - characterType: 5
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
-    changeToSequenceStartDialogIdx: 5
-    changeToSequenceResponseIdxToGrayOut: 2
-    text: "Lo siento, ese ya lo escogi\xF3 Luis."
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "parece que no te dejaron nada de lo que quer\xEDas. Fijo el profe te da
+      algo que no te gusta"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 0}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    audio: {fileID: 8300000, guid: e336086cf3d50ae4aae3703b924dd42e, type: 3}
+    audio: {fileID: 8300000, guid: 193432d941adbe7499281f50084a57b9, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: cb9b97a35a3bf1a478f6c083ecb3b9f2, type: 2}
     ExitAnim: {fileID: 0}

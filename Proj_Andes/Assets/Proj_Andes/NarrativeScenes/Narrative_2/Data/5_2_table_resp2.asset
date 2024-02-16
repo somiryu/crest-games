@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
-  m_Name: 6_2_gymChoose 2
+  m_Name: 5_2_table_resp2
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 4
+  - characterType: 2
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
-    changeToSequenceStartDialogIdx: 5
+    changeToSequence: {fileID: 11400000, guid: 3ff86865b61b6bc49b0a5bc063658b0c, type: 2}
+    changeToSequenceStartDialogIdx: 2
     changeToSequenceResponseIdxToGrayOut: 1
-    text: "Lo siento, ese ya lo escogi\xF3 Juana."
+    text: "Debajo de la mesa: \u201CDebajo de la mesa hay chicles pegados\u2026 intenta
+      no tocarlos."
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 0}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
-    audio: {fileID: 8300000, guid: f4059b200d607604594c6f5b807d83fe, type: 3}
+    audio: {fileID: 8300000, guid: 7a953d555852d554eb3110cfd064e1d8, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: d1b06cd8d72aa8c4ab84baec7468d922, type: 2}
     ExitAnim: {fileID: 0}

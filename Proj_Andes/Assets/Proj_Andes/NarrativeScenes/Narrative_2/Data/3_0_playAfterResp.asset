@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3_0_playAfterResp
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 3
+  - characterType: 9
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
@@ -26,7 +26,7 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: 9a3dd9f7e23cfca4dbb32dbb7e257152, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 852329d643a414d4c861627899d14245, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
@@ -42,53 +42,52 @@ MonoBehaviour:
     audio: {fileID: 8300000, guid: aadc4d408931e974b97d7d98b1515366, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 712513194fb372040b60ccb181b69caa, type: 2}
     ExitAnim: {fileID: 0}
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: 
+    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: baf5f2bdf5eae2c40b8c71c0f36aa328, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses:
-    - response: Saltar a la derecha
+    - response: Me levanto y empujo a Alex
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      responseAudio: {fileID: 0}
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: ca42b013d4bc3b14681266938aeb277b, type: 3}
       dataAfterResponse: {fileID: 0}
-    - response: Saltar a la izquierda
+    - response: "Le digo a Alex que me hizo da\xF1o, y que no lo vuelva a hacer"
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
-      responseAudio: {fileID: 0}
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 3ff879302843288418595d3def946ad1, type: 3}
       dataAfterResponse: {fileID: 0}
-    - response: Saltar hacia arriba
+    - response: "No digo nada y me voy para el sal\xF3n"
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 5e90a61f787052a4888cb4b2b05925ce, type: 3}
-      responseAudio: {fileID: 0}
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: f45cea7419ae88a43a6ac4a524a84964, type: 3}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: No alcanzas a quitarte y te empuja. Te caes y te pegas muy duro en el brazo.
-      Te duele mucho.
+    text: " Alex sigue caminando como si nada hubiera pasado.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: baf5f2bdf5eae2c40b8c71c0f36aa328, type: 3}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: d14971930337db04f958f4e5cacf75ce, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: bc3262571418a17458a47a980af1ea9e, type: 2}
     ExitAnim: {fileID: 0}
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
@@ -112,7 +111,7 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 3fcf665cdbaf19c488eb22b26e2c7292, type: 2}
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

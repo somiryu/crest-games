@@ -13,16 +13,134 @@ MonoBehaviour:
   m_Name: 7_AfterGymChoose
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "parece que no te dejaron nada de lo que quer\xEDas. Fijo el profe te da
       algo que no te gusta"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 193432d941adbe7499281f50084a57b9, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: cb9b97a35a3bf1a478f6c083ecb3b9f2, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 4
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "No te preocupes, puedes usar estos aros. Trata de apuntar para meterlos
+      en ese palo.\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 2f0d93c7e2c24db48869db036561ec32, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 4e75445bedc230842b9f0270364d1f7c, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: d9ec169c30384fa4387d4e003402ff9b, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: af8b73837fb051548a395870a6588f97, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\r \xA1Te equivocaste mucho! Hiciste tu mejor esfuerzo, y todo el mundo
+      te est\xE1 mirando.\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 2fbbfd9c077a7c74b8f830418573e188, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: c4db0fc64c92a904ca4b06021f31a6be, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 3
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\rJaja, eres muy malo para esto! Mejor si\xE9ntate y d\xE9janos jugar!\r"
+    textAlternative: "Jaja, eres muy mala para esto! Mejor si\xE9ntate y d\xE9janos
+      jugar!"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: 7ba703c3e885e2845b2ff3533bb1e038, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 7d02e2ef6239e63408d57260ad6b4885, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 0979e5893ea91994fa985cee6688cf73, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\rCuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\n\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses:
+    - response: "Le digo que m\xE1s mala es el"
+      responseAlternative: "Le digo que m\xE1s mala es ella"
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: caadac21bcc7cbf45a620d99489806f2, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: Me voy a sentar lejos y dejo de jugar
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 4be9c1c495ac0204a9c300e717427390, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: Le digo a Alex que cualquiera se puede equivocar y que no me critique
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: c14aa739b7b411143ba9a4150058a8b3, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 4
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\rVamos, intenta de nuevo!\r\n\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 8300000, guid: daa4aea991958d04a8186a00de87b47b, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: dc5522f1b400257408c372ce26885b38, type: 2}
     ExitAnim: {fileID: 0}

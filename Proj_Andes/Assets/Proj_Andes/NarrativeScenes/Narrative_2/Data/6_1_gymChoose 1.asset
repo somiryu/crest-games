@@ -18,10 +18,12 @@ MonoBehaviour:
     changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
     changeToSequenceStartDialogIdx: 5
     changeToSequenceResponseIdxToGrayOut: 0
-    text: "Lo siento, ese ya lo escogi\xF3 Esteban."
+    text: "Lo siento, ese ya lo escogi\xF3 Esteban.\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: b34632f7c8a515b43a3e60c1cb06ff70, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
