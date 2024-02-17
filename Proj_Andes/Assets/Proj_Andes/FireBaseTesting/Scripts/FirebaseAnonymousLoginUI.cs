@@ -40,8 +40,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] TMP_InputField searchField;
 	[SerializeField] Button confirmUserBtn;
 	[SerializeField] UsersListItem selectedUser;
+	[SerializeField] Button cancelSearchBarBtn;
 
-    [Header("Create new user panel")]
+
+	[Header("Create new user panel")]
 	public GameObject createNewUserPanel;
 	[SerializeField] TMP_InputField nameField;
     [SerializeField] TMP_Dropdown ageField;
@@ -97,6 +99,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
 		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
+
+		cancelSearchBarBtn.onClick.AddListener(() =>
+		{
+			selectUserContainer.gameObject.SetActive(true);
+		});
+
 
 		readyBtb.onClick.AddListener(OnReadyConfirmBtnPressed);
 
@@ -314,6 +322,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			UserDataManager.Instance.RegisterNewUser(newUser);
 			createNewUserPanel.SetActive(false);
 			RebuildUsersList();
+			OnSelectedUser(newUser.id);
 		}
 	}
 	void OnExitSession()
@@ -355,13 +364,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	public void OnSelectedUser(UsersListItem data)
 	{
 		if (data == null) return;
-        userNameHeader.text = data.label.text;
-        userNameExitPanel.text = data.label.text;
+		if (!currBtnsByDataID.TryGetValue(data, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
+		OnSelectedUser(idFound);
+	}
 
-        wantsToExitSessionBtn.gameObject.SetActive(true);
+	public void OnSelectedUser(string id)
+	{
+		var data = UserDataManager.Instance.usersDatas.Find(x => x.id == id);
+		if(data == null) return;
 
-        if (!currBtnsByDataID.TryGetValue(data, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
-		UserDataManager.Instance.SetCurrUser(idFound);
+		userNameHeader.text = data.name;
+		userNameExitPanel.text = data.name;
+
+		wantsToExitSessionBtn.gameObject.SetActive(true);
+
+		UserDataManager.Instance.SetCurrUser(id);
 		var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
 		afterLogInPanel.SetActive(true);
 		afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
