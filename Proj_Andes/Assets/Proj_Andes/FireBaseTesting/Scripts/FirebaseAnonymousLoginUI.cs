@@ -26,6 +26,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Transform closeSessionPanel;
 	[SerializeField] Transform headerPanel;
 	[SerializeField] Button musicBtn;
+	[SerializeField] Sprite musicBtnActive;
+	[SerializeField] Sprite musicBtnInactive;
 	[SerializeField] Button wantsToExitSessionBtn;
 	[SerializeField] Button exitSessionBtn;
 	[SerializeField] Button cancelSessionBtn;
@@ -84,7 +86,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	private void Awake()
 	{
-		DatabaseManager.DisableFirebaseOfflineSave();
 		loadingScreen.gameObject.SetActive(true);
 		selectUserContainer.gameObject.SetActive(true);
 
@@ -406,8 +407,16 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	void MusicBtn()
 	{
-		if (AudioManager.Instance.currentBkMusic.volume == 1) AudioManager.Instance.currentBkMusic.volume = 1;
-		else AudioManager.Instance.currentBkMusic.volume = 0;
+		if (AudioManager.Instance.currentBkMusic.isPlaying)
+		{
+			AudioManager.Instance.currentBkMusic.Stop();
+			musicBtn.image.sprite = musicBtnInactive;
+		}
+		else
+		{
+			AudioManager.Instance.currentBkMusic.Play();
+			musicBtn.image.sprite = musicBtnActive;
+		}
 	}
 
 	public void OnContinueGameBtnPressed()

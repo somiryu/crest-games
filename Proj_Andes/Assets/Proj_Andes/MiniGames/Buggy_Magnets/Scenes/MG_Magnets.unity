@@ -12896,7 +12896,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capturedVFX: {fileID: 1594283276}
-  capturedSFX: {fileID: 1528278248}
   spriteRef: {fileID: 368259149}
 --- !u!82 &1528278248
 AudioSource:
@@ -23587,12 +23586,12 @@ MonoBehaviour:
   winTitle: {fileID: 743223156}
   loseTitle: {fileID: 1116128807}
   afterAction_currPointsTextUI: {fileID: 1728065427}
+  capturedItemSfx: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
   currSpawnedItems: 0
   eogManager: {fileID: 2121471078}
   timePlayed: 0
   clickRepetitions: 0
   lostByCheat: 0
-  frustrationLevelSelected: 
   magnetsCollected: 0
 --- !u!4 &2104352831
 Transform:

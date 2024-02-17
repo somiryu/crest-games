@@ -31,7 +31,7 @@ public class GameUIController : MonoBehaviour
         //Audio active by default
         soundActive = 1;
         soundActive = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundActive);
-        ActivateSound(soundActive);
+        ActivateSound(soundActive == 1);
         musicBtn.onClick.AddListener(SwitchAudioActive);
 
         menuContainer.gameObject.SetActive(false);
@@ -56,17 +56,23 @@ public class GameUIController : MonoBehaviour
 
     void SwitchAudioActive()
     {
-        var newValue = AudioListener.volume == 1 ? 0 : 1;
+		var newValue = !AudioManager.Instance.currentBkMusic.isPlaying;
         ActivateSound(newValue);
 	}
 
-    void ActivateSound(int activated)
+    void ActivateSound(bool activated)
     {
-		AudioListener.volume = activated;
-		if (activated == 1) musicBtn.image.sprite = soundActivated;
-        else musicBtn.image.sprite = soundDeactivated;
+        if (activated)
+        {
+            AudioManager.Instance.currentBkMusic.Play();
+            musicBtn.image.sprite = soundActivated;
+        }
+        else
+        {
+			AudioManager.Instance.currentBkMusic.Stop();
+			musicBtn.image.sprite = soundDeactivated;
+        }
 
         PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", (int)AudioListener.volume);
-        Debug.Log("THIS IS WHATS BEING SAVED " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", (int)AudioListener.volume));
     }
 }

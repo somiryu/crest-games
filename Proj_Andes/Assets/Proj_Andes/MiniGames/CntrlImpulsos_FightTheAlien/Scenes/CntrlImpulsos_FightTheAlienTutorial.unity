@@ -22470,7 +22470,7 @@ MonoBehaviour:
   inGameUIPaneltoDissapear: {fileID: 1579605640}
   correctAudio: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
-  finishAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
+  finishAudio: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
   equalFeedbackAudio: {fileID: 8300000, guid: 2af4dcc684880a04a9cc94e736c52531, type: 3}
   differentFeedbackAudio: {fileID: 8300000, guid: a306db84071b41b429ab3faa34911a45, type: 3}
   disabledBtnColor: {r: 1, g: 1, b: 1, a: 0.5529412}

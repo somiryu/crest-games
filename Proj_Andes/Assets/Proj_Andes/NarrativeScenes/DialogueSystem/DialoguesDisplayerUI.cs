@@ -531,7 +531,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 }
 
 [Serializable]
-public struct NarrativeNavigationNode
+public class NarrativeNavigationNode
 {
     public int sourceDialogIdx;
     public int responsePickedIdx;

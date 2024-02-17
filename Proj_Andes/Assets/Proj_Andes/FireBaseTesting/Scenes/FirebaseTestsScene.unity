@@ -12592,6 +12592,8 @@ MonoBehaviour:
   closeSessionPanel: {fileID: 1348028932}
   headerPanel: {fileID: 1860574207}
   musicBtn: {fileID: 846810226}
+  musicBtnActive: {fileID: 21300000, guid: 7ab2a5f1025ae774bad893062199ed58, type: 3}
+  musicBtnInactive: {fileID: 21300000, guid: bae30125c1cf1f3409c7c66b16f6a665, type: 3}
   wantsToExitSessionBtn: {fileID: 836645276}
   exitSessionBtn: {fileID: 1218539904}
   cancelSessionBtn: {fileID: 929411238}

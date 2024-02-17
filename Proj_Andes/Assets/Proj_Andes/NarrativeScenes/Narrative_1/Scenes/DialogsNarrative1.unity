@@ -2127,38 +2127,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1463956197}
     m_Modifications:
-    - target: {fileID: 138452822383681570, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063343627534065056, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_characterSpacing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063343627534065056, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4284698937
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063343627534065056, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063343628042118870, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -19.017944
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063343628096675025, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063343628096675031, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4288387995
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063343628096675031, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3063343628931919240, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2240,24 +2208,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: AllowSkipAudio
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: timeLinePlayer
       value: 
       objectReference: {fileID: 2138338496}
-    - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: narrativeSceneItem
-      value: 
-      objectReference: {fileID: 11400000, guid: b2018ba47f9283944b03a35f619f98ff, type: 2}
     - target: {fileID: 3063343628931919348, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Name
       value: DialoguesDisplayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7466929433441695099, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 2.4299316
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

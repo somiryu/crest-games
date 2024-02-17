@@ -34,6 +34,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] GameObject winTitle;
 	[SerializeField] GameObject loseTitle;
 	[SerializeField] TMP_Text afterAction_currPointsTextUI;
+	[SerializeField] AudioClip capturedItemSfx;
 
 
 	public int currSpawnedItems;
@@ -42,6 +43,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	private int currEnergyPicked;
 	private float currEneryProgress;
     private AudioSource audiosource;
+
 
     private Collider[] overlayResults = new Collider[20];
 	[SerializeField] EndOfGameManager eogManager;
@@ -204,6 +206,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	void OnPicketEnergyItem(MG_MagnetsEnergyItem itemPicked)
 	{
 		itemPicked.OnWasPicked();
+		audiosource.clip = capturedItemSfx;
+		audiosource.Play();
         magnetsCollected++;
 		currEnergyPicked++;
 		inGame_currPointsTextUI.text = currEnergyPicked.ToString();
