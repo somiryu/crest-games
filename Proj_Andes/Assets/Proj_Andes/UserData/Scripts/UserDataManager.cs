@@ -217,6 +217,12 @@ public class UserDataManager : ScriptableObject
 
 	public void SetCurrUser(string id)
 	{
+		if (id == null)
+		{
+			currUserDataIdx = -1;
+			return;
+		}
+
 		var idx = usersDatas.FindIndex(x =>x.id == id);
 		currUserDataIdx = idx;
 	}

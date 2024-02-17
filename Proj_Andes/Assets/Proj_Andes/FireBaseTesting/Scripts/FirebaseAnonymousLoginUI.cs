@@ -32,8 +32,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] TMP_Text userNameHeader;
 	[SerializeField] TMP_Text userNameExitPanel;
 
-	[SerializeField] Transform uReadyPanel;
-	[SerializeField] Button readyBtb;
+
 
 	[Header("Search Bar")]
 	[SerializeField] Transform searchUserContainer;
@@ -64,9 +63,16 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] GameObject afterLogInPanel;
 	[SerializeField] Button afterLogInContinueBtn;
 	[SerializeField] Button afterLogInNewGameBtn;
+	[SerializeField] Button cancelAfterLogBtn;
 	[Space(20)]
 	[SerializeField] GameObject checkingInternetPanel;
 	[SerializeField] GameObject NoInternetWarningIcon;
+
+	[Header("COnfirmStart Panel")]
+	[SerializeField] Transform uReadyPanel;
+	[SerializeField] Button readyBtb;
+	[SerializeField] Button cancelConfirmPanel;
+
 
 	[Header("No Internet Connection Warnings")]
 	[SerializeField] Button noInternetConnectionPopUpOkBtn;
@@ -82,8 +88,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		loadingScreen.gameObject.SetActive(true);
 		selectUserContainer.gameObject.SetActive(true);
 
-        closeSessionPanel.gameObject.SetActive(false);
-        wantsToExitSessionBtn.gameObject.SetActive(false);
+		closeSessionPanel.gameObject.SetActive(false);
+		wantsToExitSessionBtn.gameObject.SetActive(false);
 		uReadyPanel.gameObject.SetActive(false);
 
 		cancelBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
@@ -91,18 +97,29 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wantsToExitSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(true));
 		exitSessionBtn.onClick.AddListener(OnExitSession);
 		cancelSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(false));
-        musicBtn.onClick.AddListener(MusicBtn);
-        goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
-		
+		musicBtn.onClick.AddListener(MusicBtn);
+		goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
+
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
 		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
 
-		cancelSearchBarBtn.onClick.AddListener(() =>
+		cancelSearchBarBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
+
+		cancelAfterLogBtn.onClick.AddListener(() =>
 		{
-			selectUserContainer.gameObject.SetActive(true);
+			OnExitSession();
+			selectUserContainer.gameObject.SetActive(false);
+		}
+		);
+
+		cancelConfirmPanel.onClick.AddListener(() =>
+		{
+			uReadyPanel.gameObject.SetActive(false);
+			afterLogInPanel.gameObject.SetActive(true);
+
 		});
 
 
@@ -331,6 +348,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         wantsToExitSessionBtn.gameObject.SetActive(false);
         uReadyPanel.gameObject.SetActive(false);
 		afterLogInPanel.gameObject.SetActive(false);
+		UserDataManager.Instance.SetCurrUser(null);
 
         nameField.text = string.Empty;
         ageField.SetValueWithoutNotify(0);
@@ -342,6 +360,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
         selectUserContainer.gameObject.SetActive(true);
     }
+
     public UserLivingWith GetUserLivingWith()
 	{
 		var currUserLivingWith = UserLivingWith.NONE;
@@ -387,8 +406,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	void MusicBtn()
 	{
-		if (AudioListener.volume == 1) AudioListener.volume = 0;
-		else if (AudioListener.volume == 0) AudioListener.volume = 1;
+		if (AudioManager.Instance.currentBkMusic.volume == 1) AudioManager.Instance.currentBkMusic.volume = 1;
+		else AudioManager.Instance.currentBkMusic.volume = 0;
 	}
 
 	public void OnContinueGameBtnPressed()
