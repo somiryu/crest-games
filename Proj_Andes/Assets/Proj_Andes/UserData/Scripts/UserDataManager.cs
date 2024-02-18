@@ -4,18 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
 public class UserDataManager : ScriptableObject
 {
 	[SerializeField] int maxAgeEasyLevel = 4;
     [SerializeField] int maxAgeMediumLevel = 8;
+	public bool HasInternet = true;
 
 	private static string instancePath = "UserDataManager";
 	private static string defaultUserID = "DefaultUserId";
 
 	private static string currTestID;
+
+	public static string LastCollectionIDStored = null;
+	public static string LastDocumentIDStored = null;
+
 
 	public static string CurrTestID
 	{
@@ -47,7 +54,8 @@ public class UserDataManager : ScriptableObject
 	public List<UserData> usersDatas => DatabaseManager.userDatas;
     
 	
-    public static Dictionary<string, Dictionary<string, object>> userAnayticsPerGame = new Dictionary<string, Dictionary<string, object>>();
+    public static Dictionary<string, Dictionary<string, Dictionary<string, object>>> userAnayticsPerGame = 
+		new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
 
 
     int currUserDataIdx = -1;
@@ -61,6 +69,11 @@ public class UserDataManager : ScriptableObject
 		}
 	}
 
+	public bool HasInternetConnection()
+	{
+		return HasInternet;
+	}
+
 	[RuntimeInitializeOnLoadMethod]
 	static void RunOnStart()
 	{
@@ -68,38 +81,26 @@ public class UserDataManager : ScriptableObject
 		Application.wantsToQuit += SaveToServer;
 	}
 
-    static void GetAllAnalyticsData()
-    {
-        for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
-        {
-            var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
-			var sceneID = GameSequencesList.Instance.gameSequences[i].GetSceneID();
-			if (string.IsNullOrEmpty(sceneID)) continue;
-			if(CurrUser.userAnalytics.ContainsKey(sceneID)) CurrUser.userAnalytics[sceneID] = newData;
-			else CurrUser.userAnalytics.Add(sceneID, newData);			
-        }
-    }
-
-	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics)
+	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string documentID = null, string gameType = null)
 	{
-        var playerItemAnalytics = new Dictionary<string, object>();
-
 		var analyticsWithExtraFields = new Dictionary<string, object>();
 		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
+		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
-        playerItemAnalytics.Add(CurrTestID, analyticsWithExtraFields);
-
-
-        if (userAnayticsPerGame.ContainsKey(gameKey))
+		if(!userAnayticsPerGame.TryGetValue(gameKey, out var analyticsDocsFound))
 		{
-			if (userAnayticsPerGame[gameKey].ContainsKey(CurrTestID)) userAnayticsPerGame[gameKey][CurrTestID] = playerItemAnalytics;			
-			else userAnayticsPerGame[gameKey].Add(CurrTestID, playerItemAnalytics);
+			analyticsDocsFound = new Dictionary<string, Dictionary<string, object>>();
+			userAnayticsPerGame.Add(gameKey, analyticsDocsFound);
 		}
-		else userAnayticsPerGame.Add(gameKey, playerItemAnalytics);
+
+		//Generating a new document ID each time if an explicit documentID was not passed in 
+		var newDocumentID = string.IsNullOrEmpty(documentID)? Guid.NewGuid().ToString() : documentID;
+		analyticsDocsFound.Add(newDocumentID, analyticsWithExtraFields);
     }
+
     public static bool SaveToServer()
 	{
 		OnUserQuit();
@@ -111,8 +112,6 @@ public class UserDataManager : ScriptableObject
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
-
-		GetAllAnalyticsData();
 
 		Debug.Log("Saving to server");
 		if (currSequence is MinigameGroups group)
@@ -134,7 +133,6 @@ public class UserDataManager : ScriptableObject
 
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
-		DatabaseManager.GetUserDatasList();
 	}
 
 
@@ -151,8 +149,26 @@ public class UserDataManager : ScriptableObject
 
 	public IEnumerator LoadDataFromRemoteDataBaseRoutine()
 	{
+		yield return CheckInternetConnection();
+
 		DatabaseManager.GetUserDatasList();
 		while (!DatabaseManager.userListDone) yield return null;
+	}
+
+	public IEnumerator CheckInternetConnection()
+	{
+		UnityWebRequest www = new UnityWebRequest("http://unity3d.com/");
+
+		yield return www.SendWebRequest();
+
+		if (www.result == UnityWebRequest.Result.ConnectionError) // Error
+		{
+			HasInternet = false;
+		}
+		else // Success
+		{
+			HasInternet = true;
+		}
 	}
 
 	public void SaveDataToRemoteDataBase()
@@ -187,6 +203,12 @@ public class UserDataManager : ScriptableObject
 
 	public void SetCurrUser(string id)
 	{
+		if (id == null)
+		{
+			currUserDataIdx = -1;
+			return;
+		}
+
 		var idx = usersDatas.FindIndex(x =>x.id == id);
 		currUserDataIdx = idx;
 	}

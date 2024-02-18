@@ -17,8 +17,6 @@ public class UserData
     [FirestoreProperty] public string country { get; set; }
     [FirestoreProperty] public UserLivingWith livingWith { get; set; }
 
-
-    [FirestoreProperty] public Dictionary<string, Dictionary<string, object>> userAnalytics { get; set; } = new Dictionary<string, Dictionary<string, object>>();
     [FirestoreProperty] public Dictionary<string, bool> tutorialStepsDone { get; set; } = new Dictionary<string, bool>();
 	   
 	//This refers to the Game group index
@@ -42,8 +40,6 @@ public class UserData
 		country = string.Empty;
 		livingWith = UserLivingWith.NONE;
 
-		userAnalytics = new Dictionary<string, Dictionary<string, object>>();
-
         CheckPointIdx = -1;
 		CheckPointSubIdx = -1;
 		narrativeNavCheckPointsNodes = new List<NarrativeNavigationNode>();
@@ -65,8 +61,6 @@ public class UserData
 	}
 }
 
-
-
 public enum UserGender
 {
 	Masculino,
@@ -76,10 +70,10 @@ public enum UserGender
 
 public enum UserSchoolType
 {
-    Privado,
-    PúblicoUrbano,
-    PúblicoRural,
-	NONE
+	NONE = 0,
+    Privado = 1,
+    PublicoUrbano = 2,
+    PublicoRural = 3,
 }
 
 [Flags]

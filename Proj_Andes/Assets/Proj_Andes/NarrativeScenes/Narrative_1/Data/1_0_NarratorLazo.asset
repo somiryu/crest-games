@@ -23,6 +23,8 @@ MonoBehaviour:
       en todo y sac\xF3 mala nota\u201D."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 601b4710ad54fca44b1029a23f09e4bf, type: 3}
     audioAlternative: {fileID: 0}
@@ -37,6 +39,8 @@ MonoBehaviour:
     text: "\xBFC\xF3mo te sientes t\xFA al saber que Cami sac\xF3 mala nota?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp1_other_feelings
+    analyticTimeID: emp1_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -76,6 +80,8 @@ MonoBehaviour:
     text: A mitad de clase, la profe cambia de actividad y comienzan a saltar lazo.
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 46875a07c966e4d44ac600cbfcb5c7d1, type: 3}
     audioAlternative: {fileID: 0}
@@ -90,6 +96,8 @@ MonoBehaviour:
     text: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy bueno."
     textAlternative: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy buena."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 558a5f057478b8544a2970137112af85, type: 3}
     audioAlternative: {fileID: 8300000, guid: 162ba66c204fba74ea6b3bb8c848f134, type: 3}
@@ -108,6 +116,8 @@ MonoBehaviour:
       del curso, y empuja a Cami. La hace caer y todos los dem\xE1s empiezan a re\xEDrse
       al verlo en el piso\u2026"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 5c4d5c7bcb5ae2b4799df0d473b22486, type: 3}
     audioAlternative: {fileID: 8300000, guid: 3ea59ff2bb8b8af4997fd2dabdb62716, type: 3}

@@ -6,14 +6,12 @@ using TMPro;
 using System;
 using Firebase.Auth;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {   
 
     bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
-	bool checkUserList = false;
 	bool userDeletionInProgress = false;
 
 	string logInFailedWarning = string.Empty;
@@ -28,20 +26,32 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Transform closeSessionPanel;
 	[SerializeField] Transform headerPanel;
 	[SerializeField] Button musicBtn;
+	[SerializeField] Sprite musicBtnActive;
+	[SerializeField] Sprite musicBtnInactive;
 	[SerializeField] Button wantsToExitSessionBtn;
 	[SerializeField] Button exitSessionBtn;
 	[SerializeField] Button cancelSessionBtn;
 	[SerializeField] TMP_Text userNameHeader;
 	[SerializeField] TMP_Text userNameExitPanel;
 
-	[SerializeField] Transform uReadyPanel;
-	[SerializeField] Button readyBtb;
+
+
+	[Header("Search Bar")]
+	[SerializeField] Transform searchUserContainer;
+	[SerializeField] TMP_InputField searchField;
+	[SerializeField] Button confirmUserBtn;
+	[SerializeField] UsersListItem selectedUser;
+	[SerializeField] Button cancelSearchBarBtn;
+	[SerializeField] Button removeSelectedUser;
+	[SerializeField] GameObject selectedUserLabelGO;
+	[SerializeField] TMP_Text selectedUserLabel;
+
 
 	[Header("Create new user panel")]
 	public GameObject createNewUserPanel;
 	[SerializeField] TMP_InputField nameField;
-	[SerializeField] TMP_InputField ageField;
-    [SerializeField] TMP_InputField gradeField;
+    [SerializeField] TMP_Dropdown ageField;
+    [SerializeField] TMP_Dropdown gradeField;
     [SerializeField] TMP_Dropdown sexField;
     [SerializeField] TMP_Dropdown schoolTypeField;
     [SerializeField] TMP_InputField countryField;
@@ -49,6 +59,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button createBtn;
 	[SerializeField] Button cancelBtn;
 	[SerializeField] Button wrongNewUserDataPopUp;
+	[SerializeField] TMP_Text wrongNewUserDataLabelPopUp;
 	[SerializeField] Button logInFailedPopUp;
 	[SerializeField] TMP_Text logInFailTxt;
 	[SerializeField] TMP_Text logInsuccedIDUITxt;
@@ -57,16 +68,37 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] GameObject afterLogInPanel;
 	[SerializeField] Button afterLogInContinueBtn;
 	[SerializeField] Button afterLogInNewGameBtn;
+	[SerializeField] Button cancelAfterLogBtn;
+	[Space(20)]
+	[SerializeField] GameObject checkingInternetPanel;
+	[SerializeField] GameObject NoInternetWarningIcon;
 
-	 string logInsuccedID;
+	[Header("COnfirmStart Panel")]
+	[SerializeField] Transform uReadyPanel;
+	[SerializeField] Button readyBtb;
+	[SerializeField] Button cancelConfirmPanel;
+
+
+	[Header("No Internet Connection Warnings")]
+	[SerializeField] Button noInternetConnectionPopUpOkBtn;
+	[SerializeField] GameObject noInternetConnectionPopUp;
+
+	[Header("Data synced warning")]
+	[SerializeField] Button dataSyncedPopUpOkBtn;
+	[SerializeField] GameObject dataSyncedPopUp;
+	[SerializeField] TMP_Text dataSyncedLabel;
+
+	string logInsuccedID;
+
+	bool continueSelectedFlag;
 
 	private void Awake()
 	{
 		loadingScreen.gameObject.SetActive(true);
 		selectUserContainer.gameObject.SetActive(true);
 
-        closeSessionPanel.gameObject.SetActive(false);
-        wantsToExitSessionBtn.gameObject.SetActive(false);
+		closeSessionPanel.gameObject.SetActive(false);
+		wantsToExitSessionBtn.gameObject.SetActive(false);
 		uReadyPanel.gameObject.SetActive(false);
 
 		cancelBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
@@ -74,23 +106,52 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wantsToExitSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(true));
 		exitSessionBtn.onClick.AddListener(OnExitSession);
 		cancelSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(false));
-        musicBtn.onClick.AddListener(MusicBtn);
-        goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
-		
+		musicBtn.onClick.AddListener(MusicBtn);
+		goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
+
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
-		afterLogInContinueBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
+		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
+
+		cancelSearchBarBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
+
+		cancelAfterLogBtn.onClick.AddListener(() =>
+		{
+			OnExitSession();
+			selectUserContainer.gameObject.SetActive(false);
+		}
+		);
+
+		cancelConfirmPanel.onClick.AddListener(() =>
+		{
+			uReadyPanel.gameObject.SetActive(false);
+			afterLogInPanel.gameObject.SetActive(true);
+
+		});
+
 
 		readyBtb.onClick.AddListener(OnReadyConfirmBtnPressed);
 
+		continueSelectedFlag = false;
+		searchField.onValueChanged.AddListener((_) => SearchUser());
+		removeSelectedUser.onClick.AddListener(OnRemoveSelectedUserBtnPressed);
+		confirmUserBtn.onClick.AddListener(() => OnSelectedUser(selectedUser));
 
         correctlyLoggedInFlag = false;
 		doneInitialization = false;
 		userBtnsPool.Init(10);
 		currBtnsByDataID = new Dictionary<UsersListItem, string>();
+		checkingInternetPanel.SetActive(false);
+
+		noInternetConnectionPopUpOkBtn.onClick.AddListener(() => noInternetConnectionPopUp.SetActive(false));
+
+		dataSyncedPopUpOkBtn.onClick.AddListener(() => dataSyncedPopUp.SetActive(false));
+
+		confirmUserBtn.gameObject.SetActive(false);
 	}
+
 
 	private void Start()
 	{
@@ -114,11 +175,14 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		}
 		if (taskResult.IsFaulted)
 		{
+			UserDataManager.Instance.HasInternet = false;
 			OnFailedLogIn(taskResult);
 			return;
 		}
 
 		AuthResult result = taskResult.Result;
+
+		UserDataManager.Instance.HasInternet = true;
 
 		Debug.LogFormat("User signed in successfully: {0} ({1})",
 			result.User.DisplayName, result.User.UserId);
@@ -172,6 +236,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			StartCoroutine(LoadUsers());
 		}
 	}
+	void SearchUser()
+	{
+		string searchText = searchField.text;
+		int textLenght = searchText.Length;
+		int searchElements = 0;
+		foreach (var item in currBtnsByDataID)
+		{
+			searchElements++;
+			if(item.Key.label.text.Length >= textLenght)
+			{
+				if (item.Key.label.text.Contains(searchText, StringComparison.OrdinalIgnoreCase)) item.Key.gameObject.SetActive(true);
+				else item.Key.gameObject.SetActive(false);
+            }
+		}
+	}
 
 	void RebuildUsersList()
 	{
@@ -184,13 +263,50 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			var newBtn = userBtnsPool.GetNewItem();
 			newBtn.Init(users[i].name, this);
 			currBtnsByDataID.Add(newBtn, users[i].id);
+			newBtn.gameObject.SetActive(false);
 		}
+	}
+
+    public void ShowSelection(UsersListItem userSelected)
+    {
+		selectedUser = userSelected;
+		selectedUserLabelGO.gameObject.SetActive(true);
+		selectedUserLabel.SetText(userSelected.label.text);
+		confirmUserBtn.gameObject.SetActive(true);
+		foreach (var item in currBtnsByDataID) item.Key.gameObject.SetActive(false);
+    }
+
+	public void OnRemoveSelectedUserBtnPressed()
+	{
+		selectedUser = null;
+		searchField.text = "";
+		selectedUserLabelGO.gameObject.SetActive(false);
+		confirmUserBtn.gameObject.SetActive(false);
 	}
 
 	IEnumerator LoadUsers()
 	{
+		checkingInternetPanel.SetActive(true);
 		yield return UserDataManager.Instance.LoadDataFromRemoteDataBaseRoutine();
 		Debug.Log("Corretly retrieved users from server");
+		checkingInternetPanel.SetActive(false);
+		NoInternetWarningIcon.SetActive(!UserDataManager.Instance.HasInternet);
+		if (!UserDataManager.Instance.HasInternet)
+		{
+			noInternetConnectionPopUp.SetActive(true);
+		}
+		else
+		{
+			var usersSynced = DatabaseManager.pendingSyncronizedUsersAmount;
+			var sessionsSynced = DatabaseManager.pendingSyncronizedSessionsAmount;
+
+			if(usersSynced > 0 || sessionsSynced > 0)
+			{
+				dataSyncedPopUp.SetActive(true);
+				dataSyncedLabel.SetText(string.Format("Se subieron al servidor {0} usuario(s) cambiado(s) y {1} sesion(es), encontradas en el guardado local", usersSynced, sessionsSynced));
+			}
+
+		}
 		RebuildUsersList();
 	}
 
@@ -209,22 +325,48 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
         var newUser = new UserData();
 		newUser.name = nameField.text;
-		newUser.age = int.TryParse(ageField.text, out var ageResult)? ageResult : -1;
-        newUser.grade = int.TryParse(gradeField.text, out var gradeResult) ? gradeResult : -1;
+		newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult)? ageResult : -1;
+        newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
 		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true ,out var genderFound)? genderFound : UserGender.NONE;
-		newUser.schoolType = Enum.TryParse<UserSchoolType>(schoolTypeField.options[schoolTypeField.value].text, true ,out var schoolFound)? schoolFound : UserSchoolType.NONE;
+		newUser.schoolType =  (UserSchoolType) schoolTypeField.value ;
 		newUser.country = countryField.text;
 		newUser.livingWith = GetUserLivingWith();
 
 		var validData = true;
-		validData &= !string.IsNullOrEmpty(newUser.name);
-		validData &= newUser.age != -1;
-        validData &= newUser.grade != -1;
-        validData &= newUser.gender != UserGender.NONE;
-        validData &= newUser.schoolType != UserSchoolType.NONE;
-        validData &= !string.IsNullOrEmpty(newUser.country);
-		validData &= newUser.livingWith != UserLivingWith.NONE;
-		
+		var errMsg = "";
+
+		if (string.IsNullOrEmpty(newUser.name))
+		{
+			errMsg = "El nombre de usuario está vacío o es inválido";
+		}
+		else if(newUser.age == -1)
+		{
+			errMsg = "El campo de edad está vacío o es inválido";
+		}
+		else if (newUser.gender == UserGender.NONE)
+		{
+			errMsg = "El género está vacío o es inválido";
+		}
+		else if (newUser.schoolType == UserSchoolType.NONE)
+		{
+			errMsg = "El tipo de escuela está vacía o es inválida";
+		}
+		else if (newUser.grade == -1)
+		{
+			errMsg = "El campo de grado está vacío o es inválido";
+		}
+		else if (string.IsNullOrEmpty(newUser.country))
+		{
+			errMsg = "El lugar de nacimiento está vacío o es inválido";
+		}
+		else if (newUser.livingWith == UserLivingWith.NONE)
+		{
+			errMsg = "El campo 'Con quien vives' está vacío o es inválido";
+		}
+
+
+		validData = string.IsNullOrEmpty(errMsg);
+		wrongNewUserDataLabelPopUp.SetText(errMsg);
 
 		if(!validData) wrongNewUserDataPopUp.gameObject.SetActive(true);
 		else
@@ -233,6 +375,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			UserDataManager.Instance.RegisterNewUser(newUser);
 			createNewUserPanel.SetActive(false);
 			RebuildUsersList();
+			OnSelectedUser(newUser.id);
 		}
 	}
 	void OnExitSession()
@@ -241,10 +384,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         wantsToExitSessionBtn.gameObject.SetActive(false);
         uReadyPanel.gameObject.SetActive(false);
 		afterLogInPanel.gameObject.SetActive(false);
+		UserDataManager.Instance.SetCurrUser(null);
 
         nameField.text = string.Empty;
-        ageField.text = string.Empty;
-		gradeField.text = string.Empty;
+        ageField.SetValueWithoutNotify(0);
+		gradeField.SetValueWithoutNotify(0);
 		sexField.SetValueWithoutNotify(0);
 		schoolTypeField.SetValueWithoutNotify(0);
 		countryField.text = string.Empty;
@@ -252,6 +396,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
         selectUserContainer.gameObject.SetActive(true);
     }
+
     public UserLivingWith GetUserLivingWith()
 	{
 		var currUserLivingWith = UserLivingWith.NONE;
@@ -273,38 +418,68 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnSelectedUser(UsersListItem data)
 	{
-        userNameHeader.text = data.label.text;
-        userNameExitPanel.text = data.label.text;
+		if (data == null) return;
+		if (!currBtnsByDataID.TryGetValue(data, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
+		OnSelectedUser(idFound);
+	}
 
-        wantsToExitSessionBtn.gameObject.SetActive(true);
+	public void OnSelectedUser(string id)
+	{
+		var data = UserDataManager.Instance.usersDatas.Find(x => x.id == id);
+		if(data == null) return;
 
-        if (!currBtnsByDataID.TryGetValue(data, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
-		UserDataManager.Instance.SetCurrUser(idFound);
+		userNameHeader.text = data.name;
+		userNameExitPanel.text = data.name;
+
+		wantsToExitSessionBtn.gameObject.SetActive(true);
+
+		UserDataManager.Instance.SetCurrUser(id);
 		var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
 		afterLogInPanel.SetActive(true);
 		afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
 	}
 
-	public void OnContinueGameBtnPressed()
-	{
-		var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
-        if (targetSequence is MinigameGroups group)
-        {
-			group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
-        }
-		DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
-        GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
-	}
+
 	void MusicBtn()
 	{
-		if (AudioListener.volume == 1) AudioListener.volume = 0;
-		else if (AudioListener.volume == 0) AudioListener.volume = 1;
+		if (AudioManager.Instance.currentBkMusic.isPlaying)
+		{
+			AudioManager.Instance.currentBkMusic.Stop();
+			musicBtn.image.sprite = musicBtnInactive;
+		}
+		else
+		{
+			AudioManager.Instance.currentBkMusic.Play();
+			musicBtn.image.sprite = musicBtnActive;
+		}
+	}
+
+	public void OnContinueGameBtnPressed()
+	{
+		continueSelectedFlag = true;
+		uReadyPanel.gameObject.SetActive(true);
 	}
 
 	public void OnReadyConfirmBtnPressed()
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
-		GameSequencesList.Instance.GoToNextSequence();
+		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
+		if (continueSelectedFlag)
+		{
+			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
+			if (targetSequence is MinigameGroups group)
+			{
+				group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
+			}
+			DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
+			GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+		}
+		else
+		{
+			UserDataManager.CurrUser.myCollectionMonsters.Clear();
+			UserDataManager.CurrUser.Coins = 10;
+			GameSequencesList.Instance.GoToNextSequence();
+		}
 	}
 
 }

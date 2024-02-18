@@ -6,7 +6,6 @@ public class MG_MagnetsEnergyItem : MonoBehaviour, iTutorialType
 {
 
     [SerializeField] ParticleSystem capturedVFX;
-    [SerializeField] AudioSource capturedSFX;
     [SerializeField] SpriteRenderer spriteRef;
 
     float timer = 0;
@@ -29,7 +28,6 @@ public class MG_MagnetsEnergyItem : MonoBehaviour, iTutorialType
 		wasCaptured = true;
         MG_MagnetsGameManager.Instance.currSpawnedItems -= 1;
 		capturedVFX.Play();
-        capturedSFX.Play();
         spriteRef.enabled = false;
         yield return new WaitForSeconds(0.7f);
         pool.RecycleItem(this);

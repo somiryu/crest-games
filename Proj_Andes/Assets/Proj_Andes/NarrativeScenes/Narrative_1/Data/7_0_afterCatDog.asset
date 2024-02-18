@@ -21,6 +21,8 @@ MonoBehaviour:
     text: "No, nada de eso. Est\xE1 enfermo y tuvieron que llevarlo al veterinario.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 191d94022263b2047bc3caa47d7eb7ae, type: 3}
     audioAlternative: {fileID: 0}
@@ -35,6 +37,8 @@ MonoBehaviour:
     text: "\xBFC\xF3mo te sientes t\xFA al saber que la mascota de Alex est\xE1 enferma?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp9_other_feelings
+    analyticTimeID: emp9_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -76,6 +80,8 @@ MonoBehaviour:
     textAlternative: "Mientras caminan y hablan de Tomy, llegan al parque del barrio.
       Ah\xED se encuentran a Fran, la peor enemiga de Alex. \r\n"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 90d3482e70484ca4dbc439639a8243f4, type: 3}
     audioAlternative: {fileID: 8300000, guid: 0d35db8d7b5073748a389828c207da48, type: 3}
@@ -92,6 +98,8 @@ MonoBehaviour:
     textAlternative: "Ah\xED est\xE1 Fran. La \xFAltima vez que me la encontr\xE9,
       me quit\xF3 mi maleta.\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 993b2f942ec60384ba92b091aa194d0a, type: 3}
     audioAlternative: {fileID: 8300000, guid: 641e201216aa66344a0f9a24e8a7c9fb, type: 3}
@@ -106,6 +114,8 @@ MonoBehaviour:
     text: "Fran voltea a mirarles y empieza a caminar hacia ellos.\r\r"
     textAlternative: "\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 766bf4463eccb3148a34054a24198c14, type: 3}
     audioAlternative: {fileID: 0}
@@ -121,6 +131,8 @@ MonoBehaviour:
       Alex?\r\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp10_other_feelings
+    analyticTimeID: emp10_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 

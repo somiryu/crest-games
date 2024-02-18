@@ -278,15 +278,31 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         var soundToUse = currSoundIsLeft ? leftAudio : rightAudio;
         var textToUse = currSoundIsLeft ? leftObjTxt : rightObjTxt;
 
+
         currTargetImg.sprite = imgToUse;
 
         currSound = soundToUse;
+        audioPlayer.clip = soundToUse;
 
-		audioPlayer.clip = soundToUse;
-		audioPlayer.Play();
+        if (currStepTutorial == 2 && trialsPerTutoCount == 1) StartCoroutine(Instruction());
+        else audioPlayer.Play();
+
 		eogManager.OnGameStart();
     }
-
+    IEnumerator Instruction()
+    {
+        discardBtn.interactable = false;
+        rightBtn.interactable = false;
+        leftBtn.interactable = false;
+        audioPlayer.clip = onFailSelectDiscardAdvice;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(4);
+        discardBtn.interactable = true;
+        rightBtn.interactable = true;
+        leftBtn.interactable = true;
+        audioPlayer.clip = currSound; 
+        audioPlayer.Play();
+    }
     void SetButtonState(Button button, Image highlightImg, Color color, bool highlight)
     {
         button.image.color = color;
@@ -321,8 +337,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        gameConfigs.roundResultWins.Add(false);
-
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
@@ -335,7 +349,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         if (!hasWrongChoice) return;
 
-        StartCoroutine(PlayOnWrongChoice());  
+        StartCoroutine(PlayOnWrongChoice());
     }
 
 
@@ -392,7 +406,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     void OnRoundEnded()
     {        
         currCoinsValueTxt.text = currCoins.ToString();
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
 
         if (currScoreStepTutorial == goalScoreStepTutorial)
         {

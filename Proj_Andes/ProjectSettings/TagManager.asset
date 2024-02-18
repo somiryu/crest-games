@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BorderTrigger
   - Asteroid
+  - NoClickSoundBtn
   layers:
   - Default
   - TransparentFX

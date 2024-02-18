@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tymski;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MG_MechanicHandGameConfigs", menuName = "MiniGames/MG_MechanicHandGameConfigs")]
@@ -15,24 +14,26 @@ public class MG_MechanicHandGameConfigs : GameConfig
 	public float percentageNeededToWin = 0.8f;
 	public bool activeCheats;
 
-    [NonSerialized] public int totalSuccessfulAttempts;
-    [NonSerialized] public int totalFailedAttempts;
-
     public override string GetSceneID() => DataIds.mechanicHandGame;
-
     public override void SaveAnalytics()
     {
+        var currData = MG_MechanicHand_GameManger.Instance;
         itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.mechanicHandtotalSuccessfulAttempts, totalSuccessfulAttempts);
-        itemAnalytics.Add(DataIds.mechanicHandtotalFailedAttempts, totalFailedAttempts);
+        itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
+        itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
+        itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
+        itemAnalytics.Add(DataIds.mechanicHandClawThrows, currData.clawThrows);
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.mechanicHandGame, itemAnalytics);
+		var newDocID = Guid.NewGuid().ToString();
 
-    }
+		UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
+		UserDataManager.LastDocumentIDStored = newDocID;
+
+		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.mechanicHandGame);
+
+	}
     public override void ResetCurrentAnalytics()
     {
-        totalSuccessfulAttempts = 0; 
-        totalFailedAttempts = 0;
         base.ResetCurrentAnalytics();
     }
 }

@@ -57,6 +57,13 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     [SerializeField] Animator tutorialAnims;
     int currStepTurorial;
     public EndOfGameManager EndOfGameManager => eogManager;
+
+    //DATA ANALYTICS
+    public float timePlayed;
+    public int clickRepetitions;
+    public int lostByCheat;
+    public int boostersActivated;
+
     private void Awake()
     {
         if(instance != null)
@@ -124,7 +131,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
                 tutorialAnims.gameObject.SetActive(true);
             }
         }
-
+        if (Input.GetMouseButtonDown(0)) clickRepetitions++;
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
@@ -134,7 +141,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
                 tutorialAnims.gameObject.SetActive(false);
                 if (currStepTurorial == 3) UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
             }
-            gameConfig.totalAttemptsToBoost++;
             if (gameConfig.forceToFail) ForcedToFail();
             if (currentBooster.Boosteable())
             {
@@ -142,7 +148,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
             }
             else Onfailed();
         }
-        if (successfulAttempts == 10)
+        if (successfulAttempts == gameConfig.boostersPerRun)
         {
             OnGameEnd();
             Debug.Log("You won!");
@@ -169,7 +175,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     }
     void OnGameEnd()
     {
-        gameConfig.totalGameTime = totalTime;
+        timePlayed = totalTime;
         finalScoreText.text =   successfulAttempts.ToString() ;
         endOfGameContainer.gameObject.SetActive(true);
         onPlay = false;
@@ -182,13 +188,13 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
     }
     void Onfailed()
     {
-        gameConfig.timeToMakeAChoice.Add(timer);
-        gameConfig.roundResultWins.Add(false);
+
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
         onBoost = true;
         targetTime = 0.3f;
+        boostersActivated++;
 
         alienMov.OnBoosted();
         booster.Boosted();
@@ -207,9 +213,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
             skinObjAnim[i].SetTrigger("Correct");
 
         }
-
-        gameConfig.timeToMakeAChoice.Add(timer);
-        gameConfig.roundResultWins.Add(true);
     }
 
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
@@ -234,7 +237,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
         {
             onTrapMode = true;
             StartCoroutine(ShowTrapSign());
-
+            lostByCheat++;
         }
     }
 
@@ -247,6 +250,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager
 
 	int GenerateRandom()
     {
-        return Random.Range((gameConfig.boostersPerRun - gameConfig.extraAttemptsBeforeFailing), gameConfig.boostersPerRun);
+        var newRandomFailIdx = Random.Range(gameConfig.extraAttemptsBeforeFailing, gameConfig.boostersPerRun);
+        if (forcedFails.Contains(newRandomFailIdx)) return GenerateRandom();
+        Debug.Log("will fail at: " + newRandomFailIdx);
+        return newRandomFailIdx;
     }
 }

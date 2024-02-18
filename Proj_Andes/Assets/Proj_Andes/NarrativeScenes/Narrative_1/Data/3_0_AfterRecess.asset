@@ -23,6 +23,8 @@ MonoBehaviour:
     textAlternative: "Al fin se termin\xF3 el recreo. Al regresar a tu sal\xF3n,
       te encuentras de nuevo con tu amiga Cami.\r\n"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 3cd219e9350952e46bd992e7ddf8c9d1, type: 3}
     audioAlternative: {fileID: 8300000, guid: 4b6ce3af95ad6b64ba83aef987064cc3, type: 3}
@@ -39,6 +41,8 @@ MonoBehaviour:
       Como es de ella de brava, \xA1fijo me iba a rega\xF1ar!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 434fd16d109427b4fbe0b293a646a30b, type: 3}
     audioAlternative: {fileID: 0}
@@ -53,6 +57,8 @@ MonoBehaviour:
     text: "\xBFC\xF3mo te sientes t\xFA al saber que a Cami la van a rega\xF1ar?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp5_other_feelings
+    analyticTimeID: emp5_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -96,6 +102,8 @@ MonoBehaviour:
       Alex, la misma compa\xF1era que la hab\xEDa empujado en clase de educaci\xF3n
       f\xEDsica, pasa por su puesto, le quita su l\xE1piz y lo esconde."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 8cccf6644b2ad154eb8563ab788269a8, type: 3}
     audioAlternative: {fileID: 0}
@@ -111,6 +119,8 @@ MonoBehaviour:
       a Cami?\r\r\t"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp6_other_feelings
+    analyticTimeID: emp6_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -151,6 +161,8 @@ MonoBehaviour:
       que haga lo que quiera, yo mejor busco otro l\xE1piz prestado y ya\u201D\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: d1a785bf8da0f3648ad5338f0ce109ad, type: 3}
     audioAlternative: {fileID: 0}

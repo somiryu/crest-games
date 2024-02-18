@@ -11,10 +11,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	private static MG_MagnetsGameManager instance;
 	public static MG_MagnetsGameManager Instance => instance;
 
-
-
     public Pool<MG_MagnetsEnergyItem> energyItemsPool;
-
 
 	[SerializeField] MG_MagnetsConfigs gameConfigs;
 	[SerializeField] BoxCollider spawnArea;
@@ -37,6 +34,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] GameObject winTitle;
 	[SerializeField] GameObject loseTitle;
 	[SerializeField] TMP_Text afterAction_currPointsTextUI;
+	[SerializeField] AudioClip capturedItemSfx;
 
 
 	public int currSpawnedItems;
@@ -49,7 +47,16 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
     private Collider[] overlayResults = new Collider[20];
 	[SerializeField] EndOfGameManager eogManager;
+
+	float totalTime;
 	public EndOfGameManager EndOfGameManager => eogManager;
+
+	//DATA ANALYTICS
+	public float timePlayed;
+	public int clickRepetitions;
+	public int lostByCheat;
+	public int magnetsCollected;
+
     public void Awake()
 	{
 		if(instance != null && instance != this) DestroyImmediate(instance);
@@ -63,8 +70,10 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
         ingameObj.SetActive(true);
 		ingameObjUI.SetActive(true);
+		clickRepetitions = 0;
+		totalTime = 0;
 
-		energyItemsPool.Init(30);
+        energyItemsPool.Init(30);
 		availableMagnets = gameConfigs.initialMagnetsCount;
 		timer = gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify();
 		currSpawnedItems = 0;
@@ -85,8 +94,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	{
 		if (availableMagnets == 0) return;
 		timer += Time.deltaTime;
-
-		
+		totalTime += Time.deltaTime;
+		if (Input.GetMouseButtonDown(0)) clickRepetitions++;
         if (timer > gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify())
 		{
 			timer = 0;
@@ -115,6 +124,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			if (gameConfigs.activeCheats && PredictIfWouldWin(mouseGlobalPosition))
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
+				lostByCheat++;
 				StartCoroutine(ShowTrapSign());
 			}
 
@@ -196,8 +206,10 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	void OnPicketEnergyItem(MG_MagnetsEnergyItem itemPicked)
 	{
 		itemPicked.OnWasPicked();
+		audiosource.clip = capturedItemSfx;
+		audiosource.Play();
+        magnetsCollected++;
 		currEnergyPicked++;
-		gameConfigs.energyCaptured++;
 		inGame_currPointsTextUI.text = currEnergyPicked.ToString();
 		currEneryProgress = currEnergyPicked;
 		currEneryProgress /= gameConfigs.neededEnergyToPick;
@@ -243,7 +255,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
             noLeftMagnetsAnims.SetTrigger("Play");
 			yield return new WaitForSeconds(1);
 		}
-		
+		timePlayed = totalTime;
+
 		afterActionPanel.SetActive(true);
 		ingameObj.SetActive(false);
 		ingameObjUI.SetActive(false);

@@ -106,7 +106,8 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
         SetSpeedway();
         firstPos = transform.position;
-        onPlay = true;
+        camCC.Init();
+		onPlay = true;
         gameStages = GameStages.Start;
     }
     void InitTuto()
@@ -157,12 +158,18 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 		TutoProgress();
 		if (!endOfTuto)
         {
-            if (transform.position.x >= currTutoStep.stepClickableObj.transform.position.x) StandStill();
-            if (currTutoStep.step == TutorialStepsTurboRocket.TurboAppear && !onTurbo) StandStill();
-            else if (currTutoStep.step == TutorialStepsTurboRocket.UnclickTurbo && onTurbo)
+            if (transform.position.x >= currTutoStep.stepClickableObj.transform.position.x)
             {
                 StandStill();
-                turboBtn.color = Color.red;
+            }
+            if (currTutoStep.step == TutorialStepsTurboRocket.TurboAppear && !onTurbo)
+            {
+                StandStill();
+			}
+			else if (currTutoStep.step == TutorialStepsTurboRocket.UnclickTurbo && onTurbo)
+            {
+                StandStill();
+				turboBtn.color = Color.red;
             }
             if (playerRanXSpace / bk.bkSize.localScale.x >= 0.9) if (onTurbo && currTutoStep.step == TutorialStepsTurboRocket.TurboAppear) GoToNextStep();
         }
@@ -258,6 +265,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     void StandStill()
     {
         currentSpeed = 0;
+        currentTargetSpeed = 0;
     }
     public void EndOfTuto()
     {

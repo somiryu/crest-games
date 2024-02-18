@@ -8,8 +8,15 @@ public class FrustrationTermometer : SimpleGameSequenceItem
 {
     public FrustrationLevel selectedFrustrationLevel;
     public FrustrationLevel defaultFrustrationLevel;
-    public override Dictionary<string, object> GetAnalytics()
+    public SimpleGameSequenceItem frustrationGameItem;
+    public override void SaveAnalytics()
     {
-        return itemAnalytics;
+        //If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
+        if (string.IsNullOrEmpty(UserDataManager.LastDocumentIDStored) || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
+
+        if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
+        if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
+
+        DocumentFound.Add(DataIds.frustrationLevel, selectedFrustrationLevel.ToString());
     }
 }

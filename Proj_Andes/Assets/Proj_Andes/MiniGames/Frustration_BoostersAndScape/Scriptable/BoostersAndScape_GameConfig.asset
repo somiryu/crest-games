@@ -15,9 +15,9 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: 52beac390ad590b4eae40f9edfaf3327, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/Frustration_BoostersAndScape/Scenes/Frustration_BoostersAndScape_MainScene.unity
-  boostersPerRun: 12
-  forcedFails: 3
-  boosterTriggerRate: 2
+  boostersPerRun: 17
+  forcedFails: 5
+  boosterTriggerRate: 3
   forceToFail: 1
   updateScene: 0
-  extraAttemptsBeforeFailing: 6
+  extraAttemptsBeforeFailing: 5

@@ -18,37 +18,13 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: 0
     changeToSequenceResponseIdxToGrayOut: 0
-    text: Acabas de llegar a tu colegio.
+    text: "Est\xE1s prepar\xE1ndote para ir al colegio, pero primero decides jugar
+      unos juegos"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
     audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: 0
-    changeToSequenceResponseIdxToGrayOut: 0
-    text: Te encuentras con tu amiga Cami.
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: 0
-    changeToSequenceResponseIdxToGrayOut: 0
-    text: "\xA1Hola! \xBFJugamos?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

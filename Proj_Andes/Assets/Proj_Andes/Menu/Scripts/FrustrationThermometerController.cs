@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class FrustrationThermometerController : MonoBehaviour
 {
     [SerializeField] FrustrationTermometer frustrationTermometer;
-    [SerializeField] Slider frustSlider;
     [SerializeField] Transform buttonsContainer;
     Button[] frustlevelButtons;
+    [SerializeField] GameObject[] buttonsSelectedImages;
     FrustrationLevel currFrustratioNlevel;
     [SerializeField] Button continueBtn;
     void Start()
@@ -19,6 +19,7 @@ public class FrustrationThermometerController : MonoBehaviour
         {
             int idx = i;
             frustlevelButtons[i].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)idx, frustlevelButtons[idx], idx));
+            buttonsSelectedImages[i].SetActive(false);
         }
         continueBtn.onClick.AddListener(Continue);
         continueBtn.gameObject.SetActive(false);
@@ -30,6 +31,7 @@ public class FrustrationThermometerController : MonoBehaviour
         ButtonPressed(button);
         for (int i = 0; i < frustlevelButtons.Length; i++)
         {
+            buttonsSelectedImages[i].SetActive(idx == i);
             if (idx == i) continue;
             else ButtonUnpressed(frustlevelButtons[i]);
         }
@@ -39,7 +41,6 @@ public class FrustrationThermometerController : MonoBehaviour
     void Continue()
     {
         frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
-        Debug.Log(currFrustratioNlevel);
         frustrationTermometer.OnSequenceOver();
     }
 
@@ -57,9 +58,8 @@ public class FrustrationThermometerController : MonoBehaviour
 }
 public enum FrustrationLevel
 {
-    Frustrated,
-    Stressed,
-    Unsetlled,
-    Uneasy,
-    Tranquile,
+    Muy_Frustrado,
+    Frustrado,
+    Un_Poco_Tranquilo,
+    Muy_Tranquilo,
 }

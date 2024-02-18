@@ -15,30 +15,28 @@ public class MG_FightTheAlienGameConfigs : GameConfig
 	public int coinsOnWrongAnswer = 0;
 
 	public int playerHealthLostOnWrongAnswer = -1;
-	public int EnemyHealthLostOnRightAnswer = -1;
-
-    [NonSerialized] public List<float> timeToMakeAChoice = new List<float>();
-    [NonSerialized] public List<bool> roundResultWins = new List<bool>();
-    [NonSerialized] public float totalGameTime;
+    public int EnemyHealthLostOnRightAnswer = -1;
 
     public override string GetSceneID() => DataIds.fightTheAlienGame;
 
     public override void SaveAnalytics()
     {
+        var currAnalytics = MG_FightTheAlienManager.Instance.AllRoundsAnalytics;
         itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.fightTheAlienTotalGametime, totalGameTime);
-        itemAnalytics.Add(DataIds.fightTheAlientimeToMakeAChoice, timeToMakeAChoice);
-        itemAnalytics.Add(DataIds.fightTheAlienRoundResultWins, roundResultWins);
+        for (int i = 0; i < currAnalytics.Count; i++)
+        {
+            itemAnalytics.Clear();
+            itemAnalytics.Add(DataIds.challengeType, currAnalytics[i].challengeOrder);
+            itemAnalytics.Add(DataIds.won, currAnalytics[i].wonRound);
+            itemAnalytics.Add(DataIds.responseTime, currAnalytics[i].timeToMakeAChoice);
+            itemAnalytics.Add(DataIds.totalClicks, currAnalytics[i].clicks);
+            itemAnalytics.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
-
-        Debug.Log(timeToMakeAChoice.Count + "fight " + roundResultWins.Count + " " + totalGameTime);
+            UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
+        }
     }
     public override void ResetCurrentAnalytics()
     {
-        timeToMakeAChoice.Clear();
-        roundResultWins.Clear();
-        totalGameTime = 0;
         base.ResetCurrentAnalytics();
     }
 }

@@ -19,9 +19,11 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
-      partes de la cocina.0\r"
+      partes de la cocina.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 45d862a498829074b9dfdfef300f182d, type: 3}
     audioAlternative: {fileID: 0}
@@ -34,9 +36,11 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
-      partes de la cocina.1\r"
+      partes de la cocina.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
@@ -49,9 +53,11 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
-      partes de la cocina.2\r"
+      partes de la cocina.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
@@ -64,9 +70,11 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
-      partes de la cocina.3\r"
+      partes de la cocina.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
@@ -81,6 +89,8 @@ MonoBehaviour:
     text: " \xA1Parece que la llave se perdi\xF3!\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 1a3a2c40047047f4e859292065fdc4c7, type: 3}
     audioAlternative: {fileID: 0}
@@ -95,6 +105,8 @@ MonoBehaviour:
     text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no puede comer nada?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp12_other_feelings
+    analyticTimeID: emp12_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -135,6 +147,8 @@ MonoBehaviour:
       tra\xEDdo su comida favorita.\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 99afde1bb36d88549bd97ec32bd9468f, type: 3}
     audioAlternative: {fileID: 0}
@@ -150,6 +164,8 @@ MonoBehaviour:
       te sientes t\xFA al saber que la mam\xE1 de Alex le trajo su comida favorita?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp13_other_feelings
+    analyticTimeID: emp13_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -190,6 +206,8 @@ MonoBehaviour:
       con un abrazo de mam\xE1. Ma\xF1ana seguramente ser\xE1 mejor.\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: d3ee38bbb67742946932d96faa9a324e, type: 3}
     audioAlternative: {fileID: 0}

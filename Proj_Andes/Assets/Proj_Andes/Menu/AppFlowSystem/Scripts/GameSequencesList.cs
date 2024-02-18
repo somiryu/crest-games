@@ -21,7 +21,7 @@ public class GameSequencesList : ScriptableObject
 
     public List<SimpleGameSequenceItem> gameSequences;
     [NonSerialized] public SimpleGameSequenceItem prevGame;
-
+    [HideInInspector] public SimpleGameSequenceItem currItem => gameSequences[goToGameGroupIdx];
     [NonSerialized] public int goToGameGroupIdx;
     public bool continueToNextItem;
     public void OnValidate()
@@ -40,12 +40,14 @@ public class GameSequencesList : ScriptableObject
             Debug.Log("saving");
             if (prevGame != null) prevGame.SaveAnalytics();
             prevGame = nextItem;
+            AudioManager.Instance.PlayMusic();
             SceneManagement.GoToScene(nextItem.scene);
         }
         else GoToNextSequence();
     }
     public void GoToItemIdx(int idx)
     {
+        AudioManager.Instance.PlayMusic();
         var nextItem = GetGameSequence().GetItemByIdx(idx);
         SceneManagement.GoToScene(nextItem.scene);
     }
@@ -111,7 +113,5 @@ public class GameSequencesList : ScriptableObject
 
 public abstract class GameConfig : SimpleGameSequenceItem
 {
-
-
 }
 

@@ -9,6 +9,9 @@ using Random = UnityEngine.Random;
 
 public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 {
+    static MG_VoiceStarOrFlowerManager instance; 
+    public static MG_VoiceStarOrFlowerManager Instance => instance;
+
 	[SerializeField] MG_VoiceStarOrFlowerGameConfigs gameConfigs;
 	[Space(20)]
 	[SerializeField] Sprite leftTargetSprite;
@@ -66,14 +69,21 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private bool gameoverFlag = false;
     float totalGameTime;
 
+    MG_FieldOfFlowers_RoundAnalytics roundAnalytics;
+    public List<MG_FieldOfFlowers_RoundAnalytics> AllRoundsAnalytics;
+
     public void Awake()
 	{
+        if (instance != null && instance != this) DestroyImmediate(this);
+        instance = this;
         Init();
 	}
 
 	public void Init()
     {
         currCoins = gameConfigs.initialCoins;
+        AllRoundsAnalytics = new List<MG_FieldOfFlowers_RoundAnalytics>(gameConfigs.maxRounds);
+
         wonLeftCount = 0;
         wonRightCount = 0;
         lostRoundsCount = 0;
@@ -126,11 +136,22 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	void InitRound()
     {
         timerPerChoice = 0;
+        
         GetRandomSoundImage();
+        roundAnalytics = new MG_FieldOfFlowers_RoundAnalytics();
 
+        AllRoundsAnalytics.Add(roundAnalytics);
+        roundAnalytics.clicks = 0;
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
         var textToUse = currSoundIsLeft ? leftObjTxt: rightObjTxt;
+
+        if (currSoundIsLeft) roundAnalytics.audio = "Flower";
+        else roundAnalytics.audio = "Star";
+        if (currImgIsLeft) roundAnalytics.image = "Flower";
+        else roundAnalytics.image = "Star";
+        if (currImgIsLeft && currSoundIsLeft || !currSoundIsLeft && !currSoundIsLeft) roundAnalytics.challengeType = "Same";
+        else roundAnalytics.challengeType = "Different";
 
         currTargetImg.sprite = imgToUse;
         audioPlayer.clip = soundToUse;
@@ -145,29 +166,33 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         timerUI.value = timerPerChoice;
         totalGameTime += Time.deltaTime;
         timerPerChoice += Time.deltaTime;
+        if (Input.GetMouseButtonDown(0)) roundAnalytics.clicks++;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            OnWrongChoice();
+            roundAnalytics.ranOutOfTime = true;
             timerPerChoice = 0;
+            OnWrongChoice();
         }
     }
 
 	private void OnClickedLeft()
     {
-        if(currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+        roundAnalytics.ranOutOfTime = false;
+        if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
         else OnWrongChoice();
     }
 
     private void OnClickedRight()
     {
-		if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+        roundAnalytics.ranOutOfTime = false;
+        if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
 
 	private void OnClickedDiscard()
     {
-        audioPlayer.clip = discardAudio;
-        audioPlayer.Play();
+        roundAnalytics.ranOutOfTime = false;
+        audioPlayer.PlayOneShot(discardAudio);
         if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
@@ -178,14 +203,14 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        gameConfigs.roundResultWins.Add(false);
+        roundAnalytics.wonRound = false;
 
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         lostRoundsCount++;
-        audioPlayer.clip = wrongAudio;
         incorrectParticles.Play();
-        audioPlayer.Play();
+        audioPlayer.PlayOneShot(wrongAudio);
+
         OnRoundEnded();
     }
 
@@ -194,7 +219,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Stop();
         correctParticles.Stop();
 
-        gameConfigs.roundResultWins.Add(true);
+        roundAnalytics.wonRound = true;
 
         currCoins += gameConfigs.coinsOnCorrectAnswer;
         if (currSoundIsLeft && !currImgIsLeft)
@@ -211,15 +236,16 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
         correctParticles.Play();
 
-        audioPlayer.clip = rightAudio;
-        audioPlayer.Play();
+        audioPlayer.PlayOneShot(correctAudio);
         OnRoundEnded();
     }
 
     void OnRoundEnded()
     {
         currCoinsValueTxt.text = currCoins.ToString();
-        gameConfigs.timeToMakeAChoice.Add(timerPerChoice);
+        roundAnalytics.timeToMakeAChoice = timerPerChoice;
+        if (roundAnalytics.ranOutOfTime) roundAnalytics.timeToMakeAChoice = gameConfigs.timePerChoice;
+
 
         var totalRounds = lostRoundsCount + wonLeftCount + wonRightCount;
 
@@ -234,7 +260,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
-        gameConfigs.totalGameTime = totalGameTime;
         gameConfigs.SaveAnalytics();
         audioPlayer.clip = finishAudio;
         audioPlayer.Play();
@@ -245,4 +270,14 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         gameConfigs.SaveCoins(currCoins);
         eogManager.OnGameOver();
 	}
+}
+public class MG_FieldOfFlowers_RoundAnalytics
+{
+    public string challengeType = "NONE";
+    public string image;
+    public string audio;
+    public bool wonRound = false;
+    public float timeToMakeAChoice = 0;
+    public int clicks = 0;
+    public bool ranOutOfTime = false;
 }
