@@ -42,6 +42,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button confirmUserBtn;
 	[SerializeField] UsersListItem selectedUser;
 	[SerializeField] Button cancelSearchBarBtn;
+	[SerializeField] Button removeSelectedUser;
+	[SerializeField] GameObject selectedUserLabelGO;
+	[SerializeField] TMP_Text selectedUserLabel;
 
 
 	[Header("Create new user panel")]
@@ -128,6 +131,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		continueSelectedFlag = false;
 		searchField.onValueChanged.AddListener((_) => SearchUser());
+		removeSelectedUser.onClick.AddListener(OnRemoveSelectedUserBtnPressed);
 		confirmUserBtn.onClick.AddListener(() => OnSelectedUser(selectedUser));
 
         correctlyLoggedInFlag = false;
@@ -137,6 +141,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		checkingInternetPanel.SetActive(false);
 
 		noInternetConnectionPopUpOkBtn.onClick.AddListener(() => noInternetConnectionPopUp.SetActive(false));
+
+		confirmUserBtn.gameObject.SetActive(false);
 	}
 
 
@@ -225,7 +231,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	}
 	void SearchUser()
 	{
-		Debug.Log("seaarching");
 		string searchText = searchField.text;
 		int textLenght = searchText.Length;
 		int searchElements = 0;
@@ -239,6 +244,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
             }
 		}
 	}
+
 	void RebuildUsersList()
 	{
 		currBtnsByDataID.Clear();
@@ -257,9 +263,19 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     public void ShowSelection(UsersListItem userSelected)
     {
 		selectedUser = userSelected;
-		searchField.text = userSelected.label.text;
+		selectedUserLabelGO.gameObject.SetActive(true);
+		selectedUserLabel.SetText(userSelected.label.text);
+		confirmUserBtn.gameObject.SetActive(true);
 		foreach (var item in currBtnsByDataID) item.Key.gameObject.SetActive(false);
     }
+
+	public void OnRemoveSelectedUserBtnPressed()
+	{
+		selectedUser = null;
+		searchField.text = "";
+		selectedUserLabelGO.gameObject.SetActive(false);
+		confirmUserBtn.gameObject.SetActive(false);
+	}
 
 	IEnumerator LoadUsers()
 	{
