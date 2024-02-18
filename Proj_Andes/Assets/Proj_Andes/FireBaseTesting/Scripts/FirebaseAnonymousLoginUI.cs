@@ -83,7 +83,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button noInternetConnectionPopUpOkBtn;
 	[SerializeField] GameObject noInternetConnectionPopUp;
 
-	 string logInsuccedID;
+	[Header("Data synced warning")]
+	[SerializeField] Button dataSyncedPopUpOkBtn;
+	[SerializeField] GameObject dataSyncedPopUp;
+	[SerializeField] TMP_Text dataSyncedLabel;
+
+	string logInsuccedID;
 
 	bool continueSelectedFlag;
 
@@ -141,6 +146,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		checkingInternetPanel.SetActive(false);
 
 		noInternetConnectionPopUpOkBtn.onClick.AddListener(() => noInternetConnectionPopUp.SetActive(false));
+
+		dataSyncedPopUpOkBtn.onClick.AddListener(() => dataSyncedPopUp.SetActive(false));
 
 		confirmUserBtn.gameObject.SetActive(false);
 	}
@@ -287,6 +294,18 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		if (!UserDataManager.Instance.HasInternet)
 		{
 			noInternetConnectionPopUp.SetActive(true);
+		}
+		else
+		{
+			var usersSynced = DatabaseManager.pendingSyncronizedUsersAmount;
+			var sessionsSynced = DatabaseManager.pendingSyncronizedSessionsAmount;
+
+			if(usersSynced > 0 || sessionsSynced > 0)
+			{
+				dataSyncedPopUp.SetActive(true);
+				dataSyncedLabel.SetText(string.Format("Se subieron al servidor {0} usuario(s) cambiado(s) y {1} sesion(es), encontradas en el guardado local", usersSynced, sessionsSynced));
+			}
+
 		}
 		RebuildUsersList();
 	}

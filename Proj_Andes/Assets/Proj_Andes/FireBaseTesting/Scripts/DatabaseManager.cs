@@ -29,6 +29,9 @@ public static class DatabaseManager
     public static bool userListDone = false;
     public static bool UserDeletionCompleted = false;
 
+    public static int pendingSyncronizedUsersAmount = 0;
+    public static int pendingSyncronizedSessionsAmount = 0;
+
     static FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
 #if UNITY_EDITOR
@@ -55,12 +58,12 @@ public static class DatabaseManager
     }
 
 
-public static void GetUserDatasList()
+    public static void GetUserDatasList()
     {
 
         userListDone = false;
 
-        if(userDatas == null) userDatas = new List<UserData>();
+        if (userDatas == null) userDatas = new List<UserData>();
         else userDatas.Clear();
 
         pendingSessionsToUpload.Clear();
@@ -70,14 +73,14 @@ public static void GetUserDatasList()
 
         if (!UserDataManager.Instance.HasInternetConnection())
         {
-			userListDone = true;
-			return;
+            userListDone = true;
+            return;
         }
 
         userDatas.Clear();
 
 
-		Query allUsers = db.Collection(DataIds.usersCollection);
+        Query allUsers = db.Collection(DataIds.usersCollection);
         allUsers.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             QuerySnapshot allUsersQuerySnapshot = task.Result;
@@ -87,25 +90,26 @@ public static void GetUserDatasList()
             {
                 Debug.Log(String.Format("Document data for {0} document:", documentSnapshot.Id));
                 UserData currUserData = documentSnapshot.ConvertTo<UserData>();
-				if (userDatas.Exists(x => x.id == currUserData.id))
-				{
-					Debug.Log("Trying to add user: " + currUserData.name + " " + currUserData.id + " But ID already existed");
-					continue;
-				}
-				userDatas.Add(currUserData);
+                if (userDatas.Exists(x => x.id == currUserData.id))
+                {
+                    Debug.Log("Trying to add user: " + currUserData.name + " " + currUserData.id + " But ID already existed");
+                    continue;
+                }
+                userDatas.Add(currUserData);
             }
 
-            if(pendingUserDatasToUpload.Count > 0)
+            if (pendingUserDatasToUpload.Count > 0)
             {
                 Debug.Log("Merged local users with remote users");
                 for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
                 {
                     var currPending = pendingUserDatasToUpload[i];
                     var idxFound = userDatas.FindIndex(x => x.id == currPending.id);
-                    if(idxFound != -1) userDatas[idxFound] = currPending;
+                    if (idxFound != -1) userDatas[idxFound] = currPending;
                     else userDatas.Add(currPending);
-				}
+                }
                 pendingUserDatasToUpload.Clear();
+				PlayerPrefs.DeleteKey(pendingUserJSONKey);
 			}
 
 
@@ -115,6 +119,9 @@ public static void GetUserDatasList()
 
     public static void LoadFromLocal()
     {
+        pendingSyncronizedSessionsAmount = 0;
+        pendingSyncronizedUsersAmount = 0;
+
 		if (PlayerPrefs.HasKey(UserDatasJSONKey))
 		{
             var savedJSON = PlayerPrefs.GetString(UserDatasJSONKey);
@@ -126,6 +133,7 @@ public static void GetUserDatasList()
 		{
 			var pendingUsers = JsonConvert.DeserializeObject<LocalSaveUsersList>(PlayerPrefs.GetString(pendingUserJSONKey));
 			if (pendingUsers != null && pendingUsers.datas != null) pendingUserDatasToUpload.AddRange(pendingUsers.datas);
+            pendingSyncronizedUsersAmount = pendingUserDatasToUpload.Count;
 		}
 		else pendingUserDatasToUpload = new List<UserData>();
 
@@ -133,6 +141,7 @@ public static void GetUserDatasList()
         {
             var foundPendingSessionsToUpload = JsonConvert.DeserializeObject<FullSessionData>(PlayerPrefs.GetString(pendingSessionsJSONKey));
             if (foundPendingSessionsToUpload != null && foundPendingSessionsToUpload.analytics != null) pendingSessionsToUpload.AddRange(foundPendingSessionsToUpload.analytics);
+            pendingSyncronizedSessionsAmount = pendingSessionsToUpload.Count;
         }
         else pendingSessionsToUpload = new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
 	}
