@@ -144,3 +144,17 @@ MonoBehaviour:
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: dc5522f1b400257408c372ce26885b38, type: 2}
     ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 9fa6f79b97a262749a5ed001e0dfa7e4, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responses: []
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 931db113bf73e494baf424c21effc2dc, type: 2}
+    ExitAnim: {fileID: 0}
