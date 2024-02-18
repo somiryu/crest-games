@@ -20,11 +20,13 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: 
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 678f008352ae2f8408bfcea8e8e71934, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
-    - response: Continuar
+    - response: asdasdasd
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 1b5b6421ccf37c644ab6c70aef34948a, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}

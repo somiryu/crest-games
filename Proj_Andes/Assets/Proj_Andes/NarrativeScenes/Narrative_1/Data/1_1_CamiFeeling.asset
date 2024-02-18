@@ -21,6 +21,8 @@ MonoBehaviour:
     text: "C\xF3mo te sientes t\xFA al saber que Alex empuj\xF3 a Cami?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp2_other_feelings
+    analyticTimeID: emp2_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -61,6 +63,8 @@ MonoBehaviour:
       el deporte que va a practicar ahora. Adivina qu\xE9 eligio"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: b5b6f53a1a199de4697789283ba5dd1c, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Basquetbol
       responseAlternative: 
@@ -90,6 +94,8 @@ MonoBehaviour:
     text: Si! Ese es mi deporte favorito
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 801ffbb28c2e67c49b20afe2de8c0a55, type: 3}
     audioAlternative: {fileID: 0}
@@ -104,6 +110,8 @@ MonoBehaviour:
     text: "Juegan un partido y el equipo gana!\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: c5f5817b0a763604c83496806ec83fa3, type: 3}
     audioAlternative: {fileID: 0}
@@ -118,6 +126,8 @@ MonoBehaviour:
     text: "C\xF3mo te sientes al escuchar que Cami pudo jugar lo que m\xE1s le gusta\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp3_other_feelings
+    analyticTimeID: emp3_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -157,6 +167,8 @@ MonoBehaviour:
     text: "Uy! Son\xF3 la campana! Vamos al recreo y juguemos un rato"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: f27a333d37809d54084173200c1cbde0, type: 3}
     audioAlternative: {fileID: 0}
@@ -173,6 +185,8 @@ MonoBehaviour:
     textAlternative: Una profe te llama para hablar contigo asi que Cami y tu no
       pueden estar juntas en el recreo
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 4c425019d9e5b9e4ea93d0ffe2e5e869, type: 3}
     audioAlternative: {fileID: 8300000, guid: 3788191c3089b0b498c2a80d0989ce34, type: 3}

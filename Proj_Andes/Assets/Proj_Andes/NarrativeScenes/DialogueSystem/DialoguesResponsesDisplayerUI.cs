@@ -20,6 +20,8 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 	public List<Sprite> highlightBtnsSprites;
 	public Sprite disableBtnContainer;
 
+	public bool UseConfirmationBtn = true;
+
 	public void Init(DialoguesDisplayerUI _mainUI)
 	{
 
@@ -104,7 +106,14 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 			}
 		}
 
-		mainUi.OnClickResponse(response);
+		if (UseConfirmationBtn) mainUi.OnClickResponse(response);
+		else
+		{
+			mainUi.OnClickResponse(response);
+			mainUi.preselectedResponseAudioIsDone = true;
+			mainUi.OnClickResponseConfirmation();
+		}
+
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepResponseButton))
 		{
 			TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.stepResponseButton);

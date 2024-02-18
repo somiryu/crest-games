@@ -81,18 +81,6 @@ public class UserDataManager : ScriptableObject
 		Application.wantsToQuit += SaveToServer;
 	}
 
-    static void GetAllAnalyticsData()
-    {
-        for (int i = 0; i < GameSequencesList.Instance.gameSequences.Count; i++)
-        {
-            var newData = GameSequencesList.Instance.gameSequences[i].GetAnalytics();
-			var sceneID = GameSequencesList.Instance.gameSequences[i].GetSceneID();
-			if (string.IsNullOrEmpty(sceneID)) continue;
-			if(CurrUser.userAnalytics.ContainsKey(sceneID)) CurrUser.userAnalytics[sceneID] = newData;
-			else CurrUser.userAnalytics.Add(sceneID, newData);			
-        }
-    }
-
 	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string documentID = null, string gameType = null)
 	{
 		var analyticsWithExtraFields = new Dictionary<string, object>();
@@ -124,8 +112,6 @@ public class UserDataManager : ScriptableObject
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
-
-		GetAllAnalyticsData();
 
 		Debug.Log("Saving to server");
 		if (currSequence is MinigameGroups group)
