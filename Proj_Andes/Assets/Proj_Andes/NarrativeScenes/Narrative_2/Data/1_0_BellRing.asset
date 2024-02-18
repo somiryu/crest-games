@@ -66,7 +66,7 @@ MonoBehaviour:
     text: "Ahora te toca buscar con qui\xE9n jugar! de estos tres personajes, \xBFa
       qui\xE9n le preguntarias?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: fda6a2115d437bc45acd83ef388a6d93, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 3c208caa55a5b844f87fea0e7f835d06, type: 3}
     responses:
     - response: 
       responseAlternative: 
