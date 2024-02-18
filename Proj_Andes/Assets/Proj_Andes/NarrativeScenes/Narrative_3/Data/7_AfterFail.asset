@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 7_AfterFail
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: 0
+    changeToSequenceResponseIdxToGrayOut: 1
+    text: "Haces tu mejor esfuerzo, pero te equivocas mucho. Todos te est\xE1n mirando
+      y se r\xEDen de ti."
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 678f008352ae2f8408bfcea8e8e71934, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: a2d688ec6c86d884ea0c5fcb6a81a0ff, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 2684652fa1155f7458732a70d2e024ec, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: 0
+    changeToSequenceResponseIdxToGrayOut: 1
+    text: "\xBFQu\xE9 sientes en ese momento cuando te equivocas y todos se r\xEDen
+      de ti?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: MIEDO
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
+      responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: VERGUENZA
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 6e9b02ebf15428f4486bca3895af4069, type: 3}
+      responseAudio: {fileID: 8300000, guid: c767848826877a24d876ffd3bf605c38, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: RABIA
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
+      responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: TRISTEZA
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
+      responseAudio: {fileID: 8300000, guid: 818ac1c716b27634f95d4072aff716a9, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "NO S\xC9"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
+      responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 1aae792f218db15438b80cba2231a331, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: 0
+    changeToSequenceResponseIdxToGrayOut: 1
+    text: "El profe se da cuenta y, para distraerte te deja escoger lo qu\xE9 van
+      a jugar a continuaci\xF3n. \xBFQu\xE9 eliges?:"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a59a9a59427f04f4ab590842ae924c11, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: VOLLEYBALL
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 433e9ab08d934d9409a14c87568a2d67, type: 3}
+      responseAudio: {fileID: 8300000, guid: db38533889daa094b9d2b7731eb5de1a, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "F\xDATBOL"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: e9bd8354896d42d44b17dfb6572aad2f, type: 3}
+      responseAudio: {fileID: 8300000, guid: fdac21ded8fc16d4caccc67ee12c37c2, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: b39f60153c584b34bb3adf906aa46068, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 97b853fc7c6ceea4585513afcd7facc2, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: 0
+    changeToSequenceResponseIdxToGrayOut: 1
+    text: "Eso! El profe dijo que s\xED, jugaste un partido y tu equipo gan\xF3!"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a59a9a59427f04f4ab590842ae924c11, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 11fbdde93bc1ba44d8d3ecff757a614d, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 64599f53e678bd4419746628815a5edc, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: 0
+    changeToSequenceResponseIdxToGrayOut: 1
+    text: "\xBFQu\xE9 sientes en ese momento en que tu equipo gana?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: TRISTEZA
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
+      responseAudio: {fileID: 8300000, guid: 818ac1c716b27634f95d4072aff716a9, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: TRANQUILIDAD
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 1c4e4ec93d6dd1148a54a31c23dc1534, type: 3}
+      responseAudio: {fileID: 8300000, guid: a57da50559b616542aaaa6f1fccc3cba, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "ALEGR\xCDA"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: ORGULLO
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: dd808026b5a8217409596c3bfb244917, type: 3}
+      responseAudio: {fileID: 8300000, guid: 35cdf1b0cbfe857458be890b67940f07, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "NO S\xC9"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
+      responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 2e1041f119b79c841b090c9d1c522b9d, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: a568bbe1e8dc32e49a42ebc7c0abc25f, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Despu\xE9s de un rato, entran otra  vez al sal\xF3n. La profe comienza
+      a pasar por el puesto de cada estudiante para revisar una tarea que deb\xEDan
+      traer para hoy."
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: f28b812421054e14497ea88eee4bfce1, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 4f098f89cd474a4478df9ca74f297b91, type: 2}
+    ExitAnim: {fileID: 0}
