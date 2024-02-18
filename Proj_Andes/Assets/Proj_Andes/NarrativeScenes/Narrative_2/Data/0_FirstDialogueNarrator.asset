@@ -81,8 +81,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Volteas a mirar hacia tu cuaderno y te das cuenta de que mientras estabas
-      pendiente de la profe, Alex, un compa\xF1ero del sal\xF3n comenzo a rayarlo."
+    text: "Volteas a mirar hacia tu cuaderno, y te das cuenta de que, mientras estabas
+      pendiente de la profe, Alex comenz\xF3 a rayarlo!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -98,7 +98,7 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 1921e9301d6ad4647be547d7180d454a, type: 3}
     responses:
     - response: Le digo que eso me molesta mucho, que no lo haga
       responseAlternative: 
@@ -140,7 +140,8 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Luego de un rato te sientes mejor. La profe les pide hacer un nuevo dibujo,
-      y que compartan los materiales entre sus compa\xF1eros"
+      y que compartan los materiales entre sus compa\xF1eros... Alex tiene los colores
+      rojo y amarillo que t\xFA necesitas, pero no te los quiere prestar"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
@@ -154,24 +155,9 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Alex tiene los colores rojo y amarillo que t\xFA necesitas, pero no te
-      los quiere prestar"
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    responses: []
-    audio: {fileID: 8300000, guid: a328a84375d53784387f9d0bd15a4a6b, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 4f83b75b8a28cbb41b9353848d7aa881, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 1f3df15000cc7ed428a43eda30ccb711, type: 3}
     responses:
     - response: Le quito los colores a Alex.
       responseAlternative: 
@@ -188,10 +174,10 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: ed7d97ff593d7cd449ac6e149a801434, type: 3}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 4f83b75b8a28cbb41b9353848d7aa881, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
