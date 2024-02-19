@@ -12,7 +12,7 @@ public class AudioInstruction : MonoBehaviour, ITimeManagement
     public bool doneAudio;
     public bool startedCorr;
     AudioSource[] allAudioSources;
-    public IEnumerator firstAudio => FirstInstruction();
+    public IEnumerator firstAudio;
     private void Awake()
     {
         if(instance != null && instance != this) DestroyImmediate(this); 
@@ -21,25 +21,38 @@ public class AudioInstruction : MonoBehaviour, ITimeManagement
         audioSource.clip = firstInstruction;
         doneAudio = false;
         startedCorr = false;
+        lastAudioPosition = 0;
         allAudioSources = FindObjectsOfType<AudioSource>();
     }
     private void Start()
     {
         for (int i = 0; i < allAudioSources.Length; i++) allAudioSources[i].Pause();
-        StartCoroutine(FirstInstruction());
+        firstAudio = FirstInstruction();
+        StartCoroutine(firstAudio);
     }
+
+    float lastAudioPosition;
+
     public void StopAudioIns()
     {
-        StopCoroutine(FirstInstruction());
-        audioSource.Stop();
+        lastAudioPosition = audioSource.time;
+        StopCoroutine(firstAudio);
+		TimeManager.Instance.RemoveNewStopTimeUser(this);
+		audioSource.Stop();
     }
+
+    public void RestartAudio()
+    {
+        firstAudio = FirstInstruction();
+        StartCoroutine(firstAudio);
+	}
     public IEnumerator FirstInstruction()
     {
         startedCorr = true;
+        audioSource.time = lastAudioPosition;
         audioSource.Play();
         TimeManager.Instance.SetNewStopTimeUser(this);
-        if (GameUIController.Instance != null) while (GameUIController.Instance.onPause) yield return null;
-        yield return new WaitForSecondsRealtime(audioSource.clip.length);
+        yield return new WaitForSecondsRealtime(audioSource.clip.length - lastAudioPosition);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
         doneAudio = true;
         for (int i = 0; i < allAudioSources.Length; i++) allAudioSources[i].Play();

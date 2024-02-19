@@ -44,8 +44,10 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         TimeManager.Instance.SetNewStopTimeUser(this);
         if(AudioInstruction.Instance != null)
         {
-            if (AudioInstruction.Instance.startedCorr) AudioInstruction.Instance.StopAudioIns();
-            Debug.Log("stopping");
+            if (AudioInstruction.Instance.startedCorr)
+            {
+                AudioInstruction.Instance.StopAudioIns();
+            }
         }
     }
     void Continue()
@@ -55,7 +57,10 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         TimeManager.Instance.RemoveNewStopTimeUser(this);
         if (AudioInstruction.Instance != null)
         {
-            if (AudioInstruction.Instance.startedCorr) StartCoroutine(AudioInstruction.Instance.firstAudio);
+            if (AudioInstruction.Instance.startedCorr)
+            {
+                AudioInstruction.Instance.RestartAudio();
+            }
         }
     }
     public void ExitGame()

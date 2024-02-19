@@ -27,35 +27,30 @@ public class TimeManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this);
     }
-    public void SetNewStopTimeUser(ITimeManagement user, AudioSource audioToPlay = null)
+    public void SetNewStopTimeUser(ITimeManagement user)
     {
         users.Add(user);
-        Debug.Log("adding user to stop time");
-        TestToStopTime(audioToPlay);
+        TestToStopTime();
     }    
-    public void RemoveNewStopTimeUser(ITimeManagement user, AudioSource audioToStop = null)
+    public void RemoveNewStopTimeUser(ITimeManagement user)
     {
         users.Remove(user);
-        Debug.Log("removing user to play time");
-        TestToPlayTime(audioToStop);
+        TestToPlayTime();
     }
-    void TestToPlayTime(AudioSource audioToPlay = null)
+    void TestToPlayTime()
     {
         if(users.Count <= 0)
         {
             Time.timeScale = 1;
             onTimeScalePaused = false;
-            Debug.Log("onplay");
-            if (audioToPlay != null) audioToPlay.Play();
         }
     }    
-    void TestToStopTime(AudioSource audioToStop = null)
+    void TestToStopTime()
     {
         if(users.Count > 0)
         {
             Time.timeScale = 0;
             onTimeScalePaused = true;
-            if (audioToStop != null) audioToStop.Pause();
         }
     }
     public void ResetUsers()
