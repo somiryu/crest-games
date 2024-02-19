@@ -1,0 +1,315 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 9_AfterFoodFall
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Te sientes muy mal y no tienes qu\xE9 comer. Entonces, le pides a Cami,
+      que te regale un poquito.\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: e0579848f91f8be4989b9249e2d48871, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 3af8dff9729a1364f903eb4eaeef096a, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Ay, no. Es que es mi comida favorita y no quiero compartir\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 919ad886eab734a469a5c6c7ecf903dd, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 23261639d222b4042bc8f15d562287ea, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0973eaa41d32c764da0e4e61220b7615, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: Le digo que bueno, que en realidad no tengo tanta hambre
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: f6fa012cc1c3dbf429203620496aa420, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: " Le digo que me comparta algo de su comida hoy y ma\xF1ana yo comparto
+        el comparto las m\xEDas."
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 71c7b9230626b9b4dad8614794b1f00a, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Le digo a Cami que si no me da algo, ya no voy a ser su amigo.\r"
+      responseAlternative: "Le digo a Cami que si no me da algo, ya no voy a ser
+        su amiga.\r"
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: f6e8c28344f5e864290245ccb0f97fc5, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: " Cami se distrae y sale corriendo a jugar con otros amigos.\r"
+    textAlternative: " Cami se distrae y sale corriendo a jugar con otras amigas.\r"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 8fc3caf8a26a1924e8474a95e3e8298b, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 10dc4de768773d24d8a76dfc1ba38ae0, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: f10d2bea865a68647ac4f7b1f6624460, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Se acaba el recreo. Vuelves a clase con hambre. No ha sido el mejor d\xEDa.\r"
+    textAlternative: "\r"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 59ac98e0790477944a1f5e9be1f0065e, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 1ad135d69b59fdd4798234de35c99485, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Al llegar a tu sal\xF3n, ves a Cami y te acuerdas que prefiri\xF3 dejarte
+      solo por ir a jugar con otras personas.\r"
+    textAlternative: "Al llegar a tu sal\xF3n, ves a Cami y te acuerdas que prefiri\xF3
+      dejarte sola por ir a jugar con otras personas."
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 328d9a2824e6f00419404061e79b9086, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 4853d991f6c15a446bb6c3cbc9753470, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: deb875fb52173ea4ea28a92f1d90c4ca, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: deeda736a911e9d4eb9b2f757e4acdea, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: "Le pregunto a Cami que por qu\xE9 me dej\xF3 solo, y le digo me
+        qued\xE9 muy triste"
+      responseAlternative: "Le pregunto a Cami que por qu\xE9 me dej\xF3 sola, y
+        le digo me qued\xE9 muy triste"
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 00912b4ce3db42f45a796e16d962084a, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: Le digo que es una mala y que ya no quiero ser su amigo.
+      responseAlternative: Le digo que es una mala y que ya no quiero ser su amiga.
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 1335ebb1c54c74e489e1b8c01c61f9d0, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Hago como si no hubiera pasado nada, para que sigamos siendo amigos.\r"
+      responseAlternative: "Hago como si no hubiera pasado nada, para que sigamos
+        siendo amigas.\r"
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: e8219a5ca65f7944fa26f698f40576cf, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 1
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Perd\xF3n por dejarte solo. La pr\xF3xima vez te invito a jugar con los
+      dem\xE1s."
+    textAlternative: "Perd\xF3n por dejarte sola. La pr\xF3xima vez te invito a jugar
+      con las dem\xE1s.\r"
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 3a8b2d36fcf1d1940bb9e63c475a10e7, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 2717175246cead447870cc421b85dea6, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 6392146b6c2a8b5408a9e54df14e7fb1, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Est\xE1s en clase y la profe les recuerda que ya casi es el d\xEDa del
+      ni\xF1o y para celebrarlo van a elegir una canci\xF3n que les guste. Entonces,
+      les pide que decidan entre todos cu\xE1l canci\xF3n prefieren.\r\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: b5d044d5a03b272469ee94aebaabe23e, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 6d29f223aceb13d4cbd10b75500ac5d8, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFQu\xE9 canci\xF3n prefieres?\r\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 82eca7eabcd38a44d9d62917939ae165, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: "Una canci\xF3n para bailar entre todos"
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 1936d776c0775b844a7f10841c1796c8, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Una canci\xF3n para cantar entre todos"
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 28af0ca6511f60245a61ecd416d4d7de, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Una canci\xF3n para escuchar entre todos "
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 69754fd06637202429f4dedaeaa8f65c, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 273b16df87b8f3c46bfa005e7a3a8665, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 7027f583026212b4c81a1de0103ddf8e, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Todos tus compa\xF1eros gritan opciones diferentes de canciones y no se
+      ponen de acuerdo.\r\r\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: b28ba1957fa24c841a4c0e0c0a5cba63, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 869eef77e99275644bf168ebc9534edd, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\r\r\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: cafea8acbb4c2c74aabc02cbfffae836, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: "Grito m\xE1s alto para que los dem\xE1s elijan mi canci\xF3n."
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 6d6abf1077e578848826fcf122667e5c, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Prefiero quedarme callado y que elijan los dem\xE1s."
+      responseAlternative: "Prefiero quedarme callada y que elijan los dem\xE1s."
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 9c1c7287ff026cb408af77f079d8c313, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Propongo que hagamos una votaci\xF3n para que escoja la mayor\xEDa.\r"
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 58eab9e11f0539844ad4580fb57304fa, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: " La profe decide darles algunas opciones y hacer una votaci\xF3n. Qued\xF3
+      seleccionada las opci\xF3n que m\xE1s te gustaba y te sientes muy feliz. Comienzan
+      a ensayar y lo est\xE1s haciendo muy bien. Al final, la profesora te felicita\u2026\r\r\r\r\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: ce7126b0aeace9f48b69c99e98662cb0, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: d2d0658744f06a44abd26f86473ba707, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Fue un d\xEDa largo y dif\xEDcil. \xA1Pero, al final termin\xF3 muy bien!
+      Ya es hora de irse a la casa.\r\r\r\r\r\r\r"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: fcfc074b5e57ae746a1fb12cf1cff3e6, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 52894bc1cc0a60c4b9cebe9a993178f1, type: 2}
+    ExitAnim: {fileID: 0}

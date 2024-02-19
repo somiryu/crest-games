@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: timeLinePlayer
       value: 
       objectReference: {fileID: 2138338496}
+    - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: narrativeSceneItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 19cb714e090469540bbf7647a4810b4e, type: 2}
     - target: {fileID: 3063343628931919348, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Name
       value: DialoguesDisplayer
@@ -2005,6 +2009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1818090239}
   - component: {fileID: 1818090238}
+  - component: {fileID: 1818090240}
   m_Layer: 0
   m_Name: TutorialManager
   m_TagString: Untagged
@@ -2040,6 +2045,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &1818090240
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818090237}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 8d71c5ee4b66e81418ba57bb2010b2a0, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -233199689631670184, guid: 8d71c5ee4b66e81418ba57bb2010b2a0, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &2006999767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,7 +2343,7 @@ GameObject:
   - component: {fileID: 2138338497}
   - component: {fileID: 2138338496}
   - component: {fileID: 2138338499}
-  - component: {fileID: 2138338498}
+  - component: {fileID: 2138338500}
   m_Layer: 0
   m_Name: Timeline
   m_TagString: Untagged
@@ -2336,36 +2360,142 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 1bb9682e32c23d143956fb0e764730f5, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 90096fbfb8c54d544b83b8396e1a54ac, type: 2}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: -233199689631670184, guid: 1bb9682e32c23d143956fb0e764730f5, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: 33f0b9e041053ba4188e3d7a4a97a7ae, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: eb0820e5040a6ad4997aada49cdad9a7, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: 307b7e49fcb3323448a8647a77590d5c, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: 81a65bd75f70eb543a22390d2cd15afa, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: d49181d84fc7b6f4d85365fcc677af1e, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: f1c176df1fcd37140aa0f62f4525ab97, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: 4f83b75b8a28cbb41b9353848d7aa881, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: c307db773ec41f84ca6f94b5cb6d2df4, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: 211acfd051f840748976e40f16ab6429, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: 5c55c79a114f54543b66be5f72c64a30, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
   - key: {fileID: -233199689631670184, guid: d28fbd2db618a7e44b870be8d34c919e, type: 2}
-    value: {fileID: 2138338498}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: e74376eea7b457b4db3bb06d418d2698, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 393979bd1d877e640b1d5bc537b0f75b, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 8d71c5ee4b66e81418ba57bb2010b2a0, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 254fc7cdecb19c64d834d4b2880cf9c3, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: d70fd8bb5b710b247829193618fb8835, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 31e838530c49f6b4e96e4e47fedcc306, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: bbfcba9f0484ff0498d7d10470e800f8, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 6b5b4d93ab62b6a40a3bb2e8f048f369, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 66af49869c56bec48bc333059d7d2d28, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: b8aa06ee88acec14dbefaa9225e0c664, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 852329d643a414d4c861627899d14245, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 712513194fb372040b60ccb181b69caa, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: bc3262571418a17458a47a980af1ea9e, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 54890ab1dc07c0f4b8c3ad366c67463b, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: c7b1e7716782eed49aae5ca12043c141, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 32906e81dce493e44b25fdac926c12a1, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: d7f619f848bc7614198f2577ff7e3d87, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 9b91072c8752d174db7f5e914f4e292e, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 8dbf6adf3212cdc4680be95f35943811, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: d1b06cd8d72aa8c4ab84baec7468d922, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: e6948e7b5b78edc429dde35e411dcf91, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: a3b44cdb457093c48be87539433d5100, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: e32a843acf3e8894b8e83fbf63e18985, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 7a1df6f5598e64a4bb9a453fb3422b47, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: d304568d063246a4f93c5081789f75c4, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: cb9b97a35a3bf1a478f6c083ecb3b9f2, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 4e75445bedc230842b9f0270364d1f7c, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: d9ec169c30384fa4387d4e003402ff9b, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: af8b73837fb051548a395870a6588f97, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: c4db0fc64c92a904ca4b06021f31a6be, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 0979e5893ea91994fa985cee6688cf73, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: dc5522f1b400257408c372ce26885b38, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 931db113bf73e494baf424c21effc2dc, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: d9cfb9dc2a83763498a343fc1481c2c6, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 08c014bbda0fefe4c8f319fed68c9e04, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 9ed04b41e3255bb4d8fb0e9b4df84094, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 2958c8f60ca81de4680ba0058f62c1ec, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: c994f2aa1c9c32649a9fd24cbf4faf96, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 3af8dff9729a1364f903eb4eaeef096a, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 23261639d222b4042bc8f15d562287ea, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: f10d2bea865a68647ac4f7b1f6624460, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 1ad135d69b59fdd4798234de35c99485, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: deb875fb52173ea4ea28a92f1d90c4ca, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 6392146b6c2a8b5408a9e54df14e7fb1, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 6d29f223aceb13d4cbd10b75500ac5d8, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 7027f583026212b4c81a1de0103ddf8e, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 869eef77e99275644bf168ebc9534edd, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 52894bc1cc0a60c4b9cebe9a993178f1, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: d2d0658744f06a44abd26f86473ba707, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 692b430f7ca9af94195a24e2c832d266, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: c0f2199b0cd04814cbaa2fdf9d7f4488, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 866131caea231044a8af688993ad770a, type: 2}
+    value: {fileID: 2138338500}
+  - key: {fileID: -233199689631670184, guid: 90096fbfb8c54d544b83b8396e1a54ac, type: 2}
+    value: {fileID: 2138338500}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &2138338497
@@ -2383,27 +2513,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2138338498
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138338495}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7aca4ac9de6a56a46a25264877020e51, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &2138338499
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2445,7 +2554,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c294600e408f2a84baf479059fc71c95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2456,6 +2565,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2138338500
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138338495}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7aca4ac9de6a56a46a25264877020e51, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

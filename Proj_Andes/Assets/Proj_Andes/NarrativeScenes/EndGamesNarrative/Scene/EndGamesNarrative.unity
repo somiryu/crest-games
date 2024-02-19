@@ -1993,11 +1993,11 @@ PrefabInstance:
     - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: dialoguesToShow
       value: 
-      objectReference: {fileID: 11400000, guid: 1a91fe4a1e799ec45a00265862f9f5d2, type: 2}
+      objectReference: {fileID: 11400000, guid: 11172ceaf9917fd4ab5bf165f1a7a79a, type: 2}
     - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: narrativeSceneItem
       value: 
-      objectReference: {fileID: 11400000, guid: b2018ba47f9283944b03a35f619f98ff, type: 2}
+      objectReference: {fileID: 11400000, guid: 68d2c0b4ccb3cbc4d851a8a5f3f08148, type: 2}
     - target: {fileID: 3063343628931919348, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Name
       value: DialoguesDisplayer

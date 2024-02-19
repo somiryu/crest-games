@@ -17,8 +17,6 @@ public class UserData
     [FirestoreProperty] public string country { get; set; }
     [FirestoreProperty] public UserLivingWith livingWith { get; set; }
 
-
-    [FirestoreProperty] public Dictionary<string, Dictionary<string, object>> userAnalytics { get; set; } = new Dictionary<string, Dictionary<string, object>>();
     [FirestoreProperty] public Dictionary<string, bool> tutorialStepsDone { get; set; } = new Dictionary<string, bool>();
 	   
 	//This refers to the Game group index
@@ -41,8 +39,6 @@ public class UserData
 		schoolType = UserSchoolType.NONE;
 		country = string.Empty;
 		livingWith = UserLivingWith.NONE;
-
-		userAnalytics = new Dictionary<string, Dictionary<string, object>>();
 
         CheckPointIdx = -1;
 		CheckPointSubIdx = -1;

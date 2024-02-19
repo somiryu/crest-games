@@ -22,6 +22,8 @@ MonoBehaviour:
       Ya casi est\xE1 a salvo.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 5baec16312cacbf4497590d3d6cf9aec, type: 3}
     audioAlternative: {fileID: 0}
@@ -35,11 +37,13 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: 
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 4975bf72de7b0be4ca650f4564a449b6, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
-    - response: continue
+    - response: asdasd
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 6de84f070eec5c14cbbe8d76b22f80d8, type: 3}
       responseAudio: {fileID: 0}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
@@ -55,6 +59,8 @@ MonoBehaviour:
     text: "A salvo en la casa, Alex respira profundamente. Parece que no hay nadie.\r.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 7d9a1cf14aeb0e74590ba01284657ac3, type: 3}
     audioAlternative: {fileID: 0}
@@ -69,6 +75,8 @@ MonoBehaviour:
     text: "Tengo mucha hambre! Voy a buscar qu\xE9 hay en el caj\xF3n.\r.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 952155cba462e46429afdd5485a2f075, type: 3}
     audioAlternative: {fileID: 0}
@@ -83,6 +91,8 @@ MonoBehaviour:
     text: "Alex va hacia el caj\xF3n de comida\r.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: fff1b833df88ed740aaa1cae00860afa, type: 3}
     audioAlternative: {fileID: 0}

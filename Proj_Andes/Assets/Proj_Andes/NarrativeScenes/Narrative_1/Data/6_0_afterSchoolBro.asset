@@ -22,6 +22,8 @@ MonoBehaviour:
     textAlternative: " Parece que nadie quiere acompa\xF1ar a Alex y tendr\xE1 que
       caminar sola."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 1bcb10dcfddc837469cc7f546462567c, type: 3}
     audioAlternative: {fileID: 8300000, guid: 6ca4776e19bb41e4f9954a7c739e0b94, type: 3}
@@ -37,6 +39,8 @@ MonoBehaviour:
       Alex?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp8_other_feelings
+    analyticTimeID: emp8_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -77,6 +81,8 @@ MonoBehaviour:
       y le habla."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: d9affa6b35c964440940acbce1a0db4e, type: 3}
     audioAlternative: {fileID: 0}
@@ -91,6 +97,8 @@ MonoBehaviour:
     text: "\xA1Alex! Vamos a la casa. \xBFS\xED supiste de lo que le pas\xF3 a Tomy?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: d0ed0ec7a4fbd55448944181dabb8eb3, type: 3}
     audioAlternative: {fileID: 0}
@@ -105,6 +113,8 @@ MonoBehaviour:
     text: Tomy es la mascota de Alex.
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 96f4e9b558e518347b126b29c9c2c677, type: 3}
     audioAlternative: {fileID: 0}
@@ -119,6 +129,8 @@ MonoBehaviour:
     text: "\xBFCu\xE1l crees que es la mascota de Alex?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a59a9a59427f04f4ab590842ae924c11, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: GATO
       responseAlternative: 

@@ -13,89 +13,85 @@ MonoBehaviour:
   m_Name: 4_0_playAfterFall
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "La profe te revisa y afortunadamente tu brazo est\xE1 bien, pero te sigue
-      doliendo durante todo el d\xEDa. Ella te pide que te sientes en un momento,
-      y preciso ah\xED pasa Alex."
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Te encuentras con la profe. Ella te revisa y afortunadamente tu brazo
+      est\xE1 bien, pero te sigue doliendo durante todo el d\xEDa. Ella te pide que
+      te sientes en un momento mientras ella va por hielo. Justo cuando la profe
+      se va, Alex pasa por tu lado.\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 40ba7d335df7c354cb62ff435c05fa7b, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 54890ab1dc07c0f4b8c3ad366c67463b, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 3
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: Eso te pasa por lento y no fijarte por donde caminas! Ja ja
+    textAlternative: Eso te pasa por lenta y no fijarte por donde caminas! Ja ja
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: e196782cb01397745a2e244766bdcf35, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 7ff5ea194e0cede4eb2c3be7f6f87c27, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: c7b1e7716782eed49aae5ca12043c141, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 0
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e6ad05bf63bdbd54688ca3c02d0d347d, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: "Le digo que no me moleste m\xE1s.\r"
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 48dee131fc993c248813d55da7896196, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Me levanto y le grito a Alex que m\xE1s lento es el"
+      responseAlternative: "Me levanto y le grito a Alex que m\xE1s lenta es ella"
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: e0532beb5d49a584da69ef9c46738b46, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: Hago como si no hubiera escuchado y no le digo nada
+      responseAlternative: 
+      responseImage: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 3294d89a025848e4dbc146a1aee73c99, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 3
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: No juegas por torpe y lento, ja ja...
+    changeToSequence: {fileID: 11400000, guid: 3ff86865b61b6bc49b0a5bc063658b0c, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Alex se aleja ri\xE9ndose\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 7b50465e7bcaa614ea7206773f088b67, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 0
-    changeToSequence: {fileID: 0}
-    text: "Cuando te pasa algo as\xED, \xBFQu\xE9 haces?"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses:
-    - response: "Me levanto y le grito a Alex que m\xE1s tonto y lento es \xE9l"
-      responseImage: {fileID: 0}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: Hago como si no hubiera escuchado y no le digo nada
-      responseImage: {fileID: 0}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: "Le digo que por favor no me moleste m\xE1s"
-      responseImage: {fileID: 0}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "Camino al sal\xF3n te encuentras con Cami"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "\xA1Uy, qu\xE9 le pas\xF3 a tu brazo!\xBFTe duele mucho?"
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: be774a2284dd57a4c9b76f3206681fa4, type: 2}
-    text: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: baf5f2bdf5eae2c40b8c71c0f36aa328, type: 3}
-    responses:
-    - response: UN POCO
-      responseImage: {fileID: 21300000, guid: 730553421d8251946ae2458614062649, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: NADA
-      responseImage: {fileID: 21300000, guid: e03b3f55e3112bb44b1ebf86d53c3778, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: MUCHO
-      responseImage: {fileID: 21300000, guid: eebc61383fcbcb546a54c4ac9579def6, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 32906e81dce493e44b25fdac926c12a1, type: 2}
     ExitAnim: {fileID: 0}

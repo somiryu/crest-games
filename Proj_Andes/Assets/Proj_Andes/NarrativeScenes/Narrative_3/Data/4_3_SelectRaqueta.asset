@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 4_3_SelectRaqueta
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 0a0cbe6bf461fd649a1c47e27e2488bd, type: 2}
+    changeToSequenceStartDialogIdx: 4
+    changeToSequenceResponseIdxToGrayOut: 2
+    text: "Lo siento, esa ya lo escogi\xF3 Luis."
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 828bafe2fa7b62a46a34c47b57daf5cf, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 739f3f204d7d4e74fb99f4f6289e2cec, type: 2}
+    ExitAnim: {fileID: 0}

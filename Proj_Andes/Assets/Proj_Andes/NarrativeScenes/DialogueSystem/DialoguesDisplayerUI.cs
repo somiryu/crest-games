@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Text;
 using System;
 using UnityEngine.Playables;
+using Unity.VisualScripting;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private bool audioIsDone = false;
     private DialogueSequenceData pendingSequenceToShow;
     private DialogueResponse preselectedResponse;
-	private bool preselectedResponseAudioIsDone = false;
+	[NonSerialized] public bool preselectedResponseAudioIsDone = false;
 
 
     public bool SaveNavSequence = true;
@@ -60,6 +61,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private float appearTime = 2;
     private int currCharProgress;
     private char[] currDialogueCharacters;
+
+    //Analytics
+    private float currResponseTime;
+    private string currResponseChoiceAnalyticID;
+    private string currResponseTimeAnalyticID;
+    private int currResponseAnalyticIdx;
 
     private DialoguesResponsesDisplayerUI currResponsesDisplayer;
 
@@ -102,6 +109,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		choicesTree.Clear();
         skipSceneBtn.gameObject.SetActive(activeSkipSceneBtn && !AppSkipSceneButton.ActiveDebugGlobalUI);
         skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
+
+
+        narrativeSceneItem.ResetCurrentAnalytics();
 	}
 
 	public bool OnWantsToChangeDialogFromTrigger()
@@ -397,6 +407,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
             if (currResponsesDisplayer != null)
             {
+               
+
                 currResponsesDisplayer.ShowResponses(dialogueData.responses);               
 
                 for (int i = 0; i < grayOutResponseIdxes.Count; i++)
@@ -406,10 +418,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
             }
 		}
 
+        var hasAnalytic = !string.IsNullOrEmpty(dialogueData.analyticChoiceID);
+
+		currResponseTime = 0;
 
 		while (!hasPendingLineChange)
         {
-            if(preselectedResponse != null)
+			if (hasAnalytic) currResponseTime += Time.deltaTime;
+
+			if (preselectedResponse != null)
             {
                 preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
                 if (canSkipAudio.isOn) preselectedResponseAudioIsDone = true;
@@ -429,6 +446,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
         state = dialogLineState.NotShowing;
         hasPendingLineChange = false;
         currAnimSequence = null;
+
+        if (!string.IsNullOrEmpty(currResponseChoiceAnalyticID))
+        {
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticID, currResponseAnalyticIdx);
+            narrativeSceneItem.itemAnalytics.Add(currResponseTimeAnalyticID, currResponseTime);
+
+            currResponseChoiceAnalyticID = null;
+            currResponseTimeAnalyticID = null;
+            currResponseAnalyticIdx = -1;
+            currResponseTime = 0;
+        }
+
 
         if (pendingSequenceToShow != null)
         {
@@ -456,9 +485,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (!preselectedResponseAudioIsDone) return;
 
         if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
-        hasPendingLineChange = true;
+
         lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
+
+        if (!string.IsNullOrEmpty(CurrDialog.analyticChoiceID))
+        {
+            currResponseChoiceAnalyticID = CurrDialog.analyticChoiceID;
+            currResponseTimeAnalyticID = CurrDialog.analyticTimeID;
+            currResponseAnalyticIdx = lastPickedResponseIdx;
+		}
+
         currResponsesDisplayer.ActiveConfirmationButton(false);
+        hasPendingLineChange = true;
 
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepConfirmedButton))
@@ -496,7 +534,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
         mainDialoguesGraphics.SetActive(false);
         OnEndShowingDialogue?.Invoke();
         currShowingIdx = -1;
-        if(GoToNextScene) narrativeSceneItem.OnSequenceOver();
+        if (GoToNextScene)
+        {
+            var analytics = narrativeSceneItem.itemAnalytics;
+            if(analytics != null && analytics.Count > 0)
+            {
+				UserDataManager.SaveUserAnayticsPerGame(DataIds.narrative1, narrativeSceneItem.itemAnalytics);
+			}
+			narrativeSceneItem.OnSequenceOver();
+        }
 	}
 
     public List<NarrativeNavigationNode> GetCurrNavigationNodes()
@@ -531,7 +577,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 }
 
 [Serializable]
-public struct NarrativeNavigationNode
+public class NarrativeNavigationNode
 {
     public int sourceDialogIdx;
     public int responsePickedIdx;

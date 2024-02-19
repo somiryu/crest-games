@@ -13,85 +13,67 @@ MonoBehaviour:
   m_Name: 5_0_class_table
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 1
+  - characterType: 5
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: "\xA1Mira lo que hay en tu mesa!"
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "El recreo finaliza. De regreso en el sal\xF3n, todos se est\xE1n alistando
+      para la clase de educaci\xF3n f\xEDsica. De pronto, Cami te dice:\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 9dab42d8eb474924da6d1defa60c2fa1, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "Es una pata como cualquier otra, de metal. Nada extra\xF1o."
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: d7f619f848bc7614198f2577ff7e3d87, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 1
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: Mira otra vez..
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "busca en tu mesa, parece que hay algo escrito all\xED.\r"
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 3c9afaa43d31e6945ba220c056e0d191, type: 3}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "\xA1Mira ac\xE1!"
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 9b91072c8752d174db7f5e914f4e292e, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 0
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "El dibujo te tom\xF3 por sorpresa "
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "Cuando te pasa algo as\xED, \xBFQu\xE9 haces?"
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
+    changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: baf5f2bdf5eae2c40b8c71c0f36aa328, type: 3}
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 03f00fc76b95c964facd29064f6576a4, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: 
-      responseImage: {fileID: 21300000, guid: 3537fd1708a238d4cb5effdffafbffcb, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2fad6dcce1c9ac44e8b4709eb1c3b5c6, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 80eb65d3fff2a1a49b8cf97ab713659a, type: 2}
     - response: 
-      responseImage: {fileID: 21300000, guid: 5e90a61f787052a4888cb4b2b05925ce, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2fad6dcce1c9ac44e8b4709eb1c3b5c6, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: b5deb87f6edf4f9448053e5bb69ab249, type: 2}
     - response: 
-      responseImage: {fileID: 21300000, guid: 6ceee92a670dc014790770714cd44c8e, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2fad6dcce1c9ac44e8b4709eb1c3b5c6, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 72363e995d30cb7458220ff09a3cf658, type: 2}
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 9b91072c8752d174db7f5e914f4e292e, type: 2}
     ExitAnim: {fileID: 0}

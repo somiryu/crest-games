@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 0_FirstDialogueNarrator
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Hoy es un nuevo d\xEDa de colegio. Va a ser un gran d\xEDa, \xBFno te
+      parece?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a59a9a59427f04f4ab590842ae924c11, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: "S\xED"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 849af44583d86bd4882db8cc7b18578a, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: c9d467b4d3d8b5c46b60c8dfdfb8f984, type: 2}
+    - response: No
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2fa8c2bb6fe55134ab804e427ac35f7a, type: 3}
+      responseAudio: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: db6d8c32ba4038c46b3489e6591478f0, type: 2}
+    audio: {fileID: 8300000, guid: 096c75c7661b2d04a937d42b307c6a1f, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: e4b0f91a76469a047ac17efe1272befc, type: 2}
+    ExitAnim: {fileID: 0}

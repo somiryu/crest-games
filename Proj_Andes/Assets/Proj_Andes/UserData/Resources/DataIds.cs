@@ -27,6 +27,11 @@ public static class DataIds
     public const string lostByCheat = "lostByCheat";
     public const string frustrationLevel = "frustrationLevel";
 
+    //Narratives IDs
+    public const string narrative1 = "empatia";
+    public const string narrative2 = "agression";
+    public const string narrative3 = "conflict";
+
     //Data per game
 
     public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";

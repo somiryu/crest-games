@@ -23,6 +23,8 @@ MonoBehaviour:
       que ten\xEDas en tu mesa."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 93c1173e071e3e447a494a7fb21c78cc, type: 3}
     audioAlternative: {fileID: 0}
@@ -37,6 +39,8 @@ MonoBehaviour:
     text: "\xBFQu\xE9 sientes al ver que Alex est\xE1 rompiendo tus hojas?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp7_other_feelings
+    analyticTimeID: emp7_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -77,6 +81,8 @@ MonoBehaviour:
       para regresar a tu casa.\r\n"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: a4078d4c7aeb6b647b25fb0e52a6abdc, type: 3}
     audioAlternative: {fileID: 0}
@@ -95,6 +101,8 @@ MonoBehaviour:
       l\xE1piz y, adem\xE1s, rompi\xF3 tus hojas. Parece que est\xE1 buscando a alguien
       que la acompa\xF1e caminando a su casa.\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 2b98246d86a55cd4cbfa9fc55e8b920b, type: 3}
     audioAlternative: {fileID: 8300000, guid: 938709b64ac281d4298d07914778af1b, type: 3}

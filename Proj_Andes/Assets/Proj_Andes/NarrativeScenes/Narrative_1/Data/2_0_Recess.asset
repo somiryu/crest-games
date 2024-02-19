@@ -23,6 +23,8 @@ MonoBehaviour:
     textAlternative: Para Cami no es tan chevere, porque no encuentra con quien jugar
       y se queda sola todo el descanso
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
@@ -37,6 +39,8 @@ MonoBehaviour:
     text: "\xBFC\xF3mo te sientes t\xFA al saber que Cami no tuvo con quien jugar?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: emp4_other_feelings
+    analyticTimeID: emp4_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 

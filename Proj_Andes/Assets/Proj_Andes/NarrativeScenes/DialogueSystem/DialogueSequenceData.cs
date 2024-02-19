@@ -36,6 +36,8 @@ public class DialogueData
     public string textAlternative;
     [Header("Responses")]
 	public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
+    public string analyticChoiceID;
+    public string analyticTimeID;
 	public DialogueResponse[] responses;
     
 

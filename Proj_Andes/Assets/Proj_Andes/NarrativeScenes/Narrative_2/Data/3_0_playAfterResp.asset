@@ -13,69 +13,69 @@ MonoBehaviour:
   m_Name: 3_0_playAfterResp
   m_EditorClassIdentifier: 
   dialogues:
-  - characterType: 0
+  - characterType: 9
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 0}
-    text: Todo parece estar mejor. El juego empieza bien. Vas corriendo y de pronto
-      ves a Alex corriendo hacia ti, Intentas esquivarlo
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: baf5f2bdf5eae2c40b8c71c0f36aa328, type: 3}
-    responses:
-    - response: Saltar a la derecha
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: Saltar a la izquierda
-      responseImage: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    - response: Saltar hacia arriba
-      responseImage: {fileID: 21300000, guid: 5e90a61f787052a4888cb4b2b05925ce, type: 3}
-      changeSequence: 0
-      dataAfterResponse: {fileID: 0}
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: No alcanzas a quitarte y te empuja. Te caes y te pegas muy duro en el brazo.
-      Te duele mucho.
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: baf5f2bdf5eae2c40b8c71c0f36aa328, type: 3}
-    responses: []
-    audio: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 0
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    text: "Cuando te pasa algo as\xED, \xBFQu\xE9 haces?"
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Ya se va a acabar el recreo, y ya no alcanzamos a jugar. Mejor vamos r\xE1pido
+      a la tienda para comprar algo para comer."
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 9a3dd9f7e23cfca4dbb32dbb7e257152, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 852329d643a414d4c861627899d14245, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: " Salen corriendo antes de que cierren la tienda. De pronto, ves a Alex
+      en el camino y te hace zancadilla. Te caes y te pegas muy duro en el brazo.
+      Te duele mucho. \r\n"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: aadc4d408931e974b97d7d98b1515366, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 712513194fb372040b60ccb181b69caa, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 6635b479d17b7ed46a024a03b4243336, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 16d183b8a38bf3b4d9af43079607369e, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Me levanto y empujo a Alex
+      responseAlternative: 
       responseImage: {fileID: 0}
-      changeSequence: 1
-      dataAfterResponse: {fileID: 11400000, guid: b3a3b5486b7f11f459da4589a38cc5c9, type: 2}
-    - response: Dejo de jugar y me alejo
+      responseAudio: {fileID: 8300000, guid: ca42b013d4bc3b14681266938aeb277b, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "Le digo a Alex que me hizo da\xF1o, y que no lo vuelva a hacer"
+      responseAlternative: 
       responseImage: {fileID: 0}
-      changeSequence: 1
-      dataAfterResponse: {fileID: 11400000, guid: e668f6206b2e21845ac41385c26bc278, type: 2}
-    - response: "Me acerco a Alex y le muestro el golpe que me caus\xF3 en el brazo"
+      responseAudio: {fileID: 8300000, guid: 3ff879302843288418595d3def946ad1, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "No digo nada y me voy para el sal\xF3n"
+      responseAlternative: 
       responseImage: {fileID: 0}
-      changeSequence: 1
-      dataAfterResponse: {fileID: 11400000, guid: 3fcf665cdbaf19c488eb22b26e2c7292, type: 2}
+      responseAudio: {fileID: 8300000, guid: f45cea7419ae88a43a6ac4a524a84964, type: 3}
+      dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

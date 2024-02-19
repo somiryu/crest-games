@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 9_2_Veci_WrongChoice2
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 3
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 979b15a5d9b0e4b49b5204e26e5bafdf, type: 2}
+    changeToSequenceStartDialogIdx: 1
+    changeToSequenceResponseIdxToGrayOut: 1
+    text: "Eso no es lo que yo quer\xEDa"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 87ef5ae24b61bad4b8919de1b8781e70, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: b82731e2aa57f2244bfcd51e3c62ef9b, type: 2}
+    ExitAnim: {fileID: 0}

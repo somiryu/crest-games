@@ -164,8 +164,8 @@ MonoBehaviour:
   currResponses: []
   currHighlightedResponse: {fileID: 0}
   highlightBtnsSprites:
-  - {fileID: 21300000, guid: b209aadac3ff0a4459993001e36722e2, type: 3}
-  - {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
+  - {fileID: 21300000, guid: c69dc03eecd6a654eab5554924f5e2ed, type: 3}
+  - {fileID: 21300000, guid: 4a613c010b0e1b643ab980c3e4d64b51, type: 3}
   disableBtnContainer: {fileID: 21300000, guid: 0ee5b8a5d212f2942b7429ba05d4e952, type: 3}
 --- !u!114 &1793937690743282274
 MonoBehaviour:

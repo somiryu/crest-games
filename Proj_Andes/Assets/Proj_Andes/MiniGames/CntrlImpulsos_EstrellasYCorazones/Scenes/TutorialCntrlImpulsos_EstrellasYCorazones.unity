@@ -10571,7 +10571,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -613.31, y: -1.9999847}
+  m_AnchoredPosition: {x: -613.31, y: -2}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &462482202
@@ -12152,7 +12152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 604.43994, y: 6.000025}
+  m_AnchoredPosition: {x: 604.43994, y: 6}
   m_SizeDelta: {x: -1185.02, y: 360.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1304693495
@@ -12232,7 +12232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 600.43994, y: 8.000025}
+  m_AnchoredPosition: {x: 600.43994, y: 8}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1365173669
@@ -22618,7 +22618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -617.31, y: -12.999985}
+  m_AnchoredPosition: {x: -617.31, y: -13}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1591065139
@@ -23285,8 +23285,8 @@ MonoBehaviour:
   inGameUIPanel: {fileID: 875282631}
   correctAudio: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
-  succeedStepAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
-  finishAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
+  succeedStepAudio: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
+  finishAudio: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
   ifHeartAudio: {fileID: 0}
   ifStarAudio: {fileID: 0}
   currRoundValueTxt: {fileID: 1134041796}

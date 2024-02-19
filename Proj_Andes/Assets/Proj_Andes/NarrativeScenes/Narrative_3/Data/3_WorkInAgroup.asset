@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef7db589a185d140ad34b5f3870736b, type: 3}
+  m_Name: 3_WorkInAgroup
+  m_EditorClassIdentifier: 
+  dialogues:
+  - characterType: 6
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xA1Hola! Espero que hayas recordado traer los materiales que nos pidi\xF3
+      la profe para hoy. A m\xED se me olvidaron y, como es de brava, \xA1fijo me
+      iba a rega\xF1ar!"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 1a95da0dea58ff7468ad7ae755ba5f7a, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: e46ae26615831634eafa9464a0fad2a6, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Te das cuenta de que, por el af\xE1n de esta ma\xF1ana, tambi\xE9n dejaste
+      los materiales en casa."
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: f052f47c89af9c948a9b1f46e88ef3de, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: e17ae7019cfe8794bb87b1371ed124de, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFQu\xE9 sientes en ese momento en que te das cuenta de que olvidaste
+      los materiales?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: RABIA
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
+      responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: MIEDO
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
+      responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "ALEGR\xCDA"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: TRISTEZA
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
+      responseAudio: {fileID: 8300000, guid: 818ac1c716b27634f95d4072aff716a9, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "NO S\xC9"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
+      responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: b2493de632b675b49baef0d42d33b776, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Al final, la profe les pidi\xF3 hacer unos dibujos y no usaron los materiales.
+      \xA1Estuviste de buena suerte! Adem\xE1s, cuando finalizas tu dibujo, la profe
+      te felicita y se lo muestra a todos."
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: 316a1759c90c6044f80b9489749bfd2a, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: fc501482f14f1754fb75cf2edffcbd1d, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "\xBFQu\xE9 sientes en ese momento cuando la profe te felicita?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: "ALEGR\xCDA"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: ORGULLO
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: dd808026b5a8217409596c3bfb244917, type: 3}
+      responseAudio: {fileID: 8300000, guid: 35cdf1b0cbfe857458be890b67940f07, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: MIEDO
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
+      responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: TRISTEZA
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
+      responseAudio: {fileID: 8300000, guid: 818ac1c716b27634f95d4072aff716a9, type: 3}
+      dataAfterResponse: {fileID: 0}
+    - response: "NO S\xC9"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
+      responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
+      dataAfterResponse: {fileID: 0}
+    audio: {fileID: 8300000, guid: 7e7de6823d03fb843a3796dbac79adc8, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 0a0cbe6bf461fd649a1c47e27e2488bd, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: Llega la hora del recreo y recuerdas que tu mejor amigo no vino al colegio,
+      y no encuentras con quien jugar. Te quedaste solo todo el recreo
+    textAlternative: Llega la hora del recreo y recuerdas que tu mejor amiga no vino
+      al colegio, y no encuentras con quien jugar. Te quedaste sola todo el recreo
+    responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: b70d59d44ca69cc40990842f37ed8d60, type: 3}
+    audioAlternative: {fileID: 8300000, guid: fd1337650f7926241b2f9ab522940b9f, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 0a67772424eae4a4db53daf992bf81a6, type: 2}
+    ExitAnim: {fileID: 0}

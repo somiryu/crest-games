@@ -8,7 +8,7 @@ public class SimpleGameSequenceItem : ScriptableObject
 {
     public SceneReference scene;
 
-    [NonSerialized] public Dictionary<string, object> itemAnalytics;
+    [NonSerialized] public Dictionary<string, object> itemAnalytics = new Dictionary<string, object>();
 
     public virtual string GetSceneID() => string.Empty;
 
@@ -38,12 +38,6 @@ public class SimpleGameSequenceItem : ScriptableObject
             UserDataManager.CurrUser.Coins += coinsAmt;
         }
     }
-    public virtual void SaveAnalytics()
-    {
+    public virtual void SaveAnalytics() { }
 
-    }
-    public SimpleGameSequenceItem()
-    {
-        itemAnalytics = new Dictionary<string, object>();
-    }
 }
