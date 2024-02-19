@@ -13,6 +13,9 @@ public class AppSkipSceneButton : MonoBehaviour
     public static AppSkipSceneButton Instance => instance;
     [SerializeField] Button skipSceneBtn;
     public TMP_Dropdown skinSelector;
+    public TMP_Dropdown narrativeSelector;
+
+    public static int RandomNarrativeOverride = - 1;
 
     [RuntimeInitializeOnLoadMethod]
     static void RunOnStart()
@@ -33,7 +36,13 @@ public class AppSkipSceneButton : MonoBehaviour
 
         skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
         skinSelector.onValueChanged.AddListener(ForceSkinChange);
+        narrativeSelector.onValueChanged.AddListener(OverrideNarrativeChanged);
 	}
+
+    void OverrideNarrativeChanged(int newValue)
+    {
+        RandomNarrativeOverride = newValue - 1;
+    }
 
     void ForceSkinChange(int skinIdx)
     {

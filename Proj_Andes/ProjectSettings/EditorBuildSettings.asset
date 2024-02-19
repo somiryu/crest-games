@@ -89,4 +89,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Proj_Andes/NarrativeScenes/IntermediateNarrative/Scene/IntermediateNarrative.unity
     guid: 407cc9cd5843bb54b97a7ed9962a8e9d
+  - enabled: 1
+    path: Assets/Proj_Andes/NarrativeScenes/Narrative_3/Scenes/DialogsNarrative3.unity
+    guid: abf5f464e42ab2e4e8b34cf1530dc288
   m_configObjects: {}

@@ -11,6 +11,8 @@ public class MinigameGroups : SimpleGameSequenceItem
     [NonSerialized] List<SimpleGameSequenceItem> itemsPlayed = new List<SimpleGameSequenceItem>();
     [Space]
     public bool randomize;
+    [Space]
+    public bool CanBeOverridenByDebugFlag;
     [Tooltip("How many games should we play before leaving the group (Only works if randomize is enable), if -1 we will play all items in the group")]
     public int maxItemsToPlayOnRandomize = -1;
 
@@ -19,6 +21,14 @@ public class MinigameGroups : SimpleGameSequenceItem
 
     public SimpleGameSequenceItem GetNextMiniGame()
     {
+        if (CanBeOverridenByDebugFlag)
+        {
+            var hasOverride = AppSkipSceneButton.RandomNarrativeOverride;
+            if(hasOverride != -1)
+            {
+                return miniGamesInGroup[hasOverride];
+            }
+        }
         if (randomize)
         {
             return GetRandomGame();

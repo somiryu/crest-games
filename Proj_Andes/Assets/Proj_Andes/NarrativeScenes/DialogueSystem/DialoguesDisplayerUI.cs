@@ -7,6 +7,7 @@ using System.Text;
 using System;
 using UnityEngine.Playables;
 using Unity.VisualScripting;
+using Firebase.Firestore;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
@@ -577,11 +578,19 @@ public class DialoguesDisplayerUI : MonoBehaviour
 }
 
 [Serializable]
+[FirestoreData]
 public class NarrativeNavigationNode
 {
     public int sourceDialogIdx;
     public int responsePickedIdx;
     public int nextDialogCustomStartIdx;
+
+    public NarrativeNavigationNode() 
+    {
+        sourceDialogIdx = -1;
+        responsePickedIdx = -1;
+        nextDialogCustomStartIdx = -1;
+    }
 
     public NarrativeNavigationNode(
         int _sourceDialogIdx = -1, 
