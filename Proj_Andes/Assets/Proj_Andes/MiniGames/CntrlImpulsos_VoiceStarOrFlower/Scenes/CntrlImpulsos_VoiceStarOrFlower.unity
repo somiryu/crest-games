@@ -741,6 +741,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioInstruction
       objectReference: {fileID: 0}
+    - target: {fileID: 7352783867122607617, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483439330456983160, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 595.78015
@@ -13425,9 +13433,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 58449483}
-  - {fileID: 586116114}
   - {fileID: 1265209488}
   - {fileID: 1951022620}
+  - {fileID: 586116114}
   - {fileID: 446436071}
   - {fileID: 1217146455}
   - {fileID: 1040202753}

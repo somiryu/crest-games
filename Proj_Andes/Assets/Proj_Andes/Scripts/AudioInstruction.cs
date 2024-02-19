@@ -7,12 +7,17 @@ public class AudioInstruction : MonoBehaviour, ITimeManagement
 {
     static AudioInstruction instance;
     public static AudioInstruction Instance => instance;
+
     [SerializeField] AudioClip firstInstruction;
+    [SerializeField] GameObject allScreenRayBlocker;
+
     AudioSource audioSource;
     public bool doneAudio;
     public bool startedCorr;
     AudioSource[] allAudioSources;
+    bool[] allAudioSourcesInitialActiveState;
     public IEnumerator firstAudio;
+
     private void Awake()
     {
         if(instance != null && instance != this) DestroyImmediate(this); 
@@ -23,10 +28,16 @@ public class AudioInstruction : MonoBehaviour, ITimeManagement
         startedCorr = false;
         lastAudioPosition = 0;
         allAudioSources = FindObjectsOfType<AudioSource>();
+        allAudioSourcesInitialActiveState = new bool[allAudioSources.Length];
     }
     private void Start()
     {
-        for (int i = 0; i < allAudioSources.Length; i++) allAudioSources[i].Pause();
+
+        for (int i = 0; i < allAudioSourcesInitialActiveState.Length; i++)
+        {
+            allAudioSourcesInitialActiveState[i] = allAudioSources[i].isPlaying;
+        }
+		for (int i = 0; i < allAudioSources.Length; i++) allAudioSources[i].Pause();
         firstAudio = FirstInstruction();
         StartCoroutine(firstAudio);
     }
@@ -39,15 +50,18 @@ public class AudioInstruction : MonoBehaviour, ITimeManagement
         StopCoroutine(firstAudio);
 		TimeManager.Instance.RemoveNewStopTimeUser(this);
 		audioSource.Stop();
-    }
+		allScreenRayBlocker.gameObject.SetActive(false);
+	}
 
-    public void RestartAudio()
+	public void RestartAudio()
     {
+        if(firstAudio != null) StopCoroutine(firstAudio);
         firstAudio = FirstInstruction();
         StartCoroutine(firstAudio);
 	}
     public IEnumerator FirstInstruction()
     {
+        allScreenRayBlocker.gameObject.SetActive(true);
         startedCorr = true;
         audioSource.time = lastAudioPosition;
         audioSource.Play();
@@ -55,8 +69,14 @@ public class AudioInstruction : MonoBehaviour, ITimeManagement
         yield return new WaitForSecondsRealtime(audioSource.clip.length - lastAudioPosition);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
         doneAudio = true;
-        for (int i = 0; i < allAudioSources.Length; i++) allAudioSources[i].Play();
+        for (int i = 0; i < allAudioSources.Length; i++)
+        {
+            if (!allAudioSourcesInitialActiveState[i]) continue;
+            allAudioSources[i].Play();
+        }
         audioSource.Stop();
         startedCorr = false;
-    }
+		allScreenRayBlocker.gameObject.SetActive(false);
+        firstAudio = null;
+	}
 }

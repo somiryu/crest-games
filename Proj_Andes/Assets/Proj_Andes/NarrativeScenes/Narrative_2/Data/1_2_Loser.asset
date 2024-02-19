@@ -50,8 +50,8 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
       responseAudio: {fileID: 8300000, guid: 8156591082b90b6488c5a44906cedfae, type: 3}
       dataAfterResponse: {fileID: 11400000, guid: 89dadb1d8d6348d44858afb84f04782b, type: 2}
-    - response: Les digo que son unas odiosas por no dejarme jugar.
-      responseAlternative: 
+    - response: Les digo que son unos odiosos por no dejarme jugar.
+      responseAlternative: Les digo que son unas odiosas por no dejarme jugar.
       responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
       responseAudio: {fileID: 8300000, guid: 001de859612091341abe6409c0b3e49c, type: 3}
       dataAfterResponse: {fileID: 11400000, guid: 89dadb1d8d6348d44858afb84f04782b, type: 2}
