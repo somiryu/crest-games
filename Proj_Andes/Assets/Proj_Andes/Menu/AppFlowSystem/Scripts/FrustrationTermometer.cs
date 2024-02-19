@@ -17,6 +17,7 @@ public class FrustrationTermometer : SimpleGameSequenceItem
         if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
         if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
 
+        Debug.Log(selectedFrustrationLevel.ToString());
         DocumentFound.Add(DataIds.frustrationLevel, selectedFrustrationLevel.ToString());
     }
 }
