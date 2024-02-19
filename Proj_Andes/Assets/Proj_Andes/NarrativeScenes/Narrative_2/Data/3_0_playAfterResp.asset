@@ -22,6 +22,8 @@ MonoBehaviour:
       a la tienda para comprar algo para comer."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 9a3dd9f7e23cfca4dbb32dbb7e257152, type: 3}
     audioAlternative: {fileID: 0}
@@ -38,6 +40,8 @@ MonoBehaviour:
       Te duele mucho. \r\n"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: aadc4d408931e974b97d7d98b1515366, type: 3}
     audioAlternative: {fileID: 0}
@@ -46,12 +50,14 @@ MonoBehaviour:
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
+    changeToSequence: {fileID: 11400000, guid: 6635b479d17b7ed46a024a03b4243336, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r"
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 16d183b8a38bf3b4d9af43079607369e, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Me levanto y empujo a Alex
       responseAlternative: 
@@ -69,49 +75,6 @@ MonoBehaviour:
       responseAudio: {fileID: 8300000, guid: f45cea7419ae88a43a6ac4a524a84964, type: 3}
       dataAfterResponse: {fileID: 0}
     audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: " Alex sigue caminando como si nada hubiera pasado.\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: baf5f2bdf5eae2c40b8c71c0f36aa328, type: 3}
-    responses: []
-    audio: {fileID: 8300000, guid: d14971930337db04f958f4e5cacf75ce, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: bc3262571418a17458a47a980af1ea9e, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFQu\xE9 haces?"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    responses:
-    - response: Me levanto y empujo a Alex
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: b3a3b5486b7f11f459da4589a38cc5c9, type: 2}
-    - response: Dejo de jugar y me alejo
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: e668f6206b2e21845ac41385c26bc278, type: 2}
-    - response: "Me acerco a Alex y le muestro el golpe que me caus\xF3 en el brazo"
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: 3fcf665cdbaf19c488eb22b26e2c7292, type: 2}
-    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

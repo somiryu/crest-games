@@ -18,9 +18,11 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r"
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: f11125b83cac30a428f68ea12b4f0cd6, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Hago como si no me importara y no digo nada
       responseAlternative: 
@@ -37,10 +39,10 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: de13f70ef7ee1be4f9a3ffc305d1e130, type: 3}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 9b91072c8752d174db7f5e914f4e292e, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
@@ -51,6 +53,8 @@ MonoBehaviour:
       te ayudar\xE1 a borrar el dibujo."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 4245c2943d544144bb4aa44318f1ae66, type: 3}
     audioAlternative: {fileID: 0}
@@ -66,6 +70,8 @@ MonoBehaviour:
       clase con un brazo adolorido."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: aa68ebdf29603b148b06f2c8518b4463, type: 3}
     audioAlternative: {fileID: 0}
@@ -81,6 +87,8 @@ MonoBehaviour:
       que, dependiendo de lo que elijan, tendr\xE1n que hacer algo!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 11ff0a28cc0da924892e6dc3ac9746f8, type: 3}
     audioAlternative: {fileID: 0}
@@ -96,6 +104,8 @@ MonoBehaviour:
       no correr y llegas de \xFAltimas.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 881271c4b30c3f1488fd6433c40562da, type: 3}
     audioAlternative: {fileID: 0}
@@ -109,7 +119,9 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: 
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: b5b6f53a1a199de4697789283ba5dd1c, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0c3dc869d1b9547409be13a4a759c19e, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: "Bal\xF3n"
       responseAlternative: 
@@ -129,5 +141,5 @@ MonoBehaviour:
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 692b430f7ca9af94195a24e2c832d266, type: 2}
     ExitAnim: {fileID: 0}

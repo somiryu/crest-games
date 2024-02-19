@@ -21,6 +21,8 @@ MonoBehaviour:
     text: Lo lograste! Ahora, vamos a recreo
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: be00a89af5d2a004381e1882ab612caa, type: 3}
     audioAlternative: {fileID: 0}
@@ -36,6 +38,8 @@ MonoBehaviour:
       hay mucha fila y el recreo es muy corto.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 65d9687e8f743384c8407b272c88be9b, type: 3}
     audioAlternative: {fileID: 0}
@@ -50,6 +54,8 @@ MonoBehaviour:
     text: "\xA1Mira, Andre se est\xE1 colando!\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 51bd59dec4633d640846d79c90ceae77, type: 3}
     audioAlternative: {fileID: 0}
@@ -63,7 +69,9 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a584a339cdcf84b4c8d6673f505f72fe, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Le empujo para sacarle de la fila
       responseAlternative: 
@@ -93,6 +101,8 @@ MonoBehaviour:
     text: "Andre sigue en la fila, como si nada.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: bcf4288a16321524a8b9accc2bad83c6, type: 3}
     audioAlternative: {fileID: 0}
@@ -109,6 +119,8 @@ MonoBehaviour:
       cae al piso!\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: af4e42872e8d7ea46a8df599950fd649, type: 3}
     audioAlternative: {fileID: 0}
@@ -122,7 +134,9 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 18636ae305c0724429161a3fd8b6b167, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Le grito que es un bruto, que aprenda a caminar
       responseAlternative: Le grito que es una bruta, que aprenda a caminar
@@ -152,6 +166,8 @@ MonoBehaviour:
     text: "A Alex solo se r\xEDe y sale corriendo\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 51683da0b39b3314885466c3c9e62091, type: 3}
     audioAlternative: {fileID: 0}

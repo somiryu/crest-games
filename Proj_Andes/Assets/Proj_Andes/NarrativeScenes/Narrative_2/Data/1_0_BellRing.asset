@@ -21,6 +21,8 @@ MonoBehaviour:
     text: "\xA1Son\xF3 la campana! Vamos, r\xE1pido..."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 36aaa415783dd74439d31c18036c9f10, type: 3}
     audioAlternative: {fileID: 0}
@@ -38,6 +40,8 @@ MonoBehaviour:
       primera en subirte al columpio\u2026 Aparece una profe que necesita hablar
       con Cami."
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 0d3fa8042c516ce4f9e94b5b0e7da71a, type: 3}
     audioAlternative: {fileID: 8300000, guid: 111edd3ce668bc341818a3b9c05d6c06, type: 3}
@@ -52,6 +56,8 @@ MonoBehaviour:
     text: Ya nos Vemos
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 0841a4844b9516841a508d01e9cbd277, type: 3}
     audioAlternative: {fileID: 0}
@@ -63,10 +69,12 @@ MonoBehaviour:
     changeToSequence: {fileID: 11400000, guid: 2be1a2c779afb9c409522332934eed41, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Ahora te toca buscar con qui\xE9n jugar! de estos tres personajes, \xBFa
-      qui\xE9n le preguntarias?"
+    text: "Ahora te toca buscar con qui\xE9n jugar! Ves a varios compa\xF1eros, \xBFa
+      qui\xE9n le preguntar\xEDas?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 3c208caa55a5b844f87fea0e7f835d06, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: 
       responseAlternative: 

@@ -24,6 +24,8 @@ MonoBehaviour:
       grupo de amigas. A\xFAn no han decidido qu\xE9 hacer y te cuenta el problema
       que tienen.\r\n"
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: a1740fda99422d648ab8e4659174624f, type: 3}
     audioAlternative: {fileID: 8300000, guid: 391d8fac970cc9a4c90cb39e55295405, type: 3}
@@ -42,6 +44,8 @@ MonoBehaviour:
       quiere jugar con el bal\xF3n. Todas queremos algo diferente. Ya se va a acabar
       el recreo y no hemos jugado nada. \xBFT\xFA qu\xE9 quieres?"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Basquetbol
       responseAlternative: 
@@ -68,41 +72,31 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: ' Eres muy bueno para jugar eso!'
-    textAlternative: ' Eres muy buena para jugar eso!'
-    responsesDisplayerPrefab: {fileID: 0}
-    responses: []
-    audio: {fileID: 8300000, guid: d66875819476e3d479486e8f09446ba6, type: 3}
-    audioAlternative: {fileID: 8300000, guid: ea438607dd2a0f84fb3cf2545c1bb39f, type: 3}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 0
-    changeToSequence: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Y ahora, tienes que ayudar a decidir qu\xE9 van jugar.\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    text: "Eres muy bueno para jugar eso! Y ahora, tienes que ayudar a decidir qu\xE9
+      van jugar."
+    textAlternative: "Eres muy buena para jugar eso! Y ahora, tienes que ayudar a
+      decidir qu\xE9 van jugar."
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0d1be4f6df44431449665ad0c519683f, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Escojan ustedes. yo juego lo que digan
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 4b02145e21c532d4d82b598f3e2d9db2, type: 3}
-      dataAfterResponse: {fileID: 11400000, guid: fd70b9415d8aff2498755e72fb4ed7ce, type: 2}
+      dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
     - response: Busquemos algo que nos guste a todos
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: c60a0d130bb6ca74ea28595d8018cc49, type: 3}
-      dataAfterResponse: {fileID: 11400000, guid: c09c9c40e16abe24686f084df34ed4c0, type: 2}
+      dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
     - response: Yo escojo el juego y ya
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 31236373c665b694f8350c4357470342, type: 3}
-      dataAfterResponse: {fileID: 11400000, guid: 7018a2356396fd2458dbcc24c35adaec, type: 2}
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
+    audio: {fileID: 8300000, guid: d66875819476e3d479486e8f09446ba6, type: 3}
+    audioAlternative: {fileID: 8300000, guid: ea438607dd2a0f84fb3cf2545c1bb39f, type: 3}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: b8aa06ee88acec14dbefaa9225e0c664, type: 2}
+    IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}

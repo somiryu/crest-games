@@ -22,6 +22,8 @@ MonoBehaviour:
       para la clase de educaci\xF3n f\xEDsica. De pronto, Cami te dice:\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 9dab42d8eb474924da6d1defa60c2fa1, type: 3}
     audioAlternative: {fileID: 0}
@@ -36,6 +38,8 @@ MonoBehaviour:
     text: "busca en tu mesa, parece que hay algo escrito all\xED.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 3c9afaa43d31e6945ba220c056e0d191, type: 3}
     audioAlternative: {fileID: 0}
@@ -50,6 +54,8 @@ MonoBehaviour:
     text: 
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 03f00fc76b95c964facd29064f6576a4, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: 
       responseAlternative: 
@@ -69,5 +75,5 @@ MonoBehaviour:
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 8dbf6adf3212cdc4680be95f35943811, type: 2}
+    IdleAnim: {fileID: 11400000, guid: 9b91072c8752d174db7f5e914f4e292e, type: 2}
     ExitAnim: {fileID: 0}

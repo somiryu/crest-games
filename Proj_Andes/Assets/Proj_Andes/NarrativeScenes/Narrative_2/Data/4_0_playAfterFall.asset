@@ -24,6 +24,8 @@ MonoBehaviour:
       se va, Alex pasa por tu lado.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 40ba7d335df7c354cb62ff435c05fa7b, type: 3}
     audioAlternative: {fileID: 0}
@@ -38,6 +40,8 @@ MonoBehaviour:
     text: Eso te pasa por lento y no fijarte por donde caminas! Ja ja
     textAlternative: Eso te pasa por lenta y no fijarte por donde caminas! Ja ja
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: e196782cb01397745a2e244766bdcf35, type: 3}
     audioAlternative: {fileID: 8300000, guid: 7ff5ea194e0cede4eb2c3be7f6f87c27, type: 3}
@@ -49,16 +53,18 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFQu\xE9 haces?"
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e6ad05bf63bdbd54688ca3c02d0d347d, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: "Le digo que no me moleste m\xE1s.\r"
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 48dee131fc993c248813d55da7896196, type: 3}
       dataAfterResponse: {fileID: 0}
-    - response: "Me levanto y le grito a Alex que m\xE1s lenta es el"
+    - response: "Me levanto y le grito a Alex que m\xE1s lento es el"
       responseAlternative: "Me levanto y le grito a Alex que m\xE1s lenta es ella"
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: e0532beb5d49a584da69ef9c46738b46, type: 3}
@@ -68,7 +74,7 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 3294d89a025848e4dbc146a1aee73c99, type: 3}
       dataAfterResponse: {fileID: 0}
-    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -81,6 +87,8 @@ MonoBehaviour:
     text: "Alex se aleja ri\xE9ndose\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 7b50465e7bcaa614ea7206773f088b67, type: 3}
     audioAlternative: {fileID: 0}
