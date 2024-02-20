@@ -74,18 +74,14 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     {
         audioSource.clip = titleAudio; 
         audioSource.Play();
-        TimeManager.Instance.SetNewStopTimeUser(this);
         yield return new WaitForSecondsRealtime(titleAudio.length);
         audioSource.clip = introAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(introAudio.length);
-        TimeManager.Instance.RemoveNewStopTimeUser(this);
-        for (int i = 0; i < userMonsterButtonBehaviours.Count; i++) userMonsterButtonBehaviours[i].button.interactable = true;
     }
     public void AddUserInterfaceMonsterButton(MonsterMarketButtonBehaviour monsterMarketButtonBehaviour)
     {
         userMonsterButtonBehaviours.Add(monsterMarketButtonBehaviour);
-        monsterMarketButtonBehaviour.button.interactable = false;
     }
     public void RemoveUserInterfaceMonsterButton(MonsterMarketButtonBehaviour monsterMarketButtonBehaviour)
     {
@@ -204,6 +200,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         audioSource.clip = noResourcesAudio;
         audioSource.Play();
     }
+
     private void SetLockedImageInButtons()
     {
         for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
