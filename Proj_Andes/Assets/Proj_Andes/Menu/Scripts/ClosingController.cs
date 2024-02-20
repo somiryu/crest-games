@@ -8,11 +8,16 @@ public class ClosingController : MonoBehaviour
     [SerializeField] SimpleGameSequenceItem closingItem;
     [SerializeField] float waitFor;
     [SerializeField] Transform logoPanel;
+    [SerializeField] AudioClip finalAudio;
+    AudioSource finalAudioSource;
     WaitForSeconds waitForSec;
     void Start()
     {
         waitForSec = new WaitForSeconds(waitFor);
         logoPanel.gameObject.SetActive(false);
+        TryGetComponent(out finalAudioSource);
+        finalAudioSource.clip = finalAudio;
+        finalAudioSource.Play();
         StartCoroutine(GoToNextScene());
     }
     IEnumerator GoToNextScene()
