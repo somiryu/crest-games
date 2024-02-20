@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,10 @@ public class FrustrationThermometerController : MonoBehaviour
         {
             int idx = i;
             frustrationLevels[idx].frustLevelButton.onClick.AddListener(() => GetFrustationLevel(frustrationLevels[idx]));
+
+            if (UserDataManager.CurrUser.gender == UserGender.Femenino) frustrationLevels[idx].MLabel.gameObject.SetActive(false);
+            else frustrationLevels[idx].FLabel.gameObject.SetActive(false);
+
             buttonsSelectedImages[i].SetActive(false);
         }
         continueBtn.onClick.AddListener(Continue);
@@ -78,5 +83,7 @@ public class FrustrationLevels
     public AudioClip MbuttonSound;
     public AudioClip FbuttonSound;
     public Button frustLevelButton;
+    public TextMeshProUGUI MLabel;
+    public TextMeshProUGUI FLabel;
     public int idx;
 }
