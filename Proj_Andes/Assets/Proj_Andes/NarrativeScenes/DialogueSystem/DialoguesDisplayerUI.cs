@@ -66,8 +66,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
     //Analytics
     private float currResponseTime;
     private string currResponseChoiceAnalyticID;
+    private int analyticsCount;
     private string currResponseTimeAnalyticID;
-    private int currResponseAnalyticIdx;
+    private string currResponseAnalyticResponseValue;
 
     private DialoguesResponsesDisplayerUI currResponsesDisplayer;
 
@@ -450,12 +451,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         if (!string.IsNullOrEmpty(currResponseChoiceAnalyticID))
         {
-            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticID, currResponseAnalyticIdx);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticID, currResponseAnalyticResponseValue);
             narrativeSceneItem.itemAnalytics.Add(currResponseTimeAnalyticID, currResponseTime);
 
             currResponseChoiceAnalyticID = null;
             currResponseTimeAnalyticID = null;
-            currResponseAnalyticIdx = -1;
+            currResponseAnalyticResponseValue = null;
             currResponseTime = 0;
         }
 
@@ -489,11 +490,23 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
 
-        if (!string.IsNullOrEmpty(CurrDialog.analyticChoiceID))
+        var analyticInfo = CurrDialog.responses[lastPickedResponseIdx].analyticInfo;
+
+        if (analyticInfo.mainCategory != NarrativeAnalyticCategory.NONE)
         {
-            currResponseChoiceAnalyticID = CurrDialog.analyticChoiceID;
-            currResponseTimeAnalyticID = CurrDialog.analyticTimeID;
-            currResponseAnalyticIdx = lastPickedResponseIdx;
+            var questionIdx = GetQuestionIdxFor(analyticInfo);
+
+
+            currResponseChoiceAnalyticID = analyticInfo.BuildID(
+                narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
+                questionIdx: questionIdx, 
+                isTimeLabel: false);
+
+            currResponseTimeAnalyticID = analyticInfo.BuildID(
+				narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
+				questionIdx: questionIdx,
+				isTimeLabel: true);
+			currResponseAnalyticResponseValue = analyticInfo.buildResponse();
 		}
 
         currResponsesDisplayer.ActiveConfirmationButton(false);
@@ -506,7 +519,34 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
     }
 
-    public void AppearText() {
+    private int EmptQuestionsCount = -1;
+    private int AggQuestionsCount = -1;
+    private int ConfQuestionsCount = -1;
+    private int EmoQuestionsCount = -1;
+    
+
+    public int GetQuestionIdxFor(NarrativeAnalyicsInfo info)
+    {
+        switch (info.mainCategory)
+        {
+            case NarrativeAnalyticCategory.Empathy:
+                EmptQuestionsCount++;
+                return EmptQuestionsCount;
+            case NarrativeAnalyticCategory.Aggression:
+                AggQuestionsCount++;
+                return AggQuestionsCount;
+            case NarrativeAnalyticCategory.Conflict:
+                ConfQuestionsCount++;
+                return ConfQuestionsCount;
+            case NarrativeAnalyticCategory.Emo:
+                EmoQuestionsCount++;
+                return EmoQuestionsCount;
+            default: return -1;
+        }
+	}
+
+
+	public void AppearText() {
         var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
         dialogueTxt.SetText(currText.ToString());
         appearTimer += Time.deltaTime;
@@ -540,7 +580,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             var analytics = narrativeSceneItem.itemAnalytics;
             if(analytics != null && analytics.Count > 0)
             {
-				UserDataManager.SaveUserAnayticsPerGame(DataIds.narrative1, narrativeSceneItem.itemAnalytics);
+				UserDataManager.SaveUserAnayticsPerGame(DataIds.Narratives, narrativeSceneItem.itemAnalytics);
 			}
 			narrativeSceneItem.OnSequenceOver();
         }
@@ -574,7 +614,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         return audio;
     }
 
-   
+
 }
 
 [Serializable]

@@ -11,6 +11,7 @@ public class NarrativeSceneManager : MonoBehaviour
 	[SerializeField] DialogueSequenceData _startingSequence;
 
 	public DialoguesDisplayerUI DialogueDisplayerUI => dialogueDisplayerUI;
+	public int NarrativeIdx;
 
 	RaycastHit[] collisions = new RaycastHit[30];
 
