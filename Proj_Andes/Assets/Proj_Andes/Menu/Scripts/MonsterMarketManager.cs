@@ -118,9 +118,11 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         saveForLaterButton.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.NONE, saveForLaterButton));
 
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
+    }
+    private void Start()
+    {
         StartCoroutine(MarketIntro());
     }
-
     void OnCollectionsClosed()
     {
         if (UserDataManager.CurrUser.Coins == 0) SaveForLater();

@@ -42,11 +42,11 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         menuContainer.gameObject.SetActive(true);
         onPause = true;
         TimeManager.Instance.SetNewStopTimeUser(this);
-        if(AudioInstruction.Instance != null)
+        if(CatchCoinsAudioInstruction.Instance != null)
         {
-            if (AudioInstruction.Instance.startedCorr)
+            if (CatchCoinsAudioInstruction.Instance.startedCorr)
             {
-                AudioInstruction.Instance.StopAudioIns();
+                CatchCoinsAudioInstruction.Instance.StopAudioIns();
             }
         }
     }
@@ -55,11 +55,11 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         menuContainer.gameObject.SetActive(false);
         onPause = false;
         TimeManager.Instance.RemoveNewStopTimeUser(this);
-        if (AudioInstruction.Instance != null)
+        if (CatchCoinsAudioInstruction.Instance != null)
         {
-            if (AudioInstruction.Instance.startedCorr)
+            if (CatchCoinsAudioInstruction.Instance.startedCorr)
             {
-                AudioInstruction.Instance.RestartAudio();
+                CatchCoinsAudioInstruction.Instance.RestartAudio();
             }
         }
     }

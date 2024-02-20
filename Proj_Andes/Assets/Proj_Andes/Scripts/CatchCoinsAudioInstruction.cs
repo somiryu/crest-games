@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AudioInstruction : MonoBehaviour, ITimeManagement
+public class CatchCoinsAudioInstruction : MonoBehaviour, ITimeManagement
 {
-    static AudioInstruction instance;
-    public static AudioInstruction Instance => instance;
+    static CatchCoinsAudioInstruction instance;
+    public static CatchCoinsAudioInstruction Instance => instance;
 
     [SerializeField] AudioClip firstInstruction;
     [SerializeField] GameObject allScreenRayBlocker;

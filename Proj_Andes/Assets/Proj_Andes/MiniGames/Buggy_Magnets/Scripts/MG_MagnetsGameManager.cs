@@ -92,7 +92,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	private void Update()
 	{
-		if (AudioInstruction.Instance.firstAudio != null) return;
+		if (CatchCoinsAudioInstruction.Instance.firstAudio != null) return;
 		if (availableMagnets == 0) return;
 		timer += Time.deltaTime;
 		totalTime += Time.deltaTime;

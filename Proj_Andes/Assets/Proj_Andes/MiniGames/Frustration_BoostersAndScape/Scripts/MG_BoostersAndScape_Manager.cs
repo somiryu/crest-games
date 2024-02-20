@@ -57,7 +57,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [SerializeField] Animator tutorialAnims;
     int currStepTurorial;
     public EndOfGameManager EndOfGameManager => eogManager;
-    [SerializeField] AudioInstruction audioInstruction;
+    [SerializeField] CatchCoinsAudioInstruction audioInstruction;
 
     //DATA ANALYTICS
     public float timePlayed;
