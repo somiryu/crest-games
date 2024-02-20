@@ -271,7 +271,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
-            skinObjAnim[i].SetTrigger("Incorrect");
+            skinObjAnim[i].SetTrigger("Correct");
             skinObjAnimPopUp[i].SetTrigger("Incorrect");
 
         }
@@ -316,7 +316,7 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
-            skinObjAnim[i].SetTrigger("Correct");
+            skinObjAnim[i].SetTrigger("Incorrect");
             skinObjAnimPopUp[i].SetTrigger("Correct");
         }
 

@@ -184,7 +184,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         for (int i = 0; i < skinObjAnim.Length ; i++)
         {
 
-            skinObjAnim[i].SetTrigger("Incorrect");
+            skinObjAnim[i].SetTrigger("Correct");
 
         }
         roundAnalytics.wonRound = false;
@@ -206,7 +206,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
-            skinObjAnim[i].SetTrigger("Correct");
+            skinObjAnim[i].SetTrigger("Incorrect");
         }
         roundAnalytics.wonRound = true;
 
