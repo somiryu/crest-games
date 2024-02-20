@@ -30,26 +30,51 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
       responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 5
     - response: "FRUSTRACI\xD3N"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f6049e245f6ceeb4fb2e8ada710d712f, type: 3}
       responseAudio: {fileID: 8300000, guid: 14a292d977e8cb548aeb186b45bc80dc, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 8
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
       responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 4
     - response: NERVIOS
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
       responseAudio: {fileID: 8300000, guid: edf7e9d1f30db534883e93f1f53ab7ee, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 9
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 6
     audio: {fileID: 8300000, guid: b635895bb2841a047935499a6d261c97, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -89,26 +114,51 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
       responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 4
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 8300000, guid: 818ac1c716b27634f95d4072aff716a9, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 1
     - response: "ALEGR\xCDA"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 2
     - response: ORGULLO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: dd808026b5a8217409596c3bfb244917, type: 3}
       responseAudio: {fileID: 8300000, guid: 35cdf1b0cbfe857458be890b67940f07, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 7
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 6
     audio: {fileID: 8300000, guid: df966ed8ab48dcb4ca8a567501ccf123, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

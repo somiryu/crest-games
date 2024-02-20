@@ -2023,6 +2023,7 @@ GameObject:
   - component: {fileID: 1588213348}
   - component: {fileID: 1588213347}
   - component: {fileID: 1588213351}
+  - component: {fileID: 1588213352}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2132,12 +2133,130 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frustrationTermometer: {fileID: 11400000, guid: 6585da0d1d86864418948965297520ff, type: 2}
   buttonsContainer: {fileID: 791112346}
+  frustrationLevels:
+  - level: 0
+    MbuttonSound: {fileID: 8300000, guid: 2bb01b11ee4c1ec4ca8c19e6d37dd6d0, type: 3}
+    FbuttonSound: {fileID: 8300000, guid: db0fffc8311ea674d879ea9e147be9be, type: 3}
+    frustLevelButton: {fileID: 1626340557}
+    idx: 0
+  - level: 1
+    MbuttonSound: {fileID: 8300000, guid: 606cdb60c0c7edf458b43a2c42202499, type: 3}
+    FbuttonSound: {fileID: 8300000, guid: 64edc4e2c83ab994c8d23cc95a40e80d, type: 3}
+    frustLevelButton: {fileID: 1156958431}
+    idx: 1
+  - level: 2
+    MbuttonSound: {fileID: 8300000, guid: 0c00d4125cd41824f97f90fb88725387, type: 3}
+    FbuttonSound: {fileID: 8300000, guid: a754a497187383f439a288fc15148de0, type: 3}
+    frustLevelButton: {fileID: 983051925}
+    idx: 2
+  - level: 3
+    MbuttonSound: {fileID: 8300000, guid: aba3b2ca80752a54f8d7641da18a96ee, type: 3}
+    FbuttonSound: {fileID: 8300000, guid: 7f3c438dde759434dad89c5d69658f95, type: 3}
+    frustLevelButton: {fileID: 120141241}
+    idx: 3
   buttonsSelectedImages:
   - {fileID: 1821075805}
   - {fileID: 1533676969}
   - {fileID: 1822683691}
   - {fileID: 1586297409}
   continueBtn: {fileID: 1675733216}
+  audioSource: {fileID: 0}
+--- !u!82 &1588213352
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588213346}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1626340555
 GameObject:
   m_ObjectHideFlags: 0

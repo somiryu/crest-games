@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,33 +9,39 @@ public class FrustrationThermometerController : MonoBehaviour
     [SerializeField] FrustrationTermometer frustrationTermometer;
     [SerializeField] Transform buttonsContainer;
     Button[] frustlevelButtons;
+    [SerializeField] List<FrustrationLevels> frustrationLevels = new List<FrustrationLevels>();
     [SerializeField] GameObject[] buttonsSelectedImages;
     FrustrationLevel currFrustratioNlevel;
     [SerializeField] Button continueBtn;
+
+    [SerializeField] AudioSource audioSource;
     void Start()
     {
         frustlevelButtons = buttonsContainer.GetComponentsInChildren<Button>();
-        
-        for (int i = 0; i < frustlevelButtons.Length; i++)
+        TryGetComponent(out audioSource);
+        for (int i = 0; i < frustrationLevels.Count; i++)
         {
             int idx = i;
-            frustlevelButtons[i].onClick.AddListener(() => GetFrustationLevel((FrustrationLevel)idx, frustlevelButtons[idx], idx));
+            frustrationLevels[idx].frustLevelButton.onClick.AddListener(() => GetFrustationLevel(frustrationLevels[idx]));
             buttonsSelectedImages[i].SetActive(false);
         }
         continueBtn.onClick.AddListener(Continue);
         continueBtn.gameObject.SetActive(false);
     }
 
-    void GetFrustationLevel(FrustrationLevel frustrationLevel, Button button, int idx)
+    void GetFrustationLevel(FrustrationLevels level)
     {
-        currFrustratioNlevel = frustrationLevel;
-        ButtonPressed(button);
+        currFrustratioNlevel = level.level;
+        ButtonPressed(level.frustLevelButton);
         for (int i = 0; i < frustlevelButtons.Length; i++)
         {
-            buttonsSelectedImages[i].SetActive(idx == i);
-            if (idx == i) continue;
+            buttonsSelectedImages[i].SetActive(level.idx == i);
+            if (level.idx == i) continue;
             else ButtonUnpressed(frustlevelButtons[i]);
         }
+        if(UserDataManager.CurrUser.gender == UserGender.Masculino) audioSource.clip = level.MbuttonSound;
+        else audioSource.clip = level.FbuttonSound;
+        audioSource.Play();
         continueBtn.gameObject.SetActive(true);
     }
 
@@ -62,4 +69,14 @@ public enum FrustrationLevel
     Frustrado,
     Un_Poco_Tranquilo,
     Muy_Tranquilo,
+}
+
+[Serializable]
+public class FrustrationLevels
+{
+    public FrustrationLevel level;
+    public AudioClip MbuttonSound;
+    public AudioClip FbuttonSound;
+    public Button frustLevelButton;
+    public int idx;
 }

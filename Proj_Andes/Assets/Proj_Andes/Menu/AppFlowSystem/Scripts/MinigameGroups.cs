@@ -26,6 +26,10 @@ public class MinigameGroups : SimpleGameSequenceItem
             var hasOverride = AppSkipSceneButton.RandomNarrativeOverride;
             if(hasOverride != -1)
             {
+                if(GameSequencesList.Instance.prevGame == miniGamesInGroup[hasOverride])
+                {
+                    return null;
+                }
                 return miniGamesInGroup[hasOverride];
             }
         }

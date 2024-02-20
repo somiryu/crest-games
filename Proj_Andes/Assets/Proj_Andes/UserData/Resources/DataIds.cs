@@ -28,9 +28,7 @@ public static class DataIds
     public const string frustrationLevel = "frustrationLevel";
 
     //Narratives IDs
-    public const string narrative1 = "empatia";
-    public const string narrative2 = "agression";
-    public const string narrative3 = "conflict";
+    public const string Narratives = "Narratives";
 
     //Data per game
 
