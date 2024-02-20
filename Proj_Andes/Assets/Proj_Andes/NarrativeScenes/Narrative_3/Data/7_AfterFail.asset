@@ -47,26 +47,51 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
       responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 4
     - response: VERGUENZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 6e9b02ebf15428f4486bca3895af4069, type: 3}
       responseAudio: {fileID: 8300000, guid: c767848826877a24d876ffd3bf605c38, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 10
     - response: RABIA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
       responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 5
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 8300000, guid: 818ac1c716b27634f95d4072aff716a9, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 1
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 6
     audio: {fileID: 8300000, guid: 1aae792f218db15438b80cba2231a331, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -89,11 +114,21 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: 433e9ab08d934d9409a14c87568a2d67, type: 3}
       responseAudio: {fileID: 8300000, guid: db38533889daa094b9d2b7731eb5de1a, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: "F\xDATBOL"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: e9bd8354896d42d44b17dfb6572aad2f, type: 3}
       responseAudio: {fileID: 8300000, guid: fdac21ded8fc16d4caccc67ee12c37c2, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: b39f60153c584b34bb3adf906aa46068, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -131,26 +166,51 @@ MonoBehaviour:
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 8300000, guid: 818ac1c716b27634f95d4072aff716a9, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 1
     - response: TRANQUILIDAD
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 1c4e4ec93d6dd1148a54a31c23dc1534, type: 3}
       responseAudio: {fileID: 8300000, guid: a57da50559b616542aaaa6f1fccc3cba, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 3
     - response: "ALEGR\xCDA"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 2
     - response: ORGULLO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: dd808026b5a8217409596c3bfb244917, type: 3}
       responseAudio: {fileID: 8300000, guid: 35cdf1b0cbfe857458be890b67940f07, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 7
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 6
     audio: {fileID: 8300000, guid: 2e1041f119b79c841b090c9d1c522b9d, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

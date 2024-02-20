@@ -69,4 +69,99 @@ public class DialogueResponse
     public Sprite responseImage;
     public AudioClip responseAudio;
     public DialogueSequenceData dataAfterResponse;
+	public NarrativeAnalyicsInfo analyticInfo;
+}
+
+[Serializable]
+public class NarrativeAnalyicsInfo
+{
+    public NarrativeAnalyticCategory mainCategory;
+    public NarrativeAnalticsEmphatyCategories empSubCategory;
+    public NarrativeAnalyticAggSubCategory aggSubCategory;
+    public NarrativeAnalyticsFeeling EmoSubCategory;
+
+
+    public string BuildID(int narrativeIdx, int questionIdx, bool isTimeLabel)
+    {
+        var label = "Narr" + narrativeIdx + "_";
+
+        switch (mainCategory)
+        {
+            case NarrativeAnalyticCategory.Aggression:
+                label += "Agg";
+                break;
+            case NarrativeAnalyticCategory.Emo:
+                label += "Emo";
+                break;
+            case NarrativeAnalyticCategory.Conflict:
+                label += "conf";
+                break;
+            case NarrativeAnalyticCategory.Empathy:
+                label += "Emp";
+                break;
+        }
+
+        label += questionIdx + "_";
+
+        label += isTimeLabel ? "Time" : "Response";
+
+        return label;
+    }
+
+    public string buildResponse()
+    {
+        if(mainCategory == NarrativeAnalyticCategory.Aggression || mainCategory == NarrativeAnalyticCategory.Conflict)
+        {
+            return aggSubCategory.ToString();
+        }
+        if(mainCategory == NarrativeAnalyticCategory.Empathy) return empSubCategory.ToString();
+        if(mainCategory == NarrativeAnalyticCategory.Emo) return EmoSubCategory.ToString();
+
+        return null;
+    }
+}
+
+
+public enum NarrativeAnalyticCategory
+{
+    NONE,
+    Empathy,
+    Aggression,
+    Conflict,
+    Emo,
+}
+
+public enum NarrativeAnalyticAggSubCategory
+{
+    NONE,
+    Aggresive,
+    Evasive,
+    Assertive,
+}
+
+public enum NarrativeAnalyticsFeeling
+{
+    NONE,
+    Tristeza,
+    Alegría,
+    Tranquilidad,
+    Miedo,
+    Rabia,
+    No_se,
+    Orgullo,
+    Frustracion,
+    Nervios,
+    Verguenza,
+    Aburrimiento,
+
+}
+
+public enum NarrativeAnalticsEmphatyCategories
+{
+    NONE,
+    Muy_Bien,
+    Bien,
+    Me_Da_Igual,
+    Mal,
+    Muy_Mal,
 }
