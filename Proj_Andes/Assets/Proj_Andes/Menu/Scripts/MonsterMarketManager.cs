@@ -59,6 +59,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] AudioClip noResourcesAudio;
     [SerializeField] AudioClip noStarsAudio;
     [SerializeField] AudioClip continueAudio;
+    [SerializeField] AudioClip checkAudio;
     [SerializeField] Transform blockButtons;
     IEnumerator marketIntro;
     IEnumerator noResources;
@@ -130,7 +131,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     }
     private void Start()
     {
-        //StartCoroutine(marketIntro);
+        StartCoroutine(marketIntro);
     }
     private void Update()
     {
@@ -189,12 +190,14 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             chestOpenImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
             confirmButton.gameObject.SetActive(false);
         }
+        audioSource.clip = checkAudio;
+        audioSource.Play();
     }
 
     void BuyChest()
     {
         chestOpenButtonParent.gameObject.SetActive(false);
-
+        Debug.Log("calling buy chest");
         switch (currMonsterChestType)
         {
             case MonsterChestType.Regular:
@@ -203,7 +206,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
                     marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
                     OpenChest(1, 0, 0);
                 }
-                else StartCoroutine(noResources);
+                else ShowNoResourcesCorroutine();
                 break;
             case MonsterChestType.Rare:
                 if (marketConfig.AvailableCoins >= marketConfig.RareChestPrice)
@@ -211,7 +214,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
                     marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
                     OpenChest(1, 1, 0);
                 }
-                else StartCoroutine(noResources);
+                else ShowNoResourcesCorroutine();
                 break;
             case MonsterChestType.Legendary:
                 if (marketConfig.AvailableCoins >= marketConfig.LegendaryChestPrice)
@@ -219,24 +222,30 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
                     marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
                     OpenChest(1, 1, 1);
                 }
-                else StartCoroutine(noResources);
+                else ShowNoResourcesCorroutine();
                 break;
         }
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
         SetLockedImageInButtons();
 
     }
+    void ShowNoResourcesCorroutine()
+    {
+        if(noResources != null) StopCoroutine(noResources);
+        noResources = NoResources();
+        StartCoroutine(noResources);
+    }
     IEnumerator NoResources()
     {
         chestNoEnoughCoins.SetActive(true);
         audioSource.clip = noResourcesAudio;
         audioSource.Play();
-        yield return new WaitForSecondsRealtime(noResourcesAudio.length);
-        audioSource.Stop();
+        yield return new WaitForSeconds(noResourcesAudio.length);
         Debug.Log("done first");
         audioSource.clip = noStarsAudio;
         audioSource.Play();
-        yield return new WaitForSecondsRealtime(noStarsAudio.length);
+        yield return new WaitForSeconds(noStarsAudio.length);
+        noResources = null;
     }
     void CloseNoResources()
     {

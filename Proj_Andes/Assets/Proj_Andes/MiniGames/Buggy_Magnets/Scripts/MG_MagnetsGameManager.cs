@@ -128,9 +128,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 				lostByCheat++;
 				StartCoroutine(ShowTrapSign());
 			}
-
 			magnetRangeIndicator.ShowAt(mouseGlobalPosition);
-
+			
 			var hitAmount = Physics.OverlapSphereNonAlloc(mouseGlobalPosition, gameConfigs.userMagnetRadius, overlayResults);
 			var hitEnergyItem = 0;          
 

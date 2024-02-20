@@ -23569,6 +23569,7 @@ MonoBehaviour:
   magnetRangeIndicator: {fileID: 1029733363}
   lostGameAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   failEveryEnergyItemAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
+  energySound: {fileID: 8300000, guid: 70284c26d2a0dc344b03a541a0eccc09, type: 3}
   EnergyFillImage: {fileID: 581483875}
   magnetsAvailable:
   - {fileID: 1272452603}
@@ -23586,7 +23587,7 @@ MonoBehaviour:
   winTitle: {fileID: 743223156}
   loseTitle: {fileID: 1116128807}
   afterAction_currPointsTextUI: {fileID: 1728065427}
-  capturedItemSfx: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
+  capturedItemSfx: {fileID: 8300000, guid: 70284c26d2a0dc344b03a541a0eccc09, type: 3}
   currSpawnedItems: 0
   eogManager: {fileID: 2121471078}
   timePlayed: 0

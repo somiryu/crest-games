@@ -1794,7 +1794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1250034470
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3376,12 +3376,13 @@ MonoBehaviour:
   - {fileID: 209229784}
   - {fileID: 1261687179}
   - {fileID: 229672257}
-  openChestSound: {fileID: 8300000, guid: 805e6c7630ab8014f83fc505e5ccab2f, type: 3}
+  openChestSound: {fileID: 8300000, guid: 4115d9a3bb76f3144847dc185fb4cf33, type: 3}
   titleAudio: {fileID: 8300000, guid: e49610e37a1a27d44934b8d6feae1371, type: 3}
   introAudio: {fileID: 8300000, guid: 6b33779a604c5bc4491bc4bf269652d6, type: 3}
   noResourcesAudio: {fileID: 8300000, guid: db69751e58dcf1d42861c525416e872f, type: 3}
   noStarsAudio: {fileID: 8300000, guid: 47ac57f65d30fe049909f2dfb551cd80, type: 3}
   continueAudio: {fileID: 8300000, guid: a54cb53751966ab458219186e278d683, type: 3}
+  checkAudio: {fileID: 8300000, guid: 202c5f0456383a541a4817dcd3926ab6, type: 3}
   blockButtons: {fileID: 1250034470}
 --- !u!82 &1760502174
 AudioSource:
