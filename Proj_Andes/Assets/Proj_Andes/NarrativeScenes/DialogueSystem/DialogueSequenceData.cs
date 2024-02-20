@@ -68,5 +68,6 @@ public class DialogueResponse
     public string responseAlternative;
     public Sprite responseImage;
     public AudioClip responseAudio;
+    public AudioClip responseAudioAlternative;
     public DialogueSequenceData dataAfterResponse;
 }

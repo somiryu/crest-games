@@ -476,7 +476,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
-        audioPlayer.clip = responseClicked.responseAudio;
+        var currResponseAudio = UserDataManager.CurrUser.gender == UserGender.Femenino ? responseClicked.responseAudioAlternative : responseClicked.responseAudio;
+        audioPlayer.clip = currResponseAudio;
         if(audioPlayer.clip != null) audioPlayer.Play();
         preselectedResponse = responseClicked;
 
