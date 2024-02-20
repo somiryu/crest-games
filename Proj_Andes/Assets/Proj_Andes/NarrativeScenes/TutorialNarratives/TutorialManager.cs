@@ -92,4 +92,5 @@ public enum tutorialSteps
 	MG_BoostersAndScapeDone = 11,
     MG_MechanicHand_1HoldClickAndMove = 12,
     MG_MechanicHand_2JustClickToGrab = 13,
+    Market_Instruction
 }
