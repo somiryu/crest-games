@@ -21,8 +21,10 @@ MonoBehaviour:
     text: "Ya terminaste de jugar por ahora, ahora tienes que seguir con tu d\xEDa"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 838802666fd060546bd9880d4904e96b, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}

@@ -22,8 +22,10 @@ MonoBehaviour:
       unos juegos"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: de806dce731ea6c4aa569e0bb42596be, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
