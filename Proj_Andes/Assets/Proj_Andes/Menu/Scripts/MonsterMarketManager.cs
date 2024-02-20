@@ -14,7 +14,7 @@ public interface iMonsterMarketButton
 {    
     public void SetLockedImage();
 }
-public class MonsterMarketManager : MonoBehaviour
+public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 {
     static MonsterMarketManager instance;
 
@@ -52,6 +52,11 @@ public class MonsterMarketManager : MonoBehaviour
     Button currSelectedButton;
     AudioSource audioSource;
     [SerializeField] AudioClip openChestSound;
+    [SerializeField] AudioClip titleAudio;
+    [SerializeField] AudioClip introAudio;
+    [SerializeField] AudioClip noResourcesAudio;
+    [SerializeField] AudioClip noStarsAudio;
+    [SerializeField] AudioClip continueAudio;
     private void Awake()
     {
         if(instance != null)
@@ -65,9 +70,22 @@ public class MonsterMarketManager : MonoBehaviour
         Init();
     }
 
+    IEnumerator MarketIntro()
+    {
+        audioSource.clip = titleAudio; 
+        audioSource.Play();
+        TimeManager.Instance.SetNewStopTimeUser(this);
+        yield return new WaitForSecondsRealtime(titleAudio.length);
+        audioSource.clip = introAudio;
+        audioSource.Play();
+        yield return new WaitForSecondsRealtime(introAudio.length);
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        for (int i = 0; i < userMonsterButtonBehaviours.Count; i++) userMonsterButtonBehaviours[i].button.interactable = true;
+    }
     public void AddUserInterfaceMonsterButton(MonsterMarketButtonBehaviour monsterMarketButtonBehaviour)
     {
         userMonsterButtonBehaviours.Add(monsterMarketButtonBehaviour);
+        monsterMarketButtonBehaviour.button.interactable = false;
     }
     public void RemoveUserInterfaceMonsterButton(MonsterMarketButtonBehaviour monsterMarketButtonBehaviour)
     {
@@ -100,6 +118,7 @@ public class MonsterMarketManager : MonoBehaviour
         saveForLaterButton.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.NONE, saveForLaterButton));
 
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
+        StartCoroutine(MarketIntro());
     }
 
     void OnCollectionsClosed()
@@ -156,7 +175,7 @@ public class MonsterMarketManager : MonoBehaviour
                     marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
                     OpenChest(1, 0, 0);
                 }
-                else chestNoEnoughCoins.SetActive(true);
+                else NoResources();
                 break;
             case MonsterChestType.Rare:
                 if (marketConfig.AvailableCoins >= marketConfig.RareChestPrice)
@@ -164,7 +183,7 @@ public class MonsterMarketManager : MonoBehaviour
                     marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
                     OpenChest(1, 1, 0);
                 }
-                else chestNoEnoughCoins.SetActive(true);
+                else NoResources();
                 break;
             case MonsterChestType.Legendary:
                 if (marketConfig.AvailableCoins >= marketConfig.LegendaryChestPrice)
@@ -172,14 +191,19 @@ public class MonsterMarketManager : MonoBehaviour
                     marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
                     OpenChest(1, 1, 1);
                 }
-                else chestNoEnoughCoins.SetActive(true);
+                else NoResources();
                 break;
         }
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
         SetLockedImageInButtons();
 
     }
-
+    void NoResources()
+    {
+        chestNoEnoughCoins.SetActive(true);
+        audioSource.clip = noResourcesAudio;
+        audioSource.Play();
+    }
     private void SetLockedImageInButtons()
     {
         for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
@@ -224,7 +248,11 @@ public class MonsterMarketManager : MonoBehaviour
 
     public void RefreshCollectionFromData() => myCollectionManager.RefreshCollectionFromData();
 
-
+    public void ActivateContinueSound()
+    {
+        audioSource.clip = continueAudio;
+        audioSource.Play();
+    }
 
     void Collect()
     {

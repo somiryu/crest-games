@@ -977,11 +977,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406070333}
   m_CullTransparentMesh: 1
---- !u!1 &652683733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5560996765090473758, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
-  m_PrefabInstance: {fileID: 16748643}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &687904542 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9118698994634603792, guid: edc35730d6c67da46be27c440b74c398, type: 3}
@@ -3112,6 +3107,7 @@ GameObject:
   - component: {fileID: 1760502169}
   - component: {fileID: 1760502173}
   - component: {fileID: 1760502174}
+  - component: {fileID: 1760502175}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3223,7 +3219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aac9de3d2be27947baffe3cc3813af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI_BG_base: {fileID: 652683733}
   marketConfig: {fileID: 11400000, guid: 546c6b3abfa19514a990208b4a9039f0, type: 2}
   chestOpenedContainer: {fileID: 1318681039}
   chestOpenedContainerImg: {fileID: 101709422}
@@ -3249,6 +3244,11 @@ MonoBehaviour:
   - {fileID: 1261687179}
   - {fileID: 229672257}
   openChestSound: {fileID: 8300000, guid: 805e6c7630ab8014f83fc505e5ccab2f, type: 3}
+  titleAudio: {fileID: 8300000, guid: e49610e37a1a27d44934b8d6feae1371, type: 3}
+  introAudio: {fileID: 8300000, guid: 6b33779a604c5bc4491bc4bf269652d6, type: 3}
+  noResourcesAudio: {fileID: 8300000, guid: db69751e58dcf1d42861c525416e872f, type: 3}
+  noStarsAudio: {fileID: 8300000, guid: 47ac57f65d30fe049909f2dfb551cd80, type: 3}
+  continueAudio: {fileID: 8300000, guid: a54cb53751966ab458219186e278d683, type: 3}
 --- !u!82 &1760502174
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3345,6 +3345,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1760502175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760502168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5695e7b7d4746d544afacffbb74bf918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTimeScalePaused: 0
 --- !u!114 &1797973395 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3489982151914542098, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}

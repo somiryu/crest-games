@@ -9,7 +9,7 @@ using System;
 public class MonsterMarketButtonBehaviour : MonoBehaviour, iMonsterMarketButton
 {
     public MonsterMarketButton monsterMarketButton;
-    [SerializeField] Button button;
+    public Button button;
     [SerializeField] Image lockedImage;
     [SerializeField] GameObject panelDisable;
     [SerializeField] Sprite spriteAbleBtn;
@@ -19,7 +19,11 @@ public class MonsterMarketButtonBehaviour : MonoBehaviour, iMonsterMarketButton
     {
         MonsterMarketManager.Instance.AddUserInterfaceMonsterButton(this);
         panelDisable.gameObject.SetActive(false);
-        if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;
+        if (monsterMarketButton.monsterChestType == MonsterChestType.NONE)
+        {
+            button.onClick.AddListener(MonsterMarketManager.Instance.ActivateContinueSound);
+            return;
+        }
         SetLockedImage();
     }
     public void SetLockedImage()
