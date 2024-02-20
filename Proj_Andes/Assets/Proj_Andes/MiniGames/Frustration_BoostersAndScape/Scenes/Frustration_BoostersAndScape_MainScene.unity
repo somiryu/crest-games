@@ -10454,6 +10454,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5094010127024617157, guid: fd4ea16262806e84f94c26e30345cd25, type: 3}
   m_PrefabInstance: {fileID: 436927392}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &438327201 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 838565788390763482, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+  m_PrefabInstance: {fileID: 1069322010}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a804152d33bd5c343bf0484b9cc3812c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &576818421
 GameObject:
   m_ObjectHideFlags: 0
@@ -54800,6 +54811,63 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1001 &1069322010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2500960040834178063, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_Name
+      value: AudioInstruction
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 595.78015
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 463.94012
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.6663737
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
 --- !u!1001 &1081376031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60170,6 +60238,11 @@ MonoBehaviour:
   charactetSkinableObj: {fileID: 353381527}
   characterAnims: {fileID: 0}
   tutorialAnims: {fileID: 659660205}
+  audioInstruction: {fileID: 438327201}
+  timePlayed: 0
+  clickRepetitions: 0
+  lostByCheat: 0
+  boostersActivated: 0
 --- !u!82 &1323460061
 AudioSource:
   m_ObjectHideFlags: 0
@@ -95306,3 +95379,4 @@ SceneRoots:
   - {fileID: 1273196201}
   - {fileID: 1100430077}
   - {fileID: 213581736}
+  - {fileID: 1069322010}

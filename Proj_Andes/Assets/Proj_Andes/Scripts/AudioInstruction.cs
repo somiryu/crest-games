@@ -3,33 +3,80 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AudioInstruction : MonoBehaviour
+public class AudioInstruction : MonoBehaviour, ITimeManagement
 {
+    static AudioInstruction instance;
+    public static AudioInstruction Instance => instance;
+
     [SerializeField] AudioClip firstInstruction;
+    [SerializeField] GameObject allScreenRayBlocker;
+
     AudioSource audioSource;
-    float timer;
-    [SerializeField] float targetHold;
+    public bool doneAudio;
+    public bool startedCorr;
+    AudioSource[] allAudioSources;
+    bool[] allAudioSourcesInitialActiveState;
+    public IEnumerator firstAudio;
+
     private void Awake()
     {
+        if(instance != null && instance != this) DestroyImmediate(this); 
+        instance = this;
         TryGetComponent(out audioSource);
         audioSource.clip = firstInstruction;
-        timer = 0;
+        doneAudio = false;
+        startedCorr = false;
+        lastAudioPosition = 0;
+        allAudioSources = FindObjectsOfType<AudioSource>();
+        allAudioSourcesInitialActiveState = new bool[allAudioSources.Length];
     }
     private void Start()
     {
-        //StartCoroutine(FirstInstruction());
+
+        for (int i = 0; i < allAudioSourcesInitialActiveState.Length; i++)
+        {
+            allAudioSourcesInitialActiveState[i] = allAudioSources[i].isPlaying;
+        }
+		for (int i = 0; i < allAudioSources.Length; i++) allAudioSources[i].Pause();
+        firstAudio = FirstInstruction();
+        StartCoroutine(firstAudio);
     }
-    private void Update()
+
+    float lastAudioPosition;
+
+    public void StopAudioIns()
     {
-        /*
-        timer += Time.deltaTime;
-        if (timer < targetHold) Time.timeScale = 0;
-        else Time.timeScale = 1;
-        Debug.Log(Time.timeScale);*/
-    }
-    IEnumerator FirstInstruction()
+        lastAudioPosition = audioSource.time;
+        StopCoroutine(firstAudio);
+		TimeManager.Instance.RemoveNewStopTimeUser(this);
+		audioSource.Stop();
+		allScreenRayBlocker.gameObject.SetActive(false);
+	}
+
+	public void RestartAudio()
     {
+        if(firstAudio != null) StopCoroutine(firstAudio);
+        firstAudio = FirstInstruction();
+        StartCoroutine(firstAudio);
+	}
+    public IEnumerator FirstInstruction()
+    {
+        allScreenRayBlocker.gameObject.SetActive(true);
+        startedCorr = true;
+        audioSource.time = lastAudioPosition;
         audioSource.Play();
-        yield return null;
-    }
+        TimeManager.Instance.SetNewStopTimeUser(this);
+        yield return new WaitForSecondsRealtime(audioSource.clip.length - lastAudioPosition);
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        doneAudio = true;
+        for (int i = 0; i < allAudioSources.Length; i++)
+        {
+            if (!allAudioSourcesInitialActiveState[i]) continue;
+            allAudioSources[i].Play();
+        }
+        audioSource.Stop();
+        startedCorr = false;
+		allScreenRayBlocker.gameObject.SetActive(false);
+        firstAudio = null;
+	}
 }

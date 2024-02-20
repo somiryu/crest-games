@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Tymski;
 
-public class GameUIController : MonoBehaviour
+public class GameUIController : MonoBehaviour, ITimeManagement
 {
     static GameUIController instance;
     public static GameUIController Instance => instance;
@@ -18,6 +18,7 @@ public class GameUIController : MonoBehaviour
     [SerializeField] Sprite soundDeactivated;
     int soundActive;
     [SerializeField] Image tutorialImg;
+    public bool onPause;
     private void Awake()
     {
         if (instance != null && instance != this) DestroyImmediate(this);
@@ -27,7 +28,7 @@ public class GameUIController : MonoBehaviour
         homeBtn.onClick.AddListener(OpenMenu);
         continueBtn.onClick.AddListener(Continue);
         exitBtn.onClick.AddListener(ExitGame);
-
+        onPause = false;
         //Audio active by default
         soundActive = 1;
         soundActive = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundActive);
@@ -39,18 +40,33 @@ public class GameUIController : MonoBehaviour
     void OpenMenu()
     {
         menuContainer.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        onPause = true;
+        TimeManager.Instance.SetNewStopTimeUser(this);
+        if(AudioInstruction.Instance != null)
+        {
+            if (AudioInstruction.Instance.startedCorr)
+            {
+                AudioInstruction.Instance.StopAudioIns();
+            }
+        }
     }
     void Continue()
     {
         menuContainer.gameObject.SetActive(false);
-        Time.timeScale = 1;
+        onPause = false;
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        if (AudioInstruction.Instance != null)
+        {
+            if (AudioInstruction.Instance.startedCorr)
+            {
+                AudioInstruction.Instance.RestartAudio();
+            }
+        }
     }
     public void ExitGame()
     {
-        Time.timeScale = 1;
-        Debug.Log("exiting");
-
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        onPause = false;
         GameSequencesList.Instance.EndSequence();
     }
 

@@ -25,6 +25,8 @@ MonoBehaviour:
       Te acercas a Cami, tu mejor amiga, y cuando le preguntas si ella tambi\xE9n
       siente lo mismo te responde:\r\n"
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 9596df2bad68d414d9432f9c8ac46857, type: 3}
     audioAlternative: {fileID: 8300000, guid: 2cf1c10c253683a44bf25ebf073f6c27, type: 3}
@@ -39,6 +41,8 @@ MonoBehaviour:
     text: "Uy! \xBFNo ser\xE1 que se te qued\xF3 el dibujo como a mi?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: ddcf6459d42053e46a7ed1ba0b0f0f56, type: 3}
     audioAlternative: {fileID: 0}
@@ -55,6 +59,8 @@ MonoBehaviour:
       est\xE1 acercando a tu puesto!\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: a51394199c6acd24998421cdc08064db, type: 3}
     audioAlternative: {fileID: 0}
@@ -70,6 +76,8 @@ MonoBehaviour:
       hace una pregunta y la distrae... parece que te salvaste esta vez\u2026\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 8c81b89b12cdd1347a0a4917693fed1e, type: 3}
     audioAlternative: {fileID: 0}
@@ -85,6 +93,8 @@ MonoBehaviour:
       pendiente de la profe, Alex comenz\xF3 a rayarlo!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 95fb0324abc1aa1408a882a73c155a00, type: 3}
     audioAlternative: {fileID: 0}
@@ -99,22 +109,39 @@ MonoBehaviour:
     text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 1921e9301d6ad4647be547d7180d454a, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Le digo que eso me molesta mucho, que no lo haga
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 6f4aa8e4578721a4dad0da047b203157, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 3
+        EmoSubCategory: 0
     - response: "Me levanto y tambi\xE9n le rayo el cuaderno"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
       responseAudio: {fileID: 8300000, guid: 820c881f6f8f6004f9f7ee5ca0fe48ed, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 1
+        EmoSubCategory: 0
     - response: Cierro mi cuarderno y hago como si no me hubiera dado cuenta
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
       responseAudio: {fileID: 8300000, guid: 779fcb485b0b2674ebd22eca5315d51a, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 2
+        EmoSubCategory: 0
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -128,6 +155,8 @@ MonoBehaviour:
     text: " Alex se va a su puesto a buscar su dibujo para mostr\xE1rselo a la profe."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 737c56201b7f6a84baa593462ed12d10, type: 3}
     audioAlternative: {fileID: 0}
@@ -144,6 +173,8 @@ MonoBehaviour:
       rojo y amarillo que t\xFA necesitas, pero no te los quiere prestar"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 42be7ee02f0b27b40a38ac78e0d90738, type: 3}
     audioAlternative: {fileID: 0}
@@ -158,22 +189,39 @@ MonoBehaviour:
     text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 1f3df15000cc7ed428a43eda30ccb711, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Le quito los colores a Alex.
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 9a5523db557df534a88e9eddd055d96d, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 1
+        EmoSubCategory: 0
     - response: "Dejo as\xED, y utilizo otros colores para mi dibujo."
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 98e8677afa6ce314d83437467d3db692, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 2
+        EmoSubCategory: 0
     - response: Le digo que podemos tomar turnos para usar los colores
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: ed7d97ff593d7cd449ac6e149a801434, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 3
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -187,6 +235,8 @@ MonoBehaviour:
     text: ' Alex decide comenzar a utilizar el color el azul.'
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 4e4bb834e126d0c47b93821deae923b9, type: 3}
     audioAlternative: {fileID: 0}

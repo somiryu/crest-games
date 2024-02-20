@@ -78,16 +78,31 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: f84babf3f045a5e4f95cd3e68d8fe908, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 1
+        EmoSubCategory: 0
     - response: "Dejo as\xED. Igual todos hacen lo mismo"
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 6ef0bb01e6418144a9a9b5dbdbd3ef1e, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 2
+        EmoSubCategory: 0
     - response: Le digo que no es justo que se cole. Todos tenemos que hacer la fila
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 847637f5ef2f2ed4da6623d235879504, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 3
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -143,16 +158,31 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 0b9b297e80e25e647b036867f1bdffc8, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 1
+        EmoSubCategory: 0
     - response: "Le digo que no lo vuelva a hacer, me dej\xF3 sin nada que comer."
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 4665750e591c2af45b9a0e66b4aac63c, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 3
+        EmoSubCategory: 0
     - response: "No digo nada y me pongo a llorar.\r"
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 2c32ab3cfe7788a468b41690ec698d1e, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 2
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
