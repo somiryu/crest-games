@@ -9,6 +9,7 @@ public class SkinSelectorUI : MonoBehaviour
     public List<BtnPerSkinType> btnsPerSkins = new List<BtnPerSkinType>();
 	public Button goToGame;
 	[SerializeField] SimpleGameSequenceItem skinSelectorItem;
+	AudioSource audioSource;
 
 	bool firstAssignFlag;
     private void Awake()
@@ -16,16 +17,19 @@ public class SkinSelectorUI : MonoBehaviour
 		for (int i = 0; i < btnsPerSkins.Count; i++)
 		{
 			var curr = btnsPerSkins[i];
-			curr.btn.onClick.AddListener(() => GetSkinTypeSelection(curr.skinType));
+			curr.btn.onClick.AddListener(() => GetSkinTypeSelection(curr.skinType, curr.skinTypeAudio));
 		}
 		goToGame.onClick.AddListener(skinSelectorItem.OnSequenceOver);
 		firstAssignFlag = false;
+		TryGetComponent(out audioSource);
 	}
 
 	
 
-	public void GetSkinTypeSelection(SkinType skinType)
+	public void GetSkinTypeSelection(SkinType skinType, AudioClip skinAudio)
     {
+		audioSource.clip = skinAudio;
+		audioSource.Play();
         if (SceneManagement.currSkinType == skinType && firstAssignFlag) return;
 		firstAssignFlag = true;
         SkinManager.Instance.SetSkin(skinType);
@@ -48,4 +52,5 @@ public struct BtnPerSkinType
     public Button btn;
 	public Image highlight;
 	public Image shadow;
+	public AudioClip skinTypeAudio;
 }
