@@ -64,16 +64,31 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 48dee131fc993c248813d55da7896196, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 3
+        EmoSubCategory: 0
     - response: "Me levanto y le grito a Alex que m\xE1s lento es el"
       responseAlternative: "Me levanto y le grito a Alex que m\xE1s lenta es ella"
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: e0532beb5d49a584da69ef9c46738b46, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 1
+        EmoSubCategory: 0
     - response: Hago como si no hubiera escuchado y no le digo nada
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 3294d89a025848e4dbc146a1aee73c99, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 2
+        empSubCategory: 0
+        aggSubCategory: 2
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

@@ -62,18 +62,33 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: f6fa012cc1c3dbf429203620496aa420, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 2
+        EmoSubCategory: 0
     - response: " Le digo que me comparta algo de su comida hoy y ma\xF1ana yo comparto
         el comparto las m\xEDas."
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 71c7b9230626b9b4dad8614794b1f00a, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 3
+        EmoSubCategory: 0
     - response: "Le digo a Cami que si no me da algo, ya no voy a ser su amigo.\r"
       responseAlternative: "Le digo a Cami que si no me da algo, ya no voy a ser
         su amiga.\r"
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: f6e8c28344f5e864290245ccb0f97fc5, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 1
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -147,17 +162,32 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 00912b4ce3db42f45a796e16d962084a, type: 3}
       dataAfterResponse: {fileID: 0}
-    - response: Le digo que es una mala y que ya no quiero ser su amigo.
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 3
+        EmoSubCategory: 0
+    - response: Le digo que es un malo y que ya no quiero ser su amigo.
       responseAlternative: Le digo que es una mala y que ya no quiero ser su amiga.
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 1335ebb1c54c74e489e1b8c01c61f9d0, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 1
+        EmoSubCategory: 0
     - response: "Hago como si no hubiera pasado nada, para que sigamos siendo amigos.\r"
       responseAlternative: "Hago como si no hubiera pasado nada, para que sigamos
         siendo amigas.\r"
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: e8219a5ca65f7944fa26f698f40576cf, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 2
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -215,16 +245,31 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 1936d776c0775b844a7f10841c1796c8, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: "Una canci\xF3n para cantar entre todos"
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 28af0ca6511f60245a61ecd416d4d7de, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: "Una canci\xF3n para escuchar entre todos "
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 69754fd06637202429f4dedaeaa8f65c, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 273b16df87b8f3c46bfa005e7a3a8665, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -263,16 +308,31 @@ MonoBehaviour:
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 6d6abf1077e578848826fcf122667e5c, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 1
+        EmoSubCategory: 0
     - response: "Prefiero quedarme callado y que elijan los dem\xE1s."
       responseAlternative: "Prefiero quedarme callada y que elijan los dem\xE1s."
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 9c1c7287ff026cb408af77f079d8c313, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 2
+        EmoSubCategory: 0
     - response: "Propongo que hagamos una votaci\xF3n para que escoja la mayor\xEDa.\r"
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 58eab9e11f0539844ad4580fb57304fa, type: 3}
       dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 3
+        empSubCategory: 0
+        aggSubCategory: 3
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
