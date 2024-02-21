@@ -80,11 +80,9 @@ public class GameSequencesList : ScriptableObject
 
 		if (goToGameGroupIdx >= gameSequences.Count)
         {
-            goToGameGroupIdx = 0;
-            for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
+            EndSequence();
             Debug.LogWarning("Game sequence done, restarting the app");
         }
-		//prevGame = null;
         GoToNextItemInList();
     }
 

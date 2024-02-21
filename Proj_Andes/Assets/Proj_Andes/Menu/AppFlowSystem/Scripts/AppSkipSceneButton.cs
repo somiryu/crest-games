@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AppSkipSceneButton : MonoBehaviour
 {
-    public static bool ActiveDebugGlobalUI = true;
+    public static bool ActiveDebugGlobalUI = false;
 
     public static string instancePrefabPath = "DebugGlobalUI";
     static AppSkipSceneButton instance;

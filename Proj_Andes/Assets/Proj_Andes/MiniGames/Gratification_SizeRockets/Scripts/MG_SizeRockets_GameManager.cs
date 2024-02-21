@@ -57,6 +57,8 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private int totalCoinsWon = 0;
 	private int shipsLeft;
 
+	private bool gameOverFlag;
+
 	public SizeRocketAnalytics currAnalytics = new SizeRocketAnalytics();
 
 	private void Awake()
@@ -133,6 +135,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	private void Update()
 	{
+		if(gameOverFlag) return;
 		if (activeShips.Count > 0) return;
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
@@ -272,6 +275,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	void GameOver()
 	{
+		gameOverFlag = true;
 		currAnalytics.stars = totalCoinsWon;
 		currAnalytics.timePlayed = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
 		currAnalytics.averageClick = GeneralGameAnalyticsManager.Instance.analytics.GetAverageClickTime();

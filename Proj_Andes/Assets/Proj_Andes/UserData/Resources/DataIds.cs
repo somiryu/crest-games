@@ -31,6 +31,13 @@ public static class DataIds
 	public const string lastFrustrationLevel = "last_frustration_selected";
 	public const string GameModeAboutAnalytics = "game_mode";
 
+	//Monster market
+	public const string monsterMarket = "market";
+	public const string chestChosen = "chest_chosen";
+	public const string starsSpent = "stars_spent";
+	public const string starsBeforeSpend = "stars_before_spend";
+	public const string unspentStars = "unspent_stars";
+	public const string selectionTime = "selection_time";
 
 	//Frustration levels
 	public const string frustrationGames = "frustration_levels";

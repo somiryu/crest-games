@@ -33,7 +33,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
         itemAnalytics = new Dictionary<string, object>();
 		itemAnalytics.Add(DataIds.timePlayed, analytics.timePlayed);
 		itemAnalytics.Add(DataIds.sizeRocketsBigShips, analytics.bigShipsCount);
-		itemAnalytics.Add(DataIds.sizeRocketsMidPlanets, analytics.mediumShipsCount);
+		itemAnalytics.Add(DataIds.sizeRocketsMidShips, analytics.mediumShipsCount);
 		itemAnalytics.Add(DataIds.sizeRocketsSmallShips, analytics.smallShipsCount);
 		itemAnalytics.Add(DataIds.stars, analytics.stars);
 		itemAnalytics.Add(DataIds.sizeRocketsClosePlanets, analytics.closePlanets);

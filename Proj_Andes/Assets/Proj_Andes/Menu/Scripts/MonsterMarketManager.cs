@@ -40,6 +40,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] Button chestOpenButton;
     [SerializeField] GameObject chestOpenButtonParent;
     [SerializeField] Image chestOpenImg;
+    [SerializeField] Image chestclosedImg;
 
     [SerializeField] MyCollectionManager myCollectionManager;
 
@@ -48,7 +49,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     List<Monsters> currentMonstersFound = new List<Monsters>();
     public List<Image> replaceableImg = new List<Image>();
 
-    MonsterChestType currMonsterChestType;
     MonsterMarketButtonBehaviour currButton;
 
     Button currSelectedButton;
@@ -63,6 +63,17 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] Transform blockButtons;
     IEnumerator marketIntro;
     IEnumerator noResources;
+
+    //Analytics
+    float timeUntilFirstChestOpen;
+    float totalTime;
+    bool opennedAtLeastOneChest;
+    int chestTypeOpenned;
+    int initialStars;
+    int finalStars;
+    int starsSpent;
+
+
     private void Awake()
     {
         if(instance != null)
@@ -128,11 +139,18 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         marketIntro = MarketIntro();
         noResources = NoResources();
         closeNoResourcesBtn.onClick.AddListener(CloseNoResources);
+
+
     }
+
     private void Start()
     {
         StartCoroutine(marketIntro);
-    }
+		//Init analytics
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
+		initialStars = UserDataManager.CurrUser.Coins;
+	}
+
     private void Update()
     {
         if(UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
@@ -150,6 +168,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             }
         }
     }
+
     void OnCollectionsClosed()
     {
         if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
@@ -185,66 +204,79 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     void OpenButtonBeforeBuyChestOrContinuing()
     {
-        if(currSelectedButton == saveForLaterButton) SaveForLater();
-        else
-        {
-            chestOpenButtonParent.gameObject.SetActive(true);
-            chestOpenImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
-            confirmButton.gameObject.SetActive(false);
-        }
         audioSource.clip = checkAudio;
         audioSource.Play();
-    }
+        if (currSelectedButton == saveForLaterButton)
+        {
+            SaveForLater();
+            return;
+        }
 
+        timeUntilFirstChestOpen = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
+
+        chestOpenButtonParent.gameObject.SetActive(true);
+        chestOpenImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
+        chestclosedImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
+        confirmButton.gameObject.SetActive(false);
+    }
 
     void BuyChest()
     {
+        opennedAtLeastOneChest = true;
         chestOpenButtonParent.gameObject.SetActive(false);
-        Debug.Log("calling buy chest");
-        switch (currMonsterChestType)
+        switch (currButton.monsterMarketButton.monsterChestType)
         {
             case MonsterChestType.Regular:
-
                 marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
+                starsSpent += marketConfig.RegularChestPrice;
+                chestTypeOpenned = 1;
                 OpenChest(1, 0, 0);
+                GeneralGameAnalyticsManager.RegisterWin();
                 break;
             case MonsterChestType.Rare:
                 marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
-                OpenChest(1, 1, 0);
+				starsSpent += marketConfig.RareChestPrice;
+				chestTypeOpenned = 2;
+				OpenChest(1, 1, 0);
                 break;
             case MonsterChestType.Legendary:
                 marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
-                OpenChest(1, 1, 1);
-                break;
+				starsSpent += marketConfig.LegendaryChestPrice;
+				chestTypeOpenned = 3;
+				OpenChest(1, 1, 1);
+				GeneralGameAnalyticsManager.RegisterLose();
+				break;
         }
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
         SetLockedImageInButtons();
-
     }
+
     void ShowNoResourcesCorroutine()
     {
-        if(noResources != null) StopCoroutine(noResources);
+        if (noResources != null) StopCoroutine(noResources);
         noResources = NoResources();
         StartCoroutine(noResources);
     }
+
     IEnumerator NoResources()
     {
         chestNoEnoughCoins.SetActive(true);
         audioSource.clip = noResourcesAudio;
         audioSource.Play();
         yield return new WaitForSeconds(noResourcesAudio.length);
-        Debug.Log("done first");
         audioSource.clip = noStarsAudio;
         audioSource.Play();
         yield return new WaitForSeconds(noStarsAudio.length);
         noResources = null;
     }
+
     void CloseNoResources()
     {
         StopCoroutine(noResources);
         audioSource.Stop();
         chestNoEnoughCoins.SetActive(false);
     }
+
     private void SetLockedImageInButtons()
     {
         for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
@@ -253,6 +285,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         }
 
     }
+
     void OpenChest(int regularMonstersAmount, int rareMonstersAmount, int legendaryMonstersAmount)
     {
         chestOpenButtonParent.gameObject.SetActive(false);
@@ -320,9 +353,22 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     }
 #endif
 
-
     public void SaveForLater()
     {
+        finalStars = UserDataManager.CurrUser.Coins;
+        totalTime = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
+        if (!opennedAtLeastOneChest) timeUntilFirstChestOpen = 0;
+
+        var dictionary = new Dictionary<string, object>();
+        dictionary.Add(DataIds.timePlayed, totalTime);
+        dictionary.Add(DataIds.chestChosen, chestTypeOpenned);
+        dictionary.Add(DataIds.starsSpent, starsSpent);
+        dictionary.Add(DataIds.starsBeforeSpend, initialStars);
+        dictionary.Add(DataIds.unspentStars, finalStars);
+        dictionary.Add(DataIds.selectionTime, timeUntilFirstChestOpen);
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.monsterMarket, dictionary);
+
         chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
     }
@@ -335,6 +381,7 @@ public enum MonsterChestType
     Legendary,
     NONE
 }
+
 [Serializable]
 public class Monsters
 {

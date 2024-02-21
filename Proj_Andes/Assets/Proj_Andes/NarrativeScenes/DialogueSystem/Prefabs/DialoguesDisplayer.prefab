@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7000747353987309459
 RectTransform:
   m_ObjectHideFlags: 0
@@ -288,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6518286512357413114
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   audioPlayer: {fileID: 4355001892182007100}
   canSkipAudio: {fileID: 5825257353223953195}
   skipSceneBtn: {fileID: 5020454758075906455}
-  activeSkipSceneBtn: 1
+  activeSkipSceneBtn: 0
   forceDialogeAppear: 0
   SaveNavSequence: 1
   state: 0

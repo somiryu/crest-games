@@ -112,6 +112,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         skipSceneBtn.gameObject.SetActive(activeSkipSceneBtn && !AppSkipSceneButton.ActiveDebugGlobalUI);
         skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
 
+        if (!canSkipAudio.gameObject.activeSelf) canSkipAudio.isOn = false;
 
         narrativeSceneItem.ResetCurrentAnalytics();
 	}
@@ -507,7 +508,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 				narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
 				questionIdx: questionIdx,
 				isTimeLabel: true);
-			currResponseAnalyticResponseValue = analyticInfo.buildResponse();
+			currResponseAnalyticResponseValue = analyticInfo.BuildResponse();
 		}
 
         currResponsesDisplayer.ActiveConfirmationButton(false);

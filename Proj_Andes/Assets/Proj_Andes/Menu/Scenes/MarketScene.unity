@@ -993,6 +993,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &689689215
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6682390577246145400, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_Name
+      value: GeneralGameAnalyticsManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 670
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697540334762999313, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 50a6df2c59aa7a344ba457c8666c6327, type: 3}
 --- !u!1 &695097281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3367,6 +3424,7 @@ MonoBehaviour:
   chestOpenButton: {fileID: 1683364644}
   chestOpenButtonParent: {fileID: 1387627434}
   chestOpenImg: {fileID: 101709422}
+  chestclosedImg: {fileID: 69159644}
   myCollectionManager: {fileID: 1879702826}
   monstersUIInChestOpenning:
     itemPrefab: {fileID: 5709938591456280814, guid: 9a2f725d671cefb478c186ac3d3c218d, type: 3}
@@ -4641,3 +4699,4 @@ SceneRoots:
   - {fileID: 816332184}
   - {fileID: 1760502172}
   - {fileID: 1926060170}
+  - {fileID: 689689215}
