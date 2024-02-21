@@ -452,6 +452,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			AudioManager.Instance.currentBkMusic.Play();
 			musicBtn.image.sprite = musicBtnActive;
 		}
+		bool activeStae = AudioManager.Instance.currentBkMusic.isPlaying;
+		PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activeStae ? 1 : 0);
+
 	}
 
 	public void OnContinueGameBtnPressed()

@@ -159,26 +159,28 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
         currSelectedButton = chestBtn;
-        chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out currButton);    
-        
-        currMonsterChestType = monsterChestType;
+        chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out currButton);
 
-        for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
+        var btnToActive = userMonsterButtonBehaviours.Find(x => x.monsterMarketButton.monsterChestType == monsterChestType);
+        if (btnToActive == null) return;
+        if(btnToActive.monsterMarketButton.costChest > marketConfig.AvailableCoins)
         {
-            if (currButton.monsterMarketButton.costChest > marketConfig.AvailableCoins)
-            {
-                userMonsterButtonBehaviours[i].SetActiveState();
-                confirmButton.gameObject.SetActive(false);
-                BuyChest();
-            }
-            else
-            {
-                if (userMonsterButtonBehaviours[i].monsterMarketButton.monsterChestType == monsterChestType) userMonsterButtonBehaviours[i].SetActiveState();
-                else userMonsterButtonBehaviours[i].SetInactiveState();
-                confirmButton.gameObject.SetActive(true);
-            }
+			for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
+			{
+				userMonsterButtonBehaviours[i].SetActiveState();
+			}
+			confirmButton.gameObject.SetActive(false);
+            ShowNoResourcesCorroutine();
+            return;
         }
 
+		for (int i = 0; i < userMonsterButtonBehaviours.Count; i++)
+		{
+			userMonsterButtonBehaviours[i].SetInactiveState();
+		}
+
+        currButton.SetActiveState();
+        confirmButton.gameObject.SetActive(true);
     }
 
     void OpenButtonBeforeBuyChestOrContinuing()
@@ -194,6 +196,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         audioSource.Play();
     }
 
+
     void BuyChest()
     {
         chestOpenButtonParent.gameObject.SetActive(false);
@@ -201,28 +204,17 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         switch (currMonsterChestType)
         {
             case MonsterChestType.Regular:
-                if (marketConfig.AvailableCoins >= marketConfig.RegularChestPrice)
-                {
-                    marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
-                    OpenChest(1, 0, 0);
-                }
-                else ShowNoResourcesCorroutine();
+
+                marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
+                OpenChest(1, 0, 0);
                 break;
             case MonsterChestType.Rare:
-                if (marketConfig.AvailableCoins >= marketConfig.RareChestPrice)
-                {
-                    marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
-                    OpenChest(1, 1, 0);
-                }
-                else ShowNoResourcesCorroutine();
+                marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
+                OpenChest(1, 1, 0);
                 break;
             case MonsterChestType.Legendary:
-                if (marketConfig.AvailableCoins >= marketConfig.LegendaryChestPrice)
-                {
-                    marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
-                    OpenChest(1, 1, 1);
-                }
-                else ShowNoResourcesCorroutine();
+                marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
+                OpenChest(1, 1, 1);
                 break;
         }
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();

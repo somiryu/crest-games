@@ -89,6 +89,6 @@ public class GameUIController : MonoBehaviour, ITimeManagement
 			musicBtn.image.sprite = soundDeactivated;
         }
 
-        PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", (int)AudioListener.volume);
+        PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activated? 1: 0);
     }
 }

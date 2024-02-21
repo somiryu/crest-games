@@ -25,8 +25,8 @@ public class FrustrationThermometerController : MonoBehaviour
             int idx = i;
             frustrationLevels[idx].frustLevelButton.onClick.AddListener(() => GetFrustationLevel(frustrationLevels[idx]));
 
-            if (UserDataManager.CurrUser.gender == UserGender.Femenino) frustrationLevels[idx].MLabel.gameObject.SetActive(false);
-            else frustrationLevels[idx].FLabel.gameObject.SetActive(false);
+            if (UserDataManager.CurrUser.gender == UserGender.Masculino) frustrationLevels[idx].FLabel.gameObject.SetActive(false);
+            else frustrationLevels[idx].MLabel.gameObject.SetActive(false);
 
             buttonsSelectedImages[i].SetActive(false);
         }

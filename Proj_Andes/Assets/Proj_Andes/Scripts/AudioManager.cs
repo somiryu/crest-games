@@ -50,8 +50,12 @@ public class AudioManager : MonoBehaviour
         }
         if (currentBkMusic.clip != currBkAudio)
         {
-            currentBkMusic.clip = currBkAudio;
-            currentBkMusic.Play();
+			currentBkMusic.clip = currBkAudio;
+			var audioIsActive = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive");
+            if (audioIsActive == 1)
+            {
+                currentBkMusic.Play();
+            }
         }
         if(backgroundSoundType == BackgroundSoundType.Narrative) backgroundSoundType = BackgroundSoundType.App;
     }
