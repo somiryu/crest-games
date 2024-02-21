@@ -29,8 +29,18 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	}
     public override void SaveAnalytics()
     {
+		var analytics = MG_SizeRockets_GameManager.Instance.currAnalytics;
         itemAnalytics = new Dictionary<string, object>();
-        SaveCoins(coinsCollected);
+		itemAnalytics.Add(DataIds.timePlayed, analytics.timePlayed);
+		itemAnalytics.Add(DataIds.sizeRocketsBigShips, analytics.bigShipsCount);
+		itemAnalytics.Add(DataIds.sizeRocketsMidPlanets, analytics.mediumShipsCount);
+		itemAnalytics.Add(DataIds.sizeRocketsSmallShips, analytics.smallShipsCount);
+		itemAnalytics.Add(DataIds.stars, analytics.stars);
+		itemAnalytics.Add(DataIds.sizeRocketsClosePlanets, analytics.closePlanets);
+		itemAnalytics.Add(DataIds.sizeRocketsMidPlanets, analytics.midPlanets);
+		itemAnalytics.Add(DataIds.sizeRocketsFarPlanets, analytics.farPlanets);
+		itemAnalytics.Add(DataIds.averageClickTime, analytics.averageClick);
+
         UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics);
 
     }

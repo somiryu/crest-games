@@ -99,7 +99,12 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         trapImage.gameObject.SetActive(false);
     }
 
-    void UpdateCharacterAnimRef(Transform newCharacterArtObj)
+	private void Start()
+	{
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.boostersAndScapeGame);
+	}
+
+	void UpdateCharacterAnimRef(Transform newCharacterArtObj)
     {
 		characterAnims = newCharacterArtObj.GetComponentInChildren<Animator>(true);
 	}
@@ -197,15 +202,18 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     }
     void Onfailed()
     {
-
+        Debug.Log("Failed boost");
+        GeneralGameAnalyticsManager.RegisterLose();
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
         onBoost = true;
         targetTime = 0.3f;
         boostersActivated++;
+		GeneralGameAnalyticsManager.RegisterWin();
+        Debug.Log("Boosted");
 
-        alienMov.OnBoosted();
+		alienMov.OnBoosted();
         booster.Boosted();
         spawner.spawner.nextSpawnTime = targetTime;
         successfulAttempts++;
@@ -239,14 +247,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
                 forcedFails.Remove(forcedFails[i]);
                 onTrapMode = true;
 				StartCoroutine(ShowTrapSign());
+				GeneralGameAnalyticsManager.RegisterLose();
+                lostByCheat++;
 			}
 			else onTrapMode = false;
-        }
-        if (successfulAttempts >= gameConfig.boostersPerRun - gameConfig.forcedFails-1)
-        {
-            onTrapMode = true;
-            StartCoroutine(ShowTrapSign());
-            lostByCheat++;
         }
     }
 
@@ -265,3 +269,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         return newRandomFailIdx;
     }
 }
+
+
+

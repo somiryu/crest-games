@@ -52,7 +52,8 @@ public class FrustrationThermometerController : MonoBehaviour
 
     void Continue()
     {
-        frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
+        FrustrationTermometer.LastFrustrationLevelPicked = currFrustratioNlevel;
+		frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
         frustrationTermometer.OnSequenceOver();
     }
 
@@ -74,6 +75,7 @@ public enum FrustrationLevel
     Frustrado,
     Un_Poco_Tranquilo,
     Muy_Tranquilo,
+    NONE = -1,
 }
 
 [Serializable]

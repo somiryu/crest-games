@@ -24,6 +24,10 @@ public class GameSequencesList : ScriptableObject
     [HideInInspector] public SimpleGameSequenceItem currItem => gameSequences[goToGameGroupIdx];
     [NonSerialized] public int goToGameGroupIdx;
     public bool continueToNextItem;
+
+    public static int firstFrustrationScreenIdx;
+    public static int LastFrustrationScreenIdx;
+
     public void OnValidate()
     {
         if (continueToNextItem)
@@ -38,7 +42,11 @@ public class GameSequencesList : ScriptableObject
         if (nextItem != null)
         {
             Debug.Log("saving");
-            if (prevGame != null) prevGame.SaveAnalytics();
+            if (prevGame != null)
+            {
+                prevGame.SaveAnalytics();
+                prevGame.SaveGeneralGameAnalytics();
+            }
             prevGame = nextItem;
             AudioManager.Instance.PlayMusic();
             TimeManager.Instance.ResetUsers();
@@ -94,7 +102,11 @@ public class GameSequencesList : ScriptableObject
 	}
     public void EndSequence()
     {
-        if(prevGame != null) prevGame.SaveAnalytics();
+        if (prevGame != null)
+        {
+            prevGame.SaveAnalytics();
+            prevGame.SaveGeneralGameAnalytics();
+        }
 		UserDataManager.OnUserQuit();
         ResetSequence();
 

@@ -61,6 +61,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	private void Start()
 	{
 		Init();
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.mechanicHandGame);
 	}
 
 	void Init()
@@ -137,6 +138,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 
 	public void OnCapturedAsteroid(Transform asteroid)
 	{
+		GeneralGameAnalyticsManager.RegisterWin();
 		totalCapturedAsteroids++;
 		constant_ResultsTxt.SetText(totalCapturedAsteroids.ToString());
 
@@ -154,6 +156,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 
     public void OnPlayerFailedHook()
 	{
+		GeneralGameAnalyticsManager.RegisterLose();
 		currPlayerLifes--;
 		totalCapturedAsteroids -= 2;
 		totalCapturedAsteroids = Mathf.Max(totalCapturedAsteroids, 0);

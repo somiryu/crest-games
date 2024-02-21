@@ -84,7 +84,12 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         InitRound();
     }
 
-    void InitRound()
+	private void Start()
+	{
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.heartsAndStarsGame);
+	}
+
+	void InitRound()
     {
 		roundAnalytics = new MG_HearthAndStars_RoundAnalytics();
         AllRoundsAnalytics.Add(roundAnalytics);
@@ -148,7 +153,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
 
-        audiosource.clip = wrongAudio;
+		GeneralGameAnalyticsManager.RegisterLose();
+
+
+		audiosource.clip = wrongAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
@@ -166,7 +174,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
 
-        roundAnalytics.wonRound = true;
+		GeneralGameAnalyticsManager.RegisterWin();
+		roundAnalytics.wonRound = true;
 
         audiosource.clip = correctAudio;
         audiosource.Play();

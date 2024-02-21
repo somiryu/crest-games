@@ -84,6 +84,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 	private void Start()
 	{
         RideBegining();
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.turboRocketGame);
 	}
 
 	void ReasignAnimator(Transform newActiveObj)
@@ -163,7 +164,9 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     public void OnEnterTurboMode()
     {
-        characterAnimator.SetTrigger("Turbo");
+        GeneralGameAnalyticsManager.RegisterLose();
+		characterAnimator.ResetTrigger("Normal");
+		characterAnimator.SetTrigger("Turbo");
         turboParticles.Play();
         turboAnimObj.SetActive(true);
         turboSFX.Play();
@@ -175,6 +178,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     public void OnExitTurboMode()
     {
+        characterAnimator.ResetTrigger("Turbo");
 		characterAnimator.SetTrigger("Normal");
 		currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
@@ -191,7 +195,10 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         else if (collider.TryGetComponent(out Gratification_TurboRocket_StarsController star))
         {
             if (onTurbo) return;
+            if (star.isCaptured) return;
+            Debug.Log("Collectd coin");
             star.OnCaptured();
+            GeneralGameAnalyticsManager.RegisterWin();
             gameConfig.coinsCollected++;
         }
     }

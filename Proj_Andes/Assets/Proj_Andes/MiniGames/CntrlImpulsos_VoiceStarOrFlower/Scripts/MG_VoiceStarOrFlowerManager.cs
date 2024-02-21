@@ -108,7 +108,12 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         InitRound();
 	}
 
-    int repeatedPuzzleCounter = 0;
+	private void Start()
+	{
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.voiceStarGame);
+	}
+
+	int repeatedPuzzleCounter = 0;
 
     void GetRandomSoundImage()
     {
@@ -200,6 +205,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
 	private void OnWrongChoice()
     {
+        GeneralGameAnalyticsManager.RegisterLose();
         incorrectParticles.Stop();
         correctParticles.Stop();
 
@@ -216,7 +222,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     private void OnCorrectChoice()
     {
-        incorrectParticles.Stop();
+		GeneralGameAnalyticsManager.RegisterWin();
+		incorrectParticles.Stop();
         correctParticles.Stop();
 
         roundAnalytics.wonRound = true;

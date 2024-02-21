@@ -40,4 +40,12 @@ public class SimpleGameSequenceItem : ScriptableObject
     }
     public virtual void SaveAnalytics() { }
 
+    public virtual void SaveGeneralGameAnalytics()
+    {
+        if (GeneralGameAnalyticsManager.Instance == null) return;
+        var analytics = GeneralGameAnalyticsManager.Instance.GetAnalytics();
+        if(analytics == null) return;
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.generalGamesCollID, analytics);
+    }
+
 }

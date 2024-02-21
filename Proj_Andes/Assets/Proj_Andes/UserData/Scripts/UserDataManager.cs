@@ -87,6 +87,7 @@ public class UserDataManager : ScriptableObject
 		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
+		analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
 		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 

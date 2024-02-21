@@ -7,6 +7,7 @@ public static class DataIds
     public const string usersCollection = "users";
 
     public const string TestID = "Test ID";
+    public const string GameOrderInSequence = "game_order";
     public const string UserID = "User ID";
     public const string GameID = "Game ID";
     public const string GameType = "Game Type";
@@ -21,8 +22,18 @@ public static class DataIds
     public const string responseTime = "time_response";
     public const string challengeType = "challenge_type";
 
-    //Frustration levels
-    public const string frustrationGames = "frustration_levels";
+    //General Games collection IDs
+    public const string generalGamesCollID = "Games";
+    public const string wins = "general_Achievements";
+    public const string losses = "general_Losses";
+    public const string clicks = "clicks";
+    public const string averageClickTime = "avg_click_frequency";
+	public const string lastFrustrationLevel = "last_frustration_selected";
+	public const string GameModeAboutAnalytics = "game_mode";
+
+
+	//Frustration levels
+	public const string frustrationGames = "frustration_levels";
     public const string timePlayed = "time_played";
     public const string lostByCheat = "lostByCheat";
     public const string frustrationLevel = "frustrationLevel";
@@ -31,6 +42,7 @@ public static class DataIds
     public const string Narratives = "Narratives";
 
     //Data per game
+    public const string stars = "stars";
 
     public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";
@@ -52,7 +64,7 @@ public static class DataIds
     public const string turboRocketGame = "Postergación de la gratificación: El rocket propulsado";
     public const string turboRocketCoinsCollected = "turboRocketCoinsCollected";
     public const string turboRockettotalRideTime = "turboRockettotalRideTime";
-    public const string turboRocketturboUsedTimes = "turboRocketturboUsedTimes";
+    public const string turboRocketturboUsedTimes = "boosts";
 
     public const string mechanicHandGame = "Por habilidad: la mano mecánica";
     public const string mechanicHandClawThrows = "mechanicHandClawThrows";
@@ -71,6 +83,12 @@ public static class DataIds
     public const string magnetsEneryPicked = "magnetsEneryPicked";
 
     public const string sizeRocketsGame = "Postergación de la gratificación: El rocket grande y el pequeño";
+    public const string sizeRocketsBigShips = "big_ships";
+    public const string sizeRocketsMidShips = "medium_ships";
+    public const string sizeRocketsSmallShips = "small_ships";
+    public const string sizeRocketsClosePlanets = "close_planets";
+    public const string sizeRocketsMidPlanets = "mid_planets";
+    public const string sizeRocketsFarPlanets = "far_planets";
 
     public const string tryAgainClicks = "retry_clicks";
 

@@ -87,7 +87,11 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);
 		trapImage.gameObject.SetActive(false);
 		eogManager.OnGameStart();
+	}
 
+	private void Start()
+	{
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.magnetsGame);
 	}
 
 	private void Update()
@@ -151,7 +155,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			{
                 audiosource.clip = failEveryEnergyItemAudio;
                 audiosource.Play();
-            }
+				GeneralGameAnalyticsManager.RegisterLose();
+			}
 
 			if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick)) return;
                 
@@ -205,6 +210,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	void OnPicketEnergyItem(MG_MagnetsEnergyItem itemPicked)
 	{
+		GeneralGameAnalyticsManager.RegisterWin();
 		itemPicked.OnWasPicked();
 		audiosource.clip = capturedItemSfx;
 		audiosource.Play();
