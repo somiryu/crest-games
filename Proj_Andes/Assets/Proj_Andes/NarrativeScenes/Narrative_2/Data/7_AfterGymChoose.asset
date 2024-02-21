@@ -160,6 +160,7 @@ MonoBehaviour:
       responseAlternative: "Le digo que m\xE1s mala es ella"
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: caadac21bcc7cbf45a620d99489806f2, type: 3}
+      responseAudioAlternative: {fileID: 8300000, guid: 954690250f3c2424b8d7b8a85e23c8ac, type: 3}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -170,6 +171,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 4be9c1c495ac0204a9c300e717427390, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -180,6 +182,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: c14aa739b7b411143ba9a4150058a8b3, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2

@@ -61,6 +61,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: f6fa012cc1c3dbf429203620496aa420, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -72,6 +73,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 71c7b9230626b9b4dad8614794b1f00a, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -82,7 +84,8 @@ MonoBehaviour:
       responseAlternative: "Le digo a Cami que si no me da algo, ya no voy a ser
         su amiga.\r"
       responseImage: {fileID: 0}
-      responseAudio: {fileID: 8300000, guid: f6e8c28344f5e864290245ccb0f97fc5, type: 3}
+      responseAudio: {fileID: 8300000, guid: 8ef4d010fca807241b8944a8acc5cdd8, type: 3}
+      responseAudioAlternative: {fileID: 8300000, guid: f6e8c28344f5e864290245ccb0f97fc5, type: 3}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -161,6 +164,7 @@ MonoBehaviour:
         le digo me qued\xE9 muy triste"
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 00912b4ce3db42f45a796e16d962084a, type: 3}
+      responseAudioAlternative: {fileID: 8300000, guid: 87778addf794fcd4eb419a1784919099, type: 3}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -171,6 +175,7 @@ MonoBehaviour:
       responseAlternative: Le digo que es una mala y que ya no quiero ser su amiga.
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 1335ebb1c54c74e489e1b8c01c61f9d0, type: 3}
+      responseAudioAlternative: {fileID: 8300000, guid: 6a134f1d29d59ff4e91d4c2a4422cb08, type: 3}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -182,6 +187,7 @@ MonoBehaviour:
         siendo amigas.\r"
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: e8219a5ca65f7944fa26f698f40576cf, type: 3}
+      responseAudioAlternative: {fileID: 8300000, guid: bed1da97be758054bb8ec743ee941349, type: 3}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -244,6 +250,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 1936d776c0775b844a7f10841c1796c8, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
@@ -254,6 +261,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 28af0ca6511f60245a61ecd416d4d7de, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
@@ -264,6 +272,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 69754fd06637202429f4dedaeaa8f65c, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
@@ -307,6 +316,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 6d6abf1077e578848826fcf122667e5c, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -317,6 +327,7 @@ MonoBehaviour:
       responseAlternative: "Prefiero quedarme callada y que elijan los dem\xE1s."
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 9c1c7287ff026cb408af77f079d8c313, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -327,6 +338,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 58eab9e11f0539844ad4580fb57304fa, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
