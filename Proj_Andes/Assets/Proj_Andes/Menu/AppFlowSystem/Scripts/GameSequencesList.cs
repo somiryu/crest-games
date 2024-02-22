@@ -71,6 +71,7 @@ public class GameSequencesList : ScriptableObject
 
     public SimpleGameSequenceItem GetGameSequence()
     {
+        Debug.Log("GO " + goToGameGroupIdx);
         return gameSequences[goToGameGroupIdx];
     }
 
@@ -80,10 +81,11 @@ public class GameSequencesList : ScriptableObject
 
 		if (goToGameGroupIdx >= gameSequences.Count)
         {
+            goToGameGroupIdx = gameSequences.Count-1;
             EndSequence();
             Debug.LogWarning("Game sequence done, restarting the app");
         }
-        GoToNextItemInList();
+        else GoToNextItemInList();
     }
 
     public void GoToSequenceIdx(int idx, int subIdx)
@@ -107,7 +109,6 @@ public class GameSequencesList : ScriptableObject
         }
 		UserDataManager.OnUserQuit();
         ResetSequence();
-
         GoToNextItemInList();
     }
 
