@@ -129,7 +129,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			mouseGlobalPosition.z = 0;
 			attempts++;
 			//if (gameConfigs.activeCheats && PredictIfWouldWin(mouseGlobalPosition))
-			if(gameConfigs.activeCheats && attempts > 2)
+			if(gameConfigs.activeCheats && attempts > 1)
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
 				lostByCheat++;
@@ -146,6 +146,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 				if (!curr.TryGetComponent(out MG_MagnetsEnergyItem energyItem)) continue;
                 if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
                 {
+					attempts = 0;
                     UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick.ToString());
                     TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_Magnets_2FourItemEnergyClick);
                 }
