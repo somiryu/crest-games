@@ -642,9 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c0b40dbe614524187ace3e8140fde8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 0}
-  logo1: {fileID: 39969683}
-  logo2: {fileID: 263251886}
+  logo: {fileID: 263251886}
   waitFor: 2
   mainMenuScene:
     sceneAsset: {fileID: 102900000, guid: 69f1c644272a182468a361a990562861, type: 3}

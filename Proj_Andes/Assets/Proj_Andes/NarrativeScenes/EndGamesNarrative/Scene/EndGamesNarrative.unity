@@ -1265,7 +1265,7 @@ MonoBehaviour:
   _startingSequence: {fileID: 11400000, guid: 11172ceaf9917fd4ab5bf165f1a7a79a, type: 2}
   NarrativeIdx: 0
   loadingScreen: {fileID: 1812151432}
-  isTheEntranceNarrative: 1
+  shouldNotDelay: 1
 --- !u!4 &1180631021
 Transform:
   m_ObjectHideFlags: 0

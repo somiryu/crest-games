@@ -15,31 +15,31 @@ public class NarrativeSceneManager : MonoBehaviour
 
 	RaycastHit[] collisions = new RaycastHit[30];
 	[SerializeField] Transform loadingScreen;
-	IEnumerator Delay;
-	public bool isTheEntranceNarrative;
+	IEnumerator delay;
+	public bool shouldNotDelay;
 
 	private void Awake()
 	{
 		if(instance == null && instance != this) DestroyImmediate(instance);
 		instance = this;
-        Delay = StartDelay();
-        if (!isTheEntranceNarrative) StartCoroutine(Delay);
+        delay = StartDelay();
     }
 	IEnumerator StartDelay()
 	{
 		loadingScreen.gameObject.SetActive(true);
 		yield return new WaitForSeconds(3);
         loadingScreen.gameObject.SetActive(false);
-		StopCoroutine(Delay);
+        if (_startingSequence != null) dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
     }
     private void Start()
 	{
         AudioManager.Instance.backgroundSoundType = BackgroundSoundType.Narrative;
 		AudioManager.Instance.PlayMusic();
-        if (_startingSequence != null) dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
-	}
+        if (!shouldNotDelay) StartCoroutine(delay);
+		else dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
+    }
 
-	private void Update()
+    private void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
