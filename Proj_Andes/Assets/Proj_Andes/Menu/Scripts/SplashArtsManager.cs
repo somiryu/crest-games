@@ -34,6 +34,8 @@ public class SplashArtsManager : MonoBehaviour
     {
         logo1.gameObject.SetActive (true);
         yield return waitSplashArt;
-        SceneManagement.GoToScene(mainMenuScene);
+        logo2.gameObject.SetActive (true);
+        yield return waitSplashArt;
+        GameSequencesList.Instance.GoToNextItemInList();
     }
 }

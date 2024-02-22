@@ -128,7 +128,6 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
             var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseGlobalPosition.z = 0;
 			attempts++;
-			//if (gameConfigs.activeCheats && PredictIfWouldWin(mouseGlobalPosition))
 			if(gameConfigs.activeCheats && attempts > 1)
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
