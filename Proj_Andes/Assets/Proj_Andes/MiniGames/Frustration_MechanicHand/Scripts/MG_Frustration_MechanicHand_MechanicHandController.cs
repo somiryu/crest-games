@@ -154,8 +154,13 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         var currProgress = gameManager.totalCapturedAsteroids;
         var neededAmount = gameManager.NeededAsteroidsToWin;
 
-
-		if (gameManager.gameConfigs.activeCheats && currProgress >= neededAmount - 1)
+        if(MG_MechanicHand_GameManger.Instance.currRound == 2)
+        {
+            MG_MechanicHand_GameManger.Instance.lostByCheat++;
+            StartCoroutine(ShowTrapSign());
+            CorrectRotationToFail();
+        }
+		else if (gameManager.gameConfigs.activeCheats && currProgress >= neededAmount - 1)
         {
             MG_MechanicHand_GameManger.Instance.lostByCheat++;
             StartCoroutine(ShowTrapSign());

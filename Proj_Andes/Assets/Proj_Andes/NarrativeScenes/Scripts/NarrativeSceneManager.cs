@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NarrativeSceneManager : MonoBehaviour
@@ -14,22 +15,31 @@ public class NarrativeSceneManager : MonoBehaviour
 	public int NarrativeIdx;
 
 	RaycastHit[] collisions = new RaycastHit[30];
-
+	[SerializeField] Transform loadingScreen;
+	IEnumerator delay;
+	public bool shouldNotDelay;
 
 	private void Awake()
 	{
 		if(instance == null && instance != this) DestroyImmediate(instance);
 		instance = this;
-	}
+        delay = StartDelay();
+    }
 
-	private void Start()
+	IEnumerator StartDelay()
+	{
+		yield return null;
+        if (_startingSequence != null) dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
+    }
+    private void Start()
 	{
         AudioManager.Instance.backgroundSoundType = BackgroundSoundType.Narrative;
 		AudioManager.Instance.PlayMusic();
-        if (_startingSequence != null) dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
-	}
+        if (!shouldNotDelay) StartCoroutine(delay);
+		else dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
+    }
 
-	private void Update()
+    private void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{

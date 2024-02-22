@@ -8,12 +8,10 @@ public class SplashArtsManager : MonoBehaviour
 {
     static SplashArtsManager instance;
     public static SplashArtsManager Instance => instance;
-    [SerializeField] Transform Panel;
-    [SerializeField] Transform logo1;
-    [SerializeField] Transform logo2;
+    [SerializeField] Transform logo;
     [SerializeField] int waitFor;
     WaitForSeconds waitSplashArt;
-    [SerializeField] SceneReference mainMenuScene;
+    //[SerializeField] SceneReference mainMenuScene;
     private void Awake()
     {
         if (instance)
@@ -25,15 +23,14 @@ public class SplashArtsManager : MonoBehaviour
     }
     void Init()
     {
-        logo1.gameObject.SetActive(false);
-        logo2.gameObject.SetActive(false);
+        logo.gameObject.SetActive(false);
         waitSplashArt = new WaitForSeconds(waitFor);
         StartCoroutine(SplasArtsDisplay());
     }
     public IEnumerator SplasArtsDisplay()
     {
-        logo1.gameObject.SetActive (true);
+        logo.gameObject.SetActive (true);
         yield return waitSplashArt;
-        SceneManagement.GoToScene(mainMenuScene);
+        GameSequencesList.Instance.GoToNextItemInList();
     }
 }

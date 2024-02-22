@@ -35,7 +35,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public float sizeLoseOnRoundChange => gameConfigs.asteroidsSizeLoseAmountPerRound;
 	int initialPlayerLifes => gameConfigs.playerLifes;
 
-	int currRound = 0;
+	public int currRound = 0;
 	float currAsteroidsSize = 1;
 	int currPlayerLifes;
 	public int totalCapturedAsteroids = 0;
@@ -91,7 +91,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		var center = CurrAsteroidsSpawnArea.transform.position;
 		var maxPosition = center + CurrAsteroidsSpawnArea.size/2;
 		var minPosition = center - CurrAsteroidsSpawnArea.size/2;
-
+		Debug.Log("mech hand round "+ currRound);
 		currRoundAsteroids.Clear();
 
 		for (int i = 0;i < asteroidsPerRound; i++)
@@ -111,7 +111,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		trialIdx++;
 		if (trialIdx > 20)
 		{
-			Debug.LogError("No available random position found");
+			//Debug.LogError("No available random position found");
 			return Vector3.zero;
 		}
 		var newTestPosition = Vector3.zero;

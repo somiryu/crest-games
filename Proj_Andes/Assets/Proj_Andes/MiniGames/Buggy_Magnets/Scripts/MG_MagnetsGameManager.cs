@@ -47,7 +47,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
     private Collider[] overlayResults = new Collider[20];
 	[SerializeField] EndOfGameManager eogManager;
-
+	int attempts;
 	float totalTime;
 	public EndOfGameManager EndOfGameManager => eogManager;
 
@@ -73,6 +73,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		clickRepetitions = 0;
 		totalTime = 0;
 
+		attempts = 0;
         energyItemsPool.Init(30);
 		availableMagnets = gameConfigs.initialMagnetsCount;
 		timer = gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify();
@@ -126,7 +127,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		{			
             var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseGlobalPosition.z = 0;
-			if (gameConfigs.activeCheats && PredictIfWouldWin(mouseGlobalPosition))
+			attempts++;
+			if(gameConfigs.activeCheats && attempts > 1)
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
 				lostByCheat++;
@@ -143,6 +145,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 				if (!curr.TryGetComponent(out MG_MagnetsEnergyItem energyItem)) continue;
                 if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
                 {
+					attempts = 0;
                     UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick.ToString());
                     TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_Magnets_2FourItemEnergyClick);
                 }
