@@ -1264,6 +1264,8 @@ MonoBehaviour:
   dialogueDisplayerUI: {fileID: 1527390312}
   _startingSequence: {fileID: 11400000, guid: a2a0dd2d27105c84ea436221a431687c, type: 2}
   NarrativeIdx: 0
+  loadingScreen: {fileID: 0}
+  isTheEntranceNarrative: 1
 --- !u!4 &1180631021
 Transform:
   m_ObjectHideFlags: 0
@@ -2349,8 +2351,8 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 293a04f41552fb242b82a34cf6d5c27a, type: 2}
-  m_InitialState: 1
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0

@@ -1264,6 +1264,8 @@ MonoBehaviour:
   dialogueDisplayerUI: {fileID: 1527390312}
   _startingSequence: {fileID: 11400000, guid: 11172ceaf9917fd4ab5bf165f1a7a79a, type: 2}
   NarrativeIdx: 0
+  loadingScreen: {fileID: 1812151432}
+  isTheEntranceNarrative: 1
 --- !u!4 &1180631021
 Transform:
   m_ObjectHideFlags: 0
@@ -2008,6 +2010,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+--- !u!224 &1812151432 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7113496414716506327, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+  m_PrefabInstance: {fileID: 1812151431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2006999767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,8 +2356,8 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: c386a37278e744b478c57db980e7bc12, type: 2}
-  m_InitialState: 1
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0

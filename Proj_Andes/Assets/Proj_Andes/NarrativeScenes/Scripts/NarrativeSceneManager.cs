@@ -14,15 +14,25 @@ public class NarrativeSceneManager : MonoBehaviour
 	public int NarrativeIdx;
 
 	RaycastHit[] collisions = new RaycastHit[30];
-
+	[SerializeField] Transform loadingScreen;
+	IEnumerator Delay;
+	public bool isTheEntranceNarrative;
 
 	private void Awake()
 	{
 		if(instance == null && instance != this) DestroyImmediate(instance);
 		instance = this;
-	}
-
-	private void Start()
+        Delay = StartDelay();
+        if (!isTheEntranceNarrative) StartCoroutine(Delay);
+    }
+	IEnumerator StartDelay()
+	{
+		loadingScreen.gameObject.SetActive(true);
+		yield return new WaitForSeconds(3);
+        loadingScreen.gameObject.SetActive(false);
+		StopCoroutine(Delay);
+    }
+    private void Start()
 	{
         AudioManager.Instance.backgroundSoundType = BackgroundSoundType.Narrative;
 		AudioManager.Instance.PlayMusic();
