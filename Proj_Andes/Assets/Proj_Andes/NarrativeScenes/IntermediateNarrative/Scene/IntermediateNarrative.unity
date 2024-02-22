@@ -1992,7 +1992,7 @@ PrefabInstance:
     - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: timeLinePlayer
       value: 
-      objectReference: {fileID: 575718698}
+      objectReference: {fileID: 2138338496}
     - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: dialoguesToShow
       value: 

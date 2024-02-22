@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NarrativeSceneManager : MonoBehaviour
@@ -24,11 +25,10 @@ public class NarrativeSceneManager : MonoBehaviour
 		instance = this;
         delay = StartDelay();
     }
+
 	IEnumerator StartDelay()
 	{
-		loadingScreen.gameObject.SetActive(true);
-		yield return new WaitForSeconds(3);
-        loadingScreen.gameObject.SetActive(false);
+		yield return null;
         if (_startingSequence != null) dialogueDisplayerUI.ShowDialogueSequence(_startingSequence);
     }
     private void Start()
