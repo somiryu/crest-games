@@ -15,7 +15,7 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/Gratification_TurboRocket/Scenes/Gratification_TurboRocket.unity
-  regularSpeed: 1.5
+  regularSpeed: 0.8
   turboSpeed: 15
   accelerationSpeed: 5
   regularRideDuration: 100
