@@ -20,3 +20,4 @@ MonoBehaviour:
   initialCoins: 0
   coinsOnCorrectAnswer: 2
   coinsOnWrongAnswer: -1
+  finalTutoStepMaxFailuresBeforeSkipping: 5

@@ -40,7 +40,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     [SerializeField] AnimationCurve ySpeedCurve;
 	float yMoveProgress = 0f;
     float startYPos = 0f;
-
+    IEnumerator turboDeacceleration;
 
 
 	[SerializeField] Animator characterAnimator;
@@ -175,19 +175,38 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
         gameConfig.turboUsedTimes++;
         onTurbo = true;
+
+        turboDeacceleration = Deacceleration();
     }
     public void OnExitTurboMode()
     {
         characterAnimator.ResetTrigger("Turbo");
 		characterAnimator.SetTrigger("Normal");
-		currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
         turboParticles.Stop();
         turboAnimObj.SetActive(false);
         turboSFX.Stop();
+        StartCoroutine(turboDeacceleration);
 
-
-        onTurbo = false;
+    }
+    IEnumerator Deacceleration()
+    {
+        var timer = 0f;
+        while(timer < levelConfig.deaccelerationTime)
+        {
+            timer += Time.deltaTime;
+            var progress = timer / levelConfig.deaccelerationTime;
+            var deacc = Mathf.Lerp(levelConfig.turboSpeed, levelConfig.regularSpeed, progress);
+            currentTargetSpeed = deacc;
+        }
+        yield return new WaitForSeconds(0.2f);
+        if(timer >= levelConfig.deaccelerationTime)
+        {
+            onTurbo = false;
+            Debug.Log("done " +  timer);
+            timer = 0f;
+        }
+        StopCoroutine(turboDeacceleration);
     }
     void CollisionManagement(Collider collider)
     {
@@ -211,6 +230,9 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         ride.totalRideDuration = timer;
         ride.totalStars = levelConfig.starsAmount;
         data = ride;
+        starsGatheredCount += 3;
+        OnScoreChanges?.Invoke();
+
         bk.EndOfGame();
 
         gameConfig.totalRideTime = timer;

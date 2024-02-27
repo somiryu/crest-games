@@ -107,7 +107,6 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         SetSpeedway();
         firstPos = transform.position;
         camCC.Init();
-		onPlay = true;
         gameStages = GameStages.Start;
     }
     void InitTuto()
@@ -276,6 +275,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 	void EndOfRide()
     {
         bk.EndOfGame();
+        starsGatheredCount += 3;
         onPlay = false;
         levelConfig.coinsCollected = starsGatheredCount;
         character.GetComponentInChildren<ParticleSystem>().Stop();
@@ -310,7 +310,6 @@ public class TutorialStepsTurbo
     public Vector2 handOffset;
     public void InitTutoStep()
     {
-        Debug.Log("starting " + step.ToString());
         if(step != TutorialStepsTurboRocket.TurboAppear || step != TutorialStepsTurboRocket.UnclickTurbo) signHand.Init(stepClickableObj, handOffset);
         signHand.gameObject.SetActive(true);
     }

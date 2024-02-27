@@ -18,5 +18,6 @@ MonoBehaviour:
   regularSpeed: 0.8
   turboSpeed: 15
   accelerationSpeed: 5
-  regularRideDuration: 100
+  regularRideDuration: 200
   starsAmount: 17
+  deaccelerationTime: 10
