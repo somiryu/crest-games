@@ -99,4 +99,12 @@ public static class DataIds
 
     public const string tryAgainClicks = "retry_clicks";
 
+    //General Test analytics
+    public const string test = "Test";
+    public const string created_At = "created_At";
+    public const string age = "edad";
+    public const string state = "state";
+    public const string time_Spent = "time_Spent";
+
+
 }

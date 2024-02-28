@@ -71,7 +71,6 @@ public class GameSequencesList : ScriptableObject
 
     public SimpleGameSequenceItem GetGameSequence()
     {
-        Debug.Log("GO " + goToGameGroupIdx);
         return gameSequences[goToGameGroupIdx];
     }
 

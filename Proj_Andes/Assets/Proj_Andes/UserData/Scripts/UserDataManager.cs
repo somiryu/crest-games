@@ -114,6 +114,7 @@ public class UserDataManager : ScriptableObject
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
 
+		TimeManager.Instance.GetQuitGameAnalytics();
 		Debug.Log("Saving to server");
 		if (currSequence is MinigameGroups group)
 		{

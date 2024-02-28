@@ -22,6 +22,8 @@ public class ClosingController : MonoBehaviour
         finalAudioSource.clip = finalAudio;
         finalAudioSource.Play();
         continueBtn.onClick.AddListener(closingItem.OnSequenceOver);
+        TimeManager.Instance.gameState = GameStateLeft.Finished;
+
     }
 
 }

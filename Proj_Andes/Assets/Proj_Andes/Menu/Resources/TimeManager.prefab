@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5695e7b7d4746d544afacffbb74bf918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testGeneralData: {fileID: 11400000, guid: 0306591d102933e45969c332dd4de377, type: 2}
+  onTimeScalePaused: 0
+  gameState: 0

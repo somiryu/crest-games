@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 public interface ITimeManagement
 {
     public TimeManager timeManager => TimeManager.Instance;
@@ -8,10 +9,13 @@ public interface ITimeManagement
 public class TimeManager : MonoBehaviour
 {
     private static string instancePrefabPath = "TimeManager";
+    [SerializeField] SimpleGameSequenceItem testGeneralData;
     static TimeManager instance;
     public static TimeManager Instance => instance;
     List<ITimeManagement> users = new List<ITimeManagement>();
     public bool onTimeScalePaused;
+    static string createDate;
+    [HideInInspector] public GameStateLeft gameState;
     [RuntimeInitializeOnLoadMethod]
     private static void RunOnStart()
     {
@@ -20,11 +24,13 @@ public class TimeManager : MonoBehaviour
             var instancePrefab = Resources.Load<TimeManager>(instancePrefabPath);
             instance = GameObject.Instantiate(instancePrefab);
         }
+        createDate = DateTime.Now.ToString();
     }
     private void Awake()
     {
         if(instance != null && instance != this) DestroyImmediate(instance.gameObject);
         instance = this;
+        gameState = GameStateLeft.Abandoned;
         DontDestroyOnLoad(this);
     }
     public void SetNewStopTimeUser(ITimeManagement user)
@@ -57,5 +63,15 @@ public class TimeManager : MonoBehaviour
     {
         users.Clear();
         TestToPlayTime();
+    }
+    public void GetQuitGameAnalytics()
+    {
+        var testAnalytics = testGeneralData.itemAnalytics = new Dictionary<string, object>();
+        testAnalytics.Add(DataIds.created_At, createDate);
+        testAnalytics.Add(DataIds.age, UserDataManager.CurrUser.age);
+        testAnalytics.Add(DataIds.state, gameState);
+        testAnalytics.Add(DataIds.time_Spent, Time.realtimeSinceStartup);
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.test, testAnalytics, UserDataManager.CurrTestID);
+        //Debug.Log("saved test data " + DataIds.TestID + " " + UserDataManager.CurrTestID + " " + createDate + " " + gameState + " "  + " realtime " + Time.realtimeSinceStartup);
     }
 }

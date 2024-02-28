@@ -59,6 +59,10 @@ public class UserData
 		if(tutorialStepsDone.ContainsKey(id)) tutorialStepsDone[id] = true;
 		else tutorialStepsDone.Add(id, true);
 	}
+	public void SetTestData()
+	{
+
+	}
 }
 
 public enum UserGender
@@ -86,4 +90,9 @@ public enum UserLivingWith
 	Uncles = 8,
 	Grandparents = 16,
 	Other = 32,
+}
+public enum GameStateLeft
+{
+	Abandoned,
+	Finished
 }
