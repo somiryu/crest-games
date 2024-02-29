@@ -19,6 +19,7 @@ public class UserDataManager : ScriptableObject
 	private static string defaultUserID = "DefaultUserId";
 
 	private static string currTestID;
+	private static string currInstitutionCode;
 
 	public static string LastCollectionIDStored = null;
 	public static string LastDocumentIDStored = null;
@@ -28,6 +29,12 @@ public class UserDataManager : ScriptableObject
 	{
 		get => string.IsNullOrEmpty(currTestID) ? "Default Test ID" : currTestID;
 		set => currTestID = value;
+	}
+
+	public static string CurrInstitutionCode
+	{
+		get => string.IsNullOrEmpty(currInstitutionCode) ? "Default institution code" : currInstitutionCode;
+		set => currInstitutionCode = value;
 	}
 
 	private static UserDataManager instance;

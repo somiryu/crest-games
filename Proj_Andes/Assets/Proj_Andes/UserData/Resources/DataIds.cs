@@ -101,6 +101,7 @@ public static class DataIds
 
     //General Test analytics
     public const string test = "Test";
+    public const string institutionCode = "code";
     public const string created_At = "created_At";
     public const string age = "edad";
     public const string state = "state";

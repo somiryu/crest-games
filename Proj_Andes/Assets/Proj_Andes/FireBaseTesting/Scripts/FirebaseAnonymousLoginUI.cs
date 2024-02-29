@@ -88,6 +88,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] GameObject dataSyncedPopUp;
 	[SerializeField] TMP_Text dataSyncedLabel;
 
+	[Header("Insert Code screen")]
+	[SerializeField] GameObject insertCodePanel;
+	[SerializeField] TMP_InputField insertCodeInputF;
+	[SerializeField] Button insertCodeConfirm;
+
 	string logInsuccedID;
 
 	bool continueSelectedFlag;
@@ -150,6 +155,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		dataSyncedPopUpOkBtn.onClick.AddListener(() => dataSyncedPopUp.SetActive(false));
 
 		confirmUserBtn.gameObject.SetActive(false);
+
+		insertCodePanel.gameObject.SetActive(true);
+		insertCodeConfirm.onClick.AddListener(OnInsertCodeFinished);
+		insertCodeInputF.onValueChanged.AddListener(OnInsertedCodeChanged);
+		insertCodeConfirm.interactable = false;
 	}
 
 
@@ -250,6 +260,17 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 				else item.Key.gameObject.SetActive(false);
             }
 		}
+	}
+
+	void OnInsertedCodeChanged(string newValue)
+	{
+		insertCodeConfirm.interactable = !string.IsNullOrEmpty(newValue);
+	}
+
+	void OnInsertCodeFinished()
+	{
+		UserDataManager.CurrInstitutionCode = insertCodeInputF.text;
+		insertCodePanel.gameObject.SetActive(false);
 	}
 
 	void RebuildUsersList()

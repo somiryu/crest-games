@@ -67,11 +67,12 @@ public class TimeManager : MonoBehaviour
     public void GetQuitGameAnalytics()
     {
         var testAnalytics = testGeneralData.itemAnalytics = new Dictionary<string, object>();
+        testAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
         testAnalytics.Add(DataIds.created_At, createDate);
         testAnalytics.Add(DataIds.age, UserDataManager.CurrUser.age);
-        testAnalytics.Add(DataIds.state, gameState);
+        testAnalytics.Add(DataIds.state, gameState.ToString());
         testAnalytics.Add(DataIds.time_Spent, Time.realtimeSinceStartup);
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.test, testAnalytics, UserDataManager.CurrTestID);
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.test, testAnalytics);
         //Debug.Log("saved test data " + DataIds.TestID + " " + UserDataManager.CurrTestID + " " + createDate + " " + gameState + " "  + " realtime " + Time.realtimeSinceStartup);
     }
 }
