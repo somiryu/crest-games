@@ -91,7 +91,7 @@ public enum UserLivingWith
 	Grandparents = 16,
 	Other = 32,
 }
-public enum GameStateLeft
+public enum SessionStateLeft
 {
 	Abandoned,
 	Finished

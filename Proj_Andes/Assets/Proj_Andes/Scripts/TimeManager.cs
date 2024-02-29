@@ -15,7 +15,9 @@ public class TimeManager : MonoBehaviour
     List<ITimeManagement> users = new List<ITimeManagement>();
     public bool onTimeScalePaused;
     static string createDate;
-    [HideInInspector] public GameStateLeft gameState;
+    public static string currSessionid;
+    static float timer;
+    [HideInInspector] public SessionStateLeft gameState;
     [RuntimeInitializeOnLoadMethod]
     private static void RunOnStart()
     {
@@ -25,19 +27,33 @@ public class TimeManager : MonoBehaviour
             instance = GameObject.Instantiate(instancePrefab);
         }
         createDate = DateTime.Now.ToString();
+
+    }
+    private void Update()
+    {
+        CountTimeStart();
     }
     private void Awake()
     {
-        if(instance != null && instance != this) DestroyImmediate(instance.gameObject);
+        if (instance != null && instance != this) DestroyImmediate(instance.gameObject);
         instance = this;
-        gameState = GameStateLeft.Abandoned;
+        gameState = SessionStateLeft.Abandoned;
         DontDestroyOnLoad(this);
+    }
+    public void CountTimeStart()
+    {
+        timer += Time.unscaledDeltaTime;
+    }
+    public void ResetSessionTimerAndSave()
+    {
+        GetQuitGameAnalytics();
+        timer = 0;
     }
     public void SetNewStopTimeUser(ITimeManagement user)
     {
         users.Add(user);
         TestToStopTime();
-    }    
+    }
     public void RemoveNewStopTimeUser(ITimeManagement user)
     {
         users.Remove(user);
@@ -45,15 +61,15 @@ public class TimeManager : MonoBehaviour
     }
     void TestToPlayTime()
     {
-        if(users.Count <= 0)
+        if (users.Count <= 0)
         {
             Time.timeScale = 1;
             onTimeScalePaused = false;
         }
-    }    
+    }
     void TestToStopTime()
     {
-        if(users.Count > 0)
+        if (users.Count > 0)
         {
             Time.timeScale = 0;
             onTimeScalePaused = true;
@@ -71,8 +87,8 @@ public class TimeManager : MonoBehaviour
         testAnalytics.Add(DataIds.created_At, createDate);
         testAnalytics.Add(DataIds.age, UserDataManager.CurrUser.age);
         testAnalytics.Add(DataIds.state, gameState.ToString());
-        testAnalytics.Add(DataIds.time_Spent, Time.realtimeSinceStartup);
+        testAnalytics.Add(DataIds.time_Spent, timer);
         UserDataManager.SaveUserAnayticsPerGame(DataIds.test, testAnalytics);
-        //Debug.Log("saved test data " + DataIds.TestID + " " + UserDataManager.CurrTestID + " " + createDate + " " + gameState + " "  + " realtime " + Time.realtimeSinceStartup);
+        //Debug.Log("saved test data " + DataIds.TestID + " " + UserDataManager.CurrTestID + " " + createDate + " " + gameState + " " + " realtime " + timer);
     }
 }

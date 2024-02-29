@@ -484,10 +484,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		uReadyPanel.gameObject.SetActive(true);
 	}
 
-	public void OnReadyConfirmBtnPressed()
+    public void OnReadyConfirmBtnPressed()
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
+
+		TimeManager.Instance.ResetSessionTimerAndSave();
+		
 		if (continueSelectedFlag)
 		{
 			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
