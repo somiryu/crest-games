@@ -56,7 +56,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	public int clickRepetitions;
 	public int lostByCheat;
 	public int magnetsCollected;
-
+	IEnumerator onCoinLost;
     public void Awake()
 	{
 		if(instance != null && instance != this) DestroyImmediate(instance);
@@ -88,7 +88,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);
 		trapImage.gameObject.SetActive(false);
 		eogManager.OnGameStart();
-	}
+
+    }
 
 	private void Start()
 	{
@@ -128,11 +129,14 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
             var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseGlobalPosition.z = 0;
 			attempts++;
-			if(gameConfigs.activeCheats && attempts > 1)
+			if(gameConfigs.activeCheats && attempts > 5)
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
 				lostByCheat++;
-				StartCoroutine(ShowTrapSign());
+				currEnergyPicked -= gameConfigs.coinsOnFailure;
+				GeneralGameAnalyticsManager.Instance.OnLostCoinLose(currEnergyPicked, gameConfigs.coinsOnFailure);
+                inGame_currPointsTextUI.text = currEnergyPicked.ToString();
+                StartCoroutine(ShowTrapSign());
 			}
 			magnetRangeIndicator.ShowAt(mouseGlobalPosition);
 			

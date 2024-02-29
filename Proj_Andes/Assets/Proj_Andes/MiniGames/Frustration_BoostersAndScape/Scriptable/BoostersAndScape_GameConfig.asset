@@ -21,3 +21,4 @@ MonoBehaviour:
   forceToFail: 1
   updateScene: 0
   extraAttemptsBeforeFailing: 5
+  coinsOnFailure: 3

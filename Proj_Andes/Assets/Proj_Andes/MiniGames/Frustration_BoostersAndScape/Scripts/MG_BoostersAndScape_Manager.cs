@@ -203,6 +203,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     void Onfailed()
     {
         Debug.Log("Failed boost");
+        successfulAttempts -= gameConfig.coinsOnFailure;
+        if (successfulAttempts < 0) successfulAttempts = 0;
         GeneralGameAnalyticsManager.RegisterLose();
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
