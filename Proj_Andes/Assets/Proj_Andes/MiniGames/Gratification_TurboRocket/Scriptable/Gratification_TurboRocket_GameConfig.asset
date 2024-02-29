@@ -20,4 +20,4 @@ MonoBehaviour:
   accelerationSpeed: 5
   regularRideDuration: 200
   starsAmount: 17
-  deaccelerationTime: 10
+  deacceleration: 2.5

@@ -43,12 +43,19 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
 
     IEnumerator CameraMovement()
     {
+        player.onDoneAnim = false;
         anim.enabled = true;
         player.onPlay = false;
         anim.SetTrigger("RideIntro");
         yield return new WaitForSeconds(timeRef);
         player.onPlay = true;
         anim.enabled = false;
+        if(player is TutorialManager_Gratification_TurboRocket tuto)
+        {
+            tuto.InitTuto();
+        }
+        player.onDoneAnim = true;
+        player.camCC.Init();
         StopCoroutine(cameraInstruction);   
     }
 	public void EndOfGame()

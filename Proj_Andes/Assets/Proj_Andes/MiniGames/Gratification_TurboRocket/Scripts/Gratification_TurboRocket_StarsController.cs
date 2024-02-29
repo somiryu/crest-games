@@ -13,6 +13,7 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float step = 1f;
     [SerializeField] float yOfsetLimit = 0.1f;
+    float targetSpeed;
 
     public Collider starColl;
 
@@ -86,8 +87,16 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
 
     private void ReturnObjectToInitialPosition()
     {
-        transform.position = Vector3.MoveTowards(transform.position, initialPosition, moveSpeed * Time.deltaTime);
-        if(transform.position == initialPosition) isInitialPosition = true;
+        targetSpeed = player.playerCurrentTargetSpeed - 2;
+        var movX = Mathf.Lerp(transform.position.x, initialPosition.x, targetSpeed * Time.deltaTime);
+        var movY = Mathf.Lerp(transform.position.y, initialPosition.y, targetSpeed * Time.deltaTime);
+        transform.position = new Vector3(movX, movY);
+        //transform.position = Vector3.MoveTowards(transform.position, initialPosition, targetSpeed * Time.deltaTime);
+        if(transform.position == initialPosition)
+        {
+            isInitialPosition = true;
+            targetSpeed = moveSpeed;
+        }
     }
 
     public void Deactivate()

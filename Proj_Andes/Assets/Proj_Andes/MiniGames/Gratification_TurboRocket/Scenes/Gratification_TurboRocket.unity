@@ -29739,6 +29739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioInstruction
       objectReference: {fileID: 0}
+    - target: {fileID: 2500960040834178063, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 595.78015
@@ -45449,7 +45453,7 @@ MonoBehaviour:
   starsText: {fileID: 1383071271}
   progressSlider: {fileID: 922937575}
   cam: {fileID: 519420031}
-  timeRef: 1.6
+  timeRef: 2.1
   anim: {fileID: 519420034}
 --- !u!114 &1380917381
 MonoBehaviour:

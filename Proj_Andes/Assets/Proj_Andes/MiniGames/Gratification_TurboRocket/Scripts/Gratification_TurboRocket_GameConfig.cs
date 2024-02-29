@@ -13,7 +13,7 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public float accelerationSpeed;
     public float regularRideDuration;
     public int starsAmount;
-    public float deaccelerationTime;
+    public float deacceleration;
     [HideInInspector][NonSerialized] public int coinsCollected;
 
     [NonSerialized] public int turboUsedTimes;

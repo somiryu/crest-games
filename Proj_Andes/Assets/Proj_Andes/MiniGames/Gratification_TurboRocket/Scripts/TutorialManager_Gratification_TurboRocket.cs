@@ -47,7 +47,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     float yMoveProgress = 0f;
     float startYPos = 0f;
 
-
+    float currentTargetAcceleration;
 
     Animator characterAnimator;
 
@@ -64,6 +64,12 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     Action iTurboRocketManager.OnScoreChanges { get => OnScoreChanged; set { } }
 
     public Transform myTransform => transform;
+
+    public float playerCurrentTargetSpeed => currentTargetAcceleration;
+
+    bool iTurboRocketManager.onDoneAnim { get; set; }
+    Gratification_TurboRocket_CameraController iTurboRocketManager.camCC => camCC;
+
     public bool endOfTuto;
     private void Awake()
     {
@@ -100,16 +106,16 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         currentSpeed = levelConfig.regularSpeed;
         currentTargetSpeed = levelConfig.regularSpeed;
         bk.Init();
-
-        InitTuto();
-
+        //InitTuto();
+        turboBtn.gameObject.SetActive(false);
 
         SetSpeedway();
         firstPos = transform.position;
-        camCC.Init();
+        //camCC.Init();
         gameStages = GameStages.Start;
+        currentTargetAcceleration = gameConfig.accelerationSpeed;
     }
-    void InitTuto()
+    public void InitTuto()
     {
         tutorialSteps[0].stepClickableObj = bk.starsSpawner.stars[0].starColl;
         tutorialSteps[1].stepClickableObj = bk.starsSpawner.stars[1].starColl;
@@ -153,7 +159,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     }
     void Update()
     {
-        if (!onPlay) return;
+        if (!onPlay && !iTurboRocketManager.Instance.onDoneAnim) return;
 		TutoProgress();
 		if (!endOfTuto)
         {
@@ -191,7 +197,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
     void ContinuousMovement()
     {
-        currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, levelConfig.accelerationSpeed * Time.deltaTime);
+        currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, currentTargetAcceleration * Time.deltaTime);
         if (onPlay)
         {
             var movementToAdd = Vector3.right * currentSpeed * Time.deltaTime;
@@ -224,14 +230,14 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     public void OnExitTurboMode()
     {
         characterAnimator.SetTrigger("Normal");
-        currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
         turboParticles.Stop();
         turboAnimObj.SetActive(false);
         turboSFX.Stop();
-
-
+        currentTargetAcceleration = gameConfig.deacceleration;
+        currentTargetSpeed = gameConfig.regularSpeed;
         onTurbo = false;
+
     }
     void CollisionManagement(Collider collider)
     {
