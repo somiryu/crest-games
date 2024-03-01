@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using System.Net.Sockets;
+using System.Numerics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Vector3 = UnityEngine.Vector3;
 
 public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 {
@@ -38,6 +41,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TMP_Text currRoundValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Slider timerUI;
+    GameUIController gameUi => GameUIController.Instance;
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
@@ -153,16 +157,17 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
 
-		GeneralGameAnalyticsManager.RegisterLose();
+        GeneralGameAnalyticsManager.RegisterLose();
 
 
-		audiosource.clip = wrongAudio;
+        audiosource.clip = wrongAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnWrongAnswer;
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
-
         if (currShowingRight) RIncorrectparticle.Play();
         else LIncorrectparticle.Play();
+        StartCoroutine(gameUi.StarLost());
+
 
         OnRoundEnded();
     }
@@ -174,15 +179,25 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
 
+
 		GeneralGameAnalyticsManager.RegisterWin();
 		roundAnalytics.wonRound = true;
 
         audiosource.clip = correctAudio;
         audiosource.Play();
         currCoins += gameConfigs.coinsOnCorrectAnswer;
-        if (currShowingRight) RCorrectparticle.Play();
-        else LCorrectparticle.Play();
-
+        Vector3 starPos;
+        if (currShowingRight)
+        {
+            starPos = rightBtn.transform.position;
+            RCorrectparticle.Play();
+        }
+        else
+        {
+            starPos = leftBtn.transform.position;
+            LCorrectparticle.Play();
+        }
+        gameUi.StarEarned(starPos);
         OnRoundEnded();
     }
 

@@ -25,6 +25,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] Image trapImage;
 	[SerializeField] TMP_Text inGame_currPointsTextUI;
 	[SerializeField] Animator noLeftMagnetsAnims;
+	GameUIController gameUi => GameUIController.Instance;
 
 	[Header("after action UI")]
 	[SerializeField] GameObject afterActionPanel;
@@ -132,6 +133,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
 				lostByCheat++;
+				StartCoroutine(gameUi.StarLost());
 				StartCoroutine(ShowTrapSign());
 			}
 			magnetRangeIndicator.ShowAt(mouseGlobalPosition);
@@ -214,6 +216,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	void OnPicketEnergyItem(MG_MagnetsEnergyItem itemPicked)
 	{
 		GeneralGameAnalyticsManager.RegisterWin();
+		gameUi.StarEarned(itemPicked.transform.position);
 		itemPicked.OnWasPicked();
 		audiosource.clip = capturedItemSfx;
 		audiosource.Play();

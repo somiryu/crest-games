@@ -33,7 +33,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] TextMeshProUGUI constantScoreText;
     [SerializeField] Image trapImage;
-    [SerializeField] GameUIController gameUIController;
+    [SerializeField] GameUIController gameUIController => GameUIController.Instance;
 
     [SerializeField] EndOfGameManager eogManager;
     [SerializeField] GameObject inGameObj;
@@ -159,6 +159,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
             if (currentBooster.Boosteable())
             {
                 OnBoostered(currentBooster);
+                gameUIController.StarEarned(rocket.transform.position);
             }
             else Onfailed();
         }
@@ -204,6 +205,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     {
         Debug.Log("Failed boost");
         GeneralGameAnalyticsManager.RegisterLose();
+        StartCoroutine(gameUIController.StarLost());
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
@@ -265,7 +267,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     {
         var newRandomFailIdx = Random.Range(gameConfig.extraAttemptsBeforeFailing, gameConfig.boostersPerRun);
         if (forcedFails.Contains(newRandomFailIdx)) return GenerateRandom();
-        Debug.Log("will fail at: " + newRandomFailIdx);
         return newRandomFailIdx;
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Tymski;
+using UnityEditorInternal.Profiling.Memory.Experimental;
+using UnityEditor.Animations;
 
 public class GameUIController : MonoBehaviour, ITimeManagement
 {
@@ -18,18 +20,29 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     [SerializeField] Sprite soundDeactivated;
     int soundActive;
     [SerializeField] Image tutorialImg;
+    [SerializeField] Image coinBk;
+    [SerializeField] Pool<ScoreStarsController> pool = new Pool<ScoreStarsController>();
+    [SerializeField] Transform starsContainer;
+    [SerializeField] Transform parent;
+    [SerializeField] ScoreStarsController starPrefab;
     public bool onPause;
+    Animator anim;
     private void Awake()
     {
         if (instance != null && instance != this) DestroyImmediate(this);
+        instance = this;
     }
     void Start()
     {
+        TryGetComponent(out anim);
+        anim.enabled = false;
         homeBtn.onClick.AddListener(OpenMenu);
         continueBtn.onClick.AddListener(Continue);
         exitBtn.onClick.AddListener(ExitGame);
         onPause = false;
         //Audio active by default
+        pool.Init(40);
+
         soundActive = 1;
         soundActive = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundActive);
         ActivateSound(soundActive == 1);
@@ -42,7 +55,7 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         menuContainer.gameObject.SetActive(true);
         onPause = true;
         TimeManager.Instance.SetNewStopTimeUser(this);
-        if(CatchCoinsAudioInstruction.Instance != null)
+        if (CatchCoinsAudioInstruction.Instance != null)
         {
             if (CatchCoinsAudioInstruction.Instance.startedCorr)
             {
@@ -72,9 +85,9 @@ public class GameUIController : MonoBehaviour, ITimeManagement
 
     void SwitchAudioActive()
     {
-		var newValue = !AudioManager.Instance.currentBkMusic.isPlaying;
+        var newValue = !AudioManager.Instance.currentBkMusic.isPlaying;
         ActivateSound(newValue);
-	}
+    }
 
     void ActivateSound(bool activated)
     {
@@ -85,10 +98,24 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         }
         else
         {
-			AudioManager.Instance.currentBkMusic.Stop();
-			musicBtn.image.sprite = soundDeactivated;
+            AudioManager.Instance.currentBkMusic.Stop();
+            musicBtn.image.sprite = soundDeactivated;
         }
 
-        PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activated? 1: 0);
+        PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activated ? 1 : 0);
+    }
+    public void StarEarned(Vector3 initPos)
+    {
+        var newStar = pool.GetNewItem();
+        newStar.Init(initPos, starsContainer.transform.position, pool);
+
+    }
+    public IEnumerator StarLost()
+    {
+        anim.enabled = true;
+        anim.SetTrigger("CoinLost");
+        yield return new WaitForSeconds(0.5f);
+        anim.enabled = false;
+        coinBk.color = Color.white;
     }
 }

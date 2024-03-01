@@ -31,6 +31,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUIPanel;
+    GameUIController gameUi => GameUIController.Instance;
 
     [SerializeField] AudioClip correctAudio;
     [SerializeField] AudioClip wrongAudio;
@@ -212,6 +213,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
         if (currShowingRight) RIncorrectparticle.Play();
         else LIncorrectparticle.Play();
+        StartCoroutine(gameUi.StarLost());
 
         if (currTutoStep.tutorialSteps == TutorialStepsHandS.HighlightedRight
             || currTutoStep.tutorialSteps == TutorialStepsHandS.HighlightedLeft)
@@ -235,8 +237,18 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
         audiosource.clip = correctAudio;
         audiosource.Play();
-        if (currShowingRight) RCorrectparticle.Play();
-        else LCorrectparticle.Play();
+        Vector3 starPos;
+        if (currShowingRight)
+        {
+            starPos = rightBtn.transform.position;
+            RCorrectparticle.Play();
+        }
+        else
+        {
+            starPos = leftBtn.transform.position;
+            LCorrectparticle.Play();
+        }
+        gameUi.StarEarned(starPos);
 
         currConsecutiveLoses = 0;
         currConsecutiveWins += 1;
