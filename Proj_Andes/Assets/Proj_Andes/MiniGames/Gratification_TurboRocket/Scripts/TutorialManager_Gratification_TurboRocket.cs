@@ -111,7 +111,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
         SetSpeedway();
         firstPos = transform.position;
-        //camCC.Init();
+        camCC.Init();
         gameStages = GameStages.Start;
         currentTargetAcceleration = gameConfig.accelerationSpeed;
     }

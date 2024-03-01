@@ -106,7 +106,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 		currentTargetSpeed = levelConfig.regularSpeed;
 		bk.Init();
 		SetSpeedway();
-        //camCC.Init();
+        camCC.Init();
 		firstPos = transform.position;
         onPlay = true;
         gameStages = GameStages.Start;

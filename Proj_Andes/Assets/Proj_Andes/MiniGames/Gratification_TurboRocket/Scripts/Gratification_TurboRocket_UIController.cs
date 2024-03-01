@@ -55,7 +55,6 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
             tuto.InitTuto();
         }
         player.onDoneAnim = true;
-        player.camCC.Init();
         StopCoroutine(cameraInstruction);   
     }
 	public void EndOfGame()
