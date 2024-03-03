@@ -160,6 +160,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		insertCodeConfirm.onClick.AddListener(OnInsertCodeFinished);
 		insertCodeInputF.onValueChanged.AddListener(OnInsertedCodeChanged);
 		insertCodeConfirm.interactable = false;
+		UserDataManager.Instance.SetCurrUser(null);
 	}
 
 
@@ -489,7 +490,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
-		TimeManager.Instance.ResetSessionTimerAndSave();
+		TimeManager.timer = 0;
 		
 		if (continueSelectedFlag)
 		{

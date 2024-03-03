@@ -16,7 +16,7 @@ public class TimeManager : MonoBehaviour
     public bool onTimeScalePaused;
     static string createDate;
     public static string currSessionid;
-    static float timer;
+    public static float timer;
     [HideInInspector] public SessionStateLeft gameState;
     [RuntimeInitializeOnLoadMethod]
     private static void RunOnStart()
@@ -49,6 +49,7 @@ public class TimeManager : MonoBehaviour
         GetQuitGameAnalytics();
         timer = 0;
     }
+
     public void SetNewStopTimeUser(ITimeManagement user)
     {
         users.Add(user);
