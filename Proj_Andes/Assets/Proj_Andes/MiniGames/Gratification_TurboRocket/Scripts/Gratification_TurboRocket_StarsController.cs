@@ -37,8 +37,7 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         iTurboRocketManager.Instance.starsGatheredCount++;
         StartCoroutine( _OnCapturedwithDelay());
-       
-        Debug.Log("caught star");
+        GameUIController.Instance.StarEarned(Camera.main.WorldToScreenPoint(transform.position));
         player.OnScoreChanges?.Invoke();
 
     }

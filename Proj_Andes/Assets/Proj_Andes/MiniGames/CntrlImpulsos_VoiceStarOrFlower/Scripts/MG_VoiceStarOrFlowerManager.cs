@@ -216,6 +216,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         lostRoundsCount++;
         incorrectParticles.Play();
         audioPlayer.PlayOneShot(wrongAudio);
+        GameUIController.Instance.StarLost();
 
         OnRoundEnded();
     }
@@ -241,6 +242,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 			wonRightCount++;
         }
 
+        GameUIController.Instance.StarEarned(currTargetImg.transform.position);
         correctParticles.Play();
 
         audioPlayer.PlayOneShot(correctAudio);

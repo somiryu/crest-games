@@ -135,8 +135,9 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 				mouseGlobalPosition = GetBadMousePosition(0);
 				lostByCheat++;
 				currEnergyPicked -= gameConfigs.coinsOnFailure;
+				currEnergyPicked = Mathf.Max(currEnergyPicked, 0);
                 inGame_currPointsTextUI.text = currEnergyPicked.ToString();
-				StartCoroutine(gameUi.StarLost());
+				gameUi.StarLost();
 				StartCoroutine(ShowTrapSign());
 			}
 			magnetRangeIndicator.ShowAt(mouseGlobalPosition);

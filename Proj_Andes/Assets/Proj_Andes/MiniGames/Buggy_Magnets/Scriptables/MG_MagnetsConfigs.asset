@@ -23,7 +23,7 @@ MonoBehaviour:
   activeCheats: 1
   energyItemsLifeTime: 10
   itemsAmountToSpawn: 3
-  coinsOnFailure: -5
+  coinsOnFailure: 5
   startFaillingAfterAttemps: 5
   timeBetweenSpawnsPerDifficultLevel:
     valueBase: 2

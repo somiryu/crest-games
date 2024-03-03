@@ -33,7 +33,6 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     void Start()
     {
         TryGetComponent(out anim);
-        anim.enabled = false;
         homeBtn.onClick.AddListener(OpenMenu);
         continueBtn.onClick.AddListener(Continue);
         exitBtn.onClick.AddListener(ExitGame);
@@ -110,12 +109,8 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         newStar.Init(initPos, finalPos, pool);
 
     }
-    public IEnumerator StarLost()
+    public void StarLost()
     {
-        anim.enabled = true;
-        anim.SetTrigger("CoinLost");
-        yield return new WaitForSeconds(0.5f);
-        anim.enabled = false;
-        coinBk.color = Color.white;
+		anim.SetTrigger("OnCoinLost");
     }
 }

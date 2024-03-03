@@ -157,6 +157,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
     public void OnPlayerFailedHook()
 	{
 		GeneralGameAnalyticsManager.RegisterLose();
+		GameUIController.Instance.StarLost();
 		currPlayerLifes--;
 		totalCapturedAsteroids -= 2;
 		totalCapturedAsteroids = Mathf.Max(totalCapturedAsteroids, 0);

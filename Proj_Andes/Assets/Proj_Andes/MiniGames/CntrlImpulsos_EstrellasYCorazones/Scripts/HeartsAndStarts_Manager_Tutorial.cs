@@ -213,7 +213,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
         if (currShowingRight) RIncorrectparticle.Play();
         else LIncorrectparticle.Play();
-        StartCoroutine(gameUi.StarLost());
+        gameUi.StarLost();
 
         if (currTutoStep.tutorialSteps == TutorialStepsHandS.HighlightedRight
             || currTutoStep.tutorialSteps == TutorialStepsHandS.HighlightedLeft)

@@ -164,7 +164,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 				if (currentBooster.Boosteable())
 				{
 					OnBoostered(currentBooster);
-					gameUIController.StarEarned(rocket.transform.position);
 				}
 				else Onfailed();
 			}
@@ -215,24 +214,25 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         successfulAttempts -= gameConfig.coinsOnFailure;
         if (successfulAttempts < 0) successfulAttempts = 0;
         GeneralGameAnalyticsManager.RegisterLose();
-        StartCoroutine(gameUIController.StarLost());
+        gameUIController.StarLost();
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
         onBoost = true;
         targetTime = 0.3f;
         boostersActivated++;
-		GeneralGameAnalyticsManager.RegisterWin();
+        GeneralGameAnalyticsManager.RegisterWin();
         Debug.Log("Boosted");
 
-		alienMov.OnBoosted();
+        alienMov.OnBoosted();
         booster.Boosted();
         spawner.spawner.nextSpawnTime = targetTime;
         successfulAttempts++;
         characterAnims.SetTrigger("Turbo");
         timer = 0;
-         
-        
+
+        gameUIController.StarEarned(Camera.main.WorldToScreenPoint(rocket.transform.position));
+
         audiosource.clip = boosteredAudio;
         audiosource.Play();
         boostedParticles.Play();

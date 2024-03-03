@@ -166,7 +166,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         currCoins = Mathf.Max(currCoins, gameConfigs.initialCoins);
         if (currShowingRight) RIncorrectparticle.Play();
         else LIncorrectparticle.Play();
-        StartCoroutine(gameUi.StarLost());
+        gameUi.StarLost();
 
 
         OnRoundEnded();

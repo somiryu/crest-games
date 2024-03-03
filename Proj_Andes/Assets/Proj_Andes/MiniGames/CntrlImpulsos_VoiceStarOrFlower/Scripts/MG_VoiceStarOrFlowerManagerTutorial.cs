@@ -307,6 +307,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     {
         button.image.color = color;
         highlightImg.gameObject.SetActive(highlight);
+
     }
 
 	private void OnClickedLeft()

@@ -178,7 +178,7 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         incorrectParticles.Stop();
 
         GeneralGameAnalyticsManager.RegisterLose();
-
+        GameUIController.Instance.StarLost();
         audiosource.clip = wrongAudio;
         audiosource.Play();
 
@@ -208,9 +208,10 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         audiosource.Play();
 
         GeneralGameAnalyticsManager.RegisterWin();
+		GameUIController.Instance.StarEarned(Input.mousePosition);
 
 
-        correctParticles.Play();
+		correctParticles.Play();
         for (int i = 0; i < skinObjAnim.Length; i++)
         {
 
