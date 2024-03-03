@@ -34,11 +34,14 @@ public class Spawner<T> where T : Component
     public void Tick()
     {
         timer += Time.deltaTime;
+        Debug.Log("Next spawn time: " + nextSpawnTime);
         if(timer >= nextSpawnTime)
         {
+            Debug.Log("Spawning new item");
             SpawnNewItem();
             timer = 0;
             nextSpawnTime = GetNextSpawnTime();
+            Debug.Log("New spawn time gotten: " + nextSpawnTime);
         }
     }
     public void SpawnNewItem()

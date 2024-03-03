@@ -40,6 +40,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
     [Header("Game Audio")]
     [SerializeField] AudioClip boosteredAudio;
+    [SerializeField] AudioClip onFailedAudio;
     private AudioSource audiosource;
 
 
@@ -102,6 +103,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 	private void Start()
 	{
         GeneralGameAnalyticsManager.Instance.Init(DataIds.boostersAndScapeGame);
+		spawner.spawner.SpawnNewItem();
 	}
 
 	void UpdateCharacterAnimRef(Transform newCharacterArtObj)
@@ -127,6 +129,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
             }
             timer = 0;
             MoveToNextPos(currentBooster);
+            spawner.spawner.SpawnNewItem();
         }
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
@@ -155,17 +158,20 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
                 tutorialAnims.gameObject.SetActive(false);
                 if (currStepTurorial == 3) UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
             }
-            if (gameConfig.forceToFail) ForcedToFail();
-            if (currentBooster.Boosteable())
+
+            if (!TryForcedToFail())
             {
-                OnBoostered(currentBooster);
-            }
-            else Onfailed();
-        }
+				if (currentBooster.Boosteable())
+				{
+					OnBoostered(currentBooster);
+				}
+				else Onfailed();
+			}
+			else Onfailed();
+		}
         if (successfulAttempts == gameConfig.boostersPerRun)
         {
             OnGameEnd();
-            Debug.Log("You won!");
             rocket.transform.position = Vector3.right * 5 * Time.deltaTime;
         }
         if (alien.transform.position.x >= rocket.transform.position.x) OnGameEnd();
@@ -203,6 +209,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     void Onfailed()
     {
         Debug.Log("Failed boost");
+        audiosource.clip = onFailedAudio;
+        audiosource.Play();
+        successfulAttempts -= gameConfig.coinsOnFailure;
+        if (successfulAttempts < 0) successfulAttempts = 0;
         GeneralGameAnalyticsManager.RegisterLose();
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
@@ -238,20 +248,23 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         alienMov.MoveToNextPoint();
     }
 
-    public void ForcedToFail()
+    public bool TryForcedToFail()
     {
+        if (!gameConfig.forceToFail) return false;
 		for (int i = 0; i < forcedFails.Count; i++)
         {
             if (totalAttempts == forcedFails[i])
             {
                 forcedFails.Remove(forcedFails[i]);
                 onTrapMode = true;
-				StartCoroutine(ShowTrapSign());
-				GeneralGameAnalyticsManager.RegisterLose();
+                StartCoroutine(ShowTrapSign());
+                GeneralGameAnalyticsManager.RegisterLose();
                 lostByCheat++;
-			}
-			else onTrapMode = false;
+                break;
+            }
+            else onTrapMode = false;
         }
+        return onTrapMode;
     }
 
 	IEnumerator ShowTrapSign()

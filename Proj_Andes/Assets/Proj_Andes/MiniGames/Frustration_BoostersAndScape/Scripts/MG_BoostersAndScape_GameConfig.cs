@@ -11,6 +11,7 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     public bool forceToFail;
     public bool updateScene;
     public int extraAttemptsBeforeFailing;
+    public int coinsOnFailure;
 
     public override string GetSceneID() => DataIds.boostersAndScapeGame;
 

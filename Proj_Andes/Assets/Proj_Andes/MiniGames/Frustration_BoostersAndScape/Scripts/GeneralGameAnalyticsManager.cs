@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -41,7 +42,6 @@ public class GeneralGameAnalyticsManager : MonoBehaviour
 		analytics.timesBetweenClicks.Add(clickTimer);
 		clickTimer = 0;
 	}
-
 
 	public static void RegisterWin() => instance.analytics.achievements++;
 	public static void RegisterLose() => instance.analytics.losses++;
