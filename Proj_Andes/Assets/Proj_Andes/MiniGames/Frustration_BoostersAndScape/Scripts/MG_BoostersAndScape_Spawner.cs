@@ -30,7 +30,7 @@ public class MG_BoostersAndScape_Spawner : MonoBehaviour, iSpawnerUsers<MG_Boost
     void Update()
     {
         if (!manager.onPlay) return;
-        spawner.Tick();
+        //spawner.Tick();
     }
     public void OnGameStart()
     {
