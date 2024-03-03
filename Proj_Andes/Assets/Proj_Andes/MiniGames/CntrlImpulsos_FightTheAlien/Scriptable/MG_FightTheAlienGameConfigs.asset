@@ -15,7 +15,7 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: 8bed209e6ffcec6428298b17b507740a, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_FightTheAlien/Scenes/CntrlImpulsos_FightTheAlien.unity
-  timePerChoice: 8
+  timePerChoice: 11
   PlayerHealth: 10
   EnemyHealth: 10
   initialCoins: 0

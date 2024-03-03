@@ -60234,6 +60234,7 @@ MonoBehaviour:
   eogManager: {fileID: 1081376033}
   inGameObj: {fileID: 29129434}
   boosteredAudio: {fileID: 8300000, guid: a6edc9da5ed60c64899f020ecce72b72, type: 3}
+  onFailedAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   boostedParticles: {fileID: 1347409978}
   incorrectParticles: {fileID: 0}
   skinObj: {fileID: 45429923}

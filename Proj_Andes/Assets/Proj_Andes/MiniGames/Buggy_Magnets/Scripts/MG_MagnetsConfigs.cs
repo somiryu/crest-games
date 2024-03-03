@@ -14,6 +14,8 @@ public class MG_MagnetsConfigs : GameConfig
 	public bool activeCheats;
 	public float energyItemsLifeTime = 5;
 	public int itemsAmountToSpawn = 3;
+    public int coinsOnFailure;
+    public int startFaillingAfterAttemps = 5;
 
 	public DifficultyModificatorFloat timeBetweenSpawnsPerDifficultLevel;
     

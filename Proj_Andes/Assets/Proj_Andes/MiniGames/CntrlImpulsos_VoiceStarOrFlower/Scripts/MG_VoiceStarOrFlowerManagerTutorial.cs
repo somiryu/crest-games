@@ -83,6 +83,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     int currScoreStepTutorial;
     int goalScoreStepTutorial;
     int trialsPerTutoCount;
+    int failurePerTutoCount;
     AudioClip currSound;
 
     public void Awake()
@@ -137,8 +138,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     private void InitTutorialStep()
     {
-        Debug.Log("tutorial" + currStepTutorial);
         trialsPerTutoCount = 0;
+        failurePerTutoCount = 0;
 
         if (currStepTutorial == 0)
         {
@@ -205,12 +206,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 			ResetScore();
 		}
 
-		if (currStepTutorial == 5)
-        {
-            UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
-
-            GameSequencesList.Instance.GoToNextItemInList();
-        }
+		if (currStepTutorial == 5) CompleteTuto();
 
         currScoreStepTutorial = 0;
 
@@ -219,7 +215,11 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         discardBtn.gameObject.SetActive(hasDiscardButtton);
         
     }
-
+    void CompleteTuto()
+    {
+        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
+        GameSequencesList.Instance.GoToNextItemInList();
+    }
     void ResetScore()
     {
         leftWonItemsPool.RecycleAll();
@@ -333,7 +333,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 	private void OnWrongChoice()
     {
         currScoreStepTutorial = 0;
-
+        failurePerTutoCount++;
         incorrectParticles.Stop();
         correctParticles.Stop();
 
@@ -411,6 +411,11 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         {
             currStepTutorial += 1;
             InitTutorialStep();
+        }
+        else if (currStepTutorial == 4 && failurePerTutoCount >= gameConfigs.finalTutoStepMaxFailuresBeforeSkipping)
+        {
+            CompleteTuto();
+            return;
         }
         InitRound();
     }

@@ -160,6 +160,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		insertCodeConfirm.onClick.AddListener(OnInsertCodeFinished);
 		insertCodeInputF.onValueChanged.AddListener(OnInsertedCodeChanged);
 		insertCodeConfirm.interactable = false;
+		UserDataManager.Instance.SetCurrUser(null);
 	}
 
 
@@ -484,10 +485,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		uReadyPanel.gameObject.SetActive(true);
 	}
 
-	public void OnReadyConfirmBtnPressed()
+    public void OnReadyConfirmBtnPressed()
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
+
+		TimeManager.timer = 0;
+		
 		if (continueSelectedFlag)
 		{
 			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
