@@ -14,7 +14,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
     public Transform character;
     Vector3 firstPos;
-    float currentTargetSpeed;
+    public float currentTargetSpeed;
+    float currentTargetAcceleration;
     SphereCollider myCollider;
     Collider[] colls;
     [HideInInspector] public int starsGatheredCount { get; set; }
@@ -40,7 +41,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     [SerializeField] AnimationCurve ySpeedCurve;
 	float yMoveProgress = 0f;
     float startYPos = 0f;
-
+    IEnumerator turboDeacceleration;
 
 
 	[SerializeField] Animator characterAnimator;
@@ -55,11 +56,17 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     float targetYPos;
     float playerRanXSpace;
 
-    //public float CurrProgress { get => (playerRanXSpace / bk.bkSize.localScale.x); }
     public float CurrProgress { get => (playerRanXSpace / (finalSpin.transform.position -firstPos).magnitude); }
     public Vector3 CurrPos => transform.position;
     float iTurboRocketManager.playerCurrentSpeed { get => currentSpeed; }
     public Transform myTransform { get => transform; }
+
+    public float playerCurrentTargetSpeed => currentTargetAcceleration;
+
+
+    bool iTurboRocketManager.onDoneAnim { get; set; }
+
+    public bool onAnim;
 
     private void Awake()
     {
@@ -77,7 +84,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
-        //camCC = GetComponentInChildren<Gratification_TurboRocket_CameraController>();
         eogManager.OnGameStart();
 	}
 
@@ -104,7 +110,9 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 		firstPos = transform.position;
         onPlay = true;
         gameStages = GameStages.Start;
-	}
+        currentTargetAcceleration = gameConfig.accelerationSpeed;
+
+    }
 
 	void SetSpeedway()
     {
@@ -121,7 +129,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
     void Update()
     {
-        if (!onPlay) return;
+        if (!onPlay || !iTurboRocketManager.Instance.onDoneAnim) return;
+
         ContinuousMovement();
         if (Input.GetMouseButtonDown(0) &&!EventSystem.current.IsPointerOverGameObject())
         {
@@ -134,13 +143,12 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
         var collsAmt = Physics.OverlapSphereNonAlloc(myCollider.transform.position, myCollider.radius, colls);
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
-
     }
 
 
     void ContinuousMovement()
     {
-        currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, levelConfig.accelerationSpeed * Time.deltaTime);
+        currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, currentTargetAcceleration * Time.deltaTime);
         timer += Time.deltaTime;
         if (timer <= levelConfig.regularRideDuration)
         {
@@ -171,24 +179,27 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         turboAnimObj.SetActive(true);
         turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
+        currentTargetAcceleration = levelConfig.accelerationSpeed;
         camCC.OnEnterTurbo();
 
         gameConfig.turboUsedTimes++;
         onTurbo = true;
+
     }
     public void OnExitTurboMode()
     {
         characterAnimator.ResetTrigger("Turbo");
 		characterAnimator.SetTrigger("Normal");
-		currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
         turboParticles.Stop();
         turboAnimObj.SetActive(false);
         turboSFX.Stop();
-
-
+        currentTargetAcceleration = gameConfig.deacceleration;
+        currentTargetSpeed = gameConfig.regularSpeed;
         onTurbo = false;
     }
+
+
     void CollisionManagement(Collider collider)
     {
         if (collider.CompareTag("Finish")) EndOfRide();
@@ -196,6 +207,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         {
             if (onTurbo) return;
             if (star.isCaptured) return;
+            if (!star.isInitialPosition) return;
             Debug.Log("Collectd coin");
             star.OnCaptured();
             GeneralGameAnalyticsManager.RegisterWin();
@@ -211,6 +223,9 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         ride.totalRideDuration = timer;
         ride.totalStars = levelConfig.starsAmount;
         data = ride;
+        starsGatheredCount += 3;
+        OnScoreChanges?.Invoke();
+
         bk.EndOfGame();
 
         gameConfig.totalRideTime = timer;
@@ -259,8 +274,11 @@ public interface iTurboRocketManager
     public float CurrProgress { get; }
     Vector3 CurrPos => myTransform.position;
     public float playerCurrentSpeed { get; }
+    public float playerCurrentTargetSpeed { get; }
     public bool onPlay { get; set; }
+    public bool onDoneAnim { get; set; }
     public bool onTurbo { get; set; }
+    public Gratification_TurboRocket_CameraController camCC => camCC;   
     public Action OnScoreChanges { get; set; }
     public void RideBegining();
     public void OnEnterTurboMode();
