@@ -42,11 +42,6 @@ public class GeneralGameAnalyticsManager : MonoBehaviour
 		analytics.timesBetweenClicks.Add(clickTimer);
 		clickTimer = 0;
 	}
-	public void OnLostCoinLose(int localCoinCount, int onFailCoinLose)
-	{
-        localCoinCount -= onFailCoinLose;
-		Debug.Log("new lost count " + localCoinCount);
-    }
 
 	public static void RegisterWin() => instance.analytics.achievements++;
 	public static void RegisterLose() => instance.analytics.losses++;

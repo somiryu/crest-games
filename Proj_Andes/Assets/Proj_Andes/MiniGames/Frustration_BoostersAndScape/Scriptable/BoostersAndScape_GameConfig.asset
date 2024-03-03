@@ -20,5 +20,5 @@ MonoBehaviour:
   boosterTriggerRate: 3
   forceToFail: 1
   updateScene: 0
-  extraAttemptsBeforeFailing: 5
+  extraAttemptsBeforeFailing: 8
   coinsOnFailure: 3

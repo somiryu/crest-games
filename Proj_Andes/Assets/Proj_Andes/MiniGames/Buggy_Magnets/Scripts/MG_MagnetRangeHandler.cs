@@ -11,7 +11,7 @@ public class MG_MagnetRangeHandler : MonoBehaviour
 
     public void Init(float radius)
     {
-        image.transform.localScale = Vector3.one * radius;
+        image.transform.localScale = Vector3.one * radius * 2;
         timer = 0;
         image.gameObject.SetActive(false);
     }

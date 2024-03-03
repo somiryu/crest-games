@@ -129,12 +129,11 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
             var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseGlobalPosition.z = 0;
 			attempts++;
-			if(gameConfigs.activeCheats && attempts > 5)
+			if(gameConfigs.activeCheats && attempts > gameConfigs.startFaillingAfterAttemps)
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
 				lostByCheat++;
 				currEnergyPicked -= gameConfigs.coinsOnFailure;
-				GeneralGameAnalyticsManager.Instance.OnLostCoinLose(currEnergyPicked, gameConfigs.coinsOnFailure);
                 inGame_currPointsTextUI.text = currEnergyPicked.ToString();
                 StartCoroutine(ShowTrapSign());
 			}
