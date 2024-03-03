@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Tymski;
-using UnityEditorInternal.Profiling.Memory.Experimental;
-using UnityEditor.Animations;
 
 public class GameUIController : MonoBehaviour, ITimeManagement
 {
@@ -106,8 +104,10 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     }
     public void StarEarned(Vector3 initPos)
     {
+        Debug.DrawLine(initPos, initPos + Vector3.one * 100, Color.yellow, 10);
         var newStar = pool.GetNewItem();
-        newStar.Init(initPos, starsContainer.transform.position, pool);
+        var finalPos = starsContainer.transform.position;
+        newStar.Init(initPos, finalPos, pool);
 
     }
     public IEnumerator StarLost()

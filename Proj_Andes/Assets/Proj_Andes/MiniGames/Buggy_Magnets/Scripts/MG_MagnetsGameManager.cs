@@ -216,7 +216,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	void OnPicketEnergyItem(MG_MagnetsEnergyItem itemPicked)
 	{
 		GeneralGameAnalyticsManager.RegisterWin();
-		gameUi.StarEarned(itemPicked.transform.position);
+		gameUi.StarEarned(Input.mousePosition);
 		itemPicked.OnWasPicked();
 		audiosource.clip = capturedItemSfx;
 		audiosource.Play();

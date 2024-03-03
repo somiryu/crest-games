@@ -237,18 +237,15 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
         audiosource.clip = correctAudio;
         audiosource.Play();
-        Vector3 starPos;
+
         if (currShowingRight)
         {
-            starPos = rightBtn.transform.position;
             RCorrectparticle.Play();
         }
         else
         {
-            starPos = leftBtn.transform.position;
             LCorrectparticle.Play();
         }
-        gameUi.StarEarned(starPos);
 
         currConsecutiveLoses = 0;
         currConsecutiveWins += 1;

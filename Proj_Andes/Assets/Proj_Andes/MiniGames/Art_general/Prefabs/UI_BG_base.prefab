@@ -836,7 +836,7 @@ MonoBehaviour:
   coinBk: {fileID: 9218634295787112072}
   pool:
     itemPrefab: {fileID: 3488184102121480823, guid: f9f44a381ba1c59489af5da7f0f0ca3f, type: 3}
-    hierarchyParent: {fileID: 2490705008786603269}
+    hierarchyParent: {fileID: 6615924594159201872}
     growBy: 0
   starsContainer: {fileID: 5555749961988905566}
   parent: {fileID: 2490705008786603269}

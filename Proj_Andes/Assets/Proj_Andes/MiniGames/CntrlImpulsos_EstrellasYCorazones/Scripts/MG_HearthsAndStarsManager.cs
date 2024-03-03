@@ -189,12 +189,12 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         Vector3 starPos;
         if (currShowingRight)
         {
-            starPos = rightBtn.transform.position;
+            starPos = rightImg.transform.position;
             RCorrectparticle.Play();
         }
         else
         {
-            starPos = leftBtn.transform.position;
+            starPos = leftImg.transform.position;
             LCorrectparticle.Play();
         }
         gameUi.StarEarned(starPos);
