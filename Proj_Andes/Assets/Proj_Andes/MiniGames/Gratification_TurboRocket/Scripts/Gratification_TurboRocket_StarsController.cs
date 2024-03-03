@@ -9,8 +9,9 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
 {
     [SerializeField] ParticleSystem capturedVFX;
     [SerializeField] AudioSource capturedSFX;
+    [SerializeField] SpriteRenderer graphic;
 
-    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float moveSpeed = 5;
     [SerializeField] float step = 1f;
     [SerializeField] float yOfsetLimit = 0.1f;
     float targetSpeed;
@@ -18,7 +19,7 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
     public Collider starColl;
 
     Vector3 initialPosition;
-    bool isInitialPosition;
+    public bool isInitialPosition;
     public bool isCaptured;
 
     iTurboRocketManager player => iTurboRocketManager.Instance;
@@ -65,6 +66,9 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         {
             MoveObjectToNearestEdge();
             isInitialPosition = false;
+            var color = Color.white;
+            color.a = 0.5f;
+            graphic.color = color;
         }
         else if (!isInitialPosition)
         {
@@ -88,14 +92,13 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
     private void ReturnObjectToInitialPosition()
     {
         targetSpeed = player.playerCurrentTargetSpeed - 2;
-        var movX = Mathf.Lerp(transform.position.x, initialPosition.x, targetSpeed * Time.deltaTime);
-        var movY = Mathf.Lerp(transform.position.y, initialPosition.y, targetSpeed * Time.deltaTime);
+        var movX = Mathf.MoveTowards(transform.position.x, initialPosition.x, targetSpeed * Time.deltaTime);
+        var movY = Mathf.MoveTowards(transform.position.y, initialPosition.y, targetSpeed * Time.deltaTime);
         transform.position = new Vector3(movX, movY);
-        //transform.position = Vector3.MoveTowards(transform.position, initialPosition, targetSpeed * Time.deltaTime);
         if(transform.position == initialPosition)
         {
             isInitialPosition = true;
-            targetSpeed = moveSpeed;
+            graphic.color = Color.white;
         }
     }
 

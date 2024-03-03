@@ -29741,7 +29741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2500960040834178063, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -45469,6 +45469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameConfig: {fileID: 11400000, guid: fcd10688bf1c98c43a5593c511a5112f, type: 2}
   character: {fileID: 1380917377}
+  currentTargetSpeed: 0
   cam: {fileID: 519420031}
   camCC: {fileID: 519420033}
   finalSpin: {fileID: 1389171913}
@@ -45508,6 +45509,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   characterAnimator: {fileID: 0}
+  onAnim: 0
 --- !u!82 &1380917382
 AudioSource:
   m_ObjectHideFlags: 0

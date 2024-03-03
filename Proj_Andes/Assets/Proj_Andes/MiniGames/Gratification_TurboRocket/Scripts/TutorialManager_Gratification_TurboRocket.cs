@@ -159,7 +159,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     }
     void Update()
     {
-        if (!onPlay && !iTurboRocketManager.Instance.onDoneAnim) return;
+        if (!onPlay || !iTurboRocketManager.Instance.onDoneAnim) return;
 		TutoProgress();
 		if (!endOfTuto)
         {
@@ -224,6 +224,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         turboAnimObj.SetActive(true);
         turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
+        currentTargetAcceleration = gameConfig.accelerationSpeed;
         camCC.OnEnterTurbo();
         onTurbo = true;
     }
