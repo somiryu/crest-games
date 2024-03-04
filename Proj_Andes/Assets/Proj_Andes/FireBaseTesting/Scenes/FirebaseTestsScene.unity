@@ -23792,8 +23792,8 @@ MonoBehaviour:
   m_text: "\xA1No tienes conexi\xF3n a internet!\nLa data se guardar\xE1 localmente
     y se sincronizar\xE1 la pr\xF3xima vez que inicies sesi\xF3n con internet"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d8b07a8911fc48d4cb163301aedc11b8, type: 2}
-  m_sharedMaterial: {fileID: 606339856969581449, guid: d8b07a8911fc48d4cb163301aedc11b8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f86b6067e38e60942978b59c1a61d0da, type: 2}
+  m_sharedMaterial: {fileID: -6937410804267427787, guid: f86b6067e38e60942978b59c1a61d0da, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -24555,7 +24555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1924734561
 RectTransform:
   m_ObjectHideFlags: 0

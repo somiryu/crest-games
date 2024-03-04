@@ -164,15 +164,26 @@ public class UserDataManager : ScriptableObject
 		while (!DatabaseManager.userListDone) yield return null;
 	}
 
-	public IEnumerator CheckInternetConnection()
+	public IEnumerator CheckInternetConnection() => RecursiveInternetCheck(0);
+
+
+	public IEnumerator RecursiveInternetCheck(int tryNumber)
 	{
-		UnityWebRequest www = new UnityWebRequest("http://unity3d.com/");
+		UnityWebRequest www = new UnityWebRequest("www.google.com");
 
 		yield return www.SendWebRequest();
 
 		if (www.result == UnityWebRequest.Result.ConnectionError) // Error
 		{
-			HasInternet = false;
+			Debug.Log("Failed try: " + tryNumber);
+			tryNumber++;
+			if (tryNumber >= 5) HasInternet = false;
+			else
+			{
+				//Little delay between tries
+				yield return new WaitForSeconds(0.5f);
+				yield return RecursiveInternetCheck(tryNumber);
+			}
 		}
 		else // Success
 		{
