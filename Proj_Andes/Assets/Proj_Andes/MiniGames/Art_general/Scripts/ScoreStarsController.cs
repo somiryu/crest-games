@@ -17,7 +17,6 @@ public class ScoreStarsController : MonoBehaviour
         initialPosition = initPos;
         finalPosition = finalPos;
         timer = 0;
-        Debug.Log("starInit " + initialPosition + " " + finalPos);
     }
 
     void Update()

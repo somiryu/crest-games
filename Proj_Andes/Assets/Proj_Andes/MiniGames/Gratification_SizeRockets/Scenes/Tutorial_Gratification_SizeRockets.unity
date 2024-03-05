@@ -1801,6 +1801,7 @@ RectTransform:
   - {fileID: 1797801933}
   - {fileID: 1493531372}
   - {fileID: 331577006}
+  - {fileID: 1735077448}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2485,6 +2486,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5608591365498785612, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7102062956067746015, guid: c0d71ab98fc20d34db96285405aa8ae1, type: 3}
       propertyPath: m_Name
       value: SkinManager
@@ -2727,6 +2732,81 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6615924594159201872, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
   m_PrefabInstance: {fileID: 1036952164}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1735077447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1735077448}
+  - component: {fileID: 1735077450}
+  - component: {fileID: 1735077449}
+  m_Layer: 5
+  m_Name: Blocker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1735077448
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735077447}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 825738300}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1735077449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735077447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7075472, g: 0.7000264, b: 0.69753474, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1735077450
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735077447}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1767381125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2920,10 +3000,22 @@ MonoBehaviour:
   tutorialSteps:
   - Type: 2
     activeRocketType: {fileID: 340283504}
+    onShipTypeAudio: {fileID: 8300000, guid: 040f2bf8b8680ba4fab1edd2b00eda50, type: 3}
+    onResultAudio: {fileID: 8300000, guid: de706a75b0bb59e4b964d7b46fda6ff7, type: 3}
   - Type: 1
     activeRocketType: {fileID: 672194448}
+    onShipTypeAudio: {fileID: 8300000, guid: 6b2c53b6b25a0794eb07e4f60eb96ff0, type: 3}
+    onResultAudio: {fileID: 8300000, guid: dac1fe6a1dd6333409bcd382105b7cb3, type: 3}
   - Type: 0
     activeRocketType: {fileID: 116030133}
+    onShipTypeAudio: {fileID: 8300000, guid: eddcf3d1baa37c248ad8f7ab15bf8e3b, type: 3}
+    onResultAudio: {fileID: 8300000, guid: 629b5b4ae9ad8e647818f4d79cbb8898, type: 3}
+  actionBlocker: {fileID: 1735077448}
+  introAudio: {fileID: 8300000, guid: 5b625706e6a7d744cb61abad02163d90, type: 3}
+  selectShipAudio: {fileID: 8300000, guid: dbe6e6503780681429bd80c342f5fc44, type: 3}
+  selectWorldAudio: {fileID: 8300000, guid: e0720963f51b2274d813c38778477bfc, type: 3}
+  tryStartsAudio: {fileID: 8300000, guid: 8febf6500271be64f9c0f5c2af595381, type: 3}
+  letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   onRightAction: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
   onPassedTuto: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
   onDepart: {fileID: 0}
