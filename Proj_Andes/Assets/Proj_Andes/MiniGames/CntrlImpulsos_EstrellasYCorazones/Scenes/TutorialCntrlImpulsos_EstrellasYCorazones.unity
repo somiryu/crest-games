@@ -23283,12 +23283,17 @@ MonoBehaviour:
   RIncorrectparticle: {fileID: 1475965571}
   afterActionPanel: {fileID: 745345660}
   inGameUIPanel: {fileID: 875282631}
+  reminderAudio: {fileID: 8300000, guid: c3b335c20bf86c646891df10e01fded9, type: 3}
+  letsTryAudio: {fileID: 8300000, guid: a1c76f0b28a66494e9fb43823df0f5b1, type: 3}
+  correctionIfStarAudio: {fileID: 8300000, guid: eb23bc30359beeb4995451c4dd8e271d, type: 3}
+  correctionIfHeartAudio: {fileID: 8300000, guid: c51ac3fb235aaa64a96c30e606e54a82, type: 3}
+  letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   correctAudio: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   succeedStepAudio: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
-  finishAudio: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
-  ifHeartAudio: {fileID: 0}
-  ifStarAudio: {fileID: 0}
+  finishAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
+  ifHeartAudio: {fileID: 8300000, guid: 1820e0377c8859140b183feb70b037cb, type: 3}
+  ifStarAudio: {fileID: 8300000, guid: c0d804b69c872ba4e874acc07e8a7f76, type: 3}
   currRoundValueTxt: {fileID: 1134041796}
   myTutorialSteps:
   - tutorialSteps: 0
@@ -23297,7 +23302,7 @@ MonoBehaviour:
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
     background: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    audioInstruction: {fileID: 8300000, guid: 0d4fe8e299e31a44e86346c37284fd28, type: 3}
+    audioInstruction: {fileID: 8300000, guid: 1820e0377c8859140b183feb70b037cb, type: 3}
     tutoRoundsCount: 0
   - tutorialSteps: 1
     trialsAmt: 3
@@ -23305,7 +23310,7 @@ MonoBehaviour:
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
     background: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
-    audioInstruction: {fileID: 8300000, guid: 14250fc2226cf9441ab2abdf3ff8ff57, type: 3}
+    audioInstruction: {fileID: 8300000, guid: c0d804b69c872ba4e874acc07e8a7f76, type: 3}
     tutoRoundsCount: 0
   - tutorialSteps: 3
     trialsAmt: 5
