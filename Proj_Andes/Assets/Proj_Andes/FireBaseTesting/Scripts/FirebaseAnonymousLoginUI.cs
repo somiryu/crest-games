@@ -93,12 +93,19 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] TMP_InputField insertCodeInputF;
 	[SerializeField] Button insertCodeConfirm;
 
+	AudioSource audioSource;
+	[SerializeField] AudioClip welcomeFAudio;
+	[SerializeField] AudioClip ureadyFAudio;	
+	[SerializeField] AudioClip welcomeMAudio;
+	[SerializeField] AudioClip ureadyMAudio;
+
 	string logInsuccedID;
 
 	bool continueSelectedFlag;
 
 	private void Awake()
 	{
+		TryGetComponent(out audioSource);
 		loadingScreen.gameObject.SetActive(true);
 		selectUserContainer.gameObject.SetActive(true);
 
@@ -118,7 +125,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
 		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
-		afterLogInNewGameBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
+		afterLogInNewGameBtn.onClick.AddListener(UReady);
 
 		cancelSearchBarBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
 
@@ -176,7 +183,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		}
 		auth.SignInAnonymouslyAsync().ContinueWith(OnSingingResult);
 	}
-
+	void UReady()
+	{
+        var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyFAudio : ureadyMAudio;
+        audioSource.clip = currClip;
+        audioSource.Play();
+        uReadyPanel.gameObject.SetActive(true);
+    }
 	void OnSingingResult(Task<AuthResult> taskResult)
 	{
 		if (taskResult.IsCanceled)
@@ -457,6 +470,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		UserDataManager.Instance.SetCurrUser(id);
 		var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
+
+		var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
+		audioSource.clip = currClip;
+		audioSource.Play();
+
 		afterLogInPanel.SetActive(true);
 		afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
 	}

@@ -56,6 +56,11 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] AudioClip openChestSound;
     [SerializeField] AudioClip titleAudio;
     [SerializeField] AudioClip introAudio;
+    [SerializeField] AudioClip uHaveAmtStarsAudio;
+    [SerializeField] AudioClip openItAndGetAGiftAudio;
+    [SerializeField] AudioClip uWonAMonsterAudio;
+    [SerializeField] AudioClip wantMoreAudio;
+    [SerializeField] AudioClip clicContinue;
     [SerializeField] AudioClip noResourcesAudio;
     [SerializeField] AudioClip noStarsAudio;
     [SerializeField] AudioClip continueAudio;
@@ -63,6 +68,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] Transform blockButtons;
     IEnumerator marketIntro;
     IEnumerator noResources;
+    IEnumerator openChest;
 
     //Analytics
     float timeUntilFirstChestOpen;
@@ -97,7 +103,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         audioSource.clip = introAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(introAudio.length);
-        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.Market_Instruction.ToString());
+        audioSource.clip = uHaveAmtStarsAudio;
+        audioSource.Play();
+        yield return new WaitForSecondsRealtime(uHaveAmtStarsAudio.length);
+        audioSource.clip = openItAndGetAGiftAudio;
+        audioSource.Play();
+        yield return new WaitForSecondsRealtime(openItAndGetAGiftAudio.length);
         blockButtons.gameObject.SetActive(false);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
     }
@@ -138,6 +149,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
         marketIntro = MarketIntro();
         noResources = NoResources();
+        openChest = OpenChestAudios();
         closeNoResourcesBtn.onClick.AddListener(CloseNoResources);
 
 
@@ -285,7 +297,27 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         }
 
     }
-
+    IEnumerator OpenChestAudios()
+    {
+        blockButtons.gameObject.SetActive(!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction));
+        audioSource.clip = openChestSound; 
+        audioSource.Play();
+        yield return new WaitForSeconds(openChestSound.length);
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
+        {
+            audioSource.clip = uWonAMonsterAudio; 
+            audioSource.Play();
+            yield return new WaitForSeconds(uWonAMonsterAudio.length);
+            audioSource.clip = wantMoreAudio;
+            audioSource.Play();
+            yield return new WaitForSeconds(wantMoreAudio.length);
+            audioSource.clip = clicContinue;
+            audioSource.Play();
+            yield return new WaitForSeconds(clicContinue.length);
+            blockButtons.gameObject.SetActive(false);
+        }
+        StopCoroutine(openChest);
+    }
     void OpenChest(int regularMonstersAmount, int rareMonstersAmount, int legendaryMonstersAmount)
     {
         chestOpenButtonParent.gameObject.SetActive(false);
@@ -294,8 +326,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         chestOpenedContainerImg.sprite = currButton.monsterMarketButton.chestOpenSprite;
         currentMonstersFound.Clear();
 
-        audioSource.clip = openChestSound;
-        audioSource.Play();
+        StartCoroutine(openChest);
 
         for (int i = 0; i < regularMonstersAmount; i++) currentMonstersFound.Add(GetNewRandomMonster(MonsterChestType.Regular, 0));
         for (int i = 0; i < rareMonstersAmount; i++) currentMonstersFound.Add(GetNewRandomMonster(MonsterChestType.Rare, 0));
@@ -324,6 +355,10 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     public void ActivateContinueSound()
     {
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
+        {
+            UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.Market_Instruction.ToString());
+        }
         audioSource.clip = continueAudio;
         audioSource.Play();
     }
