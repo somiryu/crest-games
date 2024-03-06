@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9528302, g: 0.8528992, b: 0.81350124, a: 0.392}
+  m_Color: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0.14901961}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2388,6 +2388,8 @@ MonoBehaviour:
     skinTypeAudio: {fileID: 8300000, guid: 67f240b71fcced14ea3af2f7f2ee6d5c, type: 3}
   goToGame: {fileID: 1829395317}
   skinSelectorItem: {fileID: 11400000, guid: f93a36707caef0744a2be27a6e8163ef, type: 2}
+  blockingPanel: {fileID: 177085341}
+  pickASkinAudio: {fileID: 8300000, guid: 36c52eedbbc42604196b7d7c69419378, type: 3}
 --- !u!82 &1453584114
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2781,8 +2783,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSkinObject: {fileID: 0}
   forceSkinType: 0
-  blockingPanel: {fileID: 177085341}
-  pickASkinAudio: {fileID: 8300000, guid: 36c52eedbbc42604196b7d7c69419378, type: 3}
   skinTypeToForce: 0
 --- !u!82 &1827048873
 AudioSource:

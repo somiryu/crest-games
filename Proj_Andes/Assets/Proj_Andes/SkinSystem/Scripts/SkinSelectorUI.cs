@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,9 @@ public class SkinSelectorUI : MonoBehaviour
 	public Button goToGame;
 	[SerializeField] SimpleGameSequenceItem skinSelectorItem;
 	AudioSource audioSource;
-
-	bool firstAssignFlag;
+    [SerializeField] Transform blockingPanel;
+    [SerializeField] AudioClip pickASkinAudio;
+    bool firstAssignFlag;
     private void Awake()
 	{
 		for (int i = 0; i < btnsPerSkins.Count; i++)
@@ -23,10 +25,21 @@ public class SkinSelectorUI : MonoBehaviour
 		firstAssignFlag = false;
 		TryGetComponent(out audioSource);
 	}
+    private void Start()
+    {
+		StartCoroutine(Instructions());
+    }
+    IEnumerator Instructions()
+    {
+        blockingPanel.gameObject.SetActive(true);
+        audioSource.clip = pickASkinAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(pickASkinAudio.length);
+        blockingPanel.gameObject.SetActive(false);
+    }
 
-	
 
-	public void GetSkinTypeSelection(SkinType skinType, AudioClip skinAudio)
+    public void GetSkinTypeSelection(SkinType skinType, AudioClip skinAudio)
     {
 		audioSource.clip = skinAudio;
 		audioSource.Play();

@@ -79,7 +79,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         allTutorialsDoneFlag = false;
 
         audiosource = GetComponent<AudioSource>();
-
+        StartCoroutine(Introduction());
 
         afterActionPanel.SetActive(false);
         inGameUIPanel.SetActive(true);
@@ -87,7 +87,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
         leftBtn.onClick.AddListener(OnClickedLeft);
         rightBtn.onClick.AddListener(OnClickedRight);
-        StartCoroutine(Introduction());
     }
 
 	void InitRound()
@@ -129,6 +128,8 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     IEnumerator Introduction()
     {
         rightBtn.interactable = false;
+        leftImg.gameObject.SetActive(false);
+        rightImg.gameObject.SetActive(false);
         leftBtn.interactable = false;
         audiosource.clip = reminderAudio;
         audiosource.Play();
@@ -138,6 +139,8 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         yield return new WaitForSeconds(letsTryAudio.length);
         rightBtn.interactable = true;
         leftBtn.interactable = true;
+        leftImg.gameObject.SetActive(true);
+        rightImg.gameObject.SetActive(true);
         InitRound();
     }
     IEnumerator AudioInstructionHelp(AudioClip clip)

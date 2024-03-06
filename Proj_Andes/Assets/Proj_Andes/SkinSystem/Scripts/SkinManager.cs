@@ -15,31 +15,18 @@ public class SkinManager : MonoBehaviour
 	public Transform currentSkinObject;
 
 	public bool forceSkinType = false;
-	[SerializeField] Transform blockingPanel;
-	[SerializeField] AudioClip pickASkinAudio;
-	AudioSource source;
 	public SkinType skinTypeToForce;
 
 	private void Awake()
 	{
 		if(instance != null && instance != this) Destroy(instance);
 		instance = this;
-		TryGetComponent(out source);
 		Utility.FindObjectsByType(allSkinnableImages);
 		Utility.FindObjectsByType(allSkinnableImagesRandom);
 		Utility.FindObjectsByType(allItems);
 	}
-	IEnumerator Instructions()
-	{
-		blockingPanel.gameObject.SetActive(true);
-		source.clip = pickASkinAudio;
-		source.Play();
-		yield return new WaitForSeconds(pickASkinAudio.length);
-        blockingPanel.gameObject.SetActive(false);
-    }
     private void Start()
 	{
-		StartCoroutine(Instructions());
 		if (forceSkinType) SetSkin(skinTypeToForce);
 		else SetSkin(SceneManagement.currSkinType);
 	}

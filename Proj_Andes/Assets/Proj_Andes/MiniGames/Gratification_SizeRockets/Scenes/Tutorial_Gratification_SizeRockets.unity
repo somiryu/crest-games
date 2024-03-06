@@ -2677,6 +2677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hand (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1544813694339650895, guid: 12a41bd8ea13e3241b852e6722682d10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2918567037770633848, guid: 12a41bd8ea13e3241b852e6722682d10, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6
@@ -2818,6 +2822,10 @@ PrefabInstance:
     - target: {fileID: 1544813694339650895, guid: 12a41bd8ea13e3241b852e6722682d10, type: 3}
       propertyPath: m_Name
       value: Hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544813694339650895, guid: 12a41bd8ea13e3241b852e6722682d10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2918567037770633848, guid: 12a41bd8ea13e3241b852e6722682d10, type: 3}
       propertyPath: m_LocalPosition.x

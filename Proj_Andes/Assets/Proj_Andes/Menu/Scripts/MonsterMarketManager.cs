@@ -66,6 +66,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] AudioClip continueAudio;
     [SerializeField] AudioClip checkAudio;
     [SerializeField] Transform blockButtons;
+    [SerializeField] Transform tutoHand;
+    [SerializeField] Button continueBtn;
     IEnumerator marketIntro;
     IEnumerator noResources;
     IEnumerator openChest;
@@ -98,17 +100,23 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         audioSource.clip = titleAudio; 
         audioSource.Play();
         TimeManager.Instance.SetNewStopTimeUser(this);
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction)) continueBtn.interactable = false;
         blockButtons.gameObject.SetActive(!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction));
         yield return new WaitForSecondsRealtime(titleAudio.length);
         audioSource.clip = introAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(introAudio.length);
-        audioSource.clip = uHaveAmtStarsAudio;
-        audioSource.Play();
-        yield return new WaitForSecondsRealtime(uHaveAmtStarsAudio.length);
-        audioSource.clip = openItAndGetAGiftAudio;
-        audioSource.Play();
-        yield return new WaitForSecondsRealtime(openItAndGetAGiftAudio.length);
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
+        {
+            audioSource.clip = uHaveAmtStarsAudio;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(uHaveAmtStarsAudio.length);
+            tutoHand.gameObject.SetActive(true);
+            audioSource.clip = openItAndGetAGiftAudio;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(openItAndGetAGiftAudio.length);
+        }
+        else continueBtn.interactable = true;
         blockButtons.gameObject.SetActive(false);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
     }
@@ -190,6 +198,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
         currSelectedButton = chestBtn;
+        tutoHand.gameObject.SetActive(false);
+        continueBtn.interactable = true;
         chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out currButton);
 
         var btnToActive = userMonsterButtonBehaviours.Find(x => x.monsterMarketButton.monsterChestType == monsterChestType);
@@ -302,7 +312,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         blockButtons.gameObject.SetActive(!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction));
         audioSource.clip = openChestSound; 
         audioSource.Play();
-        yield return new WaitForSeconds(openChestSound.length);
+        yield return new WaitForSeconds(openChestSound.length-0.2f);
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
         {
             audioSource.clip = uWonAMonsterAudio; 
