@@ -116,7 +116,13 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             audioSource.Play();
             yield return new WaitForSecondsRealtime(openItAndGetAGiftAudio.length);
         }
-        else continueBtn.interactable = true;
+        else
+        {
+            continueBtn.interactable = true;
+            audioSource.clip = clicContinue;
+            audioSource.Play();
+            yield return new WaitForSeconds(clicContinue.length);
+        }
         blockButtons.gameObject.SetActive(false);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
     }
@@ -312,7 +318,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         blockButtons.gameObject.SetActive(!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction));
         audioSource.clip = openChestSound; 
         audioSource.Play();
-        yield return new WaitForSeconds(openChestSound.length-0.2f);
+        yield return new WaitForSeconds(openChestSound.length-0.4f);
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
         {
             audioSource.clip = uWonAMonsterAudio; 
