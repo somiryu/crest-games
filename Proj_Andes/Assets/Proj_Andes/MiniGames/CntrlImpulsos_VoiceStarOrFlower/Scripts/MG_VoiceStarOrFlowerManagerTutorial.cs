@@ -44,6 +44,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip onFailSelectDiscardAdvice;
     [SerializeField] AudioClip onFailSelectInstructionAdvice;
     [SerializeField] AudioClip finalInstruction;
+    [SerializeField] AudioClip letsPlayAudio;
     [SerializeField] AudioSource effectPlayer;
     [SerializeField] AudioSource audioPlayer;
 
@@ -241,6 +242,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         audioPlayer.clip = finalInstruction;
         audioPlayer.Play();
         yield return new WaitForSeconds(finalInstruction.length);
+        audioPlayer.clip = letsPlayAudio;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(letsPlayAudio.length);
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
         GameSequencesList.Instance.GoToNextItemInList();
     }

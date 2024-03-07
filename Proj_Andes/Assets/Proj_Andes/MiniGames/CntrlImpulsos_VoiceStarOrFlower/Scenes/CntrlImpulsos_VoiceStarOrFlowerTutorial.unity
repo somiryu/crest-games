@@ -14025,6 +14025,7 @@ MonoBehaviour:
   onFailSelectDiscardAdvice: {fileID: 8300000, guid: db81eca78fe9ae04495d0a9f253a193c, type: 3}
   onFailSelectInstructionAdvice: {fileID: 8300000, guid: 86b45242d70145542bf938b4391b70cc, type: 3}
   finalInstruction: {fileID: 8300000, guid: 75f78c52738598042b3c3f521f8747d7, type: 3}
+  letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   effectPlayer: {fileID: 1631699890}
   audioPlayer: {fileID: 1951022623}
   leftWonItemsPool:

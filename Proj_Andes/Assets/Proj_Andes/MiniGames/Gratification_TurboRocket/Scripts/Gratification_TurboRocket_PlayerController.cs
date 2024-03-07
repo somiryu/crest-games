@@ -223,7 +223,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         ride.totalRideDuration = timer;
         ride.totalStars = levelConfig.starsAmount;
         data = ride;
-        starsGatheredCount += 3;
+        starsGatheredCount += 5;
         OnScoreChanges?.Invoke();
 
         bk.EndOfGame();

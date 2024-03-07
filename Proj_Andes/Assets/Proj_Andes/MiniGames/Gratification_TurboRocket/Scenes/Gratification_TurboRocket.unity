@@ -61960,6 +61960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalSpin
       objectReference: {fileID: 0}
+    - target: {fileID: 4468604796729800902, guid: 0e7694b17ca8cb34daa1ac12bd17fb4f, type: 3}
+      propertyPath: m_text
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
