@@ -20,7 +20,8 @@ public class MG_MechanicHand_TutorialAnimation : MonoBehaviour, iTutorialType
 
     public void StepDone()
     {
-       gameObject.SetActive(false);
+        GameUIController.Instance.onTuto = false;
+        gameObject.SetActive(false);
     }
 
     private void ChangePlayerAnims(tutorialSteps step)

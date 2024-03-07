@@ -39,7 +39,7 @@ public class CatchCoinsAudioInstruction : MonoBehaviour, ITimeManagement
         }
 		for (int i = 0; i < allAudioSources.Length; i++) allAudioSources[i].Pause();
         firstAudio = FirstInstruction();
-        StartCoroutine(firstAudio);
+        if(!GameUIController.Instance.onTuto) StartCoroutine(firstAudio);
     }
 
     float lastAudioPosition;

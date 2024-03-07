@@ -23,6 +23,7 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     [SerializeField] Transform starsContainer;
     [SerializeField] Transform parent;
     [SerializeField] ScoreStarsController starPrefab;
+    public bool onTuto = false;
     public bool onPause;
     Animator anim;
     private void Awake()

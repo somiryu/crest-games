@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+//using tutorialSteps = tutorialSteps;
 
 public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 {
@@ -24,6 +25,13 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public GameObject afterAction_LoseLabel;
 	public GameObject inGameUiContainer;
 	public Button sendHookBtn;
+
+	[SerializeField] AudioSource audioSource;
+	[SerializeField] AudioClip introductionAudio;
+	[SerializeField] AudioClip letsTryAudio;
+	[SerializeField] AudioClip moveHookAudio;
+	[SerializeField] AudioClip lettPlayAudio;
+	[SerializeField] AudioClip noStarsAudio;
 
 	private List<Transform> currRoundAsteroids = new List<Transform>();
     BoxCollider CurrAsteroidsSpawnArea => asteroidsAreaPerRound[currRound];
@@ -46,7 +54,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 
 	public int NeededAsteroidsToWin => Mathf.FloorToInt((asteroidsPerRound * 3) * gameConfigs.percentageNeededToWin);
 	float totalTime;
-
+	IEnumerator currentInstruction;
     //DATA ANALYTICS
     public float timePlayed;
     public int clickRepetitions;
@@ -56,7 +64,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
     private void Awake()
 	{
 		instance = this;
-	}
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) GameUIController.Instance.onTuto = true;
+    }
 
 	private void Start()
 	{
@@ -64,6 +73,12 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		GeneralGameAnalyticsManager.Instance.Init(DataIds.mechanicHandGame);
 	}
 
+	IEnumerator PlaySigleAudioGuide(AudioClip clip)
+	{
+		audioSource.clip = clip;
+		audioSource.Play();
+		yield return new WaitForSeconds(clip.length);
+	}
 	void Init()
     {
 		totalCapturedAsteroids = 0;
@@ -79,6 +94,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		player.Init();
 		OnRoundStart();
 		sendHookBtn.onClick.AddListener(player.OnClickSendHook);
+		currentInstruction = PlaySigleAudioGuide(introductionAudio);
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) StartCoroutine(currentInstruction);
     }
 	void Update()
 	{
