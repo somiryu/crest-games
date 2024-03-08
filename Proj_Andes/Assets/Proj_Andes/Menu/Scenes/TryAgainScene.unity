@@ -715,8 +715,9 @@ MonoBehaviour:
   waitFor: 15
   extraWaitAtTheEnd: 8
   fakeLoadingSlider: {fileID: 1379565383}
-  audioSource: {fileID: 0}
-  introAudio: {fileID: 8300000, guid: 35edbbf4ecd725a44b3a5dcf3b487f9b, type: 3}
+  audioSource: {fileID: 1155087141}
+  tryAgainAudio: {fileID: 8300000, guid: 35edbbf4ecd725a44b3a5dcf3b487f9b, type: 3}
+  tryAgainAudio2: {fileID: 8300000, guid: 46f1f2bce9eebc0419c1097ce54dba55, type: 3}
 --- !u!82 &1155087141
 AudioSource:
   m_ObjectHideFlags: 0

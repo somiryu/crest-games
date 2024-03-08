@@ -126,7 +126,6 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     }
     public void InitTuto()
     {
-        StartCoroutine(Introduction());
         tutorialSteps[0].stepClickableObj = bk.starsSpawner.stars[0].starColl;
         tutorialSteps[1].stepClickableObj = bk.starsSpawner.stars[1].starColl;
 
@@ -146,11 +145,13 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         turboBtn.gameObject.SetActive(false);
         alreadyGivenInstruction = false;
         currTutoStepIndex = 0;
+        StartCoroutine(Introduction());
+
         currTutoStep.InitTutoStep();
     }
     IEnumerator Introduction()
     {
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(0.5f);
         TimeManager.Instance.SetNewStopTimeUser(this);
         currTutoStep.signHand.gameObject.SetActive(false);
         audioSource.clip = introAudio;

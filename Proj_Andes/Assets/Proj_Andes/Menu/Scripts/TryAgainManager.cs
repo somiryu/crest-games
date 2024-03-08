@@ -12,7 +12,9 @@ public class TryAgainManager : MonoBehaviour
     [SerializeField] Slider fakeLoadingSlider;
 
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip introAudio;
+    [SerializeField] AudioClip tryAgainAudio;
+    [SerializeField] AudioClip tryAgainAudio2;
+    bool alreadyPlayed = false;
     void Start()
     {
         clickCounts = 0;
@@ -20,8 +22,10 @@ public class TryAgainManager : MonoBehaviour
 		retryBtn.onClick.AddListener(() => clickCounts++);
         StartCoroutine(GoToNextScene());
         TryGetComponent(out audioSource);
+        var introAudio = alreadyPlayed ? tryAgainAudio2 : tryAgainAudio;
         audioSource.clip = introAudio;
         audioSource.Play();
+        alreadyPlayed = true;
     }
     IEnumerator GoToNextScene()
     {
