@@ -29,12 +29,24 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 849af44583d86bd4882db8cc7b18578a, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: c9d467b4d3d8b5c46b60c8dfdfb8f984, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: No
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2fa8c2bb6fe55134ab804e427ac35f7a, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: db6d8c32ba4038c46b3489e6591478f0, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 096c75c7661b2d04a937d42b307c6a1f, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

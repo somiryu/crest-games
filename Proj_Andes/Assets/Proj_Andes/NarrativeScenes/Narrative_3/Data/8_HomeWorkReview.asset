@@ -50,6 +50,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
       responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -60,6 +61,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 8300000, guid: 818ac1c716b27634f95d4072aff716a9, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -70,6 +72,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
       responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -80,6 +83,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: b6b01bfe1bc2f5e47be52d7c7b2cde77, type: 3}
       responseAudio: {fileID: 8300000, guid: acacacce81cda934f96ae7de4d175b0d, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -90,6 +94,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -135,6 +140,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
       responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -145,6 +151,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f6049e245f6ceeb4fb2e8ada710d712f, type: 3}
       responseAudio: {fileID: 8300000, guid: 14a292d977e8cb548aeb186b45bc80dc, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -155,6 +162,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -165,6 +173,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
       responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -175,6 +184,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 66d32f455aaf94840b42be2f61d1c595, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
@@ -201,7 +211,8 @@ MonoBehaviour:
     - response: "MATEM\xC1TICAS"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: ee11bda945998f64fb81939e7fd967c9, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 0b55a2c744781b84aaf841ef470398a9, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
@@ -211,7 +222,8 @@ MonoBehaviour:
     - response: CIENCIAS
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 33f3640fb52ba474a9a6b11d9b9a425f, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 9320096dd770bff40b34a73aec2e5dd3, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
@@ -221,7 +233,8 @@ MonoBehaviour:
     - response: "ESPA\xD1OL"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: cee8ee2c7078454489e45ba6ba759716, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: fd63f49a8bfc9504da75cb6c7b435725, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
