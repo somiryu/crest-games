@@ -2574,6 +2574,7 @@ MonoBehaviour:
   - {fileID: 1586297409}
   continueBtn: {fileID: 1675733216}
   audioSource: {fileID: 0}
+  introAudio: {fileID: 8300000, guid: 2a47d0eeb73fe2b4a9e469143f6e3595, type: 3}
 --- !u!82 &1588213352
 AudioSource:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class FrustrationThermometerController : MonoBehaviour
     [SerializeField] Button continueBtn;
 
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip introAudio;
     void Start()
     {
         frustlevelButtons = buttonsContainer.GetComponentsInChildren<Button>();
@@ -30,10 +31,19 @@ public class FrustrationThermometerController : MonoBehaviour
 
             buttonsSelectedImages[i].SetActive(false);
         }
+        //StartCoroutine(Intro());
         continueBtn.onClick.AddListener(Continue);
         continueBtn.gameObject.SetActive(false);
+        audioSource.clip = introAudio;
+        audioSource.Play();
     }
+    IEnumerator Intro()
+    {
+        audioSource.clip = introAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(introAudio.length);
 
+    }
     void GetFrustationLevel(FrustrationLevels level)
     {
         currFrustratioNlevel = level.level;
