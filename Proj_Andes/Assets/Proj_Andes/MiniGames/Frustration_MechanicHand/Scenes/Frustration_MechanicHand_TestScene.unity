@@ -332,6 +332,7 @@ MonoBehaviour:
   lettPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   noStarsAudio: {fileID: 8300000, guid: c25c35d8e350a0241b88b5b5279b1174, type: 3}
   blockingPanel: {fileID: 277125278}
+  tutoHand1: {fileID: 1041651306}
   eogManager: {fileID: 49564637}
   trapImage: {fileID: 1762366230}
   currRound: 0
@@ -2140,6 +2141,11 @@ MonoBehaviour:
   animator: {fileID: 101717982}
   animTriggerOnStepStart: ClickAndMove
   animTriggerOnStepEnd: JustClick
+--- !u!4 &1041651306 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 630365733792445598, guid: 9295fb4f80d5058418158ec7fc3f8e0f, type: 3}
+  m_PrefabInstance: {fileID: 9182632420236475645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1066243140
 GameObject:
   m_ObjectHideFlags: 0
@@ -13301,7 +13307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1617077851
 Transform:
   m_ObjectHideFlags: 0
@@ -14486,6 +14492,10 @@ PrefabInstance:
     - target: {fileID: 6015680880506593168, guid: 9295fb4f80d5058418158ec7fc3f8e0f, type: 3}
       propertyPath: m_Name
       value: HandFirstTutAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015680880506593168, guid: 9295fb4f80d5058418158ec7fc3f8e0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6901415861629687240, guid: 9295fb4f80d5058418158ec7fc3f8e0f, type: 3}
       propertyPath: m_Name
