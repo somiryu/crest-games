@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
+public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
 	private static MG_MagnetsGameManager instance;
 	public static MG_MagnetsGameManager Instance => instance;
@@ -35,7 +35,12 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] GameObject winTitle;
 	[SerializeField] GameObject loseTitle;
 	[SerializeField] TMP_Text afterAction_currPointsTextUI;
+	[SerializeField] AudioSource instructionSource;
 	[SerializeField] AudioClip capturedItemSfx;
+	[SerializeField] AudioClip introAudio;
+	[SerializeField] AudioClip letsPlayAudio;
+	[SerializeField] AudioClip noStarsAudio;
+	[SerializeField] Transform blockingPanel;
 
 
 	public int currSpawnedItems;
@@ -62,7 +67,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	{
 		if(instance != null && instance != this) DestroyImmediate(instance);
 		instance = this;
-		Init();
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick)) GameUIController.Instance.onTuto = true;
 	}
 
 	public void Init()
@@ -89,17 +94,28 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);
 		trapImage.gameObject.SetActive(false);
 		eogManager.OnGameStart();
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick)) StartCoroutine(Intro());
 
     }
-
-	private void Start()
+    IEnumerator Intro()
 	{
+		blockingPanel.gameObject.SetActive(true);
+		TimeManager.Instance.SetNewStopTimeUser(this);
+		audiosource.clip = introAudio;
+		audiosource.Play();
+		yield return new WaitForSecondsRealtime(introAudio.length);
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        blockingPanel.gameObject.SetActive(false);
+    }
+    private void Start()
+	{
+		Init();
 		GeneralGameAnalyticsManager.Instance.Init(DataIds.magnetsGame);
 	}
 
 	private void Update()
 	{
-		if (CatchCoinsAudioInstruction.Instance.firstAudio != null) return;
+		//if (CatchCoinsAudioInstruction.Instance.firstAudio != null) return;
 		if (availableMagnets == 0) return;
 		timer += Time.deltaTime;
 		totalTime += Time.deltaTime;
@@ -152,6 +168,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
                 if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
                 {
 					attempts = 0;
+					GameUIController.Instance.onTuto = false;
+					StartCoroutine(LetsPlay());
                     UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick.ToString());
                     TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_Magnets_2FourItemEnergyClick);
                 }
@@ -180,7 +198,12 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
             }
         }
 	}
-
+	IEnumerator LetsPlay()
+	{
+		instructionSource.clip = letsPlayAudio;
+		instructionSource.Play();
+		yield return new WaitForSeconds(letsPlayAudio.length);
+	}
 	bool PredictIfWouldWin(Vector3 posToTest)
 	{
 		var hitAmount = Physics.OverlapSphereNonAlloc(posToTest, gameConfigs.userMagnetRadius, overlayResults);
@@ -280,8 +303,10 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		winTitle.SetActive(won);
 		loseTitle.SetActive(!won);
 		afterAction_currPointsTextUI.SetText(currEnergyPicked.ToString());
-
-		gameConfigs.coinsCollected = currEnergyPicked;
+        instructionSource.clip = noStarsAudio;
+        instructionSource.Play();
+        yield return new WaitForSeconds(noStarsAudio.length);
+        gameConfigs.coinsCollected = currEnergyPicked;
 		eogManager.OnGameOver();
 	}
 
