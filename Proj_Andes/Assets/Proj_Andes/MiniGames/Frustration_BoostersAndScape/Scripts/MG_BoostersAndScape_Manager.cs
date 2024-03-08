@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
@@ -41,6 +42,11 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [Header("Game Audio")]
     [SerializeField] AudioClip boosteredAudio;
     [SerializeField] AudioClip onFailedAudio;
+    [SerializeField] AudioClip introAudio;
+    [SerializeField] AudioClip letsPlay;
+    [SerializeField] AudioClip noStartsAudio;
+    [SerializeField] AudioSource audioInstructions;
+    [SerializeField] Transform blockingPanel;
     private AudioSource audiosource;
 
 
@@ -74,10 +80,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         }
         instance = this;
         spawner.Init();
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone)) GameUIController.Instance.onTuto = true;
 
-        Init();
         audiosource = GetComponent<AudioSource>();
-
     }
     void Init()
     {
@@ -98,15 +103,25 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         catchBoosterRange = 1.5f;
         OnGameStart();
         trapImage.gameObject.SetActive(false);
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone)) StartCoroutine(Intro());  
     }
-
-	private void Start()
+    IEnumerator Intro()
+    {
+        TimeManager.Instance.SetNewStopTimeUser(this);
+        blockingPanel.gameObject.SetActive(true);
+        audiosource.clip = introAudio;
+        audiosource.Play();
+        yield return new WaitForSecondsRealtime(introAudio.length);
+        blockingPanel.gameObject.SetActive(false);
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+    }
+    private void Start()
 	{
+        Init();
         GeneralGameAnalyticsManager.Instance.Init(DataIds.boostersAndScapeGame);
 		spawner.spawner.SpawnNewItem();
 	}
-
-	void UpdateCharacterAnimRef(Transform newCharacterArtObj)
+    void UpdateCharacterAnimRef(Transform newCharacterArtObj)
     {
 		characterAnims = newCharacterArtObj.GetComponentInChildren<Animator>(true);
 	}
@@ -139,24 +154,30 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
                 if(!addedTimeManagUser)
                 {
                     TimeManager.Instance.SetNewStopTimeUser(this);
+                    Debug.Log("adding");
                     addedTimeManagUser = true;
                 }
                 tutorialAnims.gameObject.SetActive(true);
             }
         }
         if (Input.GetMouseButtonDown(0)) clickRepetitions++;
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && audioInstruction.doneAudio)
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
             {
                 if(addedTimeManagUser)
                 {
                     TimeManager.Instance.RemoveNewStopTimeUser(this);
+                    Debug.Log("removing");
                     addedTimeManagUser = false;
                 }
                 currStepTurorial++;
                 tutorialAnims.gameObject.SetActive(false);
-                if (currStepTurorial == 3) UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
+                if (currStepTurorial == 3)
+                {
+                    StartCoroutine(LetsPlay());
+                    UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
+                }
             }
 
             if (!TryForcedToFail())
@@ -202,7 +223,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         spawner.OnGameEnd();
         gameConfig.SaveCoins(successfulAttempts);
         eogManager.OnGameOver();
-
+        audiosource.clip = noStartsAudio;
+        audiosource.Play();
         inGameObj.SetActive(false);
         Debug.Log("Game over!");
     }
@@ -243,7 +265,12 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
         }
     }
-
+    IEnumerator LetsPlay()
+    {
+        audioInstructions.clip = letsPlay;
+        audioInstructions.Play();
+        yield return new WaitForSecondsRealtime(letsPlay.length);
+    }
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
     {
         totalAttempts++;
