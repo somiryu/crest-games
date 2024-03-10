@@ -126,16 +126,16 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         blockButtons.gameObject.SetActive(false);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
     }
+
     public void AddUserInterfaceMonsterButton(MonsterMarketButtonBehaviour monsterMarketButtonBehaviour)
     {
         userMonsterButtonBehaviours.Add(monsterMarketButtonBehaviour);
     }
+
     public void RemoveUserInterfaceMonsterButton(MonsterMarketButtonBehaviour monsterMarketButtonBehaviour)
     {
         userMonsterButtonBehaviours.Remove(monsterMarketButtonBehaviour);
     }
-
-
 
     public void Init()
     {        
@@ -204,8 +204,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
         currSelectedButton = chestBtn;
-        tutoHand.gameObject.SetActive(false);
-        continueBtn.interactable = true;
+        if(monsterChestType == MonsterChestType.Regular) tutoHand.gameObject.SetActive(false);
         chestBtn.TryGetComponent<MonsterMarketButtonBehaviour>(out currButton);
 
         var btnToActive = userMonsterButtonBehaviours.Find(x => x.monsterMarketButton.monsterChestType == monsterChestType);
@@ -255,7 +254,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         switch (currButton.monsterMarketButton.monsterChestType)
         {
             case MonsterChestType.Regular:
-                marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
+
+                if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
+                {
+                    continueBtn.interactable = true;
+                }
+				marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
                 starsSpent += marketConfig.RegularChestPrice;
                 chestTypeOpenned = 1;
                 OpenChest(1, 0, 0);

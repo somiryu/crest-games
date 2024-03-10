@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameManager
+public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
 	[SerializeField] MG_VoiceStarOrFlowerGameConfigs gameConfigs;
 	[Space(20)]
@@ -241,12 +241,14 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         rightBtn.gameObject.SetActive(false);
         audioPlayer.clip = finalInstruction;
         audioPlayer.Play();
-        yield return new WaitForSeconds(finalInstruction.length);
+        blockPanel.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(finalInstruction.length);
         audioPlayer.clip = letsPlayAudio;
         audioPlayer.Play();
-        yield return new WaitForSeconds(letsPlayAudio.length);
+        yield return new WaitForSecondsRealtime(letsPlayAudio.length);
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
-        GameSequencesList.Instance.GoToNextItemInList();
+		blockPanel.gameObject.SetActive(false);
+		GameSequencesList.Instance.GoToNextItemInList();
     }
     void ResetScore()
     {
@@ -415,7 +417,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		rightBtn.interactable = true;
 		leftBtn.interactable = true;
 		discardBtn.interactable = true;
-		OnRoundEnded();
+		StartCoroutine(OnRoundEnded(0));
 	}
 
 
@@ -445,12 +447,22 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         effectPlayer.clip = correctAudio;
         effectPlayer.Play();
 
-        OnRoundEnded();
+        StartCoroutine(OnRoundEnded(correctAudio.length));
     }
 
-    void OnRoundEnded()
-    {        
-        currCoinsValueTxt.text = currCoins.ToString();
+    IEnumerator OnRoundEnded(float waitTime)
+    {
+        discardBtn.interactable = false;
+        leftBtn.interactable = false;
+        rightBtn.interactable = false;
+
+        yield return new WaitForSeconds(waitTime);
+
+		discardBtn.interactable = true;
+		leftBtn.interactable = true;
+		rightBtn.interactable = true;
+
+		currCoinsValueTxt.text = currCoins.ToString();
 
         if (currScoreStepTutorial == goalScoreStepTutorial)
         {
@@ -460,7 +472,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         else if (currStepTutorial == 4 && failurePerTutoCount >= gameConfigs.finalTutoStepMaxFailuresBeforeSkipping)
         {
             CompleteTuto();
-            return;
+            yield break;
         }
         InitRound();
     }
