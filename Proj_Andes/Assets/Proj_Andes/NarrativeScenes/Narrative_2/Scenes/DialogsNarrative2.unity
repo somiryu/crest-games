@@ -244,6 +244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810f4d33c9419e94c98f69fa67bac335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &625358 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7113496414716506327, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+  m_PrefabInstance: {fileID: 625355}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &273041914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,6 +1488,8 @@ MonoBehaviour:
   dialogueDisplayerUI: {fileID: 625357}
   _startingSequence: {fileID: 11400000, guid: 718cfb9555477834fbe11d31eb64b69e, type: 2}
   NarrativeIdx: 0
+  loadingScreen: {fileID: 625358}
+  shouldNotDelay: 0
 --- !u!4 &1180631021
 Transform:
   m_ObjectHideFlags: 0
@@ -2361,8 +2368,8 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 869eef77e99275644bf168ebc9534edd, type: 2}
-  m_InitialState: 1
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -2503,8 +2510,6 @@ PlayableDirector:
     value: {fileID: 2138338500}
   - key: {fileID: 2681229895518889507, guid: 839380defae90914c83af3d66bc1847a, type: 2}
     value: {fileID: 2138338500}
-  - key: {fileID: -233199689631670184, guid: bd6594831782dc040bd4af3826aa4c9b, type: 2}
-    value: {fileID: 2138338500}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &2138338497
@@ -2563,7 +2568,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c294600e408f2a84baf479059fc71c95, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2571,7 +2576,7 @@ SpriteRenderer:
   m_Size: {x: 13.4, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2138338500

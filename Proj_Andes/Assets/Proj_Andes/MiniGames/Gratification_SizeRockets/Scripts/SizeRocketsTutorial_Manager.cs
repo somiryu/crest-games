@@ -50,17 +50,27 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     private int totalCoinsWon = 0;
     private int shipsLeft;
 
+    [SerializeField] Transform actionBlocker;
+
     AudioSource audioSource;
+    [SerializeField] AudioClip introAudio;
+    [SerializeField] AudioClip selectShipAudio;
+    [SerializeField] AudioClip selectWorldAudio;
+    [SerializeField] AudioClip tryStartsAudio;
+    [SerializeField] AudioClip letsPlayAudio;
     [SerializeField] AudioClip onRightAction;
     [SerializeField] AudioClip onPassedTuto;
     [SerializeField] AudioClip onDepart;
-
+    IEnumerator currAudio;
     private void Awake()
     {
         ISizeRocketsManager.Instance = this;
 
         TryGetComponent(out audioSource);
-        InitTuto();
+
+        currAudio = ActivateStepActions(introAudio, selectShipAudio);
+        StartCoroutine(currAudio);
+        actionBlocker.gameObject.SetActive(true);
 
         selectedRocketType = SizeRocketsRocketTypes.NONE;
 
@@ -80,7 +90,38 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         tutoPlanet.Init(8);
         tutoStepIdx = 0;
         handSignPlanet.gameObject.SetActive(false);
+        handSignShip.gameObject.SetActive(true);
         ActivateTutoUI();
+    }
+
+    IEnumerator ActivateStepActions(AudioClip clip, AudioClip clip2 = null)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
+        yield return new WaitForSeconds(clip.length);
+        actionBlocker.gameObject.SetActive(false);
+        for (int i = 0; i < tutorialSteps.Count; i++) tutorialSteps[i].activeRocketType.interactable = false;
+        if (clip2 != null)
+        {
+            audioSource.clip = clip2;
+            audioSource.Play();
+            yield return new WaitForSeconds(clip2.length);
+        }
+        if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) InitTuto();
+        StopCoroutine(currAudio);
+    }
+    IEnumerator ShipDescription()
+    {
+        audioSource.clip = currTutoStep.onShipTypeAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(currTutoStep.onShipTypeAudio.length);
+    }
+    IEnumerator ResultDelivered(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
+        yield return new WaitForSeconds(clip.length);
+        GetNextStep();
     }
     void GetNextStep()
     {
@@ -98,6 +139,10 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
     void ActivateTutoUI()
     {
+        StartCoroutine(ShipDescription());
+
+        if (currTutoStep.Type != SizeRocketsTutoSteps.SmallRocketStep) handSignShip.gameObject.SetActive(false);
+
         for (int i = 0; i < tutorialSteps.Count; i++)
         {
             if (currTutoStep == tutorialSteps[i]) currTutoStep.activeRocketType.interactable = true;
@@ -166,6 +211,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         selectedRocketType = types;
         if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep)
         {
+            currAudio = ActivateStepActions(selectWorldAudio);
+            StartCoroutine(currAudio);
+            StopAllCoroutines();
             currTargetPlanet = null;
             handSignShip.gameObject.SetActive(false);
             handSignPlanet.gameObject.SetActive(true);
@@ -204,25 +252,25 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
     public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount)
     {
+        StartCoroutine(ResultDelivered(currTutoStep.onResultAudio));
         activeShips.Remove(rocket);
         totalCoinsWon += coinsAmount;
         currCoinsLabel.SetText(totalCoinsWon.ToString());
-        GetNextStep();
     }
-
-
     void GameOver()
     {
-        audioSource.clip = onPassedTuto;
-        audioSource.Play();
-
+        StartCoroutine(GoToNextScene());
         gameConfigs.coinsCollected = totalCoinsWon;
         tutoPlanet.gameObject.SetActive(false);
-        StartCoroutine(GoToNextScene());
-        Debug.Log("Passed tuto!");
     }
     IEnumerator GoToNextScene()
     {
+        audioSource.clip = tryStartsAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(tryStartsAudio.length);
+        audioSource.clip = letsPlayAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(letsPlayAudio.length);
         UserDataManager.CurrUser.RegisterTutorialStepDone(TutorialSteps.SizeRocketsDone.ToString());
         yield return new WaitForSeconds(1);
         GameSequencesList.Instance.GoToNextSequence();
@@ -241,4 +289,6 @@ public class SizeRocketTutoSteps
 {
     public SizeRocketsTutoSteps Type;
     public Button activeRocketType;
+    public AudioClip onShipTypeAudio;
+    public AudioClip onResultAudio;
 }

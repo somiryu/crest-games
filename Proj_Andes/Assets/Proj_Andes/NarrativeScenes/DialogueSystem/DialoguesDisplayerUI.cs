@@ -105,6 +105,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private void Awake() {
         if(instance != null && instance != this) DestroyImmediate(instance);
         instance = this;
+        canSkipAudio.isOn = false;
+
 
         dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
@@ -112,6 +114,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         skipSceneBtn.gameObject.SetActive(activeSkipSceneBtn && !AppSkipSceneButton.ActiveDebugGlobalUI);
         skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
 
+        if (!canSkipAudio.gameObject.activeSelf) canSkipAudio.isOn = false;
 
         narrativeSceneItem.ResetCurrentAnalytics();
 	}
@@ -157,6 +160,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     bool AutoContinueActive()
     {
+        if (currShowingIdx == -1) return false;
 		var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
         return currDialogue.autoContinueOnClickDialog && 
             (currDialogue.responses.Length == 0 || currDialogue.AllResponsesWereGrayOut(grayOutResponseIdxes));
@@ -507,7 +511,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 				narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
 				questionIdx: questionIdx,
 				isTimeLabel: true);
-			currResponseAnalyticResponseValue = analyticInfo.buildResponse();
+			currResponseAnalyticResponseValue = analyticInfo.BuildResponse();
 		}
 
         currResponsesDisplayer.ActiveConfirmationButton(false);

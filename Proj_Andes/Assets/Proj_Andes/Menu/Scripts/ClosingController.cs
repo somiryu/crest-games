@@ -6,21 +6,20 @@ using UnityEngine.UI;
 public class ClosingController : MonoBehaviour
 {
     [SerializeField] SimpleGameSequenceItem closingItem;
-    [SerializeField] float waitFor;
     [SerializeField] Transform logoPanel;
-    WaitForSeconds waitForSec;
+    [SerializeField] AudioClip finalAudio;
+    [SerializeField] Button continueBtn;
+
+    AudioSource finalAudioSource;
+
     void Start()
     {
-        waitForSec = new WaitForSeconds(waitFor);
         logoPanel.gameObject.SetActive(false);
-        StartCoroutine(GoToNextScene());
-    }
-    IEnumerator GoToNextScene()
-    {
-        yield return waitForSec;
-        logoPanel.gameObject.SetActive(true);
-        yield return waitForSec;
-        closingItem.OnSequenceOver();
+        TryGetComponent(out finalAudioSource);
+        finalAudioSource.clip = finalAudio;
+        finalAudioSource.Play();
+        continueBtn.onClick.AddListener(closingItem.OnSequenceOver);
+        TimeManager.Instance.gameState = SessionStateLeft.Finished;
 
     }
 }

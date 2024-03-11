@@ -21,13 +21,11 @@ public class SkinManager : MonoBehaviour
 	{
 		if(instance != null && instance != this) Destroy(instance);
 		instance = this;
-
 		Utility.FindObjectsByType(allSkinnableImages);
 		Utility.FindObjectsByType(allSkinnableImagesRandom);
 		Utility.FindObjectsByType(allItems);
 	}
-
-	private void Start()
+    private void Start()
 	{
 		if (forceSkinType) SetSkin(skinTypeToForce);
 		else SetSkin(SceneManagement.currSkinType);

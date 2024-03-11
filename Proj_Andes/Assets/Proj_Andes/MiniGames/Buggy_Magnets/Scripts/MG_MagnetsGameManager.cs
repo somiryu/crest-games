@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
+public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
 	private static MG_MagnetsGameManager instance;
 	public static MG_MagnetsGameManager Instance => instance;
@@ -25,6 +25,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] Image trapImage;
 	[SerializeField] TMP_Text inGame_currPointsTextUI;
 	[SerializeField] Animator noLeftMagnetsAnims;
+	GameUIController gameUi => GameUIController.Instance;
 
 	[Header("after action UI")]
 	[SerializeField] GameObject afterActionPanel;
@@ -34,7 +35,12 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] GameObject winTitle;
 	[SerializeField] GameObject loseTitle;
 	[SerializeField] TMP_Text afterAction_currPointsTextUI;
+	[SerializeField] AudioSource instructionSource;
 	[SerializeField] AudioClip capturedItemSfx;
+	[SerializeField] AudioClip introAudio;
+	[SerializeField] AudioClip letsPlayAudio;
+	[SerializeField] AudioClip noStarsAudio;
+	[SerializeField] Transform blockingPanel;
 
 
 	public int currSpawnedItems;
@@ -47,7 +53,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
     private Collider[] overlayResults = new Collider[20];
 	[SerializeField] EndOfGameManager eogManager;
-
+	int attempts;
 	float totalTime;
 	public EndOfGameManager EndOfGameManager => eogManager;
 
@@ -56,12 +62,12 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 	public int clickRepetitions;
 	public int lostByCheat;
 	public int magnetsCollected;
-
+	IEnumerator onCoinLost;
     public void Awake()
 	{
 		if(instance != null && instance != this) DestroyImmediate(instance);
 		instance = this;
-		Init();
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick)) GameUIController.Instance.onTuto = true;
 	}
 
 	public void Init()
@@ -73,6 +79,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		clickRepetitions = 0;
 		totalTime = 0;
 
+		attempts = 0;
         energyItemsPool.Init(30);
 		availableMagnets = gameConfigs.initialMagnetsCount;
 		timer = gameConfigs.timeBetweenSpawnsPerDifficultLevel.GetValueModify();
@@ -87,12 +94,28 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		magnetRangeIndicator.Init(gameConfigs.userMagnetRadius);
 		trapImage.gameObject.SetActive(false);
 		eogManager.OnGameStart();
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_1NoClick)) StartCoroutine(Intro());
 
+    }
+    IEnumerator Intro()
+	{
+		blockingPanel.gameObject.SetActive(true);
+		TimeManager.Instance.SetNewStopTimeUser(this);
+		audiosource.clip = introAudio;
+		audiosource.Play();
+		yield return new WaitForSecondsRealtime(introAudio.length);
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        blockingPanel.gameObject.SetActive(false);
+    }
+    private void Start()
+	{
+		Init();
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.magnetsGame);
 	}
 
 	private void Update()
 	{
-		if (AudioInstruction.Instance.firstAudio != null) return;
+		//if (CatchCoinsAudioInstruction.Instance.firstAudio != null) return;
 		if (availableMagnets == 0) return;
 		timer += Time.deltaTime;
 		totalTime += Time.deltaTime;
@@ -122,15 +145,19 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		{			
             var mouseGlobalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseGlobalPosition.z = 0;
-			if (gameConfigs.activeCheats && PredictIfWouldWin(mouseGlobalPosition))
+			attempts++;
+			if(gameConfigs.activeCheats && attempts > gameConfigs.startFaillingAfterAttemps)
 			{
 				mouseGlobalPosition = GetBadMousePosition(0);
 				lostByCheat++;
+				currEnergyPicked -= gameConfigs.coinsOnFailure;
+				currEnergyPicked = Mathf.Max(currEnergyPicked, 0);
+                inGame_currPointsTextUI.text = currEnergyPicked.ToString();
+				gameUi.StarLost();
 				StartCoroutine(ShowTrapSign());
 			}
-
 			magnetRangeIndicator.ShowAt(mouseGlobalPosition);
-
+			
 			var hitAmount = Physics.OverlapSphereNonAlloc(mouseGlobalPosition, gameConfigs.userMagnetRadius, overlayResults);
 			var hitEnergyItem = 0;          
 
@@ -140,6 +167,9 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 				if (!curr.TryGetComponent(out MG_MagnetsEnergyItem energyItem)) continue;
                 if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick))
                 {
+					attempts = 0;
+					GameUIController.Instance.onTuto = false;
+					StartCoroutine(LetsPlay());
                     UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick.ToString());
                     TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.MG_Magnets_2FourItemEnergyClick);
                 }
@@ -152,7 +182,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 			{
                 audiosource.clip = failEveryEnergyItemAudio;
                 audiosource.Play();
-            }
+				GeneralGameAnalyticsManager.RegisterLose();
+			}
 
 			if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_Magnets_2FourItemEnergyClick)) return;
                 
@@ -167,7 +198,12 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
             }
         }
 	}
-
+	IEnumerator LetsPlay()
+	{
+		instructionSource.clip = letsPlayAudio;
+		instructionSource.Play();
+		yield return new WaitForSeconds(letsPlayAudio.length);
+	}
 	bool PredictIfWouldWin(Vector3 posToTest)
 	{
 		var hitAmount = Physics.OverlapSphereNonAlloc(posToTest, gameConfigs.userMagnetRadius, overlayResults);
@@ -206,6 +242,8 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 
 	void OnPicketEnergyItem(MG_MagnetsEnergyItem itemPicked)
 	{
+		GeneralGameAnalyticsManager.RegisterWin();
+		gameUi.StarEarned(Input.mousePosition);
 		itemPicked.OnWasPicked();
 		audiosource.clip = capturedItemSfx;
 		audiosource.Play();
@@ -265,8 +303,10 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager
 		winTitle.SetActive(won);
 		loseTitle.SetActive(!won);
 		afterAction_currPointsTextUI.SetText(currEnergyPicked.ToString());
-
-		gameConfigs.coinsCollected = currEnergyPicked;
+        instructionSource.clip = noStarsAudio;
+        instructionSource.Play();
+        yield return new WaitForSeconds(noStarsAudio.length);
+        gameConfigs.coinsCollected = currEnergyPicked;
 		eogManager.OnGameOver();
 	}
 

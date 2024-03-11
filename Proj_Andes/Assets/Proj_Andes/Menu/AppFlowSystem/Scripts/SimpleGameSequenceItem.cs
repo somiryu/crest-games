@@ -33,11 +33,17 @@ public class SimpleGameSequenceItem : ScriptableObject
 	public virtual void OnSequenceOver() => GameSequencesList.Instance.GoToNextItemInList();
     public void SaveCoins(int coinsAmt)
     {
-        if(UserDataManager.CurrUser != null)
-        {
-            UserDataManager.CurrUser.Coins += coinsAmt;
-        }
+        Debug.Log("Adding " + coinsAmt + " Coins");
+        UserDataManager.CurrUser.Coins += coinsAmt;
     }
     public virtual void SaveAnalytics() { }
+
+    public virtual void SaveGeneralGameAnalytics()
+    {
+        if (GeneralGameAnalyticsManager.Instance == null) return;
+        var analytics = GeneralGameAnalyticsManager.Instance.GetAnalytics();
+        if(analytics == null) return;
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.generalGamesCollID, analytics);
+    }
 
 }

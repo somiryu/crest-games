@@ -4,8 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+//using tutorialSteps = tutorialSteps;
 
-public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
+public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
 	private static MG_MechanicHand_GameManger instance;
 	public static MG_MechanicHand_GameManger Instance => instance;
@@ -25,6 +26,15 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public GameObject inGameUiContainer;
 	public Button sendHookBtn;
 
+	[SerializeField] AudioSource audioSource;
+	[SerializeField] AudioClip introductionAudio;
+	[SerializeField] AudioClip letsTryAudio;
+	[SerializeField] AudioClip moveHookAudio;
+	[SerializeField] AudioClip lettPlayAudio;
+	[SerializeField] AudioClip noStarsAudio;
+	[SerializeField] Transform blockingPanel;
+	[SerializeField] Transform tutoHand1;
+
 	private List<Transform> currRoundAsteroids = new List<Transform>();
     BoxCollider CurrAsteroidsSpawnArea => asteroidsAreaPerRound[currRound];
 
@@ -35,7 +45,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 	public float sizeLoseOnRoundChange => gameConfigs.asteroidsSizeLoseAmountPerRound;
 	int initialPlayerLifes => gameConfigs.playerLifes;
 
-	int currRound = 0;
+	public int currRound = 0;
 	float currAsteroidsSize = 1;
 	int currPlayerLifes;
 	public int totalCapturedAsteroids = 0;
@@ -46,6 +56,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 
 	public int NeededAsteroidsToWin => Mathf.FloorToInt((asteroidsPerRound * 3) * gameConfigs.percentageNeededToWin);
 	float totalTime;
+	IEnumerator currentInstruction;
+	bool tutoDone;
 
     //DATA ANALYTICS
     public float timePlayed;
@@ -56,13 +68,37 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
     private void Awake()
 	{
 		instance = this;
-	}
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) GameUIController.Instance.onTuto = true;
+    }
 
 	private void Start()
 	{
 		Init();
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.mechanicHandGame);
 	}
-
+	IEnumerator Introduction()
+	{
+		tutoHand1.gameObject.SetActive(false);
+		blockingPanel.gameObject.SetActive(true);
+		TimeManager.Instance.SetNewStopTimeUser(this);
+        audioSource.clip = introductionAudio;
+        audioSource.Play();
+        yield return new WaitForSecondsRealtime(introductionAudio.length);
+        audioSource.clip = letsTryAudio;
+        audioSource.Play();
+        yield return new WaitForSecondsRealtime(letsTryAudio.length);
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        tutoHand1.gameObject.SetActive(true);
+        blockingPanel.gameObject.SetActive(false);
+        tutoDone = false;
+        StartCoroutine( PlaySigleAudioGuide(moveHookAudio));
+    }
+    IEnumerator PlaySigleAudioGuide(AudioClip clip)
+	{
+		audioSource.clip = clip;
+		audioSource.Play();
+		yield return new WaitForSeconds(clip.length);
+	}
 	void Init()
     {
 		totalCapturedAsteroids = 0;
@@ -78,6 +114,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		player.Init();
 		OnRoundStart();
 		sendHookBtn.onClick.AddListener(player.OnClickSendHook);
+		currentInstruction = Introduction();
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) StartCoroutine(currentInstruction);
     }
 	void Update()
 	{
@@ -90,7 +128,6 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		var center = CurrAsteroidsSpawnArea.transform.position;
 		var maxPosition = center + CurrAsteroidsSpawnArea.size/2;
 		var minPosition = center - CurrAsteroidsSpawnArea.size/2;
-
 		currRoundAsteroids.Clear();
 
 		for (int i = 0;i < asteroidsPerRound; i++)
@@ -110,7 +147,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		trialIdx++;
 		if (trialIdx > 20)
 		{
-			Debug.LogError("No available random position found");
+			//Debug.LogError("No available random position found");
 			return Vector3.zero;
 		}
 		var newTestPosition = Vector3.zero;
@@ -137,6 +174,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 
 	public void OnCapturedAsteroid(Transform asteroid)
 	{
+		GeneralGameAnalyticsManager.RegisterWin();
 		totalCapturedAsteroids++;
 		constant_ResultsTxt.SetText(totalCapturedAsteroids.ToString());
 
@@ -149,11 +187,14 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 			if(currRound == 3) GameOver();
 			else OnRoundStart();
 		}
-
+        if (!tutoDone) StartCoroutine(PlaySigleAudioGuide(lettPlayAudio));
+        tutoDone = true;
     }
 
     public void OnPlayerFailedHook()
 	{
+		GeneralGameAnalyticsManager.RegisterLose();
+		GameUIController.Instance.StarLost();
 		currPlayerLifes--;
 		totalCapturedAsteroids -= 2;
 		totalCapturedAsteroids = Mathf.Max(totalCapturedAsteroids, 0);
@@ -170,6 +211,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager
 		inGameUiContainer.gameObject.SetActive(false);
 		afterActionPanel.SetActive(true);
 		inGameObjs.SetActive(false);
+		StartCoroutine(PlaySigleAudioGuide(noStarsAudio));
 		//afterAction_ResultsTxt.SetText("Capturaste: " + totalCapturedAsteroids + " de " + asteroidsPerRound * 3);
 		afterAction_ResultsTxt.SetText( totalCapturedAsteroids.ToString());
 		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);

@@ -18,18 +18,29 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     [SerializeField] Sprite soundDeactivated;
     int soundActive;
     [SerializeField] Image tutorialImg;
+    [SerializeField] Image coinBk;
+    [SerializeField] Pool<ScoreStarsController> pool = new Pool<ScoreStarsController>();
+    [SerializeField] Transform starsContainer;
+    [SerializeField] Transform parent;
+    [SerializeField] ScoreStarsController starPrefab;
+    public bool onTuto = false;
     public bool onPause;
+    Animator anim;
     private void Awake()
     {
         if (instance != null && instance != this) DestroyImmediate(this);
+        instance = this;
     }
     void Start()
     {
+        TryGetComponent(out anim);
         homeBtn.onClick.AddListener(OpenMenu);
         continueBtn.onClick.AddListener(Continue);
         exitBtn.onClick.AddListener(ExitGame);
         onPause = false;
         //Audio active by default
+        pool.Init(40);
+
         soundActive = 1;
         soundActive = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundActive);
         ActivateSound(soundActive == 1);
@@ -42,11 +53,11 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         menuContainer.gameObject.SetActive(true);
         onPause = true;
         TimeManager.Instance.SetNewStopTimeUser(this);
-        if(AudioInstruction.Instance != null)
+        if (CatchCoinsAudioInstruction.Instance != null)
         {
-            if (AudioInstruction.Instance.startedCorr)
+            if (CatchCoinsAudioInstruction.Instance.startedCorr)
             {
-                AudioInstruction.Instance.StopAudioIns();
+                CatchCoinsAudioInstruction.Instance.StopAudioIns();
             }
         }
     }
@@ -55,11 +66,11 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         menuContainer.gameObject.SetActive(false);
         onPause = false;
         TimeManager.Instance.RemoveNewStopTimeUser(this);
-        if (AudioInstruction.Instance != null)
+        if (CatchCoinsAudioInstruction.Instance != null)
         {
-            if (AudioInstruction.Instance.startedCorr)
+            if (CatchCoinsAudioInstruction.Instance.startedCorr)
             {
-                AudioInstruction.Instance.RestartAudio();
+                CatchCoinsAudioInstruction.Instance.RestartAudio();
             }
         }
     }
@@ -72,9 +83,9 @@ public class GameUIController : MonoBehaviour, ITimeManagement
 
     void SwitchAudioActive()
     {
-		var newValue = !AudioManager.Instance.currentBkMusic.isPlaying;
+        var newValue = !AudioManager.Instance.currentBkMusic.isPlaying;
         ActivateSound(newValue);
-	}
+    }
 
     void ActivateSound(bool activated)
     {
@@ -85,10 +96,22 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         }
         else
         {
-			AudioManager.Instance.currentBkMusic.Stop();
-			musicBtn.image.sprite = soundDeactivated;
+            AudioManager.Instance.currentBkMusic.Stop();
+            musicBtn.image.sprite = soundDeactivated;
         }
 
-        PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", (int)AudioListener.volume);
+        PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activated ? 1 : 0);
+    }
+    public void StarEarned(Vector3 initPos)
+    {
+        Debug.DrawLine(initPos, initPos + Vector3.one * 100, Color.yellow, 10);
+        var newStar = pool.GetNewItem();
+        var finalPos = starsContainer.transform.position;
+        newStar.Init(initPos, finalPos, pool);
+
+    }
+    public void StarLost()
+    {
+		anim.SetTrigger("OnCoinLost");
     }
 }

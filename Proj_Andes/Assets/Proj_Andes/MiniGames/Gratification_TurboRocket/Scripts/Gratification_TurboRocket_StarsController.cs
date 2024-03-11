@@ -9,15 +9,17 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
 {
     [SerializeField] ParticleSystem capturedVFX;
     [SerializeField] AudioSource capturedSFX;
+    [SerializeField] SpriteRenderer graphic;
 
-    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float moveSpeed = 5;
     [SerializeField] float step = 1f;
     [SerializeField] float yOfsetLimit = 0.1f;
+    float targetSpeed;
 
     public Collider starColl;
 
     Vector3 initialPosition;
-    bool isInitialPosition;
+    public bool isInitialPosition;
     public bool isCaptured;
 
     iTurboRocketManager player => iTurboRocketManager.Instance;
@@ -35,8 +37,7 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         iTurboRocketManager.Instance.starsGatheredCount++;
         StartCoroutine( _OnCapturedwithDelay());
-       
-        Debug.Log("caught star");
+        GameUIController.Instance.StarEarned(Camera.main.WorldToScreenPoint(transform.position));
         player.OnScoreChanges?.Invoke();
 
     }
@@ -64,6 +65,9 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         {
             MoveObjectToNearestEdge();
             isInitialPosition = false;
+            var color = Color.white;
+            color.a = 0.5f;
+            graphic.color = color;
         }
         else if (!isInitialPosition)
         {
@@ -86,8 +90,15 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
 
     private void ReturnObjectToInitialPosition()
     {
-        transform.position = Vector3.MoveTowards(transform.position, initialPosition, moveSpeed * Time.deltaTime);
-        if(transform.position == initialPosition) isInitialPosition = true;
+        targetSpeed = player.playerCurrentTargetSpeed - 2;
+        var movX = Mathf.MoveTowards(transform.position.x, initialPosition.x, targetSpeed * Time.deltaTime);
+        var movY = Mathf.MoveTowards(transform.position.y, initialPosition.y, targetSpeed * Time.deltaTime);
+        transform.position = new Vector3(movX, movY);
+        if(transform.position == initialPosition)
+        {
+            isInitialPosition = true;
+            graphic.color = Color.white;
+        }
     }
 
     public void Deactivate()

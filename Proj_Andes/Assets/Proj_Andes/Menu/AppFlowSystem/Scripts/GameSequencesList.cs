@@ -24,6 +24,10 @@ public class GameSequencesList : ScriptableObject
     [HideInInspector] public SimpleGameSequenceItem currItem => gameSequences[goToGameGroupIdx];
     [NonSerialized] public int goToGameGroupIdx;
     public bool continueToNextItem;
+
+    public static int firstFrustrationScreenIdx;
+    public static int LastFrustrationScreenIdx;
+
     public void OnValidate()
     {
         if (continueToNextItem)
@@ -38,7 +42,11 @@ public class GameSequencesList : ScriptableObject
         if (nextItem != null)
         {
             Debug.Log("saving");
-            if (prevGame != null) prevGame.SaveAnalytics();
+            if (prevGame != null)
+            {
+                prevGame.SaveAnalytics();
+                prevGame.SaveGeneralGameAnalytics();
+            }
             prevGame = nextItem;
             AudioManager.Instance.PlayMusic();
             TimeManager.Instance.ResetUsers();
@@ -72,12 +80,11 @@ public class GameSequencesList : ScriptableObject
 
 		if (goToGameGroupIdx >= gameSequences.Count)
         {
-            goToGameGroupIdx = 0;
-            for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
+            goToGameGroupIdx = gameSequences.Count-1;
+            EndSequence();
             Debug.LogWarning("Game sequence done, restarting the app");
         }
-		//prevGame = null;
-        GoToNextItemInList();
+        else GoToNextItemInList();
     }
 
     public void GoToSequenceIdx(int idx, int subIdx)
@@ -94,10 +101,13 @@ public class GameSequencesList : ScriptableObject
 	}
     public void EndSequence()
     {
-        if(prevGame != null) prevGame.SaveAnalytics();
+        if (prevGame != null)
+        {
+            prevGame.SaveAnalytics();
+            prevGame.SaveGeneralGameAnalytics();
+        }
 		UserDataManager.OnUserQuit();
         ResetSequence();
-
         GoToNextItemInList();
     }
 

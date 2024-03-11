@@ -18,7 +18,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: " Al fin se termin\xF3 el recreo. Al regresar a tu sal\xF3n, te encuentras
+    text: "Al fin se termin\xF3 el recreo. Al regresar a tu sal\xF3n, te encuentras
       de nuevo con tu amigo Cami.\r\n"
     textAlternative: "Al fin se termin\xF3 el recreo. Al regresar a tu sal\xF3n,
       te encuentras de nuevo con tu amiga Cami.\r\n"
@@ -64,6 +64,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 8300000, guid: d7352ef1843fdb045aaba3a00a855f7e, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -74,6 +75,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 8300000, guid: 02f75c8a6f8937f4cb26f68be4354a30, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -84,6 +86,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 6b10eb33fdad503448cbe325332f025b, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -94,6 +97,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 8300000, guid: 0b68589e4cc8c1046a9073e8b4b887bd, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -104,6 +108,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 8300000, guid: 42ea2c09276aef24c9e27f4a2d7c1d16, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -120,9 +125,9 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "La profe llama a Cami para revisarle su tarea. Mientras tanto, Alex, el
-      mismo compa\xF1ero que lo hab\xEDa empujado en clase de educaci\xF3n f\xEDsica,
-      pasa por su puesto, le quita su l\xE1piz y lo esconde."
+    text: "La profe llama a Cami para revisarle su tarea. Mientras tanto, Alex, que
+      le hab\xEDa empujado en clase de educaci\xF3n f\xEDsica, pasa por su puesto,
+      le quita su l\xE1piz y lo esconde."
     textAlternative: "La profe llama a Cami para revisarle su tarea. Mientras tanto,
       Alex, la misma compa\xF1era que la hab\xEDa empujado en clase de educaci\xF3n
       f\xEDsica, pasa por su puesto, le quita su l\xE1piz y lo esconde."
@@ -151,6 +156,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 8300000, guid: d7352ef1843fdb045aaba3a00a855f7e, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -161,6 +167,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 8300000, guid: 02f75c8a6f8937f4cb26f68be4354a30, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -171,6 +178,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 6b10eb33fdad503448cbe325332f025b, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -181,6 +189,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 8300000, guid: 0b68589e4cc8c1046a9073e8b4b887bd, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -191,6 +200,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 8300000, guid: 42ea2c09276aef24c9e27f4a2d7c1d16, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1

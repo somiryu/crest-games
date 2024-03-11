@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using Firebase.Auth;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {   
@@ -77,7 +78,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Transform uReadyPanel;
 	[SerializeField] Button readyBtb;
 	[SerializeField] Button cancelConfirmPanel;
-
+	[SerializeField] TMP_Text contWelcomeM; 
+	[SerializeField] TMP_Text contWelcomeF; 
 
 	[Header("No Internet Connection Warnings")]
 	[SerializeField] Button noInternetConnectionPopUpOkBtn;
@@ -88,12 +90,28 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] GameObject dataSyncedPopUp;
 	[SerializeField] TMP_Text dataSyncedLabel;
 
+	[Header("Insert Code screen")]
+	[SerializeField] GameObject insertCodePanel;
+	[SerializeField] TMP_InputField insertCodeInputF;
+	[SerializeField] Button insertCodeConfirm;
+
+	AudioSource audioSource;
+	[SerializeField] AudioClip welcomeFAudio;
+	[SerializeField] AudioClip ureadyFAudio;	
+	[SerializeField] AudioClip welcomeMAudio;
+	[SerializeField] AudioClip ureadyMAudio;
+	[SerializeField] TMP_Text ureadyWelcomeM;
+	[SerializeField] TMP_Text ureadyWelcomeF;
+	[SerializeField] TMP_Text ureadyM;
+	[SerializeField] TMP_Text ureadyF;
+
 	string logInsuccedID;
 
 	bool continueSelectedFlag;
 
 	private void Awake()
 	{
+		TryGetComponent(out audioSource);
 		loadingScreen.gameObject.SetActive(true);
 		selectUserContainer.gameObject.SetActive(true);
 
@@ -113,7 +131,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
 		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
-		afterLogInNewGameBtn.onClick.AddListener(() => uReadyPanel.gameObject.SetActive(true));
+		afterLogInNewGameBtn.onClick.AddListener(UReady);
 
 		cancelSearchBarBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
 
@@ -150,6 +168,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		dataSyncedPopUpOkBtn.onClick.AddListener(() => dataSyncedPopUp.SetActive(false));
 
 		confirmUserBtn.gameObject.SetActive(false);
+
+		insertCodePanel.gameObject.SetActive(true);
+		insertCodeConfirm.onClick.AddListener(OnInsertCodeFinished);
+		insertCodeInputF.onValueChanged.AddListener(OnInsertedCodeChanged);
+		insertCodeConfirm.interactable = false;
+		UserDataManager.Instance.SetCurrUser(null);
 	}
 
 
@@ -165,7 +189,20 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		}
 		auth.SignInAnonymouslyAsync().ContinueWith(OnSingingResult);
 	}
+	void UReady()
+	{
+        var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyFAudio : ureadyMAudio;
+        audioSource.clip = currClip;
+        audioSource.Play();
 
+        //finding which to deactivate
+        var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyWelcomeM : ureadyWelcomeF;
+        var currUready = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyM : ureadyF;
+		currWelcome.gameObject.SetActive(false); 
+		currUready.gameObject.SetActive(false);
+
+        uReadyPanel.gameObject.SetActive(true);
+    }
 	void OnSingingResult(Task<AuthResult> taskResult)
 	{
 		if (taskResult.IsCanceled)
@@ -250,6 +287,17 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 				else item.Key.gameObject.SetActive(false);
             }
 		}
+	}
+
+	void OnInsertedCodeChanged(string newValue)
+	{
+		insertCodeConfirm.interactable = !string.IsNullOrEmpty(newValue);
+	}
+
+	void OnInsertCodeFinished()
+	{
+		UserDataManager.CurrInstitutionCode = insertCodeInputF.text;
+		insertCodePanel.gameObject.SetActive(false);
 	}
 
 	void RebuildUsersList()
@@ -435,8 +483,16 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		UserDataManager.Instance.SetCurrUser(id);
 		var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
+
+		var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
+		audioSource.clip = currClip;
+		audioSource.Play();
+
 		afterLogInPanel.SetActive(true);
-		afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
+
+        var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? contWelcomeM : contWelcomeF;
+		currWelcome.gameObject.SetActive(false);
+        afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
 	}
 
 
@@ -452,6 +508,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			AudioManager.Instance.currentBkMusic.Play();
 			musicBtn.image.sprite = musicBtnActive;
 		}
+		bool activeStae = AudioManager.Instance.currentBkMusic.isPlaying;
+		PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activeStae ? 1 : 0);
+
 	}
 
 	public void OnContinueGameBtnPressed()
@@ -460,10 +519,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		uReadyPanel.gameObject.SetActive(true);
 	}
 
-	public void OnReadyConfirmBtnPressed()
+    public void OnReadyConfirmBtnPressed()
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
+
+		TimeManager.timer = 0;
+		
 		if (continueSelectedFlag)
 		{
 			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];

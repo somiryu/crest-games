@@ -109,13 +109,13 @@ public class NarrativeAnalyicsInfo
         return label;
     }
 
-    public string buildResponse()
+    public string BuildResponse()
     {
         if(mainCategory == NarrativeAnalyticCategory.Aggression || mainCategory == NarrativeAnalyticCategory.Conflict)
         {
-            return aggSubCategory.ToString();
+            return ((int)aggSubCategory).ToString();
         }
-        if(mainCategory == NarrativeAnalyticCategory.Empathy) return empSubCategory.ToString();
+        if (mainCategory == NarrativeAnalyticCategory.Empathy) return ((int) empSubCategory).ToString();
         if(mainCategory == NarrativeAnalyticCategory.Emo) return EmoSubCategory.ToString();
 
         return null;

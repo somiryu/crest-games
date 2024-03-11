@@ -111,7 +111,10 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 		InitRound();
 	}
 
-   
+    void Start()
+    {
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.fightTheAlienGame);
+    }
 
 	void InitRound()
     {
@@ -174,6 +177,8 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         correctParticles.Stop();
         incorrectParticles.Stop();
 
+        GeneralGameAnalyticsManager.RegisterLose();
+        GameUIController.Instance.StarLost();
         audiosource.clip = wrongAudio;
         audiosource.Play();
 
@@ -202,7 +207,11 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
         audiosource.clip = correctAudio;
         audiosource.Play();
 
-        correctParticles.Play();
+        GeneralGameAnalyticsManager.RegisterWin();
+		GameUIController.Instance.StarEarned(Input.mousePosition);
+
+
+		correctParticles.Play();
         for (int i = 0; i < skinObjAnim.Length; i++)
         {
 

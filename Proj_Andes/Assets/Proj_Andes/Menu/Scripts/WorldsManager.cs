@@ -14,13 +14,17 @@ public class WorldsManager : MonoBehaviour
     [SerializeField] Sprite worldDone;
     [SerializeField] Sprite worldUndone;
     [SerializeField] WorldStatus[] worldStatusSprite;
-
+    AudioSource audioSource;
+    [SerializeField] AudioClip pickAWorldAudio;
     [SerializeField] TextMeshProUGUI coinsAmt;
     [SerializeField] MyCollectionManager collectionManager;
     int currActivePlanet => index;
 
     void Start()
     {
+        TryGetComponent(out audioSource);
+        audioSource.clip = pickAWorldAudio;
+        audioSource.Play();
         collectionManager.Init(true);
         worlds = GetComponentsInChildren<Button>();
         for (int i = 0; i < worlds.Length; i++)

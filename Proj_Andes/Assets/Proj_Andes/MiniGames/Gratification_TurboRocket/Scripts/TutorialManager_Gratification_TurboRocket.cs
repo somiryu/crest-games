@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TutorialSteps = tutorialSteps;
 
-public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRocketManager
+public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRocketManager, ITimeManagement
 {
     [SerializeField] Gratification_TurboRocket_GameConfig gameConfig;
     public Gratification_TurboRocket_GameConfig levelConfig { get => gameConfig; set { } }
@@ -38,7 +38,15 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     [SerializeField] Image turboBtn;
     [SerializeField] ParticleSystem turboParticles;
     [SerializeField] GameObject turboAnimObj;
+
     [SerializeField] AudioSource turboSFX;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip introAudio;
+    [SerializeField] AudioClip ifSlowAudio;
+    [SerializeField] AudioClip ifTurboAudio;
+    [SerializeField] AudioClip letsPlayAudio;
+    [SerializeField] Transform blockingPanel;
+
     [SerializeField] PlayableDirector endTimelineDirector;
     [SerializeField] Transform artParent;
     [SerializeField] SkinnableObject artSkinnableObj;
@@ -47,10 +55,10 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     float yMoveProgress = 0f;
     float startYPos = 0f;
 
-
+    float currentTargetAcceleration;
 
     Animator characterAnimator;
-
+    IEnumerator instruction;
     public Vector3 RoadSize => bk.starsSpawner.SpawnArea.size;
 
     public float tutorialProgress;
@@ -64,7 +72,14 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     Action iTurboRocketManager.OnScoreChanges { get => OnScoreChanged; set { } }
 
     public Transform myTransform => transform;
+
+    public float playerCurrentTargetSpeed => currentTargetAcceleration;
+
+    bool iTurboRocketManager.onDoneAnim { get; set; }
+    Gratification_TurboRocket_CameraController iTurboRocketManager.camCC => camCC;
+
     public bool endOfTuto;
+    bool alreadyGivenInstruction;
     private void Awake()
     {
         iTurboRocketManager.Instance = this;
@@ -100,17 +115,16 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         currentSpeed = levelConfig.regularSpeed;
         currentTargetSpeed = levelConfig.regularSpeed;
         bk.Init();
-
-        InitTuto();
-
+        //InitTuto();
+        turboBtn.gameObject.SetActive(false);
 
         SetSpeedway();
         firstPos = transform.position;
         camCC.Init();
-		onPlay = true;
         gameStages = GameStages.Start;
+        currentTargetAcceleration = gameConfig.accelerationSpeed;
     }
-    void InitTuto()
+    public void InitTuto()
     {
         tutorialSteps[0].stepClickableObj = bk.starsSpawner.stars[0].starColl;
         tutorialSteps[1].stepClickableObj = bk.starsSpawner.stars[1].starColl;
@@ -129,9 +143,35 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         ui.progressSlider.value = 0.8f;
         ui.progressSlider.gameObject.SetActive(false);
         turboBtn.gameObject.SetActive(false);
-
+        alreadyGivenInstruction = false;
         currTutoStepIndex = 0;
+        StartCoroutine(Introduction());
+
         currTutoStep.InitTutoStep();
+    }
+    IEnumerator Introduction()
+    {
+        yield return new WaitForSeconds(0.5f);
+        TimeManager.Instance.SetNewStopTimeUser(this);
+        currTutoStep.signHand.gameObject.SetActive(false);
+        audioSource.clip = introAudio;
+        audioSource.Play();
+        yield return new WaitForSecondsRealtime(introAudio.length);
+        Debug.Log("done intro");
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        audioSource.clip = ifSlowAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(ifSlowAudio.length);
+        currTutoStep.signHand.gameObject.SetActive(true);
+        blockingPanel.gameObject.SetActive(false);
+    }
+    IEnumerator Instruction(AudioClip clip)
+    {
+        blockingPanel.gameObject.SetActive(true); 
+        audioSource.clip = clip;
+        audioSource.Play();
+        yield return new WaitForSeconds(clip.length);
+        blockingPanel.gameObject.SetActive(false);
     }
     void SetSpeedway()
     {
@@ -154,7 +194,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     }
     void Update()
     {
-        if (!onPlay) return;
+        if (!onPlay || !iTurboRocketManager.Instance.onDoneAnim) return;
 		TutoProgress();
 		if (!endOfTuto)
         {
@@ -192,7 +232,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
     void ContinuousMovement()
     {
-        currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, levelConfig.accelerationSpeed * Time.deltaTime);
+        currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, currentTargetAcceleration * Time.deltaTime);
         if (onPlay)
         {
             var movementToAdd = Vector3.right * currentSpeed * Time.deltaTime;
@@ -219,20 +259,21 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         turboAnimObj.SetActive(true);
         turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
+        currentTargetAcceleration = gameConfig.accelerationSpeed;
         camCC.OnEnterTurbo();
         onTurbo = true;
     }
     public void OnExitTurboMode()
     {
         characterAnimator.SetTrigger("Normal");
-        currentTargetSpeed = levelConfig.regularSpeed;
         camCC.OnExitTurbo();
         turboParticles.Stop();
         turboAnimObj.SetActive(false);
         turboSFX.Stop();
-
-
+        currentTargetAcceleration = gameConfig.deacceleration;
+        currentTargetSpeed = gameConfig.regularSpeed;
         onTurbo = false;
+
     }
     void CollisionManagement(Collider collider)
     {
@@ -258,8 +299,12 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
         if (currTutoStep.step == TutorialStepsTurboRocket.TurboAppear)
         {
+            instruction = Instruction(ifTurboAudio);
+            if(!alreadyGivenInstruction) StartCoroutine(instruction);
+            else StopAllCoroutines();
             turboBtn.gameObject.SetActive(true);
             ui.progressSlider.gameObject.SetActive(true);
+            alreadyGivenInstruction = true;
         }
     }
     void StandStill()
@@ -270,12 +315,12 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     public void EndOfTuto()
     {
         endOfTuto = true;
-        currentTargetSpeed = levelConfig.regularSpeed;
 		UserDataManager.CurrUser.RegisterTutorialStepDone(TutorialSteps.TurboRocketDone.ToString());
 	}
 	void EndOfRide()
     {
         bk.EndOfGame();
+        starsGatheredCount += 3;
         onPlay = false;
         levelConfig.coinsCollected = starsGatheredCount;
         character.GetComponentInChildren<ParticleSystem>().Stop();
@@ -285,9 +330,12 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     }
     public IEnumerator _OnFinishSequence()
     {
+        currentTargetSpeed = levelConfig.regularSpeed;
+        audioSource.clip = letsPlayAudio;
+        audioSource.Play();
         camCC.OnGameFinishedSequence();
         endTimelineDirector.Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(letsPlayAudio.length);
         GameSequencesList.Instance.GoToNextItemInList();
     }
 }
@@ -310,7 +358,6 @@ public class TutorialStepsTurbo
     public Vector2 handOffset;
     public void InitTutoStep()
     {
-        Debug.Log("starting " + step.ToString());
         if(step != TutorialStepsTurboRocket.TurboAppear || step != TutorialStepsTurboRocket.UnclickTurbo) signHand.Init(stepClickableObj, handOffset);
         signHand.gameObject.SetActive(true);
     }

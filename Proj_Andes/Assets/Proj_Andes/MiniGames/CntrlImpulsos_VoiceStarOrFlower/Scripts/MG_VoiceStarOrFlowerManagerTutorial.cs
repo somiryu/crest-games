@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameManager
+public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
 	[SerializeField] MG_VoiceStarOrFlowerGameConfigs gameConfigs;
 	[Space(20)]
@@ -36,10 +36,18 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
     [SerializeField] AudioClip discardAudio;
-    [SerializeField] AudioClip inicialAudio;
+    [SerializeField] AudioClip lookAtCampsAudio;
+    [SerializeField] AudioClip firstInstrucAudio;
+    [SerializeField] AudioClip discardAdvice;
+    [SerializeField] AudioClip youDidGoodAudio;
+    [SerializeField] AudioClip youDidGoodNowTryAudio;
     [SerializeField] AudioClip onFailSelectDiscardAdvice;
     [SerializeField] AudioClip onFailSelectInstructionAdvice;
+    [SerializeField] AudioClip finalInstruction;
+    [SerializeField] AudioClip letsPlayAudio;
+    [SerializeField] AudioSource effectPlayer;
     [SerializeField] AudioSource audioPlayer;
+
     [Space(20)]
     [SerializeField] Pool<Transform> leftWonItemsPool;
     [SerializeField] Pool<Transform> rightWonItemsPool;
@@ -56,6 +64,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
     [SerializeField] Slider timerUI;
+    [SerializeField] Transform blockPanel;
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
@@ -83,7 +92,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     int currScoreStepTutorial;
     int goalScoreStepTutorial;
     int trialsPerTutoCount;
-    AudioClip currSound;
+    int failurePerTutoCount;
 
     public void Awake()
 	{
@@ -115,30 +124,42 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
 
-        audioPlayer.clip = inicialAudio;
         audioPlayer.Play();
+        eogManager.OnGameStart();
 
         StartCoroutine(InitTutorialAfterTime());
 	}
 
     IEnumerator InitTutorialAfterTime()
     {
+        blockPanel.gameObject.SetActive(true);
         leftBtn.gameObject.SetActive(false);
         rightBtn.gameObject.SetActive(false);
         discardBtn.gameObject.SetActive(false);
-        var waitTime = inicialAudio.length + 0.1f;
-        yield return new WaitForSeconds(waitTime);
-		leftBtn.gameObject.SetActive(true);
+        audioPlayer.clip = lookAtCampsAudio;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(lookAtCampsAudio.length-0.3f);
+        leftBtn.gameObject.SetActive(true);
 		rightBtn.gameObject.SetActive(true);
 		discardBtn.gameObject.SetActive(true);
-		InitTutorialStep();
+        leftBtn.gameObject.SetActive(false);
+        rightBtn.gameObject.SetActive(false);
+        discardBtn.gameObject.SetActive(false);
+        audioPlayer.clip = firstInstrucAudio;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(firstInstrucAudio.length);
+        leftBtn.gameObject.SetActive(true);
+        rightBtn.gameObject.SetActive(true);
+        discardBtn.gameObject.SetActive(true);
+        blockPanel.gameObject.SetActive(false);
+        InitTutorialStep();
         InitRound();
     }
 
     private void InitTutorialStep()
     {
-        Debug.Log("tutorial" + currStepTutorial);
         trialsPerTutoCount = 0;
+        failurePerTutoCount = 0;
 
         if (currStepTutorial == 0)
         {
@@ -205,21 +226,30 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 			ResetScore();
 		}
 
-		if (currStepTutorial == 5)
-        {
-            UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
-
-            GameSequencesList.Instance.GoToNextItemInList();
-        }
+		if (currStepTutorial == 5) StartCoroutine( CompleteTuto());
 
         currScoreStepTutorial = 0;
 
         timerUI.gameObject.SetActive(hasTimer);
         StarsCounter.SetActive(hasScore);
         discardBtn.gameObject.SetActive(hasDiscardButtton);
-        
     }
-
+    IEnumerator CompleteTuto()
+    {
+        discardBtn.gameObject.SetActive(false);
+        leftBtn.gameObject.SetActive(false);
+        rightBtn.gameObject.SetActive(false);
+        audioPlayer.clip = finalInstruction;
+        audioPlayer.Play();
+        blockPanel.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(finalInstruction.length);
+        audioPlayer.clip = letsPlayAudio;
+        audioPlayer.Play();
+        yield return new WaitForSecondsRealtime(letsPlayAudio.length);
+        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
+		blockPanel.gameObject.SetActive(false);
+		GameSequencesList.Instance.GoToNextItemInList();
+    }
     void ResetScore()
     {
         leftWonItemsPool.RecycleAll();
@@ -235,7 +265,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         trialsPerTutoCount++;
 
         audioPlayer.volume = 1;
-
+        Debug.Log(currStepTutorial + " " + trialsPerTutoCount);
         if (intervalQuestion)
         {
             currSoundIsLeft = !currSoundIsLeft;
@@ -281,28 +311,46 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         currTargetImg.sprite = imgToUse;
 
-        currSound = soundToUse;
-        audioPlayer.clip = soundToUse;
+        effectPlayer.clip = soundToUse;
 
-        if (currStepTutorial == 2 && trialsPerTutoCount == 1) StartCoroutine(Instruction());
-        else audioPlayer.Play();
-
-		eogManager.OnGameStart();
+        if (currStepTutorial == 2 && trialsPerTutoCount == 1) StartCoroutine(DiscardInstruction());
+        else if (currStepTutorial == 4 && trialsPerTutoCount == 1) StartCoroutine(PlaySingleAudio(youDidGoodNowTryAudio));
+        else effectPlayer.Play();   
     }
-    IEnumerator Instruction()
+    IEnumerator DiscardInstruction()
     {
+        blockPanel.gameObject.SetActive(true);
         discardBtn.interactable = false;
         rightBtn.interactable = false;
         leftBtn.interactable = false;
-        audioPlayer.clip = onFailSelectDiscardAdvice;
+        audioPlayer.clip = youDidGoodAudio;
         audioPlayer.Play();
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(youDidGoodAudio.length);
+        audioPlayer.clip = discardAdvice;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(discardAdvice.length);
+        blockPanel.gameObject.SetActive(false);
         discardBtn.interactable = true;
         rightBtn.interactable = true;
         leftBtn.interactable = true;
-        audioPlayer.clip = currSound; 
-        audioPlayer.Play();
+        effectPlayer.Play();
     }
+    IEnumerator PlaySingleAudio(AudioClip audioClip)
+    {
+        blockPanel.gameObject.SetActive(true);
+        discardBtn.interactable = false;
+        rightBtn.interactable = false;
+        leftBtn.interactable = false;
+        audioPlayer.clip = audioClip;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(audioClip.length);
+        discardBtn.interactable = true;
+        rightBtn.interactable = true;
+        leftBtn.interactable = true;
+        effectPlayer.Play();
+        blockPanel.gameObject.SetActive(false);
+    }
+
     void SetButtonState(Button button, Image highlightImg, Color color, bool highlight)
     {
         button.image.color = color;
@@ -323,17 +371,15 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 	private void OnClickedDiscard()
     {
-        audioPlayer.clip = discardAudio;
         audioPlayer.PlayOneShot(discardAudio);
         if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
 
-
 	private void OnWrongChoice()
     {
         currScoreStepTutorial = 0;
-
+        failurePerTutoCount++;
         incorrectParticles.Stop();
         correctParticles.Stop();
 
@@ -344,8 +390,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         audioPlayer.volume = 0.8f;
 
-        audioPlayer.clip = wrongAudio;
-        audioPlayer.Play();
+        effectPlayer.clip = wrongAudio;
+        effectPlayer.Play();
 
         if (!hasWrongChoice) return;
 
@@ -355,8 +401,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     IEnumerator PlayOnWrongChoice()
     {
-        AudioClip clipToPlay = onFailSelectDiscardAdvice;
-        if (currImgIsLeft != currSoundIsLeft) clipToPlay = onFailSelectInstructionAdvice;
+        AudioClip clipToPlay = onFailSelectInstructionAdvice;
+        if (currImgIsLeft && currSoundIsLeft || !currImgIsLeft && !currSoundIsLeft) clipToPlay = onFailSelectDiscardAdvice;
+        else clipToPlay = onFailSelectInstructionAdvice;
 
         audioPlayer.clip = clipToPlay;
         audioPlayer.Play();
@@ -370,7 +417,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		rightBtn.interactable = true;
 		leftBtn.interactable = true;
 		discardBtn.interactable = true;
-		OnRoundEnded();
+		StartCoroutine(OnRoundEnded(0));
 	}
 
 
@@ -395,22 +442,37 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         }
 
         correctParticles.Play();
-        audioPlayer.volume = 0.8f;
+        effectPlayer.volume = 0.8f;
 
-        audioPlayer.clip = correctAudio;
-        audioPlayer.PlayOneShot(correctAudio);
+        effectPlayer.clip = correctAudio;
+        effectPlayer.Play();
 
-        OnRoundEnded();
+        StartCoroutine(OnRoundEnded(correctAudio.length));
     }
 
-    void OnRoundEnded()
-    {        
-        currCoinsValueTxt.text = currCoins.ToString();
+    IEnumerator OnRoundEnded(float waitTime)
+    {
+        discardBtn.interactable = false;
+        leftBtn.interactable = false;
+        rightBtn.interactable = false;
+
+        yield return new WaitForSeconds(waitTime);
+
+		discardBtn.interactable = true;
+		leftBtn.interactable = true;
+		rightBtn.interactable = true;
+
+		currCoinsValueTxt.text = currCoins.ToString();
 
         if (currScoreStepTutorial == goalScoreStepTutorial)
         {
             currStepTutorial += 1;
             InitTutorialStep();
+        }
+        else if (currStepTutorial == 4 && failurePerTutoCount >= gameConfigs.finalTutoStepMaxFailuresBeforeSkipping)
+        {
+            CompleteTuto();
+            yield break;
         }
         InitRound();
     }

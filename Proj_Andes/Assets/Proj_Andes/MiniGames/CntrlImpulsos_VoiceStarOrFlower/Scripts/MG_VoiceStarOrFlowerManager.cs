@@ -108,7 +108,12 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         InitRound();
 	}
 
-    int repeatedPuzzleCounter = 0;
+	private void Start()
+	{
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.voiceStarGame);
+	}
+
+	int repeatedPuzzleCounter = 0;
 
     void GetRandomSoundImage()
     {
@@ -200,6 +205,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
 	private void OnWrongChoice()
     {
+        GeneralGameAnalyticsManager.RegisterLose();
         incorrectParticles.Stop();
         correctParticles.Stop();
 
@@ -210,13 +216,15 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         lostRoundsCount++;
         incorrectParticles.Play();
         audioPlayer.PlayOneShot(wrongAudio);
+        GameUIController.Instance.StarLost();
 
-        OnRoundEnded();
+        StartCoroutine(OnRoundEnded(wrongAudio.length));
     }
 
     private void OnCorrectChoice()
     {
-        incorrectParticles.Stop();
+		GeneralGameAnalyticsManager.RegisterWin();
+		incorrectParticles.Stop();
         correctParticles.Stop();
 
         roundAnalytics.wonRound = true;
@@ -234,15 +242,27 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 			wonRightCount++;
         }
 
+        GameUIController.Instance.StarEarned(currTargetImg.transform.position);
         correctParticles.Play();
 
         audioPlayer.PlayOneShot(correctAudio);
-        OnRoundEnded();
+        StartCoroutine(OnRoundEnded(correctAudio.length));
     }
 
-    void OnRoundEnded()
+    IEnumerator OnRoundEnded(float waitTime)
     {
-        currCoinsValueTxt.text = currCoins.ToString();
+        leftBtn.interactable = false;
+        rightBtn.interactable = false;
+        discardBtn.interactable = false;
+
+        yield return new WaitForSeconds(waitTime);
+
+		leftBtn.interactable = true;
+		rightBtn.interactable = true;
+		discardBtn.interactable = true;
+
+
+		currCoinsValueTxt.text = currCoins.ToString();
         roundAnalytics.timeToMakeAChoice = timerPerChoice;
         if (roundAnalytics.ranOutOfTime) roundAnalytics.timeToMakeAChoice = gameConfigs.timePerChoice;
 
@@ -252,7 +272,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         if (totalRounds >= gameConfigs.maxRounds)
         {
             GameOver();
-            return;
+            yield break;
         }
 
         InitRound();

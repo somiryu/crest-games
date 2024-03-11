@@ -6,6 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FrustrationTermometer", menuName = "GameSequencesList/FrustrationTermometer")]
 public class FrustrationTermometer : SimpleGameSequenceItem
 {
+
+    public static FrustrationLevel LastFrustrationLevelPicked = FrustrationLevel.NONE;
+
     public FrustrationLevel selectedFrustrationLevel;
     public FrustrationLevel defaultFrustrationLevel;
     public SimpleGameSequenceItem frustrationGameItem;

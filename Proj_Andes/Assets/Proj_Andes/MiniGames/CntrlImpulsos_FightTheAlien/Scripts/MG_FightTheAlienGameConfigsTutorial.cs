@@ -11,7 +11,6 @@ public class MG_FightTheAlienGameConfigsTutorial : ScriptableObject
     public AlienAttackConfig[] alienAttacksConfigsNoMatch;
     public List<MG_FightTheAlienTutorialStep> mG_FightTheAlienTutorialSteps;
 
-
 }
 
 [Serializable]

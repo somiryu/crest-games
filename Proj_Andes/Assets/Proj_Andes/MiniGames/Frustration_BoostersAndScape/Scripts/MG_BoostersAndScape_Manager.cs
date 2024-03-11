@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
@@ -33,13 +34,19 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [SerializeField] TextMeshProUGUI finalScoreText;
     [SerializeField] TextMeshProUGUI constantScoreText;
     [SerializeField] Image trapImage;
-    [SerializeField] GameUIController gameUIController;
+    [SerializeField] GameUIController gameUIController => GameUIController.Instance;
 
     [SerializeField] EndOfGameManager eogManager;
     [SerializeField] GameObject inGameObj;
 
     [Header("Game Audio")]
     [SerializeField] AudioClip boosteredAudio;
+    [SerializeField] AudioClip onFailedAudio;
+    [SerializeField] AudioClip introAudio;
+    [SerializeField] AudioClip letsPlay;
+    [SerializeField] AudioClip noStartsAudio;
+    [SerializeField] AudioSource audioInstructions;
+    [SerializeField] Transform blockingPanel;
     private AudioSource audiosource;
 
 
@@ -57,7 +64,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [SerializeField] Animator tutorialAnims;
     int currStepTurorial;
     public EndOfGameManager EndOfGameManager => eogManager;
-    [SerializeField] AudioInstruction audioInstruction;
+    [SerializeField] CatchCoinsAudioInstruction audioInstruction;
 
     //DATA ANALYTICS
     public float timePlayed;
@@ -73,10 +80,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         }
         instance = this;
         spawner.Init();
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone)) GameUIController.Instance.onTuto = true;
 
-        Init();
         audiosource = GetComponent<AudioSource>();
-
     }
     void Init()
     {
@@ -97,8 +103,24 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         catchBoosterRange = 1.5f;
         OnGameStart();
         trapImage.gameObject.SetActive(false);
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone)) StartCoroutine(Intro());  
     }
-
+    IEnumerator Intro()
+    {
+        TimeManager.Instance.SetNewStopTimeUser(this);
+        blockingPanel.gameObject.SetActive(true);
+        audiosource.clip = introAudio;
+        audiosource.Play();
+        yield return new WaitForSecondsRealtime(introAudio.length);
+        blockingPanel.gameObject.SetActive(false);
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+    }
+    private void Start()
+	{
+        Init();
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.boostersAndScapeGame);
+		spawner.spawner.SpawnNewItem();
+	}
     void UpdateCharacterAnimRef(Transform newCharacterArtObj)
     {
 		characterAnims = newCharacterArtObj.GetComponentInChildren<Animator>(true);
@@ -122,6 +144,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
             }
             timer = 0;
             MoveToNextPos(currentBooster);
+            spawner.spawner.SpawnNewItem();
         }
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
@@ -131,36 +154,45 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
                 if(!addedTimeManagUser)
                 {
                     TimeManager.Instance.SetNewStopTimeUser(this);
+                    Debug.Log("adding");
                     addedTimeManagUser = true;
                 }
                 tutorialAnims.gameObject.SetActive(true);
             }
         }
         if (Input.GetMouseButtonDown(0)) clickRepetitions++;
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && audioInstruction.doneAudio)
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
             {
                 if(addedTimeManagUser)
                 {
                     TimeManager.Instance.RemoveNewStopTimeUser(this);
+                    Debug.Log("removing");
                     addedTimeManagUser = false;
                 }
                 currStepTurorial++;
                 tutorialAnims.gameObject.SetActive(false);
-                if (currStepTurorial == 3) UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
+                if (currStepTurorial == 3)
+                {
+                    StartCoroutine(LetsPlay());
+                    UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
+                }
             }
-            if (gameConfig.forceToFail) ForcedToFail();
-            if (currentBooster.Boosteable())
+
+            if (!TryForcedToFail())
             {
-                OnBoostered(currentBooster);
-            }
-            else Onfailed();
-        }
+				if (currentBooster.Boosteable())
+				{
+					OnBoostered(currentBooster);
+				}
+				else Onfailed();
+			}
+			else Onfailed();
+		}
         if (successfulAttempts == gameConfig.boostersPerRun)
         {
             OnGameEnd();
-            Debug.Log("You won!");
             rocket.transform.position = Vector3.right * 5 * Time.deltaTime;
         }
         if (alien.transform.position.x >= rocket.transform.position.x) OnGameEnd();
@@ -191,19 +223,28 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         spawner.OnGameEnd();
         gameConfig.SaveCoins(successfulAttempts);
         eogManager.OnGameOver();
-
+        audiosource.clip = noStartsAudio;
+        audiosource.Play();
         inGameObj.SetActive(false);
         Debug.Log("Game over!");
     }
     void Onfailed()
     {
-
+        Debug.Log("Failed boost");
+        audiosource.clip = onFailedAudio;
+        audiosource.Play();
+        successfulAttempts -= gameConfig.coinsOnFailure;
+        if (successfulAttempts < 0) successfulAttempts = 0;
+        GeneralGameAnalyticsManager.RegisterLose();
+        gameUIController.StarLost();
     }
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
         onBoost = true;
         targetTime = 0.3f;
         boostersActivated++;
+        GeneralGameAnalyticsManager.RegisterWin();
+        Debug.Log("Boosted");
 
         alienMov.OnBoosted();
         booster.Boosted();
@@ -211,8 +252,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         successfulAttempts++;
         characterAnims.SetTrigger("Turbo");
         timer = 0;
-         
-        
+
+        gameUIController.StarEarned(Camera.main.WorldToScreenPoint(rocket.transform.position));
+
         audiosource.clip = boosteredAudio;
         audiosource.Play();
         boostedParticles.Play();
@@ -223,31 +265,35 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
         }
     }
-
+    IEnumerator LetsPlay()
+    {
+        audioInstructions.clip = letsPlay;
+        audioInstructions.Play();
+        yield return new WaitForSecondsRealtime(letsPlay.length);
+    }
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
     {
         totalAttempts++;
         alienMov.MoveToNextPoint();
     }
 
-    public void ForcedToFail()
+    public bool TryForcedToFail()
     {
+        if (!gameConfig.forceToFail) return false;
 		for (int i = 0; i < forcedFails.Count; i++)
         {
             if (totalAttempts == forcedFails[i])
             {
                 forcedFails.Remove(forcedFails[i]);
                 onTrapMode = true;
-				StartCoroutine(ShowTrapSign());
-			}
-			else onTrapMode = false;
+                StartCoroutine(ShowTrapSign());
+                GeneralGameAnalyticsManager.RegisterLose();
+                lostByCheat++;
+                break;
+            }
+            else onTrapMode = false;
         }
-        if (successfulAttempts >= gameConfig.boostersPerRun - gameConfig.forcedFails-1)
-        {
-            onTrapMode = true;
-            StartCoroutine(ShowTrapSign());
-            lostByCheat++;
-        }
+        return onTrapMode;
     }
 
 	IEnumerator ShowTrapSign()
@@ -261,7 +307,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     {
         var newRandomFailIdx = Random.Range(gameConfig.extraAttemptsBeforeFailing, gameConfig.boostersPerRun);
         if (forcedFails.Contains(newRandomFailIdx)) return GenerateRandom();
-        Debug.Log("will fail at: " + newRandomFailIdx);
         return newRandomFailIdx;
     }
 }
+
+
+

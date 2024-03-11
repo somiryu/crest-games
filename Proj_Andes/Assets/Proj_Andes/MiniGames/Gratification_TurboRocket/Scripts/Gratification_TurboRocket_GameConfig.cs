@@ -13,6 +13,7 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public float accelerationSpeed;
     public float regularRideDuration;
     public int starsAmount;
+    public float deacceleration;
     [HideInInspector][NonSerialized] public int coinsCollected;
 
     [NonSerialized] public int turboUsedTimes;
@@ -23,8 +24,12 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     {
         itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.turboRocketturboUsedTimes, turboUsedTimes);
-        itemAnalytics.Add(DataIds.turboRockettotalRideTime, totalRideTime);
-        itemAnalytics.Add(DataIds.turboRocketCoinsCollected, coinsCollected);
+        itemAnalytics.Add(DataIds.stars, coinsCollected);
+
+        var timePlayed = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
+        itemAnalytics.Add(DataIds.timePlayed, timePlayed);
+        var clicks = GeneralGameAnalyticsManager.Instance.analytics.clicks;
+        itemAnalytics.Add(DataIds.clicks, clicks);
 
         SaveCoins(coinsCollected);
 

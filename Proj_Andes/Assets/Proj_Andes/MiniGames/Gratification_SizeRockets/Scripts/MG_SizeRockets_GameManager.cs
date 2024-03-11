@@ -57,10 +57,14 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private int totalCoinsWon = 0;
 	private int shipsLeft;
 
+	private bool gameOverFlag;
+
+	public SizeRocketAnalytics currAnalytics = new SizeRocketAnalytics();
 
 	private void Awake()
 	{
         ISizeRocketsManager.Instance = this;
+
 
         ingameObj.SetActive(true);
 		ingameObjUI.SetActive(true);
@@ -80,6 +84,11 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currCoinsLabel.SetText(0.ToString());
 		shipsLeft = shipsPerGame;
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
+	}
+
+	private void Start()
+	{
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.sizeRocketsGame);
 	}
 
 	public void GeneratePlanets()
@@ -126,6 +135,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	private void Update()
 	{
+		if(gameOverFlag) return;
 		if (activeShips.Count > 0) return;
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
@@ -146,6 +156,16 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 		if (currTargetPlanet != null && selectedRocketType != SizeRocketsRocketTypes.NONE)
 		{
+
+			if(currTargetPlanet.coinsAmount == gameConfigs.FarPlanetCoins) currAnalytics.farPlanets++;
+			else if(currTargetPlanet.coinsAmount == gameConfigs.middlePlanetCoins) currAnalytics.midPlanets++;
+			else if(currTargetPlanet.coinsAmount == gameConfigs.closePlanetCoins) currAnalytics.closePlanets++;
+
+			if (selectedRocketType == SizeRocketsRocketTypes.small) currAnalytics.smallShipsCount++;
+			else if (selectedRocketType == SizeRocketsRocketTypes.medium) currAnalytics.mediumShipsCount++;
+			else if (selectedRocketType == SizeRocketsRocketTypes.large) currAnalytics.bigShipsCount++;
+
+
 			GenerateNewShip(selectedRocketType);
 			currTargetPlanet.OnMatchHappend();
 			currTargetPlanet = null;
@@ -241,6 +261,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount)
 	{
+		if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
+		else GeneralGameAnalyticsManager.RegisterWin();
+
 		activeShips.Remove(rocket);
 		totalCoinsWon += coinsAmount;
 		currCoinsLabel.SetText(totalCoinsWon.ToString());
@@ -252,14 +275,31 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	void GameOver()
 	{
+		gameOverFlag = true;
+		currAnalytics.stars = totalCoinsWon;
+		currAnalytics.timePlayed = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
+		currAnalytics.averageClick = GeneralGameAnalyticsManager.Instance.analytics.GetAverageClickTime();
 		afterActionPanel.SetActive(true);
 		ingameObj.SetActive(false);
 		ingameObjUI.SetActive(false);
 		afterAction_CoinsCountTxt.SetText(totalCoinsWon.ToString());
-		gameConfigs.coinsCollected = totalCoinsWon;
+		gameConfigs.SaveCoins(totalCoinsWon);
         eogManager.OnGameOver();
 	}
 
+}
+
+public class SizeRocketAnalytics
+{
+	public int bigShipsCount;
+	public int mediumShipsCount;
+	public int smallShipsCount;
+	public int stars;
+	public int closePlanets;
+	public int midPlanets;
+	public int farPlanets;
+	public float averageClick;
+	public float timePlayed;
 }
 
 

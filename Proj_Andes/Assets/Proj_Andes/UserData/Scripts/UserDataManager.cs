@@ -19,6 +19,7 @@ public class UserDataManager : ScriptableObject
 	private static string defaultUserID = "DefaultUserId";
 
 	private static string currTestID;
+	private static string currInstitutionCode;
 
 	public static string LastCollectionIDStored = null;
 	public static string LastDocumentIDStored = null;
@@ -28,6 +29,12 @@ public class UserDataManager : ScriptableObject
 	{
 		get => string.IsNullOrEmpty(currTestID) ? "Default Test ID" : currTestID;
 		set => currTestID = value;
+	}
+
+	public static string CurrInstitutionCode
+	{
+		get => string.IsNullOrEmpty(currInstitutionCode) ? "Default institution code" : currInstitutionCode;
+		set => currInstitutionCode = value;
 	}
 
 	private static UserDataManager instance;
@@ -87,6 +94,7 @@ public class UserDataManager : ScriptableObject
 		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
+		analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
 		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
@@ -113,6 +121,7 @@ public class UserDataManager : ScriptableObject
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
 
+		TimeManager.Instance.ResetSessionTimerAndSave();
 		Debug.Log("Saving to server");
 		if (currSequence is MinigameGroups group)
 		{
@@ -155,15 +164,26 @@ public class UserDataManager : ScriptableObject
 		while (!DatabaseManager.userListDone) yield return null;
 	}
 
-	public IEnumerator CheckInternetConnection()
+	public IEnumerator CheckInternetConnection() => RecursiveInternetCheck(0);
+
+
+	public IEnumerator RecursiveInternetCheck(int tryNumber)
 	{
-		UnityWebRequest www = new UnityWebRequest("http://unity3d.com/");
+		UnityWebRequest www = new UnityWebRequest("www.google.com");
 
 		yield return www.SendWebRequest();
 
 		if (www.result == UnityWebRequest.Result.ConnectionError) // Error
 		{
-			HasInternet = false;
+			Debug.Log("Failed try: " + tryNumber);
+			tryNumber++;
+			if (tryNumber >= 5) HasInternet = false;
+			else
+			{
+				//Little delay between tries
+				yield return new WaitForSeconds(0.5f);
+				yield return RecursiveInternetCheck(tryNumber);
+			}
 		}
 		else // Success
 		{

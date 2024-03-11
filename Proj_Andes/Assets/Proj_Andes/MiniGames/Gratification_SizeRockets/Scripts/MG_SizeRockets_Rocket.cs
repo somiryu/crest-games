@@ -67,6 +67,8 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 			if (currDist.magnitude < 0.1f)
 			{
 				ISizeRocketsManager.Instance.OnShipDeliveredCoins(this, coinsCarrying);
+
+                GameUIController.Instance.StarEarned(Camera.main.WorldToScreenPoint(targetPlanet.transform.position));
 				pool.RecycleItem(this);
 			}
 		}

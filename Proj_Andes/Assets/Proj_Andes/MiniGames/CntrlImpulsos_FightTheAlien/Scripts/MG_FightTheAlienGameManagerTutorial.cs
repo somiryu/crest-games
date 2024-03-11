@@ -44,10 +44,21 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
     [SerializeField] AudioClip correctAudio;
     [SerializeField] AudioClip wrongAudio;
     [SerializeField] AudioClip finishAudio;
-    [SerializeField] AudioClip equalFeedbackAudio;
-    [SerializeField] AudioClip differentFeedbackAudio;
+    //instructions
+    [SerializeField] AudioSource instructionSource;
+    [SerializeField] AudioClip introMonsterAudio;
+    [SerializeField] AudioClip reminderAudio;
+    [SerializeField] AudioClip letsTryAudio;
+    [SerializeField] AudioClip pickSameAudio;
+    [SerializeField] AudioClip pickDifferntAudio;
+    [SerializeField] AudioClip nowUTryAudio;
+    [SerializeField] AudioClip onFailSameAudio;
+    [SerializeField] AudioClip onFailDifferentAudio;
+    [SerializeField] AudioClip letsPlayAudio;
+    
     [SerializeField] Color disabledBtnColor;
     [SerializeField] Color enabledBtnColor;
+    [SerializeField] Transform blockingPanel;
 
     [Header("GameParticles")]
     [SerializeField] ParticleSystem correctParticles;
@@ -123,13 +134,31 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
         if(currTutorialStartSequence != null) StopCoroutine(currTutorialStartSequence);
 
+        StartCoroutine(Introduction());
+    }
+    IEnumerator Introduction()
+    {
+        blockingPanel.gameObject.SetActive(true);
+        for (int i = 0; i < answerBtns.Length; i++) answerBtns[i].button.interactable = false;
+        blockingPanel.gameObject.SetActive(true);
+        instructionSource.clip = introMonsterAudio;
+        instructionSource.Play();
+        yield return new WaitForSeconds(introMonsterAudio.length);
+        instructionSource.clip = reminderAudio;
+        instructionSource.Play();
+        yield return new WaitForSeconds(reminderAudio.length);
+        instructionSource.clip = letsTryAudio;
+        instructionSource.Play();
+        yield return new WaitForSeconds(letsTryAudio.length);
+        for (int i = 0; i < answerBtns.Length; i++) answerBtns[i].button.interactable = true;
+        blockingPanel.gameObject.SetActive(false);
         currTutorialStartSequence = InitTutorialStep();
 
         StartCoroutine(currTutorialStartSequence);
     }
-
     private IEnumerator InitTutorialStep()
     {
+        blockingPanel.gameObject.SetActive(true);
         currStepConfigTutorial = tutorialStepsConfigs.mG_FightTheAlienTutorialSteps[currentTutorialStep];
         currPointsAmount = 0;
         timerUI.gameObject.SetActive(currStepConfigTutorial.time);
@@ -137,18 +166,17 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
         playerHealthUI.gameObject.SetActive(currStepConfigTutorial.life);
         startCounter.SetActive(currStepConfigTutorial.score);
         SetAlienAttackConfig();
-		InitRound();
+        InitRound();
 
         audiosource.clip = currStepConfigTutorial.tutorialStartAudio;
+
 		if (audiosource.clip != null)
         {
             var time = audiosource.clip.length;
             audiosource.Play();
-            for (int i = 0; i < answerBtns.Length; i++) answerBtns[i].button.interactable = false;
             yield return new WaitForSeconds(time);
-			for (int i = 0; i < answerBtns.Length; i++) answerBtns[i].button.interactable = true;
 		}
-
+        blockingPanel.gameObject.SetActive(false); 
         currTutorialStartSequence = null;
 	}
 
@@ -291,15 +319,19 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
     IEnumerator PlayAudioFeedback()
     {
+        blockingPanel.gameObject.SetActive(true);
+
         currCorrectButtonAnswer.ShowHighlightImg(true);
 
-        AudioClip feedbackAudio = isMatchAttack ? equalFeedbackAudio : differentFeedbackAudio;
+        AudioClip feedbackAudio = isMatchAttack ? onFailSameAudio : onFailDifferentAudio;
 
-        audiosource.clip = feedbackAudio;
-        audiosource.Play();
+        instructionSource.clip = feedbackAudio;
+        instructionSource.Play();
 
         var waitTime = feedbackAudio.length + 0.1f;        
-        yield return new WaitForSeconds(waitTime);        
+        yield return new WaitForSeconds(waitTime);    
+        blockingPanel.gameObject.SetActive(false);
+
     }
 
     private void OnCorrectChoice()
@@ -366,8 +398,10 @@ public class MG_FightTheAlienManagerTutorial : MonoBehaviour, IEndOfGameManager
 
     IEnumerator NextSceneAfterTime()
     {
+        instructionSource.clip = letsPlayAudio;
+        instructionSource.Play();
+        yield return new WaitForSeconds(letsPlayAudio.length);
         UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.FightTheAlienDone.ToString());
-        yield return new WaitForSeconds(1);
         GameSequencesList.Instance.GoToNextSequence();
     }
 

@@ -12,7 +12,7 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 	public int initialCoins = 0;
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
-
+    public int finalTutoStepMaxFailuresBeforeSkipping;
     public override string GetSceneID() => DataIds.voiceStarGame;
     
     public override void SaveAnalytics()

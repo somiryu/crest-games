@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class FrustrationThermometerController : MonoBehaviour
     [SerializeField] Button continueBtn;
 
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip introAudio;
     void Start()
     {
         frustlevelButtons = buttonsContainer.GetComponentsInChildren<Button>();
@@ -23,12 +25,25 @@ public class FrustrationThermometerController : MonoBehaviour
         {
             int idx = i;
             frustrationLevels[idx].frustLevelButton.onClick.AddListener(() => GetFrustationLevel(frustrationLevels[idx]));
+
+            if (UserDataManager.CurrUser.gender == UserGender.Masculino) frustrationLevels[idx].FLabel.gameObject.SetActive(false);
+            else frustrationLevels[idx].MLabel.gameObject.SetActive(false);
+
             buttonsSelectedImages[i].SetActive(false);
         }
+        //StartCoroutine(Intro());
         continueBtn.onClick.AddListener(Continue);
         continueBtn.gameObject.SetActive(false);
+        audioSource.clip = introAudio;
+        audioSource.Play();
     }
+    IEnumerator Intro()
+    {
+        audioSource.clip = introAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(introAudio.length);
 
+    }
     void GetFrustationLevel(FrustrationLevels level)
     {
         currFrustratioNlevel = level.level;
@@ -47,7 +62,8 @@ public class FrustrationThermometerController : MonoBehaviour
 
     void Continue()
     {
-        frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
+        FrustrationTermometer.LastFrustrationLevelPicked = currFrustratioNlevel;
+		frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
         frustrationTermometer.OnSequenceOver();
     }
 
@@ -69,6 +85,7 @@ public enum FrustrationLevel
     Frustrado,
     Un_Poco_Tranquilo,
     Muy_Tranquilo,
+    NONE = -1,
 }
 
 [Serializable]
@@ -78,5 +95,7 @@ public class FrustrationLevels
     public AudioClip MbuttonSound;
     public AudioClip FbuttonSound;
     public Button frustLevelButton;
+    public TextMeshProUGUI MLabel;
+    public TextMeshProUGUI FLabel;
     public int idx;
 }
