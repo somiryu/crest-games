@@ -67,6 +67,7 @@ public class GameSequencesList : ScriptableObject
         prevGame = null;
         goToGameGroupIdx = 0;
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
+        MonsterMarketConfig.marketAppearTimes = 0;
     }
 
     public SimpleGameSequenceItem GetGameSequence()

@@ -265,7 +265,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         trialsPerTutoCount++;
 
         audioPlayer.volume = 1;
-        Debug.Log(currStepTutorial + " " + trialsPerTutoCount);
         if (intervalQuestion)
         {
             currSoundIsLeft = !currSoundIsLeft;
