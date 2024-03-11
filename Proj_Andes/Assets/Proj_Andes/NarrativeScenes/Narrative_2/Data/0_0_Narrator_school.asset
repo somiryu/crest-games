@@ -45,13 +45,25 @@ MonoBehaviour:
     - response: SI
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 849af44583d86bd4882db8cc7b18578a, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 425ea67e3704a3f4d8366f7ba0500b32, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: b37285ef6387fd64db72d517820b151f, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: NO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2fa8c2bb6fe55134ab804e427ac35f7a, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 5f2f0694e1307da4c8b54e486d87af97, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 6daf82e412f9d754ab06b76ae5f8ff30, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 9bc9d0c8b48a6fc4ea7cc7473258218d, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

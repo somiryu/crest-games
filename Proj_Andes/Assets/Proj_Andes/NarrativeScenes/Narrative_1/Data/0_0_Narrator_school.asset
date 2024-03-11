@@ -23,6 +23,8 @@ MonoBehaviour:
     textAlternative: "Acabas de llegar a tu colegio y te encuentras con tu mejor
       amiga Cami que te saluda en la puerta.\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 9b441ded4345fe1468a2f0c0969f30db, type: 3}
     audioAlternative: {fileID: 8300000, guid: b7f68e72bde35db4da4aaf3ecf4baa5e, type: 3}
@@ -37,17 +39,31 @@ MonoBehaviour:
     text: "\xA1Hola! Creo que hoy va a ser un gran d\xEDa, \xBFno te parece?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a59a9a59427f04f4ab590842ae924c11, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: SI
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 849af44583d86bd4882db8cc7b18578a, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 425ea67e3704a3f4d8366f7ba0500b32, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: cc7256858aee0cc45b6252b2a0816a1f, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: NO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2fa8c2bb6fe55134ab804e427ac35f7a, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: 5f2f0694e1307da4c8b54e486d87af97, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: eb4cab89b61f5a4479e882ee1e5b486f, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 9bc9d0c8b48a6fc4ea7cc7473258218d, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

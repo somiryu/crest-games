@@ -326,8 +326,8 @@ MonoBehaviour:
     - response: "Prefiero quedarme callado y que elijan los dem\xE1s."
       responseAlternative: "Prefiero quedarme callada y que elijan los dem\xE1s."
       responseImage: {fileID: 0}
-      responseAudio: {fileID: 8300000, guid: 9c1c7287ff026cb408af77f079d8c313, type: 3}
-      responseAudioAlternative: {fileID: 0}
+      responseAudio: {fileID: 8300000, guid: cb2453b39ae2cb844828a56fcf0901b1, type: 3}
+      responseAudioAlternative: {fileID: 8300000, guid: 9c1c7287ff026cb408af77f079d8c313, type: 3}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3

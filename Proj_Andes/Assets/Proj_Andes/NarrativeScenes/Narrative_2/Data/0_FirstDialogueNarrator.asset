@@ -116,6 +116,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 6f4aa8e4578721a4dad0da047b203157, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -126,6 +127,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
       responseAudio: {fileID: 8300000, guid: 820c881f6f8f6004f9f7ee5ca0fe48ed, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -136,13 +138,14 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
       responseAudio: {fileID: 8300000, guid: 779fcb485b0b2674ebd22eca5315d51a, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
         empSubCategory: 0
         aggSubCategory: 2
         EmoSubCategory: 0
-    audio: {fileID: 0}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -196,6 +199,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 9a5523db557df534a88e9eddd055d96d, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -206,6 +210,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: 98e8677afa6ce314d83437467d3db692, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
@@ -216,6 +221,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 0}
       responseAudio: {fileID: 8300000, guid: ed7d97ff593d7cd449ac6e149a801434, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
