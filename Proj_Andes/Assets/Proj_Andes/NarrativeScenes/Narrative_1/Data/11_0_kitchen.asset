@@ -21,10 +21,43 @@ MonoBehaviour:
     text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
       partes de la cocina.\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 26898b4c78b003b44a4b76be1b511697, type: 3}
     analyticChoiceID: 
     analyticTimeID: 
-    responses: []
+    responses:
+    - response: Key 1
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 79fc36c88c2a9484ab370addf7310a9b, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 36c10a37729eba14180791e9ecd3863c, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
+    - response: Key 2
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 79fc36c88c2a9484ab370addf7310a9b, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 2eb819c86b480d842aae6ac489e1df39, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
+    - response: Key 3
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 79fc36c88c2a9484ab370addf7310a9b, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: d7db4fb0037f0c14e8636b8722092b7f, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 45d862a498829074b9dfdfef300f182d, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -32,278 +65,50 @@ MonoBehaviour:
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
+    changeToSequence: {fileID: 11400000, guid: dde1b9064c9cf634aa2dab4fcd673c26, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
-      partes de la cocina.\r"
+    text: "\t\t\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 5769122ac1bf8d84a8311e28d6634882, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
-      partes de la cocina.\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: aad57d3751a8f084eb38d3b65d0f5872, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "El caj\xF3n est\xE1 con llave, y Alex comienza buscarla en diferentes
-      partes de la cocina.\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses: []
-    audio: {fileID: 0}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: d558ad32b46e45b459e80be1cff504c0, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: " \xA1Parece que la llave se perdi\xF3!\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses: []
-    audio: {fileID: 8300000, guid: 1a3a2c40047047f4e859292065fdc4c7, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: f0a3a2868fbe5c14d9459ab3d7fa1d00, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no puede comer nada?\r\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: emp12_other_feelings
-    analyticTimeID: emp12_time_response_other_ms
-    responses:
-    - response: MUY BIEN
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
-      responseAudio: {fileID: 8300000, guid: d7352ef1843fdb045aaba3a00a855f7e, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 1
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    - response: BIEN
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
-      responseAudio: {fileID: 8300000, guid: 02f75c8a6f8937f4cb26f68be4354a30, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 2
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    - response: ME DA IGUAL
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
-      responseAudio: {fileID: 8300000, guid: 6b10eb33fdad503448cbe325332f025b, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 3
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    - response: MAL
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
-      responseAudio: {fileID: 8300000, guid: 0b68589e4cc8c1046a9073e8b4b887bd, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 4
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    - response: MUY MAL
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
-      responseAudio: {fileID: 8300000, guid: 42ea2c09276aef24c9e27f4a2d7c1d16, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 5
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: 131ea3532cd6531429a3ca2059cd278e, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 3207d40ae3d9dc2478d5917f139ed845, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: " De repente, llega la mam\xE1 de Alex, lo abraza y le muestra que le ha
-      tra\xEDdo su comida favorita.\r\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: b5b6f53a1a199de4697789283ba5dd1c, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 26898b4c78b003b44a4b76be1b511697, type: 3}
     analyticChoiceID: 
     analyticTimeID: 
     responses:
-    - response: CEREAL
+    - response: Key 1
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4f667cadd1a7a4048a4d79ff06666114, type: 3}
-      responseAudio: {fileID: 8300000, guid: ae649ad80b382a44f9f54c5645aee050, type: 3}
+      responseImage: {fileID: 21300000, guid: 79fc36c88c2a9484ab370addf7310a9b, type: 3}
+      responseAudio: {fileID: 0}
       responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 36c10a37729eba14180791e9ecd3863c, type: 2}
       analyticInfo:
         mainCategory: 0
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 0
-    - response: SANDWICH
+    - response: Key 2
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 1aa6ca29fc50cc94c86a92039aaef90a, type: 3}
-      responseAudio: {fileID: 8300000, guid: eb52fb9a7da04804ca6b47412ab30036, type: 3}
+      responseImage: {fileID: 21300000, guid: 79fc36c88c2a9484ab370addf7310a9b, type: 3}
+      responseAudio: {fileID: 0}
       responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 2eb819c86b480d842aae6ac489e1df39, type: 2}
       analyticInfo:
         mainCategory: 0
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 0
-    - response: SOPA
+    - response: Key 3
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 7a51e0c411c259a468174d4ce3ba74e4, type: 3}
-      responseAudio: {fileID: 8300000, guid: 25f6ffda5c3798444ab30809fd9c9f99, type: 3}
+      responseImage: {fileID: 21300000, guid: 79fc36c88c2a9484ab370addf7310a9b, type: 3}
+      responseAudio: {fileID: 0}
       responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: d7db4fb0037f0c14e8636b8722092b7f, type: 2}
       analyticInfo:
         mainCategory: 0
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: 99afde1bb36d88549bd97ec32bd9468f, type: 3}
+    audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 34ad2af94e75d5843a303eedb540ecff, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex no puede comer nada?\xBFC\xF3mo
-      te sientes t\xFA al saber que la mam\xE1 de Alex le trajo su comida favorita?\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: emp13_other_feelings
-    analyticTimeID: emp13_time_response_other_ms
-    responses:
-    - response: MUY BIEN
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
-      responseAudio: {fileID: 8300000, guid: d7352ef1843fdb045aaba3a00a855f7e, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 1
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    - response: BIEN
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
-      responseAudio: {fileID: 8300000, guid: 02f75c8a6f8937f4cb26f68be4354a30, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 2
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    - response: ME DA IGUAL
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
-      responseAudio: {fileID: 8300000, guid: 6b10eb33fdad503448cbe325332f025b, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 3
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    - response: MAL
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
-      responseAudio: {fileID: 8300000, guid: 0b68589e4cc8c1046a9073e8b4b887bd, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 4
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    - response: MUY MAL
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
-      responseAudio: {fileID: 8300000, guid: 42ea2c09276aef24c9e27f4a2d7c1d16, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 1
-        empSubCategory: 5
-        aggSubCategory: 0
-        EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: 3acb85fbda500a14e9ec0a7cca19840c, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Parece que el d\xEDa de Alex tampoco fue muy bueno. Pero al menos termin\xF3
-      con un abrazo de mam\xE1. Ma\xF1ana seguramente ser\xE1 mejor.\r\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses: []
-    audio: {fileID: 8300000, guid: d3ee38bbb67742946932d96faa9a324e, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: cffc8f4f4eb510b4b8e3364bcfa2f586, type: 2}
     ExitAnim: {fileID: 0}

@@ -1439,6 +1439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueDisplayerUI: {fileID: 1527390312}
   _startingSequence: {fileID: 11400000, guid: 674759f1b6d1b754396734dda00717e1, type: 2}
+  NarrativeIdx: 0
 --- !u!4 &1180631021
 Transform:
   m_ObjectHideFlags: 0
@@ -2516,7 +2517,7 @@ PlayableDirector:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: b82731e2aa57f2244bfcd51e3c62ef9b, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: cffc8f4f4eb510b4b8e3364bcfa2f586, type: 2}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
