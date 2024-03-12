@@ -7,7 +7,7 @@ public class MG_SizeRockets_Planet : MonoBehaviour
 {
     public int coinsAmount;
 
-    public TMP_Text coinsAmountTxtUI;
+    [SerializeField] ObtainableStarsController obtainableStarsController;
     [SerializeField] AudioSource audioCorrect;
     [SerializeField] SpriteRenderer graphic;
     private bool isStarted;
@@ -18,15 +18,15 @@ public class MG_SizeRockets_Planet : MonoBehaviour
     public void Init(int _coinsAmount)
     {
         coinsAmount = _coinsAmount;
-        coinsAmountTxtUI.SetText(coinsAmount.ToString());
+        obtainableStarsController.ActivateStars(_coinsAmount);
 	}
 
     public void UpdateCoinsAmount(int _coinsAmount)
     {
         GetComponentInChildren<ParticleSystem>().Play();
         audioCorrect.Play();
-		coinsAmount = _coinsAmount;
-		coinsAmountTxtUI.SetText(coinsAmount.ToString());
+        for (int i = 0; i < coinsAmount- _coinsAmount; i++) obtainableStarsController.starsInUse[i].DeactivateStar();
+        coinsAmount = _coinsAmount;
 	}
 
     //There was a match between a rocket and this planet

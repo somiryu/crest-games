@@ -619,6 +619,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6144704670675671912, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
+      propertyPath: starsAmount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7556040623134769987, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: coinsAmount
       value: 4
@@ -2349,6 +2353,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6144704670675671912, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
+      propertyPath: starsAmount
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7556040623134769987, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: coinsAmount
       value: 8
@@ -2583,6 +2591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6144704670675671912, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
+      propertyPath: starsAmount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7556040623134769987, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: coinsAmount
       value: 2
@@ -2767,6 +2779,10 @@ PrefabInstance:
     - target: {fileID: 4937963415350013173, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_Name
       value: Planet (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6144704670675671912, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
+      propertyPath: starsAmount
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7556040623134769987, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: coinsAmount
@@ -3201,6 +3217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6144704670675671912, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
+      propertyPath: starsAmount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7556040623134769987, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: coinsAmount
       value: 4
@@ -3610,6 +3630,10 @@ PrefabInstance:
     - target: {fileID: 4937963415350013173, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_Name
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6144704670675671912, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
+      propertyPath: starsAmount
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7556040623134769987, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: coinsAmount

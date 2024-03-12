@@ -4937,7 +4937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinsAmount: 0
-  coinsAmountTxtUI: {fileID: 7389932375576665436}
+  obtainableStarsController: {fileID: 6144704670675671912}
   audioCorrect: {fileID: 6170176522705427406}
   graphic: {fileID: 7560693429857609891}
   normalColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
@@ -5231,11 +5231,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5510163787139767907, guid: 9ad4cda2a6307464da949bce61a92a33, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5510163787139767907, guid: 9ad4cda2a6307464da949bce61a92a33, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.9462081
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5510163787139767907, guid: 9ad4cda2a6307464da949bce61a92a33, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5259,14 +5259,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5510163787139767907, guid: 9ad4cda2a6307464da949bce61a92a33, type: 3}
   m_PrefabInstance: {fileID: 6738565691654605313}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7389932375576665436 stripped
+--- !u!114 &6144704670675671912 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4254320124318898013, guid: 9ad4cda2a6307464da949bce61a92a33, type: 3}
+  m_CorrespondingSourceObject: {fileID: 631156631530082665, guid: 9ad4cda2a6307464da949bce61a92a33, type: 3}
   m_PrefabInstance: {fileID: 6738565691654605313}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: f5c648b6e41d3614fa9372baadbd30ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
