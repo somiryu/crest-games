@@ -285,7 +285,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     void ShowNoResourcesCorroutine()
     {
-        if (noResources != null) StopCoroutine(noResources);
         noResources = NoResources();
         StartCoroutine(noResources);
     }
@@ -295,11 +294,10 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         chestNoEnoughCoins.SetActive(true);
         audioSource.clip = noResourcesAudio;
         audioSource.Play();
-        yield return new WaitForSeconds(noResourcesAudio.length);
+        yield return new WaitForSeconds(noResourcesAudio.length-0.5f);
         audioSource.clip = noStarsAudio;
         audioSource.Play();
         yield return new WaitForSeconds(noStarsAudio.length);
-        noResources = null;
     }
 
     void CloseNoResources()
