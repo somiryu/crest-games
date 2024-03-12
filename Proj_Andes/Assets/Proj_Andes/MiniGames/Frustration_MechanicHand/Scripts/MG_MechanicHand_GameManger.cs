@@ -70,6 +70,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	{
 		instance = this;
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) GameUIController.Instance.onTuto = true;
+		else tutoDone = true;
     }
 
 	private void Start()

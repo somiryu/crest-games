@@ -236,6 +236,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     }
     IEnumerator CompleteTuto()
     {
+        effectPlayer.Stop();
         discardBtn.gameObject.SetActive(false);
         leftBtn.gameObject.SetActive(false);
         rightBtn.gameObject.SetActive(false);
@@ -260,6 +261,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     void InitRound()
     {
+        if (currStepTutorial == 5) return;
         timerPerChoice = 0;
 
         trialsPerTutoCount++;
@@ -290,7 +292,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         {
             if (currSoundIsLeft && !currImgIsLeft) SetButtonState(leftBtn, leftBtnHighlightImg, enabledBtnColor, true);
             else SetButtonState(leftBtn, leftBtnHighlightImg, disabledBtnColor, false);
-           
+
             if (!currSoundIsLeft && currImgIsLeft) SetButtonState(rightBtn, rightBtnHighlightImg, enabledBtnColor, true);
             else SetButtonState(rightBtn, rightBtnHighlightImg, disabledBtnColor, false);
 
@@ -315,7 +317,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         if (currStepTutorial == 2 && trialsPerTutoCount == 1) StartCoroutine(DiscardInstruction());
         else if (currStepTutorial == 4 && trialsPerTutoCount == 1) StartCoroutine(PlaySingleAudio(youDidGoodNowTryAudio));
-        else effectPlayer.Play();   
+        else effectPlayer.Play();
     }
     IEnumerator DiscardInstruction()
     {
