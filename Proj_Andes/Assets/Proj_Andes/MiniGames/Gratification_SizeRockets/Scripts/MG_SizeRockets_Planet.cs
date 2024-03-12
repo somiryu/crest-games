@@ -25,7 +25,7 @@ public class MG_SizeRockets_Planet : MonoBehaviour
     {
         GetComponentInChildren<ParticleSystem>().Play();
         audioCorrect.Play();
-        for (int i = 0; i < coinsAmount- _coinsAmount; i++) obtainableStarsController.starsInUse[i].DeactivateStar();
+        for (int i = coinsAmount; i >= _coinsAmount; i--) obtainableStarsController.stars[i].DeactivateStar();
         coinsAmount = _coinsAmount;
 	}
 

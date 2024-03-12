@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObtainableStarsController : MonoBehaviour
@@ -11,7 +12,7 @@ public class ObtainableStarsController : MonoBehaviour
     void Awake()
     {
         stars = starsParent.GetComponentsInChildren<Star>();
-        for (int i = 0; i < stars.Length; i++) stars[i].DeactivateStar();
+        for (int i = 0; i < stars.Length; i++) stars[i].Init(this);
         starsInUse.Clear();
     }
 
@@ -21,7 +22,10 @@ public class ObtainableStarsController : MonoBehaviour
         for (int i = 0; i < starsAmt; i++)
         {
             stars[i].ActivateStar();
-            starsInUse.Add(stars[i]);
         }
+    }
+    public void RemoveStarInUse(Star star)
+    {
+        starsInUse.Remove(star);
     }
 }
