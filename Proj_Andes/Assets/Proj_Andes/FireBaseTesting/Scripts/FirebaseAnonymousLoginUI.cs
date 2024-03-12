@@ -516,7 +516,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	public void OnContinueGameBtnPressed()
 	{
 		continueSelectedFlag = true;
-		uReadyPanel.gameObject.SetActive(true);
+
+		UReady();
 	}
 
     public void OnReadyConfirmBtnPressed()
