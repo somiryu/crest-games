@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 838565788390763482}
   - component: {fileID: 34421843155320262}
   m_Layer: 0
-  m_Name: AudioInstruction
+  m_Name: CatchCoinsAudioInstruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

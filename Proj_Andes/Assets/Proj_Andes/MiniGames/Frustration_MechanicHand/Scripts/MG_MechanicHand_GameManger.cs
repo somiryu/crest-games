@@ -34,6 +34,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	[SerializeField] AudioClip noStarsAudio;
 	[SerializeField] Transform blockingPanel;
 	[SerializeField] Transform tutoHand1;
+	[SerializeField] CatchCoinsAudioInstruction audioInstruction;
 
 	private List<Transform> currRoundAsteroids = new List<Transform>();
     BoxCollider CurrAsteroidsSpawnArea => asteroidsAreaPerRound[currRound];
@@ -81,6 +82,8 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 		tutoHand1.gameObject.SetActive(false);
 		blockingPanel.gameObject.SetActive(true);
 		TimeManager.Instance.SetNewStopTimeUser(this);
+        StartCoroutine(audioInstruction.FirstInstruction());
+        yield return new WaitForSecondsRealtime(audioInstruction.firstInstruction.length);
         audioSource.clip = introductionAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(introductionAudio.length);

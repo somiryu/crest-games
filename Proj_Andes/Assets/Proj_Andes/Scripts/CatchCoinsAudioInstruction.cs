@@ -8,7 +8,7 @@ public class CatchCoinsAudioInstruction : MonoBehaviour, ITimeManagement
     static CatchCoinsAudioInstruction instance;
     public static CatchCoinsAudioInstruction Instance => instance;
 
-    [SerializeField] AudioClip firstInstruction;
+    public AudioClip firstInstruction;
     [SerializeField] GameObject allScreenRayBlocker;
 
     AudioSource audioSource;
