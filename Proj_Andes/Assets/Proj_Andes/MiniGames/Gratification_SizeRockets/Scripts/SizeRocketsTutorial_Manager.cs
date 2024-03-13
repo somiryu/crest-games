@@ -87,7 +87,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     }
     void InitTuto()
     {
-        tutoPlanet.Init(8);
+        planetPrefab.Init(8);
         tutoStepIdx = 0;
         handSignPlanet.gameObject.SetActive(false);
         handSignShip.gameObject.SetActive(true);
