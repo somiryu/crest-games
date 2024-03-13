@@ -118,7 +118,6 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         bk.Init();
         //InitTuto();
         turboBtn.gameObject.SetActive(false);
-
         SetSpeedway();
         firstPos = transform.position;
         camCC.Init();

@@ -98,6 +98,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     {
         audioSource.clip = clip;
         audioSource.Play();
+        handSignShip.gameObject.SetActive(false);
+        handSignPlanet.gameObject.SetActive(false);
+
         yield return new WaitForSeconds(clip.length);
         actionBlocker.gameObject.SetActive(false);
         for (int i = 0; i < tutorialSteps.Count; i++) tutorialSteps[i].activeRocketType.interactable = false;
