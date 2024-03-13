@@ -19,6 +19,7 @@ MonoBehaviour:
   middlePlanetCoins: 4
   FarPlanetCoins: 8
   shipsPerGame: 5
+  shipsAmtLavel1: 3
   shipsConfigs:
   - rocketType: 0
     speed: 3

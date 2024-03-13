@@ -22,6 +22,8 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	public TMP_Text currCoinsLabel;
 	public TMP_Text shipsLeftTxt;
 	public Color selectedColor;
+	[SerializeField] AudioClip succeededRound;
+	AudioSource audioSource;
 
 	[Header("After Action")]
 	public GameObject afterActionPanel;
@@ -42,7 +44,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	private List<MG_SizeRockets_Planet> planets = new List<MG_SizeRockets_Planet>();
 	private List<MG_SizeRockets_Rocket> activeShips = new List<MG_SizeRockets_Rocket>();
-
+	[SerializeField] MG_SizeRockets_Planet level1Planet;
 	[SerializeField] private List<MG_SizeRockets_Planet> closePlanets;
 	[SerializeField] private List<MG_SizeRockets_Planet> middleDistancePlanets;
 	[SerializeField] private List<MG_SizeRockets_Planet> farPlanets;
@@ -60,20 +62,20 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private bool gameOverFlag;
 
 	public SizeRocketAnalytics currAnalytics = new SizeRocketAnalytics();
-
+	int roundCount;
 	private void Awake()
 	{
         ISizeRocketsManager.Instance = this;
 
-
+		level1Planet.Init(8);
+        planets.Add(level1Planet);
+		TryGetComponent(out audioSource);
         ingameObj.SetActive(true);
 		ingameObjUI.SetActive(true);
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
-		GeneratePlanets();
 		eogManager.OnGameStart();
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
-
 		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
 		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.medium));
 		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.large));
@@ -82,7 +84,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		mediumRocketsPool.Init(5);
 		largeRocketsPool.Init(5);
 		currCoinsLabel.SetText(0.ToString());
-		shipsLeft = shipsPerGame;
+		shipsLeft = gameConfig.shipsAmtLavel1;
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
 	}
 
@@ -90,16 +92,36 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	{
 		GeneralGameAnalyticsManager.Instance.Init(DataIds.sizeRocketsGame);
 	}
-
-	public void GeneratePlanets()
+	void InitLevel2()
+	{
+		audioSource.clip = succeededRound;
+		audioSource.Play();
+		level1Planet.gameObject.SetActive(false);
+        shipsLeft = gameConfig.shipsPerGame;
+        shipsLeftTxt.SetText(shipsLeft.ToString());
+        GeneratePlanets();
+    }
+    public void GeneratePlanets()
 	{
 		planets.AddRange(closePlanets);
 		planets.AddRange(middleDistancePlanets);
 		planets.AddRange(farPlanets);
 
-		for (int i = 0; i < closePlanets.Count; i++) closePlanets[i].Init(gameConfigs.closePlanetCoins);
-		for (int i = 0; i < middleDistancePlanets.Count; i++) middleDistancePlanets[i].Init(gameConfigs.middlePlanetCoins);
-		for (int i = 0; i < farPlanets.Count; i++) farPlanets[i].Init(gameConfigs.FarPlanetCoins);
+		for (int i = 0; i < closePlanets.Count; i++)
+		{
+			closePlanets[i].gameObject.SetActive(true);
+            closePlanets[i].Init(gameConfigs.closePlanetCoins);
+        }
+		for (int i = 0; i < middleDistancePlanets.Count; i++)
+		{
+            middleDistancePlanets[i].gameObject.SetActive(true);
+            middleDistancePlanets[i].Init(gameConfigs.middlePlanetCoins);
+        }
+		for (int i = 0; i < farPlanets.Count; i++)
+		{
+            farPlanets[i].gameObject.SetActive(true);
+            farPlanets[i].Init(gameConfigs.FarPlanetCoins);
+        }
 
 	}
 
@@ -179,7 +201,12 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			largeRocketBtn.interactable = false;
 		}
 
-		if (shipsLeft <= 0 && activeShips.Count == 0) GameOver();
+		if (shipsLeft <= 0 && activeShips.Count == 0)
+		{
+			roundCount++;
+			if (roundCount > 0) InitLevel2();
+			else if(roundCount < 1) GameOver();
+        }
 	}
 
 

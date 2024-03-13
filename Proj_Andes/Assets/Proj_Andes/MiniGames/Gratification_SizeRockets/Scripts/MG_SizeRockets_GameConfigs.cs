@@ -12,6 +12,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	public int FarPlanetCoins;
 
 	public int shipsPerGame;
+	public int shipsAmtLavel1;
 
     [HideInInspector][NonSerialized] public int coinsCollected;
 
