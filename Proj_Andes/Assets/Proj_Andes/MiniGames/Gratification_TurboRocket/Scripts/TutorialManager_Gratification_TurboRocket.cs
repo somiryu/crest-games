@@ -17,6 +17,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     int currTutoStepIndex;
 
     public bool onPlay { get; set; }
+
     public Transform character;
     Vector3 firstPos;
     float currentTargetSpeed;

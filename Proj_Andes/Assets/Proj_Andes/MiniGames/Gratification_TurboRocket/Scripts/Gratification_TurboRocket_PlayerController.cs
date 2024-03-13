@@ -11,7 +11,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     [SerializeField] Gratification_TurboRocket_GameConfig gameConfig;
     public Gratification_TurboRocket_GameConfig levelConfig { get => gameConfig; set { } }
     public bool onPlay { get; set; }
-
+    [SerializeField] MG_SizeRockets_Planet planet;
     public Transform character;
     Vector3 firstPos;
     public float currentTargetSpeed;
@@ -84,6 +84,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
+        planet.Init(5);
         eogManager.OnGameStart();
 	}
 
@@ -225,7 +226,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         data = ride;
         starsGatheredCount += 5;
         OnScoreChanges?.Invoke();
-
+        planet.UpdateCoinsAmount(0);
         bk.EndOfGame();
 
         gameConfig.totalRideTime = timer;
