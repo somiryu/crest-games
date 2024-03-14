@@ -11,7 +11,7 @@ public class CatchCoinsAudioInstruction : MonoBehaviour, ITimeManagement
     public AudioClip firstInstruction;
     [SerializeField] GameObject allScreenRayBlocker;
 
-    AudioSource audioSource;
+    public AudioSource audioSource;
     public bool doneAudio;
     public bool startedCorr;
     AudioSource[] allAudioSources;

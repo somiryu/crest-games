@@ -27,6 +27,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	public Button sendHookBtn;
 
 	[SerializeField] AudioSource audioSource;
+	[SerializeField] AudioClip reminderAudio;
 	[SerializeField] AudioClip introductionAudio;
 	[SerializeField] AudioClip letsTryAudio;
 	[SerializeField] AudioClip moveHookAudio;
@@ -83,27 +84,36 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 		tutoHand1.gameObject.SetActive(false);
 		blockingPanel.gameObject.SetActive(true);
 		TimeManager.Instance.SetNewStopTimeUser(this);
-        StartCoroutine(audioInstruction.FirstInstruction());
-        yield return new WaitForSecondsRealtime(audioInstruction.firstInstruction.length);
-        audioSource.clip = introductionAudio;
+		audioSource.clip = reminderAudio;
         audioSource.Play();
-        yield return new WaitForSecondsRealtime(introductionAudio.length);
-        audioSource.clip = letsTryAudio;
-        audioSource.Play();
-        yield return new WaitForSecondsRealtime(letsTryAudio.length);
-        TimeManager.Instance.RemoveNewStopTimeUser(this);
-        tutoHand1.gameObject.SetActive(true);
-        blockingPanel.gameObject.SetActive(false);
-        tutoDone = false;
-        StartCoroutine( PlaySigleAudioGuide(moveHookAudio));
+        yield return new WaitForSecondsRealtime(reminderAudio.length);
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove))
+		{
+            audioSource.clip = introductionAudio;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(introductionAudio.length);
+            audioSource.clip = letsTryAudio;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(letsTryAudio.length);
+            TimeManager.Instance.RemoveNewStopTimeUser(this);
+            tutoHand1.gameObject.SetActive(true);
+            tutoDone = false;
+            StartCoroutine(PlaySigleAudioGuide(moveHookAudio));
+        }
+		else
+		{
+            blockingPanel.gameObject.SetActive(false);
+            TimeManager.Instance.RemoveNewStopTimeUser(this);
+        }
     }
     IEnumerator PlaySigleAudioGuide(AudioClip clip)
 	{
 		audioSource.clip = clip;
 		audioSource.Play();
 		yield return new WaitForSeconds(clip.length);
-	}
-	void Init()
+        blockingPanel.gameObject.SetActive(false);
+    }
+    void Init()
     {
 		totalCapturedAsteroids = 0;
 		totalTime = 0;
@@ -119,7 +129,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 		OnRoundStart();
 		sendHookBtn.onClick.AddListener(player.OnClickSendHook);
 		currentInstruction = Introduction();
-		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove)) StartCoroutine(currentInstruction);
+		StartCoroutine(Introduction());
     }
 	void Update()
 	{
