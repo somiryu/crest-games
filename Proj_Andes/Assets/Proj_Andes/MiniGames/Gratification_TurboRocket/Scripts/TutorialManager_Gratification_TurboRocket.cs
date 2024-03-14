@@ -270,7 +270,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         turboParticles.Stop();
         turboAnimObj.SetActive(false);
         turboSFX.Stop();
-        currentTargetAcceleration = gameConfig.deacceleration;
+        currentTargetAcceleration = gameConfig.minTurboTime;
         currentTargetSpeed = gameConfig.regularSpeed;
         onTurbo = false;
 

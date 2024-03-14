@@ -42,7 +42,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 	float yMoveProgress = 0f;
     float startYPos = 0f;
     IEnumerator turboDeacceleration;
-
+    float turboTimer;
 
 	[SerializeField] Animator characterAnimator;
 
@@ -52,7 +52,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
     Ray hit;
 	float timer;
-	float turboTimer;
     float targetYPos;
     float playerRanXSpace;
 
@@ -85,6 +84,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
         eogManager.OnGameStart();
+        turboDeacceleration = TurboCounter();
 	}
 
 	private void Start()
@@ -143,6 +143,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
         var collsAmt = Physics.OverlapSphereNonAlloc(myCollider.transform.position, myCollider.radius, colls);
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
+        if (onTurbo) turboTimer += Time.deltaTime;
     }
 
 
@@ -170,33 +171,46 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
             onPlay = false; 
         }
     }
+    public IEnumerator TurboCounter()
+    {
+        while(turboTimer <= levelConfig.minTurboTime)
+        {
+            yield return null;
+        }
+        if(timer >= levelConfig.minTurboTime)
+        {
+            onTurbo = false;
+            characterAnimator.SetTrigger("Normal");
+            camCC.OnExitTurbo();
+            turboParticles.Stop();
+            turboAnimObj.SetActive(false);
+            turboSFX.Stop();
+            currentTargetAcceleration = gameConfig.accelerationSpeed;
+            currentTargetSpeed = gameConfig.regularSpeed;
+        }
+        
+    }
     public void OnEnterTurboMode()
     {
         GeneralGameAnalyticsManager.RegisterLose();
 		characterAnimator.ResetTrigger("Normal");
-		characterAnimator.SetTrigger("Turbo");
+        characterAnimator.SetTrigger("Turbo");
         turboParticles.Play();
         turboAnimObj.SetActive(true);
         turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
         currentTargetAcceleration = levelConfig.accelerationSpeed;
         camCC.OnEnterTurbo();
-
-        gameConfig.turboUsedTimes++;
+        turboTimer = 0;
         onTurbo = true;
+        gameConfig.turboUsedTimes++;
 
     }
     public void OnExitTurboMode()
     {
         characterAnimator.ResetTrigger("Turbo");
-		characterAnimator.SetTrigger("Normal");
-        camCC.OnExitTurbo();
-        turboParticles.Stop();
-        turboAnimObj.SetActive(false);
-        turboSFX.Stop();
-        currentTargetAcceleration = gameConfig.deacceleration;
-        currentTargetSpeed = gameConfig.regularSpeed;
-        onTurbo = false;
+        StartCoroutine(TurboCounter());
+
     }
 
 
