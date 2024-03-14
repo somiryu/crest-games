@@ -329,9 +329,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             audioSource.clip = wantMoreAudio;
             audioSource.Play();
             yield return new WaitForSeconds(wantMoreAudio.length);
-            audioSource.clip = clicContinue;
-            audioSource.Play();
-            yield return new WaitForSeconds(clicContinue.length);
             blockButtons.gameObject.SetActive(false);
         }
         StopCoroutine(openChest);
@@ -395,6 +392,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		myCollectionManager.OnClosedCollections += OnCollectionsClosed;
 		myCollectionManager.gameObject.SetActive(true);
 
+    }
+    public IEnumerator OrSelectContinue()
+    {
+        audioSource.clip = clicContinue;
+        audioSource.Play();
+        yield return new WaitForSeconds(clicContinue.length);
     }
 
 #if UNITY_EDITOR
