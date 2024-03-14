@@ -35,7 +35,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip finishAudio;
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
-    [SerializeField] AudioClip discardAudio;
     [SerializeField] AudioClip lookAtCampsAudio;
     [SerializeField] AudioClip firstInstrucAudio;
     [SerializeField] AudioClip discardAdvice;
@@ -371,7 +370,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 	private void OnClickedDiscard()
     {
-        audioPlayer.PlayOneShot(discardAudio);
         if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
