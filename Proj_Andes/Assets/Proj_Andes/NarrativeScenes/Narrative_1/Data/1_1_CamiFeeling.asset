@@ -242,7 +242,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Uy! Son\xF3 la campana! Vamos al recreo y juguemos un rato"
+    text: "\xA1Si! Son\xF3 la campana! Vamos al recreo y juguemos un rato"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     analyticChoiceID: 
