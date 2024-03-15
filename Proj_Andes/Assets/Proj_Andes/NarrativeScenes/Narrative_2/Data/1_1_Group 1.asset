@@ -16,11 +16,13 @@ MonoBehaviour:
   - characterType: 6
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 8702f028d206a664f85ee29e49df7b59, type: 2}
-    changeToSequenceStartDialogIdx: 3
+    changeToSequenceStartDialogIdx: 4
     changeToSequenceResponseIdxToGrayOut: 0
     text: "No queremos jugar contigo, busca alguien m\xE1s con quien jugar"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 9993dcc8ac9adfd44877a601c5b370bc, type: 3}
     audioAlternative: {fileID: 0}

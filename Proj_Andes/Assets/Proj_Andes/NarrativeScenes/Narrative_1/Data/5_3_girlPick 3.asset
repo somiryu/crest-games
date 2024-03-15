@@ -16,11 +16,13 @@ MonoBehaviour:
   - characterType: 6
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: aaa3eb360ed99c544b70bf5bf3b7a06c, type: 2}
-    changeToSequenceStartDialogIdx: 0
+    changeToSequenceStartDialogIdx: 1
     changeToSequenceResponseIdxToGrayOut: 2
     text: No, gracias
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: dc9a2d2756a36464b96c2243ce767b2d, type: 3}
     audioAlternative: {fileID: 0}
