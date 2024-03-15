@@ -3,7 +3,6 @@ using UnityEngine.Playables;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using Transform = UnityEngine.Transform;
 
 public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager, iTurboRocketManager
