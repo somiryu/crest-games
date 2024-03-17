@@ -127,7 +127,8 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     }
     IEnumerator ResultDelivered(AudioClip clip)
     {
-        audioSource.clip = clip;
+		actionBlocker.gameObject.SetActive(true);
+		audioSource.clip = clip;
         audioSource.Play();
         yield return new WaitForSeconds(clip.length);
         GetNextStep();
@@ -140,9 +141,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
             tutoStepIdx++;
             audioSource.clip = onRightAction;
             audioSource.Play();
-            ActivateTutoUI();
-            selectedRocketType = SizeRocketsRocketTypes.NONE;
-            currTargetPlanet = null;
+			selectedRocketType = SizeRocketsRocketTypes.NONE;
+			currTargetPlanet = null;
+			ActivateTutoUI();
         }
         else GameOver();
     }
@@ -262,6 +263,8 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
     public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount)
     {
+        selectedRocketType = SizeRocketsRocketTypes.NONE;
+        currTargetPlanet = null;
         StartCoroutine(ResultDelivered(currTutoStep.onResultAudio));
         activeShips.Remove(rocket);
         totalCoinsWon += coinsAmount;

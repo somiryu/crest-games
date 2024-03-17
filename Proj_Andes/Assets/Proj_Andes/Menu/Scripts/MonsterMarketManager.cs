@@ -6,6 +6,8 @@ using System;
 using Random = UnityEngine.Random;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -92,10 +94,50 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             }
         }
         instance = this;
-        Init();
-    }
+		Init();
+	}
 
-    IEnumerator MarketIntro()
+	private void Start()
+	{
+		StartCoroutine(marketIntro);
+		//Init analytics
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
+		initialStars = UserDataManager.CurrUser.Coins;
+	}
+
+	public void Init()
+	{
+		TryGetComponent(out audioSource);
+		myCollectionManager.Init(false);
+		myCollectionManager.HideCollection();
+		confirmButton.gameObject.SetActive(false);
+		chestOpenButtonParent.gameObject.SetActive(false);
+		RefreshCollectionFromData();
+
+		monstersUIInChestOpenning.Init(5);
+		monstersUIInChestOpenning.RecycleAll();
+
+		chestOpenedContainer.gameObject.SetActive(false);
+
+		confirmButton.onClick.AddListener(OpenButtonBeforeBuyChestOrContinuing);
+		chestOpenButton.onClick.AddListener(BuyChest);
+		collectBtn.onClick.AddListener(Collect);
+
+		regularChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Regular, regularChest));
+		rareChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Rare, rareChest));
+		legendaryChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Legendary, legendaryChest));
+		saveForLaterButton.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.NONE, saveForLaterButton));
+
+		coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
+		marketIntro = MarketIntro();
+		noResources = NoResources();
+		openChest = OpenChestAudios();
+		closeNoResourcesBtn.onClick.AddListener(CloseNoResources);
+	}
+
+	
+
+	IEnumerator MarketIntro()
     {
         audioSource.clip = titleAudio; 
         audioSource.Play();
@@ -137,45 +179,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         userMonsterButtonBehaviours.Remove(monsterMarketButtonBehaviour);
     }
 
-    public void Init()
-    {        
-        myCollectionManager.Init(false);
-        myCollectionManager.HideCollection();
-        confirmButton.gameObject.SetActive(false);
-        chestOpenButtonParent.gameObject.SetActive(false);
-        RefreshCollectionFromData();
-
-        monstersUIInChestOpenning.Init(5);
-        monstersUIInChestOpenning.RecycleAll();
-
-        chestOpenedContainer.gameObject.SetActive(false);
-        TryGetComponent(out audioSource);
-
-        confirmButton.onClick.AddListener(OpenButtonBeforeBuyChestOrContinuing);
-        chestOpenButton.onClick.AddListener(BuyChest);
-        collectBtn.onClick.AddListener(Collect);
-
-        regularChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Regular, regularChest));
-        rareChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Rare, rareChest));
-        legendaryChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Legendary, legendaryChest));
-        saveForLaterButton.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.NONE, saveForLaterButton));
-
-        coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
-        marketIntro = MarketIntro();
-        noResources = NoResources();
-        openChest = OpenChestAudios();
-        closeNoResourcesBtn.onClick.AddListener(CloseNoResources);
-
-
-    }
-
-    private void Start()
-    {
-        StartCoroutine(marketIntro);
-		//Init analytics
-		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
-		initialStars = UserDataManager.CurrUser.Coins;
-	}
+ 
 
     private void Update()
     {
@@ -199,7 +203,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     {
         if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
         myCollectionManager.OnClosedCollections -= OnCollectionsClosed;
-    }
+
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
+		{
+			StartCoroutine(OrSelectContinue());
+		}
+	}
 
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {

@@ -99,7 +99,6 @@ public class MyCollectionManager : MonoBehaviour
     }
     public void HideCollection()
     {
-        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction)) StartCoroutine(MonsterMarketManager.Instance.OrSelectContinue());
         myCollBtn.gameObject.SetActive(useShowCollectionBtn);
         monstersUIInCollection.RecycleAll();
         collectionSet.gameObject.SetActive(false);

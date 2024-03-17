@@ -17,7 +17,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     float lastFrameMousePos = 0;
     private bool isDragging = false;
     public float dragDeathZone = 0.02f;
-    bool canDrag = true;
+    public bool canDrag = true;
 
     [SerializeField] Transform startPointLine;
     [SerializeField] Transform endPointLine;

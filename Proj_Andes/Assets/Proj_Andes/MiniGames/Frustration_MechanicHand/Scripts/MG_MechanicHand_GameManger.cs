@@ -81,12 +81,14 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	}
 	IEnumerator Introduction()
 	{
+		player.canDrag = false;
 		tutoHand1.gameObject.SetActive(false);
 		blockingPanel.gameObject.SetActive(true);
 		TimeManager.Instance.SetNewStopTimeUser(this);
 		audioSource.clip = reminderAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(reminderAudio.length);
+
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove))
 		{
             audioSource.clip = introductionAudio;
@@ -105,8 +107,9 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
             blockingPanel.gameObject.SetActive(false);
             TimeManager.Instance.RemoveNewStopTimeUser(this);
         }
-    }
-    IEnumerator PlaySigleAudioGuide(AudioClip clip)
+		player.canDrag = true;
+	}
+	IEnumerator PlaySigleAudioGuide(AudioClip clip)
 	{
 		audioSource.clip = clip;
 		audioSource.Play();
