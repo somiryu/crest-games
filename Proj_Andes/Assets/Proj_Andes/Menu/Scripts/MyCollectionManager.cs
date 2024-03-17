@@ -30,6 +30,9 @@ public class MyCollectionManager : MonoBehaviour
     {
         if (instance != null && instance != this) DestroyImmediate(this);
         instance = this;
+    }
+    void Start()
+    {
         Init(false);
     }
     public void Init(bool inUseShowCollectionBtn)
@@ -43,8 +46,11 @@ public class MyCollectionManager : MonoBehaviour
         myCollBtn.onClick.AddListener(ShowCollection);
         myCollBtn.gameObject.SetActive(useShowCollectionBtn);
         hideCollectionBtn.onClick.AddListener(HideCollection);
-
-        HideCollection();
+        myCollBtn.gameObject.SetActive(useShowCollectionBtn);
+        monstersUIInCollection.RecycleAll();
+        collectionSet.gameObject.SetActive(false);
+        OnClosedCollections?.Invoke();
+        //HideCollection();
     }
 
 	public void RefreshCollectionFromData()

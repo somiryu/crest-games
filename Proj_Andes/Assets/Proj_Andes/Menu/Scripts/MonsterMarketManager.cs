@@ -6,6 +6,8 @@ using System;
 using Random = UnityEngine.Random;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -65,6 +67,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] AudioClip noStarsAudio;
     [SerializeField] AudioClip continueAudio;
     [SerializeField] AudioClip checkAudio;
+    [SerializeField] AudioClip lastChanceAudio;
     [SerializeField] Transform blockButtons;
     [SerializeField] Transform tutoHand;
     [SerializeField] Button continueBtn;
@@ -92,17 +95,70 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             }
         }
         instance = this;
-        Init();
-    }
+        MonsterMarketConfig.marketAppearTimes++;
+        MonsterMarketConfig.isLastMarket = GameSequencesList.Instance.IsLastMarket(marketConfig);
+		Init();
+	}
 
-    IEnumerator MarketIntro()
+	private void Start()
+	{
+		StartCoroutine(marketIntro);
+		//Init analytics
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
+		initialStars = UserDataManager.CurrUser.Coins;
+	}
+
+	public void Init()
+	{
+		TryGetComponent(out audioSource);
+		myCollectionManager.Init(false);
+		myCollectionManager.HideCollection();
+		confirmButton.gameObject.SetActive(false);
+		chestOpenButtonParent.gameObject.SetActive(false);
+		RefreshCollectionFromData();
+
+		monstersUIInChestOpenning.Init(5);
+		monstersUIInChestOpenning.RecycleAll();
+
+		chestOpenedContainer.gameObject.SetActive(false);
+
+		confirmButton.onClick.AddListener(OpenButtonBeforeBuyChestOrContinuing);
+		chestOpenButton.onClick.AddListener(BuyChest);
+		collectBtn.onClick.AddListener(Collect);
+
+		regularChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Regular, regularChest));
+		rareChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Rare, rareChest));
+		legendaryChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Legendary, legendaryChest));
+		saveForLaterButton.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.NONE, saveForLaterButton));
+
+		coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
+		marketIntro = MarketIntro();
+		noResources = NoResources();
+		openChest = OpenChestAudios();
+		closeNoResourcesBtn.onClick.AddListener(CloseNoResources);
+	}
+
+	
+
+	IEnumerator MarketIntro()
     {
-        audioSource.clip = titleAudio; 
-        audioSource.Play();
         TimeManager.Instance.SetNewStopTimeUser(this);
-        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction)) continueBtn.interactable = false;
+        if (MonsterMarketConfig.isLastMarket)
+        {
+            blockButtons.gameObject.SetActive(true);
+            audioSource.clip = lastChanceAudio;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(lastChanceAudio.length);
+            blockButtons.gameObject.SetActive(false);
+        }
+
         blockButtons.gameObject.SetActive(!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction));
+        audioSource.clip = titleAudio;
+        audioSource.Play();
         yield return new WaitForSecondsRealtime(titleAudio.length);
+
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction)) continueBtn.interactable = false;
+
         audioSource.clip = introAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(introAudio.length);
@@ -137,45 +193,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         userMonsterButtonBehaviours.Remove(monsterMarketButtonBehaviour);
     }
 
-    public void Init()
-    {        
-        myCollectionManager.Init(false);
-        myCollectionManager.HideCollection();
-        confirmButton.gameObject.SetActive(false);
-        chestOpenButtonParent.gameObject.SetActive(false);
-        RefreshCollectionFromData();
-
-        monstersUIInChestOpenning.Init(5);
-        monstersUIInChestOpenning.RecycleAll();
-
-        chestOpenedContainer.gameObject.SetActive(false);
-        TryGetComponent(out audioSource);
-
-        confirmButton.onClick.AddListener(OpenButtonBeforeBuyChestOrContinuing);
-        chestOpenButton.onClick.AddListener(BuyChest);
-        collectBtn.onClick.AddListener(Collect);
-
-        regularChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Regular, regularChest));
-        rareChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Rare, rareChest));
-        legendaryChest.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.Legendary, legendaryChest));
-        saveForLaterButton.onClick.AddListener(() => ActiveConfirmationButton(MonsterChestType.NONE, saveForLaterButton));
-
-        coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
-        marketIntro = MarketIntro();
-        noResources = NoResources();
-        openChest = OpenChestAudios();
-        closeNoResourcesBtn.onClick.AddListener(CloseNoResources);
-
-
-    }
-
-    private void Start()
-    {
-        StartCoroutine(marketIntro);
-		//Init analytics
-		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
-		initialStars = UserDataManager.CurrUser.Coins;
-	}
+ 
 
     private void Update()
     {
@@ -199,7 +217,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     {
         if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
         myCollectionManager.OnClosedCollections -= OnCollectionsClosed;
-    }
+
+		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
+		{
+			StartCoroutine(OrSelectContinue());
+		}
+	}
 
     void ActiveConfirmationButton(MonsterChestType monsterChestType, Button chestBtn) 
     {
@@ -285,7 +308,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     void ShowNoResourcesCorroutine()
     {
-        if (noResources != null) StopCoroutine(noResources);
         noResources = NoResources();
         StartCoroutine(noResources);
     }
@@ -295,11 +317,10 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         chestNoEnoughCoins.SetActive(true);
         audioSource.clip = noResourcesAudio;
         audioSource.Play();
-        yield return new WaitForSeconds(noResourcesAudio.length);
+        yield return new WaitForSeconds(noResourcesAudio.length-0.5f);
         audioSource.clip = noStarsAudio;
         audioSource.Play();
         yield return new WaitForSeconds(noStarsAudio.length);
-        noResources = null;
     }
 
     void CloseNoResources()
@@ -331,9 +352,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             audioSource.clip = wantMoreAudio;
             audioSource.Play();
             yield return new WaitForSeconds(wantMoreAudio.length);
-            audioSource.clip = clicContinue;
-            audioSource.Play();
-            yield return new WaitForSeconds(clicContinue.length);
             blockButtons.gameObject.SetActive(false);
         }
         StopCoroutine(openChest);
@@ -397,6 +415,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		myCollectionManager.OnClosedCollections += OnCollectionsClosed;
 		myCollectionManager.gameObject.SetActive(true);
 
+    }
+    public IEnumerator OrSelectContinue()
+    {
+        audioSource.clip = clicContinue;
+        audioSource.Play();
+        yield return new WaitForSeconds(clicContinue.length);
     }
 
 #if UNITY_EDITOR

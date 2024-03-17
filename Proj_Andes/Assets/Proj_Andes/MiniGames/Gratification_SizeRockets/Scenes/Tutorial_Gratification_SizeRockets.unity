@@ -2549,7 +2549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignOnAwake: 0
+  assignOnAwake: 1
   image: {fileID: 1564268887}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
@@ -2786,7 +2786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7075472, g: 0.7000264, b: 0.69753474, a: 0.392}
+  m_Color: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0.29803923}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3307,7 +3307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignOnAwake: 0
+  assignOnAwake: 1
   image: {fileID: 2105149408}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
@@ -3405,7 +3405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignOnAwake: 0
+  assignOnAwake: 1
   image: {fileID: 2137508989}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:

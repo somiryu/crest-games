@@ -16,7 +16,7 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI starsText;
     public Slider progressSlider;
     iTurboRocketManager player => iTurboRocketManager.Instance;
-    IEnumerator cameraInstruction;
+    public IEnumerator cameraInstruction;
     [SerializeField] Camera cam;
     [SerializeField] float timeRef;
     [SerializeField] Animator anim;
@@ -30,8 +30,6 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
 
         resetCameraPos = cam.transform.position;
         
-        cameraInstruction = CameraMovement();
-        StartCoroutine(cameraInstruction);
     }
 
 	private void Update()
@@ -41,22 +39,18 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
         progressSlider.value = player.CurrProgress;
 	}
 
-    IEnumerator CameraMovement()
+    public IEnumerator CameraMovement(float waitTime)
     {
         player.onDoneAnim = false;
         anim.enabled = true;
         player.onPlay = false;
         anim.SetTrigger("RideIntro");
-        yield return new WaitForSeconds(timeRef);
+        yield return new WaitForSecondsRealtime(waitTime);
         player.onPlay = true;
         anim.enabled = false;
-        if(player is TutorialManager_Gratification_TurboRocket tuto)
-        {
-            tuto.InitTuto();
-        }
         player.onDoneAnim = true;
-        StopCoroutine(cameraInstruction);   
     }
+
 	public void EndOfGame()
     {
 

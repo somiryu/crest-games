@@ -67,7 +67,10 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     float targetYPos;
     float playerRanXSpace;
 
-    float iTurboRocketManager.CurrProgress => tutorialProgress;
+	IEnumerator turboDeacceleration;
+
+
+	float iTurboRocketManager.CurrProgress => tutorialProgress;
     float iTurboRocketManager.playerCurrentSpeed { get => currentSpeed; }
     Action iTurboRocketManager.OnScoreChanges { get => OnScoreChanged; set { } }
 
@@ -80,7 +83,10 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
     public bool endOfTuto;
     bool alreadyGivenInstruction;
-    private void Awake()
+
+    float turboTimer = 0;
+
+	private void Awake()
     {
         iTurboRocketManager.Instance = this;
         Init();
@@ -95,10 +101,10 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         targetYPos = transform.position.y;
         TryGetComponent(out myCollider);
         TryGetComponent(out ui);
+		turboDeacceleration = TurboCounter();
+	}
 
-    }
-
-    private void Start()
+	private void Start()
     {
         RideBegining();
     }
@@ -115,7 +121,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         currentSpeed = levelConfig.regularSpeed;
         currentTargetSpeed = levelConfig.regularSpeed;
         bk.Init();
-        //InitTuto();
+        InitTuto();
         turboBtn.gameObject.SetActive(false);
 
         SetSpeedway();
@@ -123,6 +129,7 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         camCC.Init();
         gameStages = GameStages.Start;
         currentTargetAcceleration = gameConfig.accelerationSpeed;
+        StartCoroutine(Introduction());
     }
     public void InitTuto()
     {
@@ -145,19 +152,17 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         turboBtn.gameObject.SetActive(false);
         alreadyGivenInstruction = false;
         currTutoStepIndex = 0;
-        StartCoroutine(Introduction());
 
         currTutoStep.InitTutoStep();
     }
     IEnumerator Introduction()
     {
-        yield return new WaitForSeconds(0.5f);
         TimeManager.Instance.SetNewStopTimeUser(this);
         currTutoStep.signHand.gameObject.SetActive(false);
         audioSource.clip = introAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(introAudio.length);
-        Debug.Log("done intro");
+        yield return ui.CameraMovement(0);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
         audioSource.clip = ifSlowAudio;
         audioSource.Play();
@@ -227,10 +232,11 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         var collsAmt = Physics.OverlapSphereNonAlloc(myCollider.transform.position, myCollider.radius, colls);
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
 
-    }
+		if (onTurbo) turboTimer += Time.deltaTime;
+	}
 
 
-    void ContinuousMovement()
+	void ContinuousMovement()
     {
         currentSpeed = Mathf.MoveTowards(currentSpeed, currentTargetSpeed, currentTargetAcceleration * Time.deltaTime);
         if (onPlay)
@@ -258,24 +264,40 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         turboParticles.Play();
         turboAnimObj.SetActive(true);
         turboSFX.Play();
-        currentTargetSpeed = levelConfig.turboSpeed;
+		turboTimer = 0;
+		currentTargetSpeed = levelConfig.turboSpeed;
         currentTargetAcceleration = gameConfig.accelerationSpeed;
         camCC.OnEnterTurbo();
         onTurbo = true;
     }
     public void OnExitTurboMode()
     {
-        characterAnimator.SetTrigger("Normal");
-        camCC.OnExitTurbo();
-        turboParticles.Stop();
-        turboAnimObj.SetActive(false);
-        turboSFX.Stop();
-        currentTargetAcceleration = gameConfig.deacceleration;
-        currentTargetSpeed = gameConfig.regularSpeed;
-        onTurbo = false;
+		if (turboDeacceleration != null) StopCoroutine(turboDeacceleration);
+        turboDeacceleration = TurboCounter();
+		StartCoroutine(turboDeacceleration);
+	}
 
-    }
-    void CollisionManagement(Collider collider)
+	public IEnumerator TurboCounter()
+	{
+		while (turboTimer <= levelConfig.minTurboTime)
+		{
+			yield return null;
+		}
+
+		onTurbo = false;
+		characterAnimator.SetTrigger("Normal");
+		camCC.OnExitTurbo();
+		turboParticles.Stop();
+		turboAnimObj.SetActive(false);
+		turboSFX.Stop();
+		currentTargetAcceleration = gameConfig.accelerationSpeed;
+		currentTargetSpeed = gameConfig.regularSpeed;
+
+		turboDeacceleration = null;
+	}
+
+
+	void CollisionManagement(Collider collider)
     {
         if (collider.CompareTag("Finish")) EndOfRide();
         else if (collider == currTutoStep.stepClickableObj) GoToNextStep();
