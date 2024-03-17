@@ -94,8 +94,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         }
         instance = this;
         MonsterMarketConfig.marketAppearTimes++;
-        var lastMarket = MonsterMarketConfig.marketAppearTimes >= 9 ? true : false;
-        MonsterMarketConfig.isLastMarket = lastMarket;
+        MonsterMarketConfig.isLastMarket = GameSequencesList.Instance.IsLastMarket(marketConfig);
         Init();
     }
 
