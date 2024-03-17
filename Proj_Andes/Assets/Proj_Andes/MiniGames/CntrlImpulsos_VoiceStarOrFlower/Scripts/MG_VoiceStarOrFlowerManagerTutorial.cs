@@ -226,7 +226,11 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 			ResetScore();
 		}
 
-		if (currStepTutorial == 5) StartCoroutine( CompleteTuto());
+        if (currStepTutorial == 5)
+        {
+			MG_VoiceStarOrFlowerGameConfigs.passedTuto = true;
+			StartCoroutine(CompleteTuto());
+        }
 
         currScoreStepTutorial = 0;
 
@@ -236,7 +240,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     }
     IEnumerator CompleteTuto()
     {
-        MG_VoiceStarOrFlowerGameConfigs.passedTuto = true;
         discardBtn.gameObject.SetActive(false);
         leftBtn.gameObject.SetActive(false);
         rightBtn.gameObject.SetActive(false);
@@ -473,7 +476,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         else if (currStepTutorial == 4 && failurePerTutoCount >= gameConfigs.finalTutoStepMaxFailuresBeforeSkipping)
         {
             MG_VoiceStarOrFlowerGameConfigs.passedTuto = false;
-            CompleteTuto();
+            StartCoroutine(CompleteTuto());
             yield break;
         }
         InitRound();

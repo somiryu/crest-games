@@ -59,7 +59,7 @@ public static class DataIds
     public const string voiceStarImage = "image";
     public const string voiceStarSound = "audio";
     public const string voiceStarClickRepetition = "voiceStarClickRepetition";
-    public const string voiceStarLostTutorial = "voiceStarLostTutorial";
+    public const string voiceStarLostTutorial = "lostTutorial";
 
     public const string heartsAndStarsGame = "Control de impulsos: estrellas y corazones";
     public const string heartsAndStarsInGameOrder = "heartsAndStarsInGameOrder";
