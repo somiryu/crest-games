@@ -436,6 +436,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             {
                 preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
                 if (canSkipAudio.isOn) preselectedResponseAudioIsDone = true;
+				currResponsesDisplayer.ActiveConfirmationButton(preselectedResponseAudioIsDone);
             }
             yield return null;
         }
