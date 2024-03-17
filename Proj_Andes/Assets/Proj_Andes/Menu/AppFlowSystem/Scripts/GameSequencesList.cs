@@ -5,11 +5,13 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
     public static string instancePath = "GameSequencesList";
     static GameSequencesList instance;
+
     public static GameSequencesList Instance
     {
         get
@@ -36,7 +38,8 @@ public class GameSequencesList : ScriptableObject
             GoToNextItemInList();
         }
     }
-    public void GoToNextItemInList()
+
+	public void GoToNextItemInList()
     {
         var nextItem = GetGameSequence().GetNextItem();
         if (nextItem != null)
@@ -67,6 +70,7 @@ public class GameSequencesList : ScriptableObject
         prevGame = null;
         goToGameGroupIdx = 0;
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
+        MonsterMarketConfig.marketAppearTimes = -1;
     }
 
     public SimpleGameSequenceItem GetGameSequence()
@@ -109,6 +113,23 @@ public class GameSequencesList : ScriptableObject
 		UserDataManager.OnUserQuit();
         ResetSequence();
         GoToNextItemInList();
+    }
+
+
+    public bool IsLastMarket(SimpleGameSequenceItem item)
+    {
+        if (item is not MonsterMarketConfig marketItem) return false;
+        var lastMarketIdx = -1;
+		for (var i = 0; i < gameSequences.Count; i++)
+        {
+            var curr = gameSequences[i];
+            if (curr is not MonsterMarketConfig currMarketToCheck) continue;
+			lastMarketIdx += 1;
+        }
+
+		var currMarketIdx = MonsterMarketConfig.marketAppearTimes;
+		if (lastMarketIdx == currMarketIdx) return true;
+        return false;
     }
 
 

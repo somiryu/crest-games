@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 838565788390763482}
   - component: {fileID: 34421843155320262}
   m_Layer: 0
-  m_Name: AudioInstruction
+  m_Name: CatchCoinsAudioInstruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a804152d33bd5c343bf0484b9cc3812c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstInstruction: {fileID: 8300000, guid: d2717a5d8cf863749b2222e46bfe7e05, type: 3}
+  firstInstruction: {fileID: 8300000, guid: c3b335c20bf86c646891df10e01fded9, type: 3}
   allScreenRayBlocker: {fileID: 7352783867122607617}
   doneAudio: 0
   startedCorr: 0

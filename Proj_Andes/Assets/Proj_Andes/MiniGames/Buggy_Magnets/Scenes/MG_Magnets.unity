@@ -23785,6 +23785,17 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1719314618 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 838565788390763482, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+  m_PrefabInstance: {fileID: 321264712}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a804152d33bd5c343bf0484b9cc3812c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1728065427 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1493603089339741428, guid: 67c539ab53012e24cb36584fe83a0b6b, type: 3}
@@ -24764,6 +24775,7 @@ MonoBehaviour:
   letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   noStarsAudio: {fileID: 8300000, guid: c25c35d8e350a0241b88b5b5279b1174, type: 3}
   blockingPanel: {fileID: 1918948702}
+  audioInstruction: {fileID: 1719314618}
   currSpawnedItems: 0
   eogManager: {fileID: 2121471078}
   timePlayed: 0

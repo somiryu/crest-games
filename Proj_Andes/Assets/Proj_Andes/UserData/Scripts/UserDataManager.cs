@@ -55,7 +55,7 @@ public class UserDataManager : ScriptableObject
 
 	public static UserData CurrUser => Instance.CurrUserData;
 
-	public UserData DefaultUserData = new UserData();
+	public static UserData DefaultUserData = new UserData();
 
 
 	public List<UserData> usersDatas => DatabaseManager.userDatas;
@@ -65,7 +65,7 @@ public class UserDataManager : ScriptableObject
 		new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
 
 
-    int currUserDataIdx = -1;
+    static int currUserDataIdx = -1;
 
 	public UserData CurrUserData
     {

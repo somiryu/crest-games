@@ -13,6 +13,7 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
     public int finalTutoStepMaxFailuresBeforeSkipping;
+    public static bool passedTuto;
     public override string GetSceneID() => DataIds.voiceStarGame;
     
     public override void SaveAnalytics()
@@ -29,9 +30,9 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
             currAnalyticsDictionary.Add(DataIds.responseTime, currAnalytics[i].timeToMakeAChoice);
             currAnalyticsDictionary.Add(DataIds.totalClicks, currAnalytics[i].clicks);
             currAnalyticsDictionary.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
+            currAnalyticsDictionary.Add(DataIds.voiceStarLostTutorial, passedTuto);
             UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
         }
-
     }
     public override void ResetCurrentAnalytics()
     {

@@ -11,6 +11,11 @@ public class MonsterMarketConfig : SimpleGameSequenceItem
     public int LegendaryChestPrice;
     public MonstersLibrary monstersLibrary;
 
+
+    public static bool isLastMarket;
+    public static int marketAppearTimes = -1;
+
+
 	public int AvailableCoins => UserDataManager.CurrUser.Coins;
     public List<string> MyCollectionMonsters => UserDataManager.CurrUser.myCollectionMonsters;
 

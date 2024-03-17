@@ -35,7 +35,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip finishAudio;
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
-    [SerializeField] AudioClip discardAudio;
     [SerializeField] AudioClip lookAtCampsAudio;
     [SerializeField] AudioClip firstInstrucAudio;
     [SerializeField] AudioClip discardAdvice;
@@ -226,7 +225,11 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 			ResetScore();
 		}
 
-		if (currStepTutorial == 5) StartCoroutine( CompleteTuto());
+        if (currStepTutorial == 5)
+        {
+			MG_VoiceStarOrFlowerGameConfigs.passedTuto = true;
+			StartCoroutine(CompleteTuto());
+        }
 
         currScoreStepTutorial = 0;
 
@@ -236,6 +239,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     }
     IEnumerator CompleteTuto()
     {
+        effectPlayer.Stop();
         discardBtn.gameObject.SetActive(false);
         leftBtn.gameObject.SetActive(false);
         rightBtn.gameObject.SetActive(false);
@@ -260,12 +264,12 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     void InitRound()
     {
+        if (currStepTutorial == 5) return;
         timerPerChoice = 0;
 
         trialsPerTutoCount++;
 
         audioPlayer.volume = 1;
-        Debug.Log(currStepTutorial + " " + trialsPerTutoCount);
         if (intervalQuestion)
         {
             currSoundIsLeft = !currSoundIsLeft;
@@ -290,7 +294,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         {
             if (currSoundIsLeft && !currImgIsLeft) SetButtonState(leftBtn, leftBtnHighlightImg, enabledBtnColor, true);
             else SetButtonState(leftBtn, leftBtnHighlightImg, disabledBtnColor, false);
-           
+
             if (!currSoundIsLeft && currImgIsLeft) SetButtonState(rightBtn, rightBtnHighlightImg, enabledBtnColor, true);
             else SetButtonState(rightBtn, rightBtnHighlightImg, disabledBtnColor, false);
 
@@ -315,7 +319,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         if (currStepTutorial == 2 && trialsPerTutoCount == 1) StartCoroutine(DiscardInstruction());
         else if (currStepTutorial == 4 && trialsPerTutoCount == 1) StartCoroutine(PlaySingleAudio(youDidGoodNowTryAudio));
-        else effectPlayer.Play();   
+        else effectPlayer.Play();
     }
     IEnumerator DiscardInstruction()
     {
@@ -371,7 +375,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 	private void OnClickedDiscard()
     {
-        audioPlayer.PlayOneShot(discardAudio);
         if (currSoundIsLeft == currImgIsLeft) OnCorrectChoice();
 		else OnWrongChoice();
 	}
@@ -471,7 +474,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         }
         else if (currStepTutorial == 4 && failurePerTutoCount >= gameConfigs.finalTutoStepMaxFailuresBeforeSkipping)
         {
-            CompleteTuto();
+            MG_VoiceStarOrFlowerGameConfigs.passedTuto = false;
+            StartCoroutine(CompleteTuto());
             yield break;
         }
         InitRound();
