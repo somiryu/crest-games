@@ -14015,7 +14015,7 @@ MonoBehaviour:
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   finishAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
-  rightAudio: {fileID: 8300000, guid: dc7b0595b4e4fe741bf177d1c46e4872, type: 3}
+  rightAudio: {fileID: 8300000, guid: f30080e8439e6b542a0736c0dc30d397, type: 3}
   discardAudio: {fileID: 8300000, guid: ab8bfe04f8cf41740b85e1491a589c5d, type: 3}
   lookAtCampsAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
   firstInstrucAudio: {fileID: 8300000, guid: 10380640d41601d4f936e2ba9d8e108c, type: 3}

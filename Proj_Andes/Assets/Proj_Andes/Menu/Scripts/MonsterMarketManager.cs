@@ -67,6 +67,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] AudioClip noStarsAudio;
     [SerializeField] AudioClip continueAudio;
     [SerializeField] AudioClip checkAudio;
+    [SerializeField] AudioClip lastChanceAudio;
     [SerializeField] Transform blockButtons;
     [SerializeField] Transform tutoHand;
     [SerializeField] Button continueBtn;
@@ -94,6 +95,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             }
         }
         instance = this;
+        MonsterMarketConfig.marketAppearTimes++;
+        MonsterMarketConfig.isLastMarket = GameSequencesList.Instance.IsLastMarket(marketConfig);
 		Init();
 	}
 
@@ -139,12 +142,23 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
 	IEnumerator MarketIntro()
     {
-        audioSource.clip = titleAudio; 
-        audioSource.Play();
         TimeManager.Instance.SetNewStopTimeUser(this);
-        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction)) continueBtn.interactable = false;
+        if (MonsterMarketConfig.isLastMarket)
+        {
+            blockButtons.gameObject.SetActive(true);
+            audioSource.clip = lastChanceAudio;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(lastChanceAudio.length);
+            blockButtons.gameObject.SetActive(false);
+        }
+
         blockButtons.gameObject.SetActive(!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction));
+        audioSource.clip = titleAudio;
+        audioSource.Play();
         yield return new WaitForSecondsRealtime(titleAudio.length);
+
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction)) continueBtn.interactable = false;
+
         audioSource.clip = introAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(introAudio.length);
