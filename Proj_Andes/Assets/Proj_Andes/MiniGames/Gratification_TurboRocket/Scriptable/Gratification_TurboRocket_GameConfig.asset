@@ -20,4 +20,4 @@ MonoBehaviour:
   accelerationSpeed: 10
   regularRideDuration: 200
   starsAmount: 17
-  deacceleration: 4
+  minTurboTime: 4

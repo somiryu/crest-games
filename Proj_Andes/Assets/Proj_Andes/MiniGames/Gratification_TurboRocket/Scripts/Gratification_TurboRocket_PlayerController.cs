@@ -100,6 +100,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 	public void RideBegining()
 	{
 		ui.StartUi();
+        ui.StartCoroutine(ui.CameraMovement(2));
 		colls = new Collider[5];
 		currentSpeed = levelConfig.regularSpeed;
 		currentTargetSpeed = levelConfig.regularSpeed;
@@ -172,23 +173,23 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     public IEnumerator TurboCounter()
     {
-        while(turboTimer <= levelConfig.minTurboTime)
+        while (turboTimer <= levelConfig.minTurboTime)
         {
             yield return null;
         }
-        if(timer >= levelConfig.minTurboTime)
-        {
-            onTurbo = false;
-            characterAnimator.SetTrigger("Normal");
-            camCC.OnExitTurbo();
-            turboParticles.Stop();
-            turboAnimObj.SetActive(false);
-            turboSFX.Stop();
-            currentTargetAcceleration = gameConfig.accelerationSpeed;
-            currentTargetSpeed = gameConfig.regularSpeed;
-        }
-        
+
+        onTurbo = false;
+        characterAnimator.SetTrigger("Normal");
+        camCC.OnExitTurbo();
+        turboParticles.Stop();
+        turboAnimObj.SetActive(false);
+        turboSFX.Stop();
+        currentTargetAcceleration = gameConfig.accelerationSpeed;
+        currentTargetSpeed = gameConfig.regularSpeed;
+
+        turboDeacceleration = null;
     }
+
     public void OnEnterTurboMode()
     {
         GeneralGameAnalyticsManager.RegisterLose();
@@ -208,8 +209,9 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     public void OnExitTurboMode()
     {
         characterAnimator.ResetTrigger("Turbo");
-        StartCoroutine(TurboCounter());
-
+        if(turboDeacceleration != null) StopCoroutine(turboDeacceleration);
+		turboDeacceleration = TurboCounter();
+		StartCoroutine(turboDeacceleration);
     }
 
 
