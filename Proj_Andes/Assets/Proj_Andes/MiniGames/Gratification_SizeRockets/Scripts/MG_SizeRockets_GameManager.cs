@@ -200,12 +200,18 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			mediumRocketBtn.interactable = false;
 			largeRocketBtn.interactable = false;
 		}
+		else
+		{
+            smallRocketBtn.interactable = true;
+            mediumRocketBtn.interactable = true;
+            largeRocketBtn.interactable = true;
+        }
 
 		if (shipsLeft <= 0 && activeShips.Count == 0)
 		{
 			roundCount++;
-			if (roundCount > 0) InitLevel2();
-			else if(roundCount < 1) GameOver();
+			if (roundCount > 0 && roundCount <= 1) InitLevel2();
+			else GameOver();
         }
 	}
 
