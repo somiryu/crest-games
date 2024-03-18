@@ -3473,7 +3473,7 @@ MonoBehaviour:
   currCoinsLabel: {fileID: 705482025}
   shipsLeftTxt: {fileID: 1306639383}
   selectedColor: {r: 0.17708082, g: 0.25339243, b: 0.2905661, a: 1}
-  succeededRound: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
+  succeededRound: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
   afterActionPanel: {fileID: 1420377327}
   ingameObj: {fileID: 525700849}
   ingameObjUI: {fileID: 950336369}
