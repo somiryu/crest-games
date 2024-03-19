@@ -957,6 +957,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5559071712027728005, guid: 1c7d5dacd6a75944088b9588a890c4b8, type: 3}
+      propertyPath: itemTutorial
+      value: 
+      objectReference: {fileID: 11400000, guid: 1399a70a061e279498043ca4bbe44190, type: 2}
     - target: {fileID: 5705546024781089816, guid: 1c7d5dacd6a75944088b9588a890c4b8, type: 3}
       propertyPath: m_Name
       value: SkipTutoButton
@@ -1986,6 +1990,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1116958798415055968, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307520066272712462, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2309134055484977744, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
