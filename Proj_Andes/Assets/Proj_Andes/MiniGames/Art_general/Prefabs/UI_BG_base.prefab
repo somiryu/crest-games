@@ -231,9 +231,9 @@ RectTransform:
   - {fileID: 5555749961988905566}
   m_Father: {fileID: 6615924594159201872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -254, y: -46.00003}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 485, y: -53}
   m_SizeDelta: {x: 355.7107, y: 135.71}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &2202933662387739013
@@ -841,6 +841,7 @@ MonoBehaviour:
   starsContainer: {fileID: 5555749961988905566}
   parent: {fileID: 2490705008786603269}
   starPrefab: {fileID: 3488184102121480823, guid: f9f44a381ba1c59489af5da7f0f0ca3f, type: 3}
+  onTuto: 0
   onPause: 0
 --- !u!95 &3271978304075138178
 Animator:
@@ -899,8 +900,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: -2}
-  m_SizeDelta: {x: 320, y: 135.71}
+  m_AnchoredPosition: {x: -13, y: -9}
+  m_SizeDelta: {x: 320, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7459868719301600469
 CanvasRenderer:
@@ -931,7 +932,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 2b65820f4870c4e49bed749fbbcf5702, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -974,7 +975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 83.85527, y: 8}
+  m_AnchoredPosition: {x: 82, y: 5}
   m_SizeDelta: {x: 409.2843, y: 318.27954}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &3664709653433971971
@@ -1453,7 +1454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -66.40602, y: -21}
+  m_AnchoredPosition: {x: -43, y: 1}
   m_SizeDelta: {x: 35.710693, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8034514939048835534
@@ -1513,8 +1514,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 74.16
-  m_fontSizeBase: 74.16
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

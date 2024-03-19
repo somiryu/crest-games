@@ -41,6 +41,7 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager, ITimeMana
 	[SerializeField] AudioClip letsPlayAudio;
 	[SerializeField] AudioClip noStarsAudio;
 	[SerializeField] Transform blockingPanel;
+	[SerializeField] CatchCoinsAudioInstruction audioInstruction;
 
 
 	public int currSpawnedItems;
@@ -101,7 +102,9 @@ public class MG_MagnetsGameManager : MonoBehaviour, IEndOfGameManager, ITimeMana
 	{
 		blockingPanel.gameObject.SetActive(true);
 		TimeManager.Instance.SetNewStopTimeUser(this);
-		audiosource.clip = introAudio;
+        StartCoroutine(audioInstruction.FirstInstruction());
+        yield return new WaitForSecondsRealtime(audioInstruction.firstInstruction.length);
+        audiosource.clip = introAudio;
 		audiosource.Play();
 		yield return new WaitForSecondsRealtime(introAudio.length);
         TimeManager.Instance.RemoveNewStopTimeUser(this);

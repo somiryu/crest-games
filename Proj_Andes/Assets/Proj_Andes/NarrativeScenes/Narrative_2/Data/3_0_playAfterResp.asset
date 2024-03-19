@@ -18,8 +18,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Ya se va a acabar el recreo, y ya no alcanzamos a jugar. Mejor vamos r\xE1pido
-      a la tienda para comprar algo para comer."
+    text: "Ya se acaba el recreo y no jugamos \xBFQu\xE9 te parece si vamos a la
+      tienda y compramos algo de comer? "
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     analyticChoiceID: 

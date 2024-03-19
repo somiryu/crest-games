@@ -12039,13 +12039,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377738088}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1221539023}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 731.2239, y: -124.74105}
@@ -12490,7 +12490,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579605640}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12500,12 +12500,12 @@ RectTransform:
   - {fileID: 1927633555}
   - {fileID: 1134041795}
   - {fileID: 1861869475}
-  m_Father: {fileID: 1951022620}
+  m_Father: {fileID: 1631699889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -219.17845, y: -262.33972}
+  m_SizeDelta: {x: 642.00696, y: 397.90454}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1579605643
 CanvasRenderer:
@@ -12627,6 +12627,7 @@ RectTransform:
   - {fileID: 597656415}
   - {fileID: 1221539023}
   - {fileID: 415999388}
+  - {fileID: 1579605641}
   m_Father: {fileID: 1951022620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -13066,11 +13067,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1631699889}
-  - {fileID: 1579605641}
   - {fileID: 892286841}
   - {fileID: 67471439}
-  - {fileID: 180080038}
   - {fileID: 2610515073907893260}
+  - {fileID: 180080038}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13103,8 +13103,7 @@ MonoBehaviour:
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   finishAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
-  rightAudio: {fileID: 8300000, guid: dc7b0595b4e4fe741bf177d1c46e4872, type: 3}
-  discardAudio: {fileID: 8300000, guid: ab8bfe04f8cf41740b85e1491a589c5d, type: 3}
+  rightAudio: {fileID: 8300000, guid: f30080e8439e6b542a0736c0dc30d397, type: 3}
   audioPlayer: {fileID: 1951022623}
   leftWonItemsPool:
     itemPrefab: {fileID: 1155978088}

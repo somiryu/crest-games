@@ -957,6 +957,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5559071712027728005, guid: 1c7d5dacd6a75944088b9588a890c4b8, type: 3}
+      propertyPath: itemTutorial
+      value: 
+      objectReference: {fileID: 11400000, guid: 1399a70a061e279498043ca4bbe44190, type: 2}
     - target: {fileID: 5705546024781089816, guid: 1c7d5dacd6a75944088b9588a890c4b8, type: 3}
       propertyPath: m_Name
       value: SkipTutoButton
@@ -2004,6 +2008,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1307520066272712462, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2309134055484977744, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: isaTuto
       value: 1
@@ -2586,7 +2594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignOnAwake: 0
+  assignOnAwake: 1
   image: {fileID: 1564268887}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
@@ -2852,7 +2860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7075472, g: 0.7000264, b: 0.69753474, a: 0.392}
+  m_Color: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0.29803923}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3402,7 +3410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignOnAwake: 0
+  assignOnAwake: 1
   image: {fileID: 2105149408}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
@@ -3500,7 +3508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929079e7ded1ee84e87d8acdb005a6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignOnAwake: 0
+  assignOnAwake: 1
   image: {fileID: 2137508989}
   sRenderer: {fileID: 0}
   imagePerSkinTypes:

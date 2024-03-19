@@ -123,8 +123,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy bueno."
-    textAlternative: "Qu\xE9 bueno! Para saltar lazo s\xED soy muy buena."
+    text: "Qu\xE9 bueno! Para saltar lazo soy muy bueno."
+    textAlternative: "Qu\xE9 bueno! Para saltar lazo soy muy buena."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     analyticChoiceID: 
     analyticTimeID: 

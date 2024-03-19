@@ -3,7 +3,6 @@ using UnityEngine.Playables;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using Transform = UnityEngine.Transform;
 
 public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfGameManager, iTurboRocketManager
@@ -42,7 +41,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 	float yMoveProgress = 0f;
     float startYPos = 0f;
     IEnumerator turboDeacceleration;
-
+    float turboTimer;
 
 	[SerializeField] Animator characterAnimator;
 
@@ -52,7 +51,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
     Ray hit;
 	float timer;
-	float turboTimer;
     float targetYPos;
     float playerRanXSpace;
 
@@ -86,6 +84,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         TryGetComponent(out ui);
         planet.Init(5);
         eogManager.OnGameStart();
+        turboDeacceleration = TurboCounter();
 	}
 
 	private void Start()
@@ -102,6 +101,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 	public void RideBegining()
 	{
 		ui.StartUi();
+        ui.StartCoroutine(ui.CameraMovement(2));
 		colls = new Collider[5];
 		currentSpeed = levelConfig.regularSpeed;
 		currentTargetSpeed = levelConfig.regularSpeed;
@@ -144,6 +144,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
         var collsAmt = Physics.OverlapSphereNonAlloc(myCollider.transform.position, myCollider.radius, colls);
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
+        if (onTurbo) turboTimer += Time.deltaTime;
     }
 
 
@@ -171,33 +172,47 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
             onPlay = false; 
         }
     }
+    public IEnumerator TurboCounter()
+    {
+        while (turboTimer <= levelConfig.minTurboTime)
+        {
+            yield return null;
+        }
+
+        onTurbo = false;
+        characterAnimator.SetTrigger("Normal");
+        camCC.OnExitTurbo();
+        turboParticles.Stop();
+        turboAnimObj.SetActive(false);
+        turboSFX.Stop();
+        currentTargetAcceleration = gameConfig.accelerationSpeed;
+        currentTargetSpeed = gameConfig.regularSpeed;
+
+        turboDeacceleration = null;
+    }
+
     public void OnEnterTurboMode()
     {
         GeneralGameAnalyticsManager.RegisterLose();
 		characterAnimator.ResetTrigger("Normal");
-		characterAnimator.SetTrigger("Turbo");
+        characterAnimator.SetTrigger("Turbo");
         turboParticles.Play();
         turboAnimObj.SetActive(true);
         turboSFX.Play();
         currentTargetSpeed = levelConfig.turboSpeed;
         currentTargetAcceleration = levelConfig.accelerationSpeed;
         camCC.OnEnterTurbo();
-
-        gameConfig.turboUsedTimes++;
+        turboTimer = 0;
         onTurbo = true;
+        gameConfig.turboUsedTimes++;
 
     }
     public void OnExitTurboMode()
     {
         characterAnimator.ResetTrigger("Turbo");
-		characterAnimator.SetTrigger("Normal");
-        camCC.OnExitTurbo();
-        turboParticles.Stop();
-        turboAnimObj.SetActive(false);
-        turboSFX.Stop();
-        currentTargetAcceleration = gameConfig.deacceleration;
-        currentTargetSpeed = gameConfig.regularSpeed;
-        onTurbo = false;
+        if(turboDeacceleration != null) StopCoroutine(turboDeacceleration);
+		turboDeacceleration = TurboCounter();
+		StartCoroutine(turboDeacceleration);
     }
 
 

@@ -35,7 +35,7 @@ public class UserData
 		name = "Unnamed";
 		age = -1;
         grade = -1;
-        gender = UserGender.NONE;
+        gender = UserGender.Femenino;
 		schoolType = UserSchoolType.NONE;
 		country = string.Empty;
 		livingWith = UserLivingWith.NONE;

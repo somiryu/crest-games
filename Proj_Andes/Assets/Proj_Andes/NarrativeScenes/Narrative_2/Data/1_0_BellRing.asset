@@ -80,18 +80,85 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: f035d65cb8ef56b47ac8f6b12cfe59a0, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: 
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: a0b76e42646cad843baa1ebaf519c08e, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: 
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 443d134371b17d34abaad5bc9a96af42, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 3de27042ffd0b5d47bbc70cb2c52d864, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 2435c29d55f50af448f9501af2060ab7, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 254fc7cdecb19c64d834d4b2880cf9c3, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 2be1a2c779afb9c409522332934eed41, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: 
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 3c208caa55a5b844f87fea0e7f835d06, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
+    responses:
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: f035d65cb8ef56b47ac8f6b12cfe59a0, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 9806f4314837ede4fa5993e7dcbc25ac, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: a0b76e42646cad843baa1ebaf519c08e, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 443d134371b17d34abaad5bc9a96af42, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 3de27042ffd0b5d47bbc70cb2c52d864, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
+    audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 254fc7cdecb19c64d834d4b2880cf9c3, type: 2}

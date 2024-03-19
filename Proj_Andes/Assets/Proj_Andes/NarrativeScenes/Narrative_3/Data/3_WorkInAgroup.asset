@@ -18,9 +18,9 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xA1Hola! Espero que hayas recordado traer los materiales que nos pidi\xF3
-      la profe para hoy. A m\xED se me olvidaron y, como es de brava, \xA1fijo me
-      iba a rega\xF1ar!"
+    text: "\xA1Hola! Espero que hayas tra\xEDdo los materiales que nos pidi\xF3 la
+      profe para hoy. A m\xED se me olvidaron y, como es de brava, \xA1fijo me iba
+      a rega\xF1ar!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     analyticChoiceID: 

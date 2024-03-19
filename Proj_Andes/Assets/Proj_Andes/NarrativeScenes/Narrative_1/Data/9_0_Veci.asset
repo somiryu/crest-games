@@ -18,8 +18,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Veci, qu\xE9 se le ofrece? Hoy no me ha llegado el pedido, entonces tengo
-      pocas cosas"
+    text: "Veci, \xBFQu\xE9 se le ofrece? Hoy no me ha llegado el pedido, entonces
+      tengo pocas cosas"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     analyticChoiceID: 
@@ -45,12 +45,24 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 0b35a20350d0b1e4dbcd7a4ca60a4cee, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: f5aae04fcdec0a14c882407196e863aa, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     - response: 
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 33500af756b0d7344a7332fdbb7d13a2, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 72c0f5c7ac1048c43b6f3b61c9a5d60c, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 0
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

@@ -36,9 +36,9 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xA1Oh no!, tenemos clase de arte y acabo de recordar que la profe nos
-      hab\xEDa pedido unos materiales para hoy. Del af\xE1n, los dej\xE9 en la casa.
-      Como es de ella de brava, \xA1fijo me iba a rega\xF1ar!"
+    text: "\xA1Ay no!, Acabo de recordar que la profe nos hab\xEDa pedido unos materiales
+      para hoy. Del af\xE1n, los dej\xE9 en la casa. Como es de ella de brava, \xA1fijo
+      me iba a rega\xF1ar!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     analyticChoiceID: 

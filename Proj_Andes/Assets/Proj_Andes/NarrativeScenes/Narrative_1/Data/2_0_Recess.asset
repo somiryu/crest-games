@@ -18,7 +18,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: Para Cami no es tan chevere, porque no encuentra con quien juga y se queda
+    text: Para Cami no es tan chevere, porque no encuentra con quien jugar y se queda
       solo todo el descanso
     textAlternative: Para Cami no es tan chevere, porque no encuentra con quien jugar
       y se queda sola todo el descanso

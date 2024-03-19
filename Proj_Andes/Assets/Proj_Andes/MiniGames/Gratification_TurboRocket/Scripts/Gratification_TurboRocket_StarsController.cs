@@ -78,7 +78,7 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
     {
         float currDistance = player.CurrPos.y - transform.position.y;
         float newY = transform.position.y + (currDistance < 0 ? step : -step);
-
+        isInitialPosition    = false;
         float yViewport = Camera.main.WorldToViewportPoint(transform.position).y;
 
         if (yViewport > 0 + yOfsetLimit && yViewport < 1 - yOfsetLimit) 
@@ -94,7 +94,7 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         var movX = Mathf.MoveTowards(transform.position.x, initialPosition.x, targetSpeed * Time.deltaTime);
         var movY = Mathf.MoveTowards(transform.position.y, initialPosition.y, targetSpeed * Time.deltaTime);
         transform.position = new Vector3(movX, movY);
-        if(transform.position == initialPosition)
+        if (transform.position == initialPosition)
         {
             isInitialPosition = true;
             graphic.color = Color.white;

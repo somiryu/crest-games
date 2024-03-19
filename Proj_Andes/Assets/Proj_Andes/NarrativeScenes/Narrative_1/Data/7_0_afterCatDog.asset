@@ -44,6 +44,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 8300000, guid: d7352ef1843fdb045aaba3a00a855f7e, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -54,6 +55,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 8300000, guid: 02f75c8a6f8937f4cb26f68be4354a30, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -64,6 +66,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 6b10eb33fdad503448cbe325332f025b, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -74,6 +77,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 8300000, guid: 0b68589e4cc8c1046a9073e8b4b887bd, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -84,6 +88,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 8300000, guid: 42ea2c09276aef24c9e27f4a2d7c1d16, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -136,7 +141,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Fran voltea a mirarles y empieza a caminar hacia ellos.\r\r"
+    text: "Fran los mira y empieza a caminar hacia ellos.\r\r"
     textAlternative: "\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 8f854424d3fd5894185d1ae6a31c042d, type: 3}
     analyticChoiceID: 
@@ -163,6 +168,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
       responseAudio: {fileID: 8300000, guid: d7352ef1843fdb045aaba3a00a855f7e, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -173,6 +179,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
       responseAudio: {fileID: 8300000, guid: 02f75c8a6f8937f4cb26f68be4354a30, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -183,6 +190,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
       responseAudio: {fileID: 8300000, guid: 6b10eb33fdad503448cbe325332f025b, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -193,6 +201,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
       responseAudio: {fileID: 8300000, guid: 0b68589e4cc8c1046a9073e8b4b887bd, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
@@ -203,6 +212,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
       responseAudio: {fileID: 8300000, guid: 42ea2c09276aef24c9e27f4a2d7c1d16, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1

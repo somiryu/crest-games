@@ -13430,13 +13430,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835511302}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 134848923}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 850.0329, y: -120.434845}
@@ -14015,8 +14015,7 @@ MonoBehaviour:
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   finishAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
-  rightAudio: {fileID: 8300000, guid: dc7b0595b4e4fe741bf177d1c46e4872, type: 3}
-  discardAudio: {fileID: 8300000, guid: ab8bfe04f8cf41740b85e1491a589c5d, type: 3}
+  rightAudio: {fileID: 8300000, guid: f30080e8439e6b542a0736c0dc30d397, type: 3}
   lookAtCampsAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
   firstInstrucAudio: {fileID: 8300000, guid: 10380640d41601d4f936e2ba9d8e108c, type: 3}
   discardAdvice: {fileID: 8300000, guid: 79e9a31ae4e8ee6469941e34d3061ea0, type: 3}
@@ -14782,6 +14781,10 @@ PrefabInstance:
     - target: {fileID: 1116958798415055968, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307520066272712462, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5157389998152620391, guid: 17331ebe115ed82448f46486e33bc3bf, type: 3}
       propertyPath: m_IsActive
