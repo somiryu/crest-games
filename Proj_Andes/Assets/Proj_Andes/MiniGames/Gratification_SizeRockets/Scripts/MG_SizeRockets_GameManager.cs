@@ -158,6 +158,20 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private void Update()
 	{
 		if(gameOverFlag) return;
+
+		if (activeShips.Count > 0)
+		{
+			smallRocketBtn.interactable = false;
+			mediumRocketBtn.interactable = false;
+			largeRocketBtn.interactable = false;
+		}
+		else
+		{
+			smallRocketBtn.interactable = true;
+			mediumRocketBtn.interactable = true;
+			largeRocketBtn.interactable = true;
+		}
+
 		if (activeShips.Count > 0) return;
 		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
@@ -194,18 +208,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			OnPressedRocketBtn(SizeRocketsRocketTypes.NONE);
 		}
 
-		if(shipsLeft <= 0)
-		{
-			smallRocketBtn.interactable = false;
-			mediumRocketBtn.interactable = false;
-			largeRocketBtn.interactable = false;
-		}
-		else
-		{
-            smallRocketBtn.interactable = true;
-            mediumRocketBtn.interactable = true;
-            largeRocketBtn.interactable = true;
-        }
+		
 
 		if (shipsLeft <= 0 && activeShips.Count == 0)
 		{
