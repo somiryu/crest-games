@@ -155,8 +155,10 @@ public static class DatabaseManager
 
 
     public static async void SaveUserDatasList(List<UserData> userDatas, 
-        Dictionary<string, Dictionary<string, Dictionary<string, object>>> dataPerGame)
+        Dictionary<string, Dictionary<string, Dictionary<string, object>>> dataPerGame, bool mustSaveInDataBase = true)
     {
+        if (FirebaseAnonymousLoginUI.saveOnlyLocalForTesting) return;
+
         if (UserDataManager.CurrUser.name == "Unnamed")
         {
             Debug.LogWarning("Skipping saving because is a test run");
@@ -173,17 +175,28 @@ public static class DatabaseManager
         var hasInternetConnection = UserDataManager.Instance.HasInternetConnection();
 
 
-        foreach(var gameData in dataPerGame)
+        foreach (var gameData in dataPerGame)
         {
             if (!pendingSessionsToUpload.TryGetValue(gameData.Key, out var sessionsDatas))
             {
                 pendingSessionsToUpload.Add(gameData.Key, gameData.Value);
+                /* TO TEST WHAT'S BEING SAVED
+                foreach (var data in gameData.Value)
+                {
+                    foreach (var data2 in data.Value)
+                    {
+                        Debug.Log(data2.Key + " FROM " + data2.Value);
+                    }
+                }*/
             }
             else
             {
                foreach(var sessionData in gameData.Value)
                 {
-                    sessionsDatas.Add(sessionData.Key, sessionData.Value);
+                    if (!gameData.Value.TryGetValue(sessionData.Key, out var sessionDat))
+                    {
+                        sessionsDatas.Add(sessionData.Key, sessionData.Value);
+                    }
                 }
             }
         }
@@ -215,8 +228,10 @@ public static class DatabaseManager
 		PlayerPrefs.SetString(pendingSessionsJSONKey, sessionsJSON);
 
 
+		if (!mustSaveInDataBase) return;
 		if (!hasInternetConnection) return;
 
+        Debug.LogWarning("IS SAVING TO DATABASE");
 
         for (int i = 0; i < userDatas.Count; i++)
         {

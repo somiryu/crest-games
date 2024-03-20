@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
-{   
+{
+	public static bool saveOnlyLocalForTesting = true;
 
     bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;

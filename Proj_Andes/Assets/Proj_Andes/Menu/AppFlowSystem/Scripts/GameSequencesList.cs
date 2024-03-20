@@ -44,11 +44,11 @@ public class GameSequencesList : ScriptableObject
         var nextItem = GetGameSequence().GetNextItem();
         if (nextItem != null)
         {
-            Debug.Log("saving");
             if (prevGame != null)
             {
                 prevGame.SaveAnalytics();
                 prevGame.SaveGeneralGameAnalytics();
+                DatabaseManager.SaveUserDatasList(UserDataManager.Instance.usersDatas, UserDataManager.userAnayticsPerGame, false);
             }
             prevGame = nextItem;
             AudioManager.Instance.PlayMusic();
