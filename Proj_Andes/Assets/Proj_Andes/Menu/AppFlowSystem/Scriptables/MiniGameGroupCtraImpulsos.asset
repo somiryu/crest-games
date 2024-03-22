@@ -18,6 +18,6 @@ MonoBehaviour:
   miniGamesInGroup:
   - {fileID: 11400000, guid: 6a8e85563e4d0f345872afaa7882124f, type: 2}
   - {fileID: 11400000, guid: cf4b54b3469cdb7469e4b7aa254c9395, type: 2}
-  - {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
   randomize: 1
+  CanBeOverridenByDebugFlag: 0
   maxItemsToPlayOnRandomize: 1

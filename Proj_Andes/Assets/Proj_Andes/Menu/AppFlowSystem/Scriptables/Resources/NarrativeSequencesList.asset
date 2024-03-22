@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a7ddeaf8f4d9542815788b594a7568, type: 3}
+  m_Name: NarrativeSequencesList
+  m_EditorClassIdentifier: 
+  gameSequences:
+  - {fileID: 11400000, guid: a5d5e430d1768fa4bb13849c706da389, type: 2}
+  - {fileID: 11400000, guid: 8c0c8b4c4124a0f4794e93749362e7c7, type: 2}
+  - {fileID: 11400000, guid: bfbbbcae4c8260a4d9521790035fd9d9, type: 2}
+  continueToNextItem: 0

@@ -178,16 +178,31 @@ public static class DatabaseManager
             if (!pendingSessionsToUpload.TryGetValue(gameData.Key, out var sessionsDatas))
             {
                 pendingSessionsToUpload.Add(gameData.Key, gameData.Value);
+                foreach (var sessDat in gameData.Value)
+                {
+                    foreach (var data in sessDat.Value)
+                    {
+                        Debug.Log("Is saving " + data.Value);
+                    }
+                }
             }
             else
             {
                foreach(var sessionData in gameData.Value)
                 {
+                    Debug.Log(sessionData.Key);
                     sessionsDatas.Add(sessionData.Key, sessionData.Value);
+                    foreach (var sessDat in gameData.Value)
+                    {
+                        foreach(var data in sessDat.Value)
+                        {
+                            Debug.Log("Is saving " + data.Value);
+                        }
+                    }
                 }
             }
         }
-
+        
 
 		if (!hasInternetConnection)
         {
@@ -231,7 +246,7 @@ public static class DatabaseManager
             Debug.Log("Syncing GAME ID: " + GameDatas.Key);
             foreach(var sessionData in GameDatas.Value)
             {
-				Debug.Log("Syncing DOC ID: " + sessionData.Key);
+				//Debug.Log("Syncing DOC ID: " + sessionData.Key);
 				DocumentReference docRef = collRef.Document(sessionData.Key);
                 await docRef.SetAsync(sessionData.Value);
             }

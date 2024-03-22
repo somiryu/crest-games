@@ -9,14 +9,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
-    public static string instancePath = "GameSequencesList";
+    public static bool isTheNarrativeSequence = true   ;
+    public static string gameInstancePath = "GameSequencesList";
+    public static string narrativeInstancePath = "NarrativeSequencesList";
     static GameSequencesList instance;
 
     public static GameSequencesList Instance
     {
         get
         {
-            if (!instance) instance = Resources.Load<GameSequencesList>(instancePath);
+            if (!instance)
+            {
+                if(isTheNarrativeSequence) instance = Resources.Load<GameSequencesList>(narrativeInstancePath);
+                else instance = Resources.Load<GameSequencesList>(gameInstancePath);
+            }
             return instance;
         }
     }
@@ -44,11 +50,11 @@ public class GameSequencesList : ScriptableObject
         var nextItem = GetGameSequence().GetNextItem();
         if (nextItem != null)
         {
-            Debug.Log("saving");
             if (prevGame != null)
             {
                 prevGame.SaveAnalytics();
                 prevGame.SaveGeneralGameAnalytics();
+                DatabaseManager.SaveUserDatasList(UserDataManager.Instance.usersDatas, UserDataManager.userAnayticsPerGame);
             }
             prevGame = nextItem;
             AudioManager.Instance.PlayMusic();
