@@ -2898,7 +2898,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00015258789, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &319744327
@@ -16467,7 +16467,7 @@ GameObject:
   - component: {fileID: 1280501793}
   - component: {fileID: 1280501792}
   m_Layer: 5
-  m_Name: NameField
+  m_Name: StudentCodeField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17993,7 +17993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 105.71421, y: -183.13434}
+  m_AnchoredPosition: {x: 536, y: -190}
   m_SizeDelta: {x: 578.9548, y: 53.558807}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1374112245
@@ -18016,7 +18016,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BUSCAR USUARIO
+  m_text: "BUSCAR C\xD3DIGO DE ESTUDIANTE"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d8b07a8911fc48d4cb163301aedc11b8, type: 2}
   m_sharedMaterial: {fileID: 606339856969581449, guid: d8b07a8911fc48d4cb163301aedc11b8, type: 2}
@@ -18079,7 +18079,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -21.923584, y: 0, z: 70.19391, w: 0}
+  m_margin: {x: -541.55914, y: 0, z: 70.19391, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -20927,7 +20927,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ingresa un nombre\u200B"
+  m_text: "Ingresa un c\xF3digo de estudiante\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae4e4719b7cced342aa1ecf987b39b55, type: 2}
   m_sharedMaterial: {fileID: 4279955609833776917, guid: ae4e4719b7cced342aa1ecf987b39b55, type: 2}
@@ -24234,7 +24234,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: Ingresa un nombre
+  m_Text: "Ingresa un c\xF3digo de estudiante"
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -24319,7 +24319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -15}
+  m_AnchoredPosition: {x: -11, y: -15}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1892728886
@@ -25685,7 +25685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nombre...
+  m_text: "C\xF3digo de estudiante"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8140e4dbebf9a9a4882215bb52e9770b, type: 2}
   m_sharedMaterial: {fileID: -6292967981036170185, guid: 8140e4dbebf9a9a4882215bb52e9770b, type: 2}
