@@ -6,14 +6,14 @@ public static class DataIds
 {
     public const string usersCollection = "users";
 
-    public const string TestID = "Test ID";
+    public const string TestID = "test ID";
     public const string GameOrderInSequence = "game_order";
-    public const string UserID = "User ID";
-    public const string GameID = "Game ID";
-    public const string GameType = "Game Type";
+    public const string UserID = "user ID";
+    public const string GameID = "game ID";
+    public const string GameType = "game Type";
 
-    public const string TotalCorrectAnswers = "Correct Answers";
-    public const string TotalWrongAnswers = "Wrong Answers";
+    public const string TotalCorrectAnswers = "correct Answers";
+    public const string TotalWrongAnswers = "wrong Answers";
 
     //Generic IDs
     public const string totalClicks = "click_repetions";
@@ -23,7 +23,7 @@ public static class DataIds
     public const string challengeType = "challenge_type";
 
     //General Games collection IDs
-    public const string generalGamesCollID = "Games";
+    public const string generalGamesCollID = "games";
     public const string wins = "general_Achievements";
     public const string losses = "general_Losses";
     public const string clicks = "clicks";
@@ -46,12 +46,12 @@ public static class DataIds
     public const string frustrationLevel = "frustrationLevel";
 
     //Narratives IDs
-    public const string Narratives = "Narratives";
+    public const string Narratives = "narratives";
 
     //Data per game
     public const string stars = "stars";
 
-    public const string voiceStarGame = "Control de impulsos: campos de flores y estrellas";
+    public const string voiceStarGame = "hearts_and_stars";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
     public const string voiceStarRoundResultWin = "voiceStarRoundResultWin";
@@ -61,7 +61,7 @@ public static class DataIds
     public const string voiceStarClickRepetition = "voiceStarClickRepetition";
     public const string voiceStarLostTutorial = "lostTutorial";
 
-    public const string heartsAndStarsGame = "Control de impulsos: estrellas y corazones";
+    public const string heartsAndStarsGame = "field_of_flowers";
     public const string heartsAndStarsInGameOrder = "heartsAndStarsInGameOrder";
     public const string heartsAndStarstimeToMakeAChoice = "heartsAndStarstimeToMakeAChoice";
     public const string heartsAndStarsRoundResultWins = "heartsAndStarsRoundResultWins";
@@ -69,28 +69,28 @@ public static class DataIds
     public const string heartsAndStarschallengeOrder = "heartsAndStarschallengeOrder";
     public const string heartsAndStarsifRanOutOfTime = "heartsAndStarsifRanOutOfTime";
 
-    public const string turboRocketGame = "Postergación de la gratificación: El rocket propulsado";
-    public const string turboRocketCoinsCollected = "turboRocketCoinsCollected";
+    public const string turboRocketGame = "rocket";
+    public const string turboRocketCoinsCollected = "star";
     public const string turboRockettotalRideTime = "turboRockettotalRideTime";
     public const string turboRocketturboUsedTimes = "boosts";
 
-    public const string mechanicHandGame = "Por habilidad: la mano mecánica";
-    public const string mechanicHandClawThrows = "mechanicHandClawThrows";
+    public const string mechanicHandGame = "por habilidad: la mano mecánica";
+    public const string mechanicHandClawThrows = "claw_Throws";
 
-    public const string fightTheAlienGame = "Control de impulsos: derrotar al alien";
+    public const string fightTheAlienGame = "defeat robot";
     public const string fightTheAlienChallengeType = "fightTheAlienTotalGametime";
     public const string fightTheAlienRoundResultWin = "fightTheAlienRoundResultWins";
     public const string fightTheAlientimeToMakeAChoice = "fightTheAlientimeToMakeAChoice";
     public const string fightTheAlienClicks = "fightTheAlienClicks";
     public const string fightTheAlienRanOutOfTime = "fightTheAlienRanOutOfTime";
 
-    public const string boostersAndScapeGame = "Delay: boosters y escape";
-    public const string boostersAndScapeTotalBoostsActivated = "boostersAndScapeTotalBoostsActivated";
+    public const string boostersAndScapeGame = "delay: boosters y escape";
+    public const string boostersAndScapeTotalBoostsActivated = "boosters_activated";
 
-    public const string magnetsGame = "Buggy: los imanes y la energía";
-    public const string magnetsEneryPicked = "magnetsEneryPicked";
+    public const string magnetsGame = "buggy: los imanes y la energía";
+    public const string magnetsEneryPicked = "magnet_collected";
 
-    public const string sizeRocketsGame = "Postergación de la gratificación: El rocket grande y el pequeño";
+    public const string sizeRocketsGame = "delivery_rockets";
     public const string sizeRocketsBigShips = "big_ships";
     public const string sizeRocketsMidShips = "medium_ships";
     public const string sizeRocketsSmallShips = "small_ships";
@@ -101,10 +101,11 @@ public static class DataIds
     public const string tryAgainClicks = "retry_clicks";
 
     //General Test analytics
-    public const string test = "Test";
+    public const string test = "test";
     public const string institutionCode = "code";
     public const string created_At = "created_At";
     public const string age = "edad";
+    public const string grade = "edad";
     public const string state = "state";
     public const string time_Spent = "time_Spent";
 

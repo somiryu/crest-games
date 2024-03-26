@@ -42,7 +42,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 		itemAnalytics.Add(DataIds.sizeRocketsFarPlanets, analytics.farPlanets);
 		itemAnalytics.Add(DataIds.averageClickTime, analytics.averageClick);
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics);
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics, GameID);
 
     }
 }

@@ -11,7 +11,7 @@ public class SimpleGameSequenceItem : ScriptableObject
     [NonSerialized] public Dictionary<string, object> itemAnalytics = new Dictionary<string, object>();
 
     public virtual string GetSceneID() => string.Empty;
-
+    public virtual string GameID { get; set; }
     public virtual Dictionary<string, object> GetAnalytics() => itemAnalytics;
     public virtual void ResetCurrentAnalytics()
     {
@@ -43,7 +43,8 @@ public class SimpleGameSequenceItem : ScriptableObject
         if (GeneralGameAnalyticsManager.Instance == null) return;
         var analytics = GeneralGameAnalyticsManager.Instance.GetAnalytics();
         if(analytics == null) return;
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.generalGamesCollID, analytics);
+        UserDataManager.SaveUserAnayticsPerGame(GameID, analytics, null, null, false, true);
+        Debug.Log("cuur generic data gamekey " + GameID);
     }
 
 }

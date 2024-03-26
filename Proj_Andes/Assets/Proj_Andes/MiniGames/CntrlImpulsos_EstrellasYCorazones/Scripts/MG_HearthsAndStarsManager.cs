@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Numerics;
@@ -6,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
+using Random = UnityEngine.Random;
 
 public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 {
@@ -228,6 +230,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
+        gameConfigs.GameID = Guid.NewGuid().ToString();
+        Debug.Log("hearts start " + gameConfigs.GameID);
         timerUI.gameObject.SetActive(false);
         audiosource.clip = finishAudio;
         audiosource.Play();

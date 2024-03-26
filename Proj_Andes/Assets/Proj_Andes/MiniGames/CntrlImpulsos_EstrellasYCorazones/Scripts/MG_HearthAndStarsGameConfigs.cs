@@ -30,9 +30,10 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 			currRoundAnalyticsDic.Add(DataIds.totalClicks, currRound.clicks);
 			currRoundAnalyticsDic.Add(DataIds.lostBecauseOfTime, currRound.ranOutOfTime);
 
-			UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, currRoundAnalyticsDic);
-		}
+			UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, currRoundAnalyticsDic, GameID);
+            Debug.Log("hearts start config " + GameID);
+        }
 
-	}
+    }
 
 }

@@ -92,7 +92,7 @@ public static class DatabaseManager
                 UserData currUserData = documentSnapshot.ConvertTo<UserData>();
                 if (userDatas.Exists(x => x.id == currUserData.id))
                 {
-                    Debug.Log("Trying to add user: " + currUserData.name + " " + currUserData.id + " But ID already existed");
+                    Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id + " But ID already existed");
                     continue;
                 }
                 userDatas.Add(currUserData);
@@ -149,7 +149,7 @@ public static class DatabaseManager
   public static async void DeleteUserFromDataList(UserData dataToDelete)
     {
         UserDeletionCompleted = false;
-		await db.Collection(DataIds.usersCollection).Document(dataToDelete.name + " " + dataToDelete.id).DeleteAsync()
+		await db.Collection(DataIds.usersCollection).Document(dataToDelete.pin + " " + dataToDelete.id).DeleteAsync()
             .ContinueWithOnMainThread(task =>UserDeletionCompleted = true);
 	}
 
@@ -157,7 +157,7 @@ public static class DatabaseManager
     public static async void SaveUserDatasList(List<UserData> userDatas, 
         Dictionary<string, Dictionary<string, Dictionary<string, object>>> dataPerGame)
     {
-        if (UserDataManager.CurrUser.name == "Unnamed")
+        if (UserDataManager.CurrUser.pin == "Unnamed")
         {
             Debug.LogWarning("Skipping saving because is a test run");
             return;
@@ -166,7 +166,7 @@ public static class DatabaseManager
         var currUserData = userDatas.Find(x => x.id == UserDataManager.CurrUser.id);
         if (currUserData == null)
         {
-            Debug.LogError("No user data found to save for user with ID: " + UserDataManager.CurrUser.id + " and name " + UserDataManager.CurrUser.name);
+            Debug.LogError("No user data found to save for user with ID: " + UserDataManager.CurrUser.id + " and name " + UserDataManager.CurrUser.pin);
             return;
         }
 
@@ -237,7 +237,8 @@ public static class DatabaseManager
 
         for (int i = 0; i < userDatas.Count; i++)
         {
-            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].name + " " + userDatas[i].id);      
+            //removed name form document ID
+            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].pin + " " + userDatas[i].id);      
             await docRef.SetAsync(userDatas[i]);
         }
 

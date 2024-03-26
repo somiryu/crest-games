@@ -9,7 +9,8 @@ using UnityEngine;
 public class UserData 
 {
     [FirestoreProperty] public string id { get; set; }
-    [FirestoreProperty] public string name { get; set; }
+    [FirestoreProperty] public string pin { get; set; }
+    [FirestoreProperty] public string institutionCode { get; set; }
     [FirestoreProperty] public int age { get; set; }
     [FirestoreProperty] public int grade { get; set; }
     [FirestoreProperty] public UserGender gender { get; set; }
@@ -32,7 +33,8 @@ public class UserData
     public UserData()
 	{
 		id = Guid.NewGuid().ToString();
-		name = "Unnamed";
+		pin = "Unnamed";
+		institutionCode = "Empty";
 		age = -1;
         grade = -1;
         gender = UserGender.Femenino;

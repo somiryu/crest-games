@@ -72,8 +72,9 @@ public class UserDataManager : ScriptableObject
         get
         {
 			if (currUserDataIdx != -1 && currUserDataIdx < usersDatas.Count) return usersDatas[currUserDataIdx];
-			return DefaultUserData;
-		}
+			DefaultUserData.id = "0000-0000-0000";
+            return DefaultUserData;
+        }
 	}
 
 	public bool HasInternetConnection()
@@ -88,11 +89,13 @@ public class UserDataManager : ScriptableObject
 		Application.wantsToQuit += SaveToServer;
 	}
 
-	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string documentID = null, string gameType = null)
+	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string documentID = null, string gameType = null, bool shouldUseTestID = true, bool shouldUseGameId = false)
 	{
 		var analyticsWithExtraFields = new Dictionary<string, object>();
-		analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
-		analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
+		if(shouldUseTestID) analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
+		else documentID = CurrTestID;
+        if (shouldUseGameId) analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
+		else documentID = gameKey;
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
 		analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
 		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
@@ -106,6 +109,7 @@ public class UserDataManager : ScriptableObject
 
 		//Generating a new document ID each time if an explicit documentID was not passed in 
 		var newDocumentID = string.IsNullOrEmpty(documentID)? Guid.NewGuid().ToString() : documentID;
+		Debug.Log("doc id " + documentID + " game id " + gameKey);
 		analyticsDocsFound.Add(newDocumentID, analyticsWithExtraFields);
     }
 
@@ -199,7 +203,7 @@ public class UserDataManager : ScriptableObject
 	public void SetCurrUser(string email, string id)
 	{
 		var newuserData = new UserData();
-		newuserData.name = email;
+		newuserData.pin = email;
 		newuserData.id = id;
 		RegisterNewUser(newuserData);
 	}
@@ -208,7 +212,7 @@ public class UserDataManager : ScriptableObject
 	{
 		if(usersDatas.Exists(x => x.id == user.id))
 		{
-			Debug.Log("Trying to add user: " + user.name + " " + user.id + " But ID already existed");
+			Debug.Log("Trying to add user: " + user.pin + " " + user.id + " But ID already existed");
 			return;
 		}
 		usersDatas.Add(user);

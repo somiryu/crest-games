@@ -309,7 +309,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		for (int i = 0; i < users.Count; i++) 
 		{
 			var newBtn = userBtnsPool.GetNewItem();
-			newBtn.Init(users[i].name, this);
+			newBtn.Init(users[i].pin, this);
 			currBtnsByDataID.Add(newBtn, users[i].id);
 			newBtn.gameObject.SetActive(false);
 		}
@@ -372,7 +372,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     void OnFinishedUserCreation()
 	{
         var newUser = new UserData();
-		newUser.name = nameField.text;
+		newUser.pin = nameField.text;
+		newUser.pin = insertCodeInputF.text;
 		newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult)? ageResult : -1;
         newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
 		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true ,out var genderFound)? genderFound : UserGender.NONE;
@@ -383,7 +384,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		var validData = true;
 		var errMsg = "";
 
-		if (string.IsNullOrEmpty(newUser.name))
+		if (string.IsNullOrEmpty(newUser.pin))
 		{
 			errMsg = "El nombre de usuario está vacío o es inválido";
 		}
@@ -476,8 +477,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		var data = UserDataManager.Instance.usersDatas.Find(x => x.id == id);
 		if(data == null) return;
 
-		userNameHeader.text = data.name;
-		userNameExitPanel.text = data.name;
+		userNameHeader.text = data.pin;
+		userNameExitPanel.text = data.pin;
 
 		wantsToExitSessionBtn.gameObject.SetActive(true);
 

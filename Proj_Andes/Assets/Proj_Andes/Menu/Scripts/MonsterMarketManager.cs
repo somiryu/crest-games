@@ -446,7 +446,9 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         dictionary.Add(DataIds.unspentStars, finalStars);
         dictionary.Add(DataIds.selectionTime, timeUntilFirstChestOpen);
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.monsterMarket, dictionary);
+        marketConfig.GameID = Guid.NewGuid().ToString();
+
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.monsterMarket, dictionary, marketConfig.GameID);
 
         chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
