@@ -178,13 +178,6 @@ public static class DatabaseManager
             if (!pendingSessionsToUpload.TryGetValue(gameData.Key, out var sessionsDatas))
             {
                 pendingSessionsToUpload.Add(gameData.Key, gameData.Value);
-                foreach (var sessDat in gameData.Value)
-                {
-                    foreach (var data in sessDat.Value)
-                    {
-                        Debug.Log("Is saving " + data.Value);
-                    }
-                }
             }
             else
             {
@@ -192,13 +185,6 @@ public static class DatabaseManager
                 {
                     Debug.Log(sessionData.Key);
                     sessionsDatas.Add(sessionData.Key, sessionData.Value);
-                    foreach (var sessDat in gameData.Value)
-                    {
-                        foreach(var data in sessDat.Value)
-                        {
-                            Debug.Log("Is saving " + data.Value);
-                        }
-                    }
                 }
             }
         }
