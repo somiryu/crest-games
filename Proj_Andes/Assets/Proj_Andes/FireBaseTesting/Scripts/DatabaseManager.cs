@@ -173,38 +173,40 @@ public static class DatabaseManager
         var hasInternetConnection = UserDataManager.Instance.HasInternetConnection();
 
 
-        foreach(var gameData in dataPerGame)
+
+        foreach (var gameData in dataPerGame)
         {
             if (!pendingSessionsToUpload.TryGetValue(gameData.Key, out var sessionsDatas))
             {
                 pendingSessionsToUpload.Add(gameData.Key, gameData.Value);
-                foreach (var sessDat in gameData.Value)
+                //TO TEST WHAT'S BEING SAVED
+                foreach (var data in gameData.Value)
                 {
-                    foreach (var data in sessDat.Value)
+                    foreach (var data2 in data.Value)
                     {
-                        Debug.Log("Is saving " + data.Value);
+                        Debug.Log(data2.Key + " FROM " + data2.Value);
                     }
                 }
             }
             else
             {
-               foreach(var sessionData in gameData.Value)
+                foreach (var sessionData in gameData.Value)
                 {
-                    Debug.Log(sessionData.Key);
-                    sessionsDatas.Add(sessionData.Key, sessionData.Value);
-                    foreach (var sessDat in gameData.Value)
+                    if (!gameData.Value.TryGetValue(sessionData.Key, out var sessionDat))
                     {
-                        foreach(var data in sessDat.Value)
-                        {
-                            Debug.Log("Is saving " + data.Value);
-                        }
+                        sessionsDatas.Add(sessionData.Key, sessionData.Value);
+                    }
+                    else
+                    {
+                        sessionsDatas[sessionData.Key] = sessionData.Value;
+                        Debug.Log("replacing " + sessionData.Key + " " + sessionData.Value);
                     }
                 }
             }
         }
-        
 
-		if (!hasInternetConnection)
+
+        if (!hasInternetConnection)
         {
             AddPendingUserData(currUserData);
         }
