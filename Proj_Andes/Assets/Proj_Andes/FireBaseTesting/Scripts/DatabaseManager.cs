@@ -241,7 +241,7 @@ public static class DatabaseManager
         for (int i = 0; i < userDatas.Count; i++)
         {
             //removed name form document ID
-            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].pin + " " + userDatas[i].id);      
+            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].id);      
             await docRef.SetAsync(userDatas[i]);
         }
 
