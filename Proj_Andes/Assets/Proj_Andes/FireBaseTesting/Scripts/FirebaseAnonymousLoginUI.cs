@@ -373,8 +373,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
         var newUser = new UserData();
 		newUser.pin = nameField.text;
-		newUser.pin = insertCodeInputF.text;
-		newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult)? ageResult : -1;
+		newUser.institutionCode = UserDataManager.CurrInstitutionCode;
+        newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult)? ageResult : -1;
         newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
 		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true ,out var genderFound)? genderFound : UserGender.NONE;
 		newUser.schoolType =  (UserSchoolType) schoolTypeField.value ;

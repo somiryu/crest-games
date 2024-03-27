@@ -43,7 +43,7 @@ public class SimpleGameSequenceItem : ScriptableObject
         if (GeneralGameAnalyticsManager.Instance == null) return;
         var analytics = GeneralGameAnalyticsManager.Instance.GetAnalytics();
         if(analytics == null) return;
-        var idToUse = string.IsNullOrEmpty(GameID) ? DataIds.generalGamesCollID : GameID;
+        var idToUse = string.IsNullOrEmpty(GameID) ? Guid.NewGuid().ToString() : GameID;
         Debug.Log("cuur generic data gamekey " + idToUse);
         UserDataManager.SaveUserAnayticsPerGame(DataIds.generalGamesCollID, analytics, idToUse, shouldUseGameId: false);
     }
