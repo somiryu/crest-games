@@ -33,7 +33,8 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
 
         SaveCoins(coinsCollected);
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.turboRocketGame, itemAnalytics);
+        UserDataManager.SaveUserAnayticsPerGame(GameID, itemAnalytics);
+        Debug.Log("turbo rocket config " + GameID + " " + itemAnalytics.Count);
 
     }
     public override void ResetCurrentAnalytics()

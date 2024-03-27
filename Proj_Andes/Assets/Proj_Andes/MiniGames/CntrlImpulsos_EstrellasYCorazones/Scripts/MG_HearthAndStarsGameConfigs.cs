@@ -19,7 +19,6 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
     {
         var allRoundsAnalytics = MG_HearthsAndStarsManager.Instance.AllRoundsAnalytics;
 		var currRoundAnalyticsDic = new Dictionary<string, object>();
-
         for (int i = 0; i < allRoundsAnalytics.Count; i++)
         {
             var currRound = allRoundsAnalytics[i];
@@ -30,8 +29,7 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 			currRoundAnalyticsDic.Add(DataIds.totalClicks, currRound.clicks);
 			currRoundAnalyticsDic.Add(DataIds.lostBecauseOfTime, currRound.ranOutOfTime);
 
-			UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, currRoundAnalyticsDic, GameID);
-            Debug.Log("hearts start config " + GameID);
+            UserDataManager.SaveUserAnayticsPerGame(GameID, currRoundAnalyticsDic, shouldUseGameId: true);
         }
 
     }

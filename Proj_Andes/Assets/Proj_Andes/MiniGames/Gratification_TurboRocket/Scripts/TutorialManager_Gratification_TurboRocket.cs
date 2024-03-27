@@ -34,7 +34,6 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     public Gratification_TurboRocket_BackgroundController bk;
     public GameStages gameStages;
     public Gratification_TurboRocket_UIController ui;
-    public GameRideData data;
 
     [SerializeField] Image turboBtn;
     [SerializeField] ParticleSystem turboParticles;

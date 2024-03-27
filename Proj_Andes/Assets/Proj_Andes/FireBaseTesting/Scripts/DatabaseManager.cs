@@ -178,28 +178,31 @@ public static class DatabaseManager
         {
             if (!pendingSessionsToUpload.TryGetValue(gameData.Key, out var sessionsDatas))
             {
+                if(string.IsNullOrEmpty( gameData.Key))
+                {
+                    Debug.LogError("trying to add something null " + gameData.Value);
+                    continue;
+                }
                 pendingSessionsToUpload.Add(gameData.Key, gameData.Value);
                 //TO TEST WHAT'S BEING SAVED
+                /*
                 foreach (var data in gameData.Value)
                 {
                     foreach (var data2 in data.Value)
                     {
                         Debug.Log(data2.Key + " FROM " + data2.Value);
                     }
-                }
+                }*/
             }
             else
             {
-                foreach (var sessionData in gameData.Value)
+                pendingSessionsToUpload[gameData.Key] = sessionsDatas;
+                foreach (var item in sessionsDatas)
                 {
-                    if (!gameData.Value.TryGetValue(sessionData.Key, out var sessionDat))
+                    foreach (var item1 in item.Value)
                     {
-                        sessionsDatas.Add(sessionData.Key, sessionData.Value);
-                    }
-                    else
-                    {
-                        sessionsDatas[sessionData.Key] = sessionData.Value;
-                        Debug.Log("replacing " + sessionData.Key + " " + sessionData.Value);
+                        //Debug.Log("replacing " + item1.Value);
+
                     }
                 }
             }

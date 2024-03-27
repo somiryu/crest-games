@@ -27,7 +27,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     public Gratification_TurboRocket_BackgroundController bk;
     public GameStages gameStages;
     public Gratification_TurboRocket_UIController ui;
-    public GameRideData data;
     [SerializeField] EndOfGameManager eogManager;
 
     [SerializeField] ParticleSystem turboParticles;
@@ -233,12 +232,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
  
     void EndOfRide()
     {
-        var ride = new GameRideData();
-        ride.starsCollected = starsGatheredCount;
-        ride.turboSelectedTime = turboTimer;
-        ride.totalRideDuration = timer;
-        ride.totalStars = levelConfig.starsAmount;
-        data = ride;
+        levelConfig.GameID = Guid.NewGuid().ToString();
+        Debug.Log("size new code " + levelConfig.GameID);
         starsGatheredCount += 5;
         OnScoreChanges?.Invoke();
         planet.UpdateCoinsAmount(0);
@@ -266,14 +261,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
 }
 
-
-public class GameRideData
-{
-    public float turboSelectedTime;
-    public int starsCollected;
-    public int totalStars;
-    public float totalRideDuration;
-}
 
 public enum GameStages
 {

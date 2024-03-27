@@ -89,13 +89,11 @@ public class UserDataManager : ScriptableObject
 		Application.wantsToQuit += SaveToServer;
 	}
 
-	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string documentID = null, string gameType = null, bool shouldUseTestID = true, bool shouldUseGameId = false)
+	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string documentID = null, string gameType = null, bool shouldUseTestID = true, bool shouldUseGameId = true)
 	{
 		var analyticsWithExtraFields = new Dictionary<string, object>();
-		if(shouldUseTestID) analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
-		else documentID = CurrTestID;
+		if (shouldUseTestID) analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
         if (shouldUseGameId) analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
-		else documentID = gameKey;
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
 		analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
 		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);

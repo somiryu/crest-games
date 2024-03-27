@@ -51,7 +51,7 @@ public static class DataIds
     //Data per game
     public const string stars = "stars";
 
-    public const string voiceStarGame = "hearts_and_stars";
+    public const string voiceStarGame = "field_of_flowers";
     public const string voiceStarTotalGametime = "voiceStarTotalGametime";
     public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
     public const string voiceStarRoundResultWin = "voiceStarRoundResultWin";
@@ -61,7 +61,7 @@ public static class DataIds
     public const string voiceStarClickRepetition = "voiceStarClickRepetition";
     public const string voiceStarLostTutorial = "lostTutorial";
 
-    public const string heartsAndStarsGame = "field_of_flowers";
+    public const string heartsAndStarsGame = "hearts_and_stars";
     public const string heartsAndStarsInGameOrder = "heartsAndStarsInGameOrder";
     public const string heartsAndStarstimeToMakeAChoice = "heartsAndStarstimeToMakeAChoice";
     public const string heartsAndStarsRoundResultWins = "heartsAndStarsRoundResultWins";
@@ -105,7 +105,7 @@ public static class DataIds
     public const string institutionCode = "code";
     public const string created_At = "created_At";
     public const string age = "edad";
-    public const string grade = "edad";
+    public const string grade = "grado";
     public const string state = "state";
     public const string time_Spent = "time_Spent";
 

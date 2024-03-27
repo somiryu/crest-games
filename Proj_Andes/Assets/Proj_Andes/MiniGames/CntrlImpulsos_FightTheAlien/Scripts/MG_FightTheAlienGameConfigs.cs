@@ -32,8 +32,10 @@ public class MG_FightTheAlienGameConfigs : GameConfig
             itemAnalytics.Add(DataIds.totalClicks, currAnalytics[i].clicks);
             itemAnalytics.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
 
-            UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
+            UserDataManager.SaveUserAnayticsPerGame(GameID, itemAnalytics);
         }
+        Debug.Log("fight the alien config " + GameID + " " + itemAnalytics.Count);
+
     }
     public override void ResetCurrentAnalytics()
     {

@@ -30,7 +30,8 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
 		UserDataManager.LastDocumentIDStored = newDocID;
 
 		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.boostersAndScapeGame);
-	}
+
+    }
     public override void ResetCurrentAnalytics()
     {
         base.ResetCurrentAnalytics();
