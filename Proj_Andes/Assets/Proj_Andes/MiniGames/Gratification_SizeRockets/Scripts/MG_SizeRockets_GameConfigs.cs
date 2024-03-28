@@ -31,7 +31,9 @@ public class MG_SizeRockets_GameConfigs : GameConfig
     public override void SaveAnalytics()
     {
 		var analytics = MG_SizeRockets_GameManager.Instance.currAnalytics;
-        itemAnalytics = new Dictionary<string, object>();
+		GameID = Guid.NewGuid().ToString();
+
+		itemAnalytics = new Dictionary<string, object>();
 		itemAnalytics.Add(DataIds.GameID, GameID);
 		itemAnalytics.Add(DataIds.timePlayed, analytics.timePlayed);
 		itemAnalytics.Add(DataIds.sizeRocketsBigShips, analytics.bigShipsCount);
@@ -44,8 +46,6 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 		itemAnalytics.Add(DataIds.averageClickTime, analytics.averageClick);
 
 		UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics); 
-
-		Debug.Log("size rockets config " + GameID + " " + itemAnalytics.Count);
     }
 }
 

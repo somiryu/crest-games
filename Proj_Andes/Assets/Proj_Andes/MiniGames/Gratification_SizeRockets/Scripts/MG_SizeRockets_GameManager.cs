@@ -311,8 +311,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	void GameOver()
 	{
-        gameConfigs.GameID = Guid.NewGuid().ToString();
-        Debug.Log("size new code " + gameConfigs.GameID);
         gameOverFlag = true;
 		currAnalytics.stars = totalCoinsWon;
 		currAnalytics.timePlayed = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;

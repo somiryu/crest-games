@@ -24,9 +24,10 @@ public class MG_MagnetsConfigs : GameConfig
     public override string GetSceneID() => DataIds.magnetsGame;
     public override void SaveAnalytics()
     {
-        var currData = MG_MagnetsGameManager.Instance;  
+        var currData = MG_MagnetsGameManager.Instance;
+		GameID = Guid.NewGuid().ToString();
 
-        itemAnalytics = new Dictionary<string, object>(); 
+		itemAnalytics = new Dictionary<string, object>(); 
         itemAnalytics.Add(DataIds.GameID, GameID);
         itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
 		itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);

@@ -242,8 +242,6 @@ public class MG_FightTheAlienManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
-        gameConfigs.GameID = Guid.NewGuid().ToString();
-        Debug.Log("fight alien new code " + gameConfigs.GameID);
         audiosource.clip = finishAudio;
         audiosource.Play();
         gameConfigs.SaveAnalytics();

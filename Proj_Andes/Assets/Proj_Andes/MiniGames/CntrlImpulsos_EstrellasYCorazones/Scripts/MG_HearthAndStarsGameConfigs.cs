@@ -17,7 +17,9 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 
     public override void SaveAnalytics()
     {
-        var allRoundsAnalytics = MG_HearthsAndStarsManager.Instance.AllRoundsAnalytics;
+		GameID = Guid.NewGuid().ToString();
+
+		var allRoundsAnalytics = MG_HearthsAndStarsManager.Instance.AllRoundsAnalytics;
 		var currRoundAnalyticsDic = new Dictionary<string, object>();
         for (int i = 0; i < allRoundsAnalytics.Count; i++)
         {

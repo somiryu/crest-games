@@ -232,8 +232,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
  
     void EndOfRide()
     {
-        levelConfig.GameID = Guid.NewGuid().ToString();
-        Debug.Log("size new code " + levelConfig.GameID);
         starsGatheredCount += 5;
         OnScoreChanges?.Invoke();
         planet.UpdateCoinsAmount(0);

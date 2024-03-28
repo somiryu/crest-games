@@ -53,7 +53,9 @@ public class GameSequencesList : ScriptableObject
             if (prevGame != null)
             {
                 prevGame.SaveAnalytics();
+                Debug.Log("last screen type: " + prevGame.GetSceneID() + " id generated: " + prevGame.GameID);
                 prevGame.SaveGeneralGameAnalytics();
+                DatabaseManager.SaveUserDatasList(UserDataManager.Instance.usersDatas, UserDataManager.userAnayticsPerGame, false);
             }
             prevGame = nextItem;
             AudioManager.Instance.PlayMusic();

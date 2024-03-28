@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
-{   
+{
+	public static bool saveOnlyLocalForTesting = false;
 
     bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
@@ -353,7 +354,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 				dataSyncedPopUp.SetActive(true);
 				dataSyncedLabel.SetText(string.Format("Se subieron al servidor {0} usuario(s) cambiado(s) y {1} sesion(es), encontradas en el guardado local", usersSynced, sessionsSynced));
 			}
-
 		}
 		RebuildUsersList();
 	}

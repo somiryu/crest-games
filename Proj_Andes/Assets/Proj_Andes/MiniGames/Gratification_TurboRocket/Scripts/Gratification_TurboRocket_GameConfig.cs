@@ -23,6 +23,8 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
+		GameID = Guid.NewGuid().ToString();
+
 		itemAnalytics.Add(DataIds.GameID, GameID);
         itemAnalytics.Add(DataIds.turboRocketturboUsedTimes, turboUsedTimes);
 		itemAnalytics.Add(DataIds.stars, coinsCollected);
@@ -35,10 +37,8 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
         SaveCoins(coinsCollected);
 
 		UserDataManager.SaveUserAnayticsPerGame(DataIds.turboRocketGame,itemAnalytics); 
-
-        Debug.Log("turbo rocket config " + GameID + " " + itemAnalytics.Count);
-
     }
+
     public override void ResetCurrentAnalytics()
     {
         turboUsedTimes = 0;

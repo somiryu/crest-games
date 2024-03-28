@@ -20,7 +20,8 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     {
         var currAnalyticsDictionary = new Dictionary<string, object>();
         var currAnalytics = MG_VoiceStarOrFlowerManager.Instance.AllRoundsAnalytics;
-        for (int i = 0; i < currAnalytics.Count; i++)
+		GameID = Guid.NewGuid().ToString();
+		for (int i = 0; i < currAnalytics.Count; i++)
         {
             currAnalyticsDictionary.Clear();
 			currAnalyticsDictionary.Add(DataIds.GameID, GameID);

@@ -230,8 +230,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
-        gameConfigs.GameID = Guid.NewGuid().ToString();
-        Debug.Log("hearts start " + gameConfigs.GameID);
         timerUI.gameObject.SetActive(false);
         audiosource.clip = finishAudio;
         audiosource.Play();

@@ -128,7 +128,6 @@ public class UserDataManager : ScriptableObject
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
 
 		TimeManager.Instance.ResetSessionTimerAndSave();
-		Debug.Log("Saving to server");
 		if (currSequence is MinigameGroups group)
 		{
 			CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
@@ -165,9 +164,17 @@ public class UserDataManager : ScriptableObject
 	public IEnumerator LoadDataFromRemoteDataBaseRoutine()
 	{
 		yield return CheckInternetConnection();
-
+		//Saving locally so that the get user data list already has all the merged local data
+		DatabaseManager.SaveUserDatasList(usersDatas, userAnayticsPerGame, mustSaveInDataBase: false);
 		DatabaseManager.GetUserDatasList();
 		while (!DatabaseManager.userListDone) yield return null;
+		if(DatabaseManager.pendingSyncronizedSessionsAmount > 0 || DatabaseManager.pendingSyncronizedUsersAmount > 0)
+		{
+			//Saving in case we had previousData
+			DatabaseManager.SaveUserDatasList(usersDatas, userAnayticsPerGame, mustSaveInDataBase: true, ignoreEmptyUser: true);
+			while (!DatabaseManager.savingIsDone) yield return null;
+			Debug.Log("Done saving and loading updated data");
+		}
 	}
 
 	public IEnumerator CheckInternetConnection() => RecursiveInternetCheck(0);
@@ -199,7 +206,7 @@ public class UserDataManager : ScriptableObject
 
 	public void SaveDataToRemoteDataBase()
 	{
-		DatabaseManager.SaveUserDatasList(usersDatas, userAnayticsPerGame);
+		DatabaseManager.SaveUserDatasList(usersDatas, userAnayticsPerGame, mustSaveInDataBase: false);
 	}
 
 	public void SetCurrUser(string email, string id)

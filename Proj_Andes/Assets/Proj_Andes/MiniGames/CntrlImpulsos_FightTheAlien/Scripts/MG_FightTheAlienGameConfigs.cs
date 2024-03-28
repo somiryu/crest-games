@@ -23,6 +23,7 @@ public class MG_FightTheAlienGameConfigs : GameConfig
     {
         var currAnalytics = MG_FightTheAlienManager.Instance.AllRoundsAnalytics;
         itemAnalytics = new Dictionary<string, object>();
+        GameID = Guid.NewGuid().ToString();
         for (int i = 0; i < currAnalytics.Count; i++)
         {
             itemAnalytics.Clear();
@@ -35,7 +36,6 @@ public class MG_FightTheAlienGameConfigs : GameConfig
 
 			UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
 		}
-        Debug.Log("fight the alien config " + GameID + " " + itemAnalytics.Count);
 
     }
     public override void ResetCurrentAnalytics()

@@ -27,6 +27,7 @@ public static class DatabaseManager
         = new Dictionary<string, Dictionary<string, Dictionary<string, object>>>(); 
 
     public static bool userListDone = false;
+    public static bool savingIsDone = false;
     public static bool UserDeletionCompleted = false;
 
     public static int pendingSyncronizedUsersAmount = 0;
@@ -52,6 +53,7 @@ public static class DatabaseManager
 
    public static void AddPendingUserData(UserData userData)
     {
+        if (userData == null) return;
         var alreadyIn = pendingUserDatasToUpload.FindIndex(x => x.id == userData.id);
         if (alreadyIn != -1) pendingUserDatasToUpload[alreadyIn] = userData;
         else pendingUserDatasToUpload.Add(userData);
@@ -155,42 +157,34 @@ public static class DatabaseManager
 
 
     public static async void SaveUserDatasList(List<UserData> userDatas, 
-        Dictionary<string, Dictionary<string, Dictionary<string, object>>> dataPerGame)
+        Dictionary<string, Dictionary<string, Dictionary<string, object>>> newCollections, 
+        bool mustSaveInDataBase = true,
+        bool ignoreEmptyUser = false)
     {
-        if (UserDataManager.CurrUser.pin == "Unnamed")
+        savingIsDone = false;
+        var shouldSkipSaving = false;
+#if UNITY_EDITOR
+        shouldSkipSaving = FirebaseAnonymousLoginUI.saveOnlyLocalForTesting;
+#endif
+
+        if ((UserDataManager.CurrUser.pin == "Unnamed" && !ignoreEmptyUser) || shouldSkipSaving)
         {
             Debug.LogWarning("Skipping saving because is a test run");
-            return;
+			savingIsDone = true;
+			return;
         }
 
         var currUserData = userDatas.Find(x => x.id == UserDataManager.CurrUser.id);
-        if (currUserData == null)
+        if (currUserData == null && !ignoreEmptyUser)
         {
             Debug.LogError("No user data found to save for user with ID: " + UserDataManager.CurrUser.id + " and name " + UserDataManager.CurrUser.pin);
+            savingIsDone = true;
             return;
         }
 
         var hasInternetConnection = UserDataManager.Instance.HasInternetConnection();
 
-
-
-        foreach (var gameData in dataPerGame)
-        {
-            if (!pendingSessionsToUpload.TryGetValue(gameData.Key, out var sessionsDatas))
-            {
-                if(string.IsNullOrEmpty( gameData.Key))
-                {
-                    Debug.LogError("trying to add something null " + gameData.Value);
-                    continue;
-                }
-                pendingSessionsToUpload.Add(gameData.Key, gameData.Value);
-            }
-            else
-            {
-                pendingSessionsToUpload[gameData.Key] = sessionsDatas;
-            }
-        }
-
+        AddSessionsToPendingSessions(newCollections);
 
         if (!hasInternetConnection)
         {
@@ -218,8 +212,18 @@ public static class DatabaseManager
 		PlayerPrefs.SetString(pendingSessionsJSONKey, sessionsJSON);
 
 
-		if (!hasInternetConnection) return;
+        if (!mustSaveInDataBase)
+        {
+			savingIsDone = true;
+			return;
+        }
+        if (!hasInternetConnection)
+        {
+			savingIsDone = true;
+			return;
+        }
 
+        Debug.LogWarning("IS SAVING TO DATABASE");
 
         for (int i = 0; i < userDatas.Count; i++)
         {
@@ -248,7 +252,59 @@ public static class DatabaseManager
             PlayerPrefs.DeleteKey(pendingUserJSONKey);
             PlayerPrefs.DeleteKey(pendingSessionsJSONKey);
         }
-    }
+
+        savingIsDone = true;
+        Debug.Log("Finished saving to database");
+
+	}
+
+    //Each time we add something to the list, we need to redo the method, since the lists change causes an error on the iteration
+    static void AddSessionsToPendingSessions(Dictionary<string, Dictionary<string, Dictionary<string, object>>> newSessions)
+    {
+		foreach (var newCollection in newSessions)
+		{
+			//If the new collection main key is not found
+			if (!pendingSessionsToUpload.TryGetValue(newCollection.Key, out var previousPendingCollections))
+			{
+				if (string.IsNullOrEmpty(newCollection.Key))
+				{
+					Debug.LogError("trying to add something null " + newCollection.Value);
+					continue;
+				}
+				//Add the new collection
+				Debug.Log("Adding new to pending sessions: " + newCollection.Key);
+				pendingSessionsToUpload.Add(newCollection.Key, newCollection.Value);
+                newSessions.Remove(newCollection.Key);
+                AddSessionsToPendingSessions(newSessions);
+                return;
+			}
+			//If the main key of the new collection already existed
+			else
+			{
+				Debug.Log("Adding to already existent pending session: " + newCollection.Key);
+				//Go thro all the documents, to see if they already existed
+				var documents = newCollection.Value;
+				foreach (var newDocument in documents)
+				{
+					//If the document didn't exist, add it to the existent collection
+					if (!previousPendingCollections.TryGetValue(newDocument.Key, out var sessionDat))
+					{
+						Debug.Log("Adding new document ID: " + newDocument.Key + " to old session: " + newCollection.Key);
+						previousPendingCollections.Add(newDocument.Key, newDocument.Value);
+                        documents.Remove(newDocument.Key);
+                        AddSessionsToPendingSessions(newSessions);
+                        return;
+					}
+					//If it already existed, then override it
+					else
+					{
+						previousPendingCollections[newDocument.Key] = newDocument.Value;
+					}
+				}
+			}
+		}
+	}
+
 }
 
 [Serializable]

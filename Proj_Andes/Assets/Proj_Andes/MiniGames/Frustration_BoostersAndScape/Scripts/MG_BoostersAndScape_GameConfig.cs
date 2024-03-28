@@ -18,7 +18,9 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
     public override void SaveAnalytics()
     {
         var currData = MG_BoostersAndScape_Manager.Instance;
-        itemAnalytics = new Dictionary<string, object>();
+		GameID = Guid.NewGuid().ToString();
+
+		itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.GameID, GameID);
         itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
         itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
