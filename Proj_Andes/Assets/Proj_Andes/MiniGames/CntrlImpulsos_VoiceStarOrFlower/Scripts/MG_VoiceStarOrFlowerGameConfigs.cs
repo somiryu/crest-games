@@ -34,7 +34,7 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
             currAnalyticsDictionary.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
             currAnalyticsDictionary.Add(DataIds.voiceStarLostTutorial, passedTuto);
 
-			UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame,itemAnalytics);
+			UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
 		}
     }
     public override void ResetCurrentAnalytics()
