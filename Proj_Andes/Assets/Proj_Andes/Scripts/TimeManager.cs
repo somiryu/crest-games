@@ -90,7 +90,12 @@ public class TimeManager : MonoBehaviour
         testAnalytics.Add(DataIds.grade, UserDataManager.CurrUser.grade);
         testAnalytics.Add(DataIds.state, gameState.ToString());
         testAnalytics.Add(DataIds.time_Spent, timer);
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.test, testAnalytics, UserDataManager.CurrTestID, shouldUseTestID: false);
+        UserDataManager.SaveUserAnayticsPerGame(
+            DataIds.test,
+            testAnalytics,
+            UserDataManager.CurrTestID,
+            shouldUseTestID: false
+            );
         //Debug.Log("saved test data " + DataIds.TestID + " " + UserDataManager.CurrTestID + " " + createDate + " " + gameState + " " + " realtime " + timer);
     }
 }

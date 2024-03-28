@@ -27,8 +27,9 @@ public class MG_MagnetsConfigs : GameConfig
         var currData = MG_MagnetsGameManager.Instance;  
 
         itemAnalytics = new Dictionary<string, object>(); 
+        itemAnalytics.Add(DataIds.GameID, GameID);
         itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
-        itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
+		itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
         itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
         itemAnalytics.Add(DataIds.magnetsEneryPicked, currData.magnetsCollected);
 

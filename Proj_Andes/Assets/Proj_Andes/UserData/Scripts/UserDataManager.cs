@@ -89,25 +89,29 @@ public class UserDataManager : ScriptableObject
 		Application.wantsToQuit += SaveToServer;
 	}
 
-	public static void SaveUserAnayticsPerGame(string gameKey, Dictionary<string, object> itemAnalytics, string documentID = null, string gameType = null, bool shouldUseTestID = true, bool shouldUseGameId = true)
+	public static void SaveUserAnayticsPerGame(
+		string CollectionName, 
+		Dictionary<string, object> itemAnalytics, 
+		string documentID = null, 
+		string gameType = null, 
+		bool shouldUseTestID = true)
 	{
 		var analyticsWithExtraFields = new Dictionary<string, object>();
 		if (shouldUseTestID) analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
-        if (shouldUseGameId) analyticsWithExtraFields.Add(DataIds.GameID, gameKey);
 		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
 		analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
 		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
-		if(!userAnayticsPerGame.TryGetValue(gameKey, out var analyticsDocsFound))
+		if(!userAnayticsPerGame.TryGetValue(CollectionName, out var analyticsDocsFound))
 		{
 			analyticsDocsFound = new Dictionary<string, Dictionary<string, object>>();
-			userAnayticsPerGame.Add(gameKey, analyticsDocsFound);
+			userAnayticsPerGame.Add(CollectionName, analyticsDocsFound);
 		}
 
 		//Generating a new document ID each time if an explicit documentID was not passed in 
 		var newDocumentID = string.IsNullOrEmpty(documentID)? Guid.NewGuid().ToString() : documentID;
-		Debug.Log("doc id " + documentID + " game id " + gameKey);
+		Debug.Log("doc id " + documentID + " game id " + CollectionName);
 		analyticsDocsFound.Add(newDocumentID, analyticsWithExtraFields);
     }
 

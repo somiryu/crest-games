@@ -32,6 +32,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
     {
 		var analytics = MG_SizeRockets_GameManager.Instance.currAnalytics;
         itemAnalytics = new Dictionary<string, object>();
+		itemAnalytics.Add(DataIds.GameID, GameID);
 		itemAnalytics.Add(DataIds.timePlayed, analytics.timePlayed);
 		itemAnalytics.Add(DataIds.sizeRocketsBigShips, analytics.bigShipsCount);
 		itemAnalytics.Add(DataIds.sizeRocketsMidShips, analytics.mediumShipsCount);
@@ -42,8 +43,9 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 		itemAnalytics.Add(DataIds.sizeRocketsFarPlanets, analytics.farPlanets);
 		itemAnalytics.Add(DataIds.averageClickTime, analytics.averageClick);
 
-        UserDataManager.SaveUserAnayticsPerGame(GameID, itemAnalytics);
-        Debug.Log("size rockets config " + GameID + " " + itemAnalytics.Count);
+		UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics); 
+
+		Debug.Log("size rockets config " + GameID + " " + itemAnalytics.Count);
     }
 }
 

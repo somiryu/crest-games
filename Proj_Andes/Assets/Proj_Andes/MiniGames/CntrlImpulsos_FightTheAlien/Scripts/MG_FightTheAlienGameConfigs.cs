@@ -26,14 +26,15 @@ public class MG_FightTheAlienGameConfigs : GameConfig
         for (int i = 0; i < currAnalytics.Count; i++)
         {
             itemAnalytics.Clear();
+            itemAnalytics.Add(DataIds.GameID, GameID);
             itemAnalytics.Add(DataIds.challengeType, currAnalytics[i].challengeOrder);
             itemAnalytics.Add(DataIds.won, currAnalytics[i].wonRound);
             itemAnalytics.Add(DataIds.responseTime, currAnalytics[i].timeToMakeAChoice);
             itemAnalytics.Add(DataIds.totalClicks, currAnalytics[i].clicks);
             itemAnalytics.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
 
-            UserDataManager.SaveUserAnayticsPerGame(GameID, itemAnalytics);
-        }
+			UserDataManager.SaveUserAnayticsPerGame(DataIds.fightTheAlienGame, itemAnalytics);
+		}
         Debug.Log("fight the alien config " + GameID + " " + itemAnalytics.Count);
 
     }

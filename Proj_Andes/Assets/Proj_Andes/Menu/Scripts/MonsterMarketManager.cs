@@ -438,19 +438,22 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         totalTime = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
         if (!opennedAtLeastOneChest) timeUntilFirstChestOpen = 0;
 
-        var dictionary = new Dictionary<string, object>();
+		marketConfig.GameID = Guid.NewGuid().ToString();
+
+
+		var dictionary = new Dictionary<string, object>();
+		dictionary.Add(DataIds.GameID, marketConfig.GameID);
         dictionary.Add(DataIds.timePlayed, totalTime);
-        dictionary.Add(DataIds.chestChosen, chestTypeOpenned);
+		dictionary.Add(DataIds.chestChosen, chestTypeOpenned);
         dictionary.Add(DataIds.starsSpent, starsSpent);
         dictionary.Add(DataIds.starsBeforeSpend, initialStars);
         dictionary.Add(DataIds.unspentStars, finalStars);
         dictionary.Add(DataIds.selectionTime, timeUntilFirstChestOpen);
 
-        marketConfig.GameID = Guid.NewGuid().ToString();
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.monsterMarket, dictionary, marketConfig.GameID);
+		UserDataManager.SaveUserAnayticsPerGame(DataIds.monsterMarket, dictionary);
 
-        chestOpenedContainer.gameObject.SetActive(false);
+		chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
     }
 }

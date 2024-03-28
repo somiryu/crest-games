@@ -23,8 +23,9 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public override void SaveAnalytics()
     {
         itemAnalytics = new Dictionary<string, object>();
+		itemAnalytics.Add(DataIds.GameID, GameID);
         itemAnalytics.Add(DataIds.turboRocketturboUsedTimes, turboUsedTimes);
-        itemAnalytics.Add(DataIds.stars, coinsCollected);
+		itemAnalytics.Add(DataIds.stars, coinsCollected);
 
         var timePlayed = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
         itemAnalytics.Add(DataIds.timePlayed, timePlayed);
@@ -33,7 +34,8 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
 
         SaveCoins(coinsCollected);
 
-        UserDataManager.SaveUserAnayticsPerGame(GameID, itemAnalytics);
+		UserDataManager.SaveUserAnayticsPerGame(DataIds.turboRocketGame,itemAnalytics); 
+
         Debug.Log("turbo rocket config " + GameID + " " + itemAnalytics.Count);
 
     }

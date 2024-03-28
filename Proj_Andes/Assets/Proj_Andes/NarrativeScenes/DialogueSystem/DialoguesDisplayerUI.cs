@@ -591,7 +591,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
             var analytics = narrativeSceneItem.itemAnalytics;
             if(analytics != null && analytics.Count > 0)
             {
-				UserDataManager.SaveUserAnayticsPerGame(DataIds.Narratives, narrativeSceneItem.itemAnalytics, null, null, true, false);
+				UserDataManager.SaveUserAnayticsPerGame(CollectionName: DataIds.Narratives,
+					itemAnalytics: narrativeSceneItem.itemAnalytics,
+                    shouldUseTestID: true);
 			}
 			narrativeSceneItem.OnSequenceOver();
         }

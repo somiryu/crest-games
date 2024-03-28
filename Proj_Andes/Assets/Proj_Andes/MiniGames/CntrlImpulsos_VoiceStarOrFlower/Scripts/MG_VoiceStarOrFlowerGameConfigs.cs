@@ -23,16 +23,18 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
         for (int i = 0; i < currAnalytics.Count; i++)
         {
             currAnalyticsDictionary.Clear();
+			currAnalyticsDictionary.Add(DataIds.GameID, GameID);
             currAnalyticsDictionary.Add(DataIds.challengeType, currAnalytics[i].challengeType);
-            currAnalyticsDictionary.Add(DataIds.voiceStarImage, currAnalytics[i].image);
+			currAnalyticsDictionary.Add(DataIds.voiceStarImage, currAnalytics[i].image);
             currAnalyticsDictionary.Add(DataIds.voiceStarSound, currAnalytics[i].audio);
             currAnalyticsDictionary.Add(DataIds.won, currAnalytics[i].wonRound);
             currAnalyticsDictionary.Add(DataIds.responseTime, currAnalytics[i].timeToMakeAChoice);
             currAnalyticsDictionary.Add(DataIds.totalClicks, currAnalytics[i].clicks);
             currAnalyticsDictionary.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
             currAnalyticsDictionary.Add(DataIds.voiceStarLostTutorial, passedTuto);
-            UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
-        }
+
+			UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame,itemAnalytics);
+		}
     }
     public override void ResetCurrentAnalytics()
     {

@@ -23,13 +23,14 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
         {
             var currRound = allRoundsAnalytics[i];
 			currRoundAnalyticsDic.Clear();
+			currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
 			currRoundAnalyticsDic.Add(DataIds.challengeType, currRound.challengeOrder);
 			currRoundAnalyticsDic.Add(DataIds.won, currRound.wonRound);
 			currRoundAnalyticsDic.Add(DataIds.responseTime, currRound.timeToMakeAChoice);
 			currRoundAnalyticsDic.Add(DataIds.totalClicks, currRound.clicks);
 			currRoundAnalyticsDic.Add(DataIds.lostBecauseOfTime, currRound.ranOutOfTime);
 
-            UserDataManager.SaveUserAnayticsPerGame(GameID, currRoundAnalyticsDic, shouldUseGameId: true);
+            UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, currRoundAnalyticsDic);
         }
 
     }
