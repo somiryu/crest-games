@@ -12,9 +12,6 @@ public static class DataIds
     public const string GameID = "game ID";
     public const string GameType = "game Type";
 
-    public const string TotalCorrectAnswers = "correct Answers";
-    public const string TotalWrongAnswers = "wrong Answers";
-
     //Generic IDs
     public const string totalClicks = "click_repetions";
     public const string lostBecauseOfTime = "time_over";
@@ -46,43 +43,25 @@ public static class DataIds
     public const string frustrationLevel = "frustrationLevel";
 
     //Narratives IDs
-    public const string Narratives = "narratives";
+    public const string Narratives = "narrative";
 
     //Data per game
     public const string stars = "stars";
 
-    public const string voiceStarGame = "field_of_flowers";
-    public const string voiceStarTotalGametime = "voiceStarTotalGametime";
-    public const string voiceStartimeToMakeAChoice = "voiceStartimeToMakeAChoice";
-    public const string voiceStarRoundResultWin = "voiceStarRoundResultWin";
-    public const string voiceStarChallengeType = "voiceStarChallengeType";
+    public const string voiceStarGame = "campo_nubes";
     public const string voiceStarImage = "image";
     public const string voiceStarSound = "audio";
-    public const string voiceStarClickRepetition = "voiceStarClickRepetition";
     public const string voiceStarLostTutorial = "lostTutorial";
 
-    public const string heartsAndStarsGame = "hearts_and_stars";
-    public const string heartsAndStarsInGameOrder = "heartsAndStarsInGameOrder";
-    public const string heartsAndStarstimeToMakeAChoice = "heartsAndStarstimeToMakeAChoice";
-    public const string heartsAndStarsRoundResultWins = "heartsAndStarsRoundResultWins";
-    public const string heartsAndStarsclickRepetitions = "heartsAndStarsclickRepetitions";
-    public const string heartsAndStarschallengeOrder = "heartsAndStarschallengeOrder";
-    public const string heartsAndStarsifRanOutOfTime = "heartsAndStarsifRanOutOfTime";
+    public const string heartsAndStarsGame = "corazones_flores";
 
-    public const string turboRocketGame = "rocket";
-    public const string turboRocketCoinsCollected = "star";
-    public const string turboRockettotalRideTime = "turboRockettotalRideTime";
+    public const string turboRocketGame = "star_booster";
     public const string turboRocketturboUsedTimes = "boosts";
 
     public const string mechanicHandGame = "por habilidad: la mano mecánica";
     public const string mechanicHandClawThrows = "claw_Throws";
 
-    public const string fightTheAlienGame = "defeat robot";
-    public const string fightTheAlienChallengeType = "fightTheAlienTotalGametime";
-    public const string fightTheAlienRoundResultWin = "fightTheAlienRoundResultWins";
-    public const string fightTheAlientimeToMakeAChoice = "fightTheAlientimeToMakeAChoice";
-    public const string fightTheAlienClicks = "fightTheAlienClicks";
-    public const string fightTheAlienRanOutOfTime = "fightTheAlienRanOutOfTime";
+    public const string fightTheAlienGame = "monstruo_figuras";
 
     public const string boostersAndScapeGame = "delay: boosters y escape";
     public const string boostersAndScapeTotalBoostsActivated = "boosters_activated";
@@ -90,7 +69,7 @@ public static class DataIds
     public const string magnetsGame = "buggy: los imanes y la energía";
     public const string magnetsEneryPicked = "magnet_collected";
 
-    public const string sizeRocketsGame = "delivery_rockets";
+    public const string sizeRocketsGame = "collecting_cars";
     public const string sizeRocketsBigShips = "big_ships";
     public const string sizeRocketsMidShips = "medium_ships";
     public const string sizeRocketsSmallShips = "small_ships";
