@@ -184,27 +184,10 @@ public static class DatabaseManager
                     continue;
                 }
                 pendingSessionsToUpload.Add(gameData.Key, gameData.Value);
-                //TO TEST WHAT'S BEING SAVED
-                /*
-                foreach (var data in gameData.Value)
-                {
-                    foreach (var data2 in data.Value)
-                    {
-                        Debug.Log(data2.Key + " FROM " + data2.Value);
-                    }
-                }*/
             }
             else
             {
                 pendingSessionsToUpload[gameData.Key] = sessionsDatas;
-                foreach (var item in sessionsDatas)
-                {
-                    foreach (var item1 in item.Value)
-                    {
-                        //Debug.Log("replacing " + item1.Value);
-
-                    }
-                }
             }
         }
 

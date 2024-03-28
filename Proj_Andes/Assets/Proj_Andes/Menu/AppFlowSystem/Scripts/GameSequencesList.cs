@@ -54,7 +54,6 @@ public class GameSequencesList : ScriptableObject
             {
                 prevGame.SaveAnalytics();
                 prevGame.SaveGeneralGameAnalytics();
-                DatabaseManager.SaveUserDatasList(UserDataManager.Instance.usersDatas, UserDataManager.userAnayticsPerGame);
             }
             prevGame = nextItem;
             AudioManager.Instance.PlayMusic();

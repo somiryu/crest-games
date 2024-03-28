@@ -232,6 +232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3697822523852332551, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3844104863026307570, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -818,11 +822,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 385
+      value: 590
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 388
+      value: 374.00006
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1033,11 +1037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 225
+      value: 430.00003
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 14.999977
+      value: 1.0000305
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1466,11 +1470,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 28
+      value: 233.00003
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 326
+      value: 312.00006
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1505,6 +1509,10 @@ PrefabInstance:
     - target: {fileID: 3697822523852332551, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_Name
       value: Planet (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3697822523852332551, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3844104863026307570, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1702,11 +1710,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -165
+      value: 40.00003
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 99.00001
+      value: 85.00006
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1824,11 +1832,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 550
+      value: 820
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 113
+      value: 141
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1973,8 +1981,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSkinObject: {fileID: 0}
   forceSkinType: 0
-  blockingPanel: {fileID: 0}
-  pickASkinAudio: {fileID: 0}
   skinTypeToForce: 0
 --- !u!82 &2037190102
 AudioSource:
@@ -2158,11 +2164,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -341
+      value: -192
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 425
+      value: 369
       objectReference: {fileID: 0}
     - target: {fileID: 8316209712567227066, guid: 653e680fc2477ec45bdd7d81d91689cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
