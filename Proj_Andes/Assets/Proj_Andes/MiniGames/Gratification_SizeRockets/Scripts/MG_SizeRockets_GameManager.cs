@@ -67,7 +67,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	{
         ISizeRocketsManager.Instance = this;
 
-		level1Planet.Init(8);
+		level1Planet.Init(20);
         planets.Add(level1Planet);
 		TryGetComponent(out audioSource);
         ingameObj.SetActive(true);
@@ -209,12 +209,12 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		}
 
 		
-
+		
 		if (shipsLeft <= 0 && activeShips.Count == 0)
 		{
 			roundCount++;
-			if (roundCount > 0 && roundCount <= 1) InitLevel2();
-			else GameOver();
+			//if (roundCount > 0 && roundCount <= 1) InitLevel2();
+			GameOver();
         }
 	}
 

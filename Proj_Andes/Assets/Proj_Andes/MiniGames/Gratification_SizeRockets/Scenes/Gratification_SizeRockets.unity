@@ -631,7 +631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4937963415350013173, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6144704670675671912, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: starsAmount
@@ -2834,7 +2834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4937963415350013173, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6144704670675671912, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: starsAmount
@@ -2842,7 +2842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7556040623134769987, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: coinsAmount
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8622947306577727613, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3494,7 +3494,7 @@ MonoBehaviour:
   planetPrefab: {fileID: 7556040623134769987, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
   planetsSpawnArea: {fileID: 1920985624}
   planetsParent: {fileID: 1083238434}
-  level1Planet: {fileID: 484243660}
+  level1Planet: {fileID: 1457479763}
   closePlanets:
   - {fileID: 2136117090}
   - {fileID: 1378005151}
