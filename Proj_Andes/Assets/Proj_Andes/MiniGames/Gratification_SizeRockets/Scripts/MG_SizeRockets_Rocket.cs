@@ -70,7 +70,10 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 			{
 				ISizeRocketsManager.Instance.OnShipDeliveredCoins(this, coinsCarrying);
 
-				GameUIController.Instance.StarEarned(Camera.main.WorldToScreenPoint(targetPlanet.transform.position));
+				for (int i = 0; i < coinsCarrying; i++)
+				{
+                    GameUIController.Instance.StarEarned(Camera.main.WorldToScreenPoint(targetPlanet.transform.position), coinsCarrying);
+                }
 				pool.RecycleItem(this);
 			}
 		}

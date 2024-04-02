@@ -26,6 +26,7 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     public bool onTuto = false;
     public bool onPause;
     Animator anim;
+    IEnumerator sendStars;
     private void Awake()
     {
         if (instance != null && instance != this) DestroyImmediate(this);
@@ -47,6 +48,7 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         musicBtn.onClick.AddListener(SwitchAudioActive);
 
         menuContainer.gameObject.SetActive(false);
+        //StopCoroutine(sendStars);
     }
     void OpenMenu()
     {
@@ -102,13 +104,21 @@ public class GameUIController : MonoBehaviour, ITimeManagement
 
         PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activated ? 1 : 0);
     }
-    public void StarEarned(Vector3 initPos)
+    public void StarEarned(Vector3 initPos, int earnedStars = 1)
     {
         Debug.DrawLine(initPos, initPos + Vector3.one * 100, Color.yellow, 10);
-        var newStar = pool.GetNewItem();
-        var finalPos = starsContainer.transform.position;
-        newStar.Init(initPos, finalPos, pool);
-
+        sendStars = SendStars(initPos, earnedStars);
+        StartCoroutine(sendStars);
+    }
+    IEnumerator SendStars(Vector3 initPos, int starsAmt)
+    {
+        for (int i = 0; i < starsAmt; i++)
+        {
+            var newStar = pool.GetNewItem();
+            var finalPos = starsContainer.transform.position;
+            newStar.Init(initPos, finalPos, pool);
+            yield return new WaitForSeconds(0.2f);
+        }
     }
     public void StarLost()
     {
