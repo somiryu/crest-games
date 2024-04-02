@@ -84,7 +84,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		mediumRocketsPool.Init(5);
 		largeRocketsPool.Init(5);
 		currCoinsLabel.SetText(0.ToString());
-		shipsLeft = gameConfig.shipsAmtLavel1;
+		shipsLeft = gameConfig.shipsPerGame;
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
 	}
 
