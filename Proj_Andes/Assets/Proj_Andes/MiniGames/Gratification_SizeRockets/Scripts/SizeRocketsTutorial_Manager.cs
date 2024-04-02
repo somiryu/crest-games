@@ -70,6 +70,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
         currAudio = ActivateStepActions(introAudio, selectShipAudio);
         StartCoroutine(currAudio);
+        planetPrefab.Init(8);
         actionBlocker.gameObject.SetActive(true);
 
         selectedRocketType = SizeRocketsRocketTypes.NONE;
@@ -87,10 +88,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     }
     void InitTuto()
     {
-        planetPrefab.Init(8);
+        currTargetPlanet = tutoPlanet;
         tutoStepIdx = 0;
         handSignPlanet.gameObject.SetActive(false);
-        handSignShip.gameObject.SetActive(true);
         ActivateTutoUI();
     }
 
@@ -101,25 +101,25 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         handSignShip.gameObject.SetActive(false);
         handSignPlanet.gameObject.SetActive(false);
 
-        yield return new WaitForSecondsRealtime(clip.length);
-        actionBlocker.gameObject.SetActive(false);
-        for (int i = 0; i < tutorialSteps.Count; i++) tutorialSteps[i].activeRocketType.interactable = false;
+        yield return new WaitForSeconds(clip.length);
         if (clip2 != null)
         {
+            handSignShip.gameObject.SetActive(true);
             audioSource.clip = clip2;
             audioSource.Play();
             yield return new WaitForSeconds(clip2.length);
         }
-        if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) InitTuto();
+        actionBlocker.gameObject.SetActive(false);
     }
     IEnumerator GetPlanet()
     {
         actionBlocker.gameObject.SetActive(true);
+        handSignPlanet.gameObject.SetActive(true);
         audioSource.clip = selectWorldAudio;
         audioSource.Play();
         yield return new WaitForSeconds(selectWorldAudio.length);
-        
         actionBlocker.gameObject.SetActive(false);
+        InitTuto();
     }
     IEnumerator ShipDescription()
     {
@@ -194,14 +194,12 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = 0;
-            currTargetPlanet = GetPlanetUnderMouse(mouseWorldPos);
+            if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) handSignPlanet.gameObject.SetActive(false);
         }
-        if (currTargetPlanet != null && selectedRocketType != SizeRocketsRocketTypes.NONE)
+        if (selectedRocketType != SizeRocketsRocketTypes.NONE)
         {
-            if(activeShips.Count < 1) GenerateNewShip(selectedRocketType);
-            currTargetPlanet = null;
+            currTargetPlanet = tutoPlanet;
+            if (activeShips.Count < 1) GenerateNewShip(selectedRocketType);
         }
         if (shipsLeft <= 0 && activeShips.Count == 0) GameOver();
     }
@@ -213,7 +211,6 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         var dist = curr.transform.position - position;
         if (dist.magnitude <= 1.5f)
         {
-            if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) handSignPlanet.gameObject.SetActive(false);
             return curr;
         }
         return null;
@@ -225,12 +222,8 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         selectedRocketType = types;
         if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep)
         {
-            currAudio = GetPlanet();
-            StartCoroutine(currAudio);
-            //StopAllCoroutines();
             currTargetPlanet = null;
             handSignShip.gameObject.SetActive(false);
-            handSignPlanet.gameObject.SetActive(true);
         }
     }
 
@@ -239,7 +232,8 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         if (shipsLeft <= 0) return;
         audioSource.clip = onDepart;
         audioSource.Play();
-        if (currTutoStep.Type == SizeRocketsTutoSteps.BigRocketStep) handSignShip.gameObject.SetActive(false);
+        if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) StartCoroutine(GetPlanet());
+        else if (currTutoStep.Type == SizeRocketsTutoSteps.BigRocketStep) handSignShip.gameObject.SetActive(false);
         var rocketsPool = GetRocketsPool(types);
         var currRocket = rocketsPool.GetNewItem();
         currRocket.transform.position = basePlanet.transform.position;
