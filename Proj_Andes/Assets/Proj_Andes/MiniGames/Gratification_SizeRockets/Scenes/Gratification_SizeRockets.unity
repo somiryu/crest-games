@@ -1027,6 +1027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioInstruction
       objectReference: {fileID: 0}
+    - target: {fileID: 2500960040834178063, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8725471533855259975, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 595.78015
@@ -2846,7 +2850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8622947306577727613, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.86
+      value: 5.49
       objectReference: {fileID: 0}
     - target: {fileID: 8622947306577727613, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_LocalPosition.y

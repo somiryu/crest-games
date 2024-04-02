@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MG_SizeRockets_Rocket : MonoBehaviour
 {
-    public SizeRocketsRocketTypes rocketType;
+	public SizeRocketsRocketTypes rocketType;
 	public SizeRocketsTravelState state;
 
-    public float speed;
-    public int coinsCapacity;
+	public float speed;
+	public int coinsCapacity;
 
-    public MG_SizeRockets_Planet targetPlanet;
-    public Transform basePlanet;
+	public MG_SizeRockets_Planet targetPlanet;
+	public Transform basePlanet;
 	Pool<MG_SizeRockets_Rocket> pool;
 
 	public int coinsCarrying;
@@ -25,7 +26,7 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 
 	public void Init(
 		Pool<MG_SizeRockets_Rocket> _pool,
-		MG_SizeRockets_Planet _targetPlanet, 
+		MG_SizeRockets_Planet _targetPlanet,
 		Transform _basePlanet)
 	{
 		targetPlanet = _targetPlanet;
@@ -35,7 +36,7 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 
 		var config = ISizeRocketsManager.Instance.gameConfigs.GetShipConfig(rocketType);
 
-        speed = config.speed;
+		speed = config.speed;
 		coinsCapacity = config.coinsCapacity;
 
 		coinsCarrying = 0;
@@ -46,6 +47,7 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 	{
 		Vector3 currentTargetPos = Vector3.zero;
 		Vector3 currentInitialPos = transform.position;
+		if (!Input.GetMouseButton(0)) return;
 		if (state == SizeRocketsTravelState.GoingToPlanet)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, targetPlanet.transform.position, speed * Time.deltaTime);
@@ -68,7 +70,7 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 			{
 				ISizeRocketsManager.Instance.OnShipDeliveredCoins(this, coinsCarrying);
 
-                GameUIController.Instance.StarEarned(Camera.main.WorldToScreenPoint(targetPlanet.transform.position));
+				GameUIController.Instance.StarEarned(Camera.main.WorldToScreenPoint(targetPlanet.transform.position));
 				pool.RecycleItem(this);
 			}
 		}

@@ -161,6 +161,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 		if (activeShips.Count > 0)
 		{
+			currTargetPlanet = level1Planet;
 			smallRocketBtn.interactable = false;
 			mediumRocketBtn.interactable = false;
 			largeRocketBtn.interactable = false;
@@ -173,7 +174,8 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		}
 
 		if (activeShips.Count > 0) return;
-		if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        currTargetPlanet = level1Planet;
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 		{
 			var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mouseWorldPos.z = 0;
@@ -190,7 +192,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			currTargetPlanet = GetPlanetUnderMouse(mouseWorldPos);
 		}
 
-		if (currTargetPlanet != null && selectedRocketType != SizeRocketsRocketTypes.NONE)
+		if (selectedRocketType != SizeRocketsRocketTypes.NONE)
 		{
 
 			if(currTargetPlanet.coinsAmount == gameConfigs.FarPlanetCoins) currAnalytics.farPlanets++;
