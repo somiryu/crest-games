@@ -69,7 +69,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		TryGetComponent(out audioSource);
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
-		
+		roundCount = 0;
+		currAudio = GetRoundCoinsAmount();
+		StartCoroutine(currAudio);
 	}
 
 	private void Start()
@@ -93,9 +95,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currCoinsLabel.SetText(0.ToString());
 		shipsLeft = gameConfig.shipsPerGame;
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
-		roundCount = 0;
-		currAudio = GetRoundCoinsAmount();
-		StartCoroutine(currAudio);
 	}
 
 	IEnumerator GetRoundCoinsAmount()	{
