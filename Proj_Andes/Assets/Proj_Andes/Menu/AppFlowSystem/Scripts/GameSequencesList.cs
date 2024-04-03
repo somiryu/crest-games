@@ -9,7 +9,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
-    public static bool isTheNarrativeSequence = false   ;
+    public static bool isTheNarrativeSequence = false;
     public static string gameInstancePath = "GameSequencesList";
     public static string narrativeInstancePath = "NarrativeSequencesList";
     static GameSequencesList instance;
@@ -27,7 +27,7 @@ public class GameSequencesList : ScriptableObject
         }
     }
 
-    public List<SimpleGameSequenceItem> gameSequences;
+    public List<SimpleGameSequenceItem> gameSequences = new List<SimpleGameSequenceItem>();
     [NonSerialized] public SimpleGameSequenceItem prevGame;
     [HideInInspector] public SimpleGameSequenceItem currItem => gameSequences[goToGameGroupIdx];
     [NonSerialized] public int goToGameGroupIdx;
@@ -48,19 +48,28 @@ public class GameSequencesList : ScriptableObject
 	public void GoToNextItemInList()
     {
         var nextItem = GetGameSequence().GetNextItem();
+        Debug.LogWarning("Curr game sequence: " + GetGameSequence().name);
         if (nextItem != null)
         {
-            if (prevGame != null)
+			Debug.LogWarning("Curr game sequence next item: " + nextItem.name);
+			if (prevGame != null)
             {
                 prevGame.SaveAnalytics();
                 Debug.Log("last screen type: " + prevGame.GetSceneID() + " id generated: " + prevGame.GameID);
                 prevGame.SaveGeneralGameAnalytics();
                 DatabaseManager.SaveUserDatasList(UserDataManager.Instance.usersDatas, UserDataManager.userAnayticsPerGame, false);
             }
-            prevGame = nextItem;
+			Debug.LogWarning("saved correctly, Changing curr scene to: " + nextItem.name);
+
+			prevGame = nextItem;
+
+            Debug.LogWarning("Audio manager: " + AudioManager.Instance);
+            Debug.LogWarning("TimeManager: " + TimeManager.Instance);
+
             AudioManager.Instance.PlayMusic();
             TimeManager.Instance.ResetUsers();
-            SceneManagement.GoToScene(nextItem.scene);
+			Debug.LogWarning("After reset users");
+			SceneManagement.GoToScene(nextItem.scene);
         }
         else GoToNextSequence();
     }
@@ -88,7 +97,7 @@ public class GameSequencesList : ScriptableObject
     public void GoToNextSequence()
     {
 		goToGameGroupIdx++;
-
+        Debug.LogWarning("Calling go to next sequence : " + gameSequences);
 		if (goToGameGroupIdx >= gameSequences.Count)
         {
             goToGameGroupIdx = gameSequences.Count-1;

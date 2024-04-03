@@ -369,15 +369,15 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         selectUserContainer.gameObject.SetActive(false);
     }
 
-    void OnFinishedUserCreation()
+	void OnFinishedUserCreation()
 	{
-        var newUser = new UserData();
+		var newUser = new UserData();
 		newUser.pin = nameField.text;
 		newUser.institutionCode = UserDataManager.CurrInstitutionCode;
-        newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult)? ageResult : -1;
-        newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
-		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true ,out var genderFound)? genderFound : UserGender.NONE;
-		newUser.schoolType =  (UserSchoolType) schoolTypeField.value ;
+		newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult) ? ageResult : -1;
+		newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
+		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
+		newUser.schoolType = (UserSchoolType)schoolTypeField.value;
 		newUser.country = countryField.text;
 		newUser.livingWith = GetUserLivingWith();
 
@@ -388,7 +388,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			errMsg = "El nombre de usuario está vacío o es inválido";
 		}
-		else if(newUser.age == -1)
+		else if (newUser.age == -1)
 		{
 			errMsg = "El campo de edad está vacío o es inválido";
 		}
@@ -417,10 +417,15 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		validData = string.IsNullOrEmpty(errMsg);
 		wrongNewUserDataLabelPopUp.SetText(errMsg);
 
-		if(!validData) wrongNewUserDataPopUp.gameObject.SetActive(true);
+		if (!validData) wrongNewUserDataPopUp.gameObject.SetActive(true);
 		else
 		{
-			newUser.id = Guid.NewGuid().ToString();
+			var alreadyInIdx = 
+				UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.institutionCode == newUser.institutionCode);
+
+			if (alreadyInIdx != -1) newUser.id = UserDataManager.Instance.usersDatas[alreadyInIdx].id;
+			else newUser.id = Guid.NewGuid().ToString();
+
 			UserDataManager.Instance.RegisterNewUser(newUser);
 			createNewUserPanel.SetActive(false);
 			RebuildUsersList();

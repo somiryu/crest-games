@@ -38,16 +38,16 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	[Header("Planets")]
 	public Transform basePlanet;
-	public MG_SizeRockets_Planet planetPrefab;
-	public BoxCollider planetsSpawnArea;
 	public Transform planetsParent;
 
 	private List<MG_SizeRockets_Planet> planets = new List<MG_SizeRockets_Planet>();
 	private List<MG_SizeRockets_Rocket> activeShips = new List<MG_SizeRockets_Rocket>();
 	[SerializeField] MG_SizeRockets_Planet level1Planet;
-	[SerializeField] private List<MG_SizeRockets_Planet> closePlanets;
-	[SerializeField] private List<MG_SizeRockets_Planet> middleDistancePlanets;
-	[SerializeField] private List<MG_SizeRockets_Planet> farPlanets;
+
+	[SerializeField] public List<AudioClip> coinsLeftAudios = new List<AudioClip>();
+	IEnumerator currAudio;
+	[SerializeField] Transform actionBlocker;
+	[SerializeField] CatchCoinsAudioInstruction catchCoinsAudio;
 
 	private SizeRocketsRocketTypes selectedRocketType;
 	private MG_SizeRockets_Planet currTargetPlanet;
@@ -56,7 +56,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	public EndOfGameManager EndOfGameManager => eogManager;
 	public int shipsPerGame => gameConfigs.shipsPerGame;
 
-	private int totalCoinsWon = 0;
+    private int totalCoinsWon = 0;
 	private int shipsLeft;
 
 	private bool gameOverFlag;
@@ -66,14 +66,21 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private void Awake()
 	{
         ISizeRocketsManager.Instance = this;
-
-		level1Planet.Init(20);
-        planets.Add(level1Planet);
 		TryGetComponent(out audioSource);
-        ingameObj.SetActive(true);
-		ingameObjUI.SetActive(true);
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
+		
+	}
+
+	private void Start()
+	{
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.sizeRocketsGame);
+		Debug.LogWarning("Initializing size rockets");
+		level1Planet.Init(20);
+		planets.Add(level1Planet);
+		ingameObj.SetActive(true);
+		ingameObjUI.SetActive(true);
+
 		eogManager.OnGameStart();
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
 		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
@@ -86,74 +93,18 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currCoinsLabel.SetText(0.ToString());
 		shipsLeft = gameConfig.shipsPerGame;
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
+		roundCount = 0;
+		currAudio = GetRoundCoinsAmount();
+		StartCoroutine(currAudio);
 	}
 
-	private void Start()
-	{
-		GeneralGameAnalyticsManager.Instance.Init(DataIds.sizeRocketsGame);
-	}
-	void InitLevel2()
-	{
-		audioSource.clip = succeededRound;
+	IEnumerator GetRoundCoinsAmount()	{
+		actionBlocker.gameObject.SetActive(true);
+		audioSource.clip = coinsLeftAudios[roundCount];
 		audioSource.Play();
-		level1Planet.gameObject.SetActive(false);
-        shipsLeft = gameConfig.shipsPerGame;
-        shipsLeftTxt.SetText(shipsLeft.ToString());
-        GeneratePlanets();
+		yield return new WaitForSeconds(coinsLeftAudios[roundCount].length);
+        actionBlocker.gameObject.SetActive(false);
     }
-    public void GeneratePlanets()
-	{
-		planets.AddRange(closePlanets);
-		planets.AddRange(middleDistancePlanets);
-		planets.AddRange(farPlanets);
-
-		for (int i = 0; i < closePlanets.Count; i++)
-		{
-			closePlanets[i].gameObject.SetActive(true);
-            closePlanets[i].Init(gameConfigs.closePlanetCoins);
-        }
-		for (int i = 0; i < middleDistancePlanets.Count; i++)
-		{
-            middleDistancePlanets[i].gameObject.SetActive(true);
-            middleDistancePlanets[i].Init(gameConfigs.middlePlanetCoins);
-        }
-		for (int i = 0; i < farPlanets.Count; i++)
-		{
-            farPlanets[i].gameObject.SetActive(true);
-            farPlanets[i].Init(gameConfigs.FarPlanetCoins);
-        }
-
-	}
-
-	Vector3 GetNewRandomPosition(int trialIdx, Vector3 minPos, Vector3 maxPos)
-	{
-		trialIdx++;
-		if (trialIdx > 20)
-		{
-			Debug.LogError("No available random position found");
-			return Vector3.zero;
-		}
-		var newTestPosition = Vector3.zero;
-		newTestPosition.x = Random.Range(minPos.x, maxPos.x);
-		newTestPosition.y = Random.Range(minPos.y, maxPos.y);
-		if (IsPositionAvailable(newTestPosition)) return newTestPosition;
-		return GetNewRandomPosition(trialIdx, minPos, maxPos);
-	}
-
-	bool IsPositionAvailable(Vector3 position)
-	{
-		for (int i = 0; i < planets.Count; i++)
-		{
-			var otherPos = planets[i].transform.position;
-			var delta = otherPos - position;
-			//1,5 if just the planets size, Offset of 1 so that planets appear far from each other
-			if (delta.magnitude <= 1f + 1)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
 
 	private void Update()
 	{
@@ -175,30 +126,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 		if (activeShips.Count > 0) return;
         currTargetPlanet = level1Planet;
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-		{
-			var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			mouseWorldPos.z = 0;
-			var newPlanet = GetPlanetUnderMouse(mouseWorldPos);
-			if(newPlanet != currTargetPlanet)
-			{
-				currTargetPlanet = newPlanet;
-				for (int i = 0; i < planets.Count; i++)
-				{
-					var curr = planets[i];
-					curr.SetSelected(curr == currTargetPlanet);
-				}
-			}
-			currTargetPlanet = GetPlanetUnderMouse(mouseWorldPos);
-		}
 
 		if (selectedRocketType != SizeRocketsRocketTypes.NONE)
 		{
-
-			if(currTargetPlanet.coinsAmount == gameConfigs.FarPlanetCoins) currAnalytics.farPlanets++;
-			else if(currTargetPlanet.coinsAmount == gameConfigs.middlePlanetCoins) currAnalytics.midPlanets++;
-			else if(currTargetPlanet.coinsAmount == gameConfigs.closePlanetCoins) currAnalytics.closePlanets++;
-
 			if (selectedRocketType == SizeRocketsRocketTypes.small) currAnalytics.smallShipsCount++;
 			else if (selectedRocketType == SizeRocketsRocketTypes.medium) currAnalytics.mediumShipsCount++;
 			else if (selectedRocketType == SizeRocketsRocketTypes.large) currAnalytics.bigShipsCount++;
@@ -209,41 +139,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			currTargetPlanet = null;
 			OnPressedRocketBtn(SizeRocketsRocketTypes.NONE);
 		}
-
-		
-		
-		if (shipsLeft <= 0 && activeShips.Count == 0)
-		{
-			roundCount++;
-			//if (roundCount > 0 && roundCount <= 1) InitLevel2();
-			GameOver();
-        }
-	}
-
-
-	MG_SizeRockets_Planet GetPlanetUnderMouse(Vector3 position)
-	{
-		for (int i = 0; i < planets.Count; i++)
-		{
-			var curr = planets[i];
-			var dist = curr.transform.position - position;
-			if (dist.magnitude > 1.5f) continue;
-			if (curr.coinsAmount == 0) continue;
-
-			var actualCurrentCoins = curr.coinsAmount;
-			for (int j = 0; j < activeShips.Count; j++)
-			{
-				var currShip = activeShips[j];
-				if(currShip.targetPlanet == planets[i])
-				{
-					actualCurrentCoins -= currShip.coinsCapacity;
-				}
-			}
-			if (actualCurrentCoins <= 0) continue;
-			return curr;
-
-		}
-		return null;
 	}
 
 	public void OnPressedRocketBtn(SizeRocketsRocketTypes types)
@@ -270,8 +165,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	void GenerateNewShip(SizeRocketsRocketTypes types)
 	{
 		if (shipsLeft <= 0) return;
+        roundCount++;
 
-		var rocketsPool = GetRocketsPool(types);
+        var rocketsPool = GetRocketsPool(types);
 		var currRocket = rocketsPool.GetNewItem();
 		currRocket.transform.position = basePlanet.transform.position;
 		currRocket.Init(rocketsPool, currTargetPlanet, basePlanet);
@@ -299,12 +195,23 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount)
 	{
-		if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
+		currAudio = GetRoundCoinsAmount();
+        if(roundCount < coinsLeftAudios.Count) StartCoroutine(currAudio);
+
+        if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
 		else GeneralGameAnalyticsManager.RegisterWin();
+
 
 		activeShips.Remove(rocket);
 		totalCoinsWon += coinsAmount;
 		currCoinsLabel.SetText(totalCoinsWon.ToString());
+
+		if (activeShips.Count == 0 && shipsLeft <= 0)
+		{
+			GameOver();
+			return;
+		}
+
 		smallRocketBtn.interactable = true;
 		mediumRocketBtn.interactable = true;
 		largeRocketBtn.interactable = true;
@@ -333,9 +240,6 @@ public class SizeRocketAnalytics
 	public int mediumShipsCount;
 	public int smallShipsCount;
 	public int stars;
-	public int closePlanets;
-	public int midPlanets;
-	public int farPlanets;
 	public float averageClick;
 	public float timePlayed;
 }

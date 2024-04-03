@@ -73,9 +73,6 @@ public static class DataIds
     public const string sizeRocketsBigShips = "big_ships";
     public const string sizeRocketsMidShips = "medium_ships";
     public const string sizeRocketsSmallShips = "small_ships";
-    public const string sizeRocketsClosePlanets = "close_planets";
-    public const string sizeRocketsMidPlanets = "mid_planets";
-    public const string sizeRocketsFarPlanets = "far_planets";
 
     public const string tryAgainClicks = "retry_clicks";
 

@@ -574,7 +574,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
   m_sharedMaterial: {fileID: -2667132593029464860, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
@@ -1426,7 +1426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8622947306577727613, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.08
+      value: 3.47
       objectReference: {fileID: 0}
     - target: {fileID: 8622947306577727613, guid: 846a62794f6e5b340a745e1b89688bf4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2599,11 +2599,11 @@ MonoBehaviour:
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
   - skinType: 0
-    sprite: {fileID: 21300000, guid: a62bb30cbbf7bd647934ff8ef152ab55, type: 3}
+    sprite: {fileID: 21300000, guid: 7ceb82320977a8f43b3a69428dbd4af8, type: 3}
   - skinType: 1
-    sprite: {fileID: 21300000, guid: e9a282592598bb14ead3c6ad20fd16ea, type: 3}
+    sprite: {fileID: 21300000, guid: 8f99cf12229936245b88ebca189a3ac7, type: 3}
   - skinType: 2
-    sprite: {fileID: 21300000, guid: 0b46e53fda2a1dc4eabe1227ad9f6c74, type: 3}
+    sprite: {fileID: 21300000, guid: 93d16e3917a80c348af164aa205f58ae, type: 3}
 --- !u!114 &1564268887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2903,7 +2903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2918567037770633848, guid: 12a41bd8ea13e3241b852e6722682d10, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.92
+      value: 3.68
       objectReference: {fileID: 0}
     - target: {fileID: 2918567037770633848, guid: 12a41bd8ea13e3241b852e6722682d10, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3415,11 +3415,11 @@ MonoBehaviour:
   sRenderer: {fileID: 0}
   imagePerSkinTypes:
   - skinType: 0
-    sprite: {fileID: 21300000, guid: 3579c1e9ffd416848ac227e968fd4e82, type: 3}
+    sprite: {fileID: 21300000, guid: 7ceb82320977a8f43b3a69428dbd4af8, type: 3}
   - skinType: 1
-    sprite: {fileID: 21300000, guid: 542a5f11e56a2be4f84fe55e6551f8ec, type: 3}
+    sprite: {fileID: 21300000, guid: 8f99cf12229936245b88ebca189a3ac7, type: 3}
   - skinType: 2
-    sprite: {fileID: 21300000, guid: e8f9bcd1d8e659d4a97e0e6012730383, type: 3}
+    sprite: {fileID: 21300000, guid: 93d16e3917a80c348af164aa205f58ae, type: 3}
 --- !u!114 &2105149408
 MonoBehaviour:
   m_ObjectHideFlags: 0
