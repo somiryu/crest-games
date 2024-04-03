@@ -66,14 +66,21 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private void Awake()
 	{
         ISizeRocketsManager.Instance = this;
-
-		level1Planet.Init(8);
-        planets.Add(level1Planet);
 		TryGetComponent(out audioSource);
-        ingameObj.SetActive(true);
-		ingameObjUI.SetActive(true);
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
+		
+	}
+
+	private void Start()
+	{
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.sizeRocketsGame);
+		Debug.LogWarning("Initializing size rockets");
+		level1Planet.Init(8);
+		planets.Add(level1Planet);
+		ingameObj.SetActive(true);
+		ingameObjUI.SetActive(true);
+
 		eogManager.OnGameStart();
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
 		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
@@ -86,11 +93,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currCoinsLabel.SetText(0.ToString());
 		shipsLeft = gameConfig.shipsAmtLavel1;
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
-	}
-
-	private void Start()
-	{
-		GeneralGameAnalyticsManager.Instance.Init(DataIds.sizeRocketsGame);
 	}
 	void InitLevel2()
 	{
