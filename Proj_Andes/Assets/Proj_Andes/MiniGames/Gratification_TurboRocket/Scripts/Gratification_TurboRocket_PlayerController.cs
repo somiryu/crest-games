@@ -68,27 +68,21 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     private void Awake()
     {
         iTurboRocketManager.Instance = this;
-        
-        Init();
-    }
-    public void Init()
-    {
-        artSkinnableObj.OnCurrSkinObjChanged += ReasignAnimator;
-        artParent.gameObject.SetActive(true);
-        character.GetComponentInChildren<ParticleSystem>().Play();
-
-        playerRanXSpace = 0;
-        targetYPos = transform.position.y;
-        TryGetComponent(out myCollider);
-        TryGetComponent(out ui);
-        planet.Init(5);
-        eogManager.OnGameStart();
-        turboDeacceleration = TurboCounter();
+		artSkinnableObj.OnCurrSkinObjChanged += ReasignAnimator;
+		TryGetComponent(out myCollider);
+		TryGetComponent(out ui);
+		playerRanXSpace = 0;
+		targetYPos = transform.position.y;
 	}
 
 	private void Start()
 	{
-        RideBegining();
+		artParent.gameObject.SetActive(true);
+		character.GetComponentInChildren<ParticleSystem>().Play();
+		planet.Init(5);
+		eogManager.OnGameStart();
+		turboDeacceleration = TurboCounter();
+		RideBegining();
         GeneralGameAnalyticsManager.Instance.Init(DataIds.turboRocketGame);
 	}
 
