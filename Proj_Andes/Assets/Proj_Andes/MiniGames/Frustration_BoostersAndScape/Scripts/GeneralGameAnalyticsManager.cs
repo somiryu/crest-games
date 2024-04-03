@@ -8,7 +8,7 @@ public class GeneralGameAnalyticsManager : MonoBehaviour
 	private static GeneralGameAnalyticsManager instance;
 	public static GeneralGameAnalyticsManager Instance => instance;
 
-	public GeneralGameAnalytics analytics;
+	public GeneralGameAnalytics analytics = new GeneralGameAnalytics();
 
 	public float clickTimer;
 
@@ -16,15 +16,12 @@ public class GeneralGameAnalyticsManager : MonoBehaviour
 	{
 		if(instance != null && instance != this) DestroyImmediate(instance);
 		instance = this;
-	}
-
-	private void Start()
-	{
 		analytics = new GeneralGameAnalytics();
 	}
 
 	public void Init(string gameType)
 	{
+		if(analytics == null) analytics = new GeneralGameAnalytics();
 		analytics.gameType = gameType;
 	}
 

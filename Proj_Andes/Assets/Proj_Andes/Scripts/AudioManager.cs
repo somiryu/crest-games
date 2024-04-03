@@ -37,6 +37,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayMusic()
     {
+        Debug.LogWarning("Started calling play music");
         if (GameSequencesList.Instance.currItem is GameConfig || GameSequencesList.Instance.currItem is SimpleGameSequenceItemTutorial)
         {
             backgroundSoundType = BackgroundSoundType.Game;
@@ -58,9 +59,10 @@ public class AudioManager : MonoBehaviour
             }
         }
         if(backgroundSoundType == BackgroundSoundType.Narrative) backgroundSoundType = BackgroundSoundType.App;
-    }
+		Debug.LogWarning("finished calling play music");
+	}
 
-    private void Update()
+	private void Update()
     {
         if (Input.GetMouseButtonDown(0) && backgroundSoundType != BackgroundSoundType.Game)
         {
