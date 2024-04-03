@@ -66,14 +66,21 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private void Awake()
 	{
         ISizeRocketsManager.Instance = this;
-
-		level1Planet.Init(20);
-        planets.Add(level1Planet);
 		TryGetComponent(out audioSource);
-        ingameObj.SetActive(true);
-		ingameObjUI.SetActive(true);
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
+		
+	}
+
+	private void Start()
+	{
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.sizeRocketsGame);
+		Debug.LogWarning("Initializing size rockets");
+		level1Planet.Init(20);
+		planets.Add(level1Planet);
+		ingameObj.SetActive(true);
+		ingameObjUI.SetActive(true);
+
 		eogManager.OnGameStart();
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
 		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
@@ -86,19 +93,12 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currCoinsLabel.SetText(0.ToString());
 		shipsLeft = gameConfig.shipsPerGame;
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
-
 		roundCount = 0;
-        currAudio = GetRoundCoinsAmount();
-        StartCoroutine(currAudio);
-    }
+		currAudio = GetRoundCoinsAmount();
+		StartCoroutine(currAudio);
+	}
 
-	private void Start()
-	{
-		GeneralGameAnalyticsManager.Instance.Init(DataIds.sizeRocketsGame);
-    }
-
-	IEnumerator GetRoundCoinsAmount()
-	{
+	IEnumerator GetRoundCoinsAmount()	{
 		actionBlocker.gameObject.SetActive(true);
 		audioSource.clip = coinsLeftAudios[roundCount];
 		audioSource.Play();
@@ -139,10 +139,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			currTargetPlanet = null;
 			OnPressedRocketBtn(SizeRocketsRocketTypes.NONE);
 		}
-
-		
-		
-		if (shipsLeft <= 0 && activeShips.Count == 0) GameOver();
 	}
 
 	public void OnPressedRocketBtn(SizeRocketsRocketTypes types)
@@ -205,16 +201,24 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
         if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
 		else GeneralGameAnalyticsManager.RegisterWin();
 
+
 		activeShips.Remove(rocket);
 		totalCoinsWon += coinsAmount;
 		currCoinsLabel.SetText(totalCoinsWon.ToString());
+
+		if (activeShips.Count == 0 && shipsLeft <= 0)
+		{
+			GameOver();
+			return;
+		}
+
 		smallRocketBtn.interactable = true;
 		mediumRocketBtn.interactable = true;
 		largeRocketBtn.interactable = true;
-    }
+	}
 
 
-    void GameOver()
+	void GameOver()
 	{
         gameOverFlag = true;
 		currAnalytics.stars = totalCoinsWon;

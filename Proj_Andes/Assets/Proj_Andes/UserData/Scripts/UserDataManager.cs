@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "UserDataManager", menuName = "User Data/ UserDataManager")]
 public class UserDataManager : ScriptableObject
@@ -219,9 +220,11 @@ public class UserDataManager : ScriptableObject
 
 	public void RegisterNewUser(UserData user)
 	{
-		if(usersDatas.Exists(x => x.id == user.id))
+		var alreadyInIndex = usersDatas.FindIndex(x => x.id == user.id);
+        if (alreadyInIndex != -1)
 		{
-			Debug.Log("Trying to add user: " + user.pin + " " + user.id + " But ID already existed");
+			usersDatas[alreadyInIndex] = user;
+            Debug.Log("Trying to add user: " + user.pin + " " + user.id + " But ID already existed, replacing data " + user.age);
 			return;
 		}
 		usersDatas.Add(user);
