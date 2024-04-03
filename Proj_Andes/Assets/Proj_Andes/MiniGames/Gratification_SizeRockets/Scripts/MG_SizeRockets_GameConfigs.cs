@@ -7,9 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MG_SizeRockets_GameConfigs", menuName = "MiniGames/MG_SizeRockets_GameConfigs")]
 public class MG_SizeRockets_GameConfigs : GameConfig
 {
-	public int closePlanetCoins;
-	public int middlePlanetCoins;
-	public int FarPlanetCoins;
+	public int planetCoins;
 
 	public int shipsPerGame;
 	public int shipsAmtLavel1;
@@ -40,9 +38,6 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 		itemAnalytics.Add(DataIds.sizeRocketsMidShips, analytics.mediumShipsCount);
 		itemAnalytics.Add(DataIds.sizeRocketsSmallShips, analytics.smallShipsCount);
 		itemAnalytics.Add(DataIds.stars, analytics.stars);
-		itemAnalytics.Add(DataIds.sizeRocketsClosePlanets, analytics.closePlanets);
-		itemAnalytics.Add(DataIds.sizeRocketsMidPlanets, analytics.midPlanets);
-		itemAnalytics.Add(DataIds.sizeRocketsFarPlanets, analytics.farPlanets);
 		itemAnalytics.Add(DataIds.averageClickTime, analytics.averageClick);
 
 		UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics); 

@@ -83,14 +83,13 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         mediumRocketsPool.Init(5);
         largeRocketsPool.Init(5);
         currCoinsLabel.SetText(0.ToString());
-        shipsLeft = shipsPerGame;
+        shipsLeft = gameConfig.shipsAmtLavel1;
         shipsLeftTxt.SetText(shipsPerGame.ToString());
     }
     void InitTuto()
     {
         currTargetPlanet = tutoPlanet;
         tutoStepIdx = 0;
-        handSignPlanet.gameObject.SetActive(false);
         ActivateTutoUI();
     }
 
@@ -163,32 +162,6 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
             else tutorialSteps[i].activeRocketType.interactable = false;
         }
     }
-    Vector3 GetNewRandomPosition(int trialIdx, Vector3 minPos, Vector3 maxPos)
-    {
-        trialIdx++;
-        if (trialIdx > 20)
-        {
-            Debug.LogError("No available random position found");
-            return Vector3.zero;
-        }
-        var newTestPosition = Vector3.zero;
-        newTestPosition.x = Random.Range(minPos.x, maxPos.x);
-        newTestPosition.y = Random.Range(minPos.y, maxPos.y);
-        if (IsPositionAvailable(newTestPosition)) return newTestPosition;
-        return GetNewRandomPosition(trialIdx, minPos, maxPos);
-    }
-
-    bool IsPositionAvailable(Vector3 position)
-    {
-        var otherPos = tutoPlanet.transform.position;
-        var delta = otherPos - position;
-        //1,5 if just the planets size, Offset of 1 so that planets appear far from each other
-        if (delta.magnitude <= 1f + 1)
-        {
-            return false;
-        }
-        return true;
-    }
 
     private void Update()
     {
@@ -202,18 +175,6 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
             if (activeShips.Count < 1) GenerateNewShip(selectedRocketType);
         }
         if (shipsLeft <= 0 && activeShips.Count == 0) GameOver();
-    }
-
-
-    MG_SizeRockets_Planet GetPlanetUnderMouse(Vector3 position)
-    {
-        var curr = tutoPlanet;
-        var dist = curr.transform.position - position;
-        if (dist.magnitude <= 1.5f)
-        {
-            return curr;
-        }
-        return null;
     }
 
     public void OnPressedRocketBtn(SizeRocketsRocketTypes types)
