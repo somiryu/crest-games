@@ -110,7 +110,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         }
         actionBlocker.gameObject.SetActive(false);
     }
-    IEnumerator GetPlanet()
+    IEnumerator TouchScreenToMoveInstruction()
     {
         actionBlocker.gameObject.SetActive(true);
         handSignPlanet.gameObject.SetActive(true);
@@ -152,8 +152,8 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
     void ActivateTutoUI()
     {
-        actionBlocker.gameObject.SetActive(true);
-        StartCoroutine(ShipDescription());
+        if(!handSignPlanet.gameObject.activeInHierarchy) actionBlocker.gameObject.SetActive(true);
+		StartCoroutine(ShipDescription());
         if (currTutoStep.Type != SizeRocketsTutoSteps.SmallRocketStep) handSignShip.gameObject.SetActive(false);
 
         for (int i = 0; i < tutorialSteps.Count; i++)
@@ -174,7 +174,6 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
             currTargetPlanet = tutoPlanet;
             if (activeShips.Count < 1) GenerateNewShip(selectedRocketType);
         }
-        if (shipsLeft <= 0 && activeShips.Count == 0) GameOver();
     }
 
     public void OnPressedRocketBtn(SizeRocketsRocketTypes types)
@@ -193,7 +192,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         if (shipsLeft <= 0) return;
         audioSource.clip = onDepart;
         audioSource.Play();
-        if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) StartCoroutine(GetPlanet());
+        if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) StartCoroutine(TouchScreenToMoveInstruction());
         else if (currTutoStep.Type == SizeRocketsTutoSteps.BigRocketStep) handSignShip.gameObject.SetActive(false);
         var rocketsPool = GetRocketsPool(types);
         var currRocket = rocketsPool.GetNewItem();
@@ -230,6 +229,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     }
     void GameOver()
     {
+        Debug.Log("Calling game over");
         StartCoroutine(GoToNextScene());
         gameConfigs.coinsCollected = totalCoinsWon;
         tutoPlanet.gameObject.SetActive(false);

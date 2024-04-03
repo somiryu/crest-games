@@ -48,7 +48,9 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 		Vector3 currentTargetPos = Vector3.zero;
 		Vector3 currentInitialPos = transform.position;
 		if (!Input.GetMouseButton(0)) return;
-		if (state == SizeRocketsTravelState.GoingToPlanet)
+		if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        if (state == SizeRocketsTravelState.GoingToPlanet)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, targetPlanet.transform.position, speed * Time.deltaTime);
 
