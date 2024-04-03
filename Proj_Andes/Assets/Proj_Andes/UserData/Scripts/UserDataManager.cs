@@ -220,17 +220,10 @@ public class UserDataManager : ScriptableObject
 
 	public void RegisterNewUser(UserData user)
 	{
-        if (usersDatas.Exists(x => x.id == user.id))
+		var alreadyInIndex = usersDatas.FindIndex(x => x.id == user.id);
+        if (alreadyInIndex != -1)
 		{
-            var idx = usersDatas.IndexOf(usersDatas.Find(x => x.id == user.id));
-            var alreadyAddedUser = usersDatas[idx];
-			Debug.Log("old age " + alreadyAddedUser.age);
-            alreadyAddedUser.age = user.age;
-            alreadyAddedUser.grade = user.grade;
-            alreadyAddedUser.gender = user.gender;
-            alreadyAddedUser.schoolType = user.schoolType;
-            alreadyAddedUser.country = user.country;
-            alreadyAddedUser.livingWith = user.livingWith;
+			usersDatas[alreadyInIndex] = user;
             Debug.Log("Trying to add user: " + user.pin + " " + user.id + " But ID already existed, replacing data " + user.age);
 			return;
 		}

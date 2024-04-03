@@ -420,12 +420,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		if (!validData) wrongNewUserDataPopUp.gameObject.SetActive(true);
 		else
 		{
-			if (UserDataManager.Instance.usersDatas.Exists(x => x.pin == newUser.pin && x.institutionCode == newUser.institutionCode))
-			{
-				var idx = UserDataManager.Instance.usersDatas.IndexOf(UserDataManager.Instance.usersDatas.Find(x => x.pin == newUser.pin));
-				newUser.id = UserDataManager.Instance.usersDatas[idx].id;
-			}
+			var alreadyInIdx = 
+				UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.institutionCode == newUser.institutionCode);
+
+			if (alreadyInIdx != -1) newUser.id = UserDataManager.Instance.usersDatas[alreadyInIdx].id;
 			else newUser.id = Guid.NewGuid().ToString();
+
 			UserDataManager.Instance.RegisterNewUser(newUser);
 			createNewUserPanel.SetActive(false);
 			RebuildUsersList();
