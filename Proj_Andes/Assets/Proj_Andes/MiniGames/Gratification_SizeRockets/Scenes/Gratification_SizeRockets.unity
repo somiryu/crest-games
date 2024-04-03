@@ -870,6 +870,17 @@ Transform:
   - {fileID: 3787378177825030208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &528409217 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 838565788390763482, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+  m_PrefabInstance: {fileID: 607340137}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a804152d33bd5c343bf0484b9cc3812c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &552814583
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,6 +3547,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cb486c5a06ca6a847b95cfa35bd98132, type: 3}
   - {fileID: 8300000, guid: 09da3260a2326414e8c879b56cfd1c4b, type: 3}
   actionBlocker: {fileID: 1566326237}
+  catchCoinsAudio: {fileID: 528409217}
   eogManager: {fileID: 748297264}
 --- !u!82 &1920985626
 AudioSource:
