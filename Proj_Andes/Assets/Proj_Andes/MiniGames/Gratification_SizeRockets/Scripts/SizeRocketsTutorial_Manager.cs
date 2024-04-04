@@ -65,28 +65,31 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     private void Awake()
     {
         ISizeRocketsManager.Instance = this;
-
         TryGetComponent(out audioSource);
-
-        currAudio = ActivateStepActions(introAudio, selectShipAudio);
-        StartCoroutine(currAudio);
-        planetPrefab.Init(8);
-        actionBlocker.gameObject.SetActive(true);
-
-        selectedRocketType = SizeRocketsRocketTypes.NONE;
-
-        smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
-        mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.medium));
-        largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.large));
-
-        smallRocketsPool.Init(5);
-        mediumRocketsPool.Init(5);
-        largeRocketsPool.Init(5);
-        currCoinsLabel.SetText(0.ToString());
-        shipsLeft = gameConfig.shipsAmtLavel1;
-        shipsLeftTxt.SetText(shipsPerGame.ToString());
     }
-    void InitTuto()
+
+	private void Start()
+	{
+		currAudio = ActivateStepActions(introAudio, selectShipAudio);
+		StartCoroutine(currAudio);
+		planetPrefab.Init(8);
+		actionBlocker.gameObject.SetActive(true);
+
+		selectedRocketType = SizeRocketsRocketTypes.NONE;
+
+		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
+		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.medium));
+		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.large));
+
+		smallRocketsPool.Init(5);
+		mediumRocketsPool.Init(5);
+		largeRocketsPool.Init(5);
+		currCoinsLabel.SetText(0.ToString());
+		shipsLeft = gameConfig.shipsAmtLavel1;
+		shipsLeftTxt.SetText(shipsPerGame.ToString());
+	}
+
+	void InitTuto()
     {
         currTargetPlanet = tutoPlanet;
         tutoStepIdx = 0;
