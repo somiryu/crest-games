@@ -81,6 +81,8 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
     bool iTurboRocketManager.onDoneAnim { get; set; }
     Gratification_TurboRocket_CameraController iTurboRocketManager.camCC => camCC;
 
+    public float gameDuration { get => gameConfig.tutorialRideDuration; set { } }
+
     public bool endOfTuto;
     bool alreadyGivenInstruction;
 

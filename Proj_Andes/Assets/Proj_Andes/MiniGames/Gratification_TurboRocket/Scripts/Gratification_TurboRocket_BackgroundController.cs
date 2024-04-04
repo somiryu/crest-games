@@ -11,7 +11,7 @@ public class Gratification_TurboRocket_BackgroundController : MonoBehaviour
     public void Init()
     {
         var newSize = bkSize.localScale;
-        newSize.x = player.levelConfig.regularRideDuration * player.levelConfig.regularSpeed;
+        newSize.x = player.gameDuration * player.levelConfig.regularSpeed;
         bkSize.localScale = newSize;
         starsSpawner.Init();
         for (int i = 0; i < starsSpawner.stars.Count; i++) starsSpawner.stars[i].Init();

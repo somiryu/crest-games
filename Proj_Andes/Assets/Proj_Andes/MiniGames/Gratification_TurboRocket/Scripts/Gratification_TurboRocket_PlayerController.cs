@@ -62,6 +62,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
 
     bool iTurboRocketManager.onDoneAnim { get; set; }
+    public float gameDuration { get => gameConfig.regularRideDuration; set { } }
 
     public bool onAnim;
 
@@ -279,4 +280,5 @@ public interface iTurboRocketManager
     public void OnEnterTurboMode();
     public void OnExitTurboMode();
     public IEnumerator _OnFinishSequence();
+    public float gameDuration { get; set; }
 }
