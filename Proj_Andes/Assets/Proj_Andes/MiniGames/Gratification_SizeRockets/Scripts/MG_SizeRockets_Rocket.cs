@@ -30,11 +30,13 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 		MG_SizeRockets_Planet _targetPlanet,
 		Transform _basePlanet)
 	{
-        var currentDeltaPos = _targetPlanet.transform.position - _basePlanet.transform.position;
-        if (currentDeltaPos.magnitude <= 0.2f) return;
-        graphicGameObj.up = currentDeltaPos.normalized;
 
-        targetPlanet = _targetPlanet;
+		graphicGameObj.up = Vector3.right;
+		var scale = graphicGameObj.localScale;
+		scale.x = initialXscale;
+		graphicGameObj.localScale = scale;
+
+		targetPlanet = _targetPlanet;
 		basePlanet = _basePlanet;
 		state = SizeRocketsTravelState.GoingToPlanet;
 		pool = _pool;
