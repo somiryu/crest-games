@@ -27,20 +27,27 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	}
     public override void SaveAnalytics()
     {
-		var analytics = MG_SizeRockets_GameManager.Instance.currAnalytics;
 		GameID = Guid.NewGuid().ToString();
-
 		itemAnalytics = new Dictionary<string, object>();
-		itemAnalytics.Add(DataIds.GameID, GameID);
-		itemAnalytics.Add(DataIds.timePlayed, analytics.timePlayed);
-		itemAnalytics.Add(DataIds.sizeRocketsBigShips, analytics.bigShipsCount);
-		itemAnalytics.Add(DataIds.sizeRocketsMidShips, analytics.mediumShipsCount);
-		itemAnalytics.Add(DataIds.sizeRocketsSmallShips, analytics.smallShipsCount);
-		itemAnalytics.Add(DataIds.stars, analytics.stars);
-		itemAnalytics.Add(DataIds.averageClickTime, analytics.averageClick);
 
-		UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics); 
-    }
+
+		for (int i = 0;i < MG_SizeRockets_GameManager.Instance.analyticsPerRound.Length; i++)
+		{
+			var analytics = MG_SizeRockets_GameManager.Instance.analyticsPerRound[i];
+			itemAnalytics.Clear();
+			itemAnalytics.Add(DataIds.GameID, GameID);
+			itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
+			itemAnalytics.Add(DataIds.tryIndex, analytics.tryIndex);
+			itemAnalytics.Add(DataIds.sizeRocketResponseString, analytics.choiceType.ToString());
+			itemAnalytics.Add(DataIds.sizeRocketResponseInt, (int) analytics.choiceType);
+			itemAnalytics.Add(DataIds.mouseUpCount, analytics.mouseUpCount);
+			itemAnalytics.Add(DataIds.starsPerRound, analytics.stars);
+
+			UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics);
+
+		}
+
+	}
 }
 
 [Serializable]

@@ -61,15 +61,25 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	private bool gameOverFlag;
 
-	public SizeRocketAnalytics currAnalytics = new SizeRocketAnalytics();
+	public SizeRocketAnalytics currAnalytics => analyticsPerRound[roundCount];
+
+	public SizeRocketAnalytics[] analyticsPerRound;
+
 	int roundCount;
+
 	private void Awake()
 	{
         ISizeRocketsManager.Instance = this;
+		analyticsPerRound = new SizeRocketAnalytics[gameConfig.shipsPerGame];
+		for (int i = 0; i < analyticsPerRound.Length; i++)
+		{
+			analyticsPerRound[i] = new SizeRocketAnalytics();
+		}
 		TryGetComponent(out audioSource);
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
 		roundCount = 0;
+		currAnalytics.tryIndex = roundCount + 1;
 		currAudio = GetRoundCoinsAmount();
 		StartCoroutine(currAudio);
 	}
@@ -97,13 +107,14 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
 	}
 
-	IEnumerator GetRoundCoinsAmount()	{
+	IEnumerator GetRoundCoinsAmount()
+	{
 		actionBlocker.gameObject.SetActive(true);
 		audioSource.clip = coinsLeftAudios[roundCount];
 		audioSource.Play();
 		yield return new WaitForSeconds(coinsLeftAudios[roundCount].length);
-        actionBlocker.gameObject.SetActive(false);
-    }
+		actionBlocker.gameObject.SetActive(false);
+	}
 
 	private void Update()
 	{
@@ -115,6 +126,11 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			smallRocketBtn.interactable = false;
 			mediumRocketBtn.interactable = false;
 			largeRocketBtn.interactable = false;
+			if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
+			{
+				currAnalytics.mouseUpCount++;
+				Debug.Log("Mouse up detected");
+			}
 		}
 		else
 		{
@@ -128,11 +144,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 		if (selectedRocketType != SizeRocketsRocketTypes.NONE)
 		{
-			if (selectedRocketType == SizeRocketsRocketTypes.small) currAnalytics.smallShipsCount++;
-			else if (selectedRocketType == SizeRocketsRocketTypes.medium) currAnalytics.mediumShipsCount++;
-			else if (selectedRocketType == SizeRocketsRocketTypes.large) currAnalytics.bigShipsCount++;
-
-
+			currAnalytics.choiceType = selectedRocketType;
 			GenerateNewShip(selectedRocketType);
 			currTargetPlanet.OnMatchHappend();
 			currTargetPlanet = null;
@@ -164,8 +176,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	void GenerateNewShip(SizeRocketsRocketTypes types)
 	{
 		if (shipsLeft <= 0) return;
-        roundCount++;
-
         var rocketsPool = GetRocketsPool(types);
 		var currRocket = rocketsPool.GetNewItem();
 		currRocket.transform.position = basePlanet.transform.position;
@@ -194,6 +204,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount)
 	{
+		currAnalytics.stars = coinsAmount;
+
+		roundCount++;
 		currAudio = GetRoundCoinsAmount();
         if(roundCount < coinsLeftAudios.Count) StartCoroutine(currAudio);
 
@@ -211,6 +224,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			return;
 		}
 
+		currAnalytics.tryIndex = roundCount + 1;
 		smallRocketBtn.interactable = true;
 		mediumRocketBtn.interactable = true;
 		largeRocketBtn.interactable = true;
@@ -220,9 +234,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	void GameOver()
 	{
         gameOverFlag = true;
-		currAnalytics.stars = totalCoinsWon;
-		currAnalytics.timePlayed = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
-		currAnalytics.averageClick = GeneralGameAnalyticsManager.Instance.analytics.GetAverageClickTime();
 		afterActionPanel.SetActive(true);
 		ingameObj.SetActive(false);
 		ingameObjUI.SetActive(false);
@@ -235,12 +246,10 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 public class SizeRocketAnalytics
 {
-	public int bigShipsCount;
-	public int mediumShipsCount;
-	public int smallShipsCount;
+	public SizeRocketsRocketTypes choiceType;
+	public int tryIndex;
+	public int mouseUpCount;
 	public int stars;
-	public float averageClick;
-	public float timePlayed;
 }
 
 

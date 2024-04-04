@@ -8,8 +8,8 @@ public static class DataIds
 
     public const string TestID = "test ID";
     public const string GameOrderInSequence = "game_order";
-    public const string UserID = "user ID";
-    public const string GameID = "game ID";
+    public const string UserID = "id_jugador";
+    public const string GameID = "id_juego";
     public const string GameType = "game Type";
 
     //Generic IDs
@@ -69,7 +69,7 @@ public static class DataIds
     public const string magnetsGame = "buggy: los imanes y la energía";
     public const string magnetsEneryPicked = "magnet_collected";
 
-    public const string sizeRocketsGame = "collecting_cars";
+    public const string sizeRocketsGame = "carrito_recolector";
     public const string sizeRocketsBigShips = "big_ships";
     public const string sizeRocketsMidShips = "medium_ships";
     public const string sizeRocketsSmallShips = "small_ships";
@@ -78,12 +78,19 @@ public static class DataIds
 
     //General Test analytics
     public const string test = "test";
-    public const string institutionCode = "code";
+    public const string institutionCode = "id_proyecto";
     public const string created_At = "created_At";
     public const string age = "edad";
     public const string grade = "grado";
     public const string state = "state";
     public const string time_Spent = "time_Spent";
 
+	//Size rockets analytics
+	public const string frustrationMode = "cr_modo";
+	public const string tryIndex = "cr_intento";
+	public const string sizeRocketResponseString = "cr_respuesta";
+	public const string sizeRocketResponseInt = "cr_codigo";
+	public const string mouseUpCount = "cr_release";
+	public const string starsPerRound = "cr_premio";
 
 }

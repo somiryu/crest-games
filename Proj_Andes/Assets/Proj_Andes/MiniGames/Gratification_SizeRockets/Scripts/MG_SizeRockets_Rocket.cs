@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 	float initialXscale;
 
 	[SerializeField] Transform graphicGameObj;
+
 
 	private void Awake()
 	{
@@ -52,7 +54,6 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 	{
 		Vector3 currentTargetPos = Vector3.zero;
 		Vector3 currentInitialPos = transform.position;
-
         if (!Input.GetMouseButton(0)) return;
 		if (EventSystem.current.IsPointerOverGameObject()) return;
 
