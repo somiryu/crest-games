@@ -18,7 +18,7 @@ public class Gratification_TurboRocket_StarsSpawner : MonoBehaviour
         var newSize = spawnArea.size;
         newSize.x = backgroundController.bkSize.transform.localScale.x * 0.9f;
         spawnArea.size = newSize;
-        var spawnSpot = spawnArea.size.x/player.levelConfig.starsAmount;
+        var spawnSpot = spawnArea.size.x/player.starsAmt;
         //Alittle bit more than 2 so that the first star doesn't appear in the face of the player
         var offset = spawnArea.size.x / 2.2f;
         var center = spawnArea.transform.position;

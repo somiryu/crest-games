@@ -19,5 +19,7 @@ MonoBehaviour:
   turboSpeed: 15
   accelerationSpeed: 10
   regularRideDuration: 200
+  tutorialRideDuration: 100
   starsAmount: 17
+  tutoStarsAmount: 8
   minTurboTime: 4

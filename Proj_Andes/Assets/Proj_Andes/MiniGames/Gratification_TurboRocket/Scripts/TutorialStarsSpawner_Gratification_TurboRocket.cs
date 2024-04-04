@@ -12,13 +12,13 @@ public class TutorialStarsSpawner_Gratification_TurboRocket : Gratification_Turb
         var newSize = spawnArea.size;
         newSize.x = backgroundController.bkSize.transform.localScale.x * 0.9f;
         spawnArea.size = newSize;
-        var spawnSpot = spawnArea.size.x / tutorialManager.levelConfig.starsAmount;
+        var spawnSpot = spawnArea.size.x / tutorialManager.starsAmt;
         //Alittle bit more than 2 so that the first star doesn't appear in the face of the player
         var offset = spawnArea.size.x / 2.2f;
         var center = spawnArea.transform.position;
         var upLimit = center + spawnArea.size / 2;
         var downLimit = center - spawnArea.size / 2;
-        for (int i = 0; i < tutorialManager.levelConfig.starsAmount; i++)
+        for (int i = 0; i < tutorialManager.starsAmt; i++)
         {
             var randomPos = center;
             var newStar = GetStar();
