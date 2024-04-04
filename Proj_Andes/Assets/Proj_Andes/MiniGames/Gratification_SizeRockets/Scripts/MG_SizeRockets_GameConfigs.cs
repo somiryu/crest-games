@@ -8,7 +8,6 @@ using UnityEngine;
 public class MG_SizeRockets_GameConfigs : GameConfig
 {
 	public int planetCoins;
-
 	public int shipsPerGame;
 	public int shipsAmtLavel1;
 

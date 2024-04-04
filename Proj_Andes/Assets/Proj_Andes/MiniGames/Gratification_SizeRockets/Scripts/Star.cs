@@ -18,13 +18,13 @@ public class Star : MonoBehaviour
     public void ActivateStar()
     {
         active = true;
-        starImage.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
     public void DeactivateStar()
     {
         if (active) obtainableStarsController.RemoveStarInUse(this);
         active = false;
-        starImage.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
 }

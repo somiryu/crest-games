@@ -11,7 +11,7 @@ public class ObtainableStarsController : MonoBehaviour
     [HideInInspector] public List<Star> starsInUse = new List<Star>();
     void Awake()
     {
-        stars = starsParent.GetComponentsInChildren<Star>();
+        stars = starsParent.GetComponentsInChildren<Star>(true);
         for (int i = 0; i < stars.Length; i++) stars[i].Init(this);
         starsInUse.Clear();
     }
