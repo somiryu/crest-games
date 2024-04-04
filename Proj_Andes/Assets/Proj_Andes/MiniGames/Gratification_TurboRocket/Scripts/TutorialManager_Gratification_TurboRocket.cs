@@ -83,6 +83,8 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
 
     public float gameDuration { get => gameConfig.tutorialRideDuration; set { } }
 
+    public float starsAmt { get => gameConfig.tutoStarsAmount; set { } }
+
     public bool endOfTuto;
     bool alreadyGivenInstruction;
 
