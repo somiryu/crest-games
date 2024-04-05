@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Tymski;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 [CreateAssetMenu(fileName = "HearthAndStarsGameConfigs", menuName = "MiniGames/HearthAndStarsGameConfigs")]
 public class MG_HearthAndStarsGameConfigs : GameConfig
@@ -25,12 +26,17 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
         {
             var currRound = allRoundsAnalytics[i];
 			currRoundAnalyticsDic.Clear();
-			currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
-			currRoundAnalyticsDic.Add(DataIds.challengeType, currRound.challengeOrder);
-			currRoundAnalyticsDic.Add(DataIds.won, currRound.wonRound);
-			currRoundAnalyticsDic.Add(DataIds.responseTime, currRound.timeToMakeAChoice);
-			currRoundAnalyticsDic.Add(DataIds.totalClicks, currRound.clicks);
-			currRoundAnalyticsDic.Add(DataIds.lostBecauseOfTime, currRound.ranOutOfTime);
+            currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
+            currRoundAnalyticsDic.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
+            currRoundAnalyticsDic.Add(DataIds.id_Test, UserDataManager.CurrTestID);
+            currRoundAnalyticsDic.Add(DataIds.heartsNFlowersFrustration, 0);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersSkill, 2);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersValid, 1);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersTrial, currRound.roundCount);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersStimuli, currRound.stimuli);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersAnswer, currRound.answer);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersCode, currRound.wonRound);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersTime, currRound.timeToMakeAChoice);
 
             UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, currRoundAnalyticsDic);
         }
