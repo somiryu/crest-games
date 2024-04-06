@@ -93,7 +93,6 @@ public static class DataIds
 
     //Hearts and flowers analytics
     public const string heartsAndStarsGame = "corazones_flores";
-    public const string id_Test = "id_prueba";
     public const string heartsNFlowersFrustration= "cf_modo";
     public const string heartsNFlowersSkill = "cf_habilidad";
     public const string heartsNFlowersValid = "cf_valid";

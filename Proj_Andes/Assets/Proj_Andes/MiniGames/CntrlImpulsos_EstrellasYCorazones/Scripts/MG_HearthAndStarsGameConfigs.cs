@@ -28,7 +28,6 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 			currRoundAnalyticsDic.Clear();
             currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
             currRoundAnalyticsDic.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
-            currRoundAnalyticsDic.Add(DataIds.id_Test, UserDataManager.CurrTestID);
             currRoundAnalyticsDic.Add(DataIds.heartsNFlowersFrustration, 0);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersSkill, 2);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersValid, 1);
