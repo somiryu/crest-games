@@ -55,8 +55,7 @@ public static class DataIds
 
     public const string heartsAndStarsGame = "corazones_flores";
 
-    public const string turboRocketGame = "star_booster";
-    public const string turboRocketturboUsedTimes = "boosts";
+    public const string turboRocketGame = "turbo_estrellas";
 
     public const string mechanicHandGame = "por habilidad: la mano mecánica";
     public const string mechanicHandClawThrows = "claw_Throws";
@@ -92,5 +91,14 @@ public static class DataIds
 	public const string sizeRocketResponseInt = "cr_codigo";
 	public const string mouseUpCount = "cr_release";
 	public const string starsPerRound = "cr_premio";
+
+    //Turbo rocket analytics
+    public const string turboStarsFrustrationMode = "te_modo";
+    public const string turboStarsStars = "te_estrellas";
+    public const string turboStarsTurboUses = "te_turbo";
+    public const string turboStarsTurboTime = "te_turbo_tm";
+    public const string turboStarsTime= "te_tiempo_total";
+
+
 
 }
