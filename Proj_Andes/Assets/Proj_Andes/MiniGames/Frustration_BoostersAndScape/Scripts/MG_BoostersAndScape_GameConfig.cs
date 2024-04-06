@@ -22,10 +22,14 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
 
 		itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.GameID, GameID);
-        itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
-        itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
-        itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
-        itemAnalytics.Add(DataIds.boostersAndScapeTotalBoostsActivated, currData.boostersActivated);
+        itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
+        itemAnalytics.Add(DataIds.frustPersTrial , currData.timePlayed);
+        itemAnalytics.Add(DataIds.frustPersPresition, currData.clickRepetitions);
+        itemAnalytics.Add(DataIds.frustPersBoostClicks, currData.lostByCheat);
+        itemAnalytics.Add(DataIds.frustPersFeelAnswer, currData.boostersActivated);
+        itemAnalytics.Add(DataIds.frustPersFeelCode, currData.boostersActivated);
+        itemAnalytics.Add(DataIds.frustPersFeelTiming, currData.boostersActivated);
+        itemAnalytics.Add(DataIds.frustPersWaitClick, currData.boostersActivated);
 
 		var newDocID = Guid.NewGuid().ToString();
 

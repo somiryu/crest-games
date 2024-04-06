@@ -58,7 +58,7 @@ public static class DataIds
     public const string turboRocketGame = "star_booster";
     public const string turboRocketturboUsedTimes = "boosts";
 
-    public const string mechanicHandGame = "por habilidad: la mano mecánica";
+    public const string mechanicHandGame = "frustr_garra";
     public const string mechanicHandClawThrows = "claw_Throws";
 
     public const string fightTheAlienGame = "monstruo_figuras";
@@ -92,5 +92,24 @@ public static class DataIds
 	public const string sizeRocketResponseInt = "cr_codigo";
 	public const string mouseUpCount = "cr_release";
 	public const string starsPerRound = "cr_premio";
+
+    //MechHand analytics
+    public const string mechHandTrial = "fg_intento";
+    public const string mechHandThrown = "fg_lanzamiento";
+    public const string mechHandPresition = "fg_precision";
+    public const string mechHandFeelAnswer = "fg_emoc_rta";
+    public const string mechHandFeelCode = "fg_emoc_cod";
+    public const string mechHandFeelTiming = "fg_emoc_tm";
+    public const string mechHandWaitClick = "fg_espera_click";
+
+
+    //BoostHand analytics
+    public const string frustPersTrial = "fp_intento";
+    public const string frustPersPresition = "fp_precision";
+    public const string frustPersBoostClicks = "fp_turbo";
+    public const string frustPersFeelAnswer = "fp_emoc_rta";
+    public const string frustPersFeelCode = "fp_emoc_cod";
+    public const string frustPersFeelTiming = "fp_emoc_tm";
+    public const string frustPersWaitClick = "fp_espera_click";
 
 }

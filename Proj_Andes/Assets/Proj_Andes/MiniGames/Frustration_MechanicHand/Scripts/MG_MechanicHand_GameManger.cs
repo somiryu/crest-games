@@ -61,6 +61,9 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	IEnumerator currentInstruction;
 	bool tutoDone;
 
+	public List<MechHandRoundAnalytics> allRoundAnalytics = new List<MechHandRoundAnalytics>();
+	public MechHandRoundAnalytics currRoundAnalytics;
+
     //DATA ANALYTICS
     public float timePlayed;
     public int clickRepetitions;
@@ -240,4 +243,11 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	}
 
 
+}
+
+public class MechHandRoundAnalytics
+{
+	public int roundCount;
+	public int thrown;
+	public int presition;
 }

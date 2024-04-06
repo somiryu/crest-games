@@ -63,6 +63,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [Header("Tutorial Anims")]
     [SerializeField] Animator tutorialAnims;
     int currStepTurorial;
+    public BoostersAndScapeAnalytics currAnalytic;
+
+    public List<BoostersAndScapeAnalytics> currAnalytics = new List<BoostersAndScapeAnalytics>();
     public EndOfGameManager EndOfGameManager => eogManager;
     [SerializeField] CatchCoinsAudioInstruction audioInstruction;
 
@@ -123,6 +126,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         GeneralGameAnalyticsManager.Instance.Init(DataIds.boostersAndScapeGame);
 		spawner.spawner.SpawnNewItem();
 	}
+    public void RegisterDistanceForAnalytic(Vector3 boosterPos)
+    {
+        currAnalytic.distanceInBetween = (boosterPos - rocket.position).magnitude;
+    }
     void UpdateCharacterAnimRef(Transform newCharacterArtObj)
     {
 		characterAnims = newCharacterArtObj.GetComponentInChildren<Animator>(true);
@@ -133,7 +140,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         constantScoreText.text = successfulAttempts.ToString();
 
         if (!onPlay) return;
-
+        if (Input.GetMouseButtonDown(0)) currAnalytic.clicksToBoost++; 
         totalTime += Time.deltaTime;
         timer += Time.deltaTime;
         spawner.spawner.timer = timer;
@@ -313,5 +320,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     }
 }
 
-
+public class BoostersAndScapeAnalytics
+{
+    public int roundCount;
+    public float distanceInBetween;
+    public int clicksToBoost;
+}
 
