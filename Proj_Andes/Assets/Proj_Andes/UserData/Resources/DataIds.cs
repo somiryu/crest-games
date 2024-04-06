@@ -29,7 +29,7 @@ public static class DataIds
 	public const string GameModeAboutAnalytics = "game_mode";
 
 	//Monster market
-	public const string monsterMarket = "market";
+	public const string monsterMarket = "mercado_monstruos";
 	public const string chestChosen = "chest_chosen";
 	public const string starsSpent = "stars_spent";
 	public const string starsBeforeSpend = "stars_before_spend";
@@ -92,5 +92,15 @@ public static class DataIds
 	public const string sizeRocketResponseInt = "cr_codigo";
 	public const string mouseUpCount = "cr_release";
 	public const string starsPerRound = "cr_premio";
+
+    //Monster market
+    public const string marketMonsterOrder = "mm_orden";
+    public const string marketMonsterStarPre = "mm_estrellas_pre";
+    public const string marketMonsterStarsSpent = "mm_estrellas_gast";
+    public const string marketMonsterStarsAfter = "mm_estrellas_post";
+    public const string marketMonsterChestTrial = "mm_cofre_intento";
+    public const string marketMonsterChestAnswer = "mm_cofre_rta";
+    public const string marketMonsterChestCode = "mm_cofre_cod";
+    public const string marketMonsterTotalTime = "mm_cofre_tm";
 
 }
