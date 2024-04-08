@@ -125,7 +125,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wantsToExitSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(true));
 		exitSessionBtn.onClick.AddListener(OnExitSession);
 		cancelSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(false));
-		musicBtn.onClick.AddListener(MusicBtn);
+		musicBtn.onClick.AddListener(() => MusicBtn(false));
 		goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
 
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
@@ -498,15 +498,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
         var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? contWelcomeM : contWelcomeF;
 		currWelcome.gameObject.SetActive(false);
+
+		var soundPref = 10;
+        soundPref = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundPref);
+		Debug.Log("sound " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive"));
+        MusicBtn(soundPref == 0);
         afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
 	}
 
 
-	void MusicBtn()
+	void MusicBtn(bool isInactive)
 	{
-		if (AudioManager.Instance.currentBkMusic.isPlaying)
+		if (isInactive)
 		{
 			AudioManager.Instance.currentBkMusic.Stop();
+			Debug.Log("deactivate");
 			musicBtn.image.sprite = musicBtnInactive;
 		}
 		else
