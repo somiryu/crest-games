@@ -24,6 +24,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	public Color selectedColor;
 	[SerializeField] AudioClip succeededRound;
 	AudioSource audioSource;
+	[SerializeField] AudioClip won1StarClip;
+	[SerializeField] AudioClip won2StarClip;
+	[SerializeField] AudioClip won4StarClip;
 
 	[Header("After Action")]
 	public GameObject afterActionPanel;
@@ -60,6 +63,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private int shipsLeft;
 
 	private bool gameOverFlag;
+	private bool doneAudioFeedback;
 
 	public SizeRocketAnalytics currAnalytics => analyticsPerRound[roundCount];
 
@@ -80,7 +84,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		instance = this;
 		roundCount = 0;
 		currAnalytics.tryIndex = roundCount + 1;
-		currAudio = GetRoundCoinsAmount();
+		currAudio = StarsWonCount();
 		StartCoroutine(currAudio);
 	}
 
@@ -107,16 +111,28 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
 	}
 
-	IEnumerator GetRoundCoinsAmount()
+	IEnumerator StarsWonCount(AudioClip clip = null)
 	{
-		actionBlocker.gameObject.SetActive(true);
-		audioSource.clip = coinsLeftAudios[roundCount];
-		audioSource.Play();
-		yield return new WaitForSeconds(coinsLeftAudios[roundCount].length);
-		actionBlocker.gameObject.SetActive(false);
-	}
-
-	private void Update()
+        actionBlocker.gameObject.SetActive(true);
+		doneAudioFeedback = false;
+        if (clip != null)
+		{
+            audioSource.clip = clip;
+            audioSource.Play();
+            yield return new WaitForSeconds(clip.length);
+        }
+		if (roundCount < coinsLeftAudios.Count)
+		{
+			audioSource.clip = coinsLeftAudios[roundCount];
+			audioSource.Play();
+			yield return new WaitForSeconds(coinsLeftAudios[roundCount].length);
+		
+		}
+		else GameOver();
+        doneAudioFeedback = true;
+        actionBlocker.gameObject.SetActive(false);
+    }
+    private void Update()
 	{
 		if(gameOverFlag) return;
 
@@ -201,24 +217,37 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			_ => null
 		};
 	}
-
+	AudioClip GetCoinAudio(SizeRocketsRocketTypes coins)
+	{
+		switch(coins)
+		{
+			case SizeRocketsRocketTypes.small:
+				return won1StarClip;
+			case SizeRocketsRocketTypes.medium:
+				return won2StarClip;
+			case SizeRocketsRocketTypes.large:
+				return won4StarClip;
+			default: return null;
+		}
+	}
 	public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount)
 	{
 		currAnalytics.stars = coinsAmount;
 
-		roundCount++;
-		currAudio = GetRoundCoinsAmount();
-        if(roundCount < coinsLeftAudios.Count) StartCoroutine(currAudio);
+
+		currAudio = StarsWonCount(GetCoinAudio(rocket.rocketType));
+		StartCoroutine(currAudio);
 
         if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
 		else GeneralGameAnalyticsManager.RegisterWin();
 
+        roundCount++;
 
-		activeShips.Remove(rocket);
+        activeShips.Remove(rocket);
 		totalCoinsWon += coinsAmount;
 		currCoinsLabel.SetText(totalCoinsWon.ToString());
 
-		if (activeShips.Count == 0 && shipsLeft <= 0)
+		if (activeShips.Count == 0 && shipsLeft <= 0 && doneAudioFeedback)
 		{
 			GameOver();
 			return;

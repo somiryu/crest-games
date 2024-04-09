@@ -1246,6 +1246,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 875205638}
     m_Modifications:
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1367976526007294105, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
       propertyPath: m_Name
       value: StarsContainer (2)
@@ -1391,6 +1407,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7735980937103304648, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -3022,6 +3054,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 493516325}
     m_Modifications:
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1367976526007294105, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
       propertyPath: m_Name
       value: StarsContainer
@@ -3167,6 +3215,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7735980937103304648, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -3754,6 +3818,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 834736014}
     m_Modifications:
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 277408689822170314, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1367976526007294105, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
       propertyPath: m_Name
       value: StarsContainer (1)
@@ -3899,6 +3979,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7735980937103304648, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220959502263102376, guid: b8099c2940ae3bb4ca4b946f22a08cfe, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -4064,6 +4160,9 @@ MonoBehaviour:
   shipsLeftTxt: {fileID: 1306639383}
   selectedColor: {r: 0.17708082, g: 0.25339243, b: 0.2905661, a: 1}
   succeededRound: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
+  won1StarClip: {fileID: 8300000, guid: de706a75b0bb59e4b964d7b46fda6ff7, type: 3}
+  won2StarClip: {fileID: 8300000, guid: dac1fe6a1dd6333409bcd382105b7cb3, type: 3}
+  won4StarClip: {fileID: 8300000, guid: 629b5b4ae9ad8e647818f4d79cbb8898, type: 3}
   afterActionPanel: {fileID: 1420377327}
   ingameObj: {fileID: 525700849}
   ingameObjUI: {fileID: 950336369}
