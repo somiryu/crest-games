@@ -13,9 +13,10 @@ public class MinigameGroups : SimpleGameSequenceItem
     public bool randomize;
     [Space]
     public bool CanBeOverridenByDebugFlag;
+    public bool hasNarrativeFixed;
     [Tooltip("How many games should we play before leaving the group (Only works if randomize is enable), if -1 we will play all items in the group")]
     public int maxItemsToPlayOnRandomize = -1;
-
+    [NonSerialized] public int forcedScene;
     [NonSerialized]
     public int lastPlayedIdx = -1;
 
@@ -24,19 +25,20 @@ public class MinigameGroups : SimpleGameSequenceItem
         if (CanBeOverridenByDebugFlag)
         {
             var hasOverride = AppSkipSceneButton.RandomNarrativeOverride;
-            if(hasOverride != -1)
+            if (hasOverride != -1)
             {
-                if(GameSequencesList.Instance.prevGame == miniGamesInGroup[hasOverride])
+                if (GameSequencesList.Instance.prevGame == miniGamesInGroup[hasOverride])
                 {
                     return null;
                 }
                 return miniGamesInGroup[hasOverride];
             }
         }
+        if (hasNarrativeFixed) return miniGamesInGroup[forcedScene];
         if (randomize)
         {
             return GetRandomGame();
-        }
+        } 
         if(miniGamesInGroup.Contains(GameSequencesList.Instance.prevGame))
         {
             var lastGameIdx = miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame);

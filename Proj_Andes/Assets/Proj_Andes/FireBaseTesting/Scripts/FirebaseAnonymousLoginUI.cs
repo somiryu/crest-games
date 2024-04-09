@@ -75,7 +75,16 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] GameObject checkingInternetPanel;
 	[SerializeField] GameObject NoInternetWarningIcon;
 
-	[Header("COnfirmStart Panel")]
+	[Header("PickANarrative Panel")]
+	[SerializeField] Transform pickANarrativePanel;
+    [SerializeField] Button narr1Btn;
+    [SerializeField] Button narr2Btn;
+    [SerializeField] Button narr3Btn;
+    [SerializeField] Button selectedNarrativeBtn;
+    [SerializeField] MinigameGroups narratives;
+
+
+    [Header("COnfirmStart Panel")]
 	[SerializeField] Transform uReadyPanel;
 	[SerializeField] Button readyBtb;
 	[SerializeField] Button cancelConfirmPanel;
@@ -133,6 +142,11 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
 		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(UReady);
+
+		narr1Btn.onClick.AddListener(() => OnSelectedNarrativeBtn(1));
+		narr2Btn.onClick.AddListener(() => OnSelectedNarrativeBtn(2));
+		narr3Btn.onClick.AddListener(() => OnSelectedNarrativeBtn(3));
+		selectedNarrativeBtn.onClick.AddListener(OnSelectedNarrative);
 
 		cancelSearchBarBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
 
@@ -361,14 +375,17 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	void OnWantsToCreateNewUser()
 	{
 		createNewUserPanel.SetActive(true);
-        selectUserContainer.gameObject.SetActive(false);
+		selectUserContainer.gameObject.SetActive(false);
     }	
 	void OnWantsToAccessExistingUser()
 	{
         createNewUserPanel.SetActive(false);
         selectUserContainer.gameObject.SetActive(false);
     }
-
+    void OnSelectedNarrativeBtn(int narIdx)
+	{
+		narratives.forcedScene = narIdx;
+	}
 	void OnFinishedUserCreation()
 	{
 		var newUser = new UserData();
@@ -494,14 +511,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		audioSource.clip = currClip;
 		audioSource.Play();
 
-		afterLogInPanel.SetActive(true);
+        pickANarrativePanel.gameObject.SetActive(GameSequencesList.isTheNarrativeSequence);
+        
+		if(!GameSequencesList.isTheNarrativeSequence) afterLogInPanel.SetActive(true);
+
 
         var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? contWelcomeM : contWelcomeF;
 		currWelcome.gameObject.SetActive(false);
         afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
 	}
 
-
+	void OnSelectedNarrative()
+	{
+		pickANarrativePanel.gameObject.SetActive(false);
+        afterLogInPanel.SetActive(true);
+    }
 	void MusicBtn()
 	{
 		if (AudioManager.Instance.currentBkMusic.isPlaying)
