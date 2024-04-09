@@ -15550,9 +15550,22 @@ MonoBehaviour:
   checkingInternetPanel: {fileID: 1698504959}
   NoInternetWarningIcon: {fileID: 982820577}
   pickANarrativePanel: {fileID: 1395290349}
-  narr1Btn: {fileID: 24042010}
-  narr2Btn: {fileID: 1682358533}
-  narr3Btn: {fileID: 1794248734}
+  btnsPerNarrative:
+  - narrative: 1
+    btn: {fileID: 24042010}
+    highlight: {fileID: 708625582}
+    shadow: {fileID: 0}
+    narrativeAudio: {fileID: 0}
+  - narrative: 2
+    btn: {fileID: 1682358533}
+    highlight: {fileID: 1238943503}
+    shadow: {fileID: 0}
+    narrativeAudio: {fileID: 0}
+  - narrative: 3
+    btn: {fileID: 1794248734}
+    highlight: {fileID: 134545113}
+    shadow: {fileID: 0}
+    narrativeAudio: {fileID: 0}
   selectedNarrativeBtn: {fileID: 1717484701}
   narratives: {fileID: 11400000, guid: 41b74151a2d5906479c9b387a0d6e2d7, type: 2}
   uReadyPanel: {fileID: 2122517642}

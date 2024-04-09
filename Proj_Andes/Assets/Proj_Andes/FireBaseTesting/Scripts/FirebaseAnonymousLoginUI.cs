@@ -77,9 +77,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	[Header("PickANarrative Panel")]
 	[SerializeField] Transform pickANarrativePanel;
-    [SerializeField] Button narr1Btn;
-    [SerializeField] Button narr2Btn;
-    [SerializeField] Button narr3Btn;
+    public List<BtnPerNarrative> btnsPerNarrative = new List<BtnPerNarrative>();
     [SerializeField] Button selectedNarrativeBtn;
     [SerializeField] MinigameGroups narratives;
 
@@ -143,9 +141,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(UReady);
 
-		narr1Btn.onClick.AddListener(() => OnSelectedNarrativeBtn(1));
-		narr2Btn.onClick.AddListener(() => OnSelectedNarrativeBtn(2));
-		narr3Btn.onClick.AddListener(() => OnSelectedNarrativeBtn(3));
+		for (int i = 0; i < btnsPerNarrative.Count; i++)
+		{
+            var narrCount = i;
+            btnsPerNarrative[i].btn.onClick.AddListener(() => OnSelectedNarrativeBtn(btnsPerNarrative[narrCount].narrative));
+        }
+
 		selectedNarrativeBtn.onClick.AddListener(OnSelectedNarrative);
 
 		cancelSearchBarBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
@@ -384,6 +385,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     }
     void OnSelectedNarrativeBtn(int narIdx)
 	{
+		for (int i = 0; i < btnsPerNarrative.Count; i++)
+		{
+			if (btnsPerNarrative[i].narrative == narIdx) btnsPerNarrative[i].highlight.gameObject.SetActive(true);
+			else btnsPerNarrative[i].highlight.gameObject.SetActive(false);
+			Debug.Log(btnsPerNarrative[i].narrative + " " + narIdx);
+        }
 		narratives.forcedScene = narIdx;
 	}
 	void OnFinishedUserCreation()
@@ -505,26 +512,27 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wantsToExitSessionBtn.gameObject.SetActive(true);
 
 		UserDataManager.Instance.SetCurrUser(id);
-		var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
 
-		var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
-		audioSource.clip = currClip;
-		audioSource.Play();
+		if (GameSequencesList.isTheNarrativeSequence) pickANarrativePanel.gameObject.SetActive(GameSequencesList.isTheNarrativeSequence);
+		else ContinueOrNewGame();
+    }
+	void ContinueOrNewGame()
+	{
+        afterLogInPanel.SetActive(true);
 
-        pickANarrativePanel.gameObject.SetActive(GameSequencesList.isTheNarrativeSequence);
-        
-		if(!GameSequencesList.isTheNarrativeSequence) afterLogInPanel.SetActive(true);
+        var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
+        audioSource.clip = currClip;
+        audioSource.Play();
 
-
+        var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
         var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? contWelcomeM : contWelcomeF;
-		currWelcome.gameObject.SetActive(false);
+        currWelcome.gameObject.SetActive(false);
         afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
-	}
-
+    }
 	void OnSelectedNarrative()
 	{
 		pickANarrativePanel.gameObject.SetActive(false);
-        afterLogInPanel.SetActive(true);
+		ContinueOrNewGame();
     }
 	void MusicBtn()
 	{
@@ -575,4 +583,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		}
 	}
 
+}
+[Serializable]
+public struct BtnPerNarrative
+{
+    public int narrative;
+    public Button btn;
+    public Image highlight;
+    public Image shadow;
+    public AudioClip narrativeAudio;
 }

@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b2018ba47f9283944b03a35f619f98ff, type: 2}
   - {fileID: 11400000, guid: 19cb714e090469540bbf7647a4810b4e, type: 2}
   - {fileID: 11400000, guid: e14ce82297b12804c9e3e141328de407, type: 2}
-  randomize: 1
-  CanBeOverridenByDebugFlag: 1
+  randomize: 0
+  CanBeOverridenByDebugFlag: 0
+  hasNarrativeFixed: 1
   maxItemsToPlayOnRandomize: 1
