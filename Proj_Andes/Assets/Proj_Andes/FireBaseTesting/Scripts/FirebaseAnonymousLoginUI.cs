@@ -143,8 +143,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		for (int i = 0; i < btnsPerNarrative.Count; i++)
 		{
-            var narrCount = i;
-            btnsPerNarrative[i].btn.onClick.AddListener(() => OnSelectedNarrativeBtn(btnsPerNarrative[narrCount].narrative));
+		var narrCount = 1;
+
+            btnsPerNarrative[i].btn.onClick.AddListener(() => OnSelectedNarrativeBtn(btnsPerNarrative[i].narrative));
         }
 
 		selectedNarrativeBtn.onClick.AddListener(OnSelectedNarrative);
