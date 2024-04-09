@@ -60,17 +60,6 @@ MonoBehaviour:
     analyticChoiceID: 
     analyticTimeID: 
     responses:
-    - response: "ALEGR\xCDA"
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
-      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 2
     - response: RABIA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
@@ -93,6 +82,17 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 4
+    - response: "ALEGR\xCDA"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 2
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -149,21 +149,10 @@ MonoBehaviour:
     analyticChoiceID: 
     analyticTimeID: 
     responses:
-    - response: "ALEGR\xCDA"
+    - response: RABIA
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
-      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 2
-    - response: ORGULLO
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: dd808026b5a8217409596c3bfb244917, type: 3}
-      responseAudio: {fileID: 8300000, guid: 35cdf1b0cbfe857458be890b67940f07, type: 3}
+      responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
+      responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
@@ -182,6 +171,17 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 4
+    - response: "ALEGR\xCDA"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 2
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
