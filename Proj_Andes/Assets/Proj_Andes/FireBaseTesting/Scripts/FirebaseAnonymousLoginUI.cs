@@ -7,10 +7,12 @@ using System;
 using Firebase.Auth;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
+using Tymski;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {
-	public static bool saveOnlyLocalForTesting = false;
+	public static bool saveOnlyLocalForTesting = true;
 
     bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
@@ -81,8 +83,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     [SerializeField] Button selectedNarrativeBtn;
     [SerializeField] MinigameGroups narratives;
 
+	[Header("Loading panel")]
+	[SerializeField] Transform loadingPanel;
+	[SerializeField] Slider loadingSlider;
+	[SerializeField] SceneReference currNextNarr;
 
-    [Header("COnfirmStart Panel")]
+    [Header("ConfirmStart Panel")]
 	[SerializeField] Transform uReadyPanel;
 	[SerializeField] Button readyBtb;
 	[SerializeField] Button cancelConfirmPanel;
@@ -143,9 +149,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		for (int i = 0; i < btnsPerNarrative.Count; i++)
 		{
-		var narrCount = 1;
-
-            btnsPerNarrative[i].btn.onClick.AddListener(() => OnSelectedNarrativeBtn(btnsPerNarrative[i].narrative));
+			var narrCount = i;
+            btnsPerNarrative[i].btn.onClick.AddListener(() => OnSelectedNarrativeBtn(btnsPerNarrative[narrCount].narrative));
         }
 
 		selectedNarrativeBtn.onClick.AddListener(OnSelectedNarrative);
@@ -388,9 +393,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		for (int i = 0; i < btnsPerNarrative.Count; i++)
 		{
-			if (btnsPerNarrative[i].narrative == narIdx) btnsPerNarrative[i].highlight.gameObject.SetActive(true);
+			if (btnsPerNarrative[i].narrative == narIdx)
+			{
+                btnsPerNarrative[i].highlight.gameObject.SetActive(true);
+				currNextNarr = narratives.miniGamesInGroup[narIdx - 1].scene;
+            }
 			else btnsPerNarrative[i].highlight.gameObject.SetActive(false);
-			Debug.Log(btnsPerNarrative[i].narrative + " " + narIdx);
         }
 		narratives.forcedScene = narIdx;
 	}
@@ -563,9 +571,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
-
-		TimeManager.timer = 0;
-		
+        if (GameSequencesList.isTheNarrativeSequence) StartCoroutine(LoadingSceneAsync(currNextNarr));
+        TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{
 			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
@@ -574,16 +581,28 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 				group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
 			}
 			DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
-			GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+            if (!GameSequencesList.isTheNarrativeSequence) GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
 		}
 		else
 		{
 			UserDataManager.CurrUser.myCollectionMonsters.Clear();
 			UserDataManager.CurrUser.Coins = 10;
-			GameSequencesList.Instance.GoToNextSequence();
+			if(!GameSequencesList.isTheNarrativeSequence) GameSequencesList.Instance.GoToNextSequence();
 		}
 	}
 
+	IEnumerator LoadingSceneAsync(SceneReference scene)
+	{
+		loadingPanel.gameObject.SetActive(true); 
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+        while (!asyncLoad.isDone)
+        {
+			loadingSlider.value = asyncLoad.progress;
+			Debug.Log(asyncLoad.progress);
+            yield return null;
+        }
+        //loadingPanel.gameObject.SetActive(false);
+    }
 }
 [Serializable]
 public struct BtnPerNarrative
