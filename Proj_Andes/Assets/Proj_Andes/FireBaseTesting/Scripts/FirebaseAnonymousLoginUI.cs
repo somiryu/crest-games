@@ -125,7 +125,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wantsToExitSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(true));
 		exitSessionBtn.onClick.AddListener(OnExitSession);
 		cancelSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(false));
-		musicBtn.onClick.AddListener(() => MusicBtn(false));
+		musicBtn.onClick.AddListener(() => SwitchSoundActive());
 		goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
 
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
@@ -180,6 +180,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	private void Start()
 	{
+		var defaultSoundState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", defaultValue: 1);
+		AssignSoundActive(defaultSoundState);
+
 		FirebaseAuth auth = FirebaseAuth.DefaultInstance;
 		if(auth.CurrentUser != null)
 		{
@@ -499,17 +502,22 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? contWelcomeM : contWelcomeF;
 		currWelcome.gameObject.SetActive(false);
 
-		var soundPref = 10;
-        soundPref = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundPref);
+        var soundPref = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", 1);
 		Debug.Log("sound " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive"));
-        MusicBtn(soundPref == 0);
+		AssignSoundActive(soundPref);
         afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
 	}
 
 
-	void MusicBtn(bool isInactive)
+	void SwitchSoundActive()
 	{
-		if (isInactive)
+		var previousState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", defaultValue: 1);
+		AssignSoundActive(previousState == 0 ? 1 : 0);
+	}
+
+	void AssignSoundActive(int active)
+	{
+		if (active == 0)
 		{
 			AudioManager.Instance.currentBkMusic.Stop();
 			Debug.Log("deactivate");
@@ -520,9 +528,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			AudioManager.Instance.currentBkMusic.Play();
 			musicBtn.image.sprite = musicBtnActive;
 		}
-		bool activeStae = AudioManager.Instance.currentBkMusic.isPlaying;
-		PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activeStae ? 1 : 0);
-
+		PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", active);
 	}
 
 	public void OnContinueGameBtnPressed()
