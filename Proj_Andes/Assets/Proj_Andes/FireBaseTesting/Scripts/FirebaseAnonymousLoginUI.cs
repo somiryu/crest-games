@@ -12,7 +12,7 @@ using Tymski;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {
-	public static bool saveOnlyLocalForTesting = true;
+	public static bool saveOnlyLocalForTesting = false;
 
     bool correctlyLoggedInFlag = false;
 	bool doneInitialization = false;
@@ -86,7 +86,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[Header("Loading panel")]
 	[SerializeField] Transform loadingPanel;
 	[SerializeField] Slider loadingSlider;
-	[SerializeField] SceneReference currNextNarr;
+	SceneReference currNextNarr;
+	int currNextNarrIdx;
 
     [Header("ConfirmStart Panel")]
 	[SerializeField] Transform uReadyPanel;
@@ -397,6 +398,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			{
                 btnsPerNarrative[i].highlight.gameObject.SetActive(true);
 				currNextNarr = narratives.miniGamesInGroup[narIdx - 1].scene;
+				currNextNarrIdx = narIdx - 1;
             }
 			else btnsPerNarrative[i].highlight.gameObject.SetActive(false);
         }
@@ -571,7 +573,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
-        if (GameSequencesList.isTheNarrativeSequence) StartCoroutine(LoadingSceneAsync(currNextNarr));
+
+		
+
         TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{
@@ -587,7 +591,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			UserDataManager.CurrUser.myCollectionMonsters.Clear();
 			UserDataManager.CurrUser.Coins = 10;
-			if(!GameSequencesList.isTheNarrativeSequence) GameSequencesList.Instance.GoToNextSequence();
+			GameSequencesList.Instance.GoToNextSequence(loadScene: !GameSequencesList.isTheNarrativeSequence);
+			if (GameSequencesList.isTheNarrativeSequence) StartCoroutine(LoadingSceneAsync(currNextNarr));
 		}
 	}
 
@@ -595,12 +600,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		loadingPanel.gameObject.SetActive(true); 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
-        while (!asyncLoad.isDone)
+        while (asyncLoad.progress < 0.9f)
         {
 			loadingSlider.value = asyncLoad.progress;
 			Debug.Log(asyncLoad.progress);
             yield return null;
         }
+
         //loadingPanel.gameObject.SetActive(false);
     }
 }

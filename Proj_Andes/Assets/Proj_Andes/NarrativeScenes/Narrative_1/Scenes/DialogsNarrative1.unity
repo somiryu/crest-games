@@ -2218,6 +2218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialoguesDisplayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4953976143558235924, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2731,7 +2735,7 @@ Animator:
   m_GameObject: {fileID: 2138338495}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 988b73debc4376141bd9357948c43088, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

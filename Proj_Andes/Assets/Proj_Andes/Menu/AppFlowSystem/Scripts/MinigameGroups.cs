@@ -34,7 +34,11 @@ public class MinigameGroups : SimpleGameSequenceItem
                 return miniGamesInGroup[hasOverride];
             }
         }
-        if (hasNarrativeFixed) return miniGamesInGroup[forcedScene-1];
+        if (hasNarrativeFixed)
+        {
+            if (GameSequencesList.Instance.prevGame == miniGamesInGroup[forcedScene - 1]) return null;
+            else return miniGamesInGroup[forcedScene - 1];
+        }
         if (randomize)
         {
             return GetRandomGame();
