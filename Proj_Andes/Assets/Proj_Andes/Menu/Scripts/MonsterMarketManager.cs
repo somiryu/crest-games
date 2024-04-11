@@ -377,7 +377,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         yield return new WaitForSeconds(openChestSound.length-0.4f);
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
         {
-            audioSource.clip = uWonAMonsterAudio; 
+			audioSource.clip = uWonAMonsterAudio; 
             audioSource.Play();
             yield return new WaitForSeconds(uWonAMonsterAudio.length);
             audioSource.clip = wantMoreAudio;
@@ -385,7 +385,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             yield return new WaitForSeconds(wantMoreAudio.length);
             blockButtons.gameObject.SetActive(false);
         }
-        StopCoroutine(openChest);
+        openChest = null;
     }
     void OpenChest(int regularMonstersAmount, int rareMonstersAmount, int legendaryMonstersAmount)
     {
@@ -395,6 +395,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         chestOpenedContainerImg.sprite = currButton.monsterMarketButton.chestOpenSprite;
         currentMonstersFound.Clear();
 
+        if(openChest != null) StopCoroutine(openChest);
+        openChest = OpenChestAudios();
         StartCoroutine(openChest);
 
         for (int i = 0; i < regularMonstersAmount; i++) currentMonstersFound.Add(GetNewRandomMonster(MonsterChestType.Regular, 0));
