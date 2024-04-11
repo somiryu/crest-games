@@ -77,35 +77,62 @@ public class DialogueResponse
 public class NarrativeAnalyicsInfo
 {
     public NarrativeAnalyticCategory mainCategory;
-    public NarrativeAnalticsEmphatyCategories empSubCategory;
-    public NarrativeAnalyticAggSubCategory aggSubCategory;
-    public NarrativeAnalyticsFeeling EmoSubCategory;
+    public NarrativeAnalticsEmpathyCategories empathySubCategory;
+    public NarrativeAnalyticAggSubCategory agressionSubCategory;
+    public NarrativeAnalyticsFeeling emotionSubCategory;
+    public NarrativeAnalticsEmpathyInRelationTo inRelationTo;
 
-
-    public string BuildID(int narrativeIdx, int questionIdx, bool isTimeLabel)
+    public string BuildID(int narrativeIdx, int questionIdx, NarrativeAnalyticType analyticType)
     {
         var label = "Narr" + narrativeIdx + "_";
 
         switch (mainCategory)
         {
             case NarrativeAnalyticCategory.Aggression:
-                label += "Agg";
-                break;
-            case NarrativeAnalyticCategory.Emo:
-                label += "Emo";
+                label += "agr";
                 break;
             case NarrativeAnalyticCategory.Conflict:
                 label += "conf";
                 break;
             case NarrativeAnalyticCategory.Empathy:
-                label += "Emp";
+                label += "emp";
+                break;
+            case NarrativeAnalyticCategory.EmoComp:
+                label += "emocomp";
+                break;            
+            case NarrativeAnalyticCategory.EmoBas:
+                label += "emobas";
                 break;
         }
-
-        label += questionIdx + "_";
-
-        label += isTimeLabel ? "Time" : "Response";
-
+        if (inRelationTo != NarrativeAnalticsEmpathyInRelationTo.NONE)
+        {
+            label += "_";
+            switch (inRelationTo)
+            {
+                case NarrativeAnalticsEmpathyInRelationTo.self:
+                    label += "self";
+                    break;                
+                case NarrativeAnalticsEmpathyInRelationTo.ami:
+                    label += "ami";
+                    break;                
+                case NarrativeAnalticsEmpathyInRelationTo.ene:
+                    label += "ene";
+                    break;
+            }
+            label += questionIdx + "_";
+        }
+        switch (analyticType)
+        {
+            case NarrativeAnalyticType.Tm:
+                label += "tm";
+                break;            
+            case NarrativeAnalyticType.Rta:
+                label += "rta";
+                break;            
+            case NarrativeAnalyticType.Val:
+                label += "val";
+                break;
+        }
         return label;
     }
 
@@ -113,10 +140,11 @@ public class NarrativeAnalyicsInfo
     {
         if(mainCategory == NarrativeAnalyticCategory.Aggression || mainCategory == NarrativeAnalyticCategory.Conflict)
         {
-            return ((int)aggSubCategory).ToString();
+            return ((int)agressionSubCategory).ToString();
         }
-        if (mainCategory == NarrativeAnalyticCategory.Empathy) return ((int) empSubCategory).ToString();
-        if(mainCategory == NarrativeAnalyticCategory.Emo) return EmoSubCategory.ToString();
+        if(mainCategory == NarrativeAnalyticCategory.Empathy) return emotionSubCategory.ToString();
+        if(mainCategory == NarrativeAnalyticCategory.EmoBas) return emotionSubCategory.ToString();
+        if(mainCategory == NarrativeAnalyticCategory.EmoComp) return emotionSubCategory.ToString();
 
         return null;
     }
@@ -129,7 +157,8 @@ public enum NarrativeAnalyticCategory
     Empathy,
     Aggression,
     Conflict,
-    Emo,
+    EmoComp,
+    EmoBas
 }
 
 public enum NarrativeAnalyticAggSubCategory
@@ -139,25 +168,22 @@ public enum NarrativeAnalyticAggSubCategory
     Evasive,
     Assertive,
 }
-
 public enum NarrativeAnalyticsFeeling
 {
     NONE,
     Tristeza,
     Alegría,
-    Tranquilidad,
     Miedo,
     Rabia,
-    No_se,
     Orgullo,
     Frustracion,
     Nervios,
     Verguenza,
     Aburrimiento,
-
+    No_se,
 }
 
-public enum NarrativeAnalticsEmphatyCategories
+public enum NarrativeAnalticsEmpathyCategories
 {
     NONE,
     Muy_Bien,
@@ -165,4 +191,17 @@ public enum NarrativeAnalticsEmphatyCategories
     Me_Da_Igual,
     Mal,
     Muy_Mal,
+}
+public enum NarrativeAnalticsEmpathyInRelationTo
+{
+    NONE,
+    self,
+    ami,
+    ene
+}
+public enum NarrativeAnalyticType
+{
+   Tm,
+   Rta,
+   Val,
 }

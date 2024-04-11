@@ -511,12 +511,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
             currResponseChoiceAnalyticID = analyticInfo.BuildID(
                 narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
                 questionIdx: questionIdx, 
-                isTimeLabel: false);
+                NarrativeAnalyticType.Tm);
 
             currResponseTimeAnalyticID = analyticInfo.BuildID(
 				narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
 				questionIdx: questionIdx,
-				isTimeLabel: true);
+				NarrativeAnalyticType.Val);  
+            
+            currResponseTimeAnalyticID = analyticInfo.BuildID(
+				narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
+				questionIdx: questionIdx,
+				NarrativeAnalyticType.Rta);
+
 			currResponseAnalyticResponseValue = analyticInfo.BuildResponse();
 		}
 
@@ -533,7 +539,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private int EmptQuestionsCount = -1;
     private int AggQuestionsCount = -1;
     private int ConfQuestionsCount = -1;
-    private int EmoQuestionsCount = -1;
+    private int EmoCompQuestionsCount = -1;
+    private int EmoBasQuestionsCount = -1;
     
 
     public int GetQuestionIdxFor(NarrativeAnalyicsInfo info)
@@ -549,9 +556,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
             case NarrativeAnalyticCategory.Conflict:
                 ConfQuestionsCount++;
                 return ConfQuestionsCount;
-            case NarrativeAnalyticCategory.Emo:
-                EmoQuestionsCount++;
-                return EmoQuestionsCount;
+            case NarrativeAnalyticCategory.EmoBas:
+                EmoBasQuestionsCount++;
+                return EmoBasQuestionsCount;            
+            case NarrativeAnalyticCategory.EmoComp:
+                EmoBasQuestionsCount++;
+                return EmoCompQuestionsCount++;
             default: return -1;
         }
 	}
