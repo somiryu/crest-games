@@ -9,7 +9,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
-    public static bool isTheNarrativeSequence = false;
+    public static bool isTheNarrativeSequence = true;
     public static string gameInstancePath = "GameSequencesList";
     public static string narrativeInstancePath = "NarrativeSequencesList";
     static GameSequencesList instance;
