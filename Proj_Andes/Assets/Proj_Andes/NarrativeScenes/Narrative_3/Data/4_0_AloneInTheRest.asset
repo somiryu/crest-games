@@ -25,6 +25,17 @@ MonoBehaviour:
     analyticChoiceID: 
     analyticTimeID: 
     responses:
+    - response: RABIA
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
+      responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 5
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -36,10 +47,10 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 4
-    - response: TRANQUILIDAD
+    - response: "ALEGR\xCDA"
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 1c4e4ec93d6dd1148a54a31c23dc1534, type: 3}
-      responseAudio: {fileID: 8300000, guid: a57da50559b616542aaaa6f1fccc3cba, type: 3}
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
@@ -58,17 +69,6 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 1
-    - response: RABIA
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
-      responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 5
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}

@@ -46,17 +46,17 @@ MonoBehaviour:
     analyticChoiceID: 
     analyticTimeID: 
     responses:
-    - response: RABIA
+    - response: "ALEGR\xCDA"
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
-      responseAudio: {fileID: 8300000, guid: 0bfaeef421bc62a4bbf81388ef0287dc, type: 3}
+      responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
+      responseAudio: {fileID: 8300000, guid: c85103de5f0d0c644bc37c2fbf1056c5, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 5
+        EmoSubCategory: 11
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -68,17 +68,6 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 1
-    - response: MIEDO
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
-      responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 4
     - response: ABURRIMIENTO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: b6b01bfe1bc2f5e47be52d7c7b2cde77, type: 3}
@@ -90,6 +79,17 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 0
         EmoSubCategory: 11
+    - response: MIEDO
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
+      responseAudio: {fileID: 8300000, guid: 6af931a7b7ee80948813260d4f176b1e, type: 3}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 0}
+      analyticInfo:
+        mainCategory: 4
+        empSubCategory: 0
+        aggSubCategory: 0
+        EmoSubCategory: 4
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
