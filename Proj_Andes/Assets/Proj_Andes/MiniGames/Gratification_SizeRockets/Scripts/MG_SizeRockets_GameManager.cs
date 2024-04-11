@@ -48,7 +48,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	[SerializeField] MG_SizeRockets_Planet level1Planet;
 
 	[SerializeField] public List<AudioClip> coinsLeftAudios = new List<AudioClip>();
-	IEnumerator currAudio;
+	IEnumerator roundEndAudioRoutineRef;
 	[SerializeField] Transform actionBlocker;
 	[SerializeField] CatchCoinsAudioInstruction catchCoinsAudio;
 
@@ -84,8 +84,8 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		instance = this;
 		roundCount = 0;
 		currAnalytics.tryIndex = roundCount + 1;
-		currAudio = StarsWonCount();
-		StartCoroutine(currAudio);
+		roundEndAudioRoutineRef = StarsWonCount();
+		StartCoroutine(roundEndAudioRoutineRef);
 	}
 
 	private void Start()
@@ -128,10 +128,10 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			yield return new WaitForSeconds(coinsLeftAudios[roundCount].length);
 		
 		}
-		else GameOver();
         doneAudioFeedback = true;
         actionBlocker.gameObject.SetActive(false);
     }
+
     private void Update()
 	{
 		if(gameOverFlag) return;
@@ -232,31 +232,36 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	}
 	public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount)
 	{
+		StartCoroutine(RoundEndSequence(rocket, coinsAmount));
+	}
+
+	IEnumerator RoundEndSequence(MG_SizeRockets_Rocket rocket, int coinsAmount)
+	{
 		currAnalytics.stars = coinsAmount;
 
-
-		currAudio = StarsWonCount(GetCoinAudio(rocket.rocketType));
-		StartCoroutine(currAudio);
-
-        if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
+		if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
 		else GeneralGameAnalyticsManager.RegisterWin();
 
-        roundCount++;
+		roundCount++;
 
-        activeShips.Remove(rocket);
+		roundEndAudioRoutineRef = StarsWonCount(GetCoinAudio(rocket.rocketType));
+		yield return roundEndAudioRoutineRef;
+
+		activeShips.Remove(rocket);
 		totalCoinsWon += coinsAmount;
 		currCoinsLabel.SetText(totalCoinsWon.ToString());
 
 		if (activeShips.Count == 0 && shipsLeft <= 0 && doneAudioFeedback)
 		{
 			GameOver();
-			return;
+			yield break;
 		}
 
 		currAnalytics.tryIndex = roundCount + 1;
 		smallRocketBtn.interactable = true;
 		mediumRocketBtn.interactable = true;
 		largeRocketBtn.interactable = true;
+
 	}
 
 
