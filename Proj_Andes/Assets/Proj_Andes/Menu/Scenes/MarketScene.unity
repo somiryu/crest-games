@@ -698,7 +698,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Selecciona un cofre para abrirlo o contin\xFAa para acumular mas estrellas
+  m_text: "Selecciona un cofre para abrirlo o contin\xFAa para acumular m\xE1s estrellas
     y conseguir mejores cofres"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae4e4719b7cced342aa1ecf987b39b55, type: 2}
@@ -3513,11 +3513,13 @@ MonoBehaviour:
   openChestSound: {fileID: 8300000, guid: 4115d9a3bb76f3144847dc185fb4cf33, type: 3}
   titleAudio: {fileID: 8300000, guid: e49610e37a1a27d44934b8d6feae1371, type: 3}
   introAudio: {fileID: 8300000, guid: 6b33779a604c5bc4491bc4bf269652d6, type: 3}
+  expensiveChestsAudio: {fileID: 8300000, guid: 5bdbfa1c729032b45b486d5651c5e01f, type: 3}
+  intermidiateGamesIntro: {fileID: 8300000, guid: 636de4e77d3027b40969c15dc6bc43f4, type: 3}
   uHaveAmtStarsAudio: {fileID: 8300000, guid: e30a931d845983b45ba196ef75cf2eb3, type: 3}
   openItAndGetAGiftAudio: {fileID: 8300000, guid: f987e6a2463660e448e45ede27b77303, type: 3}
   uWonAMonsterAudio: {fileID: 8300000, guid: c23ed5f4fa31b0b498b5db3e953ab30f, type: 3}
   wantMoreAudio: {fileID: 8300000, guid: 076e2b81a4492094abae23793985ad15, type: 3}
-  clicContinue: {fileID: 8300000, guid: 21ffa738de8b2354980d68db403009a1, type: 3}
+  clicContinue: {fileID: 8300000, guid: 3fe97ae5ec51a364c9fb93d3a19d7943, type: 3}
   noResourcesAudio: {fileID: 8300000, guid: db69751e58dcf1d42861c525416e872f, type: 3}
   noStarsAudio: {fileID: 8300000, guid: 47ac57f65d30fe049909f2dfb551cd80, type: 3}
   continueAudio: {fileID: 8300000, guid: a54cb53751966ab458219186e278d683, type: 3}

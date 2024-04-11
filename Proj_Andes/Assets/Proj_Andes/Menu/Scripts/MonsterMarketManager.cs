@@ -57,6 +57,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] AudioClip openChestSound;
     [SerializeField] AudioClip titleAudio;
     [SerializeField] AudioClip introAudio;
+    [SerializeField] AudioClip expensiveChestsAudio;
+    [SerializeField] AudioClip intermidiateGamesIntro;
     [SerializeField] AudioClip uHaveAmtStarsAudio;
     [SerializeField] AudioClip openItAndGetAGiftAudio;
     [SerializeField] AudioClip uWonAMonsterAudio;
@@ -177,16 +179,25 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
 
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction)) continueBtn.interactable = false;
+        else
+        {
+            audioSource.clip = intermidiateGamesIntro;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(intermidiateGamesIntro.length);
+        }
 
-        audioSource.clip = introAudio;
-        audioSource.Play();
-        yield return new WaitForSecondsRealtime(introAudio.length);
 
 		Debug.LogWarning("After second wait" + introAudio);
 
 
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
         {
+            audioSource.clip = introAudio;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(introAudio.length);
+            audioSource.clip = expensiveChestsAudio; 
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(expensiveChestsAudio.length);
             audioSource.clip = uHaveAmtStarsAudio;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(uHaveAmtStarsAudio.length);
@@ -196,14 +207,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             audioSource.clip = openItAndGetAGiftAudio;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(openItAndGetAGiftAudio.length);
-        }
-        else
-        {
-			Debug.LogWarning("continueBtn" + continueBtn);
-			continueBtn.interactable = true;
-            audioSource.clip = clicContinue;
-            audioSource.Play();
-            yield return new WaitForSeconds(clicContinue.length);
         }
         blockButtons.gameObject.SetActive(false);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
@@ -221,6 +224,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     }
 
  
+
 
     private void Update()
     {

@@ -588,15 +588,21 @@ public class DialoguesDisplayerUI : MonoBehaviour
         currShowingIdx = -1;
         if (GoToNextScene)
         {
-            var analytics = narrativeSceneItem.itemAnalytics;
-            if(analytics != null && analytics.Count > 0)
-            {
-				UserDataManager.SaveUserAnayticsPerGame(CollectionName: DataIds.Narratives,
-					itemAnalytics: narrativeSceneItem.itemAnalytics,
-                    shouldUseTestID: true);
-			}
+            SaveAnalytics();
 			narrativeSceneItem.OnSequenceOver();
         }
+	}
+
+    public static void SaveAnalytics()
+    {
+        if (instance == null) return;
+		var analytics = Instance.narrativeSceneItem.itemAnalytics;
+		if (analytics != null && analytics.Count > 0)
+		{
+			UserDataManager.SaveUserAnayticsPerGame(CollectionName: DataIds.Narratives,
+				itemAnalytics: Instance.narrativeSceneItem.itemAnalytics,
+				shouldUseTestID: true);
+		}
 	}
 
     public List<NarrativeNavigationNode> GetCurrNavigationNodes()

@@ -9,7 +9,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
-    public static bool isTheNarrativeSequence = false;
+    public static bool isTheNarrativeSequence = true;
     public static string gameInstancePath = "GameSequencesList";
     public static string narrativeInstancePath = "NarrativeSequencesList";
     static GameSequencesList instance;
@@ -45,34 +45,30 @@ public class GameSequencesList : ScriptableObject
         }
     }
 
-	public void GoToNextItemInList()
+    public void GoToNextItemInList() => GoToNextItemInList(true);
+
+	public void GoToNextItemInList(bool loadScene = true)
     {
         var nextItem = GetGameSequence().GetNextItem();
-        Debug.LogWarning("Curr game sequence: " + GetGameSequence().name);
         if (nextItem != null)
         {
-			Debug.LogWarning("Curr game sequence next item: " + nextItem.name);
 			if (prevGame != null)
             {
                 prevGame.SaveAnalytics();
-                Debug.Log("last screen type: " + prevGame.GetSceneID() + " id generated: " + prevGame.GameID);
                 prevGame.SaveGeneralGameAnalytics();
                 DatabaseManager.SaveUserDatasList(UserDataManager.Instance.usersDatas, UserDataManager.userAnayticsPerGame, false);
             }
-			Debug.LogWarning("saved correctly, Changing curr scene to: " + nextItem.name);
 
 			prevGame = nextItem;
 
-            Debug.LogWarning("Audio manager: " + AudioManager.Instance);
-            Debug.LogWarning("TimeManager: " + TimeManager.Instance);
-
             AudioManager.Instance.PlayMusic();
             TimeManager.Instance.ResetUsers();
-			Debug.LogWarning("After reset users");
-			SceneManagement.GoToScene(nextItem.scene);
+			if(loadScene) SceneManagement.GoToScene(nextItem.scene);
         }
         else GoToNextSequence();
     }
+
+
     public void GoToItemIdx(int idx)
     {
         AudioManager.Instance.PlayMusic();
@@ -94,17 +90,22 @@ public class GameSequencesList : ScriptableObject
         return gameSequences[goToGameGroupIdx];
     }
 
-    public void GoToNextSequence()
+    public void ForceAdvanceGameGroupID()
+    {
+        goToGameGroupIdx++;
+	}
+
+
+    public void GoToNextSequence(bool loadScene = true)
     {
 		goToGameGroupIdx++;
-        Debug.LogWarning("Calling go to next sequence : " + gameSequences);
 		if (goToGameGroupIdx >= gameSequences.Count)
         {
             goToGameGroupIdx = gameSequences.Count-1;
             EndSequence();
             Debug.LogWarning("Game sequence done, restarting the app");
         }
-        else GoToNextItemInList();
+        else GoToNextItemInList(loadScene);
     }
 
     public void GoToSequenceIdx(int idx, int subIdx)
