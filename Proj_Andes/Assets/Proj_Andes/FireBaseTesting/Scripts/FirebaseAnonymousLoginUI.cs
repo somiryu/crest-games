@@ -7,6 +7,8 @@ using System;
 using Firebase.Auth;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
+using Tymski;
 
 public class FirebaseAnonymousLoginUI : MonoBehaviour
 {
@@ -75,7 +77,19 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] GameObject checkingInternetPanel;
 	[SerializeField] GameObject NoInternetWarningIcon;
 
-	[Header("COnfirmStart Panel")]
+	[Header("PickANarrative Panel")]
+	[SerializeField] Transform pickANarrativePanel;
+    public List<BtnPerNarrative> btnsPerNarrative = new List<BtnPerNarrative>();
+    [SerializeField] Button selectedNarrativeBtn;
+    [SerializeField] MinigameGroups narratives;
+
+	[Header("Loading panel")]
+	[SerializeField] Transform loadingPanel;
+	[SerializeField] Slider loadingSlider;
+	SceneReference currNextNarr;
+	int currNextNarrIdx;
+
+    [Header("ConfirmStart Panel")]
 	[SerializeField] Transform uReadyPanel;
 	[SerializeField] Button readyBtb;
 	[SerializeField] Button cancelConfirmPanel;
@@ -125,7 +139,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wantsToExitSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(true));
 		exitSessionBtn.onClick.AddListener(OnExitSession);
 		cancelSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(false));
-		musicBtn.onClick.AddListener(MusicBtn);
+		musicBtn.onClick.AddListener(() => SwitchSoundActive());
 		goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
 
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
@@ -133,6 +147,14 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
 		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(UReady);
+
+		for (int i = 0; i < btnsPerNarrative.Count; i++)
+		{
+			var narrCount = i;
+            btnsPerNarrative[i].btn.onClick.AddListener(() => OnSelectedNarrativeBtn(btnsPerNarrative[narrCount].narrative));
+        }
+
+		selectedNarrativeBtn.onClick.AddListener(OnSelectedNarrative);
 
 		cancelSearchBarBtn.onClick.AddListener(() => selectUserContainer.gameObject.SetActive(true));
 
@@ -180,6 +202,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	private void Start()
 	{
+		var defaultSoundState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", defaultValue: 1);
+		AssignSoundActive(defaultSoundState);
+
 		FirebaseAuth auth = FirebaseAuth.DefaultInstance;
 		if(auth.CurrentUser != null)
 		{
@@ -361,14 +386,27 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	void OnWantsToCreateNewUser()
 	{
 		createNewUserPanel.SetActive(true);
-        selectUserContainer.gameObject.SetActive(false);
+		selectUserContainer.gameObject.SetActive(false);
     }	
 	void OnWantsToAccessExistingUser()
 	{
         createNewUserPanel.SetActive(false);
         selectUserContainer.gameObject.SetActive(false);
     }
-
+    void OnSelectedNarrativeBtn(int narIdx)
+	{
+		for (int i = 0; i < btnsPerNarrative.Count; i++)
+		{
+			if (btnsPerNarrative[i].narrative == narIdx)
+			{
+                btnsPerNarrative[i].highlight.gameObject.SetActive(true);
+				currNextNarr = narratives.miniGamesInGroup[narIdx - 1].scene;
+				currNextNarrIdx = narIdx - 1;
+            }
+			else btnsPerNarrative[i].highlight.gameObject.SetActive(false);
+        }
+		narratives.forcedScene = narIdx;
+	}
 	void OnFinishedUserCreation()
 	{
 		var newUser = new UserData();
@@ -488,25 +526,44 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wantsToExitSessionBtn.gameObject.SetActive(true);
 
 		UserDataManager.Instance.SetCurrUser(id);
-		var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
 
-		var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
-		audioSource.clip = currClip;
-		audioSource.Play();
+		if (GameSequencesList.isTheNarrativeSequence) pickANarrativePanel.gameObject.SetActive(GameSequencesList.isTheNarrativeSequence);
+		else ContinueOrNewGame();
+    }
+	void ContinueOrNewGame()
+	{
+        afterLogInPanel.SetActive(true);
 
-		afterLogInPanel.SetActive(true);
+        var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
+        audioSource.clip = currClip;
+        audioSource.Play();
 
+        var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
         var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? contWelcomeM : contWelcomeF;
-		currWelcome.gameObject.SetActive(false);
+        currWelcome.gameObject.SetActive(false);
+
+        var soundPref = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", 1);
+		Debug.Log("sound " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive"));
+		AssignSoundActive(soundPref);
         afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
+    }
+	void OnSelectedNarrative()
+	{
+		pickANarrativePanel.gameObject.SetActive(false);
+		ContinueOrNewGame();
+    }
+	void SwitchSoundActive()
+	{
+		var previousState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", defaultValue: 1);
+		AssignSoundActive(previousState == 0 ? 1 : 0);
 	}
 
-
-	void MusicBtn()
+	void AssignSoundActive(int active)
 	{
-		if (AudioManager.Instance.currentBkMusic.isPlaying)
+		if (active == 0)
 		{
 			AudioManager.Instance.currentBkMusic.Stop();
+			Debug.Log("deactivate");
 			musicBtn.image.sprite = musicBtnInactive;
 		}
 		else
@@ -514,9 +571,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			AudioManager.Instance.currentBkMusic.Play();
 			musicBtn.image.sprite = musicBtnActive;
 		}
-		bool activeStae = AudioManager.Instance.currentBkMusic.isPlaying;
-		PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activeStae ? 1 : 0);
-
+		PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", active);
 	}
 
 	public void OnContinueGameBtnPressed()
@@ -531,8 +586,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
-		TimeManager.timer = 0;
 		
+
+        TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{
 			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
@@ -541,14 +597,37 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 				group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
 			}
 			DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
-			GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
+            if (!GameSequencesList.isTheNarrativeSequence) GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
 		}
 		else
 		{
 			UserDataManager.CurrUser.myCollectionMonsters.Clear();
 			UserDataManager.CurrUser.Coins = 10;
-			GameSequencesList.Instance.GoToNextSequence();
+			GameSequencesList.Instance.GoToNextSequence(loadScene: !GameSequencesList.isTheNarrativeSequence);
+			if (GameSequencesList.isTheNarrativeSequence) StartCoroutine(LoadingSceneAsync(currNextNarr));
 		}
 	}
 
+	IEnumerator LoadingSceneAsync(SceneReference scene)
+	{
+		loadingPanel.gameObject.SetActive(true); 
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+        while (asyncLoad.progress < 0.9f)
+        {
+			loadingSlider.value = asyncLoad.progress;
+			Debug.Log(asyncLoad.progress);
+            yield return null;
+        }
+
+        //loadingPanel.gameObject.SetActive(false);
+    }
+}
+[Serializable]
+public struct BtnPerNarrative
+{
+    public int narrative;
+    public Button btn;
+    public Image highlight;
+    public Image shadow;
+    public AudioClip narrativeAudio;
 }

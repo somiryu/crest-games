@@ -80,6 +80,7 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     {
         TimeManager.Instance.RemoveNewStopTimeUser(this);
         onPause = false;
+        DialoguesDisplayerUI.SaveAnalytics();
         GameSequencesList.Instance.EndSequence();
     }
 
