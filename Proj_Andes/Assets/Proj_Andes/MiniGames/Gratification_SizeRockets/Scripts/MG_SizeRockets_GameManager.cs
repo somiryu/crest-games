@@ -65,10 +65,11 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	private bool gameOverFlag;
 	private bool doneAudioFeedback;
 
-	public SizeRocketAnalytics currAnalytics => analyticsPerRound[roundCount];
+	public SizeRocketAnalytics currAnalytics => analyticsPerRound[analyticsCount];
 
 	public SizeRocketAnalytics[] analyticsPerRound;
 
+	int analyticsCount;
 	int roundCount;
 
 	private void Awake()
@@ -83,6 +84,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		if (instance != null && instance != this) Destroy(instance);
 		instance = this;
 		roundCount = 0;
+		analyticsCount = 0;
 		currAnalytics.tryIndex = roundCount + 1;
 		currAudio = StarsWonCount();
 		StartCoroutine(currAudio);
@@ -120,15 +122,16 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
             audioSource.clip = clip;
             audioSource.Play();
             yield return new WaitForSeconds(clip.length);
+            analyticsCount++;
         }
 		if (roundCount < coinsLeftAudios.Count)
 		{
 			audioSource.clip = coinsLeftAudios[roundCount];
+			Debug.Log(analyticsCount);
 			audioSource.Play();
 			yield return new WaitForSeconds(coinsLeftAudios[roundCount].length);
-		
-		}
-		else GameOver();
+        }
+        else GameOver();
         doneAudioFeedback = true;
         actionBlocker.gameObject.SetActive(false);
     }
