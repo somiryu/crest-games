@@ -159,7 +159,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         }
 
 
-		blockButtons.gameObject.SetActive(!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction));
+		blockButtons.gameObject.SetActive(true);
         audioSource.clip = titleAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(titleAudio.length);
@@ -440,9 +440,11 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     }
     public IEnumerator OrSelectContinue()
     {
+        blockButtons.gameObject.SetActive(true);
         audioSource.clip = clicContinue;
         audioSource.Play();
         yield return new WaitForSeconds(clicContinue.length);
+        blockButtons.gameObject.SetActive(false);
     }
 
 #if UNITY_EDITOR

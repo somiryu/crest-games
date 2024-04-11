@@ -9,7 +9,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
-    public static bool isTheNarrativeSequence = true;
+    public static bool isTheNarrativeSequence = false;
     public static string gameInstancePath = "GameSequencesList";
     public static string narrativeInstancePath = "NarrativeSequencesList";
     static GameSequencesList instance;
@@ -78,7 +78,7 @@ public class GameSequencesList : ScriptableObject
 
     [ContextMenu("ResetSequence")]
     public void ResetSequence()
-    {
+    { 
         prevGame = null;
         goToGameGroupIdx = 0;
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
@@ -136,7 +136,7 @@ public class GameSequencesList : ScriptableObject
     public bool IsLastMarket(SimpleGameSequenceItem item)
     {
         if (item is not MonsterMarketConfig marketItem) return false;
-        var lastMarketIdx = -1;
+        var lastMarketIdx = 0;
 		for (var i = 0; i < gameSequences.Count; i++)
         {
             var curr = gameSequences[i];
