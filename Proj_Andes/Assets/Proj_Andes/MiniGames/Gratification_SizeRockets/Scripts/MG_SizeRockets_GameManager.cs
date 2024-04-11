@@ -120,8 +120,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
             audioSource.clip = clip;
             audioSource.Play();
             yield return new WaitForSeconds(clip.length);
+            roundCount++;
         }
-		if (roundCount < coinsLeftAudios.Count)
+        if (roundCount < coinsLeftAudios.Count)
 		{
 			audioSource.clip = coinsLeftAudios[roundCount];
 			audioSource.Play();
@@ -186,10 +187,10 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 				break;
 		}
 		selectedRocketType = types;
-	}
+    }
 
 
-	void GenerateNewShip(SizeRocketsRocketTypes types)
+    void GenerateNewShip(SizeRocketsRocketTypes types)
 	{
 		if (shipsLeft <= 0) return;
         var rocketsPool = GetRocketsPool(types);
@@ -242,7 +243,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
 		else GeneralGameAnalyticsManager.RegisterWin();
 
-		roundCount++;
 
 		roundEndAudioRoutineRef = StarsWonCount(GetCoinAudio(rocket.rocketType));
 		yield return roundEndAudioRoutineRef;
