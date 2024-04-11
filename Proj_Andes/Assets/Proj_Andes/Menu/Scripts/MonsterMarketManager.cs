@@ -104,17 +104,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
 	private void Start()
 	{
-		Debug.LogWarning("start Start() monster market");
         if (marketIntro != null) StopCoroutine(marketIntro);
         marketIntro = MarketIntro();
-		Debug.LogWarning("Market intro: " + marketIntro);
 		StartCoroutine(marketIntro);
 		//Init analytics
-		Debug.LogWarning("GeneralGameAnalyticsManager: " + GeneralGameAnalyticsManager.Instance);
 		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
-		Debug.LogWarning("UserDataManager.CurrUser: " + UserDataManager.CurrUser);
 		initialStars = UserDataManager.CurrUser.Coins;
-		Debug.LogWarning("finish start monster market");
 	}
 
 	public void Init()
@@ -152,7 +147,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
 	IEnumerator MarketIntro()
     {
-        Debug.LogWarning("Timer manager: " + TimeManager.Instance);
         TimeManager.Instance.SetNewStopTimeUser(this);
         if (MonsterMarketConfig.isLastMarket)
         {
@@ -164,17 +158,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             blockButtons.gameObject.SetActive(false);
         }
 
-		Debug.LogWarning("blockButtons" + blockButtons);
-		Debug.LogWarning("audioSource" + audioSource);
 
 		blockButtons.gameObject.SetActive(!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction));
         audioSource.clip = titleAudio;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(titleAudio.length);
 
-		Debug.LogWarning("After first wait" + titleAudio);
-		Debug.LogWarning("UserDataManager.CurrUser " + UserDataManager.CurrUser);
-		Debug.LogWarning("continueBtn " + continueBtn);
 
 
 
@@ -187,7 +176,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         }
 
 
-		Debug.LogWarning("After second wait" + introAudio);
 
 
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
@@ -201,16 +189,15 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             audioSource.clip = uHaveAmtStarsAudio;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(uHaveAmtStarsAudio.length);
-			Debug.LogWarning("Tuto hand" + tutoHand);
 
 			tutoHand.gameObject.SetActive(true);
             audioSource.clip = openItAndGetAGiftAudio;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(openItAndGetAGiftAudio.length);
         }
+        marketIntro = null;
         blockButtons.gameObject.SetActive(false);
         TimeManager.Instance.RemoveNewStopTimeUser(this);
-		Debug.LogWarning("Finished routine");
 	}
 
 	public void AddUserInterfaceMonsterButton(MonsterMarketButtonBehaviour monsterMarketButtonBehaviour)
