@@ -223,8 +223,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
                 if (selectedElement == null) return;
                 if (selectedElement.TryGetComponent(out Button btn))
                 {
-                    StopCoroutine(marketIntro);
-                    audioSource.Stop();
+                    if(marketIntro != null) StopCoroutine(marketIntro);
+					audioSource.Stop();
                 }
 
             }
@@ -326,6 +326,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     void ShowNoResourcesCorroutine()
     {
+        if(noResources != null) StopCoroutine(noResources);
         noResources = NoResources();
         StartCoroutine(noResources);
     }
@@ -339,11 +340,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         audioSource.clip = noStarsAudio;
         audioSource.Play();
         yield return new WaitForSeconds(noStarsAudio.length);
+        noResources = null;
     }
 
     void CloseNoResources()
     {
-        StopCoroutine(noResources);
+        if(noResources != null) StopCoroutine(noResources);
         audioSource.Stop();
         chestNoEnoughCoins.SetActive(false);
     }
