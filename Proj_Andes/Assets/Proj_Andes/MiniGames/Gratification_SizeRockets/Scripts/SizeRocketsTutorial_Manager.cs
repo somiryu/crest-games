@@ -154,7 +154,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
     void ActivateTutoUI()
     {
-        if(!handSignPlanet.gameObject.activeInHierarchy || currTutoStep.Type != SizeRocketsTutoSteps.SmallRocketStep) actionBlocker.gameObject.SetActive(true);
+        if(!handSignPlanet.gameObject.activeInHierarchy) actionBlocker.gameObject.SetActive(true);
 		StartCoroutine(ShipDescription());
         if(currTutoStep.Type != SizeRocketsTutoSteps.SmallRocketStep) currTutoStep.handSign.gameObject.SetActive(true);
         for (int i = 0; i < tutorialSteps.Count; i++)
