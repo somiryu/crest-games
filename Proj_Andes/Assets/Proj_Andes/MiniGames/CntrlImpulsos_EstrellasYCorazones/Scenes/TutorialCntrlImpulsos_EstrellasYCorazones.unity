@@ -23267,6 +23267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd220db87ba136445a36c3bbbde64079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutoConfig: {fileID: 0}
   sameDirectionSprite: {fileID: 21300000, guid: 811c77aad97344a4794f94d9f430d4b1, type: 3}
   opositeDirectionSprite: {fileID: 21300000, guid: 730553421d8251946ae2458614062649, type: 3}
   leftImg: {fileID: 946864922}
@@ -23297,7 +23298,7 @@ MonoBehaviour:
   currRoundValueTxt: {fileID: 1134041796}
   myTutorialSteps:
   - tutorialSteps: 0
-    trialsAmt: 3
+    trialsAmt: 6
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
@@ -23305,15 +23306,15 @@ MonoBehaviour:
     audioInstruction: {fileID: 8300000, guid: 1820e0377c8859140b183feb70b037cb, type: 3}
     tutoRoundsCount: 0
   - tutorialSteps: 1
-    trialsAmt: 3
+    trialsAmt: 6
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
     background: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     audioInstruction: {fileID: 8300000, guid: c0d804b69c872ba4e874acc07e8a7f76, type: 3}
     tutoRoundsCount: 0
-  - tutorialSteps: 3
-    trialsAmt: 5
+  - tutorialSteps: 2
+    trialsAmt: 4
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
     passedTuto: 

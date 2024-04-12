@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 {
+    [SerializeField] HeartsAndStarts_TutorialConfig tutoConfig;
     [Space(20)]
     [SerializeField] Sprite sameDirectionSprite;
     [SerializeField] Sprite opositeDirectionSprite;
@@ -51,6 +52,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     [SerializeField] List<TutorialConfigHeartsAndStars> myTutorialSteps = new List<TutorialConfigHeartsAndStars>();
     [SerializeField] TutorialConfigHeartsAndStars currTutoStep;
+    public static int currTutoStepIdx;
     private AudioSource audiosource;
 
     private int currRound;
@@ -73,7 +75,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     public void Init()
     {
         currRound = 0;
-        currTutoStep = myTutorialSteps[0];
+        currTutoStep = myTutorialSteps[currTutoStepIdx];
         currConsecutiveLoses = 0;
         currConsecutiveWins = 0;        
         allTutorialsDoneFlag = false;
@@ -97,8 +99,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         currTutoStep.tutoRoundsCount++;
         if (currTutoStep.tutorialSteps == TutorialStepsHandS.HighlightedRight) currRequiresSameDirection = true;
         else if (currTutoStep.tutorialSteps == TutorialStepsHandS.HighlightedLeft) currRequiresSameDirection = false;
-        else if (currTutoStep.tutorialSteps == TutorialStepsHandS.Free 
-            || currTutoStep.tutorialSteps == TutorialStepsHandS.FreeWSupport) currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+        else if (currTutoStep.tutorialSteps == TutorialStepsHandS.Free) currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
 
         currShowingRight = Random.Range(0f, 1f) > 0.5f;
 
@@ -117,13 +118,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         {
             TurnOffHighlightHelps();
 		}
-        else if(currTutoStep.tutorialSteps == TutorialStepsHandS.FreeWSupport)
-        {
-            //if (currConsecutiveLoses >= 1 && !wasShowingHelpHighlights) StartCoroutine( TurnOnHighlightHelps());
-            if (currConsecutiveWins == 0 && currConsecutiveLoses == 0) TurnOffHighlightHelps();
-            else if (wasShowingHelpHighlights && currConsecutiveWins >= 1) TurnOffHighlightHelps();
-            //else if (wasShowingHelpHighlights && currConsecutiveWins <= 1) StartCoroutine(TurnOnHighlightHelps());
-        }
     }
     IEnumerator Introduction()
     {
@@ -171,11 +165,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 			leftBtnOnRightChoiceBG.gameObject.SetActive(true);
 			leftBtn.image.color = enabledBtnColor;
         }
-        if (currTutoStep.tutorialSteps == TutorialStepsHandS.FreeWSupport)
-        {
-            var currClip = currRequiresSameDirection ? correctionIfHeartAudio : correctionIfStarAudio;
-            StartCoroutine(AudioInstructionHelp(currClip));
-        }
     }
 
     void TurnOffHighlightHelps()
@@ -193,13 +182,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         {
 			Debug.Log("tuto step passed");
 			Victory();
-			var currIdx = myTutorialSteps.IndexOf(currTutoStep);
-			if (currIdx + 1 >= myTutorialSteps.Count) allTutorialsDoneFlag = true;
-			else
-            {
-                currTutoStep = myTutorialSteps[currIdx + 1];
-                currTutoStep.InitTutoStep();
-            }
+            allTutorialsDoneFlag = true;
             currConsecutiveWins = 0;
             currConsecutiveLoses = 0;
         }
@@ -247,11 +230,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         currConsecutiveLoses += 1;
         currConsecutiveWins = 0;
 
-        if (currTutoStep.tutorialSteps == TutorialStepsHandS.FreeWSupport)
-        {
-            if (currConsecutiveLoses >= 1 && !wasShowingHelpHighlights) TurnOnHighlightHelps();
-            return;
-        }
         OnRoundEnded();
     }
 
@@ -307,14 +285,26 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         audiosource.Play();
         inGameUIPanel.SetActive(false);
         afterActionPanel.SetActive(true);
+        currTutoStepIdx++;
         StartCoroutine(GoToNextScene());
     }
 
     IEnumerator GoToNextScene()
     {
-        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.HeartsAndStarsDone.ToString());
+        switch (currTutoStep.tutorialSteps)
+        {
+            case TutorialStepsHandS.HighlightedRight:
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.HeartsAndFlowersHeartsDone.ToString());
+                break;            
+            case TutorialStepsHandS.HighlightedLeft:
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.HeartsAndFlowersFlowersDone.ToString());
+                break;            
+            case TutorialStepsHandS.Free:
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.HeartsAndFlowersMixedDone.ToString());
+                break;
+        }
         yield return new WaitForSeconds(1);
-        GameSequencesList.Instance.GoToNextSequence();
+        GameSequencesList.Instance.GoToNextItemInList();
     }
 
 }
@@ -340,6 +330,5 @@ public enum TutorialStepsHandS
 {
     HighlightedRight,
     HighlightedLeft,
-    Free,
-    FreeWSupport
+    Free
 }

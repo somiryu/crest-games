@@ -15,6 +15,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     public static MG_HearthsAndStarsManager Instance => instance;
 
     [SerializeField] MG_HearthAndStarsGameConfigs gameConfigs;
+    public static HeartsAndFlowersGameType currGameType;
     [Space(20)]
     [SerializeField] Sprite sameDirectionSprite;
     [SerializeField] Sprite opositeDirectionSprite;
@@ -105,7 +106,19 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         rightImg.gameObject.SetActive(false);
         leftImg.gameObject.SetActive(false);
 
-        currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+        switch (currGameType)
+        {
+            case HeartsAndFlowersGameType.Hearts:
+                currRequiresSameDirection = true;
+                break;            
+            case HeartsAndFlowersGameType.Flowers:
+                currRequiresSameDirection = false;
+                break;            
+            case HeartsAndFlowersGameType.Mixed:
+                currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+                break;
+        }
+
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;
         currShowingRight = Random.Range(0f, 1f) > 0.5f;
         var imgToUse = currShowingRight ? rightImg : leftImg;
