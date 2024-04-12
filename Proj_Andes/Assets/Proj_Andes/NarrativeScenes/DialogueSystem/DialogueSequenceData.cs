@@ -110,14 +110,15 @@ public class NarrativeAnalyicsInfo
             switch (inRelationTo)
             {
                 case NarrativeAnalticsEmpathyInRelationTo.self:
-                    label += "self";
+                    label += "self_";
                     break;                
                 case NarrativeAnalticsEmpathyInRelationTo.ami:
-                    label += "ami";
+                    label += "ami_";
                     break;                
                 case NarrativeAnalticsEmpathyInRelationTo.ene:
-                    label += "ene";
+                    label += "ene_";
                     break;
+
             }
             label += questionIdx + "_";
         }
@@ -133,6 +134,7 @@ public class NarrativeAnalyicsInfo
                 label += "val";
                 break;
         }
+        Debug.Log("curr label " + label);
         return label;
     }
 
@@ -147,6 +149,19 @@ public class NarrativeAnalyicsInfo
         if(mainCategory == NarrativeAnalyticCategory.EmoComp) return emotionSubCategory.ToString();
 
         return null;
+    }
+
+    public int BuildValue()
+    {
+        if (mainCategory == NarrativeAnalyticCategory.Aggression || mainCategory == NarrativeAnalyticCategory.Conflict)
+        {
+            return ((int)agressionSubCategory);
+        }
+        if (mainCategory == NarrativeAnalyticCategory.Empathy) return (int)emotionSubCategory;
+        if (mainCategory == NarrativeAnalyticCategory.EmoBas) return (int)emotionSubCategory;
+        if (mainCategory == NarrativeAnalyticCategory.EmoComp) return (int)emotionSubCategory;
+
+        return -1;
     }
 }
 

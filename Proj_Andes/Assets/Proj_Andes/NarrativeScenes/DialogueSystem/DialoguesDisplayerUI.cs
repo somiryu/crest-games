@@ -65,10 +65,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     //Analytics
     private float currResponseTime;
-    private string currResponseChoiceAnalyticID;
+    private string currResponseChoiceAnalyticIDTm;
+    private string currResponseChoiceAnalyticIDVal;
+    private string currResponseChoiceAnalyticIDRta;
     private int analyticsCount;
-    private string currResponseTimeAnalyticID;
-    private string currResponseAnalyticResponseValue;
+    private string currResponseAnalyticResponse;
+    private int currResponseAnalyticResponseVal;
 
     private DialoguesResponsesDisplayerUI currResponsesDisplayer;
 
@@ -454,14 +456,17 @@ public class DialoguesDisplayerUI : MonoBehaviour
         hasPendingLineChange = false;
         currAnimSequence = null;
 
-        if (!string.IsNullOrEmpty(currResponseChoiceAnalyticID))
+        if (!string.IsNullOrEmpty(currResponseChoiceAnalyticIDRta))
         {
-            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticID, currResponseAnalyticResponseValue);
-            narrativeSceneItem.itemAnalytics.Add(currResponseTimeAnalyticID, currResponseTime);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDRta, currResponseAnalyticResponse);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDVal, currResponseAnalyticResponseVal);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDTm, currResponseTime);
 
-            currResponseChoiceAnalyticID = null;
-            currResponseTimeAnalyticID = null;
-            currResponseAnalyticResponseValue = null;
+            Debug.Log("cur1 " + currResponseChoiceAnalyticIDRta + " " + currResponseAnalyticResponse);
+            Debug.Log("cur2 " + currResponseChoiceAnalyticIDVal + " " + currResponseAnalyticResponseVal);
+            Debug.Log("cur3 " + currResponseChoiceAnalyticIDTm + " " + currResponseTime);
+            currResponseAnalyticResponse = null;
+            currResponseAnalyticResponseVal = -1;
             currResponseTime = 0;
         }
 
@@ -507,24 +512,24 @@ public class DialoguesDisplayerUI : MonoBehaviour
         {
             var questionIdx = GetQuestionIdxFor(analyticInfo);
 
-
-            currResponseChoiceAnalyticID = analyticInfo.BuildID(
+            currResponseChoiceAnalyticIDRta = analyticInfo.BuildID(
                 narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
-                questionIdx: questionIdx, 
+                questionIdx: questionIdx,
+                NarrativeAnalyticType.Rta);
+
+            currResponseChoiceAnalyticIDVal = analyticInfo.BuildID(
+                narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
+                questionIdx: questionIdx,
+                NarrativeAnalyticType.Val);
+
+            currResponseChoiceAnalyticIDTm = analyticInfo.BuildID(
+                narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
+                questionIdx: questionIdx,
                 NarrativeAnalyticType.Tm);
 
-            currResponseTimeAnalyticID = analyticInfo.BuildID(
-				narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
-				questionIdx: questionIdx,
-				NarrativeAnalyticType.Val);  
-            
-            currResponseTimeAnalyticID = analyticInfo.BuildID(
-				narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
-				questionIdx: questionIdx,
-				NarrativeAnalyticType.Rta);
-
-			currResponseAnalyticResponseValue = analyticInfo.BuildResponse();
-		}
+            currResponseAnalyticResponse = analyticInfo.BuildResponse();
+            currResponseAnalyticResponseVal = analyticInfo.BuildValue();
+        }
 
         currResponsesDisplayer.ActiveConfirmationButton(false);
         hasPendingLineChange = true;
