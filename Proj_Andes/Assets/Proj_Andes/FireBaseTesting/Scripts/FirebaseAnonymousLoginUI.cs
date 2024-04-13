@@ -86,6 +86,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[Header("Loading panel")]
 	[SerializeField] Transform loadingPanel;
 	[SerializeField] Slider loadingSlider;
+	[SerializeField] Image replacebleImg;
 	SceneReference currNextNarr;
 	int currNextNarrIdx;
 
@@ -405,8 +406,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
                 btnsPerNarrative[i].highlight.gameObject.SetActive(true);
 				currNextNarr = narratives.miniGamesInGroup[narIdx - 1].scene;
 				currNextNarrIdx = narIdx - 1;
+				replacebleImg.sprite = btnsPerNarrative[i].btnImg.sprite;
             }
-			else btnsPerNarrative[i].highlight.gameObject.SetActive(false);
+            else btnsPerNarrative[i].highlight.gameObject.SetActive(false);
         }
 		narratives.forcedScene = narIdx;
 	}
@@ -631,6 +633,6 @@ public struct BtnPerNarrative
     public int narrative;
     public Button btn;
     public Image highlight;
-    public Image shadow;
+    public Image btnImg;
     public AudioClip narrativeAudio;
 }
