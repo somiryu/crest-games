@@ -120,7 +120,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
             audioSource.clip = clip;
             audioSource.Play();
             yield return new WaitForSeconds(clip.length);
-            roundCount++;
         }
         if (roundCount < coinsLeftAudios.Count)
 		{
@@ -243,6 +242,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
 		else GeneralGameAnalyticsManager.RegisterWin();
 
+		roundCount++;
 
 		roundEndAudioRoutineRef = StarsWonCount(GetCoinAudio(rocket.rocketType));
 		yield return roundEndAudioRoutineRef;
