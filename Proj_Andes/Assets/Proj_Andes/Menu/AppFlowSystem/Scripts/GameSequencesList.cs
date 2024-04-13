@@ -136,7 +136,7 @@ public class GameSequencesList : ScriptableObject
     public bool IsLastMarket(SimpleGameSequenceItem item)
     {
         if (item is not MonsterMarketConfig marketItem) return false;
-        var lastMarketIdx = 0;
+        var lastMarketIdx = -1;
 		for (var i = 0; i < gameSequences.Count; i++)
         {
             var curr = gameSequences[i];
