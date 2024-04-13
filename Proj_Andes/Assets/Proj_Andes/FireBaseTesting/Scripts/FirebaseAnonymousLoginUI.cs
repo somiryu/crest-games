@@ -197,6 +197,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		insertCodeInputF.onValueChanged.AddListener(OnInsertedCodeChanged);
 		insertCodeConfirm.interactable = false;
 		UserDataManager.Instance.SetCurrUser(null);
+
+		MonsterMarketConfig.marketAppearTimes = -1;
+
 	}
 
 
