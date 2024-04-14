@@ -8,6 +8,7 @@ public class SimpleGameSequenceItem : ScriptableObject
 {
     public SceneReference scene;
 
+    [NonSerialized] public bool shouldTryToSaveGeneralAnalytics = true;
     [NonSerialized] public Dictionary<string, object> itemAnalytics = new Dictionary<string, object>();
 
     public virtual string GetSceneID() => string.Empty;
@@ -38,9 +39,13 @@ public class SimpleGameSequenceItem : ScriptableObject
     }
     public virtual void SaveAnalytics() { }
 
+    public virtual void AferGeneralAnalyticsSaved() { }
+
     public virtual void SaveGeneralGameAnalytics()
     {
         if (GeneralGameAnalyticsManager.Instance == null) return;
+        if (!shouldTryToSaveGeneralAnalytics) return;
+
         var analytics = GeneralGameAnalyticsManager.Instance.GetAnalytics();
         if(analytics == null) return;
         var idToUse = string.IsNullOrEmpty(GameID) ? Guid.NewGuid().ToString() : GameID;

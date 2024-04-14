@@ -15,6 +15,7 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: 6f0335c0093bc764f8eefa1a5c6deed5, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_EstrellasYCorazones/Scenes/CntrlImpulsos_EstrellasYCorazones.unity
+  isLastHearthAndStarsGameOnBatch: 1
   timePerChoice: 3
   maxRounds: 10
   initialCoins: 0

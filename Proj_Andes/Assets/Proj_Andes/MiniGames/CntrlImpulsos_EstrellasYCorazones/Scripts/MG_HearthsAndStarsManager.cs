@@ -93,7 +93,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
 	private void Start()
 	{
-        GeneralGameAnalyticsManager.Instance.Init(DataIds.heartsAndStarsGame);
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.heartsAndStarsGame, MG_HearthAndStarsGameConfigs.GlobalGeneralGameAnalytics);
 	}
 
 	void InitRound()

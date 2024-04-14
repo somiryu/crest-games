@@ -55,7 +55,12 @@ public class GameSequencesList : ScriptableObject
 			if (prevGame != null)
             {
                 prevGame.SaveAnalytics();
-                prevGame.SaveGeneralGameAnalytics();
+                if (prevGame.shouldTryToSaveGeneralAnalytics)
+                {
+                    Debug.Log("Called try to save general game analytics");
+                    prevGame.SaveGeneralGameAnalytics();
+                    prevGame.AferGeneralAnalyticsSaved();
+                }
                 DatabaseManager.SaveUserDatasList(UserDataManager.Instance.usersDatas, UserDataManager.userAnayticsPerGame, false);
             }
 

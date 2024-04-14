@@ -15,5 +15,5 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: c05d762b1b42ee448a5ad8b23015492b, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_EstrellasYCorazones/Scenes/TutorialCntrlImpulsos_EstrellasYCorazones.unity
-  tutorialID: 8
+  tutorialID: 17
   gameIdx: 2
