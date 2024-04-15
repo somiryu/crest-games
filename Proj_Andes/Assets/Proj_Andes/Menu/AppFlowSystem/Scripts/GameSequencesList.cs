@@ -83,7 +83,7 @@ public class GameSequencesList : ScriptableObject
 
     [ContextMenu("ResetSequence")]
     public void ResetSequence()
-    {
+    { 
         prevGame = null;
         goToGameGroupIdx = 0;
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();

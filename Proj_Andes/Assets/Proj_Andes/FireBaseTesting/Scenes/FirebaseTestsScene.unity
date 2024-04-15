@@ -564,7 +564,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dcf663ee427f14a418d14daa56128f0d, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -16094,22 +16094,23 @@ MonoBehaviour:
   - narrative: 1
     btn: {fileID: 24042010}
     highlight: {fileID: 708625582}
-    shadow: {fileID: 0}
+    btnImg: {fileID: 516837225}
     narrativeAudio: {fileID: 0}
   - narrative: 2
     btn: {fileID: 1796666350}
     highlight: {fileID: 1384159801}
-    shadow: {fileID: 0}
+    btnImg: {fileID: 889623281}
     narrativeAudio: {fileID: 0}
   - narrative: 3
     btn: {fileID: 1653636336}
     highlight: {fileID: 1393617748}
-    shadow: {fileID: 0}
+    btnImg: {fileID: 1227426288}
     narrativeAudio: {fileID: 0}
   selectedNarrativeBtn: {fileID: 1717484701}
   narratives: {fileID: 11400000, guid: 41b74151a2d5906479c9b387a0d6e2d7, type: 2}
   loadingPanel: {fileID: 1030918711}
   loadingSlider: {fileID: 25349647}
+  replacebleImg: {fileID: 393477732}
   uReadyPanel: {fileID: 2122517642}
   readyBtb: {fileID: 2124433768}
   cancelConfirmPanel: {fileID: 1242150723}
@@ -26266,7 +26267,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cd15ee782aa1b0c45bd4acb12cb83ee5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c6f204b4c07add4593298c74a3c9b5e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
