@@ -47,6 +47,8 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     [SerializeField] AudioClip ifHeartAudio;
     [SerializeField] AudioClip ifStarAudio;
 
+    [SerializeField] GameObject blockScreenPanel;
+
     [Header("UI")]
     [SerializeField] TMP_Text currRoundValueTxt;
 
@@ -122,7 +124,10 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     }
     IEnumerator Introduction()
     {
-        rightBtn.interactable = false;
+        blockScreenPanel.SetActive(true);
+
+		rightBtn.interactable = false;
+        leftBtn.interactable = false;
         leftImg.gameObject.SetActive(false);
         rightImg.gameObject.SetActive(false);
         for (int i = 0; i < currTutoStep.preInitRoundInstructions.Length; i++)
@@ -135,11 +140,13 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         leftBtn.interactable = true;
         leftImg.gameObject.SetActive(true);
         rightImg.gameObject.SetActive(true);
-        InitRound();
+		blockScreenPanel.SetActive(false);
+		InitRound();
     }
     IEnumerator RunPostInitRoundInstructions()
     {
-        rightBtn.interactable = false;
+		blockScreenPanel.SetActive(true);
+		rightBtn.interactable = false;
         leftBtn.interactable = false;
 		for (int i = 0; i < currTutoStep.postInitRoundInstructions.Length; i++)
 		{
@@ -149,8 +156,9 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 		}
 		rightBtn.interactable = true;
         leftBtn.interactable = true;
-    }
-    void TurnOnHighlightHelps()
+		blockScreenPanel.SetActive(false);
+	}
+	void TurnOnHighlightHelps()
     {
         wasShowingHelpHighlights = true;
 		if (currRequiresSameDirection && currShowingRight || !currRequiresSameDirection && !currShowingRight)
@@ -223,6 +231,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     private IEnumerator OnWrongChoiceRoutine()
     {
+		blockScreenPanel.SetActive(true);
 		LIncorrectparticle.Stop();
 		RIncorrectparticle.Stop();
 		RCorrectparticle.Stop();
@@ -246,6 +255,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 		currConsecutiveLoses += 1;
 		currConsecutiveWins = 0;
 
+		blockScreenPanel.SetActive(false);
 		OnRoundEnded();
 	}
 
@@ -320,14 +330,16 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 				break;
 		}
 
-		
-        for (int i = 0; i < currTutoStep.finishTutorialStepAudios.Length; i++)
+		blockScreenPanel.SetActive(true);
+
+		for (int i = 0; i < currTutoStep.finishTutorialStepAudios.Length; i++)
         {
 			audiosource.clip = currTutoStep.finishTutorialStepAudios[i];
 			audiosource.Play();
 			yield return new WaitForSeconds(audiosource.clip.length);
 		}
 
+		blockScreenPanel.SetActive(false);
 		GameSequencesList.Instance.GoToNextItemInList();
 
 	}
