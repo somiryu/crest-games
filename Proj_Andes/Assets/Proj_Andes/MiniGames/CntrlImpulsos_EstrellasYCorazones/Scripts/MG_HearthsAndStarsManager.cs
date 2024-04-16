@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 {
@@ -167,6 +168,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     private void OnWrongChoice()
     {
+        StartCoroutine(OnWrongChoiceCorroutine());
+    }
+    IEnumerator OnWrongChoiceCorroutine()
+    {
         LIncorrectparticle.Stop();
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
@@ -183,11 +188,16 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         else LIncorrectparticle.Play();
         gameUi.StarLost();
 
-
+        yield return new WaitForSeconds(gameConfigs.maxRounds / 2);
         OnRoundEnded();
+
+    }
+    private void OnCorrectChoice()
+    {
+        StartCoroutine(OnCorroutineChoiceCorroutine());
     }
 
-    private void OnCorrectChoice()
+    IEnumerator OnCorroutineChoiceCorroutine()
     {
         LIncorrectparticle.Stop();
         RIncorrectparticle.Stop();
@@ -195,8 +205,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         LCorrectparticle.Stop();
 
 
-		GeneralGameAnalyticsManager.RegisterWin();
-		roundAnalytics.wonRound = true;
+        GeneralGameAnalyticsManager.RegisterWin();
+        roundAnalytics.wonRound = true;
 
         audiosource.clip = correctAudio;
         audiosource.Play();
@@ -213,9 +223,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
             LCorrectparticle.Play();
         }
         gameUi.StarEarned(starPos);
+        yield return new WaitForSeconds(gameConfigs.maxRounds/2);
         OnRoundEnded();
     }
-
     void OnRoundEnded()
     {
         currRound++;

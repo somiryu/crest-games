@@ -17,3 +17,5 @@ MonoBehaviour:
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_EstrellasYCorazones/Scenes/TutorialCntrlImpulsos_EstrellasYCorazones.unity
   tutorialID: 16
   gameIdx: 1
+  timePerChoiceTuto: 10
+  intermidiateHold: 1

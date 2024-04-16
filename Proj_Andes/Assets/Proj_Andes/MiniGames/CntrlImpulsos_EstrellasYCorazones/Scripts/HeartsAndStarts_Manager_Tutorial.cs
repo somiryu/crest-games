@@ -54,11 +54,14 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     [SerializeField] List<TutorialConfigHeartsAndStars> myTutorialSteps = new List<TutorialConfigHeartsAndStars>();
     [SerializeField] TutorialConfigHeartsAndStars currTutoStep;
+    int heartCount;
+    int starCount;
     public static int currTutoStepIdx;
     private AudioSource audiosource;
 
     private int currRound;
-
+    bool tutoBegan;
+    float timerPerChoice;
     private bool currShowingRight = false;
     private bool currRequiresSameDirection = false;
 
@@ -81,6 +84,8 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         currConsecutiveLoses = 0;
         currConsecutiveWins = 0;        
         allTutorialsDoneFlag = false;
+        tutoBegan = false;
+        timerPerChoice = 0;
 
         audiosource = GetComponent<AudioSource>();
         StartCoroutine(Introduction());
@@ -101,7 +106,13 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         currTutoStep.tutoRoundsCount++;
         if (currTutoStep.tutorialSteps == TutorialStepsHandS.HighlightedHearths) currRequiresSameDirection = true;
         else if (currTutoStep.tutorialSteps == TutorialStepsHandS.HighlightedFlowers) currRequiresSameDirection = false;
-        else if (currTutoStep.tutorialSteps == TutorialStepsHandS.Mixed) currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+        else if (currTutoStep.tutorialSteps == TutorialStepsHandS.Mixed)
+        {
+            currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+            if (currRequiresSameDirection) heartCount++;
+            else starCount++;
+            if (heartCount > currTutoStep.trialsAmt/2 || starCount > currTutoStep.trialsAmt / 2) currRequiresSameDirection = !currRequiresSameDirection;
+        }
 
         currShowingRight = Random.Range(0f, 1f) > 0.5f;
 
@@ -121,6 +132,16 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         {
             TurnOffHighlightHelps();
 		}
+    }
+    private void Update()
+    {
+        if (!tutoBegan) return;
+        timerPerChoice += Time.deltaTime;
+        if (timerPerChoice >= tutoConfig.timePerChoiceTuto)
+        {
+            timerPerChoice = 0;
+            OnWrongChoice();
+        }
     }
     IEnumerator Introduction()
     {
@@ -153,8 +174,9 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 			audiosource.clip = currTutoStep.postInitRoundInstructions[i];
 			audiosource.Play();
 			yield return new WaitForSeconds(audiosource.clip.length);
-		}
-		rightBtn.interactable = true;
+        }
+        tutoBegan = true;
+        rightBtn.interactable = true;
         leftBtn.interactable = true;
 		blockScreenPanel.SetActive(false);
 	}
@@ -241,14 +263,14 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 		leftBtn.interactable = false;
 
 		audiosource.clip = currRequiresSameDirection? correctionIfHeartAudio : correctionIfStarAudio;
-        
 		audiosource.Play();
         yield return new WaitForSeconds(audiosource.clip.length);
 
 		rightBtn.interactable = true;
 		leftBtn.interactable = true;
+        timerPerChoice = 0;
 
-		if (currShowingRight) RIncorrectparticle.Play();
+        if (currShowingRight) RIncorrectparticle.Play();
 		else LIncorrectparticle.Play();
 		gameUi.StarLost();
 
@@ -261,6 +283,11 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     private void OnCorrectChoice()
     {
+        StartCoroutine(OnRightChoiceCorroutine());
+    }
+    IEnumerator OnRightChoiceCorroutine()
+    {
+        blockScreenPanel.gameObject.SetActive(true);
         LIncorrectparticle.Stop();
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
@@ -278,11 +305,15 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
             LCorrectparticle.Play();
         }
 
+
         currConsecutiveLoses = 0;
         currConsecutiveWins += 1;
+        yield return new WaitForSeconds(tutoConfig.intermidiateHold);
+        blockScreenPanel.gameObject.SetActive(false);
+        timerPerChoice = 0;
         OnRoundEnded();
-    }
 
+    }
     void OnRoundEnded()
     {
         currRound++;
