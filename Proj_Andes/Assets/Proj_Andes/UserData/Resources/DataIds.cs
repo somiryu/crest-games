@@ -53,8 +53,6 @@ public static class DataIds
     public const string voiceStarSound = "audio";
     public const string voiceStarLostTutorial = "lostTutorial";
 
-    public const string heartsAndStarsGame = "corazones_flores";
-
     public const string turboRocketGame = "star_booster";
     public const string turboRocketturboUsedTimes = "boosts";
 
@@ -92,5 +90,16 @@ public static class DataIds
 	public const string sizeRocketResponseInt = "cr_codigo";
 	public const string mouseUpCount = "cr_release";
 	public const string starsPerRound = "cr_premio";
+
+    //Hearts and flowers analytics
+    public const string heartsAndStarsGame = "corazones_flores";
+    public const string heartsNFlowersFrustration= "cf_modo";
+    public const string heartsNFlowersSkill = "cf_habilidad";
+    public const string heartsNFlowersValid = "cf_valid";
+    public const string heartsNFlowersTrial = "cf_intento";
+    public const string heartsNFlowersStimuli = "cf_estimulo";
+    public const string heartsNFlowersAnswer = "cf_respuesta";
+    public const string heartsNFlowersCode = "cf_codigo";
+    public const string heartsNFlowersTime = "cf_tiempo";
 
 }

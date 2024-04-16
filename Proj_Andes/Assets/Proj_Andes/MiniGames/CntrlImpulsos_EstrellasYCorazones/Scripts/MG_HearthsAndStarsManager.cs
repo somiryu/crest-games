@@ -134,16 +134,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         if (gameoverFlag) return;
         if (onHold) return;
-        if (Input.GetMouseButtonDown(0))
-        {
-            roundAnalytics.clicks++;
-        }
-
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            roundAnalytics.ranOutOfTime = true;
             timerPerChoice = 0;
             OnWrongChoice();
         }
@@ -153,8 +147,16 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         var succeed = false;
 
-        if (!currRequiresSameDirection && currShowingRight) succeed = true;
-        if (currRequiresSameDirection && !currShowingRight) succeed = true;
+        if (!currRequiresSameDirection && currShowingRight)
+        {
+            roundAnalytics.answer = 1;
+            succeed = true;
+        }
+        if (currRequiresSameDirection && !currShowingRight)
+        {
+            roundAnalytics.answer = 0;
+            succeed = true;
+        }
         if (succeed) OnCorrectChoice();
         else OnWrongChoice();
     }
@@ -163,8 +165,16 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         var succeed = false;
 
-        if (currRequiresSameDirection && currShowingRight) succeed = true;
-        if (!currRequiresSameDirection && !currShowingRight) succeed = true;
+        if (currRequiresSameDirection && currShowingRight)
+        {
+            roundAnalytics.answer = 0;
+            succeed = true;
+        }
+        if (!currRequiresSameDirection && !currShowingRight)
+        {
+            roundAnalytics.answer = 1;
+            succeed = true;
+        }
         if (succeed) OnCorrectChoice();
         else OnWrongChoice();
     }
@@ -210,11 +220,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
-        onHold = true;
 
 
-        GeneralGameAnalyticsManager.RegisterWin();
-        roundAnalytics.wonRound = true;
+		GeneralGameAnalyticsManager.RegisterWin();
+		roundAnalytics.wonRound = 1;
 
         audiosource.clip = correctAudio;
         audiosource.Play();
@@ -238,10 +247,11 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     }
     void OnRoundEnded()
     {
+        roundAnalytics.roundCount = currRound;
         currRound++;
         timerPerChoice = 0;
-        if (currRequiresSameDirection) roundAnalytics.challengeOrder = "Same side";
-        else roundAnalytics.challengeOrder = "Different side";
+        if (currRequiresSameDirection) roundAnalytics.stimuli = 0;
+        else roundAnalytics.stimuli = 1;
 
         roundAnalytics.timeToMakeAChoice = timerPerChoice;
 
@@ -277,9 +287,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
 public class MG_HearthAndStars_RoundAnalytics
 {
-    public string challengeOrder = "NONE";
-    public bool wonRound = false;
+    public int stimuli = 0;
+    public int answer = 0;
+    public int valid = 0;
+    public int roundCount = 0;
+    public int wonRound = 0;
     public float timeToMakeAChoice = 0;
-    public int clicks = 0;
-    public bool ranOutOfTime = false;
 }
