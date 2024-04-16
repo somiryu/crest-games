@@ -11,6 +11,7 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 	/// Is this the last game of the batch? (a batch right now is the sequence of only hearths, only stars, and lastly mixed)
 	/// </summary>
 	public bool isLastHearthAndStarsGameOnBatch = false;
+	public float intermidiateRoundHold;
 	public static string CurrHearthAndStarsGameID;
 	public static GeneralGameAnalytics GlobalGeneralGameAnalytics;
 

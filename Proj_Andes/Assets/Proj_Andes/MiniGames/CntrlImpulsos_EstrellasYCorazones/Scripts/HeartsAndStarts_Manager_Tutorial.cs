@@ -212,7 +212,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     void EndOfRoundCheck()
     {
-        if (currConsecutiveWins >= currTutoStep.trialsAmt)
+        if (currRound >= currTutoStep.trialsAmt)
         {
 			Debug.Log("tuto step passed");
 			PlayVictoryAudio();
@@ -220,7 +220,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
             currConsecutiveWins = 0;
             currConsecutiveLoses = 0;
         }
-        else if(currRound >= currTutoStep.maxRoundsBeforeLosing)
+        else if(currConsecutiveLoses >= currTutoStep.maxRoundsBeforeLosing)
         {
 			Debug.Log("tuto step Failed");
 			allTutorialsDoneFlag = true;
@@ -275,7 +275,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 		gameUi.StarLost();
 
 		currConsecutiveLoses += 1;
-		currConsecutiveWins = 0;
 
 		blockScreenPanel.SetActive(false);
 		OnRoundEnded();
@@ -306,7 +305,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         }
 
 
-        currConsecutiveLoses = 0;
         currConsecutiveWins += 1;
         yield return new WaitForSeconds(tutoConfig.intermidiateHold);
         blockScreenPanel.gameObject.SetActive(false);
@@ -382,7 +380,6 @@ public class TutorialConfigHeartsAndStars
     public TutorialStepsHandS tutorialSteps;
     public int trialsAmt;
     public int maxRoundsBeforeLosing;
-    public int timePerChoice;
     public Sprite ifRightBtnIsTheRightChoice;
     public Sprite ifLeftBtnIsTheRightChoice;
     public List<bool> passedTuto = new List<bool>();

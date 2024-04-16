@@ -23375,9 +23375,8 @@ MonoBehaviour:
   currRoundValueTxt: {fileID: 1134041796}
   myTutorialSteps:
   - tutorialSteps: 0
-    trialsAmt: 3
-    maxRoundsBeforeLosing: 6
-    timePerChoice: 0
+    trialsAmt: 6
+    maxRoundsBeforeLosing: 4
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
@@ -23393,7 +23392,6 @@ MonoBehaviour:
   - tutorialSteps: 1
     trialsAmt: 3
     maxRoundsBeforeLosing: 6
-    timePerChoice: 0
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
@@ -23410,7 +23408,6 @@ MonoBehaviour:
   - tutorialSteps: 2
     trialsAmt: 4
     maxRoundsBeforeLosing: 1000
-    timePerChoice: 0
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
     passedTuto: 
@@ -23428,7 +23425,6 @@ MonoBehaviour:
     tutorialSteps: 0
     trialsAmt: 0
     maxRoundsBeforeLosing: 0
-    timePerChoice: 0
     ifRightBtnIsTheRightChoice: {fileID: 0}
     ifLeftBtnIsTheRightChoice: {fileID: 0}
     passedTuto: 

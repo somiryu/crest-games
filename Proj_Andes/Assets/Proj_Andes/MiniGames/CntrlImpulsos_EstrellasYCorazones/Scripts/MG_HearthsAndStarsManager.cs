@@ -45,6 +45,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TMP_Text currRoundValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Slider timerUI;
+    [SerializeField] Transform blocker;
     GameUIController gameUi => GameUIController.Instance;
 
     [SerializeField] EndOfGameManager eogManager;
@@ -59,6 +60,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     private bool currRequiresSameDirection = false;
 
     private bool gameoverFlag = false;
+    private bool onHold = false;
 
     private MG_HearthAndStars_RoundAnalytics roundAnalytics;
 
@@ -101,7 +103,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
 		roundAnalytics = new MG_HearthAndStars_RoundAnalytics();
         AllRoundsAnalytics.Add(roundAnalytics);
-		
+        blocker.gameObject.SetActive(false);
+
         timerPerChoice = 0;
 
         rightImg.gameObject.SetActive(false);
@@ -130,7 +133,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     private void Update()
     {
         if (gameoverFlag) return;
-
+        if (onHold) return;
         if (Input.GetMouseButtonDown(0))
         {
             roundAnalytics.clicks++;
@@ -172,11 +175,12 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     }
     IEnumerator OnWrongChoiceCorroutine()
     {
+        blocker.gameObject.SetActive(true);
         LIncorrectparticle.Stop();
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
-
+        onHold = true;
         GeneralGameAnalyticsManager.RegisterLose();
 
 
@@ -188,7 +192,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         else LIncorrectparticle.Play();
         gameUi.StarLost();
 
-        yield return new WaitForSeconds(gameConfigs.maxRounds / 2);
+        yield return new WaitForSeconds(gameConfigs.intermidiateRoundHold);
+        onHold = false;
+        blocker.gameObject.SetActive(false);
         OnRoundEnded();
 
     }
@@ -199,10 +205,12 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     IEnumerator OnCorroutineChoiceCorroutine()
     {
+        blocker.gameObject.SetActive(true);
         LIncorrectparticle.Stop();
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
+        onHold = true;
 
 
         GeneralGameAnalyticsManager.RegisterWin();
@@ -223,13 +231,15 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
             LCorrectparticle.Play();
         }
         gameUi.StarEarned(starPos);
-        yield return new WaitForSeconds(gameConfigs.maxRounds/2);
+        yield return new WaitForSeconds(gameConfigs.intermidiateRoundHold);
+        onHold = false;
+        blocker.gameObject.SetActive(false);
         OnRoundEnded();
     }
     void OnRoundEnded()
     {
         currRound++;
-
+        timerPerChoice = 0;
         if (currRequiresSameDirection) roundAnalytics.challengeOrder = "Same side";
         else roundAnalytics.challengeOrder = "Different side";
 
