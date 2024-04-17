@@ -66,6 +66,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private int amountDiscardButton = 0;
 
     private bool gameoverFlag = false;
+    private bool isPaused = false;
     float totalGameTime;
 
     MG_FieldOfFlowers_RoundAnalytics roundAnalytics;
@@ -116,28 +117,28 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	}
 
 	int repeatedPuzzleCounter = 0;
+    int flowersAppearedCount = 0;
+    int cloudsAppearedCount = 0;
 
     void GetRandomSoundImage()
     {
         var previousSoundIsLeft = currSoundIsLeft;
-        var previousImgIsLeft = currImgIsLeft;
 
         currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
-        currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
 
-        if(previousSoundIsLeft == currSoundIsLeft &&  previousImgIsLeft == currImgIsLeft)
+        if (currSoundIsLeft && flowersAppearedCount >= gameConfigs.maxRounds / 2)
         {
-            repeatedPuzzleCounter++;
-            if(repeatedPuzzleCounter >= 2)
-            {
-                GetRandomSoundImage();
-                return;
-            }
+            currSoundIsLeft = false;
         }
-        else
+        if (!currSoundIsLeft && cloudsAppearedCount >= gameConfigs.maxRounds / 2)
         {
-            repeatedPuzzleCounter = 0;
+            currSoundIsLeft = true;
         }
+
+        if (currSoundIsLeft) flowersAppearedCount++;
+        else cloudsAppearedCount++;
+
+        currImgIsLeft = !currSoundIsLeft;
     }
 
 	void InitRound()
@@ -169,6 +170,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	private void Update()
 	{
         if (gameoverFlag) return;
+        if (isPaused) return;
 
         timerUI.value = timerPerChoice;
         totalGameTime += Time.deltaTime;
@@ -235,7 +237,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         audioPlayer.PlayOneShot(wrongAudio);
         GameUIController.Instance.StarLost();
 
-        StartCoroutine(OnRoundEnded(wrongAudio.length));
+        StartCoroutine(OnRoundEnded(1f));
     }
 
     private void OnCorrectChoice()
@@ -263,11 +265,12 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         correctParticles.Play();
 
         audioPlayer.PlayOneShot(correctAudio);
-        StartCoroutine(OnRoundEnded(correctAudio.length));
+        StartCoroutine(OnRoundEnded(1f));
     }
 
     IEnumerator OnRoundEnded(float waitTime)
     {
+        isPaused = true;
         leftBtn.interactable = false;
         rightBtn.interactable = false;
         discardBtn.interactable = false;
@@ -291,8 +294,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
             GameOver();
             yield break;
         }
-
-        InitRound();
+		isPaused = false;
+		InitRound();
     }
 
     void GameOver()
