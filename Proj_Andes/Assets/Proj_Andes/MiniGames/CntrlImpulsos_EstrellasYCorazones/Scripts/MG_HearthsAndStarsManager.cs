@@ -125,10 +125,11 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
                 break;            
             case HeartsAndFlowersGameType.Mixed:
                 currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
-                if (currRequiresSameDirection) heartCount++;
-                else flowerCount++;
-                if (heartCount >= 6 || flowerCount >= 8) currRequiresSameDirection = !currRequiresSameDirection;
-                break;
+                if (heartCount >= 6) currRequiresSameDirection = false;
+                if (flowerCount >= 8) currRequiresSameDirection = true;
+				if (currRequiresSameDirection) heartCount++;
+				else flowerCount++;
+				break;
         }
 
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;

@@ -23477,7 +23477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd220db87ba136445a36c3bbbde64079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutoConfig: {fileID: 11400000, guid: 8eae9f8537289b6479cc1530d3554060, type: 2}
   sameDirectionSprite: {fileID: 21300000, guid: 811c77aad97344a4794f94d9f430d4b1, type: 3}
   opositeDirectionSprite: {fileID: 21300000, guid: 730553421d8251946ae2458614062649, type: 3}
   leftImg: {fileID: 946864922}
@@ -23510,8 +23509,10 @@ MonoBehaviour:
   currRoundValueTxt: {fileID: 1134041796}
   myTutorialSteps:
   - tutorialSteps: 0
-    trialsAmt: 6
-    maxRoundsBeforeLosing: 4
+    trialsAmt: 4
+    maxRoundsBeforeLosing: 6
+    timePerChoiceTuto: 3
+    intermidiateHold: 0.5
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
@@ -23525,8 +23526,10 @@ MonoBehaviour:
     finishTutorialStepAudios: []
     tutoRoundsCount: 0
   - tutorialSteps: 1
-    trialsAmt: 6
-    maxRoundsBeforeLosing: 3
+    trialsAmt: 3
+    maxRoundsBeforeLosing: 6
+    timePerChoiceTuto: 2
+    intermidiateHold: 0.5
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: f53715c948194254f824301477ba5b7b, type: 3}
     passedTuto: 
@@ -23541,8 +23544,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
     tutoRoundsCount: 0
   - tutorialSteps: 2
-    trialsAmt: 6
-    maxRoundsBeforeLosing: 4
+    trialsAmt: 4
+    maxRoundsBeforeLosing: 6
+    timePerChoiceTuto: 3
+    intermidiateHold: 0.5
     ifRightBtnIsTheRightChoice: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
     ifLeftBtnIsTheRightChoice: {fileID: 21300000, guid: 5d25840a212d8674d8e775a855c5f635, type: 3}
     passedTuto: 
@@ -23560,6 +23565,8 @@ MonoBehaviour:
     tutorialSteps: 0
     trialsAmt: 0
     maxRoundsBeforeLosing: 0
+    timePerChoiceTuto: 0
+    intermidiateHold: 0
     ifRightBtnIsTheRightChoice: {fileID: 0}
     ifLeftBtnIsTheRightChoice: {fileID: 0}
     passedTuto: 
