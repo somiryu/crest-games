@@ -15,14 +15,14 @@ MonoBehaviour:
   scene:
     sceneAsset: {fileID: 102900000, guid: 61a67eb858e0b994294af9d2a8e152b5, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlowerTutorial.unity
-  tutorialID: 0
+  tutorialID: 19
   gameType: 1
   gameIdx: 1
   trialsAmt: 0
-  consecutiveWinsToPass: 0
-  consecutiveFailsToLose: 0
-  introAudio: {fileID: 0}
-  introAudio2: {fileID: 0}
-  instruction1: {fileID: 0}
-  instruction2: {fileID: 0}
-  endAudio: {fileID: 0}
+  consecutiveWinsToPass: 3
+  consecutiveFailsToLose: 3
+  introAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
+  introAudio2: {fileID: 8300000, guid: a1c76f0b28a66494e9fb43823df0f5b1, type: 3}
+  instruction1: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
+  instruction2: {fileID: 8300000, guid: a1c76f0b28a66494e9fb43823df0f5b1, type: 3}
+  endAudio: {fileID: 8300000, guid: 75f78c52738598042b3c3f521f8747d7, type: 3}
