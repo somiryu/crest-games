@@ -113,7 +113,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
             currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
             if (currRequiresSameDirection) heartCount++;
             else starCount++;
-            if (heartCount > currTutoStep.trialsAmt/2 || starCount > currTutoStep.trialsAmt / 2) currRequiresSameDirection = !currRequiresSameDirection;
+            if (heartCount >= currTutoStep.trialsAmt/2 || starCount >= currTutoStep.trialsAmt / 2) currRequiresSameDirection = !currRequiresSameDirection;
         }
 
         currShowingRight = Random.Range(0f, 1f) > 0.5f;
@@ -219,21 +219,13 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     {
         if (currRound >= currTutoStep.trialsAmt)
         {
-			Debug.Log("tuto step passed");
 			PlayVictoryAudio();
             allTutorialsDoneFlag = true;
+            int passedTuto = currConsecutiveWins >= currTutoStep.maxRoundsBeforeLosing ? 1 : 0;
+            MG_HearthAndStarsGameConfigs.passedTuto = passedTuto;
             currConsecutiveWins = 0;
             currConsecutiveLoses = 0;
-            MG_HearthAndStarsGameConfigs.passedTuto = 1;
         }
-        else if(currConsecutiveLoses >= currTutoStep.maxRoundsBeforeLosing)
-        {
-			Debug.Log("tuto step Failed");
-			allTutorialsDoneFlag = true;
-			currConsecutiveWins = 0;
-			currConsecutiveLoses = 0;
-            MG_HearthAndStarsGameConfigs.passedTuto = 0;
-		}
         Debug.Log("passed " + MG_HearthAndStarsGameConfigs.passedTuto);
     }
     private void OnClickedLeft()
@@ -285,6 +277,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         onHold = false;
 
         currConsecutiveLoses += 1;
+        if(currConsecutiveWins != 4) currConsecutiveWins = 0;
 
 		blockScreenPanel.SetActive(false);
 		OnRoundEnded();
@@ -313,7 +306,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         {
             LCorrectparticle.Play();
         }
-
 
         currConsecutiveWins += 1;
         yield return new WaitForSeconds(tutoConfig.intermidiateHold);

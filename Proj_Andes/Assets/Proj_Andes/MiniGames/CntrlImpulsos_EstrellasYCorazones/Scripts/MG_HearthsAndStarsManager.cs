@@ -127,7 +127,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
                 currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
                 if (currRequiresSameDirection) heartCount++;
                 else flowerCount++;
-                if (heartCount > 6 || flowerCount > 8) currRequiresSameDirection = !currRequiresSameDirection;
+                if (heartCount >= 6 || flowerCount >= 8) currRequiresSameDirection = !currRequiresSameDirection;
                 break;
         }
 
