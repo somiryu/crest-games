@@ -33,6 +33,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUIPanel;
+    [SerializeField] Slider roundSlider;
     GameUIController gameUi => GameUIController.Instance;
 
     [SerializeField] AudioClip reminderAudio;
@@ -61,6 +62,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     private int currRound;
     bool tutoBegan;
+    bool onHold;
     float timerPerChoice;
     private bool currShowingRight = false;
     private bool currRequiresSameDirection = false;
@@ -136,7 +138,10 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     private void Update()
     {
         if (!tutoBegan) return;
+        if (onHold) return;
         timerPerChoice += Time.deltaTime;
+        var progress = Mathf.Clamp01(timerPerChoice / tutoConfig.timePerChoiceTuto);
+        roundSlider.value = progress;
         if (timerPerChoice >= tutoConfig.timePerChoiceTuto)
         {
             timerPerChoice = 0;
@@ -219,6 +224,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
             allTutorialsDoneFlag = true;
             currConsecutiveWins = 0;
             currConsecutiveLoses = 0;
+            MG_HearthAndStarsGameConfigs.passedTuto = 1;
         }
         else if(currConsecutiveLoses >= currTutoStep.maxRoundsBeforeLosing)
         {
@@ -226,7 +232,9 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 			allTutorialsDoneFlag = true;
 			currConsecutiveWins = 0;
 			currConsecutiveLoses = 0;
+            MG_HearthAndStarsGameConfigs.passedTuto = 0;
 		}
+        Debug.Log("passed " + MG_HearthAndStarsGameConfigs.passedTuto);
     }
     private void OnClickedLeft()
     {
@@ -254,6 +262,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     private IEnumerator OnWrongChoiceRoutine()
     {
 		blockScreenPanel.SetActive(true);
+        onHold = true;
 		LIncorrectparticle.Stop();
 		RIncorrectparticle.Stop();
 		RCorrectparticle.Stop();
@@ -273,8 +282,9 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         if (currShowingRight) RIncorrectparticle.Play();
 		else LIncorrectparticle.Play();
 		gameUi.StarLost();
+        onHold = false;
 
-		currConsecutiveLoses += 1;
+        currConsecutiveLoses += 1;
 
 		blockScreenPanel.SetActive(false);
 		OnRoundEnded();
@@ -315,6 +325,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     void OnRoundEnded()
     {
         currRound++;
+        timerPerChoice = 0;
         EndOfRoundCheck();
         currRoundValueTxt.text = currRound.ToString();
         if (allTutorialsDoneFlag)
@@ -345,7 +356,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 		inGameUIPanel.SetActive(false);
 		afterActionPanel.SetActive(true);
 		currTutoStepIdx++;
-		
+        onHold = true;
 		switch (currTutoStep.tutorialSteps)
 		{
 			case TutorialStepsHandS.HighlightedHearths:

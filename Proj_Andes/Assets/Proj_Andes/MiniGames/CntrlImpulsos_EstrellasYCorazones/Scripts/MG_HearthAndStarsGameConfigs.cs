@@ -15,10 +15,11 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 	public float intermidiateRoundHold;
 	public static string CurrHearthAndStarsGameID;
 	public static GeneralGameAnalytics GlobalGeneralGameAnalytics;
-
+	public static int passedTuto = 0;
 
 	public float timePerChoice = 5f;
 	public int maxRounds = 8;
+	public int maxRoundsOnMix = 8;
 	public int initialCoins = 0;
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
@@ -61,8 +62,8 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
             currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
             currRoundAnalyticsDic.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
             currRoundAnalyticsDic.Add(DataIds.heartsNFlowersFrustration, 0);
-			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersSkill, 2);
-			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersValid, 1);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersSkill, (int)gameType);
+			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersValid, passedTuto);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersTrial, currRound.roundCount);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersStimuli, currRound.stimuli);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersAnswer, currRound.answer);

@@ -56,6 +56,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     private int currCoins;
     private int currRound;
 
+    int heartCount;
+    int flowerCount;
+
     private bool currShowingRight = false;
     private bool currRequiresSameDirection = false;
 
@@ -79,6 +82,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         currCoins = gameConfigs.initialCoins;
         currRound = 0;
         audiosource = GetComponent<AudioSource>();
+        flowerCount = 0;
+        heartCount = 0;
 
         afterActionPanel.SetActive(false);
         inGameUIPanel.SetActive(true);
@@ -120,6 +125,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
                 break;            
             case HeartsAndFlowersGameType.Mixed:
                 currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+                if (currRequiresSameDirection) heartCount++;
+                else flowerCount++;
+                if (heartCount > 6 || flowerCount > 8) currRequiresSameDirection = !currRequiresSameDirection;
                 break;
         }
 
@@ -220,9 +228,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
+        onHold = true;
+        timerPerChoice = 0;
 
-
-		GeneralGameAnalyticsManager.RegisterWin();
+        GeneralGameAnalyticsManager.RegisterWin();
 		roundAnalytics.wonRound = 1;
 
         audiosource.clip = correctAudio;
@@ -257,12 +266,23 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
-
-        if (currRound >= gameConfigs.maxRounds)
+        if(currGameType != HeartsAndFlowersGameType.Mixed)
         {
-            GameOver();
-            return;
+            if (currRound >= gameConfigs.maxRounds)
+            {
+                GameOver();
+                return;
+            }
         }
+        else
+        {
+            if (currRound >= gameConfigs.maxRoundsOnMix)
+            {
+                GameOver();
+                return;
+            }
+        }
+
 
         Animator animatorImg = inGameUIPanel.GetComponent<Animator>();
         animatorImg.ResetTrigger("Appear");
@@ -273,6 +293,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
+        StopAllCoroutines();
         timerUI.gameObject.SetActive(false);
         audiosource.clip = finishAudio;
         audiosource.Play();

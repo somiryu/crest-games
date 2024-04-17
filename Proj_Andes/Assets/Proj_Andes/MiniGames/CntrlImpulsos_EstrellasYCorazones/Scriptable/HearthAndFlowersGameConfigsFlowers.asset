@@ -19,6 +19,7 @@ MonoBehaviour:
   intermidiateRoundHold: 0.5
   timePerChoice: 2
   maxRounds: 8
+  maxRoundsOnMix: 14
   initialCoins: 0
   coinsOnCorrectAnswer: 1
   coinsOnWrongAnswer: -1
