@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5868bdcb590df3541a1ddb33a90bedb7, type: 3}
+  m_Name: VoiceOrImageGameConfigsVoice
+  m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: d7608b90a7d13b34a8439223d93eb98c, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlower.unity
+  timePerChoice: 8
+  maxRounds: 10
+  initialCoins: 0
+  coinsOnCorrectAnswer: 2
+  coinsOnWrongAnswer: -1
+  finalTutoStepMaxFailuresBeforeSkipping: 5

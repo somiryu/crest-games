@@ -96,4 +96,7 @@ public enum tutorialSteps
 	HeartsAndFlowersHeartsDone = 15,
 	HeartsAndFlowersFlowersDone = 16,
 	HeartsAndFlowersMixedDone = 17,
+    VoiceOfImageVoice = 18,
+    VoiceOfImageImage = 19,
+    VoiceOfImageMixed = 20
 }

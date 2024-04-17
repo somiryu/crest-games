@@ -13998,6 +13998,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfigs: {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
+  tutoConfigs:
+  - {fileID: 11400000, guid: 54d117b8ff14db6448938f393fff02a6, type: 2}
+  - {fileID: 11400000, guid: 3331d3521c0074141930b96caed1bc14, type: 2}
+  - {fileID: 11400000, guid: 976ace76f22a52c46a4f708d303188d7, type: 2}
   leftTargetSprite: {fileID: 21300000, guid: 3ea023f6b1c9e2c4194b88a88cb8a814, type: 3}
   rightTargetSprite: {fileID: 21300000, guid: bb6115a739570b24bb07ad5301bbc228, type: 3}
   currTargetImg: {fileID: 597656416}

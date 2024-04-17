@@ -13097,6 +13097,10 @@ MonoBehaviour:
   leftBtn: {fileID: 657391130}
   rightBtn: {fileID: 1390768956}
   discardBtn: {fileID: 227213638}
+  gameTypeConfigs:
+  - {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
+  - {fileID: 11400000, guid: d659efeb262e1de49b6d8f70a037f7ee, type: 2}
+  - {fileID: 11400000, guid: ae1f1e8eaf770b24981747957523ee51, type: 2}
   afterActionPanel: {fileID: 180080037}
   inGameUiPanel: {fileID: 1631699888}
   correctAudio: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}

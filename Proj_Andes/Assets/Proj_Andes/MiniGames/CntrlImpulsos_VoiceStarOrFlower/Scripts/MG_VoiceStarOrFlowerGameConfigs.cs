@@ -7,7 +7,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "VoiceStarOrFlowerGameConfigs", menuName = "MiniGames/VoiceStarOrFlowerGameConfigs")]
 public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 {
-	public float timePerChoice = 5f;
+    public VoiceOrImageGameType gameType;
+    public float timePerChoice = 5f;
 	public int maxRounds = 10;
 	public int initialCoins = 0;
 	public int coinsOnCorrectAnswer = 0;
@@ -20,7 +21,18 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     /// If false, the game mechanic will use the image as the correct answer and voice as the wrong one
     /// </summary>
     public static bool UseVoiceAsTheCorrectAnswer = true;
-    
+
+    public int gameIdx;
+
+    public override SimpleGameSequenceItem GetNextItem()
+    {
+        var currItem = base.GetNextItem();
+        if (currItem != null)
+        {
+            MG_VoiceStarOrFlowerManager.currTutoStepIdx = gameIdx;
+        }
+        return currItem;
+    }
     public override void SaveAnalytics()
     {
         var currAnalyticsDictionary = new Dictionary<string, object>();

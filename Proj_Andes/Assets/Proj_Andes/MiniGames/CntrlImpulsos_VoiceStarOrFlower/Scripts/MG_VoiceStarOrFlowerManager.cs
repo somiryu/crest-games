@@ -22,7 +22,11 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	[SerializeField] Button leftBtn;
     [SerializeField] Button rightBtn;
     [SerializeField] Button discardBtn;
-
+    [Space(20)]
+    public static int currTutoStepIdx;
+    public List<MG_VoiceStarOrFlowerGameConfigs> gameTypeConfigs = new List<MG_VoiceStarOrFlowerGameConfigs>();
+    MG_VoiceStarOrFlowerGameConfigs currGameTypeConfig => gameTypeConfigs[currTutoStepIdx];
+    [Space(20)]
     [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUiPanel;
     [Space(20)]
@@ -83,6 +87,22 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
 	public void Init()
     {
+        var useVoiceAsCorrectAnswer = true;
+
+        switch (currGameTypeConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                useVoiceAsCorrectAnswer = true;
+                break;
+            case VoiceOrImageGameType.Image:
+                useVoiceAsCorrectAnswer = false;
+                break;
+            case VoiceOrImageGameType.Mixed:
+                useVoiceAsCorrectAnswer = MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer;
+                break;
+        }
+        Debug.Log("starting " + currGameTypeConfig.gameType);
+        MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = useVoiceAsCorrectAnswer;
         currCoins = gameConfigs.initialCoins;
         AllRoundsAnalytics = new List<MG_FieldOfFlowers_RoundAnalytics>(gameConfigs.maxRounds);
 
@@ -152,6 +172,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
         var textToUse = currSoundIsLeft ? leftObjTxt: rightObjTxt;
+
+      
 
         if (currSoundIsLeft) roundAnalytics.audio = "Flower";
         else roundAnalytics.audio = "Star";
