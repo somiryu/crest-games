@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -36,7 +37,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
     [SerializeField] AudioClip lookAtCampsAudio;
-    [SerializeField] AudioClip firstInstrucAudio;
+    [FormerlySerializedAs("firstInstrucAudio")]
+    [SerializeField] AudioClip firstInstrucAudioForVoiceAsCorrectAnswer;
+    [SerializeField] AudioClip firstInstrucAudioForImgAsCorrectAnswer;
     [SerializeField] AudioClip discardAdvice;
     [SerializeField] AudioClip youDidGoodAudio;
     [SerializeField] AudioClip youDidGoodNowTryAudio;
@@ -67,6 +70,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
+    public bool UseVoiceAsCorrectAnswer => MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer;
 
     private float timerPerChoice = 0;
     private int currCoins;
@@ -100,6 +104,12 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 	public void Init()
     {
+        var useVoiceAsCorrectAnswer = Random.Range(0f, 1f) > 0.5f;
+
+		MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = useVoiceAsCorrectAnswer;
+
+        Debug.Log("Will use voice as correct answer: " + useVoiceAsCorrectAnswer);
+
         currStepTutorial = 0;
         intervalQuestion = true;
         currCoins = gameConfigs.initialCoins;
@@ -137,16 +147,16 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         discardBtn.gameObject.SetActive(false);
         audioPlayer.clip = lookAtCampsAudio;
         audioPlayer.Play();
-        yield return new WaitForSeconds(lookAtCampsAudio.length-0.3f);
+        yield return new WaitForSeconds(audioPlayer.clip.length - 0.3f);
         leftBtn.gameObject.SetActive(true);
 		rightBtn.gameObject.SetActive(true);
 		discardBtn.gameObject.SetActive(true);
         leftBtn.gameObject.SetActive(false);
         rightBtn.gameObject.SetActive(false);
         discardBtn.gameObject.SetActive(false);
-        audioPlayer.clip = firstInstrucAudio;
+        audioPlayer.clip = UseVoiceAsCorrectAnswer? firstInstrucAudioForVoiceAsCorrectAnswer : firstInstrucAudioForImgAsCorrectAnswer;
         audioPlayer.Play();
-        yield return new WaitForSeconds(firstInstrucAudio.length);
+        yield return new WaitForSeconds(audioPlayer.clip.length);
         leftBtn.gameObject.SetActive(true);
         rightBtn.gameObject.SetActive(true);
         discardBtn.gameObject.SetActive(true);
@@ -292,14 +302,29 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         if (hasButtonHelp)
         {
-            if (currSoundIsLeft && !currImgIsLeft) SetButtonState(leftBtn, leftBtnHighlightImg, enabledBtnColor, true);
-            else SetButtonState(leftBtn, leftBtnHighlightImg, disabledBtnColor, false);
+            if (UseVoiceAsCorrectAnswer)
+            {
+				if (currSoundIsLeft && !currImgIsLeft) SetButtonState(leftBtn, leftBtnHighlightImg, enabledBtnColor, true);
+				else SetButtonState(leftBtn, leftBtnHighlightImg, disabledBtnColor, false);
 
-            if (!currSoundIsLeft && currImgIsLeft) SetButtonState(rightBtn, rightBtnHighlightImg, enabledBtnColor, true);
-            else SetButtonState(rightBtn, rightBtnHighlightImg, disabledBtnColor, false);
+				if (!currSoundIsLeft && currImgIsLeft) SetButtonState(rightBtn, rightBtnHighlightImg, enabledBtnColor, true);
+				else SetButtonState(rightBtn, rightBtnHighlightImg, disabledBtnColor, false);
 
-            if (currSoundIsLeft == currImgIsLeft) SetButtonState(discardBtn, discardBtnHighlightImg, enabledBtnColor, true);
-            else SetButtonState(discardBtn, discardBtnHighlightImg, disabledBtnColor, false);
+				if (currSoundIsLeft == currImgIsLeft) SetButtonState(discardBtn, discardBtnHighlightImg, enabledBtnColor, true);
+				else SetButtonState(discardBtn, discardBtnHighlightImg, disabledBtnColor, false);
+            }
+            else
+            {
+				if (!currSoundIsLeft && currImgIsLeft) SetButtonState(leftBtn, leftBtnHighlightImg, enabledBtnColor, true);
+				else SetButtonState(leftBtn, leftBtnHighlightImg, disabledBtnColor, false);
+
+				if (currSoundIsLeft && !currImgIsLeft) SetButtonState(rightBtn, rightBtnHighlightImg, enabledBtnColor, true);
+				else SetButtonState(rightBtn, rightBtnHighlightImg, disabledBtnColor, false);
+
+				if (currSoundIsLeft == currImgIsLeft) SetButtonState(discardBtn, discardBtnHighlightImg, enabledBtnColor, true);
+				else SetButtonState(discardBtn, discardBtnHighlightImg, disabledBtnColor, false);
+			}
+            
         }
         else
         {
@@ -363,14 +388,30 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 	private void OnClickedLeft()
     {
-        if(currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
-        else OnWrongChoice();
+        if (UseVoiceAsCorrectAnswer)
+        {
+			if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+			else OnWrongChoice();
+		}
+        else //Img is correct answer
+        {
+			if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+			else OnWrongChoice();
+		}
     }
 
     private void OnClickedRight()
     {
-		if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
-		else OnWrongChoice();
+		if (UseVoiceAsCorrectAnswer)
+		{
+			if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+			else OnWrongChoice();
+		}
+		else //Img is correct answer
+		{
+			if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+			else OnWrongChoice();
+		}
 	}
 
 	private void OnClickedDiscard()

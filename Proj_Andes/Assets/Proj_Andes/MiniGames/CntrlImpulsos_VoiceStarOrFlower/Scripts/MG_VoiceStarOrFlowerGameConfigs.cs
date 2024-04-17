@@ -15,6 +15,11 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     public int finalTutoStepMaxFailuresBeforeSkipping;
     public static bool passedTuto;
     public override string GetSceneID() => DataIds.voiceStarGame;
+
+    /// <summary>
+    /// If false, the game mechanic will use the image as the correct answer and voice as the wrong one
+    /// </summary>
+    public static bool UseVoiceAsTheCorrectAnswer = true;
     
     public override void SaveAnalytics()
     {

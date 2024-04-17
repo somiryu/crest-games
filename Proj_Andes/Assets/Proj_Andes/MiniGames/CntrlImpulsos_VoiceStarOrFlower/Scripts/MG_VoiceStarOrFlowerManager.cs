@@ -71,7 +71,10 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     MG_FieldOfFlowers_RoundAnalytics roundAnalytics;
     public List<MG_FieldOfFlowers_RoundAnalytics> AllRoundsAnalytics;
 
-    public void Awake()
+	public bool UseVoiceAsCorrectAnswer => MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer;
+
+
+	public void Awake()
 	{
         if (instance != null && instance != this) DestroyImmediate(this);
         instance = this;
@@ -182,15 +185,31 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	private void OnClickedLeft()
     {
         roundAnalytics.ranOutOfTime = false;
-        if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
-        else OnWrongChoice();
-    }
+		if (UseVoiceAsCorrectAnswer)
+		{
+			if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+			else OnWrongChoice();
+		}
+		else //Img is correct answer
+		{
+			if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+			else OnWrongChoice();
+		}
+	}
 
     private void OnClickedRight()
     {
         roundAnalytics.ranOutOfTime = false;
-        if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
-		else OnWrongChoice();
+		if (UseVoiceAsCorrectAnswer)
+		{
+			if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+			else OnWrongChoice();
+		}
+		else //Img is correct answer
+		{
+			if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+			else OnWrongChoice();
+		}
 	}
 
 	private void OnClickedDiscard()

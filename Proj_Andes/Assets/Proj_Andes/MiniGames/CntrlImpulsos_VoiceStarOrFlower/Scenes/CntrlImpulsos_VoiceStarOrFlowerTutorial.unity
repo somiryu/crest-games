@@ -14017,7 +14017,8 @@ MonoBehaviour:
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
   rightAudio: {fileID: 8300000, guid: f30080e8439e6b542a0736c0dc30d397, type: 3}
   lookAtCampsAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
-  firstInstrucAudio: {fileID: 8300000, guid: 10380640d41601d4f936e2ba9d8e108c, type: 3}
+  firstInstrucAudioForVoiceAsCorrectAnswer: {fileID: 8300000, guid: 10380640d41601d4f936e2ba9d8e108c, type: 3}
+  firstInstrucAudioForImgAsCorrectAnswer: {fileID: 8300000, guid: f96bddc5789e57c4eb88f1bc2d07d1be, type: 3}
   discardAdvice: {fileID: 8300000, guid: 79e9a31ae4e8ee6469941e34d3061ea0, type: 3}
   youDidGoodAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
   youDidGoodNowTryAudio: {fileID: 8300000, guid: 6828c86d3e559bf40a64ef17679c0e5f, type: 3}
