@@ -549,8 +549,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		rightBtn.interactable = true;
 
 		currCoinsValueTxt.text = currCoins.ToString();
+		isPaused = false;
 
-        if (currScoreStepTutorial == goalScoreStepTutorial)
+		if (currScoreStepTutorial == goalScoreStepTutorial)
         {
             currStepTutorial += 1;
             InitTutorialStep();
@@ -561,7 +562,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             StartCoroutine(CompleteTuto());
             yield break;
         }
-		isPaused = false;
 		InitRound();
     }
 }
