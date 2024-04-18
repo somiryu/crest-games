@@ -22,8 +22,10 @@ MonoBehaviour:
   consecutiveWinsToPass: 4
   consecutiveFailsToLose: 3
   roundTime: 5
-  introAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
-  introAudio2: {fileID: 0}
-  instruction1: {fileID: 0}
-  instruction2: {fileID: 0}
+  firstInstructionAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
+  firstInstructionAudio2: {fileID: 0}
+  secondInstructionAudio1: {fileID: 0}
+  secondInstructionAudio2: {fileID: 0}
   endAudio: {fileID: 8300000, guid: 75f78c52738598042b3c3f521f8747d7, type: 3}
+  switchesToAnswerIsDifferentInSecondPart: 0
+  completedFirstPart: 0

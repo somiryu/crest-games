@@ -52,6 +52,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Button retryBtn;
     [SerializeField] Slider timerUI;
+    [SerializeField] Transform blockingPanel;
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
@@ -223,6 +224,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     private void OnClickedRight()
     {
+
         roundAnalytics.ranOutOfTime = false;
 		if (UseVoiceAsCorrectAnswer)
 		{
@@ -259,7 +261,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         audioPlayer.PlayOneShot(wrongAudio);
         GameUIController.Instance.StarLost();
 
-        StartCoroutine(OnRoundEnded(1f));
+        StartCoroutine(OnRoundEnded(currGameTypeConfig.intermediateRoundHold));
     }
 
     private void OnCorrectChoice()
@@ -287,11 +289,12 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         correctParticles.Play();
 
         audioPlayer.PlayOneShot(correctAudio);
-        StartCoroutine(OnRoundEnded(1f));
+        StartCoroutine(OnRoundEnded(currGameTypeConfig.intermediateRoundHold));
     }
 
     IEnumerator OnRoundEnded(float waitTime)
     {
+        blockingPanel.gameObject.SetActive(true);
         isPaused = true;
         leftBtn.interactable = false;
         rightBtn.interactable = false;
@@ -303,8 +306,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 		rightBtn.interactable = true;
 		discardBtn.interactable = true;
 
+        blockingPanel.gameObject.SetActive(false);
 
-		currCoinsValueTxt.text = currCoins.ToString();
+        currCoinsValueTxt.text = currCoins.ToString();
         roundAnalytics.timeToMakeAChoice = timerPerChoice;
         if (roundAnalytics.ranOutOfTime) roundAnalytics.timeToMakeAChoice = gameConfigs.timePerChoice;
 

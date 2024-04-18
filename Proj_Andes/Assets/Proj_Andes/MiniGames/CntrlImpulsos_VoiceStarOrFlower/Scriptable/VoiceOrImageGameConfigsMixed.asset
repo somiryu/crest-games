@@ -21,5 +21,6 @@ MonoBehaviour:
   initialCoins: 0
   coinsOnCorrectAnswer: 0
   coinsOnWrongAnswer: 0
+  intermediateRoundHold: 0.5
   finalTutoStepMaxFailuresBeforeSkipping: 0
   gameIdx: 2

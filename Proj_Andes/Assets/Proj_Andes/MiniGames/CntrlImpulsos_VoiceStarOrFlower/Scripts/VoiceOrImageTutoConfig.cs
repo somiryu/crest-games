@@ -11,11 +11,16 @@ public class VoiceOrImageTutoConfig : SimpleGameSequenceItemTutorial
     public int consecutiveWinsToPass;
     public int consecutiveFailsToLose;
     public float roundTime;
-    public AudioClip introAudio;
-    public AudioClip introAudio2;
-    public AudioClip instruction1;
-    public AudioClip instruction2;
+    [Header("First Instructions")]
+    public AudioClip firstInstructionAudio;
+    public AudioClip firstInstructionAudio2;
+    [Header("Second Instructions")]
+    public AudioClip secondInstructionAudio1;
+    public AudioClip secondInstructionAudio2;
+    [Header("Completed tutorial audio")]
     public AudioClip endAudio;
+    public bool switchesToAnswerIsDifferentInSecondPart;
+    public bool completedFirstPart;
     public override SimpleGameSequenceItem GetNextItem()
     {
         var currItem = base.GetNextItem();

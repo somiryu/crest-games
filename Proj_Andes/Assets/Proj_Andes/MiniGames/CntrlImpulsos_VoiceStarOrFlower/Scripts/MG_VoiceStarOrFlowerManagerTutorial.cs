@@ -131,6 +131,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         wonRightCount = 0;
         lostRoundsCount = 0;
         tutoStage = 0;
+        currTutoConfig.completedFirstPart = false;
 
 		afterActionPanel.SetActive(false);
 		inGameUiPanel.SetActive(true);
@@ -164,19 +165,20 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         consecutiveWinsTuto = 0;
         tutoStage++;
 
-        if (tutoStage < 2) currInstruction = PlayInstructions(currTutoConfig.introAudio, currTutoConfig.introAudio2);
+        if (tutoStage >= 2) currTutoConfig.completedFirstPart = true;
+
+        if (!currTutoConfig.completedFirstPart) currInstruction = ActionsBeforeTutoStageStarts(currTutoConfig.firstInstructionAudio, currTutoConfig.firstInstructionAudio2);
         else
         {
-            if (currTutoConfig.gameType != VoiceOrImageGameType.Mixed) currInstruction = PlayInstructions(currTutoConfig.instruction1, currTutoConfig.instruction2);
+            if (currTutoConfig.gameType != VoiceOrImageGameType.Mixed) currInstruction = ActionsBeforeTutoStageStarts(currTutoConfig.secondInstructionAudio1, currTutoConfig.secondInstructionAudio2);
         }
-
         StartCoroutine(currInstruction);
     }
-    IEnumerator PlayInstructions(AudioClip audio1, AudioClip audio2 = null)
+    IEnumerator ActionsBeforeTutoStageStarts(AudioClip audio1, AudioClip audio2 = null)
     {
 		isPaused = true;
 		blockPanel.gameObject.SetActive(true);
-        if(tutoStage >= 2 && currTutoConfig.gameType != VoiceOrImageGameType.Mixed)
+        if(currTutoConfig.completedFirstPart && currTutoConfig.gameType != VoiceOrImageGameType.Mixed)
         {
             audioPlayer.clip = youDidGoodAudio;
             audioPlayer.Play();
@@ -195,7 +197,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		isPaused = false;
 		InitRound();
     }
-
 	void Update()
 	{
 		if (isPaused) return;
@@ -210,33 +211,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		}
 	}
 
-	IEnumerator CompleteTuto()
-    {
-        isPaused = true;
-		effectPlayer.Stop();
-        discardBtn.gameObject.SetActive(false);
-        leftBtn.gameObject.SetActive(false);
-        rightBtn.gameObject.SetActive(false);
-        audioPlayer.clip = currTutoConfig.endAudio;
-        audioPlayer.Play();
-        blockPanel.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(currTutoConfig.endAudio.length);
-        switch (currTutoConfig.gameType)
-        {
-            case VoiceOrImageGameType.Voice:
-                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageVoice.ToString());
-                break;            
-            case VoiceOrImageGameType.Image:
-                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageImage.ToString());
-                break;           
-            case VoiceOrImageGameType.Mixed:
-                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageMixed.ToString());
-                break;
-        }
-
-		blockPanel.gameObject.SetActive(false);
-		GameSequencesList.Instance.GoToNextItemInList();
-    }
 
     void InitRound()
     {
@@ -305,11 +279,13 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         switch (currTutoConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
-                if (currSoundIsLeft && tutoStage < 2 || !currSoundIsLeft && tutoStage >= 2) OnCorrectChoice();
+                if (currSoundIsLeft && !currTutoConfig.completedFirstPart 
+                    || !currSoundIsLeft && currTutoConfig.completedFirstPart && currTutoConfig.switchesToAnswerIsDifferentInSecondPart) OnCorrectChoice();
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Image:
-                if (currImgIsLeft && tutoStage < 2 || !currImgIsLeft && tutoStage >= 2) OnCorrectChoice();
+                if (currImgIsLeft && !currTutoConfig.completedFirstPart 
+                    || !currImgIsLeft && currTutoConfig.completedFirstPart && currTutoConfig.switchesToAnswerIsDifferentInSecondPart) OnCorrectChoice();
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Mixed:
@@ -455,7 +431,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 		if (consecutiveWinsTuto >= currTutoConfig.consecutiveWinsToPass || failurePerTutoCount >= currTutoConfig.consecutiveWinsToPass)
         {
-            if(tutoStage < 2) 
+            if(!currTutoConfig.completedFirstPart) 
             {
                 InitTutorialStep();
                 yield break;
@@ -465,5 +441,33 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             yield break;
         }
         InitRound();
+    }
+
+    IEnumerator CompleteTuto()
+    {
+        isPaused = true;
+        effectPlayer.Stop();
+        discardBtn.gameObject.SetActive(false);
+        leftBtn.gameObject.SetActive(false);
+        rightBtn.gameObject.SetActive(false);
+        audioPlayer.clip = currTutoConfig.endAudio;
+        audioPlayer.Play();
+        blockPanel.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(currTutoConfig.endAudio.length);
+        switch (currTutoConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageVoice.ToString());
+                break;
+            case VoiceOrImageGameType.Image:
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageImage.ToString());
+                break;
+            case VoiceOrImageGameType.Mixed:
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageMixed.ToString());
+                break;
+        }
+
+        blockPanel.gameObject.SetActive(false);
+        GameSequencesList.Instance.GoToNextItemInList();
     }
 }
