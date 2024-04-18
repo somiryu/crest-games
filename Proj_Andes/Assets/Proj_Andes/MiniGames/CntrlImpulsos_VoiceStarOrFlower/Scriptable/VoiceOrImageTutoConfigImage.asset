@@ -21,6 +21,7 @@ MonoBehaviour:
   trialsAmt: 0
   consecutiveWinsToPass: 3
   consecutiveFailsToLose: 3
+  roundTime: 5
   introAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
   introAudio2: {fileID: 8300000, guid: a1c76f0b28a66494e9fb43823df0f5b1, type: 3}
   instruction1: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}

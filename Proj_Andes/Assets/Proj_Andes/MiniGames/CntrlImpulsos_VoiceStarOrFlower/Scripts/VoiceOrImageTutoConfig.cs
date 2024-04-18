@@ -10,6 +10,7 @@ public class VoiceOrImageTutoConfig : SimpleGameSequenceItemTutorial
     public int trialsAmt;
     public int consecutiveWinsToPass;
     public int consecutiveFailsToLose;
+    public float roundTime;
     public AudioClip introAudio;
     public AudioClip introAudio2;
     public AudioClip instruction1;

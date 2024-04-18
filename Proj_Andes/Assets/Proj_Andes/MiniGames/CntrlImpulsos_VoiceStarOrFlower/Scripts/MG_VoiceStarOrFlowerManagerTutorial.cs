@@ -96,6 +96,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     int trialsPerTutoCount;
     int failurePerTutoCount;
     int tutoStage;
+    bool isPaused;
 
     public void Awake()
 	{
@@ -137,7 +138,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 
         timerUI.minValue = 0;
-        timerUI.maxValue = gameConfigs.timePerChoice;
+        timerUI.maxValue = currTutoConfig.roundTime;
 
 		leftBtn.onClick.AddListener(OnClickedLeft);
 		rightBtn.onClick.AddListener(OnClickedRight);
@@ -173,7 +174,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     }
     IEnumerator PlayInstructions(AudioClip audio1, AudioClip audio2 = null)
     {
-        blockPanel.gameObject.SetActive(true);
+		isPaused = true;
+		blockPanel.gameObject.SetActive(true);
         if(tutoStage >= 2 && currTutoConfig.gameType != VoiceOrImageGameType.Mixed)
         {
             audioPlayer.clip = youDidGoodAudio;
@@ -190,11 +192,28 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             yield return new WaitForSeconds(audio2.length);
         }
         blockPanel.gameObject.SetActive(false);
-        InitRound();
+		isPaused = false;
+		InitRound();
     }
-    IEnumerator CompleteTuto()
+
+	void Update()
+	{
+		if (isPaused) return;
+
+		timerPerChoice += Time.deltaTime;
+		timerUI.value = timerPerChoice;
+
+		if (timerPerChoice >= currTutoConfig.roundTime)
+		{
+			timerPerChoice = 0;
+			OnWrongChoice();
+		}
+	}
+
+	IEnumerator CompleteTuto()
     {
-        effectPlayer.Stop();
+        isPaused = true;
+		effectPlayer.Stop();
         discardBtn.gameObject.SetActive(false);
         leftBtn.gameObject.SetActive(false);
         rightBtn.gameObject.SetActive(false);
@@ -365,7 +384,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     IEnumerator PlayOnWrongChoice()
     {
-        AudioClip clipToPlay = onFailSelectInstructionAdvice;
+		isPaused = true;
+		AudioClip clipToPlay = onFailSelectInstructionAdvice;
         if (currImgIsLeft && currSoundIsLeft || !currImgIsLeft && !currSoundIsLeft) clipToPlay = onFailSelectDiscardAdvice;
         else clipToPlay = onFailSelectInstructionAdvice;
 
@@ -381,6 +401,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		rightBtn.interactable = true;
 		leftBtn.interactable = true;
 		discardBtn.interactable = true;
+		isPaused = false;
 		StartCoroutine(OnRoundEnded(0));
 	}
 
@@ -417,7 +438,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     IEnumerator OnRoundEnded(float waitTime)
     {
-        discardBtn.interactable = false;
+        isPaused = true;
+
+		discardBtn.interactable = false;
         leftBtn.interactable = false;
         rightBtn.interactable = false;
 
@@ -428,8 +451,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		rightBtn.interactable = true;
 
 		currCoinsValueTxt.text = currCoins.ToString();
+		isPaused = false;
 
-        if (consecutiveWinsTuto >= currTutoConfig.consecutiveWinsToPass || failurePerTutoCount >= currTutoConfig.consecutiveWinsToPass)
+		if (consecutiveWinsTuto >= currTutoConfig.consecutiveWinsToPass || failurePerTutoCount >= currTutoConfig.consecutiveWinsToPass)
         {
             if(tutoStage < 2) 
             {
