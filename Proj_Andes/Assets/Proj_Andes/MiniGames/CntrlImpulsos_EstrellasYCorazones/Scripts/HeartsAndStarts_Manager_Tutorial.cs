@@ -391,6 +391,9 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 			yield return new WaitForSeconds(audiosource.clip.length);
 		}
 
+        //Delay asked by the client
+		yield return new WaitForSeconds(1);
+
 		blockScreenPanel.SetActive(false);
 		GameSequencesList.Instance.GoToNextItemInList();
 

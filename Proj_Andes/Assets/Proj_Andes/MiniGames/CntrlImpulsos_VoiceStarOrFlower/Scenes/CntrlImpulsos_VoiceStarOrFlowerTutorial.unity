@@ -12673,7 +12673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1459326899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13138,7 +13138,7 @@ RectTransform:
   m_Father: {fileID: 348349018}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13512,8 +13512,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1448301836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14032,6 +14032,10 @@ MonoBehaviour:
   letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   effectPlayer: {fileID: 1631699890}
   audioPlayer: {fileID: 1951022623}
+  wrongAudioForImgAndCloud: {fileID: 8300000, guid: 717b9a18ae44faf4bb7cc111caf92b90, type: 3}
+  wrongAudioForSoundAndCloud: {fileID: 8300000, guid: 5f1f6bfc1ee9f0c438f534ed1e18bb93, type: 3}
+  wrongAudioForImgAndFlower: {fileID: 8300000, guid: f5cac576f8444b844a85dc3836364fc1, type: 3}
+  wrongAudioForSoundAndFlower: {fileID: 8300000, guid: 9f864ce7008462e4fa84e86092c71a69, type: 3}
   leftWonItemsPool:
     itemPrefab: {fileID: 793727092}
     hierarchyParent: {fileID: 1366486297}
@@ -14051,6 +14055,7 @@ MonoBehaviour:
   timerUI: {fileID: 1459326899}
   blockPanel: {fileID: 2107843324}
   eogManager: {fileID: 1504520893}
+  overridenRoundTime: 5
 --- !u!1 &2016063569
 GameObject:
   m_ObjectHideFlags: 0
