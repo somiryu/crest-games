@@ -29,15 +29,18 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 		for (int i = 0; i < currAnalytics.Count; i++)
         {
             currAnalyticsDictionary.Clear();
-			currAnalyticsDictionary.Add(DataIds.GameID, GameID);
-            currAnalyticsDictionary.Add(DataIds.challengeType, currAnalytics[i].challengeType);
-			currAnalyticsDictionary.Add(DataIds.voiceStarImage, currAnalytics[i].image);
-            currAnalyticsDictionary.Add(DataIds.voiceStarSound, currAnalytics[i].audio);
-            currAnalyticsDictionary.Add(DataIds.won, currAnalytics[i].wonRound);
+            currAnalyticsDictionary.Add(DataIds.GameID, GameID);
+            currAnalyticsDictionary.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerFrustrationMode, 0);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto1, 1);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto2, 1);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto3, 1);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerTrial, currAnalytics[i].roundCount);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerAudibleStimuli, currAnalytics[i].audio);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerVisualStimuli, currAnalytics[i].image);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerAnswer, currAnalytics[i].selection);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerCode, currAnalytics[i].wonRound);
             currAnalyticsDictionary.Add(DataIds.responseTime, currAnalytics[i].timeToMakeAChoice);
-            currAnalyticsDictionary.Add(DataIds.totalClicks, currAnalytics[i].clicks);
-            currAnalyticsDictionary.Add(DataIds.lostBecauseOfTime, currAnalytics[i].ranOutOfTime);
-            currAnalyticsDictionary.Add(DataIds.voiceStarLostTutorial, passedTuto);
 
 			UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
 		}

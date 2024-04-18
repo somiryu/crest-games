@@ -48,10 +48,7 @@ public static class DataIds
     //Data per game
     public const string stars = "stars";
 
-    public const string voiceStarGame = "campo_nubes";
-    public const string voiceStarImage = "image";
-    public const string voiceStarSound = "audio";
-    public const string voiceStarLostTutorial = "lostTutorial";
+    public const string voiceStarGame = "nubes_flores";
 
     public const string turboRocketGame = "star_booster";
     public const string turboRocketturboUsedTimes = "boosts";
@@ -101,5 +98,19 @@ public static class DataIds
     public const string heartsNFlowersAnswer = "cf_respuesta";
     public const string heartsNFlowersCode = "cf_codigo";
     public const string heartsNFlowersTime = "cf_tiempo";
+
+    //Cloud or flower analytics
+    public const string cloudNFlowerFrustrationMode = "nfs_modo";
+    public const string cloudNFlowerPassedTuto1 = "nf_valid_1";
+    public const string cloudNFlowerPassedTuto2 = "nf_valid_2";
+    public const string cloudNFlowerPassedTuto3 = "nf_valid_3";
+    public const string cloudNFlowerTrial = "nf_intento";
+    public const string cloudNFlowerAudibleStimuli = "nf_estimulo_aud";
+    public const string cloudNFlowerVisualStimuli = "nf_estimulo_vis";
+    public const string cloudNFlowerAnswer = "nf_respuesta";
+    public const string cloudNFlowerCode = "nf_codigo";
+    public const string cloudNFlowerTimer = "nf_tiempo";
+
+
 
 }
