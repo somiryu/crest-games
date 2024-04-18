@@ -43,7 +43,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip finishAudio;
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
-    [SerializeField] AudioClip lookAtCampsAudio;
+    [SerializeField] AudioClip tutorialIntroAudio;
     [FormerlySerializedAs("firstInstrucAudio")]
     [SerializeField] AudioClip firstInstrucAudioForVoiceAsCorrectAnswer;
     [SerializeField] AudioClip firstInstrucAudioForImgAsCorrectAnswer;
@@ -90,9 +90,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     private bool gameoverFlag = false;
 
-    bool hasWrongChoice;
+    int passedCurrTuto;
     int consecutiveWinsTuto;
-    int goalScoreStepTutorial;
     int trialsPerTutoCount;
     int failurePerTutoCount;
     int tutoStage;
@@ -152,8 +151,19 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         audioPlayer.Play();
         eogManager.OnGameStart();
 
-        InitTutorialStep();
+        if (currTutoConfig.gameType == VoiceOrImageGameType.Voice) StartCoroutine(StartTutorialAndIntro());
+        else InitTutorialStep();
 
+    }
+    IEnumerator StartTutorialAndIntro()
+    {
+        isPaused = true;
+        blockPanel.gameObject.SetActive(true );
+        audioPlayer.clip = tutorialIntroAudio;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(tutorialIntroAudio.length);
+        blockPanel.gameObject.SetActive(false);
+        InitTutorialStep();
     }
     private void InitTutorialStep()
     {
@@ -308,11 +318,13 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         switch (currTutoConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
-                if (!currSoundIsLeft && tutoStage < 2 || currSoundIsLeft && tutoStage >= 2) OnCorrectChoice();
+                if (!currSoundIsLeft && !currTutoConfig.completedFirstPart
+                    || currSoundIsLeft && currTutoConfig.completedFirstPart && currTutoConfig.switchesToAnswerIsDifferentInSecondPart) OnCorrectChoice();
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Image:
-                if (!currImgIsLeft && tutoStage < 2 || currImgIsLeft && tutoStage >= 2) OnCorrectChoice();
+                if (!currImgIsLeft && !currTutoConfig.completedFirstPart
+                    || currImgIsLeft && currTutoConfig.completedFirstPart && currTutoConfig.switchesToAnswerIsDifferentInSecondPart) OnCorrectChoice();
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Mixed:
@@ -436,8 +448,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 InitTutorialStep();
                 yield break;
             }
-            MG_VoiceStarOrFlowerGameConfigs.passedTuto = false;
             StartCoroutine(CompleteTuto());
+            var passTuto = consecutiveWinsTuto >= currTutoConfig.consecutiveWinsToPass ? 1 : 0;
+            passedCurrTuto = passTuto;
             yield break;
         }
         InitRound();
@@ -457,12 +470,15 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         switch (currTutoConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
+                MG_VoiceStarOrFlowerGameConfigs.passedTuto1 = passedCurrTuto;
                 UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageVoice.ToString());
                 break;
             case VoiceOrImageGameType.Image:
+                MG_VoiceStarOrFlowerGameConfigs.passedTuto2 = passedCurrTuto;
                 UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageImage.ToString());
                 break;
             case VoiceOrImageGameType.Mixed:
+                MG_VoiceStarOrFlowerGameConfigs.passedTuto3 = passedCurrTuto;
                 UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageMixed.ToString());
                 break;
         }

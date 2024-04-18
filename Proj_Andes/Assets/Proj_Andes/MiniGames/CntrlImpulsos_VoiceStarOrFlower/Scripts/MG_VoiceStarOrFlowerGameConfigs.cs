@@ -15,7 +15,10 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 	public int coinsOnWrongAnswer = 0;
 	public float intermediateRoundHold;
     public int finalTutoStepMaxFailuresBeforeSkipping;
-    public static bool passedTuto;
+    public bool testIsOppositeToStimuli;
+    public static int passedTuto1 = 0;
+    public static int passedTuto2 = 0;
+    public static int passedTuto3 = 0;
     public override string GetSceneID() => DataIds.voiceStarGame;
 
     /// <summary>
@@ -45,9 +48,9 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
             currAnalyticsDictionary.Add(DataIds.GameID, GameID);
             currAnalyticsDictionary.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerFrustrationMode, 0);
-            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto1, 1);
-            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto2, 1);
-            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto3, 1);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto1, passedTuto1);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto2, passedTuto2);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto3, passedTuto3);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerTrial, currAnalytics[i].roundCount);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerAudibleStimuli, currAnalytics[i].audio);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerVisualStimuli, currAnalytics[i].image);
@@ -56,6 +59,7 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
             currAnalyticsDictionary.Add(DataIds.responseTime, currAnalytics[i].timeToMakeAChoice);
 
 			UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
+            Debug.Log("to test tuto pass " + passedTuto1 + " " + passedTuto2 + " " + passedTuto3);
 		}
     }
     public override void ResetCurrentAnalytics()

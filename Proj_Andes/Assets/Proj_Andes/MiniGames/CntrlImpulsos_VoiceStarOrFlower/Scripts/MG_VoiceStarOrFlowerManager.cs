@@ -26,6 +26,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     public static int currTutoStepIdx;
     public List<MG_VoiceStarOrFlowerGameConfigs> gameTypeConfigs = new List<MG_VoiceStarOrFlowerGameConfigs>();
     MG_VoiceStarOrFlowerGameConfigs currGameTypeConfig => gameTypeConfigs[currTutoStepIdx];
+    bool UseVoiceAsCorrectAnswer => MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer;
     [Space(20)]
     [SerializeField] GameObject afterActionPanel;
     [SerializeField] GameObject inGameUiPanel;
@@ -64,6 +65,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private int lostRoundsCount;
     int roundCount = 0;
 
+    int cloudCount;
+    int flowerCount;
+
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
     
@@ -71,6 +75,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private int amountSoundIsLeft = 0;
     private int amountDiscardButton = 0;
 
+    bool isPaused;
     private bool gameoverFlag = false;
     float totalGameTime;
 
@@ -109,6 +114,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         wonRightCount = 0;
         lostRoundsCount = 0;
 
+
 		afterActionPanel.SetActive(false);
 		inGameUiPanel.SetActive(true);
         gameoverFlag = false;
@@ -122,9 +128,12 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 		rightBtn.onClick.AddListener(OnClickedRight);
 		discardBtn.onClick.AddListener(OnClickedDiscard);
 
+        flowerCount = 0;
+        cloudCount = 0;
 
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
+        eogManager.OnGameStart();
 
         InitRound();
 	}
@@ -168,24 +177,47 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         roundAnalytics = new MG_FieldOfFlowers_RoundAnalytics();
 
         AllRoundsAnalytics.Add(roundAnalytics);
-        var imgToUse = currImgIsLeft ? leftTargetSprite: rightTargetSprite;
-        var soundToUse = currSoundIsLeft ? leftAudio: rightAudio;
-        var textToUse = currSoundIsLeft ? leftObjTxt: rightObjTxt;
+
+        switch (currGameTypeConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                if (cloudCount > currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
+                else if (flowerCount > currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
+                if (currSoundIsLeft) flowerCount++;
+                else cloudCount++;
+
+                currTargetImg.gameObject.SetActive(false);
+                currImgIsLeft = currSoundIsLeft;
+                break;
+            case VoiceOrImageGameType.Image:
+                if (cloudCount > currGameTypeConfig.maxRounds / 2) currImgIsLeft = false;
+                else if (flowerCount > currGameTypeConfig.maxRounds / 2) currImgIsLeft = true;
+                if (currImgIsLeft) flowerCount++;
+                else cloudCount++;
+                audioPlayer.clip = null;
+                currSoundIsLeft = currImgIsLeft;
+                currTargetImg.gameObject.SetActive(true);
+                break;
+            case VoiceOrImageGameType.Mixed:
+                break;
+        
+
+        }
+
+        var imgToUse = currImgIsLeft ? leftTargetSprite : rightTargetSprite;
+        var soundToUse = currSoundIsLeft ? leftAudio : rightAudio;
+        var textToUse = currSoundIsLeft ? leftObjTxt : rightObjTxt;
+
+        currTargetImg.sprite = imgToUse;
+        audioPlayer.clip = soundToUse;
+
+        if(currGameTypeConfig.gameType != VoiceOrImageGameType.Image) audioPlayer.Play();
 
         if (currSoundIsLeft) roundAnalytics.audio = 1;
         else roundAnalytics.audio = 0;
         if (currImgIsLeft) roundAnalytics.image = 1;
         else roundAnalytics.image = 0;
-       //if (currImgIsLeft && currSoundIsLeft || !currSoundIsLeft && !currSoundIsLeft) roundAnalytics.challengeType = "Same";
-        //else roundAnalytics.challengeType = "Different";
-        if (currImgIsLeft && currSoundIsLeft || !currSoundIsLeft && !currSoundIsLeft) roundAnalytics.challengeType = "Same";
-        else roundAnalytics.challengeType = "Different";
-
-        currTargetImg.sprite = imgToUse;
-        audioPlayer.clip = soundToUse;
-        audioPlayer.Play();
-        eogManager.OnGameStart();
-	}
+    }
 
 	private void Update()
 	{
@@ -204,28 +236,58 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	private void OnClickedLeft()
     {
         roundAnalytics.selection = 1;
-        if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
-        else OnWrongChoice();
+        switch (currGameTypeConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                if (currSoundIsLeft && !currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
+                else OnWrongChoice();
+                break;
+            case VoiceOrImageGameType.Image:
+                if (currImgIsLeft && !currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
+                else OnWrongChoice();
+                break;
+            case VoiceOrImageGameType.Mixed:
+                if (UseVoiceAsCorrectAnswer)
+                {
+                    if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+                    else OnWrongChoice();
+                }
+                else //Img is correct answer
+                {
+                    if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+                    else OnWrongChoice();
+                }
+                break;
+        }
     }
 
     private void OnClickedRight()
     {
         roundAnalytics.selection = 0;
-        if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
-		else OnWrongChoice();
-
-        roundAnalytics.ranOutOfTime = false;
-		if (UseVoiceAsCorrectAnswer)
-		{
-			if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
-			else OnWrongChoice();
-		}
-		else //Img is correct answer
-		{
-			if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
-			else OnWrongChoice();
-		}
-	}
+        switch (currGameTypeConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                if (!currSoundIsLeft && currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
+                else OnWrongChoice();
+                break;
+            case VoiceOrImageGameType.Image:
+                if (!currImgIsLeft && currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
+                else OnWrongChoice();
+                break;
+            case VoiceOrImageGameType.Mixed:
+                if (UseVoiceAsCorrectAnswer)
+                {
+                    if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+                    else OnWrongChoice();
+                }
+                else //Img is correct answer
+                {
+                    if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+                    else OnWrongChoice();
+                }
+                break;
+        }
+    }
 
 	private void OnClickedDiscard()
     {
