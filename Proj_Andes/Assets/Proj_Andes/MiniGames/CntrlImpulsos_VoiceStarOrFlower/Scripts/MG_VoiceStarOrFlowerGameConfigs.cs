@@ -8,6 +8,11 @@ using UnityEngine;
 public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 {
     public VoiceOrImageGameType gameType;
+
+    public static string CurrFlowersAndCloudsGameID;
+    public static GeneralGameAnalytics GlobalGeneralGameAnalytics;
+    public bool isLastFlowerAndCloudGameOnBatch = false;
+
     public float timePerChoice = 5f;
 	public int maxRounds = 10;
 	public int initialCoins = 0;
@@ -16,16 +21,12 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 	public float intermediateRoundHold;
     public int finalTutoStepMaxFailuresBeforeSkipping;
     public bool testIsOppositeToStimuli;
-    public static int passedTuto1 = 0;
-    public static int passedTuto2 = 0;
-    public static int passedTuto3 = 0;
+    public static int passedTuto1 = -1;
+    public static int passedTuto2 = -1;
+    public static int passedTuto3 = -1;
     public override string GetSceneID() => DataIds.voiceStarGame;
 
-    /// <summary>
-    /// If false, the game mechanic will use the image as the correct answer and voice as the wrong one
-    /// </summary>
     public static bool UseVoiceAsTheCorrectAnswer = true;
-
     public int gameIdx;
 
     public override SimpleGameSequenceItem GetNextItem()
@@ -39,6 +40,22 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     }
     public override void SaveAnalytics()
     {
+        if (string.IsNullOrEmpty(CurrFlowersAndCloudsGameID))
+        {
+            CurrFlowersAndCloudsGameID = Guid.NewGuid().ToString();
+            GlobalGeneralGameAnalytics = new GeneralGameAnalytics();
+        }
+
+        GameID = CurrFlowersAndCloudsGameID;
+        shouldTryToSaveGeneralAnalytics = isLastFlowerAndCloudGameOnBatch;
+
+        Debug.Log("Will save general game analytics: " + shouldTryToSaveGeneralAnalytics);
+
+        if (!shouldTryToSaveGeneralAnalytics)
+        {
+            GlobalGeneralGameAnalytics.CopyFrom(GeneralGameAnalyticsManager.Instance.analytics);
+        }
+
         var currAnalyticsDictionary = new Dictionary<string, object>();
         var currAnalytics = MG_VoiceStarOrFlowerManager.Instance.AllRoundsAnalytics;
 		GameID = Guid.NewGuid().ToString();
@@ -62,9 +79,17 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
             Debug.Log("to test tuto pass " + passedTuto1 + " " + passedTuto2 + " " + passedTuto3);
 		}
     }
+    public override void AferGeneralAnalyticsSaved()
+    {
+        if (!isLastFlowerAndCloudGameOnBatch) return;
+
+        CurrFlowersAndCloudsGameID = null;
+        GlobalGeneralGameAnalytics = new GeneralGameAnalytics();
+    }
     public override void ResetCurrentAnalytics()
     {
-        base.ResetCurrentAnalytics();
+        CurrFlowersAndCloudsGameID = null;
+        GlobalGeneralGameAnalytics = new GeneralGameAnalytics();
     }
 }
 

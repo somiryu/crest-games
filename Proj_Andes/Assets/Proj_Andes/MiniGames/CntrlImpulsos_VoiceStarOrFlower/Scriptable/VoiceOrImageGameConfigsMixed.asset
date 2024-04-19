@@ -16,6 +16,7 @@ MonoBehaviour:
     sceneAsset: {fileID: 102900000, guid: d7608b90a7d13b34a8439223d93eb98c, type: 3}
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlower.unity
   gameType: 2
+  isLastFlowerAndCloudGameOnBatch: 1
   timePerChoice: 5
   maxRounds: 14
   initialCoins: 0

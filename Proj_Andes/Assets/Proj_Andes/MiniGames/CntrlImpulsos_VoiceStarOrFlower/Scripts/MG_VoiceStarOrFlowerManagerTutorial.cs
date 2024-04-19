@@ -170,8 +170,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     }
     private void InitTutorialStep()
     {
-        // audioPlayer.clip = 
-        Debug.Log("Starring" + currTutoConfig.gameType);
+        Debug.Log("Starting " + currTutoConfig.gameType);
         trialsPerTutoCount = 0;
         failurePerTutoCount = 0;
         consecutiveWinsTuto = 0;
@@ -226,7 +225,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 		timerPerChoice += Time.deltaTime;
 		timerUI.value = timerPerChoice;
-
 		if (timerPerChoice >= currTutoConfig.roundTime)
 		{
 			timerPerChoice = 0;
@@ -242,8 +240,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         trialsPerTutoCount++;
         
         audioPlayer.volume = 1;
-
-        SetButtonState(discardBtn, discardBtnHighlightImg, enabledBtnColor, false);
 
         currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
         currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
@@ -464,6 +460,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 		if (consecutiveWinsTuto >= currTutoConfig.consecutiveWinsToPass || failurePerTutoCount >= currTutoConfig.consecutiveWinsToPass)
         {
+            if (currTutoConfig.gameType == VoiceOrImageGameType.Mixed) currTutoConfig.completedFirstPart = true;
             if(!currTutoConfig.completedFirstPart) 
             {
                 InitTutorialStep();
