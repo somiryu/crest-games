@@ -17,11 +17,11 @@ MonoBehaviour:
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlower.unity
   gameType: 2
   timePerChoice: 5
-  maxRounds: 10
+  maxRounds: 14
   initialCoins: 0
   coinsOnCorrectAnswer: 0
   coinsOnWrongAnswer: 0
   intermediateRoundHold: 0.5
   finalTutoStepMaxFailuresBeforeSkipping: 0
-  testIsOppositeToStimuli: 1
+  testIsOppositeToStimuli: 0
   gameIdx: 2

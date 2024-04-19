@@ -107,7 +107,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 	public void Init()
     {
         var useVoiceAsCorrectAnswer = true;
-
+        isPaused = true;
         switch (currTutoConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
@@ -136,6 +136,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 		inGameUiPanel.SetActive(true);
         gameoverFlag = false;
 
+        if (currTutoConfig.gameType == VoiceOrImageGameType.Voice) currTargetImg.gameObject.SetActive(false);
+
 
         timerUI.minValue = 0;
         timerUI.maxValue = currTutoConfig.roundTime;
@@ -163,13 +165,13 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         audioPlayer.Play();
         yield return new WaitForSeconds(tutorialIntroAudio.length);
         blockPanel.gameObject.SetActive(false);
+        isPaused = false;
         InitTutorialStep();
     }
     private void InitTutorialStep()
     {
-        // audioPlayer.clip = UseVoiceAsCorrectAnswer ? firstInstrucAudioForVoiceAsCorrectAnswer : firstInstrucAudioForImgAsCorrectAnswer;
+        // audioPlayer.clip = 
         Debug.Log("Starring" + currTutoConfig.gameType);
-        currTargetImg.gameObject.SetActive(false);
         trialsPerTutoCount = 0;
         failurePerTutoCount = 0;
         consecutiveWinsTuto = 0;
@@ -177,11 +179,18 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
         if (tutoStage >= 2) currTutoConfig.completedFirstPart = true;
 
-        if (!currTutoConfig.completedFirstPart) currInstruction = ActionsBeforeTutoStageStarts(currTutoConfig.firstInstructionAudio, currTutoConfig.firstInstructionAudio2);
+        if (currTutoConfig.gameType != VoiceOrImageGameType.Mixed)
+        {
+            if (!currTutoConfig.completedFirstPart) currInstruction = ActionsBeforeTutoStageStarts(currTutoConfig.firstInstructionAudio, currTutoConfig.firstInstructionAudio2);
+            else currInstruction = ActionsBeforeTutoStageStarts(currTutoConfig.secondInstructionAudio1, currTutoConfig.secondInstructionAudio2);
+        }
         else
         {
-            if (currTutoConfig.gameType != VoiceOrImageGameType.Mixed) currInstruction = ActionsBeforeTutoStageStarts(currTutoConfig.secondInstructionAudio1, currTutoConfig.secondInstructionAudio2);
+            if (currTutoConfig.completedFirstPart) return;
+            var lastTutoInstruction = UseVoiceAsCorrectAnswer ? currTutoConfig.firstInstructionAudio : currTutoConfig.firstInstructionAudio2;
+            currInstruction = ActionsBeforeTutoStageStarts(lastTutoInstruction);
         }
+
         StartCoroutine(currInstruction);
     }
     IEnumerator ActionsBeforeTutoStageStarts(AudioClip audio1, AudioClip audio2 = null)
@@ -209,7 +218,11 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     }
 	void Update()
 	{
-		if (isPaused) return;
+		if (isPaused)
+        {
+            timerPerChoice = 0;
+            return;
+        }
 
 		timerPerChoice += Time.deltaTime;
 		timerUI.value = timerPerChoice;
@@ -235,29 +248,37 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
         currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
 
-        var imgToUse = currImgIsLeft ? leftTargetSprite : rightTargetSprite;
-        var soundToUse = currSoundIsLeft ? leftAudio : rightAudio;
-        var textToUse = currSoundIsLeft ? leftObjTxt : rightObjTxt;
-
-        currTargetImg.sprite = imgToUse;
-
-        effectPlayer.clip = soundToUse;
-
         switch (currTutoConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
                 currTargetImg.gameObject.SetActive(false);
                 currImgIsLeft = currSoundIsLeft;
-                effectPlayer.Play();
                 break;
             case VoiceOrImageGameType.Image:
                 currSoundIsLeft = currImgIsLeft;
                 currTargetImg.gameObject.SetActive(true);
                 break;
             case VoiceOrImageGameType.Mixed:
-                effectPlayer.Play();
+                if (UseVoiceAsCorrectAnswer)
+                {
+                    if (currSoundIsLeft) currImgIsLeft = false;
+                    else currImgIsLeft = true;
+                }
+                else
+                {
+                    if (currImgIsLeft) currSoundIsLeft = false;
+                    else currSoundIsLeft = true;
+                }
                 break;
         }
+
+        var imgToUse = currImgIsLeft ? leftTargetSprite : rightTargetSprite;
+        var soundToUse = currSoundIsLeft ? leftAudio : rightAudio;
+
+        currTargetImg.sprite = imgToUse;
+        effectPlayer.clip = soundToUse;
+
+        if (currTutoConfig.gameType != VoiceOrImageGameType.Image) effectPlayer.Play();
     }
     IEnumerator DiscardInstruction()
     {

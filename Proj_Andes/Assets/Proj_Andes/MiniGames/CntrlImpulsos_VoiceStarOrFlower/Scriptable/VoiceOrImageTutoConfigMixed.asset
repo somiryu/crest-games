@@ -19,13 +19,13 @@ MonoBehaviour:
   gameType: 2
   gameIdx: 2
   trialsAmt: 0
-  consecutiveWinsToPass: 4
-  consecutiveFailsToLose: 3
+  consecutiveWinsToPass: 3
+  consecutiveFailsToLose: 4
   roundTime: 5
-  firstInstructionAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
-  firstInstructionAudio2: {fileID: 0}
+  firstInstructionAudio: {fileID: 8300000, guid: 10380640d41601d4f936e2ba9d8e108c, type: 3}
+  firstInstructionAudio2: {fileID: 8300000, guid: f96bddc5789e57c4eb88f1bc2d07d1be, type: 3}
   secondInstructionAudio1: {fileID: 0}
   secondInstructionAudio2: {fileID: 0}
   endAudio: {fileID: 8300000, guid: 75f78c52738598042b3c3f521f8747d7, type: 3}
   switchesToAnswerIsDifferentInSecondPart: 0
-  completedFirstPart: 0
+  completedFirstPart: 1

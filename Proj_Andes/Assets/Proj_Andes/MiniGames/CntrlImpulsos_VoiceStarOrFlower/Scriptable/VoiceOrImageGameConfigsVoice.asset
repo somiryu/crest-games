@@ -23,4 +23,5 @@ MonoBehaviour:
   coinsOnWrongAnswer: -1
   intermediateRoundHold: 0.5
   finalTutoStepMaxFailuresBeforeSkipping: 4
+  testIsOppositeToStimuli: 1
   gameIdx: 0

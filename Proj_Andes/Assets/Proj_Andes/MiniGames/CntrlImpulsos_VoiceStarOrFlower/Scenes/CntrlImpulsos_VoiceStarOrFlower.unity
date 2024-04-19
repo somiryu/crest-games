@@ -798,6 +798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioInstruction
       objectReference: {fileID: 0}
+    - target: {fileID: 2500960040834178063, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7352783867122607617, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -12652,7 +12656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1689546901
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13184,6 +13188,7 @@ MonoBehaviour:
   finishAudio: {fileID: 8300000, guid: 7b5a89d1c2d8e3948952ea4f4a5f220c, type: 3}
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
   rightAudio: {fileID: 8300000, guid: f30080e8439e6b542a0736c0dc30d397, type: 3}
+  letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   audioPlayer: {fileID: 1951022623}
   leftWonItemsPool:
     itemPrefab: {fileID: 1155978088}

@@ -37,6 +37,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] AudioClip finishAudio;
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
+    [SerializeField] AudioClip letsPlayAudio;
     [SerializeField] AudioSource audioPlayer;
     [Space(20)]
     [SerializeField] Pool<Transform> leftWonItemsPool;
@@ -65,8 +66,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private int lostRoundsCount;
     int roundCount = 0;
 
-    int cloudCount;
-    int flowerCount;
+    int rightCount;
+    int leftCount;
 
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
@@ -118,6 +119,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 		afterActionPanel.SetActive(false);
 		inGameUiPanel.SetActive(true);
         gameoverFlag = false;
+        
+        if(currGameTypeConfig.gameType == VoiceOrImageGameType.Voice) currTargetImg.gameObject.SetActive(false);
 
         gameConfigs.ResetCurrentAnalytics();
 
@@ -128,14 +131,15 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 		rightBtn.onClick.AddListener(OnClickedRight);
 		discardBtn.onClick.AddListener(OnClickedDiscard);
 
-        flowerCount = 0;
-        cloudCount = 0;
+        leftCount = 0;
+        rightCount = 0;
 
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
         eogManager.OnGameStart();
 
-        InitRound();
+        StartCoroutine(ActionsBeforeFirstRound());
+
 	}
 
 	private void Start()
@@ -167,12 +171,21 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
             repeatedPuzzleCounter = 0;
         }
     }
-
-	void InitRound()
+    IEnumerator ActionsBeforeFirstRound()
+    {
+        isPaused = true;
+        blockingPanel.gameObject.SetActive(true);
+        audioPlayer.clip = letsPlayAudio;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(letsPlayAudio.length);
+        blockingPanel.gameObject.SetActive(false);
+        isPaused = false;
+        InitRound();
+    }
+    void InitRound()
     {
         timerPerChoice = 0;
         roundCount++;
-
         GetRandomSoundImage();
         roundAnalytics = new MG_FieldOfFlowers_RoundAnalytics();
 
@@ -181,33 +194,52 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         switch (currGameTypeConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
-                if (cloudCount > currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
-                else if (flowerCount > currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
-                if (currSoundIsLeft) flowerCount++;
-                else cloudCount++;
+                if (rightCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
+                else if (leftCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
+                if (currSoundIsLeft) leftCount++;
+                else rightCount++;
 
                 currTargetImg.gameObject.SetActive(false);
                 currImgIsLeft = currSoundIsLeft;
                 break;
             case VoiceOrImageGameType.Image:
-                if (cloudCount > currGameTypeConfig.maxRounds / 2) currImgIsLeft = false;
-                else if (flowerCount > currGameTypeConfig.maxRounds / 2) currImgIsLeft = true;
-                if (currImgIsLeft) flowerCount++;
-                else cloudCount++;
+                if (rightCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = true;
+                else if (leftCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = false;
+                if (currImgIsLeft) leftCount++;
+                else rightCount++;
                 audioPlayer.clip = null;
                 currSoundIsLeft = currImgIsLeft;
                 currTargetImg.gameObject.SetActive(true);
                 break;
             case VoiceOrImageGameType.Mixed:
-                break;
-        
+                if (UseVoiceAsCorrectAnswer)
+                {
+                    if (currSoundIsLeft) currImgIsLeft = false;
+                    else currImgIsLeft = true;
 
+                    if (rightCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
+                    else if (leftCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
+                    if (currSoundIsLeft) leftCount++;
+                    else rightCount++;
+                }
+                else
+                {
+                    if (currImgIsLeft) currSoundIsLeft = false;
+                    else currSoundIsLeft = true;
+
+                    if (rightCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = true;
+                    else if (leftCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = false;
+                    if (currImgIsLeft) leftCount++;
+                    else rightCount++;
+                }
+                break;
         }
 
         var imgToUse = currImgIsLeft ? leftTargetSprite : rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio : rightAudio;
         var textToUse = currSoundIsLeft ? leftObjTxt : rightObjTxt;
 
+        Debug.Log("clouds " + rightCount + "flower " + leftCount);
         currTargetImg.sprite = imgToUse;
         audioPlayer.clip = soundToUse;
 
@@ -222,6 +254,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 	private void Update()
 	{
         if (gameoverFlag) return;
+        if(isPaused) return;
 
         timerUI.value = timerPerChoice;
         totalGameTime += Time.deltaTime;
@@ -239,11 +272,11 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         switch (currGameTypeConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
-                if (currSoundIsLeft && !currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
+                if (!currSoundIsLeft && currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Image:
-                if (currImgIsLeft && !currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
+                if (!currImgIsLeft && currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Mixed:
@@ -267,11 +300,11 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         switch (currGameTypeConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
-                if (!currSoundIsLeft && currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
+                if (currSoundIsLeft && currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Image:
-                if (!currImgIsLeft && currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
+                if (currImgIsLeft && currGameTypeConfig.testIsOppositeToStimuli) OnCorrectChoice();
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Mixed:
@@ -311,7 +344,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         audioPlayer.PlayOneShot(wrongAudio);
         GameUIController.Instance.StarLost();
 
-        StartCoroutine(OnRoundEnded(wrongAudio.length));
         StartCoroutine(OnRoundEnded(currGameTypeConfig.intermediateRoundHold));
     }
 
@@ -363,7 +395,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         roundAnalytics.timeToMakeAChoice = timerPerChoice;
 
 
-        var totalRounds = lostRoundsCount + wonLeftCount + wonRightCount;
+        var totalRounds = roundCount;
+        isPaused = false;
 
         if (totalRounds >= gameConfigs.maxRounds)
         {
