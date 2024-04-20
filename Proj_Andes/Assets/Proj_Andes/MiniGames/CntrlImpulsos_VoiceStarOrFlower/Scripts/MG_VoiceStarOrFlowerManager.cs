@@ -144,7 +144,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
 	private void Start()
 	{
-        GeneralGameAnalyticsManager.Instance.Init(DataIds.voiceStarGame);
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.voiceStarGame, MG_VoiceStarOrFlowerGameConfigs.GlobalGeneralGameAnalytics);
 	}
 
 	int repeatedPuzzleCounter = 0;
@@ -155,22 +155,11 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         var previousImgIsLeft = currImgIsLeft;
 
         currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
-        currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
+        currImgIsLeft = !currSoundIsLeft;
 
-        if(previousSoundIsLeft == currSoundIsLeft &&  previousImgIsLeft == currImgIsLeft)
-        {
-            repeatedPuzzleCounter++;
-            if(repeatedPuzzleCounter >= 2)
-            {
-                GetRandomSoundImage();
-                return;
-            }
-        }
-        else
-        {
-            repeatedPuzzleCounter = 0;
-        }
+       
     }
+
     IEnumerator ActionsBeforeFirstRound()
     {
         isPaused = true;
@@ -214,24 +203,24 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
             case VoiceOrImageGameType.Mixed:
                 if (UseVoiceAsCorrectAnswer)
                 {
-                    if (currSoundIsLeft) currImgIsLeft = false;
-                    else currImgIsLeft = true;
-
                     if (rightCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
                     else if (leftCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
                     if (currSoundIsLeft) leftCount++;
                     else rightCount++;
-                }
+
+					if (currSoundIsLeft) currImgIsLeft = false;
+					else currImgIsLeft = true;
+				}
                 else
                 {
-                    if (currImgIsLeft) currSoundIsLeft = false;
-                    else currSoundIsLeft = true;
-
                     if (rightCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = true;
                     else if (leftCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = false;
                     if (currImgIsLeft) leftCount++;
                     else rightCount++;
-                }
+
+					if (currImgIsLeft) currSoundIsLeft = false;
+					else currSoundIsLeft = true;
+				}
                 break;
         }
 

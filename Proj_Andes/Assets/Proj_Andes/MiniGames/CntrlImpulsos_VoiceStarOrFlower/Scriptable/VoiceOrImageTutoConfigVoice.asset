@@ -24,8 +24,8 @@ MonoBehaviour:
   roundTime: 5
   firstInstructionAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
   firstInstructionAudio2: {fileID: 8300000, guid: 10380640d41601d4f936e2ba9d8e108c, type: 3}
-  secondInstructionAudio1: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
+  secondInstructionAudio1: {fileID: 8300000, guid: e86e75a9bef1314409537f24635db4f8, type: 3}
   secondInstructionAudio2: {fileID: 8300000, guid: a1c76f0b28a66494e9fb43823df0f5b1, type: 3}
   endAudio: {fileID: 8300000, guid: 75f78c52738598042b3c3f521f8747d7, type: 3}
   switchesToAnswerIsDifferentInSecondPart: 1
-  completedFirstPart: 0
+  completedFirstPart: 1

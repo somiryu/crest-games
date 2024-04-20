@@ -56,8 +56,14 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip letsPlayAudio;
     [SerializeField] AudioSource effectPlayer;
     [SerializeField] AudioSource audioPlayer;
+    [Space]
+	[SerializeField] AudioClip onFailedFlowersAndVoice;
+	[SerializeField] AudioClip onFailedCloudAndVoice;
+	[SerializeField] AudioClip onFailedFlowersAndImg;
+	[SerializeField] AudioClip onFailedCloudAndImg;
 
-    [Space(20)]
+
+	[Space(20)]
     [SerializeField] Pool<Transform> leftWonItemsPool;
     [SerializeField] Pool<Transform> rightWonItemsPool;
 
@@ -118,6 +124,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 break;
             case VoiceOrImageGameType.Mixed:
                 useVoiceAsCorrectAnswer = Random.Range(0f, 1f) > 0.5f;
+                Debug.Log("Will use voice as correct answer: " + useVoiceAsCorrectAnswer);
                 break;
         }
 
@@ -390,18 +397,27 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     IEnumerator PlayOnWrongChoice()
     {
 		isPaused = true;
-		AudioClip clipToPlay = onFailSelectInstructionAdvice;
-        if (currImgIsLeft && currSoundIsLeft || !currImgIsLeft && !currSoundIsLeft) clipToPlay = onFailSelectDiscardAdvice;
-        else clipToPlay = onFailSelectInstructionAdvice;
+		AudioClip clipToPlay;
+
+        if (UseVoiceAsCorrectAnswer)
+        {
+            if (currSoundIsLeft) clipToPlay = onFailedFlowersAndVoice;
+            else clipToPlay = onFailedCloudAndVoice;
+
+        }
+        else
+        {
+			if (currImgIsLeft) clipToPlay = onFailedFlowersAndImg;
+			else clipToPlay = onFailedCloudAndImg;
+		}
 
         audioPlayer.clip = clipToPlay;
         audioPlayer.Play();
-        var timeToWait = clipToPlay.length;
 		rightBtn.interactable = false;
 		leftBtn.interactable = false;
 		discardBtn.interactable = false;
 
-		yield return new WaitForSeconds(timeToWait);
+		yield return new WaitForSeconds(clipToPlay.length);
 
 		rightBtn.interactable = true;
 		leftBtn.interactable = true;
