@@ -14020,8 +14020,8 @@ MonoBehaviour:
   finishAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
   rightAudio: {fileID: 8300000, guid: f30080e8439e6b542a0736c0dc30d397, type: 3}
-  tutorialIntroAudio: {fileID: 8300000, guid: 83a0528ca6b52af4e90c476e3afb9bf6, type: 3}
-  firstInstrucAudioForVoiceAsCorrectAnswer: {fileID: 8300000, guid: 10380640d41601d4f936e2ba9d8e108c, type: 3}
+  tutorialIntroAudio: {fileID: 8300000, guid: 3e349e25ce18ceb468c6a21bcb9f7d5b, type: 3}
+  firstInstrucAudioForVoiceAsCorrectAnswer: {fileID: 8300000, guid: 3e349e25ce18ceb468c6a21bcb9f7d5b, type: 3}
   firstInstrucAudioForImgAsCorrectAnswer: {fileID: 8300000, guid: f96bddc5789e57c4eb88f1bc2d07d1be, type: 3}
   discardAdvice: {fileID: 8300000, guid: 79e9a31ae4e8ee6469941e34d3061ea0, type: 3}
   youDidGoodAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
@@ -14032,10 +14032,10 @@ MonoBehaviour:
   letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   effectPlayer: {fileID: 1631699890}
   audioPlayer: {fileID: 1951022623}
-  onFailedFlowersAndVoice: {fileID: 8300000, guid: 9f864ce7008462e4fa84e86092c71a69, type: 3}
-  onFailedCloudAndVoice: {fileID: 8300000, guid: 5f1f6bfc1ee9f0c438f534ed1e18bb93, type: 3}
-  onFailedFlowersAndImg: {fileID: 8300000, guid: f5cac576f8444b844a85dc3836364fc1, type: 3}
-  onFailedCloudAndImg: {fileID: 8300000, guid: f96bddc5789e57c4eb88f1bc2d07d1be, type: 3}
+  onFailedFlowersAndVoice: {fileID: 8300000, guid: 5fc039bdf9ebd854fa611a1ddd95e7b9, type: 3}
+  onFailedCloudAndVoice: {fileID: 8300000, guid: 2caf4144889f46143b6975b6878b4147, type: 3}
+  onFailedFlowersAndImg: {fileID: 8300000, guid: b9fdfb099382d804589e08f6af2285e0, type: 3}
+  onFailedCloudAndImg: {fileID: 8300000, guid: 9fafed0d6491e02439776d17bbeaf80f, type: 3}
   leftWonItemsPool:
     itemPrefab: {fileID: 793727092}
     hierarchyParent: {fileID: 1366486297}
