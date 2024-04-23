@@ -93,3 +93,8 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     }
 }
 
+public enum VoiceOrImage
+{
+    VoiceDominant,
+    ImageDominant
+}
