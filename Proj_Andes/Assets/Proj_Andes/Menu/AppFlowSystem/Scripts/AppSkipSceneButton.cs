@@ -35,9 +35,6 @@ public class AppSkipSceneButton : MonoBehaviour
         instance = this;
         Object.DontDestroyOnLoad(this);
 
-        if (MG_VoiceStarOrFlowerManagerTutorial.Instance != null || MG_VoiceStarOrFlowerManager.Instance != null) voiceOrImageMixedOptionSelections.gameObject.SetActive(true);
-        else voiceOrImageMixedOptionSelections.gameObject.SetActive(false);
-
         skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
         skinSelector.onValueChanged.AddListener(ForceSkinChange);
         narrativeSelector.onValueChanged.AddListener(OverrideNarrativeChanged);
@@ -61,7 +58,9 @@ public class AppSkipSceneButton : MonoBehaviour
 
     void SelectMixedVoiceOrImageOption(int option)
     {
-        var selectedOption = option == 0 ? true : false;
-        MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = selectedOption; 
+        if (option == 0) return;
+        var selectedOption = option == 1 ? true : false;
+        MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = selectedOption;
+        Debug.Log("dropdown " + MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer);
     }
 }
