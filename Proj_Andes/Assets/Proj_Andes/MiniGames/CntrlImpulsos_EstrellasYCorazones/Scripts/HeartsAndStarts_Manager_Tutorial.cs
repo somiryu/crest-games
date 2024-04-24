@@ -36,17 +36,13 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     [SerializeField] Slider roundSlider;
     GameUIController gameUi => GameUIController.Instance;
 
-    [SerializeField] AudioClip reminderAudio;
-    [SerializeField] AudioClip letsTryAudio;
     [SerializeField] AudioClip correctionIfStarAudio;
     [SerializeField] AudioClip correctionIfHeartAudio;
     [SerializeField] AudioClip letsPlayAudio;
     [SerializeField] AudioClip correctAudio;
     [SerializeField] AudioClip wrongAudio;
     [SerializeField] AudioClip succeedStepAudio;
-    [SerializeField] AudioClip finishAudio;
-    [SerializeField] AudioClip ifHeartAudio;
-    [SerializeField] AudioClip ifStarAudio;
+    [SerializeField] AudioClip ifTimeOver;
 
     [SerializeField] GameObject blockScreenPanel;
 
@@ -64,6 +60,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     bool tutoBegan;
     bool onHold;
     float timerPerChoice;
+    bool ranOutOfTime;
     private bool currShowingRight = false;
     private bool currRequiresSameDirection = false;
 
@@ -147,6 +144,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         roundSlider.value = progress;
         if (timerPerChoice >= currTutoStep.timePerChoiceTuto)
         {
+            ranOutOfTime = true;
             timerPerChoice = 0;
             OnWrongChoice();
         }
@@ -274,14 +272,16 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 		rightBtn.interactable = false;
 		leftBtn.interactable = false;
 
-		audiosource.clip = currRequiresSameDirection? correctionIfHeartAudio : correctionIfStarAudio;
+        if (!ranOutOfTime) audiosource.clip = currRequiresSameDirection ? correctionIfHeartAudio : correctionIfStarAudio;
+        else audiosource.clip = ifTimeOver;
+
 		audiosource.Play();
         yield return new WaitForSeconds(audiosource.clip.length);
 
 		rightBtn.interactable = true;
 		leftBtn.interactable = true;
         timerPerChoice = 0;
-
+        ranOutOfTime = false;
         if (currShowingRight) RIncorrectparticle.Play();
 		else LIncorrectparticle.Play();
 		gameUi.StarLost();
