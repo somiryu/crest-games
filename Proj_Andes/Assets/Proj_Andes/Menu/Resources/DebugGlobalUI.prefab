@@ -2513,7 +2513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 799.9, y: -52}
+  m_AnchoredPosition: {x: -235.36, y: -51.95}
   m_SizeDelta: {x: 311.412, y: 70.4925}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8018801320369556200
@@ -2606,9 +2606,9 @@ MonoBehaviour:
     m_Options:
     - m_Text: Voice Or Image
       m_Image: {fileID: 0}
-    - m_Text: 1
+    - m_Text: Voice
       m_Image: {fileID: 0}
-    - m_Text: 2
+    - m_Text: Image
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

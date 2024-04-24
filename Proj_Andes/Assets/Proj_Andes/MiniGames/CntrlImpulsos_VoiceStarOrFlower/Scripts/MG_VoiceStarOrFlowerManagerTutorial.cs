@@ -123,7 +123,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 useVoiceAsCorrectAnswer = false;
                 break;
             case VoiceOrImageGameType.Mixed:
-                if (MG_VoiceStarOrFlowerGameConfigs.Overwritten) useVoiceAsCorrectAnswer = UseVoiceAsCorrectAnswer;
+                if (MG_VoiceStarOrFlowerGameConfigs.Overwritten) useVoiceAsCorrectAnswer = MG_VoiceStarOrFlowerGameConfigs.OverridenUseVoiceAsTheCorrectAnswer;
                 else useVoiceAsCorrectAnswer = Random.Range(0f, 1f) > 0.5f;
                 Debug.Log("Will use voice as correct answer: " + useVoiceAsCorrectAnswer);
                 break;

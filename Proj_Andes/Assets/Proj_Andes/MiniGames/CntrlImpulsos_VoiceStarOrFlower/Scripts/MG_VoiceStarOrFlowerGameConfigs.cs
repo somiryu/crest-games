@@ -27,6 +27,7 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     public override string GetSceneID() => DataIds.voiceStarGame;
 
     public static bool UseVoiceAsTheCorrectAnswer = true;
+    public static bool OverridenUseVoiceAsTheCorrectAnswer = true;
     public static bool Overwritten = false;
     public int gameIdx;
 

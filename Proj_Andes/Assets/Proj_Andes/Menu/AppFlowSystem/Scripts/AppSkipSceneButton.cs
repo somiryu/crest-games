@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AppSkipSceneButton : MonoBehaviour
 {
-    public static bool ActiveDebugGlobalUI = true;
+    public static bool ActiveDebugGlobalUI = false;
 
     public static string instancePrefabPath = "DebugGlobalUI";
     static AppSkipSceneButton instance;
@@ -39,6 +39,9 @@ public class AppSkipSceneButton : MonoBehaviour
         skinSelector.onValueChanged.AddListener(ForceSkinChange);
         narrativeSelector.onValueChanged.AddListener(OverrideNarrativeChanged);
         voiceOrImageMixedOptionSelections.onValueChanged.AddListener(SelectMixedVoiceOrImageOption);
+
+        narrativeSelector.gameObject.SetActive(GameSequencesList.isTheNarrativeSequence);
+        voiceOrImageMixedOptionSelections.gameObject.SetActive(!GameSequencesList.isTheNarrativeSequence);
 	}
 
     void OverrideNarrativeChanged(int newValue)
@@ -63,7 +66,7 @@ public class AppSkipSceneButton : MonoBehaviour
         {
             MG_VoiceStarOrFlowerGameConfigs.Overwritten = true;
             var selectedOption = option == 1 ? true : false;
-            MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = selectedOption;
+            MG_VoiceStarOrFlowerGameConfigs.OverridenUseVoiceAsTheCorrectAnswer = selectedOption;
             Debug.Log("dropdown " + MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer);
         }
     }

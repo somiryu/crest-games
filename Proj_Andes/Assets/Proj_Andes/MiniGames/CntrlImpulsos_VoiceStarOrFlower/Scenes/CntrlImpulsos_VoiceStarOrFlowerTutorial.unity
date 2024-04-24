@@ -14032,10 +14032,10 @@ MonoBehaviour:
   letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   effectPlayer: {fileID: 1631699890}
   audioPlayer: {fileID: 1951022623}
-  onFailedFlowersAndVoice: {fileID: 8300000, guid: 5fc039bdf9ebd854fa611a1ddd95e7b9, type: 3}
-  onFailedCloudAndVoice: {fileID: 8300000, guid: 2caf4144889f46143b6975b6878b4147, type: 3}
-  onFailedFlowersAndImg: {fileID: 8300000, guid: b9fdfb099382d804589e08f6af2285e0, type: 3}
-  onFailedCloudAndImg: {fileID: 8300000, guid: 9fafed0d6491e02439776d17bbeaf80f, type: 3}
+  onFailedFlowersAndVoice: {fileID: 8300000, guid: 9fafed0d6491e02439776d17bbeaf80f, type: 3}
+  onFailedCloudAndVoice: {fileID: 8300000, guid: b9fdfb099382d804589e08f6af2285e0, type: 3}
+  onFailedFlowersAndImg: {fileID: 8300000, guid: 2caf4144889f46143b6975b6878b4147, type: 3}
+  onFailedCloudAndImg: {fileID: 8300000, guid: 5fc039bdf9ebd854fa611a1ddd95e7b9, type: 3}
   leftWonItemsPool:
     itemPrefab: {fileID: 793727092}
     hierarchyParent: {fileID: 1366486297}
