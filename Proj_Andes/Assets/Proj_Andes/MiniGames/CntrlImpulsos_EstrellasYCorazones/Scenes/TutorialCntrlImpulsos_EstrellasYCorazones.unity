@@ -23494,22 +23494,18 @@ MonoBehaviour:
   afterActionPanel: {fileID: 745345660}
   inGameUIPanel: {fileID: 875282631}
   roundSlider: {fileID: 1060734748}
-  reminderAudio: {fileID: 8300000, guid: c3b335c20bf86c646891df10e01fded9, type: 3}
-  letsTryAudio: {fileID: 8300000, guid: a1c76f0b28a66494e9fb43823df0f5b1, type: 3}
   correctionIfStarAudio: {fileID: 8300000, guid: eb23bc30359beeb4995451c4dd8e271d, type: 3}
   correctionIfHeartAudio: {fileID: 8300000, guid: c51ac3fb235aaa64a96c30e606e54a82, type: 3}
   letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   correctAudio: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
   wrongAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   succeedStepAudio: {fileID: 8300000, guid: 85f6c0f194bf26e449d1721ac389cddb, type: 3}
-  finishAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
-  ifHeartAudio: {fileID: 8300000, guid: 1820e0377c8859140b183feb70b037cb, type: 3}
-  ifStarAudio: {fileID: 8300000, guid: c0d804b69c872ba4e874acc07e8a7f76, type: 3}
+  ifTimeOver: {fileID: 8300000, guid: 0ad27770f8ba81e4390d48c79d19eb8a, type: 3}
   blockScreenPanel: {fileID: 1662963494}
   currRoundValueTxt: {fileID: 1134041796}
   myTutorialSteps:
   - tutorialSteps: 0
-    trialsAmt: 4
+    roundsNeededToWinTutorial: 4
     maxRoundsBeforeLosing: 6
     timePerChoiceTuto: 3
     intermidiateHold: 0.5
@@ -23519,14 +23515,16 @@ MonoBehaviour:
     background: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     audioInstruction: {fileID: 8300000, guid: 1820e0377c8859140b183feb70b037cb, type: 3}
     preInitRoundInstructions:
+    - {fileID: 8300000, guid: 6b7153a9347569e4fb42ad0c1054608d, type: 3}
     - {fileID: 8300000, guid: a1c76f0b28a66494e9fb43823df0f5b1, type: 3}
     postInitRoundInstructions:
     - {fileID: 8300000, guid: 1820e0377c8859140b183feb70b037cb, type: 3}
-    - {fileID: 8300000, guid: c3b335c20bf86c646891df10e01fded9, type: 3}
+    - {fileID: 8300000, guid: 90c96de71fb24a64484f5f934e52187a, type: 3}
+    - {fileID: 8300000, guid: 44d55930edb9fd0448c4febd23f4b9c6, type: 3}
     finishTutorialStepAudios: []
     tutoRoundsCount: 0
   - tutorialSteps: 1
-    trialsAmt: 3
+    roundsNeededToWinTutorial: 3
     maxRoundsBeforeLosing: 6
     timePerChoiceTuto: 2
     intermidiateHold: 0.5
@@ -23535,16 +23533,18 @@ MonoBehaviour:
     passedTuto: 
     background: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     audioInstruction: {fileID: 8300000, guid: c0d804b69c872ba4e874acc07e8a7f76, type: 3}
-    preInitRoundInstructions: []
+    preInitRoundInstructions:
+    - {fileID: 8300000, guid: 1aa06292ff307db4b9e80cd4b14f3399, type: 3}
     postInitRoundInstructions:
     - {fileID: 8300000, guid: c0d804b69c872ba4e874acc07e8a7f76, type: 3}
+    - {fileID: 8300000, guid: 90c96de71fb24a64484f5f934e52187a, type: 3}
     - {fileID: 8300000, guid: c3b335c20bf86c646891df10e01fded9, type: 3}
     finishTutorialStepAudios:
     - {fileID: 8300000, guid: 75f78c52738598042b3c3f521f8747d7, type: 3}
     - {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
     tutoRoundsCount: 0
   - tutorialSteps: 2
-    trialsAmt: 4
+    roundsNeededToWinTutorial: 4
     maxRoundsBeforeLosing: 6
     timePerChoiceTuto: 3
     intermidiateHold: 0.5
@@ -23554,6 +23554,7 @@ MonoBehaviour:
     background: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
     audioInstruction: {fileID: 0}
     preInitRoundInstructions:
+    - {fileID: 8300000, guid: 7856d1a09d9b81748b584efa8b4835d4, type: 3}
     - {fileID: 8300000, guid: c3b335c20bf86c646891df10e01fded9, type: 3}
     postInitRoundInstructions:
     - {fileID: 8300000, guid: 1820e0377c8859140b183feb70b037cb, type: 3}
@@ -23563,7 +23564,7 @@ MonoBehaviour:
     tutoRoundsCount: 0
   currTutoStep:
     tutorialSteps: 0
-    trialsAmt: 0
+    roundsNeededToWinTutorial: 0
     maxRoundsBeforeLosing: 0
     timePerChoiceTuto: 0
     intermidiateHold: 0
