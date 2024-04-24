@@ -106,7 +106,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
                 useVoiceAsCorrectAnswer = MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer;
                 break;
         }
-        Debug.Log("starting " + currGameTypeConfig.gameType);
+        Debug.Log("starting " + currGameTypeConfig.gameType + " WILL USE VOICE " + useVoiceAsCorrectAnswer);
         MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = useVoiceAsCorrectAnswer;
         currCoins = gameConfigs.initialCoins;
         AllRoundsAnalytics = new List<MG_FieldOfFlowers_RoundAnalytics>(gameConfigs.maxRounds);
@@ -367,6 +367,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     IEnumerator OnRoundEnded(float waitTime)
     {
         blockingPanel.gameObject.SetActive(true);
+        currTargetImg.gameObject.SetActive(false);
         isPaused = true;
         leftBtn.interactable = false;
         rightBtn.interactable = false;
@@ -378,6 +379,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 		rightBtn.interactable = true;
 		discardBtn.interactable = true;
 
+        if (currGameTypeConfig.gameType != VoiceOrImageGameType.Voice) currTargetImg.gameObject.SetActive(true);
         blockingPanel.gameObject.SetActive(false);
 
         currCoinsValueTxt.text = currCoins.ToString();

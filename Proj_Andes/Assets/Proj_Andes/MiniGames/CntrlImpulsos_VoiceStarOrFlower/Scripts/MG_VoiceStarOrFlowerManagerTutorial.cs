@@ -123,7 +123,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 useVoiceAsCorrectAnswer = false;
                 break;
             case VoiceOrImageGameType.Mixed:
-                useVoiceAsCorrectAnswer = Random.Range(0f, 1f) > 0.5f;
+                if (MG_VoiceStarOrFlowerGameConfigs.Overwritten) useVoiceAsCorrectAnswer = UseVoiceAsCorrectAnswer;
+                else useVoiceAsCorrectAnswer = Random.Range(0f, 1f) > 0.5f;
                 Debug.Log("Will use voice as correct answer: " + useVoiceAsCorrectAnswer);
                 break;
         }
@@ -460,14 +461,16 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     IEnumerator OnRoundEnded(float waitTime)
     {
         isPaused = true;
-
-		discardBtn.interactable = false;
+        currTargetImg.gameObject.SetActive(false);
+        discardBtn.interactable = false;
         leftBtn.interactable = false;
         rightBtn.interactable = false;
 
         yield return new WaitForSeconds(waitTime);
 
-		discardBtn.interactable = true;
+        if (currTutoConfig.gameType != VoiceOrImageGameType.Voice) currTargetImg.gameObject.SetActive(true);
+
+        discardBtn.interactable = true;
 		leftBtn.interactable = true;
 		rightBtn.interactable = true;
 

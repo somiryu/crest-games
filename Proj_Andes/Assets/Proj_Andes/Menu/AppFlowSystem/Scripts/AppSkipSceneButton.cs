@@ -58,9 +58,13 @@ public class AppSkipSceneButton : MonoBehaviour
 
     void SelectMixedVoiceOrImageOption(int option)
     {
-        if (option == 0) return;
-        var selectedOption = option == 1 ? true : false;
-        MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = selectedOption;
-        Debug.Log("dropdown " + MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer);
+        if (option == 0) MG_VoiceStarOrFlowerGameConfigs.Overwritten = false;
+        else
+        {
+            MG_VoiceStarOrFlowerGameConfigs.Overwritten = true;
+            var selectedOption = option == 1 ? true : false;
+            MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = selectedOption;
+            Debug.Log("dropdown " + MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer);
+        }
     }
 }
