@@ -18,90 +18,6 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Te sientes muy mal y no tienes qu\xE9 comer. Entonces, le pides a Cami,
-      que te regale un poquito.\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses: []
-    audio: {fileID: 8300000, guid: e0579848f91f8be4989b9249e2d48871, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 3af8dff9729a1364f903eb4eaeef096a, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 1
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Ay, no. Es que es mi comida favorita y no quiero compartir\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses: []
-    audio: {fileID: 8300000, guid: 919ad886eab734a469a5c6c7ecf903dd, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 23261639d222b4042bc8f15d562287ea, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0973eaa41d32c764da0e4e61220b7615, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses:
-    - response: Le digo que bueno, que en realidad no tengo tanta hambre
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 8300000, guid: f6fa012cc1c3dbf429203620496aa420, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
-    - response: " Le digo que me comparta algo de su comida hoy y ma\xF1ana yo comparto
-        el comparto las m\xEDas."
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 8300000, guid: 71c7b9230626b9b4dad8614794b1f00a, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
-    - response: "Le digo a Cami que si no me da algo, ya no voy a ser su amigo.\r"
-      responseAlternative: "Le digo a Cami que si no me da algo, ya no voy a ser
-        su amiga.\r"
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 8300000, guid: 8ef4d010fca807241b8944a8acc5cdd8, type: 3}
-      responseAudioAlternative: {fileID: 8300000, guid: f6e8c28344f5e864290245ccb0f97fc5, type: 3}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
     text: " Cami se distrae y sale corriendo a jugar con otros amigos.\r"
     textAlternative: " Cami se distrae y sale corriendo a jugar con otras amigas.\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
@@ -152,7 +68,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\r"
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: deeda736a911e9d4eb9b2f757e4acdea, type: 3}
     analyticChoiceID: 
@@ -194,7 +110,7 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 2
         EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -306,7 +222,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\r\r\r\r"
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?\r\r\r\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: cafea8acbb4c2c74aabc02cbfffae836, type: 3}
     analyticChoiceID: 
@@ -345,7 +261,7 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 3
         EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
