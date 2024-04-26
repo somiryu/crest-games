@@ -1010,7 +1010,7 @@ MonoBehaviour:
   canSkipAudio: {fileID: 5825257353223953195}
   skipSceneBtn: {fileID: 5020454758075906455}
   activeSkipSceneBtn: 0
-  continueBtn: {fileID: 0}
+  continueBtn: {fileID: 7625016823755777863}
   forceDialogeAppear: 0
   SaveNavSequence: 1
   state: 0
@@ -2376,3 +2376,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7387497103421275294, guid: 521f9868b19dcf44c82a17a2777e9fa6, type: 3}
   m_PrefabInstance: {fileID: 3926112339503466171}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7625016823755777863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6894406546717336060, guid: 521f9868b19dcf44c82a17a2777e9fa6, type: 3}
+  m_PrefabInstance: {fileID: 3926112339503466171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
