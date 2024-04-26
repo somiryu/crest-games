@@ -61,7 +61,7 @@ MonoBehaviour:
     responses:
     - response: Me levanto y empujo a Alex
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 700995c9f0eae01478d9de0deca16d3d, type: 3}
       responseAudio: {fileID: 8300000, guid: ca42b013d4bc3b14681266938aeb277b, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Le digo a Alex que me hizo da\xF1o, y que no lo vuelva a hacer"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: ee6b5c4868c891d4db5d993ea95df1b1, type: 3}
       responseAudio: {fileID: 8300000, guid: 3ff879302843288418595d3def946ad1, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -83,7 +83,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "No digo nada y me voy para el sal\xF3n"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 646ce89e98d40074799d65bc79a7be6e, type: 3}
       responseAudio: {fileID: 8300000, guid: f45cea7419ae88a43a6ac4a524a84964, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}

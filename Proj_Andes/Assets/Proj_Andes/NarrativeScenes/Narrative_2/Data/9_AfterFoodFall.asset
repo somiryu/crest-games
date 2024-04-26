@@ -78,7 +78,7 @@ MonoBehaviour:
         qued\xE9 muy triste"
       responseAlternative: "Le pregunto a Cami que por qu\xE9 me dej\xF3 sola, y
         le digo me qued\xE9 muy triste"
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 61b42e19a901fbb4d850d32f6d94ec2f, type: 3}
       responseAudio: {fileID: 8300000, guid: 00912b4ce3db42f45a796e16d962084a, type: 3}
       responseAudioAlternative: {fileID: 8300000, guid: 87778addf794fcd4eb419a1784919099, type: 3}
       dataAfterResponse: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: Le digo que es un malo y que ya no quiero ser su amigo.
       responseAlternative: Le digo que es una mala y que ya no quiero ser su amiga.
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: fe81452cb52ebd54e915f25b8ea9e239, type: 3}
       responseAudio: {fileID: 8300000, guid: 1335ebb1c54c74e489e1b8c01c61f9d0, type: 3}
       responseAudioAlternative: {fileID: 8300000, guid: 6a134f1d29d59ff4e91d4c2a4422cb08, type: 3}
       dataAfterResponse: {fileID: 0}
@@ -101,7 +101,7 @@ MonoBehaviour:
     - response: "Hago como si no hubiera pasado nada, para que sigamos siendo amigos.\r"
       responseAlternative: "Hago como si no hubiera pasado nada, para que sigamos
         siendo amigas.\r"
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 847e9f62a30e64c4dbf3b5df1055c8a8, type: 3}
       responseAudio: {fileID: 8300000, guid: e8219a5ca65f7944fa26f698f40576cf, type: 3}
       responseAudioAlternative: {fileID: 8300000, guid: bed1da97be758054bb8ec743ee941349, type: 3}
       dataAfterResponse: {fileID: 0}
@@ -164,7 +164,7 @@ MonoBehaviour:
     responses:
     - response: "Una canci\xF3n para bailar entre todos"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 7a81df3ba59ee23429dc43cd05af7b3e, type: 3}
       responseAudio: {fileID: 8300000, guid: 1936d776c0775b844a7f10841c1796c8, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Una canci\xF3n para cantar entre todos"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 0880512c4e986564494df79c3976027c, type: 3}
       responseAudio: {fileID: 8300000, guid: 28af0ca6511f60245a61ecd416d4d7de, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -186,7 +186,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Una canci\xF3n para escuchar entre todos "
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 012764ea3672baf419f23ab73fa09be8, type: 3}
       responseAudio: {fileID: 8300000, guid: 69754fd06637202429f4dedaeaa8f65c, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -230,7 +230,7 @@ MonoBehaviour:
     responses:
     - response: "Grito m\xE1s alto para que los dem\xE1s elijan mi canci\xF3n."
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 8a5f38529597d2540b17a1e9044abbbc, type: 3}
       responseAudio: {fileID: 8300000, guid: 6d6abf1077e578848826fcf122667e5c, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -241,7 +241,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Prefiero quedarme callado y que elijan los dem\xE1s."
       responseAlternative: "Prefiero quedarme callada y que elijan los dem\xE1s."
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: d5f41a71e3d091f4cb04b1385e7b7b13, type: 3}
       responseAudio: {fileID: 8300000, guid: cb2453b39ae2cb844828a56fcf0901b1, type: 3}
       responseAudioAlternative: {fileID: 8300000, guid: 9c1c7287ff026cb408af77f079d8c313, type: 3}
       dataAfterResponse: {fileID: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Propongo que hagamos una votaci\xF3n para que escoja la mayor\xEDa.\r"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: e712c5a2376a2504d8d4c898086b7935, type: 3}
       responseAudio: {fileID: 8300000, guid: 58eab9e11f0539844ad4580fb57304fa, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}

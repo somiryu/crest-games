@@ -108,13 +108,13 @@ MonoBehaviour:
     changeToSequenceResponseIdxToGrayOut: -1
     text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?\r"
     textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 1921e9301d6ad4647be547d7180d454a, type: 3}
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 6c211695709a44e40bec7d403ab01841, type: 3}
     analyticChoiceID: 
     analyticTimeID: 
     responses:
-    - response: Le digo que eso me molesta mucho, que no lo haga
+    - response: 
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: b0376ba79c1944643aa38b566c248b1e, type: 3}
       responseAudio: {fileID: 8300000, guid: 6f4aa8e4578721a4dad0da047b203157, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Me levanto y tambi\xE9n le rayo el cuaderno"
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
+      responseImage: {fileID: 21300000, guid: 923c36817424ef141962f2d24b167093, type: 3}
       responseAudio: {fileID: 8300000, guid: 820c881f6f8f6004f9f7ee5ca0fe48ed, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -134,9 +134,9 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 1
         EmoSubCategory: 0
-    - response: Cierro mi cuarderno y hago como si no me hubiera dado cuenta
+    - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      responseImage: {fileID: 21300000, guid: 882dcbc7e52d66b4a81450fe714a2371, type: 3}
       responseAudio: {fileID: 8300000, guid: 779fcb485b0b2674ebd22eca5315d51a, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -195,9 +195,9 @@ MonoBehaviour:
     analyticChoiceID: 
     analyticTimeID: 
     responses:
-    - response: Le quito los colores a Alex.
+    - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: ebbbfa8258290ec489dfe2a150e3ef9d, type: 3}
+      responseImage: {fileID: 21300000, guid: 6e5ceaaf944bc1a418830314741637af, type: 3}
       responseAudio: {fileID: 8300000, guid: 9a5523db557df534a88e9eddd055d96d, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -206,9 +206,9 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 1
         EmoSubCategory: 0
-    - response: "Dejo as\xED, y utilizo otros colores para mi dibujo."
+    - response: 
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: b97f1c41c7fbfe948a8bcfa3b50fb939, type: 3}
+      responseImage: {fileID: 21300000, guid: a216895e530db0a4f81f19a7bd2e31e0, type: 3}
       responseAudio: {fileID: 8300000, guid: 98e8677afa6ce314d83437467d3db692, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -219,7 +219,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: Le digo que podemos tomar turnos para usar los colores
       responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 1b5b6421ccf37c644ab6c70aef34948a, type: 3}
+      responseImage: {fileID: 21300000, guid: b266c2eb756ef8b44a39f0eef553b1d9, type: 3}
       responseAudio: {fileID: 8300000, guid: ed7d97ff593d7cd449ac6e149a801434, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}

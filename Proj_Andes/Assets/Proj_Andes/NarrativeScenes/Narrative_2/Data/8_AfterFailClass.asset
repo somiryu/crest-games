@@ -75,7 +75,7 @@ MonoBehaviour:
     responses:
     - response: Le empujo para sacarle de la fila
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 01f55b6a202a8a04d8deb03fd6a29ae6, type: 3}
       responseAudio: {fileID: 8300000, guid: f84babf3f045a5e4f95cd3e68d8fe908, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Dejo as\xED. Igual todos hacen lo mismo"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 47a5b63ec1ac2814a83cabe727db7329, type: 3}
       responseAudio: {fileID: 8300000, guid: 6ef0bb01e6418144a9a9b5dbdbd3ef1e, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: Le digo que no es justo que se cole. Todos tenemos que hacer la fila
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: b094601e6d7b7a74f9393b621c37eb84, type: 3}
       responseAudio: {fileID: 8300000, guid: 847637f5ef2f2ed4da6623d235879504, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}

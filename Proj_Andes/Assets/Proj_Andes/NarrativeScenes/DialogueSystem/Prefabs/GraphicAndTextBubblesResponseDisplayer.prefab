@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 5329665876752624690}
   - component: {fileID: 1793937690743282274}
   m_Layer: 5
-  m_Name: TextBubblesResponseDisplayer 1
+  m_Name: GraphicAndTextBubblesResponseDisplayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

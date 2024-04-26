@@ -26,8 +26,9 @@ MonoBehaviour:
     responses:
     - response: Hago como si no me importara y no digo nada
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 7c30aa95f06558040a8572c95f722ce0, type: 3}
       responseAudio: {fileID: 8300000, guid: 36296b640ffedf04aa2ff2ca0219e464, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -36,8 +37,9 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Le dices a tus compa\xF1eros que no te parece chistoso lo que hicieron"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 982129c43178bfd4589d8695d0c33031, type: 3}
       responseAudio: {fileID: 8300000, guid: aded67fb68c59f7489ad24c511f25aae, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -46,8 +48,9 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Empujo el pupitre y les grito a mis compa\xF1eros que son unos bobos\u201D.\r"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 0a7d14ea0aeeb534888966a9b34a1cb4, type: 3}
       responseAudio: {fileID: 8300000, guid: de13f70ef7ee1be4f9a3ffc305d1e130, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -142,6 +145,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 0ae72c8a4132bbe4daf410fee5f20508, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: c5c74847b1811b94f85c1312fb0ba5d4, type: 2}
       analyticInfo:
         mainCategory: 0
@@ -152,6 +156,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 4f667cadd1a7a4048a4d79ff06666114, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 8b1726e1cb72d1847a6e68027b572183, type: 2}
       analyticInfo:
         mainCategory: 0
@@ -162,6 +167,7 @@ MonoBehaviour:
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 43f522dac1955f2419eabe9e780e07cb, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 0a9344e9cd523d4428992b68b261ae51, type: 2}
       analyticInfo:
         mainCategory: 0
