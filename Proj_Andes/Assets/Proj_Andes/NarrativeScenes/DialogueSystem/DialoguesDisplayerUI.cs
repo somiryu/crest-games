@@ -34,7 +34,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] Toggle canSkipAudio;
     [SerializeField] Button skipSceneBtn;
     [SerializeField] bool activeSkipSceneBtn;
-
+    [SerializeField] Button continueBtn;
+    bool hasResponse;
 
     [SerializeField] bool forceDialogeAppear;
 
@@ -107,8 +108,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
         instance = this;
         canSkipAudio.isOn = false;
 
-
-        dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
+        continueBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
+        hasResponse = true;
+        //dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
 		choicesTree.Clear();
         skipSceneBtn.gameObject.SetActive(activeSkipSceneBtn && !AppSkipSceneButton.ActiveDebugGlobalUI);
@@ -348,8 +350,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             HideDialogues(false);
             return;
         }
-
-        if (isAppearingTxt) AppearText();
+        if (isAppearingTxt) AppearText(); 
     }
 
     private IEnumerator currAnimSequence;
@@ -375,6 +376,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             audioPlayer.clip = audio;
             audioPlayer.Play();
             audioIsDone = false;
+            continueBtn.gameObject.SetActive(false);
         }
 
         //Start showing text
@@ -410,6 +412,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         preselectedResponse = null;
         if (dialogueData.responses.Length > 0)
         {
+            hasResponse = true;
 			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
             if (currResponsesDisplayer != null)
             {
@@ -423,10 +426,13 @@ public class DialoguesDisplayerUI : MonoBehaviour
 				}
             }
 		}
+        else hasResponse = false;
 
         var hasAnalytic = !string.IsNullOrEmpty(dialogueData.analyticChoiceID);
 
-		currResponseTime = 0;
+        if (audioIsDone && !hasResponse) continueBtn.gameObject.SetActive(true);
+
+        currResponseTime = 0;
 
 		while (!hasPendingLineChange)
         {
@@ -465,15 +471,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
             currResponseTime = 0;
         }
 
-
         if (pendingSequenceToShow != null)
         {
             ShowDialogueSequence(pendingSequenceToShow);
         }
         else NextDialogue();
-
-	}
-
+    }
     public void OnClickResponse(DialogueResponse responseClicked)
     {
         if (!audioIsDone) return;
@@ -496,7 +499,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public void OnClickResponseConfirmation()
     {
         if (!preselectedResponseAudioIsDone) return;
-
+        Debug.Log("confimg");
         if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
 
         lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
