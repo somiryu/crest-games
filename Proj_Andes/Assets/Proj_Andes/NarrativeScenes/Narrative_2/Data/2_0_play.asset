@@ -147,8 +147,8 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 1
         EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: d66875819476e3d479486e8f09446ba6, type: 3}
-    audioAlternative: {fileID: 8300000, guid: ea438607dd2a0f84fb3cf2545c1bb39f, type: 3}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
