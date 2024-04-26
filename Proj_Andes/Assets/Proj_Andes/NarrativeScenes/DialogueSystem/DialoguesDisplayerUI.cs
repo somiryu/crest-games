@@ -8,6 +8,7 @@ using System;
 using UnityEngine.Playables;
 using Unity.VisualScripting;
 using Firebase.Firestore;
+using UnityEngine.Serialization;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
@@ -25,8 +26,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] GameObject nameTxtContainer;
     [SerializeField] TMP_Text dialogueTxt;
     [SerializeField] GameObject dialogueTxtContainer;
-    [SerializeField] Image skipDialogueTutImg;    
-    [SerializeField] Button dialogueBoxBtn;
+    [SerializeField] Image skipDialogueTutImg;
+    [FormerlySerializedAs("dialogueBoxBtn")]
+    [SerializeField] Button fullScreenInvisibleBtn;
     [SerializeField] Button repeatBtn;
     [SerializeField] PlayableDirector timeLinePlayer;
     [SerializeField] Transform responseDisplayersContainer;
@@ -34,7 +36,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [SerializeField] Toggle canSkipAudio;
     [SerializeField] Button skipSceneBtn;
     [SerializeField] bool activeSkipSceneBtn;
-
+    [SerializeField] Button continueBtn;
+    bool hasResponse;
 
     [SerializeField] bool forceDialogeAppear;
 
@@ -107,8 +110,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
         instance = this;
         canSkipAudio.isOn = false;
 
-
-        dialogueBoxBtn.onClick.AddListener(OnDialogueBoxBtnPressed);
+        continueBtn.onClick.AddListener(OnClickToContinueBtn);
+        hasResponse = true;
+        fullScreenInvisibleBtn.onClick.AddListener(OnFullScreenInvisibleBtnClicked);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
 		choicesTree.Clear();
         skipSceneBtn.gameObject.SetActive(activeSkipSceneBtn && !AppSkipSceneButton.ActiveDebugGlobalUI);
@@ -137,23 +141,24 @@ public class DialoguesDisplayerUI : MonoBehaviour
         return true;
 	}
 
-    private void OnDialogueBoxBtnPressed()
+    private void OnFullScreenInvisibleBtnClicked()
 	{
         
 		if (isAppearingTxt)
 		{
             forceEndAppearingTxt = true;
 		}
-		else
+	}
+
+    private void OnClickToContinueBtn()
+    {
+		if (AutoContinueActive() && audioIsDone)
 		{
-            if (AutoContinueActive() && audioIsDone)
-            {
-                //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
-                hasPendingLineChange = true;
-                if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepSkipButton))
-                {
-					TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.stepSkipButton);
-				}
+			//We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
+			hasPendingLineChange = true;
+			if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepSkipButton))
+			{
+				TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.stepSkipButton);
 			}
 		}
 	}
@@ -336,7 +341,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public void StartTextAppear()
 	{
         isAppearingTxt = true;
-        dialogueBoxBtn.gameObject.SetActive(true);
+        fullScreenInvisibleBtn.gameObject.SetActive(true);
         forceEndAppearingTxt = false;
     }
 
@@ -348,8 +353,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             HideDialogues(false);
             return;
         }
-
-        if (isAppearingTxt) AppearText();
+        if (isAppearingTxt) AppearText(); 
     }
 
     private IEnumerator currAnimSequence;
@@ -370,7 +374,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
         //Start playing audio
         var audio = SelectAudioByGender(dialogueData);
 
-        if (audio != null)
+		continueBtn.gameObject.SetActive(false);
+
+
+		if (audio != null)
         {
             audioPlayer.clip = audio;
             audioPlayer.Play();
@@ -402,7 +409,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
 
 
-        repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || audio != null);
+		repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || audio != null);
 
 
 		//Get new response handler
@@ -410,6 +417,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         preselectedResponse = null;
         if (dialogueData.responses.Length > 0)
         {
+            hasResponse = true;
 			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
             if (currResponsesDisplayer != null)
             {
@@ -423,8 +431,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
 				}
             }
 		}
+        else hasResponse = false;
 
         var hasAnalytic = !string.IsNullOrEmpty(dialogueData.analyticChoiceID);
+
+        if (audioIsDone && !hasResponse)
+        {
+            continueBtn.gameObject.SetActive(true);
+			skipDialogueTutImg.gameObject.SetActive(true);
+		}
 
 		currResponseTime = 0;
 
@@ -465,15 +480,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
             currResponseTime = 0;
         }
 
-
         if (pendingSequenceToShow != null)
         {
             ShowDialogueSequence(pendingSequenceToShow);
         }
         else NextDialogue();
-
-	}
-
+    }
     public void OnClickResponse(DialogueResponse responseClicked)
     {
         if (!audioIsDone) return;
@@ -496,7 +508,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public void OnClickResponseConfirmation()
     {
         if (!preselectedResponseAudioIsDone) return;
-
+        Debug.Log("confimg");
         if (preselectedResponse.dataAfterResponse != null) pendingSequenceToShow = preselectedResponse.dataAfterResponse;
 
         lastPickedResponseIdx = currResponsesDisplayer.currResponses.FindIndex(x => x.ResponseData == preselectedResponse);
@@ -574,8 +586,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             isAppearingTxt = false;
             dialogueTxt.SetText(SelectTextByGender(currDialogue));
             var turnOnAutoSkip = AutoContinueActive();
-            skipDialogueTutImg.gameObject.SetActive(turnOnAutoSkip);
-            dialogueBoxBtn.gameObject.SetActive(turnOnAutoSkip);       
+            fullScreenInvisibleBtn.gameObject.SetActive(turnOnAutoSkip);       
         }
     }
 
