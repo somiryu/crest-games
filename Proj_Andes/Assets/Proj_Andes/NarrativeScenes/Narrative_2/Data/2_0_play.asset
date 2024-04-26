@@ -97,6 +97,22 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0d1be4f6df44431449665ad0c519683f, type: 3}
     analyticChoiceID: 
     analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: d66875819476e3d479486e8f09446ba6, type: 3}
+    audioAlternative: {fileID: 8300000, guid: ea438607dd2a0f84fb3cf2545c1bb39f, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0d1be4f6df44431449665ad0c519683f, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Escojan ustedes. yo juego lo que digan
       responseAlternative: 
