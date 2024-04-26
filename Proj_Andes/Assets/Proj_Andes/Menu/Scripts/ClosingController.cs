@@ -9,6 +9,7 @@ public class ClosingController : MonoBehaviour
     [SerializeField] Transform logoPanel;
     [SerializeField] AudioClip finalAudio;
     [SerializeField] Button continueBtn;
+    [SerializeField] GameObject rocketObj;
 
     AudioSource finalAudioSource;
 
@@ -20,6 +21,7 @@ public class ClosingController : MonoBehaviour
         finalAudioSource.Play();
         continueBtn.onClick.AddListener(closingItem.OnSequenceOver);
         TimeManager.Instance.gameState = SessionStateLeft.Finished;
+        rocketObj.SetActive(GameSequencesList.isTheNarrativeSequence == false);
 
     }
 }

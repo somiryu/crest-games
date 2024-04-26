@@ -54288,10 +54288,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closingItem: {fileID: 11400000, guid: bfbbbcae4c8260a4d9521790035fd9d9, type: 2}
-  waitFor: 3
   logoPanel: {fileID: 677228747}
   finalAudio: {fileID: 8300000, guid: 098f83c394bf71b4998561eea295c745, type: 3}
   continueBtn: {fileID: 1351283593}
+  rocketObj: {fileID: 1395965179}
 --- !u!82 &1155087141
 AudioSource:
   m_ObjectHideFlags: 0
@@ -69384,7 +69384,7 @@ PrefabInstance:
       objectReference: {fileID: 2120585510}
     - target: {fileID: 8545674054673659368, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
       propertyPath: m_Name
-      value: SwitchableObject (1)
+      value: MainCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 8545674054673659368, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
       propertyPath: m_IsActive
@@ -69410,6 +69410,11 @@ PrefabInstance:
 --- !u!4 &1395965178 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1410902767965579119, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
+  m_PrefabInstance: {fileID: 1395965177}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1395965179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8545674054673659368, guid: ccee9fc6d86d46d48b4d9d67742efe2b, type: 3}
   m_PrefabInstance: {fileID: 1395965177}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1484346023
