@@ -258,15 +258,17 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
         currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
 
-        if (rightCount >= 2) currSoundIsLeft = true;
-        else if (leftCount >= 2) currSoundIsLeft = false;
 
         switch (currTutoConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
                 currTargetImg.gameObject.SetActive(false);
 
-                if (currSoundIsLeft) leftCount++;
+
+				if (rightCount >= 2) currSoundIsLeft = true;
+				else if (leftCount >= 2) currSoundIsLeft = false;
+
+				if (currSoundIsLeft) leftCount++;
                 else rightCount++;
 
                 currImgIsLeft = currSoundIsLeft;
@@ -274,7 +276,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
             case VoiceOrImageGameType.Image:
                 currTargetImg.gameObject.SetActive(true);
 
-                if (currImgIsLeft) leftCount++;
+				if (rightCount >= 2) currImgIsLeft = true;
+				else if (leftCount >= 2) currImgIsLeft = false;
+
+				if (currImgIsLeft) leftCount++;
                 else rightCount++;
 
                 currSoundIsLeft = currImgIsLeft;
