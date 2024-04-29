@@ -46,11 +46,12 @@ public class FrustrationThermometerController : MonoBehaviour
         {
             var currDescription = frustrationLevels[i];
             GetFrustationLevel(currDescription);
+            continueBtn.gameObject.SetActive(false);
             var currAudio = UserDataManager.CurrUser.gender == UserGender.Femenino ? currDescription.FbuttonSound : currDescription.MbuttonSound;
             audioSource.clip = currAudio; 
             audioSource.Play();
             yield return new WaitForSeconds(currAudio.length);
-            ButtonUnpressed(frustlevelButtons[i]);
+            buttonsSelectedImages[i].SetActive(false);
         }
         blockingPanel.gameObject.SetActive(false);
     }
