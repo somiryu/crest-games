@@ -608,12 +608,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			UserDataManager.CurrUser.myCollectionMonsters.Clear();
 			UserDataManager.CurrUser.Coins = 10;
-			GameSequencesList.Instance.GoToNextSequence(loadScene: !GameSequencesList.isTheNarrativeSequence);
-			if (GameSequencesList.isTheNarrativeSequence) StartCoroutine(LoadingSceneAsync(currNextNarr));
+            GameSequencesList.Instance.GoToNextSequence(loadScene: !GameSequencesList.isTheNarrativeSequence);
 		}
-	}
+        if (GameSequencesList.isTheNarrativeSequence) StartCoroutine(LoadingSceneAsync(currNextNarr));
+    }
 
-	IEnumerator LoadingSceneAsync(SceneReference scene)
+    IEnumerator LoadingSceneAsync(SceneReference scene)
 	{
 		loadingPanel.gameObject.SetActive(true); 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
