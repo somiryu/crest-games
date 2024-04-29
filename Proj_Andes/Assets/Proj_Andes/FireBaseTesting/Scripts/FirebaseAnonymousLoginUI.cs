@@ -170,6 +170,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			uReadyPanel.gameObject.SetActive(false);
 			afterLogInPanel.gameObject.SetActive(true);
+			continueSelectedFlag = false;
 
 		});
 
@@ -550,7 +551,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         var soundPref = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", 1);
 		Debug.Log("sound " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive"));
 		AssignSoundActive(soundPref);
-        afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1);
+        afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1 && !GameSequencesList.isTheNarrativeSequence);
     }
 	void OnSelectedNarrative()
 	{
