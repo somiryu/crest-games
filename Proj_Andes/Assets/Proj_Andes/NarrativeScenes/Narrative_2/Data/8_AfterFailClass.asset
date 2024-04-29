@@ -139,7 +139,7 @@ MonoBehaviour:
     analyticChoiceID: 
     analyticTimeID: 
     responses: []
-    audio: {fileID: 8300000, guid: af4e42872e8d7ea46a8df599950fd649, type: 3}
+    audio: {fileID: 8300000, guid: 142b8c8654c36154e811e6d964363373, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 9ed04b41e3255bb4d8fb0e9b4df84094, type: 2}
