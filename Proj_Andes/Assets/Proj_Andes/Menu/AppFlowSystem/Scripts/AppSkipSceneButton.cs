@@ -42,6 +42,7 @@ public class AppSkipSceneButton : MonoBehaviour
 
         narrativeSelector.gameObject.SetActive(GameSequencesList.isTheNarrativeSequence);
         voiceOrImageMixedOptionSelections.gameObject.SetActive(!GameSequencesList.isTheNarrativeSequence);
+        skinSelector.gameObject.SetActive(!GameSequencesList.isTheNarrativeSequence);
 	}
 
     void OverrideNarrativeChanged(int newValue)
