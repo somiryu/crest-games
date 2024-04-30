@@ -161,6 +161,7 @@ MonoBehaviour:
     hierarchyParent: {fileID: 5120906064912766403}
     growBy: 4
   confirmationButton: {fileID: 7329329421512132839}
+  audibleResponses: 0
   currResponses: []
   currHighlightedResponse: {fileID: 0}
   highlightBtnsSprites: []

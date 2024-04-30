@@ -11,7 +11,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 
 	[SerializeField] Button confirmationButton;
 
-
+	public bool audibleResponses = true;
 	public List<ResponseBtn> currResponses;
 	public IDialoguesResponseDisplayerUser[] users;
 
@@ -33,7 +33,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 		confirmationButton.gameObject.SetActive(false);
 	}
 
-	public void ShowResponses(DialogueResponse[] responseDatas)
+    public void ShowResponses(DialogueResponse[] responseDatas)
 	{
 		for (int i = 0; i < users.Length; i++) users[i].OnShowResponses(responseDatas);
 
@@ -99,11 +99,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 				}
 				if (highlightSprite) curr.Btn.image.sprite = highlightSprite;
 			}
-			else
-			{
-				curr.transform.localScale = Vector3.one;
-				if (disableBtnContainer) curr.Btn.image.sprite = disableBtnContainer;
-			}
+			else UnClickResponse(curr);
 		}
 
 		if (UseConfirmationBtn) mainUi.OnClickResponse(response);
@@ -120,7 +116,11 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 		}
 	}
 
-
+	public void UnClickResponse(ResponseBtn response)
+	{
+        response.transform.localScale = Vector3.one;
+        if (disableBtnContainer) response.Btn.image.sprite = disableBtnContainer;
+    }
 	public void Hide()
 	{
 		if (currHighlightedResponse != null)

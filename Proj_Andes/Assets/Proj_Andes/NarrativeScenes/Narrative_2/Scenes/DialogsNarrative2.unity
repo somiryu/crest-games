@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: timeLinePlayer
       value: 
       objectReference: {fileID: 2138338496}
+    - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
+      propertyPath: narrativeSceneItem
+      value: 
+      objectReference: {fileID: 11400000, guid: d2fffb3871e185345b3d4b37554b2b43, type: 2}
     - target: {fileID: 3063343628931919348, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Name
       value: DialoguesDisplayer

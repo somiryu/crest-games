@@ -9,14 +9,15 @@ using UnityEngine.Playables;
 using Unity.VisualScripting;
 using Firebase.Firestore;
 using UnityEngine.Serialization;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
     private static DialoguesDisplayerUI instance;
     public static DialoguesDisplayerUI Instance => instance;
-    [SerializeField] SimpleGameSequenceItem narrativeSceneItem;
+    public NarrativeSequenceItem narrativeSceneItem;
 
-    [SerializeField] DialogueSequenceData dialoguesToShow;
+    public DialogueSequenceData dialoguesToShow;
     public DialogueSequenceData CurrDialoguesBeingShown => dialoguesToShow;
     [Space(20)]
     [SerializeField] GameObject mainDialoguesGraphics;
@@ -53,6 +54,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 
     public bool SaveNavSequence = true;
+    public bool doneResponsePreview;
     
 
     public bool IsShowing => isShowing;
@@ -122,8 +124,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         narrativeSceneItem.ResetCurrentAnalytics();
 	}
-
-	public bool OnWantsToChangeDialogFromTrigger()
+    public bool OnWantsToChangeDialogFromTrigger()
     {
         if (!audioIsDone) return false;
         if (state != dialogLineState.Idle) return false;
@@ -344,7 +345,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
         fullScreenInvisibleBtn.gameObject.SetActive(true);
         forceEndAppearingTxt = false;
     }
-
     public void Update()
     {
         if (!isShowing) return;
@@ -418,20 +418,46 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (dialogueData.responses.Length > 0)
         {
             hasResponse = true;
-			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
+            currResponsesDisplayer = GetResponseDisplayer(dialogueData);
+
             if (currResponsesDisplayer != null)
             {
-               
-
-                currResponsesDisplayer.ShowResponses(dialogueData.responses);               
+                currResponsesDisplayer.ShowResponses(dialogueData.responses);
 
                 for (int i = 0; i < grayOutResponseIdxes.Count; i++)
                 {
                     currResponsesDisplayer.GrayOutResponse(grayOutResponseIdxes[i]);
-				}
+                }
+
+                if (narrativeSceneItem.shouldPreviewAnswers && currResponsesDisplayer.audibleResponses)
+                {
+
+                    doneResponsePreview = false;
+                    for (int i = 0; i < currResponsesDisplayer.currResponses.Count; i++) currResponsesDisplayer.currResponses[i].Btn.interactable = false;
+                    for (int i = 0; i < dialogueData.responses.Length; i++)
+                    {
+                        var currResponse = dialogueData.responses[i];
+                        Debug.Log("playing " + i);
+                        currResponsesDisplayer.HighlightResponse(currResponse);
+                        if (currResponse.responseAudio != null) yield return new WaitForSeconds(audioPlayer.clip.length);
+                        else yield return null;
+                    }
+                    for (int i = 0; i < currResponsesDisplayer.currResponses.Count; i++)
+                    {
+                        currResponsesDisplayer.UnClickResponse(currResponsesDisplayer.currResponses[i]);
+                        currResponsesDisplayer.currResponses[i].Btn.interactable = true;
+                    }
+                }
+                doneResponsePreview = true;
+                preselectedResponseAudioIsDone = false;
+                currResponsesDisplayer.ActiveConfirmationButton(false);
             }
-		}
-        else hasResponse = false;
+        }
+        else
+        {
+            doneResponsePreview = true;
+            hasResponse = false;
+        }
 
         var hasAnalytic = !string.IsNullOrEmpty(dialogueData.analyticChoiceID);
 
@@ -451,7 +477,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             {
                 preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
                 if (canSkipAudio.isOn) preselectedResponseAudioIsDone = true;
-				currResponsesDisplayer.ActiveConfirmationButton(preselectedResponseAudioIsDone);
+				//currResponsesDisplayer.ActiveConfirmationButton(preselectedResponseAudioIsDone);
             }
             yield return null;
         }
@@ -490,8 +516,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     {
         if (!audioIsDone) return;
         
-        currResponsesDisplayer.ActiveConfirmationButton(true);
-
+        currResponsesDisplayer.ActiveConfirmationButton(doneResponsePreview);
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
         var currResponseAudio = responseClicked.responseAudio;
