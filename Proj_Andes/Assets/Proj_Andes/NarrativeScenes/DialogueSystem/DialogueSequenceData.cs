@@ -36,8 +36,6 @@ public class DialogueData
     public string textAlternative;
     [Header("Responses")]
 	public DialoguesResponsesDisplayerUI responsesDisplayerPrefab;
-    public string analyticChoiceID;
-    public string analyticTimeID;
 	public DialogueResponse[] responses;
     
 
@@ -106,10 +104,11 @@ public class NarrativeAnalyicsInfo
                 label += "emobas";
                 break;
         }
-        if (inRelationTo != NarrativeAnalticsEmpathyInRelationTo.NONE)
+
+		if (inRelationTo != NarrativeAnalticsEmpathyInRelationTo.NONE)
         {
-            label += "_";
-            switch (inRelationTo)
+			label += "_";
+			switch (inRelationTo)
             {
                 case NarrativeAnalticsEmpathyInRelationTo.self:
                     label += "self_";
@@ -122,9 +121,10 @@ public class NarrativeAnalyicsInfo
                     break;
 
             }
-            label += (questionIdx + 1) + "_";
         }
-        switch (analyticType)
+		label += (questionIdx + 1) + "_";
+
+		switch (analyticType)
         {
             case NarrativeAnalyticType.Tm:
                 label += "tm";

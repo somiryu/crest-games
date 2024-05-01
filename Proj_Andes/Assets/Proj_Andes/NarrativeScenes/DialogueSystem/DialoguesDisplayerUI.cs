@@ -457,7 +457,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
             hasResponse = false;
         }
 
-        var hasAnalytic = !string.IsNullOrEmpty(dialogueData.analyticChoiceID);
 
         if (audioIsDone && !hasResponse)
         {
@@ -469,7 +468,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 		while (!hasPendingLineChange)
         {
-			if (hasAnalytic) currResponseTime += Time.deltaTime;
+			currResponseTime += Time.deltaTime;
 
 			if (preselectedResponse != null)
             {
@@ -503,6 +502,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             Debug.Log("cur2 " + currResponseChoiceAnalyticIDVal + " " + currResponseAnalyticResponseVal);
             Debug.Log("cur3 " + currResponseChoiceAnalyticIDTm + " " + currResponseTime);
             currResponseAnalyticResponse = null;
+            currResponseChoiceAnalyticIDRta = null;
             currResponseAnalyticResponseVal = -1;
             currResponseTime = 0;
         }
