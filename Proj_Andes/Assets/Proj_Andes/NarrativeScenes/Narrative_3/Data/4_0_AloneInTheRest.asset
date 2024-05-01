@@ -32,10 +32,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 5
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 4
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -43,10 +46,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 4
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 3
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: "ALEGR\xCDA"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -54,10 +60,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 3
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 2
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -65,10 +74,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 1
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 1
+        inRelationTo: 0
+        customEmotionValue: 1
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -76,10 +88,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 6
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 10
+        inRelationTo: 0
+        customEmotionValue: 0
     audio: {fileID: 8300000, guid: f581100083bf0eb479168fd637e3807d, type: 3}
     audioAlternative: {fileID: 8300000, guid: e448df789bf85144f8636ab2538dc009, type: 3}
     EnterAnim: {fileID: 0}
@@ -154,9 +169,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 74eb9412284496146b6883117a4135b7, type: 2}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: LAZO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f3ac91e4e24310b4798fba4183b0e936, type: 3}
@@ -165,9 +183,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 184a02f90bd9c7e478a9f2d5ac1c9941, type: 2}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: RAQUETA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 35c385e10a8b5c34b9aff29915c9739f, type: 3}
@@ -176,9 +197,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 6ed13133b642dc54aa00bb02dfc455db, type: 2}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
     audio: {fileID: 8300000, guid: 4699d2b1941557b45974a77fb254a420, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

@@ -82,7 +82,7 @@ public class NarrativeAnalyicsInfo
     public NarrativeAnalyticConfSubCategory conflictSubCategory;
     public NarrativeAnalyticsFeeling emotionSubCategory;
     public NarrativeAnalticsEmpathyInRelationTo inRelationTo;
-    public EmotionsAnalyticsValues emotionsAnalyticsValues;
+    public float customEmotionValue = 0;
 
     public string BuildID(int narrativeIdx, int questionIdx, NarrativeAnalyticType analyticType)
     {
@@ -160,7 +160,7 @@ public class NarrativeAnalyicsInfo
         if (mainCategory == NarrativeAnalyticCategory.Empathy) return (int)empathySubCategory;
         if(mainCategory == NarrativeAnalyticCategory.EmoBas || mainCategory == NarrativeAnalyticCategory.EmoComp)
         {
-            return emotionsAnalyticsValues.GetValueForEmotion(emotionSubCategory);
+            return customEmotionValue;
         }
         return -1;
     }

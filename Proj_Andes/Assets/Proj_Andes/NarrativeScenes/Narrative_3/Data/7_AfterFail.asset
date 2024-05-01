@@ -50,9 +50,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 4
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 3
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: RABIA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: da2c42be71e0eff44b5774b26832028d, type: 3}
@@ -61,9 +64,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 5
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 4
+        inRelationTo: 0
+        customEmotionValue: 0.5
     - response: VERGUENZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 6e9b02ebf15428f4486bca3895af4069, type: 3}
@@ -72,9 +78,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 10
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 8
+        inRelationTo: 0
+        customEmotionValue: 1
     - response: "ALEGR\xCDA"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -83,9 +92,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 1
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 2
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -94,9 +106,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 6
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 10
+        inRelationTo: 0
+        customEmotionValue: 0
     audio: {fileID: 8300000, guid: 1aae792f218db15438b80cba2231a331, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -122,9 +137,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: "F\xDATBOL"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: e9bd8354896d42d44b17dfb6572aad2f, type: 3}
@@ -133,9 +151,12 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
     audio: {fileID: 8300000, guid: b39f60153c584b34bb3adf906aa46068, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -175,10 +196,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 7
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 4
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -186,10 +210,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 3
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 3
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: "ALEGR\xCDA"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -197,10 +224,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 2
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 2
+        inRelationTo: 0
+        customEmotionValue: 1
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -208,10 +238,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 1
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 1
+        inRelationTo: 0
+        customEmotionValue: 0
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -219,10 +252,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 6
+        mainCategory: 5
+        empathySubCategory: 99
+        agressionSubCategory: 99
+        conflictSubCategory: 99
+        emotionSubCategory: 10
+        inRelationTo: 0
+        customEmotionValue: 0
     audio: {fileID: 8300000, guid: 2e1041f119b79c841b090c9d1c522b9d, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
