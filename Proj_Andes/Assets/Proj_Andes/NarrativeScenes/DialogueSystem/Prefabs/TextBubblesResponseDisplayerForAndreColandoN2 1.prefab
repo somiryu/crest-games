@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   responsesPool:
-    itemPrefab: {fileID: 3933102859777142689, guid: 360b5c7173341514aac0a0df58252bed, type: 3}
+    itemPrefab: {fileID: 3933102859777142689, guid: 9b054b636e8065c42800d72ead44cf0a, type: 3}
     hierarchyParent: {fileID: 5120906064912766403}
     growBy: 3
   confirmationButton: {fileID: 4596808888548888361}

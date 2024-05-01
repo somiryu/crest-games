@@ -92,5 +92,11 @@ public enum tutorialSteps
 	MG_BoostersAndScapeDone = 11,
     MG_MechanicHand_1HoldClickAndMove = 12,
     MG_MechanicHand_2JustClickToGrab = 13,
-    Market_Instruction
+    Market_Instruction = 14,
+	HeartsAndFlowersHeartsDone = 15,
+	HeartsAndFlowersFlowersDone = 16,
+	HeartsAndFlowersMixedDone = 17,
+    VoiceOfImageVoice = 18,
+    VoiceOfImageImage = 19,
+    VoiceOfImageMixed = 20
 }

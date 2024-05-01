@@ -25,6 +25,24 @@ public class GeneralGameAnalyticsManager : MonoBehaviour
 		analytics.gameType = gameType;
 	}
 
+	public void Init(string gameType, GeneralGameAnalytics previousAnalytics)
+	{
+		Init(gameType);
+		if (previousAnalytics == null) return;
+		analytics.lastFrustrationLevel = previousAnalytics.lastFrustrationLevel;
+		analytics.timePlayed = previousAnalytics.timePlayed;
+		analytics.timesBetweenClicks = previousAnalytics.timesBetweenClicks;
+		analytics.timePlayed = previousAnalytics.timePlayed;
+		analytics.achievements = previousAnalytics.achievements;
+		analytics.losses = previousAnalytics.losses;
+		analytics.clicks = previousAnalytics.clicks;
+		analytics.timesBetweenClicks = new List<float>();
+		for (int i = 0; i < previousAnalytics.timesBetweenClicks.Count; i++)
+		{
+			analytics.timesBetweenClicks.Add(previousAnalytics.timesBetweenClicks[i]);
+		}
+	}
+
 	private void Update()
 	{
 		analytics.timePlayed += Time.deltaTime;
@@ -106,6 +124,22 @@ public class GeneralGameAnalytics
 		}
 		averageClickTime /= timesBetweenClicks.Count;
 		return averageClickTime;
+	}
+
+	public void CopyFrom(GeneralGameAnalytics other)
+	{
+		if(other == null) return;
+		gameType = other.gameType;
+		timePlayed = other.timePlayed;
+		achievements = other.achievements;
+		losses = other.losses;
+		clicks = other.clicks;
+		lastFrustrationLevel = other.lastFrustrationLevel;
+		timesBetweenClicks = new List<float>();
+		for (int i = 0; i < other.timesBetweenClicks.Count; i++)
+		{
+			timesBetweenClicks.Add(other.timesBetweenClicks[i]);
+		}
 	}
 
 

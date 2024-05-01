@@ -33,7 +33,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35.020004, y: -53.563995}
+  m_AnchoredPosition: {x: 35.020004, y: -138}
   m_SizeDelta: {x: 313.5159, y: 161.1271}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6679070306618362478
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   responsesPool:
-    itemPrefab: {fileID: 3933102859777142689, guid: 360b5c7173341514aac0a0df58252bed, type: 3}
+    itemPrefab: {fileID: 3933102859777142689, guid: 9b054b636e8065c42800d72ead44cf0a, type: 3}
     hierarchyParent: {fileID: 5120906064912766403}
     growBy: 3
   confirmationButton: {fileID: 4596808888548888361}

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45ea78bcb33acf438332113390c420b, type: 3}
+  m_Name: VoiceOrImageTutoConfigMixed
+  m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 61a67eb858e0b994294af9d2a8e152b5, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlowerTutorial.unity
+  tutorialID: 20
+  gameType: 2
+  gameIdx: 2
+  trialsAmt: 0
+  consecutiveWinsToPass: 3
+  consecutiveFailsToLose: 4
+  roundTime: 5
+  firstInstructionAudio: {fileID: 8300000, guid: f6ef924653e8ca3458336e114e957690, type: 3}
+  firstInstructionAudio2: {fileID: 8300000, guid: 6b797c3ce6aa3aa48b3be004dcae7c62, type: 3}
+  secondInstructionAudio1: {fileID: 0}
+  secondInstructionAudio2: {fileID: 0}
+  endAudio: {fileID: 8300000, guid: 75f78c52738598042b3c3f521f8747d7, type: 3}
+  switchesToAnswerIsDifferentInSecondPart: 0
+  completedFirstPart: 0

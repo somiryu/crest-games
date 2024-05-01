@@ -42,7 +42,7 @@ MonoBehaviour:
     responses:
     - response: ' Les digo que si no me dejan jugar me voy a poner triste.'
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 1b583e9ddad1e7247adf55da6de2c547, type: 3}
       responseAudio: {fileID: 8300000, guid: eb91ee252d0d416419c34cb8ee2cbd59, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 89dadb1d8d6348d44858afb84f04782b, type: 2}
@@ -53,7 +53,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: No hago nada, y me quedo jugando solo
       responseAlternative: No hago nada, y me quedo jugando sola.
-      responseImage: {fileID: 21300000, guid: 4b4cc54be93d39d41b399933af73058b, type: 3}
+      responseImage: {fileID: 21300000, guid: f8429f9d90079034fadd482990f6f4ff, type: 3}
       responseAudio: {fileID: 8300000, guid: 3b746d843dd121f42893c064af6459ff, type: 3}
       responseAudioAlternative: {fileID: 8300000, guid: 8156591082b90b6488c5a44906cedfae, type: 3}
       dataAfterResponse: {fileID: 11400000, guid: 89dadb1d8d6348d44858afb84f04782b, type: 2}
@@ -64,7 +64,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: Les digo que son unos odiosos por no dejarme jugar.
       responseAlternative: Les digo que son unas odiosas por no dejarme jugar.
-      responseImage: {fileID: 21300000, guid: 66f10bb16b512884ba1c89ea2f108e3a, type: 3}
+      responseImage: {fileID: 21300000, guid: 0b4874a07715c8846ad1baad152c33c5, type: 3}
       responseAudio: {fileID: 8300000, guid: 001de859612091341abe6409c0b3e49c, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 89dadb1d8d6348d44858afb84f04782b, type: 2}

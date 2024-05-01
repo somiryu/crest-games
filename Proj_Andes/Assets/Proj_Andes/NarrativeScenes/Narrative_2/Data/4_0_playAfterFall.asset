@@ -61,8 +61,9 @@ MonoBehaviour:
     responses:
     - response: "Le digo que no me moleste m\xE1s.\r"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: df3a8be8896735043b15f88d52793991, type: 3}
       responseAudio: {fileID: 8300000, guid: 48dee131fc993c248813d55da7896196, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -71,8 +72,9 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Me levanto y le grito a Alex que m\xE1s lento es el"
       responseAlternative: "Me levanto y le grito a Alex que m\xE1s lenta es ella"
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 9ec3700dd99c36840bc1532cdd1b530b, type: 3}
       responseAudio: {fileID: 8300000, guid: e0532beb5d49a584da69ef9c46738b46, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -81,8 +83,9 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: Hago como si no hubiera escuchado y no le digo nada
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 16f506f356cf7e74f84febc28e5f0912, type: 3}
       responseAudio: {fileID: 8300000, guid: 3294d89a025848e4dbc146a1aee73c99, type: 3}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2

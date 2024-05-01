@@ -60,7 +60,6 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     [SerializeField] AudioClip onRightAction;
     [SerializeField] AudioClip onPassedTuto;
     [SerializeField] AudioClip onDepart;
-    IEnumerator currAudio;
     private void Awake()
     {
         ISizeRocketsManager.Instance = this;
@@ -69,8 +68,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
 	private void Start()
 	{
-		currAudio = ActivateStepActions(introAudio, selectShipAudio);
-		StartCoroutine(currAudio);
+		StartCoroutine(RunTutorialStartInstructions());
 		planetPrefab.Init(8);
 		actionBlocker.gameObject.SetActive(true);
 
@@ -88,30 +86,24 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 		shipsLeftTxt.SetText(shipsPerGame.ToString());
 	}
 
-	void InitTuto()
+
+    IEnumerator RunTutorialStartInstructions()
     {
-        currTargetPlanet = tutoPlanet;
+        actionBlocker.gameObject.SetActive(true);
+		audioSource.clip = introAudio;
+		audioSource.Play();
+		yield return new WaitForSeconds(introAudio.length);
+
+		currTutoStep.handSign.gameObject.SetActive(true);
         tutoStepIdx = 0;
-        ActivateTutoUI();
-    }
+		currTargetPlanet = tutoPlanet;
 
-    IEnumerator ActivateStepActions(AudioClip clip, AudioClip clip2 = null)
-    {
-        audioSource.clip = clip;
-        audioSource.Play();
-        handSignPlanet.gameObject.SetActive(false);
+		audioSource.clip = selectShipAudio;
+		audioSource.Play();
+		yield return new WaitForSeconds(selectShipAudio.length);
+		actionBlocker.gameObject.SetActive(false);
+	}
 
-        yield return new WaitForSeconds(clip.length);
-        if (clip2 != null)
-        {
-            ActivateTutoUI();
-            currTutoStep.handSign.gameObject.SetActive(true);
-            audioSource.clip = clip2;
-            audioSource.Play();
-            yield return new WaitForSeconds(clip2.length);
-        }
-        actionBlocker.gameObject.SetActive(false);
-    }
     IEnumerator TouchScreenToMoveInstruction()
     {
         actionBlocker.gameObject.SetActive(true);
@@ -119,8 +111,8 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         audioSource.clip = selectWorldAudio;
         audioSource.Play();
         yield return new WaitForSeconds(selectWorldAudio.length);
+        yield return ShipDescription();
         actionBlocker.gameObject.SetActive(false);
-        InitTuto();
     }
     IEnumerator ShipDescription()
     {
@@ -137,6 +129,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         yield return new WaitForSeconds(clip.length);
         GetNextStep();
     }
+
     void GetNextStep()
     {
         if (tutoStepIdx + 1 < tutorialSteps.Count)

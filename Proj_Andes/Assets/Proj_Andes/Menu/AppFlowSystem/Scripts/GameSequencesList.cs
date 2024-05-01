@@ -55,7 +55,12 @@ public class GameSequencesList : ScriptableObject
 			if (prevGame != null)
             {
                 prevGame.SaveAnalytics();
-                prevGame.SaveGeneralGameAnalytics();
+                if (prevGame.shouldTryToSaveGeneralAnalytics)
+                {
+                    Debug.Log("Called try to save general game analytics");
+                    prevGame.SaveGeneralGameAnalytics();
+                    prevGame.AferGeneralAnalyticsSaved();
+                }
                 DatabaseManager.SaveUserDatasList(UserDataManager.Instance.usersDatas, UserDataManager.userAnayticsPerGame, false);
             }
 
@@ -78,7 +83,7 @@ public class GameSequencesList : ScriptableObject
 
     [ContextMenu("ResetSequence")]
     public void ResetSequence()
-    {
+    { 
         prevGame = null;
         goToGameGroupIdx = 0;
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();

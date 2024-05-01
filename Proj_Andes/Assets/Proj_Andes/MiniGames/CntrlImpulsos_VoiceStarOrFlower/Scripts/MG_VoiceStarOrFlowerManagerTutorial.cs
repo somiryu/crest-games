@@ -5,13 +5,21 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameManager, ITimeManagement
 {
-	[SerializeField] MG_VoiceStarOrFlowerGameConfigs gameConfigs;
-	[Space(20)]
+    static MG_VoiceStarOrFlowerManagerTutorial instance;
+    public static MG_VoiceStarOrFlowerManagerTutorial Instance => instance;
+
+    [SerializeField] MG_VoiceStarOrFlowerGameConfigs gameConfigs;
+    [Space(20)]
+    public static int currTutoStepIdx;
+    public List<VoiceOrImageTutoConfig> tutoConfigs = new List<VoiceOrImageTutoConfig>();
+    VoiceOrImageTutoConfig currTutoConfig => tutoConfigs[currTutoStepIdx];
+    [Space(20)]
 	[SerializeField] Sprite leftTargetSprite;
     [SerializeField] Sprite rightTargetSprite;
     [Space(20)]
@@ -35,8 +43,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip finishAudio;
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
-    [SerializeField] AudioClip lookAtCampsAudio;
-    [SerializeField] AudioClip firstInstrucAudio;
+    [SerializeField] AudioClip tutorialIntroAudio;
+    [FormerlySerializedAs("firstInstrucAudio")]
+    [SerializeField] AudioClip firstInstrucAudioForVoiceAsCorrectAnswer;
+    [SerializeField] AudioClip firstInstrucAudioForImgAsCorrectAnswer;
     [SerializeField] AudioClip discardAdvice;
     [SerializeField] AudioClip youDidGoodAudio;
     [SerializeField] AudioClip youDidGoodNowTryAudio;
@@ -46,8 +56,14 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip letsPlayAudio;
     [SerializeField] AudioSource effectPlayer;
     [SerializeField] AudioSource audioPlayer;
+    [Space]
+	[SerializeField] AudioClip onFailedFlowersAndVoice;
+	[SerializeField] AudioClip onFailedCloudAndVoice;
+	[SerializeField] AudioClip onFailedFlowersAndImg;
+	[SerializeField] AudioClip onFailedCloudAndImg;
 
-    [Space(20)]
+
+	[Space(20)]
     [SerializeField] Pool<Transform> leftWonItemsPool;
     [SerializeField] Pool<Transform> rightWonItemsPool;
 
@@ -67,259 +83,234 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     [SerializeField] EndOfGameManager eogManager;
     public EndOfGameManager EndOfGameManager => eogManager;
+    public bool UseVoiceAsCorrectAnswer => MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer;
 
     private float timerPerChoice = 0;
     private int currCoins;
     private int wonLeftCount;
     private int wonRightCount;
     private int lostRoundsCount;
-
+    IEnumerator currInstruction;
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
 
     private bool gameoverFlag = false;
-    float totalGameTime;
 
-    int currStepTutorial;
-    bool intervalQuestion;
-    bool soundAndImgSameQuestion;
-    bool hasTimer;
-    bool hasScore;
-    bool hasDiscardButtton;
-    bool hasButtonHelp;
-    bool hasWrongChoice;
-    int currScoreStepTutorial;
-    int goalScoreStepTutorial;
+    int leftCount = 0;
+    int rightCount = 0;
+
+    int passedCurrTuto;
+    int consecutiveWinsTuto;
     int trialsPerTutoCount;
     int failurePerTutoCount;
+    int tutoStage;
+    bool isPaused;
 
     public void Awake()
 	{
+        if (instance != null && instance != this) DestroyImmediate(this);
+        instance = this;
         Init();
 	}
 
 	public void Init()
     {
-        currStepTutorial = 0;
-        intervalQuestion = true;
+        var useVoiceAsCorrectAnswer = true;
+        isPaused = true;
+        switch (currTutoConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                useVoiceAsCorrectAnswer = true;
+                break;
+            case VoiceOrImageGameType.Image:
+                useVoiceAsCorrectAnswer = false;
+                break;
+            case VoiceOrImageGameType.Mixed:
+                if (MG_VoiceStarOrFlowerGameConfigs.Overwritten) useVoiceAsCorrectAnswer = MG_VoiceStarOrFlowerGameConfigs.OverridenUseVoiceAsTheCorrectAnswer;
+                else useVoiceAsCorrectAnswer = Random.Range(0f, 1f) > 0.5f;
+                Debug.Log("Will use voice as correct answer: " + useVoiceAsCorrectAnswer);
+                break;
+        }
+
+        MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer = useVoiceAsCorrectAnswer;
+
+        Debug.Log("Will use voice as correct answer: " + useVoiceAsCorrectAnswer);
+
         currCoins = gameConfigs.initialCoins;
         wonLeftCount = 0;
         wonRightCount = 0;
         lostRoundsCount = 0;
+        tutoStage = 0;
+        currTutoConfig.completedFirstPart = false;
 
 		afterActionPanel.SetActive(false);
 		inGameUiPanel.SetActive(true);
         gameoverFlag = false;
 
+        if (currTutoConfig.gameType == VoiceOrImageGameType.Voice) currTargetImg.gameObject.SetActive(false);
+
 
         timerUI.minValue = 0;
-        timerUI.maxValue = gameConfigs.timePerChoice;
+        timerUI.maxValue = currTutoConfig.roundTime;
 
 		leftBtn.onClick.AddListener(OnClickedLeft);
 		rightBtn.onClick.AddListener(OnClickedRight);
 		discardBtn.onClick.AddListener(OnClickedDiscard);
 
-
+        discardBtn.gameObject.SetActive(false);
         leftWonItemsPool.Init(gameConfigs.maxRounds);
         rightWonItemsPool.Init(gameConfigs.maxRounds);
 
         audioPlayer.Play();
         eogManager.OnGameStart();
 
-        StartCoroutine(InitTutorialAfterTime());
-	}
+        if (currTutoConfig.gameType == VoiceOrImageGameType.Voice) StartCoroutine(StartTutorialAndIntro());
+        else InitTutorialStep();
 
-    IEnumerator InitTutorialAfterTime()
-    {
-        blockPanel.gameObject.SetActive(true);
-        leftBtn.gameObject.SetActive(false);
-        rightBtn.gameObject.SetActive(false);
-        discardBtn.gameObject.SetActive(false);
-        audioPlayer.clip = lookAtCampsAudio;
-        audioPlayer.Play();
-        yield return new WaitForSeconds(lookAtCampsAudio.length-0.3f);
-        leftBtn.gameObject.SetActive(true);
-		rightBtn.gameObject.SetActive(true);
-		discardBtn.gameObject.SetActive(true);
-        leftBtn.gameObject.SetActive(false);
-        rightBtn.gameObject.SetActive(false);
-        discardBtn.gameObject.SetActive(false);
-        audioPlayer.clip = firstInstrucAudio;
-        audioPlayer.Play();
-        yield return new WaitForSeconds(firstInstrucAudio.length);
-        leftBtn.gameObject.SetActive(true);
-        rightBtn.gameObject.SetActive(true);
-        discardBtn.gameObject.SetActive(true);
-        blockPanel.gameObject.SetActive(false);
-        InitTutorialStep();
-        InitRound();
     }
-
+    IEnumerator StartTutorialAndIntro()
+    {
+        isPaused = true;
+        blockPanel.gameObject.SetActive(true );
+        audioPlayer.clip = tutorialIntroAudio;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(tutorialIntroAudio.length);
+        blockPanel.gameObject.SetActive(false);
+        isPaused = false;
+        InitTutorialStep();
+    }
     private void InitTutorialStep()
     {
+        Debug.Log("Starting " + currTutoConfig.gameType);
         trialsPerTutoCount = 0;
         failurePerTutoCount = 0;
+        consecutiveWinsTuto = 0;
+        rightCount = 0;
+        leftCount = 0;
 
-        if (currStepTutorial == 0)
-        {
-            hasTimer = false;
-            hasScore = false;
-            intervalQuestion = true;
-            soundAndImgSameQuestion = false;
-            hasDiscardButtton = false;
-            hasButtonHelp = true;
-            goalScoreStepTutorial = 4;
-            hasWrongChoice = false;
-			ResetScore();
-		}
+        tutoStage++;
 
-		if (currStepTutorial == 1)
+        if (tutoStage >= 2) currTutoConfig.completedFirstPart = true;
+
+        if (currTutoConfig.gameType != VoiceOrImageGameType.Mixed)
         {
-            hasTimer = false;
-            hasScore = false;
-            intervalQuestion = false;
-            soundAndImgSameQuestion = false;
-            hasDiscardButtton = false;
-            hasButtonHelp = true;
-            goalScoreStepTutorial = 6;
-            hasWrongChoice = false;
-            ResetScore();
+            if (!currTutoConfig.completedFirstPart) currInstruction = ActionsBeforeTutoStageStarts(currTutoConfig.firstInstructionAudio, currTutoConfig.firstInstructionAudio2);
+            else currInstruction = ActionsBeforeTutoStageStarts(currTutoConfig.secondInstructionAudio1, currTutoConfig.secondInstructionAudio2);
+        }
+        else
+        {
+            if (currTutoConfig.completedFirstPart) return;
+            var lastTutoInstruction = UseVoiceAsCorrectAnswer ? currTutoConfig.firstInstructionAudio : currTutoConfig.firstInstructionAudio2;
+            currInstruction = ActionsBeforeTutoStageStarts(lastTutoInstruction);
         }
 
-        if (currStepTutorial == 2)
+        StartCoroutine(currInstruction);
+    }
+    IEnumerator ActionsBeforeTutoStageStarts(AudioClip audio1, AudioClip audio2 = null)
+    {
+		isPaused = true;
+		blockPanel.gameObject.SetActive(true);
+        if(currTutoConfig.completedFirstPart && currTutoConfig.gameType != VoiceOrImageGameType.Mixed)
         {
-            hasTimer = false;
-            hasScore = false;
-            intervalQuestion = true;
-            soundAndImgSameQuestion = true;
-            hasDiscardButtton = true;
-            hasButtonHelp = true;
-            hasWrongChoice = false;
-            goalScoreStepTutorial = 4;
-			ResetScore();
-		}
-
-		if (currStepTutorial == 3)
+            audioPlayer.clip = youDidGoodAudio;
+            audioPlayer.Play();
+            yield return new WaitForSeconds(youDidGoodAudio.length);
+        }
+        audioPlayer.clip = audio1;
+        audioPlayer.Play();
+        yield return new WaitForSeconds(audio1.length);
+        if(audio2 != null)
         {
-            hasTimer = false;
-            hasScore = false;
-            intervalQuestion = false;
-            soundAndImgSameQuestion = false;
-            hasDiscardButtton = true;
-            hasButtonHelp = true;
-            hasWrongChoice = false;
-            goalScoreStepTutorial = 4;
-			ResetScore();
-		}
-
-		if (currStepTutorial == 4)
+            audioPlayer.clip = audio2;
+            audioPlayer.Play();
+            yield return new WaitForSeconds(audio2.length);
+        }
+        blockPanel.gameObject.SetActive(false);
+		isPaused = false;
+		InitRound();
+    }
+	void Update()
+	{
+		if (isPaused)
         {
-            hasTimer = false;
-            hasScore = false;
-            intervalQuestion = false;
-            soundAndImgSameQuestion = false;
-            hasDiscardButtton = true;
-            hasWrongChoice = true;
-            hasButtonHelp = false;
-            goalScoreStepTutorial = 5;
-			ResetScore();
-		}
-
-        if (currStepTutorial == 5)
-        {
-			MG_VoiceStarOrFlowerGameConfigs.passedTuto = true;
-			StartCoroutine(CompleteTuto());
+            timerPerChoice = 0;
+            return;
         }
 
-        currScoreStepTutorial = 0;
+		timerPerChoice += Time.deltaTime;
+		timerUI.value = timerPerChoice;
+		if (timerPerChoice >= currTutoConfig.roundTime)
+		{
+			timerPerChoice = 0;
+			OnWrongChoice();
+		}
+	}
 
-        timerUI.gameObject.SetActive(hasTimer);
-        StarsCounter.SetActive(hasScore);
-        discardBtn.gameObject.SetActive(hasDiscardButtton);
-    }
-    IEnumerator CompleteTuto()
-    {
-        effectPlayer.Stop();
-        discardBtn.gameObject.SetActive(false);
-        leftBtn.gameObject.SetActive(false);
-        rightBtn.gameObject.SetActive(false);
-        audioPlayer.clip = finalInstruction;
-        audioPlayer.Play();
-        blockPanel.gameObject.SetActive(true);
-        yield return new WaitForSecondsRealtime(finalInstruction.length);
-        audioPlayer.clip = letsPlayAudio;
-        audioPlayer.Play();
-        yield return new WaitForSecondsRealtime(letsPlayAudio.length);
-        UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceStarOrFlowerDone.ToString());
-		blockPanel.gameObject.SetActive(false);
-		GameSequencesList.Instance.GoToNextItemInList();
-    }
-    void ResetScore()
-    {
-        leftWonItemsPool.RecycleAll();
-        rightWonItemsPool.RecycleAll();
-        currCoins = 0;
-        currCoinsValueTxt.SetText(0.ToString());
-    }
 
     void InitRound()
     {
-        if (currStepTutorial == 5) return;
         timerPerChoice = 0;
 
         trialsPerTutoCount++;
-
+        
         audioPlayer.volume = 1;
-        if (intervalQuestion)
-        {
-            currSoundIsLeft = !currSoundIsLeft;
-            if (soundAndImgSameQuestion) currImgIsLeft = currSoundIsLeft;
-            else currImgIsLeft = !currSoundIsLeft;
-        }
-        else
-        {
-            if (hasDiscardButtton)
-            {
-                currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
-                currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
-            }
-            else
-            {
-                currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
-                currImgIsLeft = !currSoundIsLeft;
-            }
-        }
 
-        if (hasButtonHelp)
-        {
-            if (currSoundIsLeft && !currImgIsLeft) SetButtonState(leftBtn, leftBtnHighlightImg, enabledBtnColor, true);
-            else SetButtonState(leftBtn, leftBtnHighlightImg, disabledBtnColor, false);
+        currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
+        currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
 
-            if (!currSoundIsLeft && currImgIsLeft) SetButtonState(rightBtn, rightBtnHighlightImg, enabledBtnColor, true);
-            else SetButtonState(rightBtn, rightBtnHighlightImg, disabledBtnColor, false);
 
-            if (currSoundIsLeft == currImgIsLeft) SetButtonState(discardBtn, discardBtnHighlightImg, enabledBtnColor, true);
-            else SetButtonState(discardBtn, discardBtnHighlightImg, disabledBtnColor, false);
-        }
-        else
+        switch (currTutoConfig.gameType)
         {
-            SetButtonState(leftBtn, leftBtnHighlightImg, enabledBtnColor, false);
-            SetButtonState(rightBtn, rightBtnHighlightImg, enabledBtnColor, false);
-            SetButtonState(discardBtn, discardBtnHighlightImg, enabledBtnColor, false);
+            case VoiceOrImageGameType.Voice:
+                currTargetImg.gameObject.SetActive(false);
+
+
+				if (rightCount >= 2) currSoundIsLeft = true;
+				else if (leftCount >= 2) currSoundIsLeft = false;
+
+				if (currSoundIsLeft) leftCount++;
+                else rightCount++;
+
+                currImgIsLeft = currSoundIsLeft;
+                break;
+            case VoiceOrImageGameType.Image:
+                currTargetImg.gameObject.SetActive(true);
+
+				if (rightCount >= 2) currImgIsLeft = true;
+				else if (leftCount >= 2) currImgIsLeft = false;
+
+				if (currImgIsLeft) leftCount++;
+                else rightCount++;
+
+                currSoundIsLeft = currImgIsLeft;
+                break;
+            case VoiceOrImageGameType.Mixed:
+                if (UseVoiceAsCorrectAnswer)
+                {
+                    if (currSoundIsLeft) currImgIsLeft = false;
+                    else currImgIsLeft = true;
+
+                    if (currSoundIsLeft) leftCount++;
+                    else rightCount++;
+                }
+                else
+                {
+                    if (currImgIsLeft) currSoundIsLeft = false;
+                    else currSoundIsLeft = true;
+
+                    if (currImgIsLeft) leftCount++;
+                    else rightCount++;
+                }
+                break;
         }
 
         var imgToUse = currImgIsLeft ? leftTargetSprite : rightTargetSprite;
         var soundToUse = currSoundIsLeft ? leftAudio : rightAudio;
-        var textToUse = currSoundIsLeft ? leftObjTxt : rightObjTxt;
-
 
         currTargetImg.sprite = imgToUse;
-
         effectPlayer.clip = soundToUse;
 
-        if (currStepTutorial == 2 && trialsPerTutoCount == 1) StartCoroutine(DiscardInstruction());
-        else if (currStepTutorial == 4 && trialsPerTutoCount == 1) StartCoroutine(PlaySingleAudio(youDidGoodNowTryAudio));
-        else effectPlayer.Play();
+        if (currTutoConfig.gameType != VoiceOrImageGameType.Image) effectPlayer.Play();
     }
     IEnumerator DiscardInstruction()
     {
@@ -339,21 +330,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         leftBtn.interactable = true;
         effectPlayer.Play();
     }
-    IEnumerator PlaySingleAudio(AudioClip audioClip)
-    {
-        blockPanel.gameObject.SetActive(true);
-        discardBtn.interactable = false;
-        rightBtn.interactable = false;
-        leftBtn.interactable = false;
-        audioPlayer.clip = audioClip;
-        audioPlayer.Play();
-        yield return new WaitForSeconds(audioClip.length);
-        discardBtn.interactable = true;
-        rightBtn.interactable = true;
-        leftBtn.interactable = true;
-        effectPlayer.Play();
-        blockPanel.gameObject.SetActive(false);
-    }
 
     void SetButtonState(Button button, Image highlightImg, Color color, bool highlight)
     {
@@ -363,14 +339,60 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 	private void OnClickedLeft()
     {
-        if(currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
-        else OnWrongChoice();
+        switch (currTutoConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                if (currSoundIsLeft && !currTutoConfig.completedFirstPart 
+                    || !currSoundIsLeft && currTutoConfig.completedFirstPart && currTutoConfig.switchesToAnswerIsDifferentInSecondPart) OnCorrectChoice();
+                else OnWrongChoice();
+                break;
+            case VoiceOrImageGameType.Image:
+                if (currImgIsLeft && !currTutoConfig.completedFirstPart 
+                    || !currImgIsLeft && currTutoConfig.completedFirstPart && currTutoConfig.switchesToAnswerIsDifferentInSecondPart) OnCorrectChoice();
+                else OnWrongChoice();
+                break;
+            case VoiceOrImageGameType.Mixed:
+                if (UseVoiceAsCorrectAnswer)
+                {
+                    if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+                    else OnWrongChoice();
+                }
+                else //Img is correct answer
+                {
+                    if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+                    else OnWrongChoice();
+                }
+                break;
+        }
     }
 
     private void OnClickedRight()
     {
-		if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
-		else OnWrongChoice();
+        switch (currTutoConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                if (!currSoundIsLeft && !currTutoConfig.completedFirstPart
+                    || currSoundIsLeft && currTutoConfig.completedFirstPart && currTutoConfig.switchesToAnswerIsDifferentInSecondPart) OnCorrectChoice();
+                else OnWrongChoice();
+                break;
+            case VoiceOrImageGameType.Image:
+                if (!currImgIsLeft && !currTutoConfig.completedFirstPart
+                    || currImgIsLeft && currTutoConfig.completedFirstPart && currTutoConfig.switchesToAnswerIsDifferentInSecondPart) OnCorrectChoice();
+                else OnWrongChoice();
+                break;
+            case VoiceOrImageGameType.Mixed:
+                if (UseVoiceAsCorrectAnswer)
+                {
+                    if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
+                    else OnWrongChoice();
+                }
+                else //Img is correct answer
+                {
+                    if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
+                    else OnWrongChoice();
+                }
+                break;
+        }
 	}
 
 	private void OnClickedDiscard()
@@ -381,7 +403,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 	private void OnWrongChoice()
     {
-        currScoreStepTutorial = 0;
+        consecutiveWinsTuto = 0;
         failurePerTutoCount++;
         incorrectParticles.Stop();
         correctParticles.Stop();
@@ -392,41 +414,52 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         incorrectParticles.Play();
 
         audioPlayer.volume = 0.8f;
-
         effectPlayer.clip = wrongAudio;
         effectPlayer.Play();
 
-        if (!hasWrongChoice) return;
-
-        StartCoroutine(PlayOnWrongChoice());
+        
+        if (currTutoConfig.gameType != VoiceOrImageGameType.Mixed) StartCoroutine(OnRoundEnded(wrongAudio.length));
+        else StartCoroutine(PlayOnWrongChoice());        
     }
 
 
     IEnumerator PlayOnWrongChoice()
     {
-        AudioClip clipToPlay = onFailSelectInstructionAdvice;
-        if (currImgIsLeft && currSoundIsLeft || !currImgIsLeft && !currSoundIsLeft) clipToPlay = onFailSelectDiscardAdvice;
-        else clipToPlay = onFailSelectInstructionAdvice;
+		isPaused = true;
+		AudioClip clipToPlay;
+
+        if (UseVoiceAsCorrectAnswer)
+        {
+            if (currSoundIsLeft) clipToPlay = onFailedFlowersAndVoice;
+            else clipToPlay = onFailedCloudAndVoice;
+
+        }
+        else
+        {
+			if (currImgIsLeft) clipToPlay = onFailedFlowersAndImg;
+			else clipToPlay = onFailedCloudAndImg;
+		}
 
         audioPlayer.clip = clipToPlay;
         audioPlayer.Play();
-        var timeToWait = clipToPlay.length;
 		rightBtn.interactable = false;
 		leftBtn.interactable = false;
 		discardBtn.interactable = false;
 
-		yield return new WaitForSeconds(timeToWait);
+		yield return new WaitForSeconds(clipToPlay.length);
 
 		rightBtn.interactable = true;
 		leftBtn.interactable = true;
 		discardBtn.interactable = true;
+		isPaused = false;
 		StartCoroutine(OnRoundEnded(0));
 	}
 
 
     private void OnCorrectChoice()
     {
-        currScoreStepTutorial += 1;
+        consecutiveWinsTuto += 1;
+        failurePerTutoCount = 0;
 
         incorrectParticles.Stop();
         correctParticles.Stop();
@@ -455,29 +488,67 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     IEnumerator OnRoundEnded(float waitTime)
     {
+        isPaused = true;
+        currTargetImg.gameObject.SetActive(false);
         discardBtn.interactable = false;
         leftBtn.interactable = false;
         rightBtn.interactable = false;
 
         yield return new WaitForSeconds(waitTime);
 
-		discardBtn.interactable = true;
+        if (currTutoConfig.gameType != VoiceOrImageGameType.Voice) currTargetImg.gameObject.SetActive(true);
+
+        discardBtn.interactable = true;
 		leftBtn.interactable = true;
 		rightBtn.interactable = true;
 
 		currCoinsValueTxt.text = currCoins.ToString();
+		isPaused = false;
 
-        if (currScoreStepTutorial == goalScoreStepTutorial)
+		if (consecutiveWinsTuto >= currTutoConfig.consecutiveWinsToPass || failurePerTutoCount >= currTutoConfig.consecutiveWinsToPass)
         {
-            currStepTutorial += 1;
-            InitTutorialStep();
-        }
-        else if (currStepTutorial == 4 && failurePerTutoCount >= gameConfigs.finalTutoStepMaxFailuresBeforeSkipping)
-        {
-            MG_VoiceStarOrFlowerGameConfigs.passedTuto = false;
+            if (currTutoConfig.gameType == VoiceOrImageGameType.Mixed) currTutoConfig.completedFirstPart = true;
+            if(!currTutoConfig.completedFirstPart) 
+            {
+                InitTutorialStep();
+                yield break;
+            }
             StartCoroutine(CompleteTuto());
+            var passTuto = consecutiveWinsTuto >= currTutoConfig.consecutiveWinsToPass ? 1 : 0;
+            passedCurrTuto = passTuto;
             yield break;
         }
         InitRound();
+    }
+
+    IEnumerator CompleteTuto()
+    {
+        isPaused = true;
+        effectPlayer.Stop();
+        discardBtn.gameObject.SetActive(false);
+        leftBtn.gameObject.SetActive(false);
+        rightBtn.gameObject.SetActive(false);
+        audioPlayer.clip = currTutoConfig.endAudio;
+        audioPlayer.Play();
+        blockPanel.gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(currTutoConfig.endAudio.length);
+        switch (currTutoConfig.gameType)
+        {
+            case VoiceOrImageGameType.Voice:
+                MG_VoiceStarOrFlowerGameConfigs.passedTuto1 = passedCurrTuto;
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageVoice.ToString());
+                break;
+            case VoiceOrImageGameType.Image:
+                MG_VoiceStarOrFlowerGameConfigs.passedTuto2 = passedCurrTuto;
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageImage.ToString());
+                break;
+            case VoiceOrImageGameType.Mixed:
+                MG_VoiceStarOrFlowerGameConfigs.passedTuto3 = passedCurrTuto;
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.VoiceOfImageMixed.ToString());
+                break;
+        }
+
+        blockPanel.gameObject.SetActive(false);
+        GameSequencesList.Instance.GoToNextItemInList();
     }
 }

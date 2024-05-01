@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5868bdcb590df3541a1ddb33a90bedb7, type: 3}
+  m_Name: VoiceOrImageGameConfigsMixed
+  m_EditorClassIdentifier: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: d7608b90a7d13b34a8439223d93eb98c, type: 3}
+    scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlower.unity
+  gameType: 2
+  isLastFlowerAndCloudGameOnBatch: 1
+  timePerChoice: 5
+  maxRounds: 14
+  initialCoins: 0
+  coinsOnCorrectAnswer: 0
+  coinsOnWrongAnswer: 0
+  intermediateRoundHold: 0.5
+  finalTutoStepMaxFailuresBeforeSkipping: 0
+  testIsOppositeToStimuli: 1
+  gameIdx: 2

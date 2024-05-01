@@ -28,9 +28,20 @@ public class ResponseBtn : MonoBehaviour
 	{
 		TryGetComponent(out RectTransform);
         btn.onClick.RemoveAllListeners();
-        btn.onClick.AddListener(() => onClicked?.Invoke(ResponseData));
+        btn.onClick.AddListener(OnClickedMainBtn);
        
 	}
+
+    public void SetRaycastInteractable(bool interactable)
+    {
+        btn.targetGraphic.raycastTarget = interactable;
+        responseImg.raycastTarget = interactable;
+    }
+
+    void OnClickedMainBtn()
+    {
+        onClicked?.Invoke(ResponseData);
+    }
 
 	public void SetData(DialogueResponse _responseData)
 	{

@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51813b6438b1ee541af7d1a4288e7529, type: 3}
+  m_Script: {fileID: 11500000, guid: fd54a6f289b559c4eb27799d9ea5200b, type: 3}
   m_Name: Narrative2SequenceItem
   m_EditorClassIdentifier: 
   scene:
     sceneAsset: {fileID: 102900000, guid: 79156b56a878386439c2187d80e9487e, type: 3}
-    scenePath: Assets/Proj_Andes/NarrativeScenes/Narrative_2/DialogsNarrative2.unity
+    scenePath: Assets/Proj_Andes/NarrativeScenes/Narrative_2/Scenes/DialogsNarrative2.unity
+  shouldPreviewAnswers: 1

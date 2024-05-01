@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 {
@@ -15,6 +16,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     public static MG_HearthsAndStarsManager Instance => instance;
 
     [SerializeField] MG_HearthAndStarsGameConfigs gameConfigs;
+    public static HeartsAndFlowersGameType currGameType;
     [Space(20)]
     [SerializeField] Sprite sameDirectionSprite;
     [SerializeField] Sprite opositeDirectionSprite;
@@ -43,6 +45,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     [SerializeField] TMP_Text currRoundValueTxt;
     [SerializeField] TMP_Text afterActionFinalCoinsTxt;
     [SerializeField] Slider timerUI;
+    [SerializeField] Transform blocker;
     GameUIController gameUi => GameUIController.Instance;
 
     [SerializeField] EndOfGameManager eogManager;
@@ -53,10 +56,14 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     private int currCoins;
     private int currRound;
 
+    int heartCount;
+    int flowerCount;
+
     private bool currShowingRight = false;
     private bool currRequiresSameDirection = false;
 
     private bool gameoverFlag = false;
+    private bool onHold = false;
 
     private MG_HearthAndStars_RoundAnalytics roundAnalytics;
 
@@ -75,6 +82,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         currCoins = gameConfigs.initialCoins;
         currRound = 0;
         audiosource = GetComponent<AudioSource>();
+        flowerCount = 0;
+        heartCount = 0;
 
         afterActionPanel.SetActive(false);
         inGameUIPanel.SetActive(true);
@@ -92,20 +101,37 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
 	private void Start()
 	{
-        GeneralGameAnalyticsManager.Instance.Init(DataIds.heartsAndStarsGame);
+        GeneralGameAnalyticsManager.Instance.Init(DataIds.heartsAndStarsGame, MG_HearthAndStarsGameConfigs.GlobalGeneralGameAnalytics);
 	}
 
 	void InitRound()
     {
 		roundAnalytics = new MG_HearthAndStars_RoundAnalytics();
         AllRoundsAnalytics.Add(roundAnalytics);
-		
+        blocker.gameObject.SetActive(false);
+
         timerPerChoice = 0;
 
         rightImg.gameObject.SetActive(false);
         leftImg.gameObject.SetActive(false);
 
-        currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+        switch (currGameType)
+        {
+            case HeartsAndFlowersGameType.Hearts:
+                currRequiresSameDirection = true;
+                break;            
+            case HeartsAndFlowersGameType.Flowers:
+                currRequiresSameDirection = false;
+                break;            
+            case HeartsAndFlowersGameType.Mixed:
+                currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+                if (heartCount >= 6) currRequiresSameDirection = false;
+                if (flowerCount >= 8) currRequiresSameDirection = true;
+				if (currRequiresSameDirection) heartCount++;
+				else flowerCount++;
+				break;
+        }
+
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;
         currShowingRight = Random.Range(0f, 1f) > 0.5f;
         var imgToUse = currShowingRight ? rightImg : leftImg;
@@ -116,17 +142,11 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     private void Update()
     {
         if (gameoverFlag) return;
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            roundAnalytics.clicks++;
-        }
-
+        if (onHold) return;
         timerUI.value = timerPerChoice;
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            roundAnalytics.ranOutOfTime = true;
             timerPerChoice = 0;
             OnWrongChoice();
         }
@@ -136,8 +156,16 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         var succeed = false;
 
-        if (!currRequiresSameDirection && currShowingRight) succeed = true;
-        if (currRequiresSameDirection && !currShowingRight) succeed = true;
+        if (!currRequiresSameDirection && currShowingRight)
+        {
+            roundAnalytics.answer = 1;
+            succeed = true;
+        }
+        if (currRequiresSameDirection && !currShowingRight)
+        {
+            roundAnalytics.answer = 0;
+            succeed = true;
+        }
         if (succeed) OnCorrectChoice();
         else OnWrongChoice();
     }
@@ -146,19 +174,32 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         var succeed = false;
 
-        if (currRequiresSameDirection && currShowingRight) succeed = true;
-        if (!currRequiresSameDirection && !currShowingRight) succeed = true;
+        if (currRequiresSameDirection && currShowingRight)
+        {
+            roundAnalytics.answer = 0;
+            succeed = true;
+        }
+        if (!currRequiresSameDirection && !currShowingRight)
+        {
+            roundAnalytics.answer = 1;
+            succeed = true;
+        }
         if (succeed) OnCorrectChoice();
         else OnWrongChoice();
     }
 
     private void OnWrongChoice()
     {
+        StartCoroutine(OnWrongChoiceCorroutine());
+    }
+    IEnumerator OnWrongChoiceCorroutine()
+    {
+        blocker.gameObject.SetActive(true);
         LIncorrectparticle.Stop();
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
-
+        onHold = true;
         GeneralGameAnalyticsManager.RegisterLose();
 
 
@@ -170,20 +211,29 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         else LIncorrectparticle.Play();
         gameUi.StarLost();
 
-
+        yield return new WaitForSeconds(gameConfigs.intermidiateRoundHold);
+        onHold = false;
+        blocker.gameObject.SetActive(false);
         OnRoundEnded();
-    }
 
+    }
     private void OnCorrectChoice()
     {
+        StartCoroutine(OnCorroutineChoiceCorroutine());
+    }
+
+    IEnumerator OnCorroutineChoiceCorroutine()
+    {
+        blocker.gameObject.SetActive(true);
         LIncorrectparticle.Stop();
         RIncorrectparticle.Stop();
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
+        onHold = true;
+        timerPerChoice = 0;
 
-
-		GeneralGameAnalyticsManager.RegisterWin();
-		roundAnalytics.wonRound = true;
+        GeneralGameAnalyticsManager.RegisterWin();
+		roundAnalytics.wonRound = 1;
 
         audiosource.clip = correctAudio;
         audiosource.Play();
@@ -200,26 +250,40 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
             LCorrectparticle.Play();
         }
         gameUi.StarEarned(starPos);
+        yield return new WaitForSeconds(gameConfigs.intermidiateRoundHold);
+        onHold = false;
+        blocker.gameObject.SetActive(false);
         OnRoundEnded();
     }
-
     void OnRoundEnded()
     {
+        roundAnalytics.roundCount = currRound;
         currRound++;
-
-        if (currRequiresSameDirection) roundAnalytics.challengeOrder = "Same side";
-        else roundAnalytics.challengeOrder = "Different side";
+        timerPerChoice = 0;
+        if (currRequiresSameDirection) roundAnalytics.stimuli = 0;
+        else roundAnalytics.stimuli = 1;
 
         roundAnalytics.timeToMakeAChoice = timerPerChoice;
 
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
-
-        if (currRound >= gameConfigs.maxRounds)
+        if(currGameType != HeartsAndFlowersGameType.Mixed)
         {
-            GameOver();
-            return;
+            if (currRound >= gameConfigs.maxRounds)
+            {
+                GameOver();
+                return;
+            }
         }
+        else
+        {
+            if (currRound >= gameConfigs.maxRoundsOnMix)
+            {
+                GameOver();
+                return;
+            }
+        }
+
 
         Animator animatorImg = inGameUIPanel.GetComponent<Animator>();
         animatorImg.ResetTrigger("Appear");
@@ -230,6 +294,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
+        StopAllCoroutines();
         timerUI.gameObject.SetActive(false);
         audiosource.clip = finishAudio;
         audiosource.Play();
@@ -244,9 +309,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
 public class MG_HearthAndStars_RoundAnalytics
 {
-    public string challengeOrder = "NONE";
-    public bool wonRound = false;
+    public int stimuli = 0;
+    public int answer = 0;
+    public int valid = 0;
+    public int roundCount = 0;
+    public int wonRound = 0;
     public float timeToMakeAChoice = 0;
-    public int clicks = 0;
-    public bool ranOutOfTime = false;
 }

@@ -67,7 +67,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r"
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: a584a339cdcf84b4c8d6673f505f72fe, type: 3}
     analyticChoiceID: 
@@ -75,7 +75,7 @@ MonoBehaviour:
     responses:
     - response: Le empujo para sacarle de la fila
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 01f55b6a202a8a04d8deb03fd6a29ae6, type: 3}
       responseAudio: {fileID: 8300000, guid: f84babf3f045a5e4f95cd3e68d8fe908, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: "Dejo as\xED. Igual todos hacen lo mismo"
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 47a5b63ec1ac2814a83cabe727db7329, type: 3}
       responseAudio: {fileID: 8300000, guid: 6ef0bb01e6418144a9a9b5dbdbd3ef1e, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: Le digo que no es justo que se cole. Todos tenemos que hacer la fila
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: b094601e6d7b7a74f9393b621c37eb84, type: 3}
       responseAudio: {fileID: 8300000, guid: 847637f5ef2f2ed4da6623d235879504, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
@@ -106,7 +106,7 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 3
         EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
@@ -129,84 +129,18 @@ MonoBehaviour:
     ExitAnim: {fileID: 0}
   - characterType: 5
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Por fin! Cami y t\xFA logran comprar algo y ya tienes c\xF3mo calmar el
-      hambre. De repente, Alex llega por detr\xE1s y te empuja. \xA1Toda tu comida
-      cae al piso!\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses: []
-    audio: {fileID: 8300000, guid: af4e42872e8d7ea46a8df599950fd649, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: 2958c8f60ca81de4680ba0058f62c1ec, type: 2}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 0}
-    changeToSequenceStartDialogIdx: -1
-    changeToSequenceResponseIdxToGrayOut: -1
-    text: "Cuando te pasa algo as\xED, \xBFqu\xE9 haces?\r\r"
-    textAlternative: 
-    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 18636ae305c0724429161a3fd8b6b167, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
-    responses:
-    - response: Le grito que es un bruto, que aprenda a caminar
-      responseAlternative: Le grito que es una bruta, que aprenda a caminar
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 8300000, guid: 0b9b297e80e25e647b036867f1bdffc8, type: 3}
-      responseAudioAlternative: {fileID: 8300000, guid: faa4a19869e91a349b81a39302ef0192, type: 3}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
-    - response: "Le digo que no lo vuelva a hacer, me dej\xF3 sin nada que comer."
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 8300000, guid: 4665750e591c2af45b9a0e66b4aac63c, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
-    - response: "No digo nada y me pongo a llorar.\r"
-      responseAlternative: 
-      responseImage: {fileID: 0}
-      responseAudio: {fileID: 8300000, guid: 2c32ab3cfe7788a468b41690ec698d1e, type: 3}
-      responseAudioAlternative: {fileID: 0}
-      dataAfterResponse: {fileID: 0}
-      analyticInfo:
-        mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: e88e36ffae0bd454e8a0291bf0bac4b9, type: 3}
-    audioAlternative: {fileID: 0}
-    EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 0}
-    ExitAnim: {fileID: 0}
-  - characterType: 5
-    autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 5b90a1ca1c4b4b54f9bb8b881a3fb6b7, type: 2}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "A Alex solo se r\xEDe y sale corriendo\r\r"
+    text: "Por fin! Cami y t\xFA logran comprar algo y ya tienes c\xF3mo calmar el
+      hambre.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     analyticChoiceID: 
     analyticTimeID: 
     responses: []
-    audio: {fileID: 8300000, guid: 51683da0b39b3314885466c3c9e62091, type: 3}
+    audio: {fileID: 8300000, guid: 142b8c8654c36154e811e6d964363373, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
-    IdleAnim: {fileID: 11400000, guid: c994f2aa1c9c32649a9fd24cbf4faf96, type: 2}
+    IdleAnim: {fileID: 11400000, guid: 9ed04b41e3255bb4d8fb0e9b4df84094, type: 2}
     ExitAnim: {fileID: 0}

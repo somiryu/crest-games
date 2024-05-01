@@ -12673,7 +12673,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1459326899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13138,7 +13138,7 @@ RectTransform:
   m_Father: {fileID: 348349018}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13512,8 +13512,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1448301836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13998,6 +13998,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfigs: {fileID: 11400000, guid: ff83302c6ad47384ea88edc9c0e3bc06, type: 2}
+  tutoConfigs:
+  - {fileID: 11400000, guid: 54d117b8ff14db6448938f393fff02a6, type: 2}
+  - {fileID: 11400000, guid: 3331d3521c0074141930b96caed1bc14, type: 2}
+  - {fileID: 11400000, guid: 976ace76f22a52c46a4f708d303188d7, type: 2}
   leftTargetSprite: {fileID: 21300000, guid: 3ea023f6b1c9e2c4194b88a88cb8a814, type: 3}
   rightTargetSprite: {fileID: 21300000, guid: bb6115a739570b24bb07ad5301bbc228, type: 3}
   currTargetImg: {fileID: 597656416}
@@ -14016,8 +14020,9 @@ MonoBehaviour:
   finishAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
   rightAudio: {fileID: 8300000, guid: f30080e8439e6b542a0736c0dc30d397, type: 3}
-  lookAtCampsAudio: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
-  firstInstrucAudio: {fileID: 8300000, guid: 10380640d41601d4f936e2ba9d8e108c, type: 3}
+  tutorialIntroAudio: {fileID: 8300000, guid: 3e349e25ce18ceb468c6a21bcb9f7d5b, type: 3}
+  firstInstrucAudioForVoiceAsCorrectAnswer: {fileID: 8300000, guid: 3e349e25ce18ceb468c6a21bcb9f7d5b, type: 3}
+  firstInstrucAudioForImgAsCorrectAnswer: {fileID: 8300000, guid: f96bddc5789e57c4eb88f1bc2d07d1be, type: 3}
   discardAdvice: {fileID: 8300000, guid: 79e9a31ae4e8ee6469941e34d3061ea0, type: 3}
   youDidGoodAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
   youDidGoodNowTryAudio: {fileID: 8300000, guid: 6828c86d3e559bf40a64ef17679c0e5f, type: 3}
@@ -14027,6 +14032,10 @@ MonoBehaviour:
   letsPlayAudio: {fileID: 8300000, guid: 1d0f0f4a25fb51f4ebd3e8ef5cfca15f, type: 3}
   effectPlayer: {fileID: 1631699890}
   audioPlayer: {fileID: 1951022623}
+  onFailedFlowersAndVoice: {fileID: 8300000, guid: 9fafed0d6491e02439776d17bbeaf80f, type: 3}
+  onFailedCloudAndVoice: {fileID: 8300000, guid: b9fdfb099382d804589e08f6af2285e0, type: 3}
+  onFailedFlowersAndImg: {fileID: 8300000, guid: 2caf4144889f46143b6975b6878b4147, type: 3}
+  onFailedCloudAndImg: {fileID: 8300000, guid: 5fc039bdf9ebd854fa611a1ddd95e7b9, type: 3}
   leftWonItemsPool:
     itemPrefab: {fileID: 793727092}
     hierarchyParent: {fileID: 1366486297}

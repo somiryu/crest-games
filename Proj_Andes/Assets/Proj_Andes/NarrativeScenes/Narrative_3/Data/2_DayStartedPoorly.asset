@@ -53,7 +53,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 5
+        EmoSubCategory: 0
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -61,10 +61,10 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
+        mainCategory: 5
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 4
+        EmoSubCategory: 0
     - response: "ALEGR\xCDA"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -75,7 +75,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 2
+        EmoSubCategory: 0
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -86,7 +86,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 1
+        EmoSubCategory: 0
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -97,7 +97,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 6
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 949cf147508a45d4b9f1c55be520cbe3, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 5
+        EmoSubCategory: 0
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -174,7 +174,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 4
+        EmoSubCategory: 0
     - response: "ALEGR\xCDA"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -185,7 +185,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 3
+        EmoSubCategory: 0
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -196,7 +196,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 1
+        EmoSubCategory: 0
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -207,7 +207,7 @@ MonoBehaviour:
         mainCategory: 4
         empSubCategory: 0
         aggSubCategory: 0
-        EmoSubCategory: 6
+        EmoSubCategory: 0
     audio: {fileID: 8300000, guid: 37f454003c39c4d49951abb49690e69f, type: 3}
     audioAlternative: {fileID: 8300000, guid: ff3e5ced29c2ae84196f71aef5594f96, type: 3}
     EnterAnim: {fileID: 0}

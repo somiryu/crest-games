@@ -83,6 +83,7 @@ public class TimeManager : MonoBehaviour
     }
     public void GetQuitGameAnalytics()
     {
+        if (UserDataManager.CurrTestID == "Default Test ID") return;
         var testAnalytics = testGeneralData.itemAnalytics = new Dictionary<string, object>();
         testAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
         testAnalytics.Add(DataIds.created_At, createDate);

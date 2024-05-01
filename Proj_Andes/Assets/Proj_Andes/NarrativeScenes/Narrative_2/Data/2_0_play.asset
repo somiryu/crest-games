@@ -97,10 +97,26 @@ MonoBehaviour:
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0d1be4f6df44431449665ad0c519683f, type: 3}
     analyticChoiceID: 
     analyticTimeID: 
+    responses: []
+    audio: {fileID: 8300000, guid: d66875819476e3d479486e8f09446ba6, type: 3}
+    audioAlternative: {fileID: 8300000, guid: ea438607dd2a0f84fb3cf2545c1bb39f, type: 3}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 0}
+    ExitAnim: {fileID: 0}
+  - characterType: 5
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0d1be4f6df44431449665ad0c519683f, type: 3}
+    analyticChoiceID: 
+    analyticTimeID: 
     responses:
     - response: Escojan ustedes. yo juego lo que digan
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 80bd84dfb4ab3bc47abea91ef6b5fd35, type: 3}
       responseAudio: {fileID: 8300000, guid: 4b02145e21c532d4d82b598f3e2d9db2, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
@@ -111,7 +127,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: Busquemos algo que nos guste a todos
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 8dff2534afdb0de4d9e08f41baeeb206, type: 3}
       responseAudio: {fileID: 8300000, guid: c60a0d130bb6ca74ea28595d8018cc49, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
@@ -122,7 +138,7 @@ MonoBehaviour:
         EmoSubCategory: 0
     - response: Yo escojo el juego y ya
       responseAlternative: 
-      responseImage: {fileID: 0}
+      responseImage: {fileID: 21300000, guid: 9259764a6ddabb5498014d9796dd5048, type: 3}
       responseAudio: {fileID: 8300000, guid: 31236373c665b694f8350c4357470342, type: 3}
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
@@ -131,8 +147,8 @@ MonoBehaviour:
         empSubCategory: 0
         aggSubCategory: 1
         EmoSubCategory: 0
-    audio: {fileID: 8300000, guid: d66875819476e3d479486e8f09446ba6, type: 3}
-    audioAlternative: {fileID: 8300000, guid: ea438607dd2a0f84fb3cf2545c1bb39f, type: 3}
+    audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
