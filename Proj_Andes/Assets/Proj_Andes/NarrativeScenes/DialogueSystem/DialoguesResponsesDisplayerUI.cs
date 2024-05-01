@@ -41,7 +41,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 		{
 			var newResponse = responsesPool.GetNewItem();
 			newResponse.SetData(responseDatas[i]);
-			newResponse.onClicked = HighlightResponse;
+			newResponse.onClicked = OnClickedResponse;
 			currResponses.Add(newResponse);
 			Sprite highlightSprite = null;
 			if(i < highlightBtnsSprites.Count)
@@ -61,7 +61,14 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 	public void ActiveConfirmationButton(bool value)
 	{
 		confirmationButton.gameObject.SetActive(value);
+	}
 
+	public void SetCanInteractWithBtns(bool value)
+	{
+		for (int i = 0; i < currResponses.Count; i++)
+		{
+			currResponses[i].SetRaycastInteractable(value);
+		}
 	}
 
 	public void GrayOutResponse(int responseIdx)
@@ -101,7 +108,11 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 			}
 			else UnClickResponse(curr);
 		}
+	}
 
+	public void OnClickedResponse(DialogueResponse response)
+	{
+		HighlightResponse(response);
 		if (UseConfirmationBtn) mainUi.OnClickResponse(response);
 		else
 		{

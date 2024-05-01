@@ -429,28 +429,24 @@ public class DialoguesDisplayerUI : MonoBehaviour
                     currResponsesDisplayer.GrayOutResponse(grayOutResponseIdxes[i]);
                 }
 
-                if (narrativeSceneItem.shouldPreviewAnswers && currResponsesDisplayer.audibleResponses)
+                if (narrativeSceneItem.shouldPreviewAnswers && !canSkipAudio.isOn)
                 {
-
                     doneResponsePreview = false;
-                    for (int i = 0; i < currResponsesDisplayer.currResponses.Count; i++) currResponsesDisplayer.currResponses[i].Btn.interactable = false;
+                    currResponsesDisplayer.SetCanInteractWithBtns(false);
                     for (int i = 0; i < dialogueData.responses.Length; i++)
                     {
                         var currResponse = dialogueData.responses[i];
+                        if (currResponse.responseAudio == null) continue;
                         Debug.Log("playing " + i);
                         currResponsesDisplayer.HighlightResponse(currResponse);
-                        if (currResponse.responseAudio != null) yield return new WaitForSeconds(audioPlayer.clip.length);
-                        else yield return null;
+                        audioPlayer.clip = currResponse.responseAudio;
+                        audioPlayer.Play();
+                        yield return new WaitForSeconds(audioPlayer.clip.length);
                     }
-                    for (int i = 0; i < currResponsesDisplayer.currResponses.Count; i++)
-                    {
-                        currResponsesDisplayer.UnClickResponse(currResponsesDisplayer.currResponses[i]);
-                        currResponsesDisplayer.currResponses[i].Btn.interactable = true;
-                    }
+					currResponsesDisplayer.HighlightResponse(null);
                 }
                 doneResponsePreview = true;
-                preselectedResponseAudioIsDone = false;
-                currResponsesDisplayer.ActiveConfirmationButton(false);
+				currResponsesDisplayer.SetCanInteractWithBtns(true);
             }
         }
         else
@@ -477,7 +473,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             {
                 preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
                 if (canSkipAudio.isOn) preselectedResponseAudioIsDone = true;
-				//currResponsesDisplayer.ActiveConfirmationButton(preselectedResponseAudioIsDone);
+				currResponsesDisplayer.ActiveConfirmationButton(preselectedResponseAudioIsDone);
             }
             yield return null;
         }
