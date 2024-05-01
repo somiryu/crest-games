@@ -50,9 +50,10 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
-        empSubCategory: 1
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 2
     - response: BIEN
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -61,9 +62,10 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
-        empSubCategory: 2
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 1
+        agressionSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 2
     - response: ME DA IGUAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -72,9 +74,10 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
-        empSubCategory: 3
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 2
+        agressionSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 2
     - response: MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
@@ -83,9 +86,10 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
-        empSubCategory: 4
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 3
+        agressionSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 2
     - response: MUY MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -94,9 +98,10 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 1
-        empSubCategory: 5
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 4
+        agressionSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 2
     audio: {fileID: 8300000, guid: 52fb05e15daf2e749a32ba7dad06a49c, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

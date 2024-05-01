@@ -55,9 +55,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: Volleyball
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 433e9ab08d934d9409a14c87568a2d67, type: 3}
@@ -66,9 +70,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "F\xFAtbol"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: e9bd8354896d42d44b17dfb6572aad2f, type: 3}
@@ -77,9 +85,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 5daf22789e0076447877b00ec4bb04a1, type: 3}
     audioAlternative: {fileID: 8300000, guid: f44d1ae9648f6014f8cd4c185f4ac387, type: 3}
     EnterAnim: {fileID: 0}
@@ -122,9 +134,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 1
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: Busquemos algo que nos guste a todos
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 8dff2534afdb0de4d9e08f41baeeb206, type: 3}
@@ -133,9 +149,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 2
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: Yo escojo el juego y ya
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9259764a6ddabb5498014d9796dd5048, type: 3}
@@ -144,9 +164,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 8dd934194d330cd45b1244e9fc23915a, type: 2}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     EnterAnim: {fileID: 0}

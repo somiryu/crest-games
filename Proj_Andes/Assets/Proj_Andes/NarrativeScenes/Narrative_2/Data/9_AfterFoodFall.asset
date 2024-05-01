@@ -84,9 +84,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: Le digo que es un malo y que ya no quiero ser su amigo.
       responseAlternative: Le digo que es una mala y que ya no quiero ser su amiga.
       responseImage: {fileID: 21300000, guid: fe81452cb52ebd54e915f25b8ea9e239, type: 3}
@@ -95,9 +99,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "Hago como si no hubiera pasado nada, para que sigamos siendo amigos.\r"
       responseAlternative: "Hago como si no hubiera pasado nada, para que sigamos
         siendo amigas.\r"
@@ -107,9 +115,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -170,9 +182,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "Una canci\xF3n para cantar entre todos"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 0880512c4e986564494df79c3976027c, type: 3}
@@ -181,9 +197,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "Una canci\xF3n para escuchar entre todos "
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 012764ea3672baf419f23ab73fa09be8, type: 3}
@@ -192,9 +212,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 0
-        empSubCategory: 0
-        aggSubCategory: 0
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 273b16df87b8f3c46bfa005e7a3a8665, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -236,9 +260,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "Prefiero quedarme callado y que elijan los dem\xE1s."
       responseAlternative: "Prefiero quedarme callada y que elijan los dem\xE1s."
       responseImage: {fileID: 21300000, guid: d5f41a71e3d091f4cb04b1385e7b7b13, type: 3}
@@ -247,9 +275,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 1
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "Propongo que hagamos una votaci\xF3n para que escoja la mayor\xEDa.\r"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: e712c5a2376a2504d8d4c898086b7935, type: 3}
@@ -258,9 +290,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 2
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

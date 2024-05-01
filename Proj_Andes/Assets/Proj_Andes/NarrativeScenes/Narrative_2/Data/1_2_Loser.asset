@@ -40,7 +40,7 @@ MonoBehaviour:
     analyticChoiceID: 
     analyticTimeID: 
     responses:
-    - response: ' Les digo que si no me dejan jugar me voy a poner triste.'
+    - response: Asertiva
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 1b583e9ddad1e7247adf55da6de2c547, type: 3}
       responseAudio: {fileID: 8300000, guid: eb91ee252d0d416419c34cb8ee2cbd59, type: 3}
@@ -48,10 +48,14 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 89dadb1d8d6348d44858afb84f04782b, type: 2}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
-    - response: No hago nada, y me quedo jugando solo
+        empathySubCategory: 0
+        agressionSubCategory: 2
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
+    - response: Evitativa
       responseAlternative: No hago nada, y me quedo jugando sola.
       responseImage: {fileID: 21300000, guid: f8429f9d90079034fadd482990f6f4ff, type: 3}
       responseAudio: {fileID: 8300000, guid: 3b746d843dd121f42893c064af6459ff, type: 3}
@@ -59,10 +63,14 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 89dadb1d8d6348d44858afb84f04782b, type: 2}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
-    - response: Les digo que son unos odiosos por no dejarme jugar.
+        empathySubCategory: 0
+        agressionSubCategory: 1
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
+    - response: Agresiva
       responseAlternative: Les digo que son unas odiosas por no dejarme jugar.
       responseImage: {fileID: 21300000, guid: 0b4874a07715c8846ad1baad152c33c5, type: 3}
       responseAudio: {fileID: 8300000, guid: 001de859612091341abe6409c0b3e49c, type: 3}
@@ -70,9 +78,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 11400000, guid: 89dadb1d8d6348d44858afb84f04782b, type: 2}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

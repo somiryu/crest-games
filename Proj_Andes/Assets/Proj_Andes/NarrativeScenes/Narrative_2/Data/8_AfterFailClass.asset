@@ -81,9 +81,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 3
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "Dejo as\xED. Igual todos hacen lo mismo"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 47a5b63ec1ac2814a83cabe727db7329, type: 3}
@@ -91,10 +95,14 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
+        mainCategory: 3
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 1
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: Le digo que no es justo que se cole. Todos tenemos que hacer la fila
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: b094601e6d7b7a74f9393b621c37eb84, type: 3}
@@ -102,10 +110,14 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
+        mainCategory: 3
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 2
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

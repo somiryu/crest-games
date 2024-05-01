@@ -79,12 +79,14 @@ public class NarrativeAnalyicsInfo
     public NarrativeAnalyticCategory mainCategory;
     public NarrativeAnalticsEmpathyCategories empathySubCategory;
     public NarrativeAnalyticAggSubCategory agressionSubCategory;
+    public NarrativeAnalyticConfSubCategory conflictSubCategory;
     public NarrativeAnalyticsFeeling emotionSubCategory;
     public NarrativeAnalticsEmpathyInRelationTo inRelationTo;
+    public EmotionsAnalyticsValues emotionsAnalyticsValues;
 
     public string BuildID(int narrativeIdx, int questionIdx, NarrativeAnalyticType analyticType)
     {
-        var label = "Narr" + narrativeIdx + "_";
+        var label = "m" + (narrativeIdx + 1) + "_";
 
         switch (mainCategory)
         {
@@ -120,7 +122,7 @@ public class NarrativeAnalyicsInfo
                     break;
 
             }
-            label += questionIdx + "_";
+            label += (questionIdx + 1) + "_";
         }
         switch (analyticType)
         {
@@ -140,29 +142,50 @@ public class NarrativeAnalyicsInfo
 
     public string BuildResponse()
     {
-        if(mainCategory == NarrativeAnalyticCategory.Aggression || mainCategory == NarrativeAnalyticCategory.Conflict)
-        {
-            return ((int)agressionSubCategory).ToString();
-        }
-        if(mainCategory == NarrativeAnalyticCategory.Empathy) return emotionSubCategory.ToString();
+        if(mainCategory == NarrativeAnalyticCategory.Aggression) return agressionSubCategory.ToString();
+        if(mainCategory == NarrativeAnalyticCategory.Conflict) return conflictSubCategory.ToString();
+        if(mainCategory == NarrativeAnalyticCategory.Empathy) return empathySubCategory.ToString();
         if(mainCategory == NarrativeAnalyticCategory.EmoBas) return emotionSubCategory.ToString();
         if(mainCategory == NarrativeAnalyticCategory.EmoComp) return emotionSubCategory.ToString();
 
         return null;
     }
 
-    public int BuildValue()
+    public float BuildValue()
     {
         if (mainCategory == NarrativeAnalyticCategory.Aggression || mainCategory == NarrativeAnalyticCategory.Conflict)
         {
             return ((int)agressionSubCategory);
         }
-        if (mainCategory == NarrativeAnalyticCategory.Empathy) return (int)emotionSubCategory;
-        if (mainCategory == NarrativeAnalyticCategory.EmoBas) return (int)emotionSubCategory;
-        if (mainCategory == NarrativeAnalyticCategory.EmoComp) return (int)emotionSubCategory;
-
+        if (mainCategory == NarrativeAnalyticCategory.Empathy) return (int)empathySubCategory;
+        if(mainCategory == NarrativeAnalyticCategory.EmoBas || mainCategory == NarrativeAnalyticCategory.EmoComp)
+        {
+            return emotionsAnalyticsValues.GetValueForEmotion(emotionSubCategory);
+        }
         return -1;
     }
+}
+
+[Serializable]
+public class EmotionsAnalyticsValues
+{
+    public List<EmotionAnalyticValue> customValues;
+
+    public float GetValueForEmotion(NarrativeAnalyticsFeeling type)
+    {
+        for (int i = 0; i < customValues.Count; i++)
+        {
+            if (customValues[i].emotionType == type) return customValues[i].value;
+        }
+        return 0;
+    }
+}
+
+[Serializable]
+public class EmotionAnalyticValue
+{
+    public NarrativeAnalyticsFeeling emotionType;
+    public float value;
 }
 
 
@@ -178,11 +201,20 @@ public enum NarrativeAnalyticCategory
 
 public enum NarrativeAnalyticAggSubCategory
 {
-    NONE,
-    Aggresive,
-    Evasive,
-    Assertive,
+    NONE = 99,
+    Agresiva = 0,
+    Evitativa = 1,
+    Asertiva = 2,
 }
+
+public enum NarrativeAnalyticConfSubCategory
+{
+	NONE = 99,
+	imponer = 0,
+	Ceder = 1,
+	Negociar = 2,
+}
+
 public enum NarrativeAnalyticsFeeling
 {
     NONE,
@@ -200,12 +232,12 @@ public enum NarrativeAnalyticsFeeling
 
 public enum NarrativeAnalticsEmpathyCategories
 {
-    NONE,
-    Muy_Bien,
-    Bien,
-    Me_Da_Igual,
-    Mal,
-    Muy_Mal,
+    NONE = 99,
+    Muy_Bien = 0,
+    Bien = 1,
+    Me_Da_Igual = 2,
+    Mal = 3,
+    Muy_Mal = 4,
 }
 public enum NarrativeAnalticsEmpathyInRelationTo
 {

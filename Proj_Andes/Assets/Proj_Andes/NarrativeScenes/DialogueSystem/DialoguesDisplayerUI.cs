@@ -75,7 +75,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private string currResponseChoiceAnalyticIDRta;
     private int analyticsCount;
     private string currResponseAnalyticResponse;
-    private int currResponseAnalyticResponseVal;
+    private float currResponseAnalyticResponseVal;
 
     private DialoguesResponsesDisplayerUI currResponsesDisplayer;
 
