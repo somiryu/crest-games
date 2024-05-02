@@ -19,6 +19,10 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 		if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
 
 		DocumentFound.Add(DataIds.tryAgainClicks, clickAmounts);
+        foreach (var item in DocumentFound)
+        {
+            Debug.Log("found " + item.Value);
+        }
     }
 
     public override void ResetCurrentAnalytics()
