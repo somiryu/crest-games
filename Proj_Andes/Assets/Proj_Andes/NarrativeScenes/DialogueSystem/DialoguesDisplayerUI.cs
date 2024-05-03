@@ -646,24 +646,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
 		var analytics = Instance.narrativeSceneItem.itemAnalytics;
         if (analytics != null && analytics.Count > 0)
         {
-            switch (NarrativeSceneManager.Instance.NarrativeIdx)
-            {
-                case 0:
-                    UserDataManager.SaveUserAnayticsPerGame(CollectionName: DataIds.Narratives1,
-                    itemAnalytics: Instance.narrativeSceneItem.itemAnalytics,
-                    shouldUseTestID: true);
-                    break;
-                case 1:
-                    UserDataManager.SaveUserAnayticsPerGame(CollectionName: DataIds.Narratives2,
-                    itemAnalytics: Instance.narrativeSceneItem.itemAnalytics,
-                    shouldUseTestID: true);
-                    break;
-                case 2:
-                    UserDataManager.SaveUserAnayticsPerGame(CollectionName: DataIds.Narratives3,
-                    itemAnalytics: Instance.narrativeSceneItem.itemAnalytics,
-                    shouldUseTestID: true);
-                    break;
-            }
+
+            var collectionID = DataIds.Narratives1;
+            if (NarrativeSceneManager.Instance.NarrativeIdx == 1) collectionID = DataIds.Narratives2;
+            else if (NarrativeSceneManager.Instance.NarrativeIdx == 2) collectionID = DataIds.Narratives3;
+
+			UserDataManager.SaveUserAnayticsPerGame(
+                CollectionName: collectionID,
+                itemAnalytics: Instance.narrativeSceneItem.itemAnalytics,
+                shouldUseTestID: true);
         }
 	}
 
