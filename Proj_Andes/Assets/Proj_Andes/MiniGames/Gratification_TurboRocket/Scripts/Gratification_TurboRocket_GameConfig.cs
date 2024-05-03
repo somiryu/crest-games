@@ -20,6 +20,8 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
 
     [NonSerialized] public int turboUsedTimes;
     [NonSerialized] public float totalTurboTime;
+
+    public static int postFrustration = 0;
     public override string GetSceneID() => DataIds.turboRocketGame;
 
     public override void SaveAnalytics()
@@ -29,7 +31,7 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
 
 		itemAnalytics.Add(DataIds.GameID, GameID);
 		itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
-		itemAnalytics.Add(DataIds.turboStarsFrustrationMode, 0);
+		itemAnalytics.Add(DataIds.turboStarsFrustrationMode, postFrustration);
         itemAnalytics.Add(DataIds.turboStarsStars, coinsCollected);
         itemAnalytics.Add(DataIds.turboStarsTurboUses, turboUsedTimes);
         itemAnalytics.Add(DataIds.turboStarsTurboTime, totalTurboTime);
