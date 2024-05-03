@@ -14020,8 +14020,8 @@ MonoBehaviour:
   finishAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
   leftAudio: {fileID: 8300000, guid: f33fbb17412eb57488860928ccee36ef, type: 3}
   rightAudio: {fileID: 8300000, guid: f30080e8439e6b542a0736c0dc30d397, type: 3}
-  tutorialIntroAudio: {fileID: 8300000, guid: 3e349e25ce18ceb468c6a21bcb9f7d5b, type: 3}
-  firstInstrucAudioForVoiceAsCorrectAnswer: {fileID: 8300000, guid: 3e349e25ce18ceb468c6a21bcb9f7d5b, type: 3}
+  tutorialIntroAudio: {fileID: 8300000, guid: 8a7acd6c095a885409b763fd041aef40, type: 3}
+  firstInstrucAudioForVoiceAsCorrectAnswer: {fileID: 8300000, guid: 4b408138fce64a8478c40441feb7654f, type: 3}
   firstInstrucAudioForImgAsCorrectAnswer: {fileID: 8300000, guid: f96bddc5789e57c4eb88f1bc2d07d1be, type: 3}
   discardAdvice: {fileID: 8300000, guid: 79e9a31ae4e8ee6469941e34d3061ea0, type: 3}
   youDidGoodAudio: {fileID: 8300000, guid: e528421c097fe7549a78c949e9e28825, type: 3}
