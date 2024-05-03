@@ -59,6 +59,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     [SerializeField] AudioClip introAudio;
     [SerializeField] AudioClip expensiveChestsAudio;
     [SerializeField] AudioClip intermidiateGamesIntro;
+    [SerializeField] AudioClip selectRedBoxAudio;
     [SerializeField] AudioClip uHaveAmtStarsAudio;
     [SerializeField] AudioClip openItAndGetAGiftAudio;
     [SerializeField] AudioClip uWonAMonsterAudio;
@@ -173,6 +174,9 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             audioSource.clip = intermidiateGamesIntro;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(intermidiateGamesIntro.length);
+            audioSource.clip = selectRedBoxAudio;
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(selectRedBoxAudio.length);
         }
 
 
@@ -211,7 +215,14 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     }
 
  
-
+    IEnumerator PlaySelectMonsters()
+    {
+        blockButtons.gameObject.SetActive(true);
+        audioSource.clip = intermidiateGamesIntro;
+        audioSource.Play();
+        yield return new WaitForSecondsRealtime(intermidiateGamesIntro.length);
+        blockButtons.gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -235,8 +246,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     {
         if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
         myCollectionManager.OnClosedCollections -= OnCollectionsClosed;
-
-		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
+        if (UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction) && UserDataManager.CurrUser.Coins >= 5) StartCoroutine(PlaySelectMonsters());
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
 		{
 			StartCoroutine(OrSelectContinue());
 		}
@@ -321,6 +332,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 				break;
         }
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
+         
         SetLockedImageInButtons();
     }
 
