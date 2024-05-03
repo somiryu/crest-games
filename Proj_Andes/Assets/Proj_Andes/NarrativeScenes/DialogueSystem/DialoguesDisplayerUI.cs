@@ -9,14 +9,15 @@ using UnityEngine.Playables;
 using Unity.VisualScripting;
 using Firebase.Firestore;
 using UnityEngine.Serialization;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class DialoguesDisplayerUI : MonoBehaviour
 {
     private static DialoguesDisplayerUI instance;
     public static DialoguesDisplayerUI Instance => instance;
-    [SerializeField] SimpleGameSequenceItem narrativeSceneItem;
+    public NarrativeSequenceItem narrativeSceneItem;
 
-    [SerializeField] DialogueSequenceData dialoguesToShow;
+    public DialogueSequenceData dialoguesToShow;
     public DialogueSequenceData CurrDialoguesBeingShown => dialoguesToShow;
     [Space(20)]
     [SerializeField] GameObject mainDialoguesGraphics;
@@ -53,6 +54,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 
     public bool SaveNavSequence = true;
+    public bool doneResponsePreview;
     
 
     public bool IsShowing => isShowing;
@@ -68,10 +70,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     //Analytics
     private float currResponseTime;
-    private string currResponseChoiceAnalyticID;
+    private string currResponseChoiceAnalyticIDTm;
+    private string currResponseChoiceAnalyticIDVal;
+    private string currResponseChoiceAnalyticIDRta;
     private int analyticsCount;
-    private string currResponseTimeAnalyticID;
-    private string currResponseAnalyticResponseValue;
+    private string currResponseAnalyticResponse;
+    private float currResponseAnalyticResponseVal;
 
     private DialoguesResponsesDisplayerUI currResponsesDisplayer;
 
@@ -122,8 +126,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         narrativeSceneItem.ResetCurrentAnalytics();
 	}
-
-	public bool OnWantsToChangeDialogFromTrigger()
+    public bool OnWantsToChangeDialogFromTrigger()
     {
         if (!audioIsDone) return false;
         if (state != dialogLineState.Idle) return false;
@@ -344,7 +347,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
         fullScreenInvisibleBtn.gameObject.SetActive(true);
         forceEndAppearingTxt = false;
     }
-
     public void Update()
     {
         if (!isShowing) return;
@@ -418,22 +420,43 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (dialogueData.responses.Length > 0)
         {
             hasResponse = true;
-			currResponsesDisplayer = GetResponseDisplayer(dialogueData);
+            currResponsesDisplayer = GetResponseDisplayer(dialogueData);
+
             if (currResponsesDisplayer != null)
             {
-               
-
-                currResponsesDisplayer.ShowResponses(dialogueData.responses);               
+                currResponsesDisplayer.ShowResponses(dialogueData.responses);
 
                 for (int i = 0; i < grayOutResponseIdxes.Count; i++)
                 {
                     currResponsesDisplayer.GrayOutResponse(grayOutResponseIdxes[i]);
-				}
-            }
-		}
-        else hasResponse = false;
+                }
 
-        var hasAnalytic = !string.IsNullOrEmpty(dialogueData.analyticChoiceID);
+                if (narrativeSceneItem.shouldPreviewAnswers && !canSkipAudio.isOn)
+                {
+                    doneResponsePreview = false;
+                    currResponsesDisplayer.SetCanInteractWithBtns(false);
+                    for (int i = 0; i < dialogueData.responses.Length; i++)
+                    {
+                        var currResponse = dialogueData.responses[i];
+                        if (currResponse.responseAudio == null) continue;
+                        Debug.Log("playing " + i);
+                        currResponsesDisplayer.HighlightResponse(currResponse);
+                        audioPlayer.clip = currResponse.responseAudio;
+                        audioPlayer.Play();
+                        yield return new WaitForSeconds(audioPlayer.clip.length);
+                    }
+					currResponsesDisplayer.HighlightResponse(null);
+                }
+                doneResponsePreview = true;
+				currResponsesDisplayer.SetCanInteractWithBtns(true);
+            }
+        }
+        else
+        {
+            doneResponsePreview = true;
+            hasResponse = false;
+        }
+
 
         if (audioIsDone && !hasResponse)
         {
@@ -445,7 +468,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 		while (!hasPendingLineChange)
         {
-			if (hasAnalytic) currResponseTime += Time.deltaTime;
+			currResponseTime += Time.deltaTime;
 
 			if (preselectedResponse != null)
             {
@@ -469,14 +492,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
         hasPendingLineChange = false;
         currAnimSequence = null;
 
-        if (!string.IsNullOrEmpty(currResponseChoiceAnalyticID))
+        if (!string.IsNullOrEmpty(currResponseChoiceAnalyticIDRta))
         {
-            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticID, currResponseAnalyticResponseValue);
-            narrativeSceneItem.itemAnalytics.Add(currResponseTimeAnalyticID, currResponseTime);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDRta, currResponseAnalyticResponse);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDVal, currResponseAnalyticResponseVal);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDTm, currResponseTime);
 
-            currResponseChoiceAnalyticID = null;
-            currResponseTimeAnalyticID = null;
-            currResponseAnalyticResponseValue = null;
+            Debug.Log("cur1 " + currResponseChoiceAnalyticIDRta + " " + currResponseAnalyticResponse);
+            Debug.Log("cur2 " + currResponseChoiceAnalyticIDVal + " " + currResponseAnalyticResponseVal);
+            Debug.Log("cur3 " + currResponseChoiceAnalyticIDTm + " " + currResponseTime);
+            currResponseAnalyticResponse = null;
+            currResponseChoiceAnalyticIDRta = null;
+            currResponseAnalyticResponseVal = -1;
             currResponseTime = 0;
         }
 
@@ -490,8 +517,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     {
         if (!audioIsDone) return;
         
-        currResponsesDisplayer.ActiveConfirmationButton(true);
-
+        currResponsesDisplayer.ActiveConfirmationButton(doneResponsePreview);
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
         var currResponseAudio = responseClicked.responseAudio;
@@ -519,18 +545,24 @@ public class DialoguesDisplayerUI : MonoBehaviour
         {
             var questionIdx = GetQuestionIdxFor(analyticInfo);
 
-
-            currResponseChoiceAnalyticID = analyticInfo.BuildID(
+            currResponseChoiceAnalyticIDRta = analyticInfo.BuildID(
                 narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
-                questionIdx: questionIdx, 
-                isTimeLabel: false);
+                questionIdx: questionIdx,
+                NarrativeAnalyticType.Rta);
 
-            currResponseTimeAnalyticID = analyticInfo.BuildID(
-				narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
-				questionIdx: questionIdx,
-				isTimeLabel: true);
-			currResponseAnalyticResponseValue = analyticInfo.BuildResponse();
-		}
+            currResponseChoiceAnalyticIDVal = analyticInfo.BuildID(
+                narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
+                questionIdx: questionIdx,
+                NarrativeAnalyticType.Val);
+
+            currResponseChoiceAnalyticIDTm = analyticInfo.BuildID(
+                narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
+                questionIdx: questionIdx,
+                NarrativeAnalyticType.Tm);
+
+            currResponseAnalyticResponse = analyticInfo.BuildResponse();
+            currResponseAnalyticResponseVal = analyticInfo.BuildValue();
+        }
 
         currResponsesDisplayer.ActiveConfirmationButton(false);
         hasPendingLineChange = true;
@@ -545,7 +577,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private int EmptQuestionsCount = -1;
     private int AggQuestionsCount = -1;
     private int ConfQuestionsCount = -1;
-    private int EmoQuestionsCount = -1;
+    private int EmoCompQuestionsCount = -1;
+    private int EmoBasQuestionsCount = -1;
     
 
     public int GetQuestionIdxFor(NarrativeAnalyicsInfo info)
@@ -561,9 +594,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
             case NarrativeAnalyticCategory.Conflict:
                 ConfQuestionsCount++;
                 return ConfQuestionsCount;
-            case NarrativeAnalyticCategory.Emo:
-                EmoQuestionsCount++;
-                return EmoQuestionsCount;
+            case NarrativeAnalyticCategory.EmoBas:
+                EmoBasQuestionsCount++;
+                return EmoBasQuestionsCount;            
+            case NarrativeAnalyticCategory.EmoComp:
+                EmoBasQuestionsCount++;
+                return EmoCompQuestionsCount++;
             default: return -1;
         }
 	}

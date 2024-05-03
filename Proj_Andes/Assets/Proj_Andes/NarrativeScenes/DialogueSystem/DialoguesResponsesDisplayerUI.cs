@@ -11,7 +11,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 
 	[SerializeField] Button confirmationButton;
 
-
+	public bool audibleResponses = true;
 	public List<ResponseBtn> currResponses;
 	public IDialoguesResponseDisplayerUser[] users;
 
@@ -33,7 +33,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 		confirmationButton.gameObject.SetActive(false);
 	}
 
-	public void ShowResponses(DialogueResponse[] responseDatas)
+    public void ShowResponses(DialogueResponse[] responseDatas)
 	{
 		for (int i = 0; i < users.Length; i++) users[i].OnShowResponses(responseDatas);
 
@@ -41,7 +41,7 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 		{
 			var newResponse = responsesPool.GetNewItem();
 			newResponse.SetData(responseDatas[i]);
-			newResponse.onClicked = HighlightResponse;
+			newResponse.onClicked = OnClickedResponse;
 			currResponses.Add(newResponse);
 			Sprite highlightSprite = null;
 			if(i < highlightBtnsSprites.Count)
@@ -61,7 +61,14 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 	public void ActiveConfirmationButton(bool value)
 	{
 		confirmationButton.gameObject.SetActive(value);
+	}
 
+	public void SetCanInteractWithBtns(bool value)
+	{
+		for (int i = 0; i < currResponses.Count; i++)
+		{
+			currResponses[i].SetRaycastInteractable(value);
+		}
 	}
 
 	public void GrayOutResponse(int responseIdx)
@@ -99,13 +106,13 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 				}
 				if (highlightSprite) curr.Btn.image.sprite = highlightSprite;
 			}
-			else
-			{
-				curr.transform.localScale = Vector3.one;
-				if (disableBtnContainer) curr.Btn.image.sprite = disableBtnContainer;
-			}
+			else UnClickResponse(curr);
 		}
+	}
 
+	public void OnClickedResponse(DialogueResponse response)
+	{
+		HighlightResponse(response);
 		if (UseConfirmationBtn) mainUi.OnClickResponse(response);
 		else
 		{
@@ -120,7 +127,11 @@ public class DialoguesResponsesDisplayerUI : MonoBehaviour
 		}
 	}
 
-
+	public void UnClickResponse(ResponseBtn response)
+	{
+        response.transform.localScale = Vector3.one;
+        if (disableBtnContainer) response.Btn.image.sprite = disableBtnContainer;
+    }
 	public void Hide()
 	{
 		if (currHighlightedResponse != null)

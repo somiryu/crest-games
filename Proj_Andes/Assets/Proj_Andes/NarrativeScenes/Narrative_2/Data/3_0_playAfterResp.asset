@@ -67,9 +67,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "Le digo a Alex que me hizo da\xF1o, y que no lo vuelva a hacer"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: ee6b5c4868c891d4db5d993ea95df1b1, type: 3}
@@ -78,9 +82,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 2
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "No digo nada y me voy para el sal\xF3n"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 646ce89e98d40074799d65bc79a7be6e, type: 3}
@@ -89,9 +97,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 1
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

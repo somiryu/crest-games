@@ -96,6 +96,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
     private bool gameoverFlag = false;
 
+    int leftCount = 0;
+    int rightCount = 0;
+
     int passedCurrTuto;
     int consecutiveWinsTuto;
     int trialsPerTutoCount;
@@ -182,6 +185,9 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         trialsPerTutoCount = 0;
         failurePerTutoCount = 0;
         consecutiveWinsTuto = 0;
+        rightCount = 0;
+        leftCount = 0;
+
         tutoStage++;
 
         if (tutoStage >= 2) currTutoConfig.completedFirstPart = true;
@@ -252,26 +258,48 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
         currSoundIsLeft = Random.Range(0f, 1f) > 0.5f;
         currImgIsLeft = Random.Range(0f, 1f) > 0.5f;
 
+
         switch (currTutoConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
                 currTargetImg.gameObject.SetActive(false);
+
+
+				if (rightCount >= 2) currSoundIsLeft = true;
+				else if (leftCount >= 2) currSoundIsLeft = false;
+
+				if (currSoundIsLeft) leftCount++;
+                else rightCount++;
+
                 currImgIsLeft = currSoundIsLeft;
                 break;
             case VoiceOrImageGameType.Image:
-                currSoundIsLeft = currImgIsLeft;
                 currTargetImg.gameObject.SetActive(true);
+
+				if (rightCount >= 2) currImgIsLeft = true;
+				else if (leftCount >= 2) currImgIsLeft = false;
+
+				if (currImgIsLeft) leftCount++;
+                else rightCount++;
+
+                currSoundIsLeft = currImgIsLeft;
                 break;
             case VoiceOrImageGameType.Mixed:
                 if (UseVoiceAsCorrectAnswer)
                 {
                     if (currSoundIsLeft) currImgIsLeft = false;
                     else currImgIsLeft = true;
+
+                    if (currSoundIsLeft) leftCount++;
+                    else rightCount++;
                 }
                 else
                 {
                     if (currImgIsLeft) currSoundIsLeft = false;
                     else currSoundIsLeft = true;
+
+                    if (currImgIsLeft) leftCount++;
+                    else rightCount++;
                 }
                 break;
         }

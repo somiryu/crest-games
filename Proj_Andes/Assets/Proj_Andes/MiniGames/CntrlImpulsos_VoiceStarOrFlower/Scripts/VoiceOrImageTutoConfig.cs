@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class VoiceOrImageTutoConfig : SimpleGameSequenceItemTutorial
     [Header("Completed tutorial audio")]
     public AudioClip endAudio;
     public bool switchesToAnswerIsDifferentInSecondPart;
-    public bool completedFirstPart;
+    [NonSerialized] public bool completedFirstPart;
     public override SimpleGameSequenceItem GetNextItem()
     {
         var currItem = base.GetNextItem();

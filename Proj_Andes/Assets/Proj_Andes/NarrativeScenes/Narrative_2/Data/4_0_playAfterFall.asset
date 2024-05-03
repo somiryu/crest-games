@@ -67,9 +67,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 3
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 2
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: "Me levanto y le grito a Alex que m\xE1s lento es el"
       responseAlternative: "Me levanto y le grito a Alex que m\xE1s lenta es ella"
       responseImage: {fileID: 21300000, guid: 9ec3700dd99c36840bc1532cdd1b530b, type: 3}
@@ -78,9 +82,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 1
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     - response: Hago como si no hubiera escuchado y no le digo nada
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 16f506f356cf7e74f84febc28e5f0912, type: 3}
@@ -89,9 +97,13 @@ MonoBehaviour:
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
-        empSubCategory: 0
-        aggSubCategory: 2
-        EmoSubCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 1
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        emotionsAnalyticsValues:
+          customValues: []
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

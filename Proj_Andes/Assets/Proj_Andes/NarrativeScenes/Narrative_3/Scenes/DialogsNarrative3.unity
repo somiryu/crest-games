@@ -218,7 +218,7 @@ PrefabInstance:
     - target: {fileID: 3063343628931919241, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: narrativeSceneItem
       value: 
-      objectReference: {fileID: 11400000, guid: 19cb714e090469540bbf7647a4810b4e, type: 2}
+      objectReference: {fileID: 11400000, guid: e71fd875eaf37004bad9464f40ba9e4f, type: 2}
     - target: {fileID: 3063343628931919348, guid: ecfde0ed97e8a644692c7cbca04cba10, type: 3}
       propertyPath: m_Name
       value: DialoguesDisplayer
