@@ -8,7 +8,6 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 {
     public int tryAgainTrial;
     [NonSerialized] public int clickAmounts;
-    public FrustrationTermometer frustrationTermometer;
     public override void SaveAnalytics()
     {
         clickAmounts = TryAgainManager.clickCounts;
@@ -19,10 +18,6 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 		if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
 
 		DocumentFound.Add(DataIds.tryAgainClicks, clickAmounts);
-        foreach (var item in DocumentFound)
-        {
-            Debug.Log("found " + item.Value);
-        }
     }
 
     public override void ResetCurrentAnalytics()
