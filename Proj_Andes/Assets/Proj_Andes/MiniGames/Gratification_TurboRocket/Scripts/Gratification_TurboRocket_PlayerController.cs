@@ -41,6 +41,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     float startYPos = 0f;
     IEnumerator turboDeacceleration;
     float turboTimer;
+    float totalTurboTimer;
 
 	[SerializeField] Animator characterAnimator;
 
@@ -108,7 +109,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         onPlay = true;
         gameStages = GameStages.Start;
         currentTargetAcceleration = gameConfig.accelerationSpeed;
-
+        totalTurboTimer = 0;
     }
 
 	void SetSpeedway()
@@ -140,7 +141,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
         var collsAmt = Physics.OverlapSphereNonAlloc(myCollider.transform.position, myCollider.radius, colls);
         for (int i = 0; i < collsAmt; i++) CollisionManagement(colls[i]);
-        if (onTurbo) turboTimer += Time.deltaTime;
+        if (onTurbo) totalTurboTimer += Time.deltaTime;
     }
 
 
@@ -167,6 +168,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
             transform.position = firstPos;
             onPlay = false; 
         }
+        if (onTurbo) turboTimer += Time.deltaTime;
     }
     public IEnumerator TurboCounter()
     {
@@ -220,7 +222,6 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
             if (onTurbo) return;
             if (star.isCaptured) return;
             if (!star.isInitialPosition) return;
-            Debug.Log("Collectd coin");
             star.OnCaptured();
             GeneralGameAnalyticsManager.RegisterWin();
             gameConfig.coinsCollected++;
@@ -234,7 +235,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         planet.UpdateCoinsAmount(0);
         bk.EndOfGame();
 
-        gameConfig.totalRideTime = timer;
+        gameConfig.totalTurboTime = totalTurboTimer;
 
         onPlay = false;
         levelConfig.coinsCollected = starsGatheredCount;
