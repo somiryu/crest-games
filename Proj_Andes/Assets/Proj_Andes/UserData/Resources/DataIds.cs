@@ -52,8 +52,7 @@ public static class DataIds
 
     public const string voiceStarGame = "nubes_flores";
 
-    public const string turboRocketGame = "star_booster";
-    public const string turboRocketturboUsedTimes = "boosts";
+    public const string turboRocketGame = "turbo_estrellas";
 
     public const string mechanicHandGame = "por habilidad: la mano mecánica";
     public const string mechanicHandClawThrows = "claw_Throws";
@@ -71,7 +70,8 @@ public static class DataIds
     public const string sizeRocketsMidShips = "medium_ships";
     public const string sizeRocketsSmallShips = "small_ships";
 
-    public const string tryAgainClicks = "retry_clicks";
+    public const string tryAgainClicks = "fg_espera_click";
+    public const string tryAgainClicksAfterWait = "fg_espera_click_afterWait";
 
     //General Test analytics
     public const string test = "test";
@@ -112,6 +112,15 @@ public static class DataIds
     public const string cloudNFlowerAnswer = "nf_respuesta";
     public const string cloudNFlowerCode = "nf_codigo";
     public const string cloudNFlowerTimer = "nf_tiempo";
+
+
+
+    //Turbo rocket analytics
+    public const string turboStarsFrustrationMode = "te_modo";
+    public const string turboStarsStars = "te_estrellas";
+    public const string turboStarsTurboUses = "te_turbo";
+    public const string turboStarsTurboTime = "te_turbo_tm";
+    public const string turboStarsTime= "te_tiempo_total";
 
 
 
