@@ -68,7 +68,8 @@ public static class DataIds
     public const string sizeRocketsMidShips = "medium_ships";
     public const string sizeRocketsSmallShips = "small_ships";
 
-    public const string tryAgainClicks = "retry_clicks";
+    public const string tryAgainClicks = "fg_espera_click";
+    public const string tryAgainClicksAfterWait = "fg_espera_click_afterWait";
 
     //General Test analytics
     public const string test = "test";
