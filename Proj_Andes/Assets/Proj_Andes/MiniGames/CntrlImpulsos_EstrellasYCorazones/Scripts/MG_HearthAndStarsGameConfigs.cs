@@ -24,6 +24,7 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
 	public HeartsAndFlowersGameType gameType;
+	public static int postFrustration = 0;
 	public override string GetSceneID() => DataIds.heartsAndStarsGame;
 
     public override SimpleGameSequenceItem GetNextItem()
@@ -61,7 +62,7 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 			currRoundAnalyticsDic.Clear();
             currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
             currRoundAnalyticsDic.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
-            currRoundAnalyticsDic.Add(DataIds.heartsNFlowersFrustration, 0);
+            currRoundAnalyticsDic.Add(DataIds.heartsNFlowersFrustration, postFrustration);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersSkill, (int)gameType);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersValid, passedTuto);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersTrial, currRound.roundCount);
@@ -72,9 +73,10 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 
 			UserDataManager.SaveUserAnayticsPerGame(DataIds.heartsAndStarsGame, currRoundAnalyticsDic);
 		}
-	}
+        Debug.Log("post frust " + postFrustration);
+    }
 
-	public override void AferGeneralAnalyticsSaved()
+    public override void AferGeneralAnalyticsSaved()
 	{
 		//We clean the game ID so that different "batches" of hearth and stars games happend, they do have different IDs
 		if (!isLastHearthAndStarsGameOnBatch) return;

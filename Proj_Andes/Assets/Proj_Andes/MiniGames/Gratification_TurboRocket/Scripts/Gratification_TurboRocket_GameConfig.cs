@@ -16,6 +16,8 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public int starsAmount;
     public int tutoStarsAmount;
     public float minTurboTime;
+    public static int postFrustration = 0;
+
     [HideInInspector][NonSerialized] public int coinsCollected;
 
     [NonSerialized] public int turboUsedTimes;
@@ -37,8 +39,8 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
         itemAnalytics.Add(DataIds.clicks, clicks);
 
         SaveCoins(coinsCollected);
-
-		UserDataManager.SaveUserAnayticsPerGame(DataIds.turboRocketGame,itemAnalytics); 
+        Debug.Log("post frust " + postFrustration);
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.turboRocketGame,itemAnalytics); 
     }
 
     public override void ResetCurrentAnalytics()

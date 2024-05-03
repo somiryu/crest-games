@@ -34,6 +34,7 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
 
 		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.boostersAndScapeGame);
 
+        MG_MechanicHandGameConfigs.SetPostFrustration();
     }
     public override void ResetCurrentAnalytics()
     {

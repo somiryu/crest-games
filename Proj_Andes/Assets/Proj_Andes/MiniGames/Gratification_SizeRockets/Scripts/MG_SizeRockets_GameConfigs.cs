@@ -10,6 +10,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	public int planetCoins;
 	public int shipsPerGame;
 	public int shipsAmtLavel1;
+    public static int postFrustration = 0;
 
     [HideInInspector][NonSerialized] public int coinsCollected;
 
@@ -37,6 +38,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 			itemAnalytics.Clear();
 			itemAnalytics.Add(DataIds.GameID, GameID);
 			itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
+			itemAnalytics.Add(DataIds.frustrationMode, postFrustration);
 			itemAnalytics.Add(DataIds.tryIndex, analytics.tryIndex);
 			itemAnalytics.Add(DataIds.sizeRocketResponseString, analytics.choiceType.ToString());
 			itemAnalytics.Add(DataIds.sizeRocketResponseInt, (int) analytics.choiceType);
@@ -46,8 +48,8 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 			UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics);
 
 		}
-
-	}
+        Debug.Log("post frust " + postFrustration);
+    }
 }
 
 [Serializable]

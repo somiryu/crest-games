@@ -33,7 +33,15 @@ public class MG_MechanicHandGameConfigs : GameConfig
 		UserDataManager.LastDocumentIDStored = newDocID;
 
 		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.mechanicHandGame);
+		SetPostFrustration();
+	}
 
+	public static void SetPostFrustration()
+	{
+		MG_SizeRockets_GameConfigs.postFrustration = 1;
+		MG_VoiceStarOrFlowerGameConfigs.postFrustration = 1;
+		MG_HearthAndStarsGameConfigs.postFrustration = 1;
+		Gratification_TurboRocket_GameConfig.postFrustration = 1;
 	}
     public override void ResetCurrentAnalytics()
     {

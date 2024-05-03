@@ -147,7 +147,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         timerPerChoice += Time.deltaTime;
         if (timerPerChoice >= gameConfigs.timePerChoice)
         {
-            timerPerChoice = 0;
             OnWrongChoice();
         }
     }
@@ -230,7 +229,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
         RCorrectparticle.Stop();
         LCorrectparticle.Stop();
         onHold = true;
-        timerPerChoice = 0;
 
         GeneralGameAnalyticsManager.RegisterWin();
 		roundAnalytics.wonRound = 1;
@@ -259,11 +257,11 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         roundAnalytics.roundCount = currRound;
         currRound++;
-        timerPerChoice = 0;
         if (currRequiresSameDirection) roundAnalytics.stimuli = 0;
         else roundAnalytics.stimuli = 1;
 
         roundAnalytics.timeToMakeAChoice = timerPerChoice;
+        Debug.Log(roundAnalytics.timeToMakeAChoice);
 
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
