@@ -24,7 +24,7 @@ public class MG_MechanicHandGameConfigs : GameConfig
 
 		itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.GameID, GameID);
-        itemAnalytics.Add(repetition > 1 ? DataIds.repetition2 : DataIds.repetition1, repetition);
+        itemAnalytics.Add(DataIds.repetition, repetition);
         itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
 		itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
         itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);

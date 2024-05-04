@@ -38,8 +38,7 @@ public static class DataIds
 
 	//Frustration levels
 	public const string frustrationGames = "frustration_levels";
-	public const string repetition1 = "repetición_1";
-	public const string repetition2 = "repetición_2";
+	public const string repetition = "repeticion";
     public const string timePlayed = "time_played";
     public const string lostByCheat = "lostByCheat";
     public const string frustrationLevel = "frustrationLevel";
