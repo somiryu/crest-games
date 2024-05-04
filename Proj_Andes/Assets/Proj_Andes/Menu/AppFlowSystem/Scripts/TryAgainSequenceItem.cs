@@ -8,9 +8,10 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 {
     public int tryAgainTrial;
     [NonSerialized] public int clickAmounts;
-    public override void SaveAnalytics()
+    [NonSerialized] public int ExtraClickAmounts;    public override void SaveAnalytics()
     {
-        clickAmounts = TryAgainManager.clickCounts;
+        clickAmounts = TryAgainManager.clickCountsBeforeBarCompleted;
+        ExtraClickAmounts = TryAgainManager.clickCountsAfterBarCompleted;
 		//If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
 		if (string.IsNullOrEmpty(UserDataManager.LastDocumentIDStored) || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
 
@@ -18,6 +19,7 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 		if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
 
 		DocumentFound.Add(DataIds.tryAgainClicks, clickAmounts);
+		DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
     }
 
     public override void ResetCurrentAnalytics()

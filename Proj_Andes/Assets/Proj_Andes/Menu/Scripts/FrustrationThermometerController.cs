@@ -13,6 +13,7 @@ public class FrustrationThermometerController : MonoBehaviour
     [SerializeField] List<FrustrationLevels> frustrationLevels = new List<FrustrationLevels>();
     [SerializeField] GameObject[] buttonsSelectedImages;
     FrustrationLevel currFrustratioNlevel;
+    [SerializeField] Transform blockingPanel;
     [SerializeField] Button continueBtn;
 
     [SerializeField] AudioSource audioSource;
@@ -31,18 +32,28 @@ public class FrustrationThermometerController : MonoBehaviour
 
             buttonsSelectedImages[i].SetActive(false);
         }
-        //StartCoroutine(Intro());
+        StartCoroutine(Intro());
         continueBtn.onClick.AddListener(Continue);
         continueBtn.gameObject.SetActive(false);
-        audioSource.clip = introAudio;
-        audioSource.Play();
     }
     IEnumerator Intro()
     {
+        blockingPanel.gameObject.SetActive(true);
         audioSource.clip = introAudio;
         audioSource.Play();
-        yield return new WaitForSeconds(introAudio.length);
-
+        yield return new WaitForSeconds(introAudio.length-0.4f);
+        for (int i = 0; i < frustrationLevels.Count; i++)
+        {
+            var currDescription = frustrationLevels[i];
+            GetFrustationLevel(currDescription);
+            continueBtn.gameObject.SetActive(false);
+            var currAudio = UserDataManager.CurrUser.gender == UserGender.Femenino ? currDescription.FbuttonSound : currDescription.MbuttonSound;
+            audioSource.clip = currAudio; 
+            audioSource.Play();
+            yield return new WaitForSeconds(currAudio.length);
+            buttonsSelectedImages[i].SetActive(false);
+        }
+        blockingPanel.gameObject.SetActive(false);
     }
     void GetFrustationLevel(FrustrationLevels level)
     {
