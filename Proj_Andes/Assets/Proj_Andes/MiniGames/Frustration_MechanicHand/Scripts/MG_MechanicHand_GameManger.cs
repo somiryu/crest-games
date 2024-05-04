@@ -28,6 +28,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 
 	[SerializeField] AudioSource audioSource;
 	[SerializeField] AudioClip reminderAudio;
+	[SerializeField] AudioClip notHookedAudio;
 	[SerializeField] AudioClip introductionAudio;
 	[SerializeField] AudioClip letsTryAudio;
 	[SerializeField] AudioClip moveHookAudio;
@@ -100,7 +101,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
             TimeManager.Instance.RemoveNewStopTimeUser(this);
             tutoHand1.gameObject.SetActive(true);
             tutoDone = false;
-            StartCoroutine(PlaySigleAudioGuide(moveHookAudio));
+            StartCoroutine(PlayAudiosGuide(moveHookAudio));
         }
 		else
 		{
@@ -109,8 +110,14 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
         }
 		player.canDrag = true;
 	}
-	IEnumerator PlaySigleAudioGuide(AudioClip clip)
+	IEnumerator PlayAudiosGuide(AudioClip clip, AudioClip clip2 = null)
 	{
+		if(clip2 != null)
+		{
+            audioSource.clip = clip2;
+            audioSource.Play();
+            yield return new WaitForSeconds(clip2.length);
+        }
 		audioSource.clip = clip;
 		audioSource.Play();
 		yield return new WaitForSeconds(clip.length);
@@ -204,7 +211,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 			if(currRound == 3) GameOver();
 			else OnRoundStart();
 		}
-        if (!tutoDone) StartCoroutine(PlaySigleAudioGuide(lettPlayAudio));
+        if (!tutoDone) StartCoroutine(PlayAudiosGuide(lettPlayAudio));
         tutoDone = true;
     }
 
@@ -228,7 +235,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 		inGameUiContainer.gameObject.SetActive(false);
 		afterActionPanel.SetActive(true);
 		inGameObjs.SetActive(false);
-		StartCoroutine(PlaySigleAudioGuide(noStarsAudio));
+		StartCoroutine(PlayAudiosGuide(noStarsAudio, notHookedAudio));
 		//afterAction_ResultsTxt.SetText("Capturaste: " + totalCapturedAsteroids + " de " + asteroidsPerRound * 3);
 		afterAction_ResultsTxt.SetText( totalCapturedAsteroids.ToString());
 		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);
