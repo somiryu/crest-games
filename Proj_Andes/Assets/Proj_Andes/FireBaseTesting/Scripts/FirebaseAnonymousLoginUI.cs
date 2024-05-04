@@ -205,21 +205,24 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	}
 
 
-	private void Start()
+	private IEnumerator Start()
 	{
 		var defaultSoundState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", defaultValue: 1);
 		AssignSoundActive(defaultSoundState);
 
 		FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+
 		if(auth.CurrentUser != null)
 		{
 			Debug.Log("Already signed in: " + auth.CurrentUser.UserId);
 			logInsuccedID = ("Firebase ID:" + auth.CurrentUser.UserId);
 			correctlyLoggedInFlag = true;
-			return;
+			yield break;
 		}
 		auth.SignInAnonymouslyAsync().ContinueWith(OnSingingResult);
 	}
+
+
 	void UReady()
 	{
         var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyFAudio : ureadyMAudio;
@@ -241,21 +244,20 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			Debug.LogError("SignInAnonymouslyAsync was canceled.");
 			return;
 		}
-		if (taskResult.IsFaulted)
+		else if (taskResult.IsFaulted)
 		{
-			UserDataManager.Instance.HasInternet = false;
 			OnFailedLogIn(taskResult);
-			return;
 		}
+		else
+		{
+			AuthResult result = taskResult.Result;
 
-		AuthResult result = taskResult.Result;
+			Debug.LogFormat("User signed in successfully: {0} ({1})",
+				result.User.DisplayName, result.User.UserId);
 
-		UserDataManager.Instance.HasInternet = true;
-
-		Debug.LogFormat("User signed in successfully: {0} ({1})",
-			result.User.DisplayName, result.User.UserId);
-
-		logInsuccedID = ("Firebase ID:" + result.User.UserId);
+			logInsuccedID = ("Firebase ID:" + result.User.UserId);
+		}
+		
 		correctlyLoggedInFlag = true;
     }
 

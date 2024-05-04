@@ -83,7 +83,10 @@ public class TimeManager : MonoBehaviour
     }
     public void GetQuitGameAnalytics()
     {
-        if (UserDataManager.CurrTestID == "Default Test ID") return;
+        if (UserDataManager.CurrTestID == "Default Test ID")
+        {
+            return;
+        }
         var testAnalytics = testGeneralData.itemAnalytics = new Dictionary<string, object>();
         testAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
         testAnalytics.Add(DataIds.created_At, createDate);
@@ -97,6 +100,8 @@ public class TimeManager : MonoBehaviour
             UserDataManager.CurrTestID,
             shouldUseTestID: false
             );
+        //Resetting the test id since this only gets called when the user exits
+        UserDataManager.CurrTestID = "Default Test ID";
         //Debug.Log("saved test data " + DataIds.TestID + " " + UserDataManager.CurrTestID + " " + createDate + " " + gameState + " " + " realtime " + timer);
     }
 }

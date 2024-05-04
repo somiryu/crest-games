@@ -17,7 +17,7 @@ public class UserDataManager : ScriptableObject
 	public bool HasInternet = true;
 
 	private static string instancePath = "UserDataManager";
-	private static string defaultUserID = "DefaultUserId";
+	private static string defaultUserID = "0000-0000-0000";
 
 	private static string currTestID;
 	private static string currInstitutionCode;
@@ -87,7 +87,7 @@ public class UserDataManager : ScriptableObject
 	static void RunOnStart()
 	{
 		Debug.Log("aplying callback");
-		Application.wantsToQuit += SaveToServer;
+		//Application.wantsToQuit += SaveToServer;
 	}
 
 	public static void SaveUserAnayticsPerGame(
@@ -104,6 +104,16 @@ public class UserDataManager : ScriptableObject
 		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
+		foreach(var analytic in analyticsWithExtraFields)
+		{
+			Debug.Log("Wants to save analytic with key: " + analytic);
+		}
+
+		if (string.IsNullOrEmpty(CollectionName))
+		{
+			Debug.LogError("Trying to save something with null collection name");
+		}
+
 		if(!userAnayticsPerGame.TryGetValue(CollectionName, out var analyticsDocsFound))
 		{
 			analyticsDocsFound = new Dictionary<string, Dictionary<string, object>>();
@@ -112,6 +122,7 @@ public class UserDataManager : ScriptableObject
 
 		//Generating a new document ID each time if an explicit documentID was not passed in 
 		var newDocumentID = string.IsNullOrEmpty(documentID)? Guid.NewGuid().ToString() : documentID;
+		Debug.Log("will try to save for collection name: " + CollectionName);
 		Debug.Log("doc id " + documentID + " game id " + CollectionName);
 		analyticsDocsFound.Add(newDocumentID, analyticsWithExtraFields);
     }
