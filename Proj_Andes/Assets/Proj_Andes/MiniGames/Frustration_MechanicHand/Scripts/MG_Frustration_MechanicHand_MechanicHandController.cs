@@ -186,7 +186,6 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         }
         else
         {
-            audioSource.Stop();
             audioSource.clip = notHookedAudio;
             audioSource.Play();
         }
