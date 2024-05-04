@@ -23,7 +23,6 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     [NonSerialized] public int turboUsedTimes;
     [NonSerialized] public float totalTurboTime;
 
-    public static int postFrustration = 0;
     public override string GetSceneID() => DataIds.turboRocketGame;
 
     public override void SaveAnalytics()
