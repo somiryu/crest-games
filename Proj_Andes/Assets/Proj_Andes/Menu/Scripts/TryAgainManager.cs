@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class TryAgainManager : MonoBehaviour
 {
     public static int clickCounts;
+    public static int clickCountsBeforeBarCompleted;
+    public static int clickCountsAfterBarCompleted;
     [SerializeField] Button retryBtn;
     [SerializeField] float waitFor;
     [SerializeField] float extraWaitAtTheEnd;
@@ -38,11 +40,14 @@ public class TryAgainManager : MonoBehaviour
             yield return null;
         }
         timer = 0f;
+        clickCountsBeforeBarCompleted = clickCounts;
+        clickCounts = 0;
         while(timer < extraWaitAtTheEnd)
         {
             timer += Time.deltaTime;
             yield return null;
         }
+        clickCountsAfterBarCompleted = clickCounts;
         GameSequencesList.Instance.GoToNextItemInList();
     }
 
