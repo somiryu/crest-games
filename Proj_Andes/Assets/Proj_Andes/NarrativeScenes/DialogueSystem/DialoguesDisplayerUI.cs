@@ -644,12 +644,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
     {
         if (instance == null) return;
 		var analytics = Instance.narrativeSceneItem.itemAnalytics;
-		if (analytics != null && analytics.Count > 0)
-		{
-			UserDataManager.SaveUserAnayticsPerGame(CollectionName: DataIds.Narratives,
-				itemAnalytics: Instance.narrativeSceneItem.itemAnalytics,
-				shouldUseTestID: true);
-		}
+        if (analytics != null && analytics.Count > 0)
+        {
+
+            var collectionID = DataIds.Narratives1;
+            if (NarrativeSceneManager.Instance.NarrativeIdx == 1) collectionID = DataIds.Narratives2;
+            else if (NarrativeSceneManager.Instance.NarrativeIdx == 2) collectionID = DataIds.Narratives3;
+
+			UserDataManager.SaveUserAnayticsPerGame(
+                CollectionName: collectionID,
+                itemAnalytics: Instance.narrativeSceneItem.itemAnalytics,
+                shouldUseTestID: true);
+        }
 	}
 
     public List<NarrativeNavigationNode> GetCurrNavigationNodes()

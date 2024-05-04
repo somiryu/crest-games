@@ -1487,7 +1487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueDisplayerUI: {fileID: 625357}
   _startingSequence: {fileID: 11400000, guid: 718cfb9555477834fbe11d31eb64b69e, type: 2}
-  NarrativeIdx: 0
+  NarrativeIdx: 1
   loadingScreen: {fileID: 625358}
   shouldNotDelay: 0
 --- !u!4 &1180631021
