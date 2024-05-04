@@ -21,7 +21,9 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     [HideInInspector][NonSerialized] public int coinsCollected;
 
     [NonSerialized] public int turboUsedTimes;
-    [NonSerialized] public float totalRideTime;
+    [NonSerialized] public float totalTurboTime;
+
+    public static int postFrustration = 0;
     public override string GetSceneID() => DataIds.turboRocketGame;
 
     public override void SaveAnalytics()
@@ -30,23 +32,23 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
 		GameID = Guid.NewGuid().ToString();
 
 		itemAnalytics.Add(DataIds.GameID, GameID);
-        itemAnalytics.Add(DataIds.turboRocketturboUsedTimes, turboUsedTimes);
-		itemAnalytics.Add(DataIds.stars, coinsCollected);
-
+		itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
+		itemAnalytics.Add(DataIds.turboStarsFrustrationMode, postFrustration);
+        itemAnalytics.Add(DataIds.turboStarsStars, coinsCollected);
+        itemAnalytics.Add(DataIds.turboStarsTurboUses, turboUsedTimes);
+        itemAnalytics.Add(DataIds.turboStarsTurboTime, totalTurboTime);
         var timePlayed = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
-        itemAnalytics.Add(DataIds.timePlayed, timePlayed);
-        var clicks = GeneralGameAnalyticsManager.Instance.analytics.clicks;
-        itemAnalytics.Add(DataIds.clicks, clicks);
+        itemAnalytics.Add(DataIds.turboStarsTime, timePlayed);
 
         SaveCoins(coinsCollected);
-        Debug.Log("post frust " + postFrustration);
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.turboRocketGame,itemAnalytics); 
+
+		UserDataManager.SaveUserAnayticsPerGame(DataIds.turboRocketGame,itemAnalytics);
     }
 
     public override void ResetCurrentAnalytics()
     {
         turboUsedTimes = 0;
-        totalRideTime = 0;
+        totalTurboTime = 0;
         coinsCollected = 0;
         base.ResetCurrentAnalytics();
     }

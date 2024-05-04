@@ -323,6 +323,7 @@ MonoBehaviour:
   sendHookBtn: {fileID: 1154508504}
   audioSource: {fileID: 9856677}
   reminderAudio: {fileID: 8300000, guid: c3b335c20bf86c646891df10e01fded9, type: 3}
+  notHookedAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   introductionAudio: {fileID: 8300000, guid: fd8641955e8fa894b9030800ee83b40e, type: 3}
   letsTryAudio: {fileID: 8300000, guid: a1c76f0b28a66494e9fb43823df0f5b1, type: 3}
   moveHookAudio: {fileID: 8300000, guid: deda69f027ee983448eef820a1a7b134, type: 3}
@@ -7584,13 +7585,14 @@ MonoBehaviour:
   hookedObj: {fileID: 0}
   hook: {fileID: 2142186870}
   dragDeathZone: 0.2
+  canDrag: 1
   startPointLine: {fileID: 756945518}
   endPointLine: {fileID: 71237818}
   lineRenderer: {fileID: 756945519}
   selectingAudio: {fileID: 8300000, guid: 663e66f9b674e6247a94fa59178aa870, type: 3}
   toHookAudio: {fileID: 8300000, guid: f5259c2675d58994f81f31674914ae52, type: 3}
   onHookedAudio: {fileID: 8300000, guid: 0ef3a454384d11f409ab707f790cf7ef, type: 3}
-  notHookedAudio: {fileID: 8300000, guid: 254be262c189e9e4e867c8462192507b, type: 3}
+  notHookedAudio: {fileID: 8300000, guid: c2d0f6578719d4a4b81e7af75f50e553, type: 3}
   correctParticles: {fileID: 1600877462}
   incorrectParticles: {fileID: 0}
   skinObj: {fileID: 0}

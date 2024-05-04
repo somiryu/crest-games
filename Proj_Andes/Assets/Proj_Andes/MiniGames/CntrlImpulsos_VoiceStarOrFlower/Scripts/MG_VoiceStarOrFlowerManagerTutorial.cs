@@ -44,16 +44,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     [SerializeField] AudioClip leftAudio;
     [SerializeField] AudioClip rightAudio;
     [SerializeField] AudioClip tutorialIntroAudio;
-    [FormerlySerializedAs("firstInstrucAudio")]
-    [SerializeField] AudioClip firstInstrucAudioForVoiceAsCorrectAnswer;
-    [SerializeField] AudioClip firstInstrucAudioForImgAsCorrectAnswer;
     [SerializeField] AudioClip discardAdvice;
     [SerializeField] AudioClip youDidGoodAudio;
-    [SerializeField] AudioClip youDidGoodNowTryAudio;
-    [SerializeField] AudioClip onFailSelectDiscardAdvice;
-    [SerializeField] AudioClip onFailSelectInstructionAdvice;
-    [SerializeField] AudioClip finalInstruction;
-    [SerializeField] AudioClip letsPlayAudio;
     [SerializeField] AudioSource effectPlayer;
     [SerializeField] AudioSource audioPlayer;
     [Space]

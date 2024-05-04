@@ -3519,6 +3519,7 @@ MonoBehaviour:
   introAudio: {fileID: 8300000, guid: 6b33779a604c5bc4491bc4bf269652d6, type: 3}
   expensiveChestsAudio: {fileID: 8300000, guid: 5bdbfa1c729032b45b486d5651c5e01f, type: 3}
   intermidiateGamesIntro: {fileID: 8300000, guid: 636de4e77d3027b40969c15dc6bc43f4, type: 3}
+  selectRedBoxAudio: {fileID: 8300000, guid: fb9f4717542ded644a5be101ba6b1bed, type: 3}
   uHaveAmtStarsAudio: {fileID: 8300000, guid: e30a931d845983b45ba196ef75cf2eb3, type: 3}
   openItAndGetAGiftAudio: {fileID: 8300000, guid: f987e6a2463660e448e45ede27b77303, type: 3}
   uWonAMonsterAudio: {fileID: 8300000, guid: c23ed5f4fa31b0b498b5db3e953ab30f, type: 3}

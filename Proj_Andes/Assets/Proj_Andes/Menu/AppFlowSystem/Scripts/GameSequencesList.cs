@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "GameSequencesList", menuName = "GameSequencesList/GameSequencesList")]
+[CreateAssetMenu(fileName = "GameSequencesList  ", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
     public static bool isTheNarrativeSequence = false;

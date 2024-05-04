@@ -13,15 +13,18 @@ public class MG_MechanicHandGameConfigs : GameConfig
 	[Range(0f,1f)]
 	public float percentageNeededToWin = 0.8f;
 	public bool activeCheats;
+	public static int repetition = 0;
 
     public override string GetSceneID() => DataIds.mechanicHandGame;
     public override void SaveAnalytics()
     {
+		repetition++;
         var currData = MG_MechanicHand_GameManger.Instance;
 		GameID = Guid.NewGuid().ToString();
 
 		itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.GameID, GameID);
+        itemAnalytics.Add(DataIds.repetition, repetition);
         itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
 		itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
         itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
