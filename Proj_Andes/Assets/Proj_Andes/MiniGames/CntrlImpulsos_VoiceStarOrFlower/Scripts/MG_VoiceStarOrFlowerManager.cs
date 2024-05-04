@@ -177,6 +177,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         roundCount++;
         GetRandomSoundImage();
         roundAnalytics = new MG_FieldOfFlowers_RoundAnalytics();
+        roundAnalytics.roundCount = roundCount;
 
         AllRoundsAnalytics.Add(roundAnalytics);
 
