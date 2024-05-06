@@ -463,6 +463,10 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         audioSource.clip = clicContinue;
         audioSource.Play();
         yield return new WaitForSeconds(clicContinue.length);
+        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
+        {
+            UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.Market_Instruction.ToString());
+        }
         blockButtons.gameObject.SetActive(false);
     }
 
