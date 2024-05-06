@@ -24,21 +24,26 @@ public class MonsterMarketButtonBehaviour : MonoBehaviour, iMonsterMarketButton
             button.onClick.AddListener(MonsterMarketManager.Instance.ActivateContinueSound);
             return;
         }
-        SetLockedImage();
+        SetMarketButtonToCurrState();
     }
-    public void SetLockedImage()
+    public void SetMarketButtonToCurrState()
+    {
+        bool value = UserDataManager.CurrUser.Coins >= monsterMarketButton.costChest;
+        if (value) SetActiveState();
+        else SetInactiveState();
+    }
+    public void SetLocked()
     {
         if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;
         bool value = UserDataManager.CurrUser.Coins >= monsterMarketButton.costChest;
         lockedImage.gameObject.SetActive(!value);
     }
-
     public void SetInactiveState()
     {              
         button.image.sprite = spriteDesableBtn;
         panelDisable.gameObject.SetActive(true);
-        if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;       
-
+        if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;
+        SetLocked();
     }
 
     public void SetActiveState()
@@ -46,7 +51,7 @@ public class MonsterMarketButtonBehaviour : MonoBehaviour, iMonsterMarketButton
         button.image.sprite = spriteAbleBtn;
         panelDisable.gameObject.SetActive(false);
         if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;
-        SetLockedImage();
+        SetLocked();
 
     }
 
