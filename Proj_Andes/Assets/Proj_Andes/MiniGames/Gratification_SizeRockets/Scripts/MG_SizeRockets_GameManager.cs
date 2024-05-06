@@ -45,6 +45,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	private List<MG_SizeRockets_Planet> planets = new List<MG_SizeRockets_Planet>();
 	private List<MG_SizeRockets_Rocket> activeShips = new List<MG_SizeRockets_Rocket>();
+	MG_SizeRockets_Rocket activeShip;
 	[SerializeField] MG_SizeRockets_Planet level1Planet;
 
 	[SerializeField] public List<AudioClip> coinsLeftAudios = new List<AudioClip>();
@@ -67,7 +68,11 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	public SizeRocketAnalytics currAnalytics => analyticsPerRound[roundCount];
 
-	public SizeRocketAnalytics[] analyticsPerRound;
+    public MG_SizeRockets_Rocket currShip { get => activeShip; set { } }
+
+    public bool shipIsMoving { get => false; set { } }
+
+    public SizeRocketAnalytics[] analyticsPerRound;
 
 	int roundCount;
 
@@ -142,7 +147,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			smallRocketBtn.interactable = false;
 			mediumRocketBtn.interactable = false;
 			largeRocketBtn.interactable = false;
-			if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
+			if (Input.GetMouseButtonUp(0) && EventSystem.current.IsPointerOverGameObject())
 			{
 				currAnalytics.mouseUpCount++;
 				Debug.Log("Mouse up detected");
@@ -197,6 +202,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currRocket.transform.position = basePlanet.transform.position;
 		currRocket.Init(rocketsPool, currTargetPlanet, basePlanet);
 		activeShips.Add(currRocket);
+		activeShip = currRocket;
 		shipsLeft--;
 		shipsLeftTxt.SetText(shipsLeft.ToString());
 		shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
@@ -248,7 +254,8 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		yield return roundEndAudioRoutineRef;
 
 		activeShips.Remove(rocket);
-		totalCoinsWon += coinsAmount;
+        activeShip = null;
+        totalCoinsWon += coinsAmount;
 		currCoinsLabel.SetText(totalCoinsWon.ToString());
 
 		if (activeShips.Count == 0 && shipsLeft <= 0 && doneAudioFeedback)
@@ -300,4 +307,6 @@ public interface ISizeRocketsManager
 	public static ISizeRocketsManager Instance { get; set; }
     public MG_SizeRockets_GameConfigs gameConfigs { get; set; }
     public void OnShipDeliveredCoins(MG_SizeRockets_Rocket rocket, int coinsAmount);
+    public MG_SizeRockets_Rocket currShip { get; set; }
+    public bool shipIsMoving { get; set; }
 }

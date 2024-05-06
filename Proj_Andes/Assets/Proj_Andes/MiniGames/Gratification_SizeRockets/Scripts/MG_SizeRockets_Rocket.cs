@@ -11,7 +11,7 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 
 	public float speed;
 	public int coinsCapacity;
-
+	public bool shouldMove;
 	public MG_SizeRockets_Planet targetPlanet;
 	public Transform basePlanet;
 	Pool<MG_SizeRockets_Rocket> pool;
@@ -40,12 +40,13 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 
 		targetPlanet = _targetPlanet;
 		basePlanet = _basePlanet;
-		state = SizeRocketsTravelState.GoingToPlanet;
+        state = SizeRocketsTravelState.GoingToPlanet;
 		pool = _pool;
         var config = ISizeRocketsManager.Instance.gameConfigs.GetShipConfig(rocketType);
+		ISizeRocketsManager.Instance.currShip = this;
 		speed = config.speed;
 		coinsCapacity = config.coinsCapacity;
-		
+		shouldMove = false;
 		coinsCarrying = 0;
 	}
 
@@ -54,14 +55,14 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 	{
 		Vector3 currentTargetPos = Vector3.zero;
 		Vector3 currentInitialPos = transform.position;
-        if (!Input.GetMouseButton(0)) return;
-		if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (!shouldMove) return;
+		if (!EventSystem.current.IsPointerOverGameObject()) return;
 
         if (state == SizeRocketsTravelState.GoingToPlanet)
 		{
 			transform.position = Vector3.MoveTowards(transform.position, targetPlanet.transform.position, speed * Time.deltaTime);
 
-			currentTargetPos = targetPlanet.transform.position;
+            currentTargetPos = targetPlanet.transform.position;
 			var currDist = transform.position - targetPlanet.transform.position;
 			if (currDist.magnitude < 0.1f)
 			{
@@ -94,9 +95,7 @@ public class MG_SizeRockets_Rocket : MonoBehaviour
 		scale.x = initialXscale * Mathf.Sign(currentDeltaPos.x);
 		graphicGameObj.localScale = scale;
 
-
 	}
-
 }
 
 public enum SizeRocketsTravelState
