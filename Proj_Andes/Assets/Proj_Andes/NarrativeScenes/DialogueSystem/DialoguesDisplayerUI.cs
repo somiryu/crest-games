@@ -636,9 +636,34 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (GoToNextScene)
         {
             SaveAnalytics();
+            UnloadAllImages();
 			narrativeSceneItem.OnSequenceOver();
         }
 	}
+
+
+    public void UnloadAllImages()
+    {
+        var allImages = NarrativeSceneManager.Instance.allSpritesUsed;
+        for (int i = 0; i < allImages.Length; i++)
+        {
+			if (allImages[i] == null)
+            {
+                continue;
+            }
+            if (allImages[i].texture != null) 
+            {
+				Resources.UnloadAsset(allImages[i].texture);
+			}
+			Resources.UnloadAsset(allImages[i]);
+		}
+		var allTimeLines = NarrativeSceneManager.Instance.allAnimClips;
+        for (int i = 0; i < allTimeLines.Length; i++)
+        {
+            if (allTimeLines[i] == null) continue;
+            Resources.UnloadAsset(allTimeLines[i]);
+        }
+    }
 
     public static void SaveAnalytics()
     {

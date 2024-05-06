@@ -594,8 +594,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
-		
-
         TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{
@@ -616,8 +614,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         if (GameSequencesList.isTheNarrativeSequence) StartCoroutine(LoadingSceneAsync(currNextNarr));
     }
 
-    IEnumerator LoadingSceneAsync(SceneReference scene)
+	IEnumerator LoadingSceneAsync(SceneReference scene)
 	{
+		Debug.Log("Unloading assets started");
+		yield return Resources.UnloadUnusedAssets();
+		Debug.Log("Unloading assets finished");
+
 		loadingPanel.gameObject.SetActive(true); 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
         while (asyncLoad.progress < 0.9f)

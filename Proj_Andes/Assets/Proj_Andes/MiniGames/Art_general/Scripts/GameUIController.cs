@@ -81,6 +81,10 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         TimeManager.Instance.RemoveNewStopTimeUser(this);
         onPause = false;
         DialoguesDisplayerUI.SaveAnalytics();
+        if(NarrativeSceneManager.Instance != null)
+        {
+            DialoguesDisplayerUI.Instance.UnloadAllImages();
+        }
         GameSequencesList.Instance.EndSequence();
     }
 

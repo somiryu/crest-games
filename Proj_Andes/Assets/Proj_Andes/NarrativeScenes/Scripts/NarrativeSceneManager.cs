@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class NarrativeSceneManager : MonoBehaviour
 {
@@ -12,12 +13,16 @@ public class NarrativeSceneManager : MonoBehaviour
 	[SerializeField] DialogueSequenceData _startingSequence;
 
 	public DialoguesDisplayerUI DialogueDisplayerUI => dialogueDisplayerUI;
+	public DialogueSequenceData StartingSequence => _startingSequence;
 	public int NarrativeIdx;
 
 	RaycastHit[] collisions = new RaycastHit[30];
 	[SerializeField] Transform loadingScreen;
 	IEnumerator delay;
 	public bool shouldNotDelay;
+
+	public Sprite[] allSpritesUsed;
+	public AnimationClip[] allAnimClips;
 
 	private void Awake()
 	{
