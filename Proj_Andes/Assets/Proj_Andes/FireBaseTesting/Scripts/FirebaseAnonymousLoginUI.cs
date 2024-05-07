@@ -594,6 +594,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
+		TimeManager.Instance.RegisterTestDate();
         TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{
