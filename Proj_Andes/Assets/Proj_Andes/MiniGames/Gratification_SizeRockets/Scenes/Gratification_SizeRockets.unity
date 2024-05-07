@@ -1038,6 +1038,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 838565788390763482, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
+      propertyPath: firstInstruction
+      value: 
+      objectReference: {fileID: 8300000, guid: 44d55930edb9fd0448c4febd23f4b9c6, type: 3}
     - target: {fileID: 2500960040834178063, guid: f77fa783a35fe1749b5879e928fb92c9, type: 3}
       propertyPath: m_Name
       value: AudioInstruction

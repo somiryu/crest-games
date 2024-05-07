@@ -61,6 +61,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     [SerializeField] AudioClip selectWorldAudio;
     [SerializeField] AudioClip tryStartsAudio;
     [SerializeField] AudioClip letsPlayAudio;
+    [SerializeField] AudioClip letsTryAudio;
     [SerializeField] AudioClip onRightAction;
     [SerializeField] AudioClip onPassedTuto;
     [SerializeField] AudioClip onDepart;
@@ -123,6 +124,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         audioSource.clip = currTutoStep.onShipTypeAudio;
         audioSource.Play();
         yield return new WaitForSeconds(currTutoStep.onShipTypeAudio.length);
+        audioSource.clip = letsTryAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(letsTryAudio.length);
         actionBlocker.gameObject.SetActive(false);
     }
     IEnumerator ResultDelivered(AudioClip clip)
