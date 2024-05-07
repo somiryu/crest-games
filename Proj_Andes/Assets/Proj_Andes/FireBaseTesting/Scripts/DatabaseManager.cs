@@ -30,6 +30,7 @@ public static class DatabaseManager
     public static bool savingIsDone = false;
     public static bool UserDeletionCompleted = false;
 
+    public static int testAmountsSavedToDataBase = 0;
     public static int pendingSyncronizedUsersAmount = 0;
     public static int pendingSyncronizedSessionsAmount = 0;
 
@@ -225,7 +226,9 @@ public static class DatabaseManager
 
         Debug.LogWarning("IS SAVING TO DATABASE");
 
-        for (int i = 0; i < userDatas.Count; i++)
+		testAmountsSavedToDataBase = 0;
+
+		for (int i = 0; i < userDatas.Count; i++)
         {
             //removed name form document ID
             DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].id);      
@@ -237,6 +240,11 @@ public static class DatabaseManager
         {
             CollectionReference collRef = db.Collection(GameDatas.Key);
             Debug.Log("Syncing GAME ID: " + GameDatas.Key);
+            if(GameDatas.Key == DataIds.test)
+            {
+                testAmountsSavedToDataBase = GameDatas.Value.Count;
+                Debug.Log("Amount of sesions saved: " + testAmountsSavedToDataBase);
+            }
             foreach(var sessionData in GameDatas.Value)
             {
 				//Debug.Log("Syncing DOC ID: " + sessionData.Key);
