@@ -598,8 +598,8 @@ public class DialoguesDisplayerUI : MonoBehaviour
                 EmoBasQuestionsCount++;
                 return EmoBasQuestionsCount;            
             case NarrativeAnalyticCategory.EmoComp:
-                EmoBasQuestionsCount++;
-                return EmoCompQuestionsCount++;
+                EmoCompQuestionsCount++;
+                return EmoCompQuestionsCount;
             default: return -1;
         }
 	}
