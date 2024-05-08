@@ -553,7 +553,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             currResponseChoiceAnalyticIDVal = analyticInfo.BuildID(
                 narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
                 questionIdx: questionIdx,
-                NarrativeAnalyticType.Val);
+                NarrativeAnalyticType.cod);
 
             currResponseChoiceAnalyticIDTm = analyticInfo.BuildID(
                 narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,

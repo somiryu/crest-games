@@ -103,7 +103,7 @@ public static class DataIds
     public const string heartsNFlowersTime = "cf_tiempo";
 
     //Cloud or flower analytics
-    public const string cloudNFlowerFrustrationMode = "nfs_modo";
+    public const string cloudNFlowerFrustrationMode = "nf_modo";
     public const string cloudNFlowerPassedTuto1 = "nf_valid_1";
     public const string cloudNFlowerPassedTuto2 = "nf_valid_2";
     public const string cloudNFlowerPassedTuto3 = "nf_valid_3";
