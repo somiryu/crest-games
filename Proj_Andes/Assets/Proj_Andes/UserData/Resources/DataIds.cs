@@ -29,7 +29,7 @@ public static class DataIds
 	public const string GameModeAboutAnalytics = "game_mode";
 
 	//Monster market
-	public const string monsterMarket = "market";
+	public const string monsterMarket = "mercado_monstruos";
 	public const string chestChosen = "chest_chosen";
 	public const string starsSpent = "stars_spent";
 	public const string starsBeforeSpend = "stars_before_spend";
