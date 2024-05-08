@@ -34,7 +34,7 @@ MonoBehaviour:
         agressionSubCategory: 0
         conflictSubCategory: 0
         emotionSubCategory: 0
-        inRelationTo: 0
+        inRelationTo: 2
         customEmotionValue: 0
     - response: BIEN
       responseAlternative: 

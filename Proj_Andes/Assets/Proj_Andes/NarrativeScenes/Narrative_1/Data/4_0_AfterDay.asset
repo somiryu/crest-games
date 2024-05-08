@@ -23,8 +23,6 @@ MonoBehaviour:
       que ten\xEDas en tu mesa."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 93c1173e071e3e447a494a7fb21c78cc, type: 3}
     audioAlternative: {fileID: 0}
@@ -39,8 +37,6 @@ MonoBehaviour:
     text: "\xBFQu\xE9 sientes al ver que Alex est\xE1 rompiendo tus hojas?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: emp7_other_feelings
-    analyticTimeID: emp7_time_response_other_ms
     responses:
     - response: RABIA
       responseAlternative: 
@@ -49,11 +45,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
+        mainCategory: 5
         empathySubCategory: 99
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 4
         inRelationTo: 1
+        customEmotionValue: 1
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -61,11 +59,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
+        mainCategory: 5
         empathySubCategory: 99
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 3
         inRelationTo: 1
+        customEmotionValue: 2
     - response: ALEGRIA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
@@ -73,11 +73,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
+        mainCategory: 5
         empathySubCategory: 99
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 2
         inRelationTo: 1
+        customEmotionValue: 3
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -85,11 +87,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
+        mainCategory: 5
         empathySubCategory: 99
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 1
         inRelationTo: 1
+        customEmotionValue: 4
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -97,11 +101,13 @@ MonoBehaviour:
       responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
-        mainCategory: 4
+        mainCategory: 5
         empathySubCategory: 99
         agressionSubCategory: 0
-        emotionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 10
         inRelationTo: 1
+        customEmotionValue: 5
     audio: {fileID: 8300000, guid: aaefd190900cacb44a5c71faca6b1e0e, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -116,8 +122,6 @@ MonoBehaviour:
       para regresar a tu casa.\r\n"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: a4078d4c7aeb6b647b25fb0e52a6abdc, type: 3}
     audioAlternative: {fileID: 0}
@@ -136,8 +140,6 @@ MonoBehaviour:
       l\xE1piz y, adem\xE1s, rompi\xF3 tus hojas. Parece que est\xE1 buscando a alguien
       que la acompa\xF1e caminando a su casa.\r"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 2b98246d86a55cd4cbfa9fc55e8b920b, type: 3}
     audioAlternative: {fileID: 8300000, guid: 938709b64ac281d4298d07914778af1b, type: 3}
