@@ -456,7 +456,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			errMsg = "El lugar de nacimiento está vacío o es inválido";
 		}
-		else if (newUser.livingWith == UserLivingWith.NONE)
+		else if (string.IsNullOrEmpty(newUser.livingWith))
 		{
 			errMsg = "El campo 'Con quien vives' está vacío o es inválido";
 		}
@@ -499,16 +499,20 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         selectUserContainer.gameObject.SetActive(true);
     }
 
-    public UserLivingWith GetUserLivingWith()
+    public string GetUserLivingWith()
 	{
-		var currUserLivingWith = UserLivingWith.NONE;
-
+		var currUserLivingWith = "";
+		int familyTypeCount = 0;
 		for (int i = 0; i < livingWithToggles.Count; i++)
 		{
 			if (livingWithToggles[i].GetValue())
-				currUserLivingWith |= livingWithToggles[i].livingWithType;			
+			{
+				familyTypeCount++;
+				currUserLivingWith += livingWithToggles[i].livingWithType.ToString() + (familyTypeCount > 1 ? "," :"");
+			}
 		}
-		return currUserLivingWith;
+        Debug.Log(currUserLivingWith);
+        return currUserLivingWith;
 	}
 
 	public void RemoveUserOfBtn(UsersListItem item)

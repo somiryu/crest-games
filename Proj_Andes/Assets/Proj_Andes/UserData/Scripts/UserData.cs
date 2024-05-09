@@ -16,7 +16,7 @@ public class UserData
     [FirestoreProperty] public UserGender gender { get; set; }
     [FirestoreProperty] public UserSchoolType schoolType { get; set; }
     [FirestoreProperty] public string country { get; set; }
-    [FirestoreProperty] public UserLivingWith livingWith { get; set; }
+    [FirestoreProperty] public string livingWith { get; set; }
 
     [FirestoreProperty] public Dictionary<string, bool> tutorialStepsDone { get; set; } = new Dictionary<string, bool>();
 	   
@@ -40,7 +40,7 @@ public class UserData
         gender = UserGender.Femenino;
 		schoolType = UserSchoolType.NONE;
 		country = string.Empty;
-		livingWith = UserLivingWith.NONE;
+		livingWith = string.Empty;
 
         CheckPointIdx = -1;
 		CheckPointSubIdx = -1;
@@ -86,12 +86,12 @@ public enum UserSchoolType
 public enum UserLivingWith
 {
 	NONE = 0,
-	Father = 1,
-	Mother = 2,
-	Siblings = 4,
-	Uncles = 8,
-	Grandparents = 16,
-	Other = 32,
+	Papa = 1,
+	Mama = 2,
+	Hermanos = 4,
+	Tios = 8,
+	Abuelos = 16,
+	Otros = 32,
 }
 public enum SessionStateLeft
 {

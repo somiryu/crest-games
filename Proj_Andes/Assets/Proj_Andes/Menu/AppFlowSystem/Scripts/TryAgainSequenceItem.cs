@@ -8,7 +8,8 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 {
     public int tryAgainTrial;
     [NonSerialized] public int clickAmounts;
-    [NonSerialized] public int ExtraClickAmounts;    public override void SaveAnalytics()
+    [NonSerialized] public int ExtraClickAmounts;    
+    public override void SaveAnalytics()
     {
         clickAmounts = TryAgainManager.clickCountsBeforeBarCompleted;
         ExtraClickAmounts = TryAgainManager.clickCountsAfterBarCompleted;
@@ -18,7 +19,7 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 		if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
 		if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
 
-		DocumentFound.Add(DataIds.tryAgainClicks, clickAmounts);
+		DocumentFound.Add(DataIds.tryAgainClicks + tryAgainTrial, clickAmounts);
 		DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
     }
 
