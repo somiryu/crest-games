@@ -81,6 +81,10 @@ public class NarrativeAnalyicsInfo
     public NarrativeAnalyticsFeeling emotionSubCategory;
     public NarrativeAnalticsEmpathyInRelationTo inRelationTo;
     public float customEmotionValue = 0;
+    public bool hasCustomID;
+    public string codCustomID;
+    public string rtaCustomID;
+    public string tmCustomID;
 
     public string BuildID(int narrativeIdx, int questionIdx, NarrativeAnalyticType analyticType)
     {

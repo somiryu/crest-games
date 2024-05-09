@@ -432,11 +432,17 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		var validData = true;
 		var errMsg = "";
 
-		if (string.IsNullOrEmpty(newUser.pin))
+		var isAlreadyRegistered = UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.institutionCode == newUser.institutionCode);
+
+        if (string.IsNullOrEmpty(newUser.pin))
 		{
 			errMsg = "El nombre de usuario está vacío o es inválido";
 		}
-		else if (newUser.age == -1)
+		else if (isAlreadyRegistered != -1)
+		{
+            errMsg = "El pin de usuario ya está registrado en esta institución";
+        }
+        else if (newUser.age == -1)
 		{
 			errMsg = "El campo de edad está vacío o es inválido";
 		}

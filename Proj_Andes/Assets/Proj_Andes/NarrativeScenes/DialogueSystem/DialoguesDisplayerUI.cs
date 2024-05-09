@@ -71,7 +71,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     //Analytics
     private float currResponseTime;
     private string currResponseChoiceAnalyticIDTm;
-    private string currResponseChoiceAnalyticIDVal;
+    private string currResponseChoiceAnalyticIDCod;
     private string currResponseChoiceAnalyticIDRta;
     private int analyticsCount;
     private string currResponseAnalyticResponse;
@@ -495,11 +495,11 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (!string.IsNullOrEmpty(currResponseChoiceAnalyticIDRta))
         {
             narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDRta, currResponseAnalyticResponse);
-            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDVal, currResponseAnalyticResponseVal);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDCod, currResponseAnalyticResponseVal);
             narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDTm, currResponseTime);
 
             Debug.Log("cur1 " + currResponseChoiceAnalyticIDRta + " " + currResponseAnalyticResponse);
-            Debug.Log("cur2 " + currResponseChoiceAnalyticIDVal + " " + currResponseAnalyticResponseVal);
+            Debug.Log("cur2 " + currResponseChoiceAnalyticIDCod + " " + currResponseAnalyticResponseVal);
             Debug.Log("cur3 " + currResponseChoiceAnalyticIDTm + " " + currResponseTime);
             currResponseAnalyticResponse = null;
             currResponseChoiceAnalyticIDRta = null;
@@ -543,19 +543,19 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         if (analyticInfo.mainCategory != NarrativeAnalyticCategory.NONE)
         {
-            var questionIdx = GetQuestionIdxFor(analyticInfo);
+            var questionIdx = analyticInfo.hasCustomID ? -1 : GetQuestionIdxFor(analyticInfo, analyticInfo.inRelationTo == NarrativeAnalticsEmpathyInRelationTo.ami ? true : false);
 
-            currResponseChoiceAnalyticIDRta = analyticInfo.BuildID(
+            currResponseChoiceAnalyticIDRta = analyticInfo.hasCustomID ? analyticInfo.rtaCustomID : analyticInfo.BuildID(
                 narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
                 questionIdx: questionIdx,
                 NarrativeAnalyticType.Rta);
 
-            currResponseChoiceAnalyticIDVal = analyticInfo.BuildID(
+            currResponseChoiceAnalyticIDCod = analyticInfo.hasCustomID ? analyticInfo.codCustomID : analyticInfo.BuildID(
                 narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
                 questionIdx: questionIdx,
                 NarrativeAnalyticType.cod);
 
-            currResponseChoiceAnalyticIDTm = analyticInfo.BuildID(
+            currResponseChoiceAnalyticIDTm = analyticInfo.hasCustomID ? analyticInfo.tmCustomID : analyticInfo.BuildID(
                 narrativeIdx: NarrativeSceneManager.Instance.NarrativeIdx,
                 questionIdx: questionIdx,
                 NarrativeAnalyticType.Tm);
@@ -574,20 +574,31 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
     }
 
-    private int EmptQuestionsCount = -1;
-    private int AggQuestionsCount = -1;
-    private int ConfQuestionsCount = -1;
-    private int EmoCompQuestionsCount = -1;
-    private int EmoBasQuestionsCount = -1;
+    private int EmptQuestionsCount = 0;
+    private int AggQuestionsCount = 0;
+    private int ConfQuestionsCount = 0;
+    private int EmoCompQuestionsCount = 0;
+    private int EmoBasQuestionsCount = 0;
+
+    private int AmiQuestionsCount = -1;
+    private int EneQuestionsCount = -1;
     
 
-    public int GetQuestionIdxFor(NarrativeAnalyicsInfo info)
+    public int GetQuestionIdxFor(NarrativeAnalyicsInfo info, bool isEmptAmi = false)
     {
         switch (info.mainCategory)
         {
             case NarrativeAnalyticCategory.Empathy:
-                EmptQuestionsCount++;
-                return EmptQuestionsCount;
+                if (isEmptAmi)
+                {
+                    AmiQuestionsCount++;
+                    return AmiQuestionsCount;
+                }
+                else
+                {
+                    EneQuestionsCount++;
+                    return EneQuestionsCount;
+                }
             case NarrativeAnalyticCategory.Aggression:
                 AggQuestionsCount++;
                 return AggQuestionsCount;
@@ -604,8 +615,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
 	}
 
-
-	public void AppearText() {
+    public void AppearText() {
         var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
         dialogueTxt.SetText(currText.ToString());
         appearTimer += Time.deltaTime;
@@ -730,7 +740,7 @@ public class NarrativeNavigationNode
     }
 
     public NarrativeNavigationNode(
-        int _sourceDialogIdx = -1, 
+        int _sourceDialogIdx = 0, 
         int _responsePickedIdx = -1, 
         int _nextDialogCustomStartIdx = -1)
     {

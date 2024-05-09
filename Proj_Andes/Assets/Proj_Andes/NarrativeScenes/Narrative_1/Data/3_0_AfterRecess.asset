@@ -23,8 +23,6 @@ MonoBehaviour:
     textAlternative: "Al fin se termin\xF3 el recreo. Al regresar a tu sal\xF3n,
       te encuentras de nuevo con tu amiga Cami.\r\n"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 3cd219e9350952e46bd992e7ddf8c9d1, type: 3}
     audioAlternative: {fileID: 8300000, guid: 4b6ce3af95ad6b64ba83aef987064cc3, type: 3}
@@ -41,8 +39,6 @@ MonoBehaviour:
       me iba a rega\xF1ar!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 434fd16d109427b4fbe0b293a646a30b, type: 3}
     audioAlternative: {fileID: 0}
@@ -57,8 +53,6 @@ MonoBehaviour:
     text: "\xBFC\xF3mo te sientes t\xFA al saber que a Cami la van a rega\xF1ar?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: emp5_other_feelings
-    analyticTimeID: emp5_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -70,8 +64,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: BIEN
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -82,8 +82,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 1
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: ME DA IGUAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -94,8 +100,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 2
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 1
+        codCustomID: m1_emp_ami_pos_cod
+        rtaCustomID: m1_emp_ami_pos_rta
+        tmCustomID: m1_emp_ami_pos_tm
     - response: MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
@@ -106,8 +118,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 3
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: MUY MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -118,8 +136,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 4
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     audio: {fileID: 8300000, guid: 1b8583a5628e7cd408fe09bda059ee98, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -137,8 +161,6 @@ MonoBehaviour:
       Alex, la misma compa\xF1era que la hab\xEDa empujado en clase de educaci\xF3n
       f\xEDsica, pasa por su puesto, le quita su l\xE1piz y lo esconde."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 8cccf6644b2ad154eb8563ab788269a8, type: 3}
     audioAlternative: {fileID: 0}
@@ -154,8 +176,6 @@ MonoBehaviour:
       a Cami?\r\r\t"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: emp6_other_feelings
-    analyticTimeID: emp6_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -167,8 +187,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: BIEN
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -179,8 +205,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 1
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: ME DA IGUAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -191,8 +223,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 2
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
@@ -203,8 +241,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 3
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: MUY MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -215,8 +259,14 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 4
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     audio: {fileID: 8300000, guid: a24499ce8a8fc044283d698c9b6febae, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -231,8 +281,6 @@ MonoBehaviour:
       que haga lo que quiera, yo mejor busco otro l\xE1piz prestado y ya\u201D\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: d1a785bf8da0f3648ad5338f0ce109ad, type: 3}
     audioAlternative: {fileID: 0}
