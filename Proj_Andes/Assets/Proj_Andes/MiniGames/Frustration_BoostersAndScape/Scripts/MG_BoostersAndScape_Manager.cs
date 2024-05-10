@@ -75,6 +75,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     public int lostByCheat;
     public int boostersActivated;
     bool addedTimeManagUser;
+
+    int trials = 0;
     private void Awake()
     {
         if(instance != null)
@@ -106,6 +108,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         catchBoosterRange = 1.5f;
         OnGameStart();
         trapImage.gameObject.SetActive(false);
+        var newRound = new BoostersAndScapeAnalytics();
+        currAnalytic = newRound;
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone)) StartCoroutine(Intro());  
     }
     IEnumerator Intro()
@@ -206,6 +210,19 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         }
         if (alien.transform.position.x >= rocket.transform.position.x) OnGameEnd();
     }
+    public void StoreAnalytics(MG_BoostersAndScape_Boosters booster)
+    { 
+        trials++;
+        currAnalytic.distanceInBetween = booster.DistanceInBoost;
+        currAnalytic.roundCount = trials;
+        currAnalytic.clicksToBoost = clickRepetitions;
+        currAnalytics.Add(currAnalytic);
+        Debug.Log("new one " + trials);
+
+        clickRepetitions = 0;
+        var newRound = new BoostersAndScapeAnalytics();
+        currAnalytic = newRound;
+    }
     void OnGameStart()
     {
         endOfGameContainer.gameObject.SetActive(false);
@@ -282,6 +299,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     }
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
     {
+        StoreAnalytics(currentBooster);
         totalAttempts++;
         alienMov.MoveToNextPoint();
     }

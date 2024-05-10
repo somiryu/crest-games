@@ -66,8 +66,8 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 		for (int i = 0; i < currAnalytics.Count; i++)
         {
             currAnalyticsDictionary.Clear();
-            currAnalyticsDictionary.Add(DataIds.GameID, GameID);
-            currAnalyticsDictionary.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
+            //currAnalyticsDictionary.Add(DataIds.GameID, GameID);
+            currAnalyticsDictionary.Add(DataIds.cloudNFlowerTest, (int)gameType);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerFrustrationMode, postFrustration);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto1, passedTuto1);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto2, passedTuto2);

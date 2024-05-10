@@ -82,7 +82,9 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	{
 		Init();
 		GeneralGameAnalyticsManager.Instance.Init(DataIds.mechanicHandGame);
-	}
+        var newRound = new MechHandRoundAnalytics();
+        currRoundAnalytics = newRound;
+    }
 	IEnumerator Introduction()
 	{
 		player.canDrag = false;
@@ -256,5 +258,5 @@ public class MechHandRoundAnalytics
 {
 	public int roundCount;
 	public int thrown;
-	public int presition;
+	public float presition;
 }

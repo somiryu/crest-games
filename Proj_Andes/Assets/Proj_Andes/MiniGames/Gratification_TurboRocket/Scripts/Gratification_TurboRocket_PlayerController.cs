@@ -234,7 +234,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         OnScoreChanges?.Invoke();
         planet.UpdateCoinsAmount(0);
         bk.EndOfGame();
-
+        Debug.Log(totalTurboTimer);
         gameConfig.totalTurboTime = totalTurboTimer;
 
         onPlay = false;

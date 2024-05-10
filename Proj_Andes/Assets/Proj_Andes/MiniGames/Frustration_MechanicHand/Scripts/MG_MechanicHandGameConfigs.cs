@@ -19,26 +19,30 @@ public class MG_MechanicHandGameConfigs : GameConfig
     public override void SaveAnalytics()
     {
 		repetition++;
-        var currData = MG_MechanicHand_GameManger.Instance;
+        var currAnalytics = MG_MechanicHand_GameManger.Instance.allRoundAnalytics;
 		GameID = Guid.NewGuid().ToString();
+        var currAnalyticsDictionary = new Dictionary<string, object>();
 
-		itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.GameID, GameID);
-        itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
-        itemAnalytics.Add(DataIds.mechHandTrial, currData.timePlayed);
-		itemAnalytics.Add(DataIds.mechHandThrown, currData.clickRepetitions);
-        itemAnalytics.Add(DataIds.mechHandPresition, currData.lostByCheat);
-        itemAnalytics.Add(DataIds.mechHandFeelAnswer, currData.clawThrows);
-        itemAnalytics.Add(DataIds.mechHandFeelCode, currData.clawThrows);
-        itemAnalytics.Add(DataIds.mechHandFeelTiming, currData.clawThrows);
-        itemAnalytics.Add(DataIds.mechHandWaitClick, currData.clawThrows);
+        itemAnalytics = new Dictionary<string, object>();
+		for (int i = 0; i < currAnalytics.Count; i++)
+		{
+            currAnalyticsDictionary.Clear();
 
-		var newDocID = Guid.NewGuid().ToString();
+            var currData = currAnalytics[i];
+            //.Add(DataIds.GameID, GameID);
+            currAnalyticsDictionary.Add(DataIds.mechHandTest, repetition);
+            currAnalyticsDictionary.Add(DataIds.mechHandTrial, currData.roundCount);
+            currAnalyticsDictionary.Add(DataIds.mechHandThrown, currData.thrown);
+            currAnalyticsDictionary.Add(DataIds.mechHandPresicion, currData.presition);
 
-		UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
-		UserDataManager.LastDocumentIDStored = newDocID;
+            var newDocID = Guid.NewGuid().ToString();
 
-		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.mechanicHandGame);
+            UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
+            UserDataManager.LastDocumentIDStored = newDocID;
+
+            UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, currAnalyticsDictionary, newDocID, DataIds.mechanicHandGame);
+        }
+
 		SetPostFrustration();
 	}
 

@@ -18,6 +18,8 @@ public class FrustrationThermometerController : MonoBehaviour
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip introAudio;
+    bool startToChoose = false;
+    float timer;
     void Start()
     {
         frustlevelButtons = buttonsContainer.GetComponentsInChildren<Button>();
@@ -53,6 +55,7 @@ public class FrustrationThermometerController : MonoBehaviour
             yield return new WaitForSeconds(currAudio.length);
             buttonsSelectedImages[i].SetActive(false);
         }
+        startToChoose = true;
         blockingPanel.gameObject.SetActive(false);
     }
     void GetFrustationLevel(FrustrationLevels level)
@@ -70,11 +73,17 @@ public class FrustrationThermometerController : MonoBehaviour
         audioSource.Play();
         continueBtn.gameObject.SetActive(true);
     }
+    void Update()
+    {
+        if(!startToChoose) return;
+        timer += Time.deltaTime;
+    }
 
     void Continue()
     {
         FrustrationTermometer.LastFrustrationLevelPicked = currFrustratioNlevel;
 		frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
+        FrustrationTermometer.timerToPickEmotion = timer;
         frustrationTermometer.OnSequenceOver();
     }
 

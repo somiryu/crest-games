@@ -481,6 +481,9 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         totalTime = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
 
 		var dictionary = new Dictionary<string, object>();
+        dictionary.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
+        dictionary.Add(DataIds.TestID, UserDataManager.CurrTestID);
+        dictionary.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
         dictionary.Add(DataIds.marketMonsterOrder, MonsterMarketConfig.marketAppearTimes);
 		dictionary.Add(DataIds.marketMonsterStarPre, initialStars);
         dictionary.Add(DataIds.marketMonsterStarsSpent, starsSpent);

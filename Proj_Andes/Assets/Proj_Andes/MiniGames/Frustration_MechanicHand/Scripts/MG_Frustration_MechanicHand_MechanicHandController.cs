@@ -36,7 +36,8 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     [SerializeField] GameObject skinObj;
     [SerializeField] Animator objAnim;
 
-
+    int thowns;
+    float dragTimer;
     IEnumerator hookShootingRoutine;
 
 
@@ -46,6 +47,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         hook.Init(this);
         audioSource = GetComponent<AudioSource>();
         lineRenderer.SetPosition(0, startPointLine.position);
+        thowns = 0;
     }
 
     void Update()
@@ -68,6 +70,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
+            dragTimer += Time.deltaTime;
             var diff = mouseDragStartPosition - Input.mousePosition.y;
             if (Mathf.Abs(diff) > dragDeathZone)
             {
@@ -92,11 +95,20 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
                 }
             }
             isDragging = false;
-
-
         }
     }
 
+    void StoreAnalytics()
+    {
+        thowns++;
+        gameManager.currRoundAnalytics.roundCount = thowns;
+        gameManager.currRoundAnalytics.thrown = thowns;
+        gameManager.currRoundAnalytics.presition = dragTimer;
+        gameManager.allRoundAnalytics.Add(gameManager.currRoundAnalytics);
+        Debug.Log("new one " + thowns);
+        var newRound = new MechHandRoundAnalytics();
+        gameManager.currRoundAnalytics = newRound;
+    }
     public void OnClickSendHook()
     {
         if (hookShootingRoutine != null) return;
@@ -137,6 +149,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = toHookAudio;
         audioSource.Play();
+        StoreAnalytics();
 
         MG_MechanicHand_GameManger.Instance.clawThrows++;
 

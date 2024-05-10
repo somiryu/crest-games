@@ -12,6 +12,7 @@ public class FrustrationTermometer : SimpleGameSequenceItem
     public FrustrationLevel selectedFrustrationLevel;
     public FrustrationLevel defaultFrustrationLevel;
     public SimpleGameSequenceItem frustrationGameItem;
+    public static float timerToPickEmotion;
     public override void SaveAnalytics()
     {
         //If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
@@ -21,6 +22,17 @@ public class FrustrationTermometer : SimpleGameSequenceItem
         if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
 
         Debug.Log(selectedFrustrationLevel.ToString());
-        DocumentFound.Add(DataIds.frustrationLevel, selectedFrustrationLevel.ToString());
+        if (DocumentFound.TryGetValue(DataIds.mechHandThrown, out var valueFound))
+        {
+            DocumentFound.Add(DataIds.mechHandFeelAnswer, selectedFrustrationLevel.ToString());
+            DocumentFound.Add(DataIds.mechHandFeelCode, (int)selectedFrustrationLevel);
+            DocumentFound.Add(DataIds.mechHandFeelTiming, timerToPickEmotion);
+;        } 
+        else if (DocumentFound.TryGetValue(DataIds.frustPersBoostClicks, out var otherValueFound))
+        {
+            DocumentFound.Add(DataIds.frustPersFeelAnswer, selectedFrustrationLevel.ToString());
+            DocumentFound.Add(DataIds.frustPersFeelCode, (int)selectedFrustrationLevel);
+            DocumentFound.Add(DataIds.frustPersFeelTiming, timerToPickEmotion);
+        }
     }
 }

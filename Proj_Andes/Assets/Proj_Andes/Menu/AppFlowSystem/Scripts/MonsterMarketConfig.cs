@@ -15,7 +15,7 @@ public class MonsterMarketConfig : SimpleGameSequenceItem
 
     public static bool isLastMarket;
     public static int marketAppearTimes = -1;
-    public static int openChestTrials = -1;
+    public static int openChestTrials = 0;
 
 	public int AvailableCoins => UserDataManager.CurrUser.Coins;
     public List<string> MyCollectionMonsters => UserDataManager.CurrUser.myCollectionMonsters;
@@ -41,7 +41,6 @@ public class MonsterMarketConfig : SimpleGameSequenceItem
         GameID = Guid.NewGuid().ToString();
 		var dictionary = new Dictionary<string, object>();
 		dictionary.Add(DataIds.GameID, GameID);
-		dictionary.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
         dictionary.AddRange(itemAnalytics);
 		UserDataManager.SaveUserAnayticsPerGame(DataIds.monsterMarket, dictionary);
 	}
