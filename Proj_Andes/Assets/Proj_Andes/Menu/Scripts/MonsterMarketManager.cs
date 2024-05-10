@@ -79,8 +79,9 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     //Analytics
     float timeUntilFirstChestOpen;
+    bool openedAtLeastOneChest;
     float totalTime;
-    bool opennedAtLeastOneChest;
+    string chestTypeOpenedString;
     int chestTypeOpenned;
     int initialStars;
     int finalStars;
@@ -125,6 +126,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		monstersUIInChestOpenning.Init(5);
 		monstersUIInChestOpenning.RecycleAll();
 
+        openedAtLeastOneChest = false;
 		chestOpenedContainer.gameObject.SetActive(false);
 
 		confirmButton.onClick.AddListener(OpenButtonBeforeBuyChestOrContinuing);
@@ -301,7 +303,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     void BuyChest()
     {
-        opennedAtLeastOneChest = true;
         chestOpenButtonParent.gameObject.SetActive(false);
         switch (currButton.monsterMarketButton.monsterChestType)
         {
@@ -313,6 +314,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
                 }
 				marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
                 starsSpent += marketConfig.RegularChestPrice;
+                chestTypeOpenedString = "Pequeño";
                 chestTypeOpenned = 1;
                 OpenChest(1, 0, 0);
                 GeneralGameAnalyticsManager.RegisterWin();
@@ -320,12 +322,14 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             case MonsterChestType.Rare:
                 marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
 				starsSpent += marketConfig.RareChestPrice;
-				chestTypeOpenned = 2;
+                chestTypeOpenedString = "Mediano";
+                chestTypeOpenned = 2;
 				OpenChest(1, 1, 0);
                 break;
             case MonsterChestType.Legendary:
                 marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
 				starsSpent += marketConfig.LegendaryChestPrice;
+                chestTypeOpenedString = "Grande";
 				chestTypeOpenned = 3;
 				OpenChest(1, 1, 1);
 				GeneralGameAnalyticsManager.RegisterLose();
@@ -390,12 +394,14 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     }
     void OpenChest(int regularMonstersAmount, int rareMonstersAmount, int legendaryMonstersAmount)
     {
+        openedAtLeastOneChest = true;
+
         chestOpenButtonParent.gameObject.SetActive(false);
         chestOpenedContainer.gameObject.SetActive(true);
         saveForLaterButton.gameObject.SetActive(true);
         chestOpenedContainerImg.sprite = currButton.monsterMarketButton.chestOpenSprite;
         currentMonstersFound.Clear();
-
+        MonsterMarketConfig.openChestTrials++;
         if(openChest != null) StopCoroutine(openChest);
         openChest = OpenChestAudios();
         StartCoroutine(openChest);
@@ -470,18 +476,24 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     public void SaveForLater()
     {
+        if (!openedAtLeastOneChest) chestTypeOpenedString = "Saltar"; 
         finalStars = UserDataManager.CurrUser.Coins;
         totalTime = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
-        if (!opennedAtLeastOneChest) timeUntilFirstChestOpen = 0;
 
 		var dictionary = new Dictionary<string, object>();
-        dictionary.Add(DataIds.timePlayed, totalTime);
-		dictionary.Add(DataIds.chestChosen, chestTypeOpenned);
-        dictionary.Add(DataIds.starsSpent, starsSpent);
-        dictionary.Add(DataIds.starsBeforeSpend, initialStars);
-        dictionary.Add(DataIds.unspentStars, finalStars);
-        dictionary.Add(DataIds.selectionTime, timeUntilFirstChestOpen);
+        dictionary.Add(DataIds.marketMonsterOrder, MonsterMarketConfig.marketAppearTimes);
+		dictionary.Add(DataIds.marketMonsterStarPre, initialStars);
+        dictionary.Add(DataIds.marketMonsterStarsSpent, starsSpent);
+        dictionary.Add(DataIds.marketMonsterStarsAfter, finalStars);
+        dictionary.Add(DataIds.marketMonsterChestTrial, MonsterMarketConfig.openChestTrials);
+        dictionary.Add(DataIds.marketMonsterChestAnswer, chestTypeOpenedString);
+        dictionary.Add(DataIds.marketMonsterChestCode, chestTypeOpenned);
+        dictionary.Add(DataIds.marketMonsterTotalTime, totalTime);
 
+        foreach (var item in dictionary)
+        {
+            Debug.Log(item.Key +  " " + item.Value);
+        }
         marketConfig.SetAnalyticsInfo(dictionary);
 
 		chestOpenedContainer.gameObject.SetActive(false);
