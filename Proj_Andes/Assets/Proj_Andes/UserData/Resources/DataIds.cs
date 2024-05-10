@@ -78,6 +78,7 @@ public static class DataIds
     public const string test = "test";
     public const string institutionCode = "id_proyecto";
     public const string created_At = "created_At";
+    public const string ended_At = "fin";
     public const string age = "edad";
     public const string grade = "grado";
     public const string state = "state";

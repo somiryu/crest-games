@@ -225,13 +225,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	void UReady()
 	{
-        var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyFAudio : ureadyMAudio;
+        var currClip = UserDataManager.CurrUser.sex == UserGender.Femenino ? ureadyFAudio : ureadyMAudio;
         audioSource.clip = currClip;
         audioSource.Play();
 
         //finding which to deactivate
-        var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyWelcomeM : ureadyWelcomeF;
-        var currUready = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyM : ureadyF;
+        var currWelcome = UserDataManager.CurrUser.sex == UserGender.Femenino ? ureadyWelcomeM : ureadyWelcomeF;
+        var currUready = UserDataManager.CurrUser.sex == UserGender.Femenino ? ureadyM : ureadyF;
 		currWelcome.gameObject.SetActive(false); 
 		currUready.gameObject.SetActive(false);
 
@@ -424,10 +424,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		newUser.institutionCode = UserDataManager.CurrInstitutionCode;
 		newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult) ? ageResult : -1;
 		newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
-		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
+		newUser.sex = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
 		newUser.schoolType = (UserSchoolType)schoolTypeField.value;
 		newUser.country = countryField.text;
-		newUser.livingWith = GetUserLivingWith();
+		newUser.family = GetUserLivingWith();
 
 		var validData = true;
 		var errMsg = "";
@@ -446,7 +446,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			errMsg = "El campo de edad está vacío o es inválido";
 		}
-		else if (newUser.gender == UserGender.NONE)
+		else if (newUser.sex == UserGender.NONE)
 		{
 			errMsg = "El género está vacío o es inválido";
 		}
@@ -462,12 +462,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			errMsg = "El lugar de nacimiento está vacío o es inválido";
 		}
-		else if (string.IsNullOrEmpty(newUser.livingWith))
+		else if (string.IsNullOrEmpty(newUser.family))
 		{
 			errMsg = "El campo 'Con quien vives' está vacío o es inválido";
 		}
 
-
+		Debug.Log("user" + newUser.pin + " " + newUser.institutionCode + " " + newUser.age + " " + 
+			newUser.country + " " + newUser.grade + " " + newUser.family + " " + newUser.sex + " " + newUser.schoolType);
 		validData = string.IsNullOrEmpty(errMsg);
 		wrongNewUserDataLabelPopUp.SetText(errMsg);
 
@@ -514,7 +515,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			if (livingWithToggles[i].GetValue())
 			{
 				familyTypeCount++;
-				currUserLivingWith += livingWithToggles[i].livingWithType.ToString() + (familyTypeCount > 1 ? "," :"");
+				currUserLivingWith += (familyTypeCount > 1 ? "," : "") + livingWithToggles[i].livingWithType.ToString();
 			}
 		}
         Debug.Log(currUserLivingWith);
@@ -554,12 +555,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
         afterLogInPanel.SetActive(true);
 
-        var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
+        var currClip = UserDataManager.CurrUser.sex == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
         audioSource.clip = currClip;
         audioSource.Play();
 
         var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
-        var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? contWelcomeM : contWelcomeF;
+        var currWelcome = UserDataManager.CurrUser.sex == UserGender.Femenino ? contWelcomeM : contWelcomeF;
         currWelcome.gameObject.SetActive(false);
 
         var soundPref = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", 1);
@@ -606,7 +607,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
-		TimeManager.Instance.RegisterTestDate();
+		TimeManager.createDate = TimeManager.Instance.RegisterTestDate();
         TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{

@@ -21,6 +21,10 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 
 		DocumentFound.Add(DataIds.tryAgainClicks + tryAgainTrial, clickAmounts);
 		DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
+        foreach (var item in DocumentFound)
+        {
+            Debug.Log("frust " + item.Key + " " + item.Value);
+        }
     }
 
     public override void ResetCurrentAnalytics()
