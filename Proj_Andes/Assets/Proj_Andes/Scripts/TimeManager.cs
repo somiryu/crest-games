@@ -92,7 +92,6 @@ public class TimeManager : MonoBehaviour
             return;
         }
         var testAnalytics = testGeneralData.itemAnalytics = new Dictionary<string, object>();
-        testAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
         testAnalytics.Add(DataIds.created_At, createDate);
         testAnalytics.Add(DataIds.ended_At, RegisterTestDate());
         testAnalytics.Add(DataIds.grade, UserDataManager.CurrUser.grade);
