@@ -22,4 +22,4 @@ MonoBehaviour:
   tutorialRideDuration: 100
   starsAmount: 17
   tutoStarsAmount: 8
-  minTurboTime: 4
+  minTurboTime: 2

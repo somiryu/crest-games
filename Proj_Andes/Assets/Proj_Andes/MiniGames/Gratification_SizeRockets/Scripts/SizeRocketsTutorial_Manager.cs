@@ -33,7 +33,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     public Transform planetsParent;
 
     private List<MG_SizeRockets_Rocket> activeShips = new List<MG_SizeRockets_Rocket>();
-
+    MG_SizeRockets_Rocket activeShip;
     private SizeRocketsRocketTypes selectedRocketType;
     private MG_SizeRockets_Planet currTargetPlanet;
 
@@ -45,6 +45,10 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     public List<SizeRocketTutoSteps> tutorialSteps = new List<SizeRocketTutoSteps>();
 
     public int shipsPerGame => gameConfigs.shipsPerGame;
+    bool moving;
+    public MG_SizeRockets_Rocket currShip { get => activeShip; set { } }
+    public bool shipIsMoving { get => moving; set { } }
+
 
     private int totalCoinsWon = 0;
     private int shipsLeft;
@@ -57,6 +61,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     [SerializeField] AudioClip selectWorldAudio;
     [SerializeField] AudioClip tryStartsAudio;
     [SerializeField] AudioClip letsPlayAudio;
+    [SerializeField] AudioClip letsTryAudio;
     [SerializeField] AudioClip onRightAction;
     [SerializeField] AudioClip onPassedTuto;
     [SerializeField] AudioClip onDepart;
@@ -73,7 +78,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 		actionBlocker.gameObject.SetActive(true);
 
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
-
+        moving = false;
 		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
 		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.medium));
 		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.large));
@@ -119,6 +124,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         audioSource.clip = currTutoStep.onShipTypeAudio;
         audioSource.Play();
         yield return new WaitForSeconds(currTutoStep.onShipTypeAudio.length);
+        audioSource.clip = letsTryAudio;
+        audioSource.Play();
+        yield return new WaitForSeconds(letsTryAudio.length);
         actionBlocker.gameObject.SetActive(false);
     }
     IEnumerator ResultDelivered(AudioClip clip)
@@ -159,9 +167,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (currShip != null && currShip.shouldMove)
         {
-            if (currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) handSignPlanet.gameObject.SetActive(false);
+            if(currTutoStep.Type == SizeRocketsTutoSteps.SmallRocketStep) handSignPlanet.gameObject.SetActive(false);
         }
         if (selectedRocketType != SizeRocketsRocketTypes.NONE)
         {
@@ -192,6 +200,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         currRocket.transform.position = basePlanet.transform.position;
         currRocket.Init(rocketsPool, currTargetPlanet, basePlanet);
         activeShips.Add(currRocket);
+        activeShip = currRocket;
         shipsLeft--;
         shipsLeftTxt.SetText(shipsLeft.ToString());
         shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
@@ -217,6 +226,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         currTargetPlanet = null;
         StartCoroutine(ResultDelivered(currTutoStep.onResultAudio));
         activeShips.Remove(rocket);
+        activeShip = null;
         totalCoinsWon += coinsAmount;
         currCoinsLabel.SetText(totalCoinsWon.ToString());
     }
