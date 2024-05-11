@@ -21,8 +21,6 @@ MonoBehaviour:
     text: "C\xF3mo te sientes t\xFA al saber que Alex empuj\xF3 a Cami?\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: emp2_other_feelings
-    analyticTimeID: emp2_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -34,8 +32,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
-        inRelationTo: 0
+        inRelationTo: 2
+        customEmotionValue: 0
     - response: BIEN
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -46,8 +46,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
+        customEmotionValue: 0
     - response: ME DA IGUAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -58,8 +60,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
+        customEmotionValue: 0
     - response: MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
@@ -70,8 +74,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
+        customEmotionValue: 0
     - response: MUY MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -82,8 +88,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
+        customEmotionValue: 0
     audio: {fileID: 8300000, guid: eedf834dbb8e8d348a8f93acf18d3e51, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -98,8 +106,6 @@ MonoBehaviour:
       el deporte que va a practicar ahora. Adivina qu\xE9 eligio"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: b5b6f53a1a199de4697789283ba5dd1c, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses:
     - response: Basquetbol
       responseAlternative: 
@@ -111,8 +117,10 @@ MonoBehaviour:
         mainCategory: 0
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
+        customEmotionValue: 0
     - response: Voleybol
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 433e9ab08d934d9409a14c87568a2d67, type: 3}
@@ -123,8 +131,10 @@ MonoBehaviour:
         mainCategory: 0
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
+        customEmotionValue: 0
     - response: "F\xFAtbol"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: e9bd8354896d42d44b17dfb6572aad2f, type: 3}
@@ -135,8 +145,10 @@ MonoBehaviour:
         mainCategory: 0
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
+        customEmotionValue: 0
     audio: {fileID: 8300000, guid: 40945b4f781f2a14cbafe55736d233fd, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -150,8 +162,6 @@ MonoBehaviour:
     text: Si! Ese es mi deporte favorito
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 801ffbb28c2e67c49b20afe2de8c0a55, type: 3}
     audioAlternative: {fileID: 0}
@@ -166,8 +176,6 @@ MonoBehaviour:
     text: "Juegan un partido y el equipo gana!\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: c5f5817b0a763604c83496806ec83fa3, type: 3}
     audioAlternative: {fileID: 0}
@@ -182,8 +190,6 @@ MonoBehaviour:
     text: "C\xF3mo te sientes al escuchar que Cami pudo jugar lo que m\xE1s le gusta\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: emp3_other_feelings
-    analyticTimeID: emp3_time_response_other_ms
     responses:
     - response: MUY BIEN
       responseAlternative: 
@@ -195,8 +201,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 0
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
     - response: BIEN
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -207,8 +215,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 1
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
     - response: ME DA IGUAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -219,8 +229,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 2
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
     - response: MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f2927f19aea82044abdf8461b526e850, type: 3}
@@ -231,8 +243,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 3
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
     - response: MUY MAL
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -243,8 +257,10 @@ MonoBehaviour:
         mainCategory: 1
         empathySubCategory: 4
         agressionSubCategory: 0
+        conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 2
+        customEmotionValue: 0
     audio: {fileID: 8300000, guid: b6b9941ec243f124c9c6542464959a0f, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -258,8 +274,6 @@ MonoBehaviour:
     text: "\xA1Si! Son\xF3 la campana! Vamos al recreo y juguemos un rato"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: f27a333d37809d54084173200c1cbde0, type: 3}
     audioAlternative: {fileID: 0}
@@ -276,11 +290,9 @@ MonoBehaviour:
     textAlternative: Una profe te llama para hablar contigo asi que Cami y tu no
       pueden estar juntas en el recreo
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
-    audio: {fileID: 8300000, guid: d9e3d181d18e77b40a817c199303c30f, type: 3}
-    audioAlternative: {fileID: 0}
+    audio: {fileID: 8300000, guid: ccedbf546a2647f4497e554a7d57fe48, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 2cb4c53b30b0cde4d8ec7f35af104f2a, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: a5310fd5fee7f1a458c4b389e7201d5d, type: 2}
     ExitAnim: {fileID: 0}

@@ -25,11 +25,12 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
         lifetime = manager.gameConfig.boosterTriggerRate * 2;
         targetPos.x = manager.rocket.transform.position.x - initPos.x*2;
         manager.currentBooster = this;
+        manager.currAnalytic = new BoostersAndScapeAnalytics();
     }
 
     void Update()
     {
-        if (!manager.onPlay) return;        
+        if (!manager.onPlay) return;
         timer += Time.deltaTime;
         if(timer > lifetime) Recycle(); 
         var currentProgress = Mathf.InverseLerp(0, manager.gameConfig.boosterTriggerRate*2, timer);
@@ -43,6 +44,7 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
     }
     public void Boosted()
     {
+        manager.RegisterDistanceForAnalytic(transform.position);
         boosted = true;
         boostedParticles.Play();
         Recycle();

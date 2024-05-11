@@ -2256,8 +2256,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -4, y: -211}
-  m_SizeDelta: {x: 684.6454, y: 343.3996}
+  m_AnchoredPosition: {x: -4, y: -158}
+  m_SizeDelta: {x: 651.9, y: 292.6003}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &167807312
 MonoBehaviour:
@@ -2279,7 +2279,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Manejo de la agresi\xF3n y manejo del conflicto"
+  m_text: Conflicto
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
   m_sharedMaterial: {fileID: -2667132593029464860, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
@@ -2306,8 +2306,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.02
-  m_fontSizeBase: 46.02
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12955,7 +12955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -7, y: -185}
+  m_AnchoredPosition: {x: -7, y: -158}
   m_SizeDelta: {x: 651.9, y: 292.6003}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &959394090
@@ -12978,7 +12978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Empat\xEDa en amigo y enemigo"
+  m_text: "Empat\xEDa"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
   m_sharedMaterial: {fileID: -2667132593029464860, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
@@ -13005,8 +13005,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.02
-  m_fontSizeBase: 46.02
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -30802,7 +30802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 9, y: -185}
+  m_AnchoredPosition: {x: 9, y: -158}
   m_SizeDelta: {x: 595.7465, y: 286.2504}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2136476711
@@ -30825,7 +30825,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Identificaci\xF3n de las emocions de s\xED mismo"
+  m_text: Emociones
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
   m_sharedMaterial: {fileID: -2667132593029464860, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
@@ -30852,8 +30852,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.02
-  m_fontSizeBase: 46.02
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

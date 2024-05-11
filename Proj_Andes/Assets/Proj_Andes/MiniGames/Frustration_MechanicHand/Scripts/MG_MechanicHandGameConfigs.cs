@@ -24,11 +24,14 @@ public class MG_MechanicHandGameConfigs : GameConfig
 
 		itemAnalytics = new Dictionary<string, object>();
         itemAnalytics.Add(DataIds.GameID, GameID);
-        itemAnalytics.Add(DataIds.repetition, repetition);
-        itemAnalytics.Add(DataIds.timePlayed, currData.timePlayed);
-		itemAnalytics.Add(DataIds.totalClicks, currData.clickRepetitions);
-        itemAnalytics.Add(DataIds.lostByCheat, currData.lostByCheat);
-        itemAnalytics.Add(DataIds.mechanicHandClawThrows, currData.clawThrows);
+        itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
+        itemAnalytics.Add(DataIds.mechHandTrial, currData.timePlayed);
+		itemAnalytics.Add(DataIds.mechHandThrown, currData.clickRepetitions);
+        itemAnalytics.Add(DataIds.mechHandPresition, currData.lostByCheat);
+        itemAnalytics.Add(DataIds.mechHandFeelAnswer, currData.clawThrows);
+        itemAnalytics.Add(DataIds.mechHandFeelCode, currData.clawThrows);
+        itemAnalytics.Add(DataIds.mechHandFeelTiming, currData.clawThrows);
+        itemAnalytics.Add(DataIds.mechHandWaitClick, currData.clawThrows);
 
 		var newDocID = Guid.NewGuid().ToString();
 
