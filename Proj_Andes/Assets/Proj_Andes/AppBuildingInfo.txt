@@ -1,0 +1,13 @@
+Apps build settings:
+
+ Minigames:
+
+-- AppName --
+miniSEL - Minijuegos
+-- overriden package name --
+com.HiHatGames.CREST
+
+-- App name --
+miniSel - Historias
+-- overriden package name --
+com.HiHatGames.MiniSelNarratives

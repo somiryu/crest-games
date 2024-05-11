@@ -26,9 +26,14 @@ public class TimeManager : MonoBehaviour
             var instancePrefab = Resources.Load<TimeManager>(instancePrefabPath);
             instance = GameObject.Instantiate(instancePrefab);
         }
-        createDate = DateTime.Now.ToString();
-
     }
+
+    public void RegisterTestDate()
+    {
+		createDate = DateTime.Now.ToString("s");
+        Debug.Log("Test date: " + createDate);
+	}
+
     private void Update()
     {
         CountTimeStart();

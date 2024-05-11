@@ -29,7 +29,7 @@ public static class DataIds
 	public const string GameModeAboutAnalytics = "game_mode";
 
 	//Monster market
-	public const string monsterMarket = "market";
+	public const string monsterMarket = "mercado_monstruos";
 	public const string chestChosen = "chest_chosen";
 	public const string starsSpent = "stars_spent";
 	public const string starsBeforeSpend = "stars_before_spend";
@@ -55,7 +55,7 @@ public static class DataIds
 
     public const string turboRocketGame = "turbo_estrellas";
 
-    public const string mechanicHandGame = "por habilidad: la mano mecánica";
+    public const string mechanicHandGame = "frustr_garra";
     public const string mechanicHandClawThrows = "claw_Throws";
 
     public const string fightTheAlienGame = "monstruo_figuras";
@@ -103,7 +103,7 @@ public static class DataIds
     public const string heartsNFlowersTime = "cf_tiempo";
 
     //Cloud or flower analytics
-    public const string cloudNFlowerFrustrationMode = "nfs_modo";
+    public const string cloudNFlowerFrustrationMode = "nf_modo";
     public const string cloudNFlowerPassedTuto1 = "nf_valid_1";
     public const string cloudNFlowerPassedTuto2 = "nf_valid_2";
     public const string cloudNFlowerPassedTuto3 = "nf_valid_3";
@@ -124,5 +124,34 @@ public static class DataIds
     public const string turboStarsTime= "te_tiempo_total";
 
 
+
+    //MechHand analytics
+    public const string mechHandTrial = "fg_intento";
+    public const string mechHandThrown = "fg_lanzamiento";
+    public const string mechHandPresition = "fg_precision";
+    public const string mechHandFeelAnswer = "fg_emoc_rta";
+    public const string mechHandFeelCode = "fg_emoc_cod";
+    public const string mechHandFeelTiming = "fg_emoc_tm";
+    public const string mechHandWaitClick = "fg_espera_click";
+
+
+    //BoostHand analytics
+    public const string frustPersTrial = "fp_intento";
+    public const string frustPersPresition = "fp_precision";
+    public const string frustPersBoostClicks = "fp_turbo";
+    public const string frustPersFeelAnswer = "fp_emoc_rta";
+    public const string frustPersFeelCode = "fp_emoc_cod";
+    public const string frustPersFeelTiming = "fp_emoc_tm";
+    public const string frustPersWaitClick = "fp_espera_click";
+
+    //Monster market
+    public const string marketMonsterOrder = "mm_orden";
+    public const string marketMonsterStarPre = "mm_estrellas_pre";
+    public const string marketMonsterStarsSpent = "mm_estrellas_gast";
+    public const string marketMonsterStarsAfter = "mm_estrellas_post";
+    public const string marketMonsterChestTrial = "mm_cofre_intento";
+    public const string marketMonsterChestAnswer = "mm_cofre_rta";
+    public const string marketMonsterChestCode = "mm_cofre_cod";
+    public const string marketMonsterTotalTime = "mm_cofre_tm";
 
 }
