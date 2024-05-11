@@ -14,6 +14,7 @@ public class MonsterMarketButtonBehaviour : MonoBehaviour, iMonsterMarketButton
     [SerializeField] GameObject panelDisable;
     [SerializeField] Sprite spriteAbleBtn;
     [SerializeField] Sprite spriteDesableBtn;
+    [SerializeField] Image highlight;
 
     private void Start()
     {
@@ -24,9 +25,18 @@ public class MonsterMarketButtonBehaviour : MonoBehaviour, iMonsterMarketButton
             button.onClick.AddListener(MonsterMarketManager.Instance.ActivateContinueSound);
             return;
         }
-        SetLockedImage();
+        SetMarketButtonToCurrState();
+        SetHighlightState(false);
     }
-    public void SetLockedImage()
+
+    public void SetMarketButtonToCurrState()
+    {
+        bool value = UserDataManager.CurrUser.Coins >= monsterMarketButton.costChest;
+        if (value) SetActiveState();
+        else SetInactiveState();
+    }
+
+    public void SetLocked()
     {
         if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;
         bool value = UserDataManager.CurrUser.Coins >= monsterMarketButton.costChest;
@@ -37,19 +47,22 @@ public class MonsterMarketButtonBehaviour : MonoBehaviour, iMonsterMarketButton
     {              
         button.image.sprite = spriteDesableBtn;
         panelDisable.gameObject.SetActive(true);
-        if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;       
-
+		SetHighlightState(false);
+		if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;
+        SetLocked();
     }
+
+    public void SetCanReceiveClicks(bool state) => button.interactable = state;
 
     public void SetActiveState()
     {
         button.image.sprite = spriteAbleBtn;
         panelDisable.gameObject.SetActive(false);
         if (monsterMarketButton.monsterChestType == MonsterChestType.NONE) return;
-        SetLockedImage();
-
+        SetLocked();
     }
 
+    public void SetHighlightState(bool enabled) => highlight.gameObject.SetActive(enabled);
 }
 
 [Serializable]

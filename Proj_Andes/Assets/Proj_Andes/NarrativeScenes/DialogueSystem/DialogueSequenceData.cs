@@ -98,16 +98,17 @@ public class NarrativeAnalyicsInfo
                 label += "emp";
                 break;
             case NarrativeAnalyticCategory.EmoComp:
-                label += "emocomp";
+                label += "emocom";
                 break;            
             case NarrativeAnalyticCategory.EmoBas:
                 label += "emobas";
                 break;
         }
 
+		label += "_";
+
 		if (inRelationTo != NarrativeAnalticsEmpathyInRelationTo.NONE)
         {
-			label += "_";
 			switch (inRelationTo)
             {
                 case NarrativeAnalticsEmpathyInRelationTo.self:
@@ -132,8 +133,8 @@ public class NarrativeAnalyicsInfo
             case NarrativeAnalyticType.Rta:
                 label += "rta";
                 break;            
-            case NarrativeAnalyticType.Val:
-                label += "val";
+            case NarrativeAnalyticType.cod:
+                label += "cod";
                 break;
         }
         Debug.Log("curr label " + label);
@@ -153,9 +154,13 @@ public class NarrativeAnalyicsInfo
 
     public float BuildValue()
     {
-        if (mainCategory == NarrativeAnalyticCategory.Aggression || mainCategory == NarrativeAnalyticCategory.Conflict)
+        if (mainCategory == NarrativeAnalyticCategory.Aggression)
         {
             return ((int)agressionSubCategory);
+        }
+        if(mainCategory == NarrativeAnalyticCategory.Conflict)
+        {
+            return ((int) conflictSubCategory);
         }
         if (mainCategory == NarrativeAnalyticCategory.Empathy) return (int)empathySubCategory;
         if(mainCategory == NarrativeAnalyticCategory.EmoBas || mainCategory == NarrativeAnalyticCategory.EmoComp)
@@ -210,7 +215,7 @@ public enum NarrativeAnalyticAggSubCategory
 public enum NarrativeAnalyticConfSubCategory
 {
 	NONE = 99,
-	imponer = 0,
+	Imponer = 0,
 	Ceder = 1,
 	Negociar = 2,
 }
@@ -250,5 +255,5 @@ public enum NarrativeAnalyticType
 {
    Tm,
    Rta,
-   Val,
+   cod,
 }

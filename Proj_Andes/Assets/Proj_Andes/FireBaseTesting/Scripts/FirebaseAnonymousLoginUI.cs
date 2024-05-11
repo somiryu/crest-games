@@ -380,11 +380,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			var usersSynced = DatabaseManager.pendingSyncronizedUsersAmount;
 			var sessionsSynced = DatabaseManager.pendingSyncronizedSessionsAmount;
+			var testAmounts = DatabaseManager.testAmountsSavedToDataBase;
 
 			if(usersSynced > 0 || sessionsSynced > 0)
 			{
 				dataSyncedPopUp.SetActive(true);
-				dataSyncedLabel.SetText(string.Format("Se subieron al servidor {0} usuario(s) cambiado(s) y {1} sesion(es), encontradas en el guardado local", usersSynced, sessionsSynced));
+				dataSyncedLabel.SetText(string.Format("Se subieron al servidor {0} usuario(s) cambiado(s) y {1} sesion(es), encontradas en el guardado local",
+					usersSynced, testAmounts));
 			}
 		}
 		RebuildUsersList();
@@ -594,6 +596,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
+		TimeManager.Instance.RegisterTestDate();
         TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{

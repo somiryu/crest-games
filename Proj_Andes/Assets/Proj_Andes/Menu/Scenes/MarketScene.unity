@@ -3286,6 +3286,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1735088858 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4523131330258861097, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+  m_PrefabInstance: {fileID: 746739626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91947867f0bde449acbaa0a643ee2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1757229507
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,10 +3540,10 @@ MonoBehaviour:
   noStarsAudio: {fileID: 8300000, guid: 47ac57f65d30fe049909f2dfb551cd80, type: 3}
   continueAudio: {fileID: 8300000, guid: a54cb53751966ab458219186e278d683, type: 3}
   checkAudio: {fileID: 8300000, guid: 202c5f0456383a541a4817dcd3926ab6, type: 3}
-  lastChanceAudio: {fileID: 8300000, guid: 80364a3a8fd8618449b6de3856d5bef4, type: 3}
+  lastChanceAudio: {fileID: 8300000, guid: 9fd3f2e26ae1f794188272252a53dcac, type: 3}
   blockButtons: {fileID: 1250034470}
   tutoHand: {fileID: 1597380035}
-  continueBtn: {fileID: 1735088856}
+  continueBtn: {fileID: 1735088858}
 --- !u!82 &1760502174
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4679,6 +4690,10 @@ PrefabInstance:
     - target: {fileID: 2261139383427928640, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_text
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465273765785598025, guid: edc35730d6c67da46be27c440b74c398, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3694640175569498726, guid: edc35730d6c67da46be27c440b74c398, type: 3}
       propertyPath: m_AnchoredPosition.y
