@@ -52,6 +52,8 @@ public class MonsterMarketButtonBehaviour : MonoBehaviour, iMonsterMarketButton
         SetLocked();
     }
 
+    public void SetCanReceiveClicks(bool state) => button.interactable = state;
+
     public void SetActiveState()
     {
         button.image.sprite = spriteAbleBtn;

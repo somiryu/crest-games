@@ -139,7 +139,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		saveForLaterButton.onClick.AddListener(() => ActivateConfirmationButton(MonsterChestType.NONE, saveForLaterButton));
 
 		coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
-		marketIntro = MarketIntro();
 		noResources = NoResources();
 		openChest = OpenChestAudios();
 		closeNoResourcesBtn.onClick.AddListener(CloseNoResources);
@@ -154,7 +153,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		blockButtons.gameObject.SetActive(true);
 		if (MonsterMarketConfig.isLastMarket)
         {
-
             audioSource.clip = lastChanceAudio;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(lastChanceAudio.length);
@@ -169,7 +167,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction)) continueBtn.button.interactable = false;
         else
         {
-            continueBtn.SetInactiveState();
+			continueBtn.button.interactable = false;
+			continueBtn.SetInactiveState();
             audioSource.clip = intermidiateGamesIntro;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(intermidiateGamesIntro.length);
@@ -177,10 +176,11 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             audioSource.Play();
             yield return new WaitForSecondsRealtime(selectRedBoxAudio.length);
             blockButtons.gameObject.SetActive(false);
-            alreadyReactivatedBlockButton = true;
+			alreadyReactivatedBlockButton = true;
             yield return new WaitForSecondsRealtime(2);
             continueBtn.SetActiveState();
-        }
+			continueBtn.button.interactable = true;
+		}
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
         {
@@ -219,6 +219,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     {
         blockButtons.gameObject.SetActive(true);
         continueBtn.SetInactiveState();
+        continueBtn.button.interactable = false;
         audioSource.clip = intermidiateGamesIntro;
         audioSource.Play();
         yield return new WaitForSecondsRealtime(intermidiateGamesIntro.length);
@@ -228,32 +229,20 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         blockButtons.gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(2);
         continueBtn.SetActiveState();
-    }
+		continueBtn.button.interactable = true;
+	}
 
-    private void Update()
-    {
-        if(UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                var selectedElement = EventSystem.current.currentSelectedGameObject;
-                if (selectedElement == null) return;
-                if (selectedElement.TryGetComponent(out Button btn))
-                {
-                    if(marketIntro != null) StopCoroutine(marketIntro);
-					audioSource.Stop();
-                }
-
-            }
-        }
-    }
-
-    void OnCollectionsClosed()
+	void OnCollectionsClosed()
     {
         UpdateStateButtons();
         if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
         myCollectionManager.OnClosedCollections -= OnCollectionsClosed;
-        if (UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction) && UserDataManager.CurrUser.Coins >= 5) StartCoroutine(PlaySelectMonsters());
+
+        if (UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction) && UserDataManager.CurrUser.Coins >= 5)
+        {
+            StartCoroutine(PlaySelectMonsters());
+        }
+
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction))
 		{
 			StartCoroutine(OrSelectContinue());
