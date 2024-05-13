@@ -22,3 +22,4 @@ MonoBehaviour:
   CanBeOverridenByDebugFlag: 0
   hasNarrativeFixed: 0
   maxItemsToPlayOnRandomize: 1
+  isMiniGameOfMiniGames: 1
