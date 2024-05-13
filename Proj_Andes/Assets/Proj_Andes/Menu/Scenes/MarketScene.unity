@@ -3529,7 +3529,7 @@ MonoBehaviour:
   noStarsAudio: {fileID: 8300000, guid: 47ac57f65d30fe049909f2dfb551cd80, type: 3}
   continueAudio: {fileID: 8300000, guid: a54cb53751966ab458219186e278d683, type: 3}
   checkAudio: {fileID: 8300000, guid: 202c5f0456383a541a4817dcd3926ab6, type: 3}
-  lastChanceAudio: {fileID: 8300000, guid: 80364a3a8fd8618449b6de3856d5bef4, type: 3}
+  lastChanceAudio: {fileID: 8300000, guid: 9fd3f2e26ae1f794188272252a53dcac, type: 3}
   blockButtons: {fileID: 1250034470}
   tutoHand: {fileID: 1597380035}
   continueBtn: {fileID: 1735088856}
