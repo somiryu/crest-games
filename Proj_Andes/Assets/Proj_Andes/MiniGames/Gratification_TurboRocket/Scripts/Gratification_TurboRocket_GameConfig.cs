@@ -30,8 +30,7 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
         itemAnalytics = new Dictionary<string, object>();
 		GameID = Guid.NewGuid().ToString();
 
-		itemAnalytics.Add(DataIds.GameID, GameID);
-		itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
+		//.Add(DataIds.GameID, GameID);
 		itemAnalytics.Add(DataIds.turboStarsFrustrationMode, postFrustration);
         itemAnalytics.Add(DataIds.turboStarsStars, coinsCollected);
         itemAnalytics.Add(DataIds.turboStarsTurboUses, turboUsedTimes);

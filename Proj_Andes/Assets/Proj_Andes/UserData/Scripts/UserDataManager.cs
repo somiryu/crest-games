@@ -98,15 +98,16 @@ public class UserDataManager : ScriptableObject
 		bool shouldUseTestID = true)
 	{
 		var analyticsWithExtraFields = new Dictionary<string, object>();
-		if (shouldUseTestID) analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
-		analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
-		analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
+        analyticsWithExtraFields.Add(DataIds.institutionCode, CurrUser.institutionCode);
+        analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
+        if (shouldUseTestID) analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
+		//analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
 		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
 		foreach(var analytic in analyticsWithExtraFields)
 		{
-			Debug.Log("Wants to save analytic with key: " + analytic);
+			Debug.Log("Wants to save analytic with key: " + analytic.Key + " " + analytic.Value);
 		}
 
 		if (string.IsNullOrEmpty(CollectionName))
@@ -125,6 +126,10 @@ public class UserDataManager : ScriptableObject
 		Debug.Log("will try to save for collection name: " + CollectionName);
 		Debug.Log("doc id " + documentID + " game id " + CollectionName);
 		analyticsDocsFound.Add(newDocumentID, analyticsWithExtraFields);
+		foreach (var item in analyticsWithExtraFields)
+		{
+			Debug.Log("extrafields " + item.Key + " " + item.Value);
+        }
     }
 
     public static bool SaveToServer()

@@ -14,6 +14,7 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
     Vector3 targetPos;
     public bool boosted;
 
+    public float DistanceInBoost => Mathf.Abs(transform.position.x - manager.rocket.transform.position.x);
     [Header("GameParticles")]
     [SerializeField] ParticleSystem boostedParticles;
     public void Init(Pool<MG_BoostersAndScape_Boosters> _pool)
@@ -65,4 +66,6 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
             return false;
         }
     }
+
+
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Tymski;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "MG_SizeRockets_GameConfigs", menuName = "MiniGames/MG_SizeRockets_GameConfigs")]
 public class MG_SizeRockets_GameConfigs : GameConfig
@@ -11,6 +12,9 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 	public int shipsPerGame;
 	public int shipsAmtLavel1;
     public static int postFrustration = 0;
+
+    public Sprite btnPressed;
+    public Sprite btnUnPressed;
 
     [HideInInspector][NonSerialized] public int coinsCollected;
 
@@ -36,8 +40,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 		{
 			var analytics = MG_SizeRockets_GameManager.Instance.analyticsPerRound[i];
 			itemAnalytics.Clear();
-			itemAnalytics.Add(DataIds.GameID, GameID);
-			itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrUser.institutionCode);
+			//itemAnalytics.Add(DataIds.GameID, GameID);
 			itemAnalytics.Add(DataIds.frustrationMode, postFrustration);
 			itemAnalytics.Add(DataIds.tryIndex, analytics.tryIndex);
 			itemAnalytics.Add(DataIds.sizeRocketResponseString, analytics.choiceType.ToString());

@@ -6,10 +6,10 @@ public static class DataIds
 {
     public const string usersCollection = "users";
 
-    public const string TestID = "test ID";
+    public const string TestID = "id_prueba";
     public const string GameOrderInSequence = "game_order";
     public const string UserID = "id_jugador";
-    public const string GameID = "id_juego";
+    public const string GameID = "juego_tipo";
     public const string GameType = "game Type";
 
     //Generic IDs
@@ -71,13 +71,15 @@ public static class DataIds
     public const string sizeRocketsMidShips = "medium_ships";
     public const string sizeRocketsSmallShips = "small_ships";
 
-    public const string tryAgainClicks = "fg_espera_click";
+    public const string tryAgainClicksMechHand = "fg_espera_click";
+    public const string tryAgainClicksBoosters = "fp_espera_click";
     public const string tryAgainClicksAfterWait = "fg_espera_click_afterWait";
 
     //General Test analytics
     public const string test = "test";
     public const string institutionCode = "id_proyecto";
     public const string created_At = "created_At";
+    public const string ended_At = "fin";
     public const string age = "edad";
     public const string grade = "grado";
     public const string state = "state";
@@ -95,6 +97,7 @@ public static class DataIds
     public const string heartsAndStarsGame = "corazones_flores";
     public const string heartsNFlowersFrustration= "cf_modo";
     public const string heartsNFlowersSkill = "cf_habilidad";
+    public const string heartsNFlowersTest = "cf_prueba";
     public const string heartsNFlowersValid = "cf_valid";
     public const string heartsNFlowersTrial = "cf_intento";
     public const string heartsNFlowersStimuli = "cf_estimulo";
@@ -104,6 +107,7 @@ public static class DataIds
 
     //Cloud or flower analytics
     public const string cloudNFlowerFrustrationMode = "nf_modo";
+    public const string cloudNFlowerTest = "nf_prueba";
     public const string cloudNFlowerPassedTuto1 = "nf_valid_1";
     public const string cloudNFlowerPassedTuto2 = "nf_valid_2";
     public const string cloudNFlowerPassedTuto3 = "nf_valid_3";
@@ -126,9 +130,10 @@ public static class DataIds
 
 
     //MechHand analytics
+    public const string mechHandTest = "fg_prueba";
     public const string mechHandTrial = "fg_intento";
     public const string mechHandThrown = "fg_lanzamiento";
-    public const string mechHandPresition = "fg_precision";
+    public const string mechHandPresicion = "fg_precision";
     public const string mechHandFeelAnswer = "fg_emoc_rta";
     public const string mechHandFeelCode = "fg_emoc_cod";
     public const string mechHandFeelTiming = "fg_emoc_tm";
@@ -136,6 +141,7 @@ public static class DataIds
 
 
     //BoostHand analytics
+    public const string frustPersTest= "fp_prueba";
     public const string frustPersTrial = "fp_intento";
     public const string frustPersPresition = "fp_precision";
     public const string frustPersBoostClicks = "fp_turbo";

@@ -16,6 +16,8 @@ public class MyCollectionManager : MonoBehaviour
     [SerializeField] Image leftArrow;
     [SerializeField] Image rightArrow;
     public ScrollRect scrollbar;
+    [SerializeField] AudioClip thisIsYourCollAudio;
+
     [HideInInspector] public float scrollSpeed = 200f;
 
     public static List<Monsters> totalDataCollection = new List<Monsters>();

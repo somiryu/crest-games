@@ -8,7 +8,8 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 {
     public int tryAgainTrial;
     [NonSerialized] public int clickAmounts;
-    [NonSerialized] public int ExtraClickAmounts;    public override void SaveAnalytics()
+    [NonSerialized] public int ExtraClickAmounts;    
+    public override void SaveAnalytics()
     {
         clickAmounts = TryAgainManager.clickCountsBeforeBarCompleted;
         ExtraClickAmounts = TryAgainManager.clickCountsAfterBarCompleted;
@@ -18,8 +19,21 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
 		if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
 		if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
 
-		DocumentFound.Add(DataIds.tryAgainClicks, clickAmounts);
-		DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
+        if (DocumentFound.TryGetValue(DataIds.mechHandThrown, out var valueFound))
+        {
+            DocumentFound.Add(DataIds.tryAgainClicksMechHand + tryAgainTrial, clickAmounts);
+            //DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
+        }
+        else if (DocumentFound.TryGetValue(DataIds.frustPersBoostClicks, out var otherValueFound))
+        {
+            DocumentFound.Add(DataIds.tryAgainClicksBoosters + tryAgainTrial, clickAmounts);
+            //DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
+        }
+
+        foreach (var item in DocumentFound)
+        {
+            Debug.Log("frust " + item.Key + " " + item.Value);
+        }
     }
 
     public override void ResetCurrentAnalytics()

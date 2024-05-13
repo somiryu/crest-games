@@ -18,6 +18,8 @@ public class FrustrationThermometerController : MonoBehaviour
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip introAudio;
+    bool startToChoose = false;
+    float timer;
     void Start()
     {
         frustlevelButtons = buttonsContainer.GetComponentsInChildren<Button>();
@@ -27,7 +29,7 @@ public class FrustrationThermometerController : MonoBehaviour
             int idx = i;
             frustrationLevels[idx].frustLevelButton.onClick.AddListener(() => GetFrustationLevel(frustrationLevels[idx]));
 
-            if (UserDataManager.CurrUser.gender == UserGender.Masculino) frustrationLevels[idx].FLabel.gameObject.SetActive(false);
+            if (UserDataManager.CurrUser.sex == UserGender.Masculino) frustrationLevels[idx].FLabel.gameObject.SetActive(false);
             else frustrationLevels[idx].MLabel.gameObject.SetActive(false);
 
             buttonsSelectedImages[i].SetActive(false);
@@ -47,12 +49,13 @@ public class FrustrationThermometerController : MonoBehaviour
             var currDescription = frustrationLevels[i];
             GetFrustationLevel(currDescription);
             continueBtn.gameObject.SetActive(false);
-            var currAudio = UserDataManager.CurrUser.gender == UserGender.Femenino ? currDescription.FbuttonSound : currDescription.MbuttonSound;
+            var currAudio = UserDataManager.CurrUser.sex == UserGender.Femenino ? currDescription.FbuttonSound : currDescription.MbuttonSound;
             audioSource.clip = currAudio; 
             audioSource.Play();
             yield return new WaitForSeconds(currAudio.length);
             buttonsSelectedImages[i].SetActive(false);
         }
+        startToChoose = true;
         blockingPanel.gameObject.SetActive(false);
     }
     void GetFrustationLevel(FrustrationLevels level)
@@ -65,16 +68,22 @@ public class FrustrationThermometerController : MonoBehaviour
             if (level.idx == i) continue;
             else ButtonUnpressed(frustlevelButtons[i]);
         }
-        if(UserDataManager.CurrUser.gender == UserGender.Masculino) audioSource.clip = level.MbuttonSound;
+        if(UserDataManager.CurrUser.sex == UserGender.Masculino) audioSource.clip = level.MbuttonSound;
         else audioSource.clip = level.FbuttonSound;
         audioSource.Play();
         continueBtn.gameObject.SetActive(true);
+    }
+    void Update()
+    {
+        if(!startToChoose) return;
+        timer += Time.deltaTime;
     }
 
     void Continue()
     {
         FrustrationTermometer.LastFrustrationLevelPicked = currFrustratioNlevel;
 		frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
+        FrustrationTermometer.timerToPickEmotion = timer;
         frustrationTermometer.OnSequenceOver();
     }
 

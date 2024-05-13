@@ -401,7 +401,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     void GameOver()
     {
-        gameConfigs.SaveAnalytics();
         audioPlayer.clip = finishAudio;
         audioPlayer.Play();
         gameoverFlag = true;

@@ -18,27 +18,29 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
 
     public override void SaveAnalytics()
     {
-        repetition ++;
-        var currData = MG_BoostersAndScape_Manager.Instance;
+        repetition++;
+        var currAnalytics = MG_BoostersAndScape_Manager.Instance.currAnalytics;
 		GameID = Guid.NewGuid().ToString();
+        itemAnalytics = new Dictionary<string, object>();
 
-		itemAnalytics = new Dictionary<string, object>();
-        itemAnalytics.Add(DataIds.GameID, GameID);
-        itemAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
-        itemAnalytics.Add(DataIds.frustPersTrial , currData.timePlayed);
-        itemAnalytics.Add(DataIds.frustPersPresition, currData.clickRepetitions);
-        itemAnalytics.Add(DataIds.frustPersBoostClicks, currData.lostByCheat);
-        itemAnalytics.Add(DataIds.frustPersFeelAnswer, currData.boostersActivated);
-        itemAnalytics.Add(DataIds.frustPersFeelCode, currData.boostersActivated);
-        itemAnalytics.Add(DataIds.frustPersFeelTiming, currData.boostersActivated);
-        itemAnalytics.Add(DataIds.frustPersWaitClick, currData.boostersActivated);
+        for (int i = 0; i < currAnalytics.Count; i++)
+        {
+            itemAnalytics.Clear();
+            var currData = currAnalytics[i];
+            //itemAnalytics.Add(DataIds.GameID, GameID);
+            itemAnalytics.Add(DataIds.frustPersTest, repetition);
+            itemAnalytics.Add(DataIds.frustPersTrial, currData.roundCount);
+            itemAnalytics.Add(DataIds.frustPersPresition, currData.distanceInBetween);
+            itemAnalytics.Add(DataIds.frustPersBoostClicks, currData.clicksToBoost);
 
-		var newDocID = Guid.NewGuid().ToString();
+            var newDocID = Guid.NewGuid().ToString();
 
-        UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
-		UserDataManager.LastDocumentIDStored = newDocID;
+            UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
+            UserDataManager.LastDocumentIDStored = newDocID;
 
-		UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.boostersAndScapeGame);
+            UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.boostersAndScapeGame);
+        }
+
 
         MG_MechanicHandGameConfigs.SetPostFrustration();
     }

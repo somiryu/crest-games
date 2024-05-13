@@ -14,7 +14,7 @@ public class TimeManager : MonoBehaviour
     public static TimeManager Instance => instance;
     List<ITimeManagement> users = new List<ITimeManagement>();
     public bool onTimeScalePaused;
-    static string createDate;
+    public static string createDate;
     public static string currSessionid;
     public static float timer;
     [HideInInspector] public SessionStateLeft gameState;
@@ -28,10 +28,9 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    public void RegisterTestDate()
+    public string RegisterTestDate()
     {
-		createDate = DateTime.Now.ToString("s");
-        Debug.Log("Test date: " + createDate);
+        return DateTime.Now.ToString("s");
 	}
 
     private void Update()
@@ -93,10 +92,10 @@ public class TimeManager : MonoBehaviour
             return;
         }
         var testAnalytics = testGeneralData.itemAnalytics = new Dictionary<string, object>();
-        testAnalytics.Add(DataIds.institutionCode, UserDataManager.CurrInstitutionCode);
         testAnalytics.Add(DataIds.created_At, createDate);
-        testAnalytics.Add(DataIds.age, UserDataManager.CurrUser.age);
+        testAnalytics.Add(DataIds.ended_At, RegisterTestDate());
         testAnalytics.Add(DataIds.grade, UserDataManager.CurrUser.grade);
+        testAnalytics.Add(DataIds.age, UserDataManager.CurrUser.age);
         testAnalytics.Add(DataIds.state, gameState.ToString());
         testAnalytics.Add(DataIds.time_Spent, timer);
         UserDataManager.SaveUserAnayticsPerGame(
@@ -107,6 +106,6 @@ public class TimeManager : MonoBehaviour
             );
         //Resetting the test id since this only gets called when the user exits
         UserDataManager.CurrTestID = "Default Test ID";
-        //Debug.Log("saved test data " + DataIds.TestID + " " + UserDataManager.CurrTestID + " " + createDate + " " + gameState + " " + " realtime " + timer);
+        Debug.Log("saved test data " + DataIds.TestID + " " + UserDataManager.CurrTestID + " " + createDate + " " + gameState + " " + " realtime " + timer);
     }
 }

@@ -52,6 +52,10 @@ MonoBehaviour:
         emotionSubCategory: 4
         inRelationTo: 1
         customEmotionValue: 1
+        hasCustomID: 1
+        codCustomID: m1_emoc_bas_cod
+        rtaCustomID: m1_emoc_bas_rta
+        tmCustomID: m1_emoc_bas_tm
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -66,6 +70,10 @@ MonoBehaviour:
         emotionSubCategory: 3
         inRelationTo: 1
         customEmotionValue: 2
+        hasCustomID: 1
+        codCustomID: m1_emoc_bas_cod
+        rtaCustomID: m1_emoc_bas_rta
+        tmCustomID: m1_emoc_bas_tm
     - response: ALEGRIA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: eeb07e2dfb8852a40a323ec3a48cf177, type: 3}
@@ -80,6 +88,10 @@ MonoBehaviour:
         emotionSubCategory: 2
         inRelationTo: 1
         customEmotionValue: 3
+        hasCustomID: 1
+        codCustomID: m1_emoc_bas_cod
+        rtaCustomID: m1_emoc_bas_rta
+        tmCustomID: m1_emoc_bas_tm
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -94,6 +106,10 @@ MonoBehaviour:
         emotionSubCategory: 1
         inRelationTo: 1
         customEmotionValue: 4
+        hasCustomID: 1
+        codCustomID: m1_emoc_bas_cod
+        rtaCustomID: m1_emoc_bas_rta
+        tmCustomID: m1_emoc_bas_tm
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -108,6 +124,10 @@ MonoBehaviour:
         emotionSubCategory: 10
         inRelationTo: 1
         customEmotionValue: 5
+        hasCustomID: 1
+        codCustomID: m1_emoc_bas_cod
+        rtaCustomID: m1_emoc_bas_rta
+        tmCustomID: m1_emoc_bas_tm
     audio: {fileID: 8300000, guid: aaefd190900cacb44a5c71faca6b1e0e, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
