@@ -225,13 +225,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	void UReady()
 	{
-        var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyFAudio : ureadyMAudio;
+        var currClip = UserDataManager.CurrUser.gender == UserSex.Femenino ? ureadyFAudio : ureadyMAudio;
         audioSource.clip = currClip;
         audioSource.Play();
 
         //finding which to deactivate
-        var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyWelcomeM : ureadyWelcomeF;
-        var currUready = UserDataManager.CurrUser.gender == UserGender.Femenino ? ureadyM : ureadyF;
+        var currWelcome = UserDataManager.CurrUser.gender == UserSex.Femenino ? ureadyWelcomeM : ureadyWelcomeF;
+        var currUready = UserDataManager.CurrUser.gender == UserSex.Femenino ? ureadyM : ureadyF;
 		currWelcome.gameObject.SetActive(false); 
 		currUready.gameObject.SetActive(false);
 
@@ -424,7 +424,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		newUser.institutionCode = UserDataManager.CurrInstitutionCode;
 		newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult) ? ageResult : -1;
 		newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
-		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
+		newUser.gender = Enum.TryParse<UserSex>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserSex.NONE;
 		newUser.schoolType = (UserSchoolType)schoolTypeField.value;
 		newUser.country = countryField.text;
 		newUser.livingWith = GetUserLivingWith();
@@ -440,7 +440,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			errMsg = "El campo de edad está vacío o es inválido";
 		}
-		else if (newUser.gender == UserGender.NONE)
+		else if (newUser.gender == UserSex.NONE)
 		{
 			errMsg = "El género está vacío o es inválido";
 		}
@@ -544,12 +544,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
         afterLogInPanel.SetActive(true);
 
-        var currClip = UserDataManager.CurrUser.gender == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
+        var currClip = UserDataManager.CurrUser.gender == UserSex.Femenino ? welcomeFAudio : welcomeMAudio;
         audioSource.clip = currClip;
         audioSource.Play();
 
         var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
-        var currWelcome = UserDataManager.CurrUser.gender == UserGender.Femenino ? contWelcomeM : contWelcomeF;
+        var currWelcome = UserDataManager.CurrUser.gender == UserSex.Femenino ? contWelcomeM : contWelcomeF;
         currWelcome.gameObject.SetActive(false);
 
         var soundPref = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", 1);

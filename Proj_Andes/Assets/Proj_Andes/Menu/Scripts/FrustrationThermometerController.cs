@@ -27,7 +27,7 @@ public class FrustrationThermometerController : MonoBehaviour
             int idx = i;
             frustrationLevels[idx].frustLevelButton.onClick.AddListener(() => GetFrustationLevel(frustrationLevels[idx]));
 
-            if (UserDataManager.CurrUser.gender == UserGender.Masculino) frustrationLevels[idx].FLabel.gameObject.SetActive(false);
+            if (UserDataManager.CurrUser.gender == UserSex.Masculino) frustrationLevels[idx].FLabel.gameObject.SetActive(false);
             else frustrationLevels[idx].MLabel.gameObject.SetActive(false);
 
             buttonsSelectedImages[i].SetActive(false);
@@ -47,7 +47,7 @@ public class FrustrationThermometerController : MonoBehaviour
             var currDescription = frustrationLevels[i];
             GetFrustationLevel(currDescription);
             continueBtn.gameObject.SetActive(false);
-            var currAudio = UserDataManager.CurrUser.gender == UserGender.Femenino ? currDescription.FbuttonSound : currDescription.MbuttonSound;
+            var currAudio = UserDataManager.CurrUser.gender == UserSex.Femenino ? currDescription.FbuttonSound : currDescription.MbuttonSound;
             audioSource.clip = currAudio; 
             audioSource.Play();
             yield return new WaitForSeconds(currAudio.length);
@@ -65,7 +65,7 @@ public class FrustrationThermometerController : MonoBehaviour
             if (level.idx == i) continue;
             else ButtonUnpressed(frustlevelButtons[i]);
         }
-        if(UserDataManager.CurrUser.gender == UserGender.Masculino) audioSource.clip = level.MbuttonSound;
+        if(UserDataManager.CurrUser.gender == UserSex.Masculino) audioSource.clip = level.MbuttonSound;
         else audioSource.clip = level.FbuttonSound;
         audioSource.Play();
         continueBtn.gameObject.SetActive(true);
