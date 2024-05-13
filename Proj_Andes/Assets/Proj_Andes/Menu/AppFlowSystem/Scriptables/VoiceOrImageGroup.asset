@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9a897d4e5304744f8eac206b8045b31, type: 3}
-  m_Name: MiniGameGroupCtraImpulsos
+  m_Name: VoiceOrImageGroup
   m_EditorClassIdentifier: 
   scene:
     sceneAsset: {fileID: 0}
     scenePath: 
   miniGamesInGroup:
-  - {fileID: 11400000, guid: d29116d12627e774c9c99a4a6abff81e, type: 2}
-  - {fileID: 11400000, guid: 8ba9cf229ee28dd44a21f3f5e1a70141, type: 2}
-  randomize: 1
+  - {fileID: 11400000, guid: 257a554bbfafabe44ac0f976fbe0bbda, type: 2}
+  - {fileID: 11400000, guid: 2d412b62f0ec7e844b5e60491e3b5888, type: 2}
+  randomize: 0
   CanBeOverridenByDebugFlag: 0
   hasNarrativeFixed: 0
-  maxItemsToPlayOnRandomize: 1
+  maxItemsToPlayOnRandomize: -1

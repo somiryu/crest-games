@@ -19,6 +19,7 @@ public class MinigameGroups : SimpleGameSequenceItem
     [NonSerialized] public int forcedScene;
     [NonSerialized]
     public int lastPlayedIdx = -1;
+    public bool isMiniGameOfMiniGames;
 
     public SimpleGameSequenceItem GetNextMiniGame()
     {
@@ -42,21 +43,31 @@ public class MinigameGroups : SimpleGameSequenceItem
         if (randomize)
         {
             return GetRandomGame();
-        } 
-        if(miniGamesInGroup.Contains(GameSequencesList.Instance.prevGame))
+        }
+        return GetNextMiniGameWithoutOverrides();
+    }
+
+    SimpleGameSequenceItem GetNextMiniGameWithoutOverrides()
+    {
+        if (miniGamesInGroup.Contains(GameSequencesList.Instance.prevGame))
         {
             var lastGameIdx = miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame);
             var newGameIdx = lastGameIdx + 1;
+            Debug.Log(newGameIdx + " minigame " + lastGameIdx);
 
             if (newGameIdx >= miniGamesInGroup.Count) return null;
-
-			lastPlayedIdx = newGameIdx;
+            lastPlayedIdx = newGameIdx;
             var newGame = miniGamesInGroup[lastPlayedIdx];
+            if (newGame is MinigameGroups group)
+            {
+                Debug.Log("going to minigame in minigame");
+                var currGameToCheck = group.GetNextMiniGame();
+                if (currGameToCheck != null) return currGameToCheck;
+            }
             return newGame;
         }
         else return miniGamesInGroup[0];
     }
-
     public void SetItemsPlayedData(List<int> itemsIdsPlayed)
     {
         itemsPlayed.Clear();
@@ -86,7 +97,11 @@ public class MinigameGroups : SimpleGameSequenceItem
             Debug.Log("Saved played ID: " +  lastPlayedIdx);
         }
 		var maxItemsToPlay = maxItemsToPlayOnRandomize != -1 ? maxItemsToPlayOnRandomize : miniGamesInGroup.Count;
-        if(itemsPlayed.Count >= maxItemsToPlay) return null;
+        if (itemsPlayed.Count >= maxItemsToPlay)
+        {
+            if (isMiniGameOfMiniGames) return GetNextMiniGameWithoutOverrides();
+        }
+        else return null;
 
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
         if (!itemsPlayed.Contains(newGame))
@@ -103,7 +118,8 @@ public class MinigameGroups : SimpleGameSequenceItem
 
     public override SimpleGameSequenceItem GetNextItem()
     {
-        return GetNextMiniGame();
+        var nextGame = GetNextMiniGame();
+        return nextGame;
     }
 
 	public override SimpleGameSequenceItem GetItemByIdx(int idx) => miniGamesInGroup[(int)idx];
