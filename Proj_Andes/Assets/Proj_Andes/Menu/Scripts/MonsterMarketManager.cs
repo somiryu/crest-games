@@ -156,6 +156,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             audioSource.clip = lastChanceAudio;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(lastChanceAudio.length);
+            blockButtons.gameObject.SetActive(false);
             yield break;
         }
 

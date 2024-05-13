@@ -609,7 +609,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		TimeManager.createDate = TimeManager.Instance.RegisterTestDate();
 		GameSequencesList.CleanCurrUserTutorial();
-		TimeManager.Instance.RegisterTestDate();
         TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{
