@@ -240,7 +240,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 		inGameUiContainer.gameObject.SetActive(false);
 		afterActionPanel.SetActive(true);
 		inGameObjs.SetActive(false);
-		StartCoroutine(PlayAudiosGuide(noStarsAudio, notHookedAudio));
+		StartCoroutine(PlayAudiosGuide(noStarsAudio));
 		//afterAction_ResultsTxt.SetText("Capturaste: " + totalCapturedAsteroids + " de " + asteroidsPerRound * 3);
 		afterAction_ResultsTxt.SetText( totalCapturedAsteroids.ToString());
 		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);
