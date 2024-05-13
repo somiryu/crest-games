@@ -209,11 +209,13 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		smallRocketBtn.interactable = false;
 		mediumRocketBtn.interactable = false;
 		largeRocketBtn.interactable = false;
-	}
+        currAnalytics.tryIndex = roundCount + 1;
+
+    }
 
 
 
-	public Pool<MG_SizeRockets_Rocket> GetRocketsPool(SizeRocketsRocketTypes type)
+    public Pool<MG_SizeRockets_Rocket> GetRocketsPool(SizeRocketsRocketTypes type)
 	{
 		return type switch
 		{
@@ -250,7 +252,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 		roundCount++;
 
-		roundEndAudioRoutineRef = StarsWonCount(GetCoinAudio(rocket.rocketType));
+        roundEndAudioRoutineRef = StarsWonCount(GetCoinAudio(rocket.rocketType));
 		yield return roundEndAudioRoutineRef;
 
 		activeShips.Remove(rocket);
@@ -264,7 +266,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			yield break;
 		}
 
-		currAnalytics.tryIndex = roundCount + 1;
 		smallRocketBtn.interactable = true;
 		mediumRocketBtn.interactable = true;
 		largeRocketBtn.interactable = true;
