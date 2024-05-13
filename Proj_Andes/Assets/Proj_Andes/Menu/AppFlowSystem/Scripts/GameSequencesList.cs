@@ -9,7 +9,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameSequencesList  ", menuName = "GameSequencesList/GameSequencesList")]
 public class GameSequencesList : ScriptableObject
 {
-    public static bool isTheNarrativeSequence = true;
+    public static bool isTheNarrativeSequence = false;
     public static string gameInstancePath = "GameSequencesList";
     public static string narrativeInstancePath = "NarrativeSequencesList";
     static GameSequencesList instance;
@@ -88,6 +88,7 @@ public class GameSequencesList : ScriptableObject
         goToGameGroupIdx = 0;
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
         MonsterMarketConfig.marketAppearTimes = -1;
+        CleanCurrUserTutorial();
     }
 
     public SimpleGameSequenceItem GetGameSequence()
@@ -159,7 +160,7 @@ public class GameSequencesList : ScriptableObject
 #if UNITY_EDITOR
     [MenuItem("Hi Hat Games/ Clean tutorial data")]
 #endif
-    private static void CleanCurrUserTutorial()
+    public static void CleanCurrUserTutorial()
     {
         UserDataManager.CurrUser.tutorialStepsDone.Clear();
     }
