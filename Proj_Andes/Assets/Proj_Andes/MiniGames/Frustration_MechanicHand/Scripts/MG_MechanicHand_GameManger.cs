@@ -27,7 +27,6 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	public Button sendHookBtn;
 
 	[SerializeField] AudioSource audioSource;
-	[SerializeField] AudioClip reminderAudio;
 	[SerializeField] AudioClip notHookedAudio;
 	[SerializeField] AudioClip introductionAudio;
 	[SerializeField] AudioClip letsTryAudio;
@@ -91,22 +90,19 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 		tutoHand1.gameObject.SetActive(false);
 		blockingPanel.gameObject.SetActive(true);
 		TimeManager.Instance.SetNewStopTimeUser(this);
-		audioSource.clip = reminderAudio;
-        audioSource.Play();
-        yield return new WaitForSecondsRealtime(reminderAudio.length);
 
         if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_MechanicHand_1HoldClickAndMove))
 		{
             audioSource.clip = introductionAudio;
             audioSource.Play();
-            yield return new WaitForSecondsRealtime(introductionAudio.length);
+            yield return new WaitForSecondsRealtime(introductionAudio.length+1);
             audioSource.clip = letsTryAudio;
             audioSource.Play();
             yield return new WaitForSecondsRealtime(letsTryAudio.length);
             TimeManager.Instance.RemoveNewStopTimeUser(this);
             tutoHand1.gameObject.SetActive(true);
             tutoDone = false;
-            StartCoroutine(PlayAudiosGuide(moveHookAudio));
+            StartCoroutine( PlayAudiosGuide(moveHookAudio));
         }
 		else
 		{
@@ -125,7 +121,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
         }
 		audioSource.clip = clip;
 		audioSource.Play();
-		yield return new WaitForSeconds(clip.length);
+		yield return new WaitForSecondsRealtime(clip.length);
         blockingPanel.gameObject.SetActive(false);
     }
     void Init()
