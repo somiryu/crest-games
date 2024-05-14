@@ -240,7 +240,9 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
         myCollectionManager.OnClosedCollections -= OnCollectionsClosed;
 
-        if (UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction) && UserDataManager.CurrUser.Coins >= 5)
+        if (UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction) 
+            && UserDataManager.CurrUser.Coins >= 5
+            && !MonsterMarketConfig.isLastMarket)
         {
             StartCoroutine(PlaySelectMonsters());
         }
