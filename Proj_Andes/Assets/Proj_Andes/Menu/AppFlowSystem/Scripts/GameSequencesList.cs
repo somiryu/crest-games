@@ -88,7 +88,11 @@ public class GameSequencesList : ScriptableObject
         goToGameGroupIdx = 0;
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
         MonsterMarketConfig.marketAppearTimes = -1;
-        CleanCurrUserTutorial();
+		MG_SizeRockets_GameConfigs.postFrustration = 0;
+		MG_VoiceStarOrFlowerGameConfigs.postFrustration = 0;
+		MG_HearthAndStarsGameConfigs.postFrustration = 0;
+		Gratification_TurboRocket_GameConfig.postFrustration = 0;
+		CleanCurrUserTutorial();
     }
 
     public SimpleGameSequenceItem GetGameSequence()

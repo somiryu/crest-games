@@ -610,6 +610,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
+		MG_SizeRockets_GameConfigs.postFrustration = 0;
+		MG_VoiceStarOrFlowerGameConfigs.postFrustration = 0;
+		MG_HearthAndStarsGameConfigs.postFrustration = 0;
+		Gratification_TurboRocket_GameConfig.postFrustration = 0;
+		MonsterMarketConfig.marketAppearTimes = -1;
+
 		TimeManager.createDate = TimeManager.Instance.RegisterTestDate();
 		GameSequencesList.CleanCurrUserTutorial();
         TimeManager.timer = 0;
@@ -634,9 +640,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	IEnumerator LoadingSceneAsync(SceneReference scene)
 	{
-		Debug.Log("Unloading assets started");
 		yield return Resources.UnloadUnusedAssets();
-		Debug.Log("Unloading assets finished");
 
 		loadingPanel.gameObject.SetActive(true); 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);

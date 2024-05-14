@@ -20,6 +20,7 @@ public class FrustrationThermometerController : MonoBehaviour
     [SerializeField] AudioClip introAudio;
     bool startToChoose = false;
     float timer;
+
     void Start()
     {
         frustlevelButtons = buttonsContainer.GetComponentsInChildren<Button>();
