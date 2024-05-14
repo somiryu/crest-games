@@ -13,7 +13,7 @@ public class UserData
     [FirestoreProperty] public string institutionCode { get; set; }
     [FirestoreProperty] public int age { get; set; }
     [FirestoreProperty] public int grade { get; set; }
-    [FirestoreProperty] public UserGender sex { get; set; }
+    [FirestoreProperty] public UserSex sex { get; set; }
     [FirestoreProperty] public UserSchoolType schoolType { get; set; }
     [FirestoreProperty] public string country { get; set; }
     [FirestoreProperty] public string family { get; set; }
@@ -37,7 +37,7 @@ public class UserData
 		institutionCode = "Empty";
 		age = -1;
         grade = -1;
-        sex = UserGender.Femenino;
+        sex = UserSex.Mujer;
 		schoolType = UserSchoolType.NONE;
 		country = string.Empty;
 		family = string.Empty;
@@ -67,10 +67,10 @@ public class UserData
 	}
 }
 
-public enum UserGender
+public enum UserSex
 {
-	Masculino,
-	Femenino,
+	Hombre,
+	Mujer,
 	NONE,
 }
 
