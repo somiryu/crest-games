@@ -6,22 +6,25 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System;
 
-[Serializable]
-public class MoveButtonSizeRockets : Image, IPointerDownHandler, IPointerUpHandler
+public class MoveButtonSizeRockets : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     ISizeRocketsManager manager => ISizeRocketsManager.Instance;
+    [SerializeField] Image btnImage;
+    void Start()
+    {
+        TryGetComponent(out btnImage);
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
-        sprite = manager.gameConfigs.btnPressed;
+        btnImage.sprite = manager.gameConfigs.btnPressed;
         manager.shipIsMoving = true;
         if(manager.currShip != null) manager.currShip.shouldMove = true;
-
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         if (manager.currShip != null) manager.currShip.shouldMove = false;
         manager.shipIsMoving = false;
-        sprite = manager.gameConfigs.btnUnPressed;
+        btnImage.sprite = manager.gameConfigs.btnUnPressed;
     }
 }
