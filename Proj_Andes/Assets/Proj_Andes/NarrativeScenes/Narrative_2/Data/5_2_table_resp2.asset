@@ -16,8 +16,8 @@ MonoBehaviour:
   - characterType: 2
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 3ff86865b61b6bc49b0a5bc063658b0c, type: 2}
-    changeToSequenceStartDialogIdx: 2
-    changeToSequenceResponseIdxToGrayOut: 1
+    changeToSequenceStartDialogIdx: 3
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Debajo de la mesa: \u201CDebajo de la mesa hay chicles pegados\u2026 intenta
       no tocarlos."
     textAlternative: 

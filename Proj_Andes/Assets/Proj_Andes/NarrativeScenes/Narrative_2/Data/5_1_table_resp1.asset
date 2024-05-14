@@ -15,15 +15,13 @@ MonoBehaviour:
   dialogues:
   - characterType: 1
     autoContinueOnClickDialog: 1
-    changeToSequence: {fileID: 11400000, guid: 3ff86865b61b6bc49b0a5bc063658b0c, type: 2}
-    changeToSequenceStartDialogIdx: 2
-    changeToSequenceResponseIdxToGrayOut: 0
+    changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "\xBFC\xF3mo no lo hab\xEDas notado? Alguien hizo un dibujo muy feo de
       ti."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: b8037a5ce6759da4f8aaa01ae92e7801, type: 3}
     audioAlternative: {fileID: 0}
