@@ -524,7 +524,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
 		if (responseClicked.responseAudioAlternative != null)
         {
-			currResponseAudio = UserDataManager.CurrUser.gender == UserSex.Femenino ? responseClicked.responseAudioAlternative : responseClicked.responseAudio;
+			currResponseAudio = UserDataManager.CurrUser.gender == UserSex.Mujer ? responseClicked.responseAudioAlternative : responseClicked.responseAudio;
 		}
 		audioPlayer.clip = currResponseAudio;
         if(audioPlayer.clip != null) audioPlayer.Play();
@@ -693,7 +693,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public string SelectTextByGender(DialogueData curr)
     {
         var text = curr.text;
-        if(UserDataManager.CurrUser.gender == UserSex.Femenino && !string.IsNullOrEmpty(curr.textAlternative))
+        if(UserDataManager.CurrUser.gender == UserSex.Mujer && !string.IsNullOrEmpty(curr.textAlternative))
         {
             text = curr.textAlternative;
         }
@@ -704,7 +704,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public AudioClip SelectAudioByGender(DialogueData curr)
     {
         var audio = curr.audio;
-        if(UserDataManager.CurrUser.gender == UserSex.Femenino && curr.audioAlternative != null)
+        if(UserDataManager.CurrUser.gender == UserSex.Mujer && curr.audioAlternative != null)
         {
             audio = curr.audioAlternative;
         }

@@ -37,7 +37,7 @@ public class UserData
 		institutionCode = "Empty";
 		age = -1;
         grade = -1;
-        gender = UserSex.Femenino;
+        gender = UserSex.Mujer;
 		schoolType = UserSchoolType.NONE;
 		country = string.Empty;
 		livingWith = UserLivingWith.NONE;
@@ -69,8 +69,8 @@ public class UserData
 
 public enum UserSex
 {
-	Masculino,
-	Femenino,
+	Hombre,
+	Mujer,
 	NONE,
 }
 

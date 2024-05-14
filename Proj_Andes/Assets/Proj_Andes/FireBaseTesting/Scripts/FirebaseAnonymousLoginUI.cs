@@ -225,13 +225,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	void UReady()
 	{
-        var currClip = UserDataManager.CurrUser.gender == UserSex.Femenino ? ureadyFAudio : ureadyMAudio;
+        var currClip = UserDataManager.CurrUser.gender == UserSex.Mujer ? ureadyFAudio : ureadyMAudio;
         audioSource.clip = currClip;
         audioSource.Play();
 
         //finding which to deactivate
-        var currWelcome = UserDataManager.CurrUser.gender == UserSex.Femenino ? ureadyWelcomeM : ureadyWelcomeF;
-        var currUready = UserDataManager.CurrUser.gender == UserSex.Femenino ? ureadyM : ureadyF;
+        var currWelcome = UserDataManager.CurrUser.gender == UserSex.Mujer ? ureadyWelcomeM : ureadyWelcomeF;
+        var currUready = UserDataManager.CurrUser.gender == UserSex.Mujer ? ureadyM : ureadyF;
 		currWelcome.gameObject.SetActive(false); 
 		currUready.gameObject.SetActive(false);
 
@@ -544,13 +544,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
         afterLogInPanel.SetActive(true);
 
-        var currClip = UserDataManager.CurrUser.gender == UserSex.Femenino ? welcomeFAudio : welcomeMAudio;
+        var currClip = UserDataManager.CurrUser.gender == UserSex.Mujer ? welcomeFAudio : welcomeMAudio;
         audioSource.clip = currClip;
         audioSource.Play();
 
         var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
-        var currWelcome = UserDataManager.CurrUser.gender == UserSex.Femenino ? contWelcomeM : contWelcomeF;
-        currWelcome.gameObject.SetActive(false);
+        var currWelcomeToHide = UserDataManager.CurrUser.gender == UserSex.Mujer ? contWelcomeM : contWelcomeF;
+        currWelcomeToHide.gameObject.SetActive(false);
 
         var soundPref = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", 1);
 		Debug.Log("sound " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive"));
