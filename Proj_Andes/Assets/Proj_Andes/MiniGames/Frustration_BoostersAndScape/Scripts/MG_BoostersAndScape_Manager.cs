@@ -116,8 +116,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     {
         TimeManager.Instance.SetNewStopTimeUser(this);
         blockingPanel.gameObject.SetActive(true);
-        StartCoroutine(audioInstruction.FirstInstruction());
-        yield return new WaitForSecondsRealtime(audioInstruction.firstInstruction.length);
         audiosource.clip = introAudio;
         audiosource.Play();
         yield return new WaitForSecondsRealtime(introAudio.length);
