@@ -58,6 +58,8 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     int heartCount;
     int flowerCount;
+    int consecutiveFlower;
+    int consecutiveHeart;
 
     private bool currShowingRight = false;
     private bool currRequiresSameDirection = false;
@@ -124,12 +126,25 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
                 currRequiresSameDirection = false;
                 break;            
             case HeartsAndFlowersGameType.Mixed:
-                currRequiresSameDirection = Random.Range(0f, 1f) > 0.5f;
+                float posibilityIncrease = currRequiresSameDirection ? -consecutiveHeart : consecutiveFlower;
+                var totalPosibility = (0.5f + (posibilityIncrease / 10));
+                Debug.Log(totalPosibility + " chance increase by " + posibilityIncrease + " floer " + consecutiveFlower + " heart" + consecutiveHeart);
+                currRequiresSameDirection = Random.Range(0f, 1f) < totalPosibility;
                 if (heartCount >= 6) currRequiresSameDirection = false;
                 if (flowerCount >= 8) currRequiresSameDirection = true;
-				if (currRequiresSameDirection) heartCount++;
-				else flowerCount++;
-				break;
+                if (posibilityIncrease > 0 && currRequiresSameDirection) consecutiveFlower = 0;
+                else if (posibilityIncrease < 0 && !currRequiresSameDirection) consecutiveHeart = 0;
+                if (currRequiresSameDirection)
+                {
+                    heartCount++;
+                    consecutiveHeart++;
+                }
+				else
+                {
+                    flowerCount++;
+                    consecutiveFlower++;
+                }
+                break;
         }
 
         var spriteToShow = currRequiresSameDirection ? sameDirectionSprite : opositeDirectionSprite;

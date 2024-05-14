@@ -68,6 +68,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     int rightCount;
     int leftCount;
+    int consecutiveLeft;
+    int consecutiveRight;
 
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
@@ -204,20 +206,46 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
             case VoiceOrImageGameType.Mixed:
                 if (UseVoiceAsCorrectAnswer)
                 {
+                    float posibilityIncrease = currSoundIsLeft ? -consecutiveLeft : consecutiveRight;
+                    var totalPosibility = (0.5f + (posibilityIncrease / 10));
+                    currSoundIsLeft = Random.Range(0f, 1f) < totalPosibility;
                     if (rightCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
                     else if (leftCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
-                    if (currSoundIsLeft) leftCount++;
-                    else rightCount++;
+                    if (posibilityIncrease > 0 && currSoundIsLeft) consecutiveRight = 0;
+                    else if (posibilityIncrease < 0 && !currSoundIsLeft) consecutiveLeft = 0;
+                    if (currSoundIsLeft)
+                    {
+                        consecutiveLeft++;
+                        leftCount++;
+                    }
+                    else
+                    {
+                        consecutiveRight++;
+                        rightCount++;
+                    }
 
-					if (currSoundIsLeft) currImgIsLeft = false;
+                    if (currSoundIsLeft) currImgIsLeft = false;
 					else currImgIsLeft = true;
 				}
                 else
                 {
+                    float posibilityIncrease = currImgIsLeft ? -consecutiveLeft : consecutiveRight;
+                    var totalPosibility = (0.5f + (posibilityIncrease / 10));
+                    currImgIsLeft = Random.Range(0f, 1f) < totalPosibility;
                     if (rightCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = true;
                     else if (leftCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = false;
-                    if (currImgIsLeft) leftCount++;
-                    else rightCount++;
+                    if (posibilityIncrease > 0 && currImgIsLeft) consecutiveRight = 0;
+                    else if (posibilityIncrease < 0 && !currImgIsLeft) consecutiveLeft= 0;
+                    if (currImgIsLeft)
+                    {
+                        consecutiveLeft++;
+                        leftCount++;
+                    }
+                    else
+                    {
+                        consecutiveRight++;
+                        rightCount++;
+                    }
 
 					if (currImgIsLeft) currSoundIsLeft = false;
 					else currSoundIsLeft = true;
@@ -229,7 +257,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         var soundToUse = currSoundIsLeft ? leftAudio : rightAudio;
         var textToUse = currSoundIsLeft ? leftObjTxt : rightObjTxt;
 
-        Debug.Log("clouds " + rightCount + "flower " + leftCount);
         currTargetImg.sprite = imgToUse;
         audioPlayer.clip = soundToUse;
 

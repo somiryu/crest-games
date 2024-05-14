@@ -113,8 +113,7 @@ public class MinigameGroups : SimpleGameSequenceItem
             var currGameToCheck = group.GetNextMiniGame();
             if (currGameToCheck != null) return currGameToCheck;
             else
-            { 
-                Debug.Log("SKIPPING");
+            {
                 return null;
             }
         }
