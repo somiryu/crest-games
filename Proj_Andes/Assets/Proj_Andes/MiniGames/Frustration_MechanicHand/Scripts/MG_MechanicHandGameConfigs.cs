@@ -24,12 +24,14 @@ public class MG_MechanicHandGameConfigs : GameConfig
         var currAnalyticsDictionary = new Dictionary<string, object>();
 
         itemAnalytics = new Dictionary<string, object>();
+		UserDataManager.LastDocumentIDsStored = new List<string>();
+
 		for (int i = 0; i < currAnalytics.Count; i++)
 		{
             currAnalyticsDictionary.Clear();
 
             var currData = currAnalytics[i];
-            //.Add(DataIds.GameID, GameID);
+            currAnalyticsDictionary.Add(DataIds.GameID, GameID);
             currAnalyticsDictionary.Add(DataIds.mechHandTest, repetition);
             currAnalyticsDictionary.Add(DataIds.mechHandTrial, currData.roundCount);
             currAnalyticsDictionary.Add(DataIds.mechHandThrown, currData.thrown);
@@ -37,10 +39,10 @@ public class MG_MechanicHandGameConfigs : GameConfig
 
             var newDocID = Guid.NewGuid().ToString();
 
-            UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
-            UserDataManager.LastDocumentIDStored = newDocID;
+            UserDataManager.LastCollectionIDStored = DataIds.mechanicHandGame;
+			UserDataManager.LastDocumentIDsStored.Add(newDocID);
 
-            UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, currAnalyticsDictionary, newDocID, DataIds.mechanicHandGame);
+            UserDataManager.SaveUserAnayticsPerGame(DataIds.mechanicHandGame, currAnalyticsDictionary, newDocID);
         }
 
 		SetPostFrustration();

@@ -10,21 +10,37 @@ public class MoveButtonSizeRockets : MonoBehaviour, IPointerDownHandler, IPointe
 {
     ISizeRocketsManager manager => ISizeRocketsManager.Instance;
     [SerializeField] Image btnImage;
-    void Start()
-    {
-        TryGetComponent(out btnImage);
-    }
+
+
     public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("Pressed to move ship");
         btnImage.sprite = manager.gameConfigs.btnPressed;
         manager.shipIsMoving = true;
-        if(manager.currShip != null) manager.currShip.shouldMove = true;
+        if (manager.currShip != null)
+        {
+            manager.currShip.shouldMove = true;
+			Debug.Log("ship found");
+		}
+		else
+        {
+            Debug.Log("No ship found");
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (manager.currShip != null) manager.currShip.shouldMove = false;
-        manager.shipIsMoving = false;
+		Debug.Log("released to move ship");
+        if (manager.currShip != null)
+        {
+            manager.currShip.shouldMove = false;
+			Debug.Log("ship found");
+		}
+		else
+        {
+			Debug.Log("No ship found");
+		}
+		manager.shipIsMoving = false;
         btnImage.sprite = manager.gameConfigs.btnUnPressed;
     }
 }

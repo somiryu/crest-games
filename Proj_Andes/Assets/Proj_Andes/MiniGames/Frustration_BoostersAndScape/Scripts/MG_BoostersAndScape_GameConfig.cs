@@ -22,12 +22,13 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
         var currAnalytics = MG_BoostersAndScape_Manager.Instance.currAnalytics;
 		GameID = Guid.NewGuid().ToString();
         itemAnalytics = new Dictionary<string, object>();
+        UserDataManager.LastDocumentIDsStored = new List<string>();
 
         for (int i = 0; i < currAnalytics.Count; i++)
         {
             itemAnalytics.Clear();
             var currData = currAnalytics[i];
-            //itemAnalytics.Add(DataIds.GameID, GameID);
+            itemAnalytics.Add(DataIds.GameID, GameID);
             itemAnalytics.Add(DataIds.frustPersTest, repetition);
             itemAnalytics.Add(DataIds.frustPersTrial, currData.roundCount);
             itemAnalytics.Add(DataIds.frustPersPresition, currData.distanceInBetween);
@@ -35,10 +36,10 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
 
             var newDocID = Guid.NewGuid().ToString();
 
-            UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
-            UserDataManager.LastDocumentIDStored = newDocID;
+            UserDataManager.LastCollectionIDStored = DataIds.boostersAndScapeGame;
+            UserDataManager.LastDocumentIDsStored.Add(newDocID);
 
-            UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.boostersAndScapeGame);
+            UserDataManager.SaveUserAnayticsPerGame(DataIds.boostersAndScapeGame, itemAnalytics, newDocID);
         }
 
 

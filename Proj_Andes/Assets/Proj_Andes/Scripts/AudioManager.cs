@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour
         if (currentBkMusic.clip != currBkAudio)
         {
 			currentBkMusic.clip = currBkAudio;
-			var audioIsActive = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive");
+			var audioIsActive = PlayerPrefs.GetInt(UserDataManager.CurrUser.id_jugador + " isTheSoundActive");
             if (audioIsActive == 1)
             {
                 currentBkMusic.Play();

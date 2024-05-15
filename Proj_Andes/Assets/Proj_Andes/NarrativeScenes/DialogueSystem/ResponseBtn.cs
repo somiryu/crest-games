@@ -51,7 +51,7 @@ public class ResponseBtn : MonoBehaviour
 		{
             if (!string.IsNullOrEmpty(responseData.responseAlternative))
             {
-                var userGender = UserDataManager.CurrUser.sex;
+                var userGender = UserDataManager.CurrUser.sexo;
                 var currResponse = (userGender == UserSex.Mujer) ? responseData.responseAlternative : responseData.response;
                 SetResponseText(currResponse);
             }

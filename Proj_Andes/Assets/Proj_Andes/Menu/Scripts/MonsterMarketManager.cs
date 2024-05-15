@@ -78,7 +78,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     IEnumerator openChest;
 
     //Analytics
-    float timeUntilFirstChestOpen;
+    float timerPerChestOpenning;
     bool openedAtLeastOneChest;
     float totalTime;
     string chestTypeOpenedString;
@@ -87,8 +87,14 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     int finalStars;
     int starsSpent;
 
+	[SerializeField] public List<MonsterMarketRoundAnalytic> AllRoundsAnalytics;
 
-    private void Awake()
+    public MonsterMarketRoundAnalytic currAnalyticRound => AllRoundsAnalytics[AllRoundsAnalytics.Count - 1];
+
+
+
+
+	private void Awake()
     {
         if(instance != null)
         {
@@ -112,6 +118,8 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		//Init analytics
 		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
 		initialStars = UserDataManager.CurrUser.Coins;
+        chestOpennedCount = 0;
+        timerPerChestOpenning = 0;
 	}
 
 	public void Init()
@@ -283,8 +291,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             return;
         }
 
-        timeUntilFirstChestOpen = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
-
         chestOpenButtonParent.gameObject.SetActive(true);
         chestOpenImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
         chestclosedImg.sprite = currButton.monsterMarketButton.chestCloseSprite;
@@ -302,32 +308,71 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
                 {
                     continueBtn.button.interactable = true;
                 }
+				SaveNewChestOpenningnalytic(MonsterChestType.Regular, marketConfig.RegularChestPrice);
 				marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
                 starsSpent += marketConfig.RegularChestPrice;
                 chestTypeOpenedString = "Pequeño";
                 chestTypeOpenned = 1;
                 OpenChest(1, 0, 0);
-                GeneralGameAnalyticsManager.RegisterWin();
+                GeneralGameAnalyticsManager.RegisterLose();
                 break;
             case MonsterChestType.Rare:
-                marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
+				SaveNewChestOpenningnalytic(MonsterChestType.Rare, marketConfig.RareChestPrice);
+				marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
 				starsSpent += marketConfig.RareChestPrice;
                 chestTypeOpenedString = "Mediano";
                 chestTypeOpenned = 2;
 				OpenChest(1, 1, 0);
                 break;
             case MonsterChestType.Legendary:
-                marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
+                SaveNewChestOpenningnalytic(MonsterChestType.Legendary,marketConfig.LegendaryChestPrice);
+				marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
 				starsSpent += marketConfig.LegendaryChestPrice;
                 chestTypeOpenedString = "Grande";
 				chestTypeOpenned = 3;
 				OpenChest(1, 1, 1);
-				GeneralGameAnalyticsManager.RegisterLose();
+				GeneralGameAnalyticsManager.RegisterWin();
 				break;
         }
         coinsAmtTxt.text = marketConfig.AvailableCoins.ToString();
          
         UpdateStateButtons();
+    }
+
+    void Update()
+    {
+        timerPerChestOpenning += Time.deltaTime;
+    }
+
+    int chestOpennedCount = 0;
+
+    void SaveNewChestOpenningnalytic(MonsterChestType type, int cost)
+    {
+        chestOpennedCount++;
+        var newAnalytic = new MonsterMarketRoundAnalytic();
+        newAnalytic.time = timerPerChestOpenning;
+        timerPerChestOpenning = 0;
+        switch (type)
+        {
+            case MonsterChestType.Legendary:
+                newAnalytic.chestTypeOpenedString = "Grande";
+                newAnalytic.chestTypeOpenned = 3;
+                break;
+            case MonsterChestType.Rare:
+				newAnalytic.chestTypeOpenedString = "Mediano";
+				newAnalytic.chestTypeOpenned = 1;
+				break;
+            case MonsterChestType.Regular:
+				newAnalytic.chestTypeOpenedString = "Pequeño";
+				newAnalytic.chestTypeOpenned = 0;
+				break;
+        }
+        newAnalytic.marketIndex = MonsterMarketConfig.marketAppearTimes;
+        newAnalytic.chestCount = chestOpennedCount;
+        newAnalytic.initialStars = UserDataManager.CurrUser.Coins;
+        newAnalytic.starsSpent = cost;
+        newAnalytic.finalStars = newAnalytic.initialStars - cost;
+        AllRoundsAnalytics.Add(newAnalytic);
     }
 
     void ShowNoResourcesCorroutine()
@@ -478,21 +523,20 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         finalStars = UserDataManager.CurrUser.Coins;
         totalTime = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
 
-		var dictionary = new Dictionary<string, object>();
-        dictionary.Add(DataIds.marketMonsterOrder, MonsterMarketConfig.marketAppearTimes);
-		dictionary.Add(DataIds.marketMonsterStarPre, initialStars);
-        dictionary.Add(DataIds.marketMonsterStarsSpent, starsSpent);
-        dictionary.Add(DataIds.marketMonsterStarsAfter, finalStars);
-        dictionary.Add(DataIds.marketMonsterChestTrial, MonsterMarketConfig.openChestTrials);
-        dictionary.Add(DataIds.marketMonsterChestAnswer, chestTypeOpenedString);
-        dictionary.Add(DataIds.marketMonsterChestCode, chestTypeOpenned);
-        dictionary.Add(DataIds.marketMonsterTotalTime, totalTime);
+		var newAnalytic = new MonsterMarketRoundAnalytic();
+		newAnalytic.time = timerPerChestOpenning;
+		newAnalytic.chestTypeOpenedString = "Saltar";
+		newAnalytic.chestTypeOpenned = 4;
 
-        foreach (var item in dictionary)
-        {
-            Debug.Log(item.Key +  " " + item.Value);
-        }
-        marketConfig.SetAnalyticsInfo(dictionary);
+		newAnalytic.marketIndex = MonsterMarketConfig.marketAppearTimes;
+		newAnalytic.chestCount = -1;
+		newAnalytic.initialStars = initialStars;
+		newAnalytic.starsSpent = starsSpent;
+		newAnalytic.finalStars = finalStars;
+		AllRoundsAnalytics.Add(newAnalytic);
+
+
+        marketConfig.SetAnalyticsInfo(AllRoundsAnalytics);
 
 		chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
@@ -529,4 +573,18 @@ public class Monsters
             Name = currName;
         }
     }
+}
+
+
+[Serializable]
+public class MonsterMarketRoundAnalytic
+{
+	public float time;
+	public float marketIndex;
+	public string chestTypeOpenedString;
+	public int chestTypeOpenned;
+	public int initialStars;
+	public int finalStars;
+	public int starsSpent;
+    public int chestCount;
 }

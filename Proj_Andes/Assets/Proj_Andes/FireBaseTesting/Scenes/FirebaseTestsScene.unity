@@ -7116,9 +7116,9 @@ MonoBehaviour:
     m_Options:
     - m_Text: Sexo
       m_Image: {fileID: 0}
-    - m_Text: Masculino
+    - m_Text: Hombre
       m_Image: {fileID: 0}
-    - m_Text: Femenino
+    - m_Text: Mujer
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18776,14 +18776,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 0
+  m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 4
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 2
   m_RegexValue: 
   m_GlobalPointSize: 60
   m_CharacterLimit: 0

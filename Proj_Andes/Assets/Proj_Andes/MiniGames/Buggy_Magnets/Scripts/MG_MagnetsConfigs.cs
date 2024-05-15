@@ -36,10 +36,9 @@ public class MG_MagnetsConfigs : GameConfig
 
         var newDocID = Guid.NewGuid().ToString();
 
-        UserDataManager.LastCollectionIDStored = DataIds.frustrationGames;
-        UserDataManager.LastDocumentIDStored = newDocID;
+        UserDataManager.LastCollectionIDStored = DataIds.magnetsGame;
 
-        UserDataManager.SaveUserAnayticsPerGame(DataIds.frustrationGames, itemAnalytics, newDocID, DataIds.magnetsGame);
+        UserDataManager.SaveUserAnayticsPerGame(DataIds.magnetsGame, itemAnalytics, newDocID);
 
         SaveCoins(coinsCollected);
     }

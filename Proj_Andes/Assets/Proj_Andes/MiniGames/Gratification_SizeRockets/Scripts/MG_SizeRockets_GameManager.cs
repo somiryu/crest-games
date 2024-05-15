@@ -68,7 +68,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	public SizeRocketAnalytics currAnalytics => analyticsPerRound[roundCount];
 
-    public MG_SizeRockets_Rocket currShip { get => activeShip; set { } }
+    public MG_SizeRockets_Rocket currShip { get => activeShip; set => activeShip = currShip; }
 
     public bool shipIsMoving { get => false; set { } }
 
@@ -203,6 +203,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currRocket.Init(rocketsPool, currTargetPlanet, basePlanet);
 		activeShips.Add(currRocket);
 		activeShip = currRocket;
+		Debug.Log("Just asigned ship: " + currShip);
 		shipsLeft--;
 		shipsLeftTxt.SetText(shipsLeft.ToString());
 		shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
