@@ -16,23 +16,30 @@ public class FrustrationTermometer : SimpleGameSequenceItem
     public override void SaveAnalytics()
     {
         //If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
-        if (string.IsNullOrEmpty(UserDataManager.LastDocumentIDStored) || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
+        if (UserDataManager.LastDocumentIDsStored == null || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
 
-        if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
-        if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
+		if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound))
+		{
+			if (!DatabaseManager.pendingSessionsToUpload.TryGetValue(UserDataManager.LastCollectionIDStored, out collectionFound)) return;
+		}
 
-        Debug.Log(selectedFrustrationLevel.ToString());
-        if (DocumentFound.TryGetValue(DataIds.mechHandThrown, out var valueFound))
+		for (int i = 0; i < UserDataManager.LastDocumentIDsStored.Count; i++)
         {
-            DocumentFound.Add(DataIds.mechHandFeelAnswer, selectedFrustrationLevel.ToString());
-            DocumentFound.Add(DataIds.mechHandFeelCode, (int)selectedFrustrationLevel);
-            DocumentFound.Add(DataIds.mechHandFeelTiming, timerToPickEmotion);
-;        } 
-        else if (DocumentFound.TryGetValue(DataIds.frustPersBoostClicks, out var otherValueFound))
-        {
-            DocumentFound.Add(DataIds.frustPersFeelAnswer, selectedFrustrationLevel.ToString());
-            DocumentFound.Add(DataIds.frustPersFeelCode, (int)selectedFrustrationLevel);
-            DocumentFound.Add(DataIds.frustPersFeelTiming, timerToPickEmotion);
-        }
+			if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDsStored[i], out var DocumentFound)) continue;
+
+			Debug.Log(selectedFrustrationLevel.ToString());
+			if (DocumentFound.TryGetValue(DataIds.mechHandThrown, out var valueFound))
+			{
+				DocumentFound.Add(DataIds.mechHandFeelAnswer, selectedFrustrationLevel.ToString());
+				DocumentFound.Add(DataIds.mechHandFeelCode, selectedFrustrationLevel.GetAnalyticValue());
+				DocumentFound.Add(DataIds.mechHandFeelTiming, timerToPickEmotion);
+			}
+			else if (DocumentFound.TryGetValue(DataIds.frustPersBoostClicks, out var otherValueFound))
+			{
+				DocumentFound.Add(DataIds.frustPersFeelAnswer, selectedFrustrationLevel.ToString());
+				DocumentFound.Add(DataIds.frustPersFeelCode, (int)selectedFrustrationLevel.GetAnalyticValue());
+				DocumentFound.Add(DataIds.frustPersFeelTiming, timerToPickEmotion);
+			}
+		}
     }
 }

@@ -28,7 +28,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    public string RegisterTestDate()
+    public string GetCurrDate()
     {
         return DateTime.Now.ToString("s");
 	}
@@ -93,16 +93,16 @@ public class TimeManager : MonoBehaviour
         }
         var testAnalytics = testGeneralData.itemAnalytics = new Dictionary<string, object>();
         testAnalytics.Add(DataIds.created_At, createDate);
-        testAnalytics.Add(DataIds.ended_At, RegisterTestDate());
-        testAnalytics.Add(DataIds.grade, UserDataManager.CurrUser.grade);
-        testAnalytics.Add(DataIds.age, UserDataManager.CurrUser.age);
+        testAnalytics.Add(DataIds.ended_At, GetCurrDate());
+        testAnalytics.Add(DataIds.grade, UserDataManager.CurrUser.grado);
+        testAnalytics.Add(DataIds.age, UserDataManager.CurrUser.edad);
         testAnalytics.Add(DataIds.state, gameState.ToString());
         testAnalytics.Add(DataIds.time_Spent, timer);
         UserDataManager.SaveUserAnayticsPerGame(
             DataIds.test,
             testAnalytics,
             UserDataManager.CurrTestID,
-            shouldUseTestID: false
+            shouldUseTestID: true
             );
         //Resetting the test id since this only gets called when the user exits
         UserDataManager.CurrTestID = "Default Test ID";

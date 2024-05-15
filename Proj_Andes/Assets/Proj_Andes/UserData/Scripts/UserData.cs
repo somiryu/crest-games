@@ -8,15 +8,17 @@ using UnityEngine;
 [FirestoreData]
 public class UserData 
 {
-    [FirestoreProperty] public string id { get; set; }
+    [FirestoreProperty] public string id_jugador { get; set; }
     [FirestoreProperty] public string pin { get; set; }
-    [FirestoreProperty] public string institutionCode { get; set; }
-    [FirestoreProperty] public int age { get; set; }
-    [FirestoreProperty] public int grade { get; set; }
-    [FirestoreProperty] public UserGender sex { get; set; }
-    [FirestoreProperty] public UserSchoolType schoolType { get; set; }
-    [FirestoreProperty] public string country { get; set; }
-    [FirestoreProperty] public string family { get; set; }
+    [FirestoreProperty] public string id_proyecto { get; set; }
+    [FirestoreProperty] public int edad { get; set; }
+    [FirestoreProperty] public int grado { get; set; }
+    [FirestoreProperty] public UserSex sexo { get; set; }
+    [FirestoreProperty] public int sexo_cod { get; set; }
+    [FirestoreProperty] public string tipo_colegio { get; set; }
+    [FirestoreProperty] public int tipo_colegio_cod { get; set; }
+    [FirestoreProperty] public string lugar_nacimiento { get; set; }
+    [FirestoreProperty] public string vive { get; set; }
 
     [FirestoreProperty] public Dictionary<string, bool> tutorialStepsDone { get; set; } = new Dictionary<string, bool>();
 	   
@@ -32,15 +34,17 @@ public class UserData
 
     public UserData()
 	{
-		id = Guid.NewGuid().ToString();
+		id_jugador = Guid.NewGuid().ToString();
 		pin = "Unnamed";
-		institutionCode = "Empty";
-		age = -1;
-        grade = -1;
-        sex = UserGender.Femenino;
-		schoolType = UserSchoolType.NONE;
-		country = string.Empty;
-		family = string.Empty;
+		id_proyecto = "Empty";
+		edad = -1;
+        grado = -1;
+        sexo = UserSex.Mujer;
+		sexo_cod = 1;
+		tipo_colegio = UserSchoolType.NONE.ToString();
+		tipo_colegio_cod = -1;
+		lugar_nacimiento = string.Empty;
+		vive = string.Empty;
 
         CheckPointIdx = -1;
 		CheckPointSubIdx = -1;
@@ -61,25 +65,21 @@ public class UserData
 		if(tutorialStepsDone.ContainsKey(id)) tutorialStepsDone[id] = true;
 		else tutorialStepsDone.Add(id, true);
 	}
-	public void SetTestData()
-	{
-
-	}
 }
 
-public enum UserGender
+public enum UserSex
 {
-	Masculino,
-	Femenino,
+	Hombre,
+	Mujer,
 	NONE,
 }
 
 public enum UserSchoolType
 {
-	NONE = 0,
-    Privado = 1,
-    PublicoUrbano = 2,
-    PublicoRural = 3,
+	NONE = -1,
+    Privado = 0,
+    PublicoUrbano = 1,
+    PublicoRural = 2,
 }
 
 [Flags]

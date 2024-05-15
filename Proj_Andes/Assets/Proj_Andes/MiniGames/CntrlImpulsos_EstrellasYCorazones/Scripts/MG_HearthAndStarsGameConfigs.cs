@@ -60,7 +60,7 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 		{
 			var currRound = allRoundsAnalytics[i];
 			currRoundAnalyticsDic.Clear();
-            //currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
+            currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
             currRoundAnalyticsDic.Add(DataIds.heartsNFlowersFrustration, postFrustration);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersSkill, (int)gameType);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersTest, (int)gameType);

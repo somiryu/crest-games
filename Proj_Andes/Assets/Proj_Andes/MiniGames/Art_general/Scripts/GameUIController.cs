@@ -43,7 +43,7 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         pool.Init(40);
 
         soundActive = 1;
-        soundActive = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", soundActive);
+        soundActive = (int)PlayerPrefs.GetInt(UserDataManager.CurrUser.id_jugador + " isTheSoundActive", soundActive);
         ActivateSound(soundActive == 1);
         musicBtn.onClick.AddListener(SwitchAudioActive);
 
@@ -107,7 +107,7 @@ public class GameUIController : MonoBehaviour, ITimeManagement
             musicBtn.image.sprite = soundDeactivated;
         }
 
-        PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", activated ? 1 : 0);
+        PlayerPrefs.SetInt(UserDataManager.CurrUser.id_jugador + " isTheSoundActive", activated ? 1 : 0);
     }
     public void StarEarned(Vector3 initPos, int earnedStars = 1)
     {

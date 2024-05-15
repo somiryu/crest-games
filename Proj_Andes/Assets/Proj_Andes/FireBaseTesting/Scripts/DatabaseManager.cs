@@ -55,7 +55,7 @@ public static class DatabaseManager
    public static void AddPendingUserData(UserData userData)
     {
         if (userData == null) return;
-        var alreadyIn = pendingUserDatasToUpload.FindIndex(x => x.id == userData.id);
+        var alreadyIn = pendingUserDatasToUpload.FindIndex(x => x.id_jugador == userData.id_jugador);
         if (alreadyIn != -1) pendingUserDatasToUpload[alreadyIn] = userData;
         else pendingUserDatasToUpload.Add(userData);
     }
@@ -93,9 +93,9 @@ public static class DatabaseManager
             {
                 Debug.Log(String.Format("Document data for {0} document:", documentSnapshot.Id));
                 UserData currUserData = documentSnapshot.ConvertTo<UserData>();
-                if (userDatas.Exists(x => x.id == currUserData.id))
+                if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
                 {
-                    Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id + " But ID already existed");
+                    Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id_jugador + " But ID already existed");
                     continue;
                 }
                 userDatas.Add(currUserData);
@@ -107,7 +107,7 @@ public static class DatabaseManager
                 for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
                 {
                     var currPending = pendingUserDatasToUpload[i];
-                    var idxFound = userDatas.FindIndex(x => x.id == currPending.id);
+                    var idxFound = userDatas.FindIndex(x => x.id_jugador == currPending.id_jugador);
                     if (idxFound != -1) userDatas[idxFound] = currPending;
                     else userDatas.Add(currPending);
                 }
@@ -152,7 +152,7 @@ public static class DatabaseManager
   public static async void DeleteUserFromDataList(UserData dataToDelete)
     {
         UserDeletionCompleted = false;
-		await db.Collection(DataIds.usersCollection).Document(dataToDelete.pin + " " + dataToDelete.id).DeleteAsync()
+		await db.Collection(DataIds.usersCollection).Document(dataToDelete.pin + " " + dataToDelete.id_jugador).DeleteAsync()
             .ContinueWithOnMainThread(task =>UserDeletionCompleted = true);
 	}
 
@@ -175,10 +175,10 @@ public static class DatabaseManager
 			return;
         }
 
-        var currUserData = userDatas.Find(x => x.id == UserDataManager.CurrUser.id);
+        var currUserData = userDatas.Find(x => x.id_jugador == UserDataManager.CurrUser.id_jugador);
         if (currUserData == null && !ignoreEmptyUser)
         {
-            Debug.LogError("No user data found to save for user with ID: " + UserDataManager.CurrUser.id + " and name " + UserDataManager.CurrUser.pin);
+            Debug.LogError("No user data found to save for user with ID: " + UserDataManager.CurrUser.id_jugador + " and name " + UserDataManager.CurrUser.pin);
             savingIsDone = true;
             return;
         }
@@ -231,7 +231,7 @@ public static class DatabaseManager
 		for (int i = 0; i < userDatas.Count; i++)
         {
             //removed name form document ID
-            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].id);      
+            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].id_jugador);      
             await docRef.SetAsync(userDatas[i]);
         }
 

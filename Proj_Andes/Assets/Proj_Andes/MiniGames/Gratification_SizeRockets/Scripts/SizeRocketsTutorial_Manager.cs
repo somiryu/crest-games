@@ -46,7 +46,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
     public int shipsPerGame => gameConfigs.shipsPerGame;
     bool moving;
-    public MG_SizeRockets_Rocket currShip { get => activeShip; set { } }
+    public MG_SizeRockets_Rocket currShip { get => activeShip; set => activeShip = value; }
     public bool shipIsMoving { get => moving; set { } }
 
 
@@ -65,9 +65,11 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     [SerializeField] AudioClip onRightAction;
     [SerializeField] AudioClip onPassedTuto;
     [SerializeField] AudioClip onDepart;
+
     private void Awake()
     {
         ISizeRocketsManager.Instance = this;
+        Debug.Log("Asigning instance");
         TryGetComponent(out audioSource);
     }
 
@@ -201,6 +203,7 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
         currRocket.Init(rocketsPool, currTargetPlanet, basePlanet);
         activeShips.Add(currRocket);
         activeShip = currRocket;
+        Debug.Log("Just asigned curr ship: " + currShip);
         shipsLeft--;
         shipsLeftTxt.SetText(shipsLeft.ToString());
         shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
