@@ -40,7 +40,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 		{
 			var analytics = MG_SizeRockets_GameManager.Instance.analyticsPerRound[i];
 			itemAnalytics.Clear();
-			//itemAnalytics.Add(DataIds.GameID, GameID);
+			itemAnalytics.Add(DataIds.GameID, GameID);
 			itemAnalytics.Add(DataIds.frustrationMode, postFrustration);
 			itemAnalytics.Add(DataIds.tryIndex, analytics.tryIndex);
 			itemAnalytics.Add(DataIds.sizeRocketResponseString, analytics.choiceType.ToString());

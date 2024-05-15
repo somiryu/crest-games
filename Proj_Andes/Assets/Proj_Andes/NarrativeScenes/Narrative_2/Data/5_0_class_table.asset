@@ -22,8 +22,6 @@ MonoBehaviour:
       para la clase de educaci\xF3n f\xEDsica. De pronto, Cami te dice:\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 9dab42d8eb474924da6d1defa60c2fa1, type: 3}
     audioAlternative: {fileID: 0}
@@ -38,8 +36,6 @@ MonoBehaviour:
     text: "busca en tu mesa, parece que hay algo escrito all\xED.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 3c9afaa43d31e6945ba220c056e0d191, type: 3}
     audioAlternative: {fileID: 0}
@@ -54,24 +50,89 @@ MonoBehaviour:
     text: 
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 03f00fc76b95c964facd29064f6576a4, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses:
     - response: 
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2fad6dcce1c9ac44e8b4709eb1c3b5c6, type: 3}
       responseAudio: {fileID: 0}
-      dataAfterResponse: {fileID: 11400000, guid: 80eb65d3fff2a1a49b8cf97ab713659a, type: 2}
-    - response: 
-      responseAlternative: 
-      responseImage: {fileID: 21300000, guid: 2fad6dcce1c9ac44e8b4709eb1c3b5c6, type: 3}
-      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: b5deb87f6edf4f9448053e5bb69ab249, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 9b91072c8752d174db7f5e914f4e292e, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: 
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0158c6d0a61cda84792a70e003183370, type: 3}
+    responses:
     - response: 
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2fad6dcce1c9ac44e8b4709eb1c3b5c6, type: 3}
       responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
       dataAfterResponse: {fileID: 11400000, guid: 72363e995d30cb7458220ff09a3cf658, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 9b91072c8752d174db7f5e914f4e292e, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: 
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 9955f6de79300de49bcb0c49a3926f76, type: 3}
+    responses:
+    - response: 
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 2fad6dcce1c9ac44e8b4709eb1c3b5c6, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 80eb65d3fff2a1a49b8cf97ab713659a, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

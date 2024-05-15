@@ -207,7 +207,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	private IEnumerator Start()
 	{
-		var defaultSoundState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", defaultValue: 1);
+		var defaultSoundState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id_jugador + " isTheSoundActive", defaultValue: 1);
 		AssignSoundActive(defaultSoundState);
 
 		FirebaseAuth auth = FirebaseAuth.DefaultInstance;
@@ -225,13 +225,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	void UReady()
 	{
-        var currClip = UserDataManager.CurrUser.sex == UserGender.Femenino ? ureadyFAudio : ureadyMAudio;
+        var currClip = UserDataManager.CurrUser.sexo == UserSex.Mujer ? ureadyFAudio : ureadyMAudio;
         audioSource.clip = currClip;
         audioSource.Play();
 
         //finding which to deactivate
-        var currWelcome = UserDataManager.CurrUser.sex == UserGender.Femenino ? ureadyWelcomeM : ureadyWelcomeF;
-        var currUready = UserDataManager.CurrUser.sex == UserGender.Femenino ? ureadyM : ureadyF;
+        var currWelcome = UserDataManager.CurrUser.sexo == UserSex.Mujer ? ureadyWelcomeM : ureadyWelcomeF;
+        var currUready = UserDataManager.CurrUser.sexo == UserSex.Mujer ? ureadyM : ureadyF;
 		currWelcome.gameObject.SetActive(false); 
 		currUready.gameObject.SetActive(false);
 
@@ -343,7 +343,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			var newBtn = userBtnsPool.GetNewItem();
 			newBtn.Init(users[i].pin, this);
-			currBtnsByDataID.Add(newBtn, users[i].id);
+			currBtnsByDataID.Add(newBtn, users[i].id_jugador);
 			newBtn.gameObject.SetActive(false);
 		}
 	}
@@ -421,18 +421,20 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		var newUser = new UserData();
 		newUser.pin = nameField.text;
-		newUser.institutionCode = UserDataManager.CurrInstitutionCode;
-		newUser.age = int.TryParse(ageField.options[ageField.value].text, out var ageResult) ? ageResult : -1;
-		newUser.grade = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
-		newUser.sex = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
-		newUser.schoolType = (UserSchoolType)schoolTypeField.value;
-		newUser.country = countryField.text;
-		newUser.family = GetUserLivingWith();
+		newUser.id_proyecto = UserDataManager.CurrInstitutionCode;
+		newUser.edad = int.TryParse(ageField.options[ageField.value].text, out var ageResult) ? ageResult : -1;
+		newUser.grado = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
+		newUser.sexo = Enum.TryParse<UserSex>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserSex.NONE;
+		newUser.sexo_cod = (int) newUser.sexo;
+		newUser.tipo_colegio = schoolTypeField.options[schoolTypeField.value].text;
+		newUser.tipo_colegio_cod = schoolTypeField.value - 1;
+		newUser.lugar_nacimiento = countryField.text;
+		newUser.vive = GetUserLivingWith();
 
 		var validData = true;
 		var errMsg = "";
 
-		var isAlreadyRegistered = UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.institutionCode == newUser.institutionCode);
+		var isAlreadyRegistered = UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.id_proyecto == newUser.id_proyecto);
 
         if (string.IsNullOrEmpty(newUser.pin))
 		{
@@ -442,33 +444,33 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
             errMsg = "El pin de usuario ya está registrado en esta institución";
         }
-        else if (newUser.age == -1)
+        else if (newUser.edad == -1)
 		{
 			errMsg = "El campo de edad está vacío o es inválido";
 		}
-		else if (newUser.sex == UserGender.NONE)
+		else if (newUser.sexo == UserSex.NONE)
 		{
 			errMsg = "El género está vacío o es inválido";
 		}
-		else if (newUser.schoolType == UserSchoolType.NONE)
+		else if (newUser.tipo_colegio == UserSchoolType.NONE.ToString())
 		{
 			errMsg = "El tipo de escuela está vacía o es inválida";
 		}
-		else if (newUser.grade == -1)
+		else if (newUser.grado == -1)
 		{
 			errMsg = "El campo de grado está vacío o es inválido";
 		}
-		else if (string.IsNullOrEmpty(newUser.country))
+		else if (string.IsNullOrEmpty(newUser.lugar_nacimiento))
 		{
 			errMsg = "El lugar de nacimiento está vacío o es inválido";
 		}
-		else if (string.IsNullOrEmpty(newUser.family))
+		else if (string.IsNullOrEmpty(newUser.vive))
 		{
 			errMsg = "El campo 'Con quien vives' está vacío o es inválido";
 		}
 
-		Debug.Log("user" + newUser.pin + " " + newUser.institutionCode + " " + newUser.age + " " + 
-			newUser.country + " " + newUser.grade + " " + newUser.family + " " + newUser.sex + " " + newUser.schoolType);
+		Debug.Log("user" + newUser.pin + " " + newUser.id_proyecto + " " + newUser.edad + " " + 
+			newUser.lugar_nacimiento + " " + newUser.grado + " " + newUser.vive + " " + newUser.sexo + " " + newUser.tipo_colegio);
 		validData = string.IsNullOrEmpty(errMsg);
 		wrongNewUserDataLabelPopUp.SetText(errMsg);
 
@@ -476,15 +478,15 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		else
 		{
 			var alreadyInIdx = 
-				UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.institutionCode == newUser.institutionCode);
+				UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.id_proyecto == newUser.id_proyecto);
 
-			if (alreadyInIdx != -1) newUser.id = UserDataManager.Instance.usersDatas[alreadyInIdx].id;
-			else newUser.id = Guid.NewGuid().ToString();
+			if (alreadyInIdx != -1) newUser.id_jugador = UserDataManager.Instance.usersDatas[alreadyInIdx].id_jugador;
+			else newUser.id_jugador = Guid.NewGuid().ToString();
 
 			UserDataManager.Instance.RegisterNewUser(newUser);
 			createNewUserPanel.SetActive(false);
 			RebuildUsersList();
-			OnSelectedUser(newUser.id);
+			OnSelectedUser(newUser.id_jugador);
 		}
 	}
 	void OnExitSession()
@@ -538,7 +540,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	public void OnSelectedUser(string id)
 	{
-		var data = UserDataManager.Instance.usersDatas.Find(x => x.id == id);
+		var data = UserDataManager.Instance.usersDatas.Find(x => x.id_jugador == id);
 		if(data == null) return;
 
 		userNameHeader.text = data.pin;
@@ -553,18 +555,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     }
 	void ContinueOrNewGame()
 	{
-        afterLogInPanel.SetActive(true);
+		afterLogInPanel.SetActive(true);
 
-        var currClip = UserDataManager.CurrUser.sex == UserGender.Femenino ? welcomeFAudio : welcomeMAudio;
-        audioSource.clip = currClip;
-        audioSource.Play();
+		var currClip = UserDataManager.CurrUser.sexo == UserSex.Mujer ? welcomeFAudio : welcomeMAudio;
+		audioSource.clip = currClip;
+		audioSource.Play();
 
-        var storedCheckPoint = UserDataManager.CurrUser.CheckPointIdx;
-        var currWelcome = UserDataManager.CurrUser.sex == UserGender.Femenino ? contWelcomeM : contWelcomeF;
-        currWelcome.gameObject.SetActive(false);
+		var currUser = UserDataManager.CurrUser;
 
-        var soundPref = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", 1);
-		Debug.Log("sound " + PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive"));
+		var storedCheckPoint = currUser.CheckPointIdx; 
+
+		contWelcomeF.gameObject.SetActive(currUser.sexo == UserSex.Mujer);
+		contWelcomeM.gameObject.SetActive(currUser.sexo == UserSex.Hombre);
+
+		var soundPref = PlayerPrefs.GetInt(currUser.id_jugador + " isTheSoundActive", 1);
+		Debug.Log("sound " + PlayerPrefs.GetInt(currUser.id_jugador + " isTheSoundActive"));
 		AssignSoundActive(soundPref);
         afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1 && !GameSequencesList.isTheNarrativeSequence);
     }
@@ -575,7 +580,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     }
 	void SwitchSoundActive()
 	{
-		var previousState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id + " isTheSoundActive", defaultValue: 1);
+		var previousState = PlayerPrefs.GetInt(UserDataManager.CurrUser.id_jugador + " isTheSoundActive", defaultValue: 1);
 		AssignSoundActive(previousState == 0 ? 1 : 0);
 	}
 
@@ -592,7 +597,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			AudioManager.Instance.currentBkMusic.Play();
 			musicBtn.image.sprite = musicBtnActive;
 		}
-		PlayerPrefs.SetInt(UserDataManager.CurrUser.id + " isTheSoundActive", active);
+		PlayerPrefs.SetInt(UserDataManager.CurrUser.id_jugador + " isTheSoundActive", active);
 	}
 
 	public void OnContinueGameBtnPressed()
@@ -607,7 +612,14 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
-		TimeManager.createDate = TimeManager.Instance.RegisterTestDate();
+		MG_SizeRockets_GameConfigs.postFrustration = 0;
+		MG_VoiceStarOrFlowerGameConfigs.postFrustration = 0;
+		MG_HearthAndStarsGameConfigs.postFrustration = 0;
+		Gratification_TurboRocket_GameConfig.postFrustration = 0;
+		MonsterMarketConfig.marketAppearTimes = -1;
+
+		TimeManager.createDate = TimeManager.Instance.GetCurrDate();
+		GameSequencesList.CleanCurrUserTutorial();
         TimeManager.timer = 0;
 		if (continueSelectedFlag)
 		{
@@ -630,9 +642,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	IEnumerator LoadingSceneAsync(SceneReference scene)
 	{
-		Debug.Log("Unloading assets started");
 		yield return Resources.UnloadUnusedAssets();
-		Debug.Log("Unloading assets finished");
 
 		loadingPanel.gameObject.SetActive(true); 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);

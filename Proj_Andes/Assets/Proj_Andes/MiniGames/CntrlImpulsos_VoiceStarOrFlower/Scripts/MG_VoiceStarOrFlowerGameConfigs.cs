@@ -21,9 +21,9 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 	public float intermediateRoundHold;
     public int finalTutoStepMaxFailuresBeforeSkipping;
     public bool testIsOppositeToStimuli;
-    public static int passedTuto1 = -1;
-    public static int passedTuto2 = -1;
-    public static int passedTuto3 = -1;
+    public static int passedTuto1 = 0;
+    public static int passedTuto2 = 0;
+    public static int passedTuto3 = 0;
     public static int postFrustration = 0;
 
     public override string GetSceneID() => DataIds.voiceStarGame;
@@ -62,11 +62,11 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 
         var currAnalyticsDictionary = new Dictionary<string, object>();
         var currAnalytics = MG_VoiceStarOrFlowerManager.Instance.AllRoundsAnalytics;
-		GameID = Guid.NewGuid().ToString();
+
 		for (int i = 0; i < currAnalytics.Count; i++)
         {
             currAnalyticsDictionary.Clear();
-            //currAnalyticsDictionary.Add(DataIds.GameID, GameID);
+            currAnalyticsDictionary.Add(DataIds.GameID, GameID);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerTest, (int)gameType);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerFrustrationMode, postFrustration);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto1, passedTuto1);

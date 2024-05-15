@@ -527,7 +527,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Muy Frustrada
+  m_text: Muy frustrada
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e46f67f487211ab49bf55bbdc66670b0, type: 2}
   m_sharedMaterial: {fileID: 1914995512169818216, guid: e46f67f487211ab49bf55bbdc66670b0, type: 2}
@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Muy Frustrado
+  m_text: Muy frustrado
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e46f67f487211ab49bf55bbdc66670b0, type: 2}
   m_sharedMaterial: {fileID: 1914995512169818216, guid: e46f67f487211ab49bf55bbdc66670b0, type: 2}

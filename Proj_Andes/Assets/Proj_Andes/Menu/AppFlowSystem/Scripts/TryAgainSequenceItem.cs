@@ -14,26 +14,34 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
         clickAmounts = TryAgainManager.clickCountsBeforeBarCompleted;
         ExtraClickAmounts = TryAgainManager.clickCountsAfterBarCompleted;
 		//If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
-		if (string.IsNullOrEmpty(UserDataManager.LastDocumentIDStored) || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
+		if (UserDataManager.LastDocumentIDsStored == null || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
 
-		if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
-		if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDStored, out var DocumentFound)) return;
+		if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound))
+		{
+			if (!DatabaseManager.pendingSessionsToUpload.TryGetValue(UserDataManager.LastCollectionIDStored, out collectionFound)) return;
+		}
 
-        if (DocumentFound.TryGetValue(DataIds.mechHandThrown, out var valueFound))
-        {
-            DocumentFound.Add(DataIds.tryAgainClicksMechHand + tryAgainTrial, clickAmounts);
-            //DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
-        }
-        else if (DocumentFound.TryGetValue(DataIds.frustPersBoostClicks, out var otherValueFound))
-        {
-            DocumentFound.Add(DataIds.tryAgainClicksBoosters + tryAgainTrial, clickAmounts);
-            //DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
-        }
 
-        foreach (var item in DocumentFound)
+        for (int i = 0; i < UserDataManager.LastDocumentIDsStored.Count; i++)
         {
-            Debug.Log("frust " + item.Key + " " + item.Value);
-        }
+            if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDsStored[i], out var DocumentFound)) continue;
+
+			if (DocumentFound.TryGetValue(DataIds.mechHandThrown, out var valueFound))
+			{
+				DocumentFound.Add(DataIds.tryAgainClicksMechHand, clickAmounts);
+				//DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
+			}
+			else if (DocumentFound.TryGetValue(DataIds.frustPersBoostClicks, out var otherValueFound))
+			{
+				DocumentFound.Add(DataIds.tryAgainClicksBoosters, clickAmounts);
+				//DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
+			}
+
+			foreach (var item in DocumentFound)
+			{
+				Debug.Log("frust " + item.Key + " " + item.Value);
+			}
+		}
     }
 
     public override void ResetCurrentAnalytics()

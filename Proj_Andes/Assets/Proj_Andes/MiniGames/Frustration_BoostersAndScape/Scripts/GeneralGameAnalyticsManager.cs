@@ -68,14 +68,7 @@ public class GeneralGameAnalyticsManager : MonoBehaviour
 
 		var analyticsDic = new Dictionary<string, object>();
 
-		var gameMode = GameModeAboutFrustration.baseline;
-		var currGameIdx = GameSequencesList.Instance.goToGameGroupIdx;
-		if (currGameIdx > GameSequencesList.firstFrustrationScreenIdx
-			&& currGameIdx < GameSequencesList.LastFrustrationScreenIdx) gameMode = GameModeAboutFrustration.Frustration;
-		else if (currGameIdx > GameSequencesList.LastFrustrationScreenIdx) gameMode = GameModeAboutFrustration.Post;
-
-
-		analyticsDic.Add(DataIds.GameModeAboutAnalytics, gameMode);
+		analyticsDic.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
 		analyticsDic.Add(DataIds.GameType, analytics.gameType);
 		analyticsDic.Add(DataIds.timePlayed, analytics.timePlayed);
 		analyticsDic.Add(DataIds.wins, analytics.achievements);
@@ -94,7 +87,7 @@ public class GeneralGameAnalyticsManager : MonoBehaviour
 		analytics.lastFrustrationLevel = FrustrationTermometer.LastFrustrationLevelPicked;
 		FrustrationTermometer.LastFrustrationLevelPicked = FrustrationLevel.NONE;
 
-		analyticsDic.Add(DataIds.lastFrustrationLevel, (int) analytics.lastFrustrationLevel);
+		analyticsDic.Add(DataIds.lastFrustrationLevel, (int) analytics.lastFrustrationLevel.GetAnalyticValue());
 
 
 		return analyticsDic;

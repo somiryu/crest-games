@@ -23,7 +23,7 @@ public class UserDataManager : ScriptableObject
 	private static string currInstitutionCode;
 
 	public static string LastCollectionIDStored = null;
-	public static string LastDocumentIDStored = null;
+	public static List<string> LastDocumentIDsStored = null;
 
 
 	public static string CurrTestID
@@ -73,7 +73,7 @@ public class UserDataManager : ScriptableObject
         get
         {
 			if (currUserDataIdx != -1 && currUserDataIdx < usersDatas.Count) return usersDatas[currUserDataIdx];
-			DefaultUserData.id = "0000-0000-0000";
+			DefaultUserData.id_jugador = "0000-0000-0000";
             return DefaultUserData;
         }
 	}
@@ -94,15 +94,13 @@ public class UserDataManager : ScriptableObject
 		string CollectionName, 
 		Dictionary<string, object> itemAnalytics, 
 		string documentID = null, 
-		string gameType = null, 
 		bool shouldUseTestID = true)
 	{
 		var analyticsWithExtraFields = new Dictionary<string, object>();
-        analyticsWithExtraFields.Add(DataIds.institutionCode, CurrUser.institutionCode);
-        analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id);
+        analyticsWithExtraFields.Add(DataIds.institutionCode, CurrUser.id_proyecto);
+        analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id_jugador);
         if (shouldUseTestID) analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
 		//analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
-		if (gameType != null) analyticsWithExtraFields.Add(DataIds.GameType, gameType);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 
 		foreach(var analytic in analyticsWithExtraFields)
@@ -160,7 +158,7 @@ public class UserDataManager : ScriptableObject
 		else CurrUser.narrativeNavCheckPointsNodes = null;
 
 		//Don't save if we are using the default user
-		if (CurrUser.id == defaultUserID) return;
+		if (CurrUser.id_jugador == defaultUserID) return;
 
 		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
 		UserDataManager.Instance.SaveDataToRemoteDataBase();
@@ -230,17 +228,17 @@ public class UserDataManager : ScriptableObject
 	{
 		var newuserData = new UserData();
 		newuserData.pin = email;
-		newuserData.id = id;
+		newuserData.id_jugador = id;
 		RegisterNewUser(newuserData);
 	}
 
 	public void RegisterNewUser(UserData user)
 	{
-		var alreadyInIndex = usersDatas.FindIndex(x => x.id == user.id);
+		var alreadyInIndex = usersDatas.FindIndex(x => x.id_jugador == user.id_jugador);
         if (alreadyInIndex != -1)
 		{
 			usersDatas[alreadyInIndex] = user;
-            Debug.Log("Trying to add user: " + user.pin + " " + user.id + " But ID already existed, replacing data " + user.age);
+            Debug.Log("Trying to add user: " + user.pin + " " + user.id_jugador + " But ID already existed, replacing data " + user.edad);
 			return;
 		}
 		usersDatas.Add(user);
@@ -249,7 +247,7 @@ public class UserDataManager : ScriptableObject
 
 	public void RemoveUser(string id)
 	{
-		var data = usersDatas.Find(x => x.id == id);
+		var data = usersDatas.Find(x => x.id_jugador == id);
 		DatabaseManager.DeleteUserFromDataList(data);
 	}
 
@@ -261,13 +259,13 @@ public class UserDataManager : ScriptableObject
 			return;
 		}
 
-		var idx = usersDatas.FindIndex(x =>x.id == id);
+		var idx = usersDatas.FindIndex(x =>x.id_jugador == id);
 		currUserDataIdx = idx;
 	}
 
     public DifficultyLevel GetDifficultyLevelUser()
     {
-		var currAge = CurrUser.age;
+		var currAge = CurrUser.edad;
         if (currAge <= maxAgeEasyLevel) return DifficultyLevel.Easy;
         else if (currAge <= maxAgeMediumLevel) return DifficultyLevel.Medium;
         else return DifficultyLevel.Hard;        
