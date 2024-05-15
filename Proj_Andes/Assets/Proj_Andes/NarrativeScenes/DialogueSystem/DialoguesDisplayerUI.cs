@@ -494,13 +494,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         if (!string.IsNullOrEmpty(currResponseChoiceAnalyticIDRta))
         {
-            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDRta, currResponseAnalyticResponse);
+			Debug.Log("cur1 " + currResponseChoiceAnalyticIDRta + " " + currResponseAnalyticResponse);
+			Debug.Log("cur2 " + currResponseChoiceAnalyticIDCod + " " + currResponseAnalyticResponseVal);
+			Debug.Log("cur3 " + currResponseChoiceAnalyticIDTm + " " + currResponseTime);
+
+			narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDRta, currResponseAnalyticResponse);
             narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDCod, currResponseAnalyticResponseVal);
             narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDTm, currResponseTime);
 
-            Debug.Log("cur1 " + currResponseChoiceAnalyticIDRta + " " + currResponseAnalyticResponse);
-            Debug.Log("cur2 " + currResponseChoiceAnalyticIDCod + " " + currResponseAnalyticResponseVal);
-            Debug.Log("cur3 " + currResponseChoiceAnalyticIDTm + " " + currResponseTime);
+
             currResponseAnalyticResponse = null;
             currResponseChoiceAnalyticIDRta = null;
             currResponseAnalyticResponseVal = -1;

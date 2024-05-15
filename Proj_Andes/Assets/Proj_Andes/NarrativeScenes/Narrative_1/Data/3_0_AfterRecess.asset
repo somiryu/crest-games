@@ -104,7 +104,7 @@ MonoBehaviour:
         emotionSubCategory: 0
         inRelationTo: 2
         customEmotionValue: 0
-        hasCustomID: 1
+        hasCustomID: 0
         codCustomID: m1_emp_ami_pos_cod
         rtaCustomID: m1_emp_ami_pos_rta
         tmCustomID: m1_emp_ami_pos_tm
