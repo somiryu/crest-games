@@ -75,6 +75,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button cancelAfterLogBtn;
 	[Space(20)]
 	[SerializeField] GameObject checkingInternetPanel;
+	[SerializeField] Slider syncingDataSlider;
 	[SerializeField] GameObject NoInternetWarningIcon;
 
 	[Header("PickANarrative Panel")]
@@ -365,10 +366,17 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		confirmUserBtn.gameObject.SetActive(false);
 	}
 
+
+	IEnumerator syncDataRoutineRef;
+
 	IEnumerator LoadUsers()
 	{
 		checkingInternetPanel.SetActive(true);
+
+		syncDataRoutineRef = SyncDataSliderRoutine();
+		StartCoroutine(syncDataRoutineRef);
 		yield return UserDataManager.Instance.LoadDataFromRemoteDataBaseRoutine();
+		StopCoroutine(syncDataRoutineRef);
 		Debug.Log("Corretly retrieved users from server");
 		checkingInternetPanel.SetActive(false);
 		NoInternetWarningIcon.SetActive(!UserDataManager.Instance.HasInternet);
@@ -391,6 +399,16 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		}
 		RebuildUsersList();
 	}
+
+	IEnumerator SyncDataSliderRoutine()
+	{
+		while (true)
+		{
+			syncingDataSlider.SetValueWithoutNotify(DatabaseManager.currLoadProgress);
+			yield return null;
+		}
+	}
+
 
 	void OnWantsToCreateNewUser()
 	{
