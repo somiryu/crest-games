@@ -88,6 +88,11 @@ public class GameSequencesList : ScriptableObject
         goToGameGroupIdx = 0;
         for (int i = 0; i < gameSequences.Count; i++) gameSequences[i].OnReset();
         MonsterMarketConfig.marketAppearTimes = -1;
+		MG_SizeRockets_GameConfigs.postFrustration = 0;
+		MG_VoiceStarOrFlowerGameConfigs.postFrustration = 0;
+		MG_HearthAndStarsGameConfigs.postFrustration = 0;
+		Gratification_TurboRocket_GameConfig.postFrustration = 0;
+		CleanCurrUserTutorial();
     }
 
     public SimpleGameSequenceItem GetGameSequence()
@@ -159,7 +164,7 @@ public class GameSequencesList : ScriptableObject
 #if UNITY_EDITOR
     [MenuItem("Hi Hat Games/ Clean tutorial data")]
 #endif
-    private static void CleanCurrUserTutorial()
+    public static void CleanCurrUserTutorial()
     {
         UserDataManager.CurrUser.tutorialStepsDone.Clear();
     }

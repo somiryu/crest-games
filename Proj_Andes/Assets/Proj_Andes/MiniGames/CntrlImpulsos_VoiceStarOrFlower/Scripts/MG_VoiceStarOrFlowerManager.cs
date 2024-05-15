@@ -68,6 +68,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
     int rightCount;
     int leftCount;
+    int consecutiveLeft;
+    int consecutiveRight;
 
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
@@ -75,6 +77,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private int amountImgIsLeft = 0;
     private int amountSoundIsLeft = 0;
     private int amountDiscardButton = 0;
+    private float propabilityShifter = 0;
 
     bool isPaused;
     private bool gameoverFlag = false;
@@ -184,6 +187,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         switch (currGameTypeConfig.gameType)
         {
             case VoiceOrImageGameType.Voice:
+
                 if (rightCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
                 else if (leftCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
                 if (currSoundIsLeft) leftCount++;
@@ -192,7 +196,9 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
                 currTargetImg.gameObject.SetActive(false);
                 currImgIsLeft = currSoundIsLeft;
                 break;
+
             case VoiceOrImageGameType.Image:
+
                 if (rightCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = true;
                 else if (leftCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = false;
                 if (currImgIsLeft) leftCount++;
@@ -201,26 +207,58 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
                 currSoundIsLeft = currImgIsLeft;
                 currTargetImg.gameObject.SetActive(true);
                 break;
+
             case VoiceOrImageGameType.Mixed:
+
                 if (UseVoiceAsCorrectAnswer)
                 {
+					var lastWasSameDir = currSoundIsLeft;
+
+                    var totalPosibility = (0.5f + propabilityShifter);
+
+					Debug.Log(totalPosibility + " chance increase by " + propabilityShifter);
+
+
+					currSoundIsLeft = Random.Range(0f, 1f) < totalPosibility;
+
                     if (rightCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
                     else if (leftCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
+
                     if (currSoundIsLeft) leftCount++;
                     else rightCount++;
 
-					if (currSoundIsLeft) currImgIsLeft = false;
+                    if (currSoundIsLeft) currImgIsLeft = false;
 					else currImgIsLeft = true;
+
+					if (currSoundIsLeft == lastWasSameDir)
+					{
+						propabilityShifter += currSoundIsLeft ? -0.2f : 0.2f;
+					}
+					else propabilityShifter = 0;
+
 				}
-                else
+				else
                 {
+					var lastWasSameDir = currImgIsLeft;
+
+                    var totalPosibility = (0.5f + propabilityShifter);
+                    currImgIsLeft = Random.Range(0f, 1f) < totalPosibility;
+
                     if (rightCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = true;
                     else if (leftCount >= currGameTypeConfig.maxRounds / 2) currImgIsLeft = false;
+
                     if (currImgIsLeft) leftCount++;
                     else rightCount++;
 
 					if (currImgIsLeft) currSoundIsLeft = false;
 					else currSoundIsLeft = true;
+
+					if (currImgIsLeft == lastWasSameDir)
+					{
+						propabilityShifter += currImgIsLeft ? -0.2f : 0.2f;
+					}
+					else propabilityShifter = 0;
+
 				}
                 break;
         }
@@ -229,7 +267,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         var soundToUse = currSoundIsLeft ? leftAudio : rightAudio;
         var textToUse = currSoundIsLeft ? leftObjTxt : rightObjTxt;
 
-        Debug.Log("clouds " + rightCount + "flower " + leftCount);
         currTargetImg.sprite = imgToUse;
         audioPlayer.clip = soundToUse;
 

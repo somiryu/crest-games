@@ -95,6 +95,19 @@ public static class Utility
 		}
         return false;
 	}
+
+    public static int GetAnalyticValue(this FrustrationLevel level)
+    {
+        return level switch
+        {
+            FrustrationLevel.NONE => 0,
+            FrustrationLevel.Muy_Tranquilo => 1,
+            FrustrationLevel.Un_Poco_Tranquilo => 2,
+            FrustrationLevel.Frustrado => 3,
+            FrustrationLevel.Muy_Frustrado => 4,
+            _ => -1
+        };
+    }
 }
 
 public enum Comparison

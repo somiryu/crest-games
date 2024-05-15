@@ -4,13 +4,13 @@ using UnityEngine;
 
 public static class DataIds
 {
-    public const string usersCollection = "users";
+    public const string usersCollection = "usuario";
 
     public const string TestID = "id_prueba";
-    public const string GameOrderInSequence = "game_order";
+    public const string GameOrderInSequence = "orden";
     public const string UserID = "id_jugador";
-    public const string GameID = "juego_tipo";
-    public const string GameType = "game Type";
+    public const string GameID = "id_juego";
+    public const string GameType = "juego_tipo";
 
     //Generic IDs
     public const string totalClicks = "click_repetions";
@@ -20,12 +20,12 @@ public static class DataIds
     public const string challengeType = "challenge_type";
 
     //General Games collection IDs
-    public const string generalGamesCollID = "games";
-    public const string wins = "general_Achievements";
-    public const string losses = "general_Losses";
+    public const string generalGamesCollID = "juegos";
+    public const string wins = "logros_general";
+    public const string losses = "perdidas_general";
     public const string clicks = "clicks";
-    public const string averageClickTime = "avg_click_frequency";
-	public const string lastFrustrationLevel = "last_frustration_selected";
+    public const string averageClickTime = "frecuencia_media_clicks";
+	public const string lastFrustrationLevel = "ultima_frustracion_selec";
 	public const string GameModeAboutAnalytics = "game_mode";
 
 	//Monster market
@@ -39,7 +39,7 @@ public static class DataIds
 	//Frustration levels
 	public const string frustrationGames = "frustration_levels";
 	public const string repetition = "repeticion";
-    public const string timePlayed = "time_played";
+    public const string timePlayed = "tiempo_juego_total";
     public const string lostByCheat = "lostByCheat";
     public const string frustrationLevel = "frustrationLevel";
 
@@ -60,7 +60,7 @@ public static class DataIds
 
     public const string fightTheAlienGame = "monstruo_figuras";
 
-    public const string boostersAndScapeGame = "delay: boosters y escape";
+    public const string boostersAndScapeGame = "frustr_persecusion";
     public const string boostersAndScapeTotalBoostsActivated = "boosters_activated";
 
     public const string magnetsGame = "buggy: los imanes y la energía";
@@ -76,14 +76,14 @@ public static class DataIds
     public const string tryAgainClicksAfterWait = "fg_espera_click_afterWait";
 
     //General Test analytics
-    public const string test = "test";
+    public const string test = "prueba";
     public const string institutionCode = "id_proyecto";
-    public const string created_At = "created_At";
+    public const string created_At = "inicio";
     public const string ended_At = "fin";
     public const string age = "edad";
     public const string grade = "grado";
-    public const string state = "state";
-    public const string time_Spent = "time_Spent";
+    public const string state = "estado";
+    public const string time_Spent = "tiempo_total";
 
 	//Size rockets analytics
 	public const string frustrationMode = "cr_modo";

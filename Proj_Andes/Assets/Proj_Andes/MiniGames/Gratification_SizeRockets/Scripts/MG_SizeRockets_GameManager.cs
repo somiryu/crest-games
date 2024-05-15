@@ -68,7 +68,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 	public SizeRocketAnalytics currAnalytics => analyticsPerRound[roundCount];
 
-    public MG_SizeRockets_Rocket currShip { get => activeShip; set { } }
+    public MG_SizeRockets_Rocket currShip { get => activeShip; set => activeShip = currShip; }
 
     public bool shipIsMoving { get => false; set { } }
 
@@ -203,17 +203,20 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currRocket.Init(rocketsPool, currTargetPlanet, basePlanet);
 		activeShips.Add(currRocket);
 		activeShip = currRocket;
+		Debug.Log("Just asigned ship: " + currShip);
 		shipsLeft--;
 		shipsLeftTxt.SetText(shipsLeft.ToString());
 		shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
 		smallRocketBtn.interactable = false;
 		mediumRocketBtn.interactable = false;
 		largeRocketBtn.interactable = false;
-	}
+        currAnalytics.tryIndex = roundCount + 1;
+
+    }
 
 
 
-	public Pool<MG_SizeRockets_Rocket> GetRocketsPool(SizeRocketsRocketTypes type)
+    public Pool<MG_SizeRockets_Rocket> GetRocketsPool(SizeRocketsRocketTypes type)
 	{
 		return type switch
 		{
@@ -250,7 +253,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 		roundCount++;
 
-		roundEndAudioRoutineRef = StarsWonCount(GetCoinAudio(rocket.rocketType));
+        roundEndAudioRoutineRef = StarsWonCount(GetCoinAudio(rocket.rocketType));
 		yield return roundEndAudioRoutineRef;
 
 		activeShips.Remove(rocket);
@@ -264,7 +267,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			yield break;
 		}
 
-		currAnalytics.tryIndex = roundCount + 1;
 		smallRocketBtn.interactable = true;
 		mediumRocketBtn.interactable = true;
 		largeRocketBtn.interactable = true;

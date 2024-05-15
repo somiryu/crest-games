@@ -20,6 +20,8 @@ public class MinigameGroups : SimpleGameSequenceItem
     [NonSerialized]
     public int lastPlayedIdx = -1;
 
+    [NonSerialized] SimpleGameSequenceItem lastRandomSequenceItemPicked;
+
     public SimpleGameSequenceItem GetNextMiniGame()
     {
         if (CanBeOverridenByDebugFlag)
@@ -42,21 +44,20 @@ public class MinigameGroups : SimpleGameSequenceItem
         if (randomize)
         {
             return GetRandomGame();
-        } 
-        if(miniGamesInGroup.Contains(GameSequencesList.Instance.prevGame))
+        }
+        if (miniGamesInGroup.Contains(GameSequencesList.Instance.prevGame))
         {
             var lastGameIdx = miniGamesInGroup.IndexOf(GameSequencesList.Instance.prevGame);
             var newGameIdx = lastGameIdx + 1;
+            Debug.Log(newGameIdx + " minigame " + lastGameIdx);
 
             if (newGameIdx >= miniGamesInGroup.Count) return null;
-
-			lastPlayedIdx = newGameIdx;
+            lastPlayedIdx = newGameIdx;
             var newGame = miniGamesInGroup[lastPlayedIdx];
             return newGame;
         }
         else return miniGamesInGroup[0];
     }
-
     public void SetItemsPlayedData(List<int> itemsIdsPlayed)
     {
         itemsPlayed.Clear();
@@ -83,27 +84,49 @@ public class MinigameGroups : SimpleGameSequenceItem
         if(lastPlayedIdx != -1 && !itemsPlayed.Contains(GameSequencesList.Instance.prevGame))
         {
             itemsPlayed.Add(GameSequencesList.Instance.prevGame);
-            Debug.Log("Saved played ID: " +  lastPlayedIdx);
         }
 		var maxItemsToPlay = maxItemsToPlayOnRandomize != -1 ? maxItemsToPlayOnRandomize : miniGamesInGroup.Count;
-        if(itemsPlayed.Count >= maxItemsToPlay) return null;
+        if (itemsPlayed.Count >= maxItemsToPlay) return null;
 
         var newGame = miniGamesInGroup[Random.Range(0, miniGamesInGroup.Count)];
         if (!itemsPlayed.Contains(newGame))
         {
             lastPlayedIdx = miniGamesInGroup.IndexOf(newGame);
+            lastRandomSequenceItemPicked = newGame;
             return newGame;
         }
         else return GetRandomGame();
     }
     public override void OnSequenceOver()
     {
+        lastRandomSequenceItemPicked = null;
         GameSequencesList.Instance.GoToNextSequence();
     }
 
     public override SimpleGameSequenceItem GetNextItem()
     {
-        return GetNextMiniGame();
+        //Make sure that the curr picked item is really done
+        if(lastRandomSequenceItemPicked != null)
+        {
+            var nextInnerItem = lastRandomSequenceItemPicked.GetNextItem();
+            if(nextInnerItem != null)
+            {
+                return nextInnerItem;
+            }
+        }
+
+        var nextGame = GetNextMiniGame();
+        if (nextGame is MinigameGroups group)
+        {
+            Debug.Log("going to minigame in minigame");
+            var currGameToCheck = group.GetNextMiniGame();
+            if (currGameToCheck != null) return currGameToCheck;
+            else
+            {
+                return null;
+            }
+        }
+        else return nextGame;
     }
 
 	public override SimpleGameSequenceItem GetItemByIdx(int idx) => miniGamesInGroup[(int)idx];
@@ -111,6 +134,7 @@ public class MinigameGroups : SimpleGameSequenceItem
 
 	public override void OnReset()
     {
+        lastRandomSequenceItemPicked = null;
         itemsPlayed.Clear();
         lastPlayedIdx = -1;
     }

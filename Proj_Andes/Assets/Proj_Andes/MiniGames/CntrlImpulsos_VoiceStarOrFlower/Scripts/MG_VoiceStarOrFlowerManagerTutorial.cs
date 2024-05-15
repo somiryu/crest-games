@@ -97,8 +97,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     int failurePerTutoCount;
     int tutoStage;
     bool isPaused;
+    float propabilityShifter;
 
-    public void Awake()
+
+	public void Awake()
 	{
         if (instance != null && instance != this) DestroyImmediate(this);
         instance = this;
@@ -277,23 +279,59 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 currSoundIsLeft = currImgIsLeft;
                 break;
             case VoiceOrImageGameType.Mixed:
-                if (UseVoiceAsCorrectAnswer)
-                {
-                    if (currSoundIsLeft) currImgIsLeft = false;
-                    else currImgIsLeft = true;
+				if (UseVoiceAsCorrectAnswer)
+				{
+					var lastWasSameDir = currSoundIsLeft;
 
-                    if (currSoundIsLeft) leftCount++;
-                    else rightCount++;
-                }
-                else
-                {
-                    if (currImgIsLeft) currSoundIsLeft = false;
-                    else currSoundIsLeft = true;
+					var totalPosibility = (0.5f + propabilityShifter);
 
-                    if (currImgIsLeft) leftCount++;
-                    else rightCount++;
-                }
-                break;
+					Debug.Log(totalPosibility + " chance increase by " + propabilityShifter);
+
+
+					currSoundIsLeft = Random.Range(0f, 1f) < totalPosibility;
+
+					if (rightCount >= currTutoConfig.consecutiveWinsToPass / 2) currSoundIsLeft = true;
+					else if (leftCount >= currTutoConfig.consecutiveWinsToPass / 2) currSoundIsLeft = false;
+
+					if (currSoundIsLeft) leftCount++;
+					else rightCount++;
+
+					if (currSoundIsLeft) currImgIsLeft = false;
+					else currImgIsLeft = true;
+
+					if (currSoundIsLeft == lastWasSameDir)
+					{
+						propabilityShifter += currSoundIsLeft ? -0.2f : 0.2f;
+					}
+					else propabilityShifter = 0;
+
+				}
+				else
+				{
+					var lastWasSameDir = currImgIsLeft;
+
+					var totalPosibility = (0.5f + propabilityShifter);
+					currImgIsLeft = Random.Range(0f, 1f) < totalPosibility;
+
+					Debug.Log(totalPosibility + " chance increase by " + propabilityShifter);
+
+					if (rightCount >= currTutoConfig.consecutiveWinsToPass / 2) currImgIsLeft = true;
+					else if (leftCount >= currTutoConfig.consecutiveWinsToPass / 2) currImgIsLeft = false;
+
+					if (currImgIsLeft) leftCount++;
+					else rightCount++;
+
+					if (currImgIsLeft) currSoundIsLeft = false;
+					else currSoundIsLeft = true;
+
+					if (currImgIsLeft == lastWasSameDir)
+					{
+						propabilityShifter += currImgIsLeft ? -0.2f : 0.2f;
+					}
+					else propabilityShifter = 0;
+
+				}
+				break;
         }
 
         var imgToUse = currImgIsLeft ? leftTargetSprite : rightTargetSprite;
