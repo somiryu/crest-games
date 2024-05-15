@@ -60,6 +60,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     int flowerCount;
     int consecutiveFlower;
     int consecutiveHeart;
+    float propabilityShifter;
 
     private bool currShowingRight = false;
     private bool currRequiresSameDirection = false;
@@ -126,24 +127,25 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
                 currRequiresSameDirection = false;
                 break;            
             case HeartsAndFlowersGameType.Mixed:
-                float posibilityIncrease = currRequiresSameDirection ? -consecutiveHeart : consecutiveFlower;
-                var totalPosibility = (0.5f + (posibilityIncrease / 10));
-                Debug.Log(totalPosibility + " chance increase by " + posibilityIncrease + " floer " + consecutiveFlower + " heart" + consecutiveHeart);
+
+                var lastWasSameDir = currRequiresSameDirection;
+
+                var totalPosibility = (0.5f + propabilityShifter);
+                Debug.Log(totalPosibility + " chance increase by " + propabilityShifter + " floer " + consecutiveFlower + " heart" + consecutiveHeart);
                 currRequiresSameDirection = Random.Range(0f, 1f) < totalPosibility;
+
                 if (heartCount >= 6) currRequiresSameDirection = false;
                 if (flowerCount >= 8) currRequiresSameDirection = true;
-                if (posibilityIncrease > 0 && currRequiresSameDirection) consecutiveFlower = 0;
-                else if (posibilityIncrease < 0 && !currRequiresSameDirection) consecutiveHeart = 0;
-                if (currRequiresSameDirection)
+
+                if (currRequiresSameDirection) heartCount++;
+				else flowerCount++;
+	
+                if(currRequiresSameDirection == lastWasSameDir)
                 {
-                    heartCount++;
-                    consecutiveHeart++;
+                    propabilityShifter += currRequiresSameDirection ? -0.1f : 0.1f;
                 }
-				else
-                {
-                    flowerCount++;
-                    consecutiveFlower++;
-                }
+                else propabilityShifter = 0;
+
                 break;
         }
 

@@ -21,9 +21,9 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 	public float intermediateRoundHold;
     public int finalTutoStepMaxFailuresBeforeSkipping;
     public bool testIsOppositeToStimuli;
-    public static int passedTuto1 = -1;
-    public static int passedTuto2 = -1;
-    public static int passedTuto3 = -1;
+    public static int passedTuto1 = 0;
+    public static int passedTuto2 = 0;
+    public static int passedTuto3 = 0;
     public static int postFrustration = 0;
 
     public override string GetSceneID() => DataIds.voiceStarGame;
