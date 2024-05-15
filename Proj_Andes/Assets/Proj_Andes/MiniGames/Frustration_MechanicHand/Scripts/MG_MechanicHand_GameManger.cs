@@ -233,18 +233,29 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 
 	void GameOver()
 	{
+		StartCoroutine(GameOverRoutine());
+	}
+
+
+	IEnumerator GameOverRoutine()
+	{
+		blockingPanel.gameObject.SetActive(true);
 		inGameUiContainer.gameObject.SetActive(false);
 		afterActionPanel.SetActive(true);
 		inGameObjs.SetActive(false);
-		StartCoroutine(PlayAudiosGuide(noStarsAudio));
-		//afterAction_ResultsTxt.SetText("Capturaste: " + totalCapturedAsteroids + " de " + asteroidsPerRound * 3);
-		afterAction_ResultsTxt.SetText( totalCapturedAsteroids.ToString());
-		var ratio = totalCapturedAsteroids / (asteroidsPerRound*3f);
+
+		afterAction_ResultsTxt.SetText(totalCapturedAsteroids.ToString());
+		var ratio = totalCapturedAsteroids / (asteroidsPerRound * 3f);
 		afterAction_WinLabel.SetActive(ratio >= gameConfigs.percentageNeededToWin);
 		afterAction_LoseLabel.SetActive(ratio < gameConfigs.percentageNeededToWin);
 		timePlayed = totalTime;
-        gameConfigs.SaveCoins(totalCapturedAsteroids);
-        eogManager.OnGameOver();
+		gameConfigs.SaveCoins(totalCapturedAsteroids);
+		eogManager.OnGameOver();
+
+		audioSource.clip = noStarsAudio;
+		audioSource.Play();
+		yield return new WaitForSeconds(audioSource.clip.length);
+		blockingPanel.gameObject.SetActive(false);
 	}
 
 

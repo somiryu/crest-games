@@ -240,18 +240,27 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     }
     void OnGameEnd()
     {
-        timePlayed = totalTime;
-        finalScoreText.text =   successfulAttempts.ToString() ;
-        endOfGameContainer.gameObject.SetActive(true);
-        onPlay = false;
-        spawner.OnGameEnd();
-        gameConfig.SaveCoins(successfulAttempts);
-        eogManager.OnGameOver();
-        audiosource.clip = noStartsAudio;
-        audiosource.Play();
-        inGameObj.SetActive(false);
-        Debug.Log("Game over!");
+        StartCoroutine(GameOverRoutine());
     }
+
+    IEnumerator GameOverRoutine()
+    {
+        blockingPanel.gameObject.SetActive(true);
+		timePlayed = totalTime;
+		finalScoreText.text = successfulAttempts.ToString();
+		endOfGameContainer.gameObject.SetActive(true);
+		onPlay = false;
+		spawner.OnGameEnd();
+		gameConfig.SaveCoins(successfulAttempts);
+		eogManager.OnGameOver();
+		audiosource.clip = noStartsAudio;
+		audiosource.Play();
+        yield return new WaitForSeconds(noStartsAudio.length);
+		inGameObj.SetActive(false);
+		blockingPanel.gameObject.SetActive(false);
+		Debug.Log("Game over!");
+	}
+
     void Onfailed()
     {
         Debug.Log("Failed boost");
