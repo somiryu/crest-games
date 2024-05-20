@@ -21,8 +21,6 @@ MonoBehaviour:
     text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: f11125b83cac30a428f68ea12b4f0cd6, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses:
     - response: Hago como si no me importara y no digo nada
       responseAlternative: 
@@ -37,8 +35,11 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: "Le dices a tus compa\xF1eros que no te parece chistoso lo que hicieron"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 982129c43178bfd4589d8695d0c33031, type: 3}
@@ -52,8 +53,11 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: "Empujo el pupitre y les grito a mis compa\xF1eros que son unos bobos\u201D.\r"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 0a7d14ea0aeeb534888966a9b34a1cb4, type: 3}
@@ -67,8 +71,11 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -83,8 +90,6 @@ MonoBehaviour:
       te ayudar\xE1 a borrar el dibujo."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 4245c2943d544144bb4aa44318f1ae66, type: 3}
     audioAlternative: {fileID: 0}
@@ -100,8 +105,6 @@ MonoBehaviour:
       clase con un brazo adolorido."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: aa68ebdf29603b148b06f2c8518b4463, type: 3}
     audioAlternative: {fileID: 0}
@@ -117,8 +120,6 @@ MonoBehaviour:
       que, dependiendo de lo que elijan, tendr\xE1n que hacer algo!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 11ff0a28cc0da924892e6dc3ac9746f8, type: 3}
     audioAlternative: {fileID: 0}
@@ -134,10 +135,8 @@ MonoBehaviour:
       no correr y llegas de \xFAltimas.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
-    audio: {fileID: 8300000, guid: 881271c4b30c3f1488fd6433c40562da, type: 3}
+    audio: {fileID: 8300000, guid: d513e257e15b61a4dab183eff2581b4f, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: d304568d063246a4f93c5081789f75c4, type: 2}
@@ -150,8 +149,6 @@ MonoBehaviour:
     text: 
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0c3dc869d1b9547409be13a4a759c19e, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses:
     - response: "Bal\xF3n"
       responseAlternative: 
@@ -166,8 +163,11 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: Cuerda
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 4f667cadd1a7a4048a4d79ff06666114, type: 3}
@@ -181,8 +181,11 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: Juguete
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 43f522dac1955f2419eabe9e780e07cb, type: 3}
@@ -196,8 +199,11 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     audio: {fileID: 0}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}

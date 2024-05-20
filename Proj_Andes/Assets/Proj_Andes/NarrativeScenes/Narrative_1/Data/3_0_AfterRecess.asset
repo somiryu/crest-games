@@ -50,8 +50,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFC\xF3mo te sientes t\xFA al saber que a Cami la van a rega\xF1ar?\r\r"
-    textAlternative: 
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que a Cami lo van a rega\xF1ar?\r\r"
+    textAlternative: "\xBFC\xF3mo te sientes t\xFA al saber que a Cami la van a rega\xF1ar?"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses:
     - response: MUY BIEN
@@ -144,8 +144,8 @@ MonoBehaviour:
         codCustomID: 
         rtaCustomID: 
         tmCustomID: 
-    audio: {fileID: 8300000, guid: 1b8583a5628e7cd408fe09bda059ee98, type: 3}
-    audioAlternative: {fileID: 0}
+    audio: {fileID: 8300000, guid: 3889e274f55c7f14f81a29b410842496, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 1b8583a5628e7cd408fe09bda059ee98, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
@@ -155,15 +155,15 @@ MonoBehaviour:
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
     text: "La profe llama a Cami para revisarle su tarea. Mientras tanto, Alex, que
-      le hab\xEDa empujado en clase de educaci\xF3n f\xEDsica, pasa por su puesto,
+      lo hab\xEDa empujado en clase de educaci\xF3n f\xEDsica, pasa por su puesto,
       le quita su l\xE1piz y lo esconde."
     textAlternative: "La profe llama a Cami para revisarle su tarea. Mientras tanto,
-      Alex, la misma compa\xF1era que la hab\xEDa empujado en clase de educaci\xF3n
-      f\xEDsica, pasa por su puesto, le quita su l\xE1piz y lo esconde."
+      Alex, que la hab\xEDa empujado en clase de educaci\xF3n f\xEDsica, pasa por
+      su puesto, le quita su l\xE1piz y lo esconde."
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     responses: []
-    audio: {fileID: 8300000, guid: 8cccf6644b2ad154eb8563ab788269a8, type: 3}
-    audioAlternative: {fileID: 0}
+    audio: {fileID: 8300000, guid: b8310e0f59c48db4a8c0e609929713e1, type: 3}
+    audioAlternative: {fileID: 8300000, guid: 8cccf6644b2ad154eb8563ab788269a8, type: 3}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: 015448271cd5bcc4dbffe5e6487cc87b, type: 2}
     ExitAnim: {fileID: 0}
