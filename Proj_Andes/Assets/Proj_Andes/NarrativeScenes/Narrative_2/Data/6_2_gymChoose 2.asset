@@ -16,13 +16,11 @@ MonoBehaviour:
   - characterType: 4
     autoContinueOnClickDialog: 1
     changeToSequence: {fileID: 11400000, guid: 5a98a17c13a968149aa3ce9769425134, type: 2}
-    changeToSequenceStartDialogIdx: 5
+    changeToSequenceStartDialogIdx: 6
     changeToSequenceResponseIdxToGrayOut: 1
     text: "Lo siento, ese ya lo escogi\xF3 Juana."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: f4059b200d607604594c6f5b807d83fe, type: 3}
     audioAlternative: {fileID: 0}

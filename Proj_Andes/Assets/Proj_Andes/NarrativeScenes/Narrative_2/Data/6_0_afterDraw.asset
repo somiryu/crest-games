@@ -136,10 +136,78 @@ MonoBehaviour:
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
     responses: []
-    audio: {fileID: 8300000, guid: d513e257e15b61a4dab183eff2581b4f, type: 3}
+    audio: {fileID: 8300000, guid: 881271c4b30c3f1488fd6433c40562da, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 11400000, guid: d304568d063246a4f93c5081789f75c4, type: 2}
+    ExitAnim: {fileID: 0}
+  - characterType: 0
+    autoContinueOnClickDialog: 1
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Aqu\xED est\xE1n las opciones \xBFcu\xE1l quieres?"
+    textAlternative: 
+    responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0c3dc869d1b9547409be13a4a759c19e, type: 3}
+    responses:
+    - response: "Bal\xF3n"
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 0ae72c8a4132bbe4daf410fee5f20508, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: c5c74847b1811b94f85c1312fb0ba5d4, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
+    - response: Cuerda
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 4f667cadd1a7a4048a4d79ff06666114, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 8b1726e1cb72d1847a6e68027b572183, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
+    - response: Juguete
+      responseAlternative: 
+      responseImage: {fileID: 21300000, guid: 43f522dac1955f2419eabe9e780e07cb, type: 3}
+      responseAudio: {fileID: 0}
+      responseAudioAlternative: {fileID: 0}
+      dataAfterResponse: {fileID: 11400000, guid: 0a9344e9cd523d4428992b68b261ae51, type: 2}
+      analyticInfo:
+        mainCategory: 0
+        empathySubCategory: 0
+        agressionSubCategory: 0
+        conflictSubCategory: 0
+        emotionSubCategory: 0
+        inRelationTo: 0
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
+    audio: {fileID: 8300000, guid: d513e257e15b61a4dab183eff2581b4f, type: 3}
+    audioAlternative: {fileID: 0}
+    EnterAnim: {fileID: 0}
+    IdleAnim: {fileID: 11400000, guid: 692b430f7ca9af94195a24e2c832d266, type: 2}
     ExitAnim: {fileID: 0}
   - characterType: 0
     autoContinueOnClickDialog: 1
