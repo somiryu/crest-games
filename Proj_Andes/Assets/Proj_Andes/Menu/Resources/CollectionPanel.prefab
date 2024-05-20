@@ -853,7 +853,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fcbba7f4ae7ec74419eef0aa60708ae9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6d89d4bbf30be242851755514e2eb59, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1940,6 +1940,7 @@ MonoBehaviour:
   leftArrow: {fileID: 0}
   rightArrow: {fileID: 0}
   scrollbar: {fileID: 4142207108209327377}
+  thisIsYourCollAudio: {fileID: 0}
   scrollSpeed: 2
   monstersUIInCollection:
     itemPrefab: {fileID: 5709938591456280814, guid: 9a2f725d671cefb478c186ac3d3c218d, type: 3}

@@ -29,6 +29,7 @@ public static class DatabaseManager
     public static bool userListDone = false;
     public static bool savingIsDone = false;
     public static bool UserDeletionCompleted = false;
+    public static float currLoadProgress = 0;
 
     public static int testAmountsSavedToDataBase = 0;
     public static int pendingSyncronizedUsersAmount = 0;
@@ -103,7 +104,6 @@ public static class DatabaseManager
 
             if (pendingUserDatasToUpload.Count > 0)
             {
-                Debug.Log("Merged local users with remote users");
                 for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
                 {
                     var currPending = pendingUserDatasToUpload[i];
@@ -111,10 +111,7 @@ public static class DatabaseManager
                     if (idxFound != -1) userDatas[idxFound] = currPending;
                     else userDatas.Add(currPending);
                 }
-                pendingUserDatasToUpload.Clear();
-				PlayerPrefs.DeleteKey(pendingUserJSONKey);
 			}
-
 
 			userListDone = true;
         });
@@ -187,11 +184,6 @@ public static class DatabaseManager
 
         AddSessionsToPendingSessions(newCollections);
 
-        if (!hasInternetConnection)
-        {
-            AddPendingUserData(currUserData);
-        }
-
 		//Save locally
 		Debug.Log("Saving to local");
 		//all users
@@ -226,19 +218,30 @@ public static class DatabaseManager
 
         Debug.LogWarning("IS SAVING TO DATABASE");
 
+        currLoadProgress = 0;
+        var currLoadedObjs = 0;
+        var totalLoadNeeded = pendingUserDatasToUpload.Count + pendingSessionsToUpload.Count;
+
 		testAmountsSavedToDataBase = 0;
 
-		for (int i = 0; i < userDatas.Count; i++)
+
+		for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
         {
-            //removed name form document ID
-            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(userDatas[i].id_jugador);      
-            await docRef.SetAsync(userDatas[i]);
+            currLoadedObjs++;
+            currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
+            var updatedData = DatabaseManager.userDatas.Find(x => x.id_jugador == pendingUserDatasToUpload[i].id_jugador);
+            Debug.Log("Will save user: " + updatedData.pin);
+
+            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(updatedData.id_jugador);      
+            await docRef.SetAsync(updatedData);
         }
 
 
         foreach(var GameDatas in pendingSessionsToUpload)
         {
-            CollectionReference collRef = db.Collection(GameDatas.Key);
+			currLoadedObjs++;
+			currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
+			CollectionReference collRef = db.Collection(GameDatas.Key);
             Debug.Log("Syncing GAME ID: " + GameDatas.Key);
             if(GameDatas.Key == DataIds.test)
             {
@@ -261,7 +264,9 @@ public static class DatabaseManager
             PlayerPrefs.DeleteKey(pendingSessionsJSONKey);
         }
 
-        savingIsDone = true;
+        currLoadProgress = 1;
+
+		savingIsDone = true;
         Debug.Log("Finished saving to database");
 
 	}

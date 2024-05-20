@@ -17,7 +17,7 @@ MonoBehaviour:
     scenePath: Assets/Proj_Andes/MiniGames/CntrlImpulsos_VoiceStarOrFlower/Scenes/CntrlImpulsos_VoiceStarOrFlower.unity
   gameType: 2
   isLastFlowerAndCloudGameOnBatch: 1
-  timePerChoice: 5
+  timePerChoice: 3
   maxRounds: 14
   initialCoins: 0
   coinsOnCorrectAnswer: 0
