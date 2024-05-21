@@ -24,8 +24,6 @@ MonoBehaviour:
       se va, Alex pasa por tu lado.\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 40ba7d335df7c354cb62ff435c05fa7b, type: 3}
     audioAlternative: {fileID: 0}
@@ -40,8 +38,6 @@ MonoBehaviour:
     text: Eso te pasa por lento y no fijarte por donde caminas! Ja ja
     textAlternative: Eso te pasa por lenta y no fijarte por donde caminas! Ja ja
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: e196782cb01397745a2e244766bdcf35, type: 3}
     audioAlternative: {fileID: 8300000, guid: 7ff5ea194e0cede4eb2c3be7f6f87c27, type: 3}
@@ -56,8 +52,6 @@ MonoBehaviour:
     text: "Debes actuar r\xE1pidamente, \xBFqu\xE9 haces?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e6ad05bf63bdbd54688ca3c02d0d347d, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses:
     - response: "Le digo que no me moleste m\xE1s.\r"
       responseAlternative: 
@@ -72,13 +66,16 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: "Me levanto y le grito a Alex que m\xE1s lento es el"
       responseAlternative: "Me levanto y le grito a Alex que m\xE1s lenta es ella"
       responseImage: {fileID: 21300000, guid: 9ec3700dd99c36840bc1532cdd1b530b, type: 3}
       responseAudio: {fileID: 8300000, guid: e0532beb5d49a584da69ef9c46738b46, type: 3}
-      responseAudioAlternative: {fileID: 0}
+      responseAudioAlternative: {fileID: 8300000, guid: 3b7f305a6383b8045af4d710dac660ce, type: 3}
       dataAfterResponse: {fileID: 0}
       analyticInfo:
         mainCategory: 2
@@ -87,8 +84,11 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: Hago como si no hubiera escuchado y no le digo nada
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 16f506f356cf7e74f84febc28e5f0912, type: 3}
@@ -102,8 +102,11 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 0
         inRelationTo: 0
-        emotionsAnalyticsValues:
-          customValues: []
+        customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     audio: {fileID: 8300000, guid: 6ec137970277bd347b50135b259c6ca5, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
@@ -117,8 +120,6 @@ MonoBehaviour:
     text: "Alex se aleja ri\xE9ndose\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 7b50465e7bcaa614ea7206773f088b67, type: 3}
     audioAlternative: {fileID: 0}

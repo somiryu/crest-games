@@ -50,12 +50,12 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private bool audioIsDone = false;
     private DialogueSequenceData pendingSequenceToShow;
     private DialogueResponse preselectedResponse;
-	[NonSerialized] public bool preselectedResponseAudioIsDone = false;
+    [NonSerialized] public bool preselectedResponseAudioIsDone = false;
 
 
     public bool SaveNavSequence = true;
     public bool doneResponsePreview;
-    
+
 
     public bool IsShowing => isShowing;
     public dialogLineState state = dialogLineState.NotShowing;
@@ -84,7 +84,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
         = new Dictionary<DialoguesResponsesDisplayerUI, DialoguesResponsesDisplayerUI>();
 
 
-	private StringBuilder currText = new StringBuilder();
+    private StringBuilder currText = new StringBuilder();
 
     public DialogueData CurrDialog => dialoguesToShow.dialogues[currShowingIdx];
     public int CurrDialogIdx => currShowingIdx;
@@ -95,22 +95,26 @@ public class DialoguesDisplayerUI : MonoBehaviour
     [NonSerialized]
     public List<NarrativeNavigationNode> choicesTree = new List<NarrativeNavigationNode>();
 
-	/// <summary>
-	/// The user data manager writes this values if it detects that there's a saved narrativeindex that we should push
-	/// </summary>
-	public static List<NarrativeNavigationNode> CheckPointTreeToConsume;
+    /// <summary>
+    /// The user data manager writes this values if it detects that there's a saved narrativeindex that we should push
+    /// </summary>
+    public static List<NarrativeNavigationNode> CheckPointTreeToConsume;
 
-	private void OnValidate() {
-        if (forceDialogeAppear) {
-            if (Application.isPlaying) {
+    private void OnValidate()
+    {
+        if (forceDialogeAppear)
+        {
+            if (Application.isPlaying)
+            {
                 ShowDialogueSequence(dialoguesToShow);
             }
             forceDialogeAppear = false;
         }
     }
 
-    private void Awake() {
-        if(instance != null && instance != this) DestroyImmediate(instance);
+    private void Awake()
+    {
+        if (instance != null && instance != this) DestroyImmediate(instance);
         instance = this;
         canSkipAudio.isOn = false;
 
@@ -118,19 +122,19 @@ public class DialoguesDisplayerUI : MonoBehaviour
         hasResponse = true;
         fullScreenInvisibleBtn.onClick.AddListener(OnFullScreenInvisibleBtnClicked);
         repeatBtn.onClick.AddListener(() => ShowCurrDialog(true));
-		choicesTree.Clear();
+        choicesTree.Clear();
         skipSceneBtn.gameObject.SetActive(activeSkipSceneBtn && !AppSkipSceneButton.ActiveDebugGlobalUI);
         skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
 
         if (!canSkipAudio.gameObject.activeSelf) canSkipAudio.isOn = false;
 
         narrativeSceneItem.ResetCurrentAnalytics();
-	}
+    }
     public bool OnWantsToChangeDialogFromTrigger()
     {
         if (!audioIsDone) return false;
         if (state != dialogLineState.Idle) return false;
-        
+
         if (isAppearingTxt)
         {
             forceEndAppearingTxt = true;
@@ -142,35 +146,35 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
 
         return true;
-	}
+    }
 
     private void OnFullScreenInvisibleBtnClicked()
-	{
-        
-		if (isAppearingTxt)
-		{
+    {
+
+        if (isAppearingTxt)
+        {
             forceEndAppearingTxt = true;
-		}
-	}
+        }
+    }
 
     private void OnClickToContinueBtn()
     {
-		if (AutoContinueActive() && audioIsDone)
-		{
-			//We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
-			hasPendingLineChange = true;
-			if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepSkipButton))
-			{
-				TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.stepSkipButton);
-			}
-		}
-	}
+        if (AutoContinueActive() && audioIsDone)
+        {
+            //We want to wait until the exit anim is done, if there's one, that's way there's no inmediate change in here
+            hasPendingLineChange = true;
+            if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.stepSkipButton))
+            {
+                TutorialManager.Instance.TurnOffTutorialStep(tutorialSteps.stepSkipButton);
+            }
+        }
+    }
 
     bool AutoContinueActive()
     {
         if (currShowingIdx == -1) return false;
-		var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
-        return currDialogue.autoContinueOnClickDialog && 
+        var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
+        return currDialogue.autoContinueOnClickDialog &&
             (currDialogue.responses.Length == 0 || currDialogue.AllResponsesWereGrayOut(grayOutResponseIdxes));
     }
 
@@ -179,10 +183,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
     /// </summary>
     public bool SetPendingSequence(DialogueSequenceData newDialogSequence)
     {
-		if (!audioIsDone) return false;
-		if (state != dialogLineState.Idle) return false;
+        if (!audioIsDone) return false;
+        if (state != dialogLineState.Idle) return false;
 
-		pendingSequenceToShow = newDialogSequence;
+        pendingSequenceToShow = newDialogSequence;
         hasPendingLineChange = true;
 
         return true;
@@ -200,19 +204,19 @@ public class DialoguesDisplayerUI : MonoBehaviour
                        _responsePickedIdx: lastPickedResponseIdx,
                        _nextDialogCustomStartIdx: customStartIdx);
 
-			Debug.Log("Registering new narr navitagation from dialogLine idx: " + narrNavigation.sourceDialogIdx);
-			Debug.Log("Response picked: " + narrNavigation.responsePickedIdx);
-			Debug.Log("Next dialog custom start idx: " + narrNavigation.nextDialogCustomStartIdx);
+            Debug.Log("Registering new narr navitagation from dialogLine idx: " + narrNavigation.sourceDialogIdx);
+            Debug.Log("Response picked: " + narrNavigation.responsePickedIdx);
+            Debug.Log("Next dialog custom start idx: " + narrNavigation.nextDialogCustomStartIdx);
 
-			choicesTree.Add(narrNavigation);
+            choicesTree.Add(narrNavigation);
         }
-		//This is the first secuence of this scene, check if we have a pending checkpoint info
-		else if(CheckPointTreeToConsume != null && CheckPointTreeToConsume.Count > 0)
-		{
+        //This is the first secuence of this scene, check if we have a pending checkpoint info
+        else if (CheckPointTreeToConsume != null && CheckPointTreeToConsume.Count > 0)
+        {
             newDialogues = LoadCheckPointInfo(newDialogues);
         }
 
-		pendingSequenceToShow = null;
+        pendingSequenceToShow = null;
         dialoguesToShow = newDialogues;
         currShowingIdx = customStartIdx;
         customStartIdx = -1;
@@ -224,43 +228,45 @@ public class DialoguesDisplayerUI : MonoBehaviour
     }
 
 
-	DialogueSequenceData LoadCheckPointInfo(DialogueSequenceData startSequence)
+    DialogueSequenceData LoadCheckPointInfo(DialogueSequenceData startSequence)
     {
         var currSequence = startSequence;
-        for (int i = 0; i < CheckPointTreeToConsume.Count -1; i++)
+        for (int i = 0; i < CheckPointTreeToConsume.Count - 1; i++)
         {
             currSequence = GetTargetSequence(currSequence, CheckPointTreeToConsume[i]);
         }
         //-1 as we will call the nextDialogue after this
         customStartIdx = CheckPointTreeToConsume[CheckPointTreeToConsume.Count - 1].sourceDialogIdx - 1;
-		choicesTree = new List<NarrativeNavigationNode>(CheckPointTreeToConsume);
+        choicesTree = new List<NarrativeNavigationNode>(CheckPointTreeToConsume);
         //The last position was an unfinished movement, so remove that one
         choicesTree.RemoveAt(choicesTree.Count - 1);
-		CheckPointTreeToConsume.Clear();
+        CheckPointTreeToConsume.Clear();
         return currSequence;
     }
     DialogueSequenceData GetTargetSequence(DialogueSequenceData startSequence, NarrativeNavigationNode navInfo)
     {
         var fromDialogLine = startSequence.dialogues[navInfo.sourceDialogIdx];
-        if(navInfo.responsePickedIdx != -1) 
+        if (navInfo.responsePickedIdx != -1)
         {
             var targetResponse = fromDialogLine.responses[navInfo.responsePickedIdx];
-            if(targetResponse.dataAfterResponse != null) return targetResponse.dataAfterResponse;
+            if (targetResponse.dataAfterResponse != null) return targetResponse.dataAfterResponse;
             else return fromDialogLine.changeToSequence;
         }
         else return fromDialogLine.changeToSequence;
-	}
+    }
 
-    public void NextDialogue() {
-        
+    public void NextDialogue()
+    {
+
         DialogueData lastPlayedDialog = null;
-        if(currShowingIdx > -1 && currShowingIdx < dialoguesToShow.dialogues.Length) lastPlayedDialog = dialoguesToShow.dialogues[currShowingIdx];
+        if (currShowingIdx > -1 && currShowingIdx < dialoguesToShow.dialogues.Length) lastPlayedDialog = dialoguesToShow.dialogues[currShowingIdx];
 
         currShowingIdx++;
-        if(dialoguesToShow == null || currShowingIdx >= dialoguesToShow.dialogues.Length) {
+        if (dialoguesToShow == null || currShowingIdx >= dialoguesToShow.dialogues.Length)
+        {
             DialogueSequenceData nextSequence = null;
             customStartIdx = -1;
-            if(dialoguesToShow != null)
+            if (dialoguesToShow != null)
             {
                 nextSequence = lastPlayedDialog.changeToSequence;
                 if (lastPlayedDialog.changeToSequenceStartDialogIdx != -1)
@@ -276,7 +282,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
                 }
             }
             HideDialogues(nextSequence == null);
-            if(nextSequence != null)
+            if (nextSequence != null)
             {
                 ShowDialogueSequence(nextSequence);
             }
@@ -288,49 +294,49 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private void ShowCurrDialog(bool SkipEnterAnim = false)
     {
         lastDisplayedDialogLineIdx = currShowingIdx;
-		var curr = dialoguesToShow.dialogues[currShowingIdx];
+        var curr = dialoguesToShow.dialogues[currShowingIdx];
 
-		if (CurrDialog.AllResponsesWereGrayOut(grayOutResponseIdxes))
-		{
-			grayOutResponseIdxes.Clear();
-			ShowDialogueSequence(CurrDialog.changeToSequence);
-			return;
-		}
+        if (CurrDialog.AllResponsesWereGrayOut(grayOutResponseIdxes))
+        {
+            grayOutResponseIdxes.Clear();
+            ShowDialogueSequence(CurrDialog.changeToSequence);
+            return;
+        }
 
-		repeatBtn.gameObject.SetActive(false);
-		skipDialogueTutImg.gameObject.SetActive(false);        
+        repeatBtn.gameObject.SetActive(false);
+        skipDialogueTutImg.gameObject.SetActive(false);
 
         //Clean old responses if needed
         if (currResponsesDisplayer != null) currResponsesDisplayer.Hide();
 
 
         //Image and name of character
-		var currCharConfigs = curr.characterType.GetCharacterConfig();
-		characterImageContainer.SetActive(currCharConfigs.image != null);
-		characterImage.sprite = currCharConfigs.image;
-		nameTxtContainer.SetActive(!string.IsNullOrEmpty(currCharConfigs.name));
-		nameTxt.SetText(currCharConfigs.name);
+        var currCharConfigs = curr.characterType.GetCharacterConfig();
+        characterImageContainer.SetActive(currCharConfigs.image != null);
+        characterImage.sprite = currCharConfigs.image;
+        nameTxtContainer.SetActive(!string.IsNullOrEmpty(currCharConfigs.name));
+        nameTxt.SetText(currCharConfigs.name);
 
         currDialogueCharacters = SelectTextByGender(curr).ToCharArray();
-      
-        dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
-		dialogueTxt.SetText("");
 
-		if (currAnimSequence != null) StopCoroutine(currAnimSequence);
-		currAnimSequence = DialogAnimSequence(curr, SkipEnterAnim);
-		StartCoroutine(currAnimSequence);
-	}
+        dialogueTxtContainer.SetActive(currDialogueCharacters.Length > 0);
+        dialogueTxt.SetText("");
+
+        if (currAnimSequence != null) StopCoroutine(currAnimSequence);
+        currAnimSequence = DialogAnimSequence(curr, SkipEnterAnim);
+        StartCoroutine(currAnimSequence);
+    }
 
     private DialoguesResponsesDisplayerUI GetResponseDisplayer(DialogueData dialogueData)
     {
-        if(dialogueData.responses.Length == 0) return null;
-        if(dialogueData.responsesDisplayerPrefab == null)
+        if (dialogueData.responses.Length == 0) return null;
+        if (dialogueData.responsesDisplayerPrefab == null)
         {
             Debug.LogError("You have responses, but you haven't set a response displayer on dialogue data" + dialogueData.responses[0].response, CurrDialoguesBeingShown);
             return null;
         }
         //Already cached
-        if(cachedResponseDisplayers.TryGetValue(dialogueData.responsesDisplayerPrefab, out var responsesDisplayerUI))
+        if (cachedResponseDisplayers.TryGetValue(dialogueData.responsesDisplayerPrefab, out var responsesDisplayerUI))
         {
             return responsesDisplayerUI;
         }
@@ -342,7 +348,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     }
 
     public void StartTextAppear()
-	{
+    {
         isAppearingTxt = true;
         fullScreenInvisibleBtn.gameObject.SetActive(true);
         forceEndAppearingTxt = false;
@@ -355,7 +361,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
             HideDialogues(false);
             return;
         }
-        if (isAppearingTxt) AppearText(); 
+        if (isAppearingTxt) AppearText();
     }
 
     private IEnumerator currAnimSequence;
@@ -363,7 +369,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     private IEnumerator DialogAnimSequence(DialogueData dialogueData, bool skipEnterAnim = false)
     {
 
-		state = dialogLineState.Entering;
+        state = dialogLineState.Entering;
         if (dialogueData.EnterAnim != null && !skipEnterAnim)
         {
             timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
@@ -376,10 +382,10 @@ public class DialoguesDisplayerUI : MonoBehaviour
         //Start playing audio
         var audio = SelectAudioByGender(dialogueData);
 
-		continueBtn.gameObject.SetActive(false);
+        continueBtn.gameObject.SetActive(false);
 
 
-		if (audio != null)
+        if (audio != null)
         {
             audioPlayer.clip = audio;
             audioPlayer.Play();
@@ -411,11 +417,11 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
 
 
-		repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || audio != null);
+        repeatBtn.gameObject.SetActive(!string.IsNullOrEmpty(dialogueData.text) || audio != null);
 
 
-		//Get new response handler
-		lastPickedResponseIdx = -1;
+        //Get new response handler
+        lastPickedResponseIdx = -1;
         preselectedResponse = null;
         if (dialogueData.responses.Length > 0)
         {
@@ -441,14 +447,15 @@ public class DialoguesDisplayerUI : MonoBehaviour
                         if (currResponse.responseAudio == null) continue;
                         Debug.Log("playing " + i);
                         currResponsesDisplayer.HighlightResponse(currResponse);
-                        audioPlayer.clip = currResponse.responseAudio;
+                        var currPrevAudio = SelectAudioResponseByGender(currResponse);
+                        audioPlayer.clip = currPrevAudio;
                         audioPlayer.Play();
                         yield return new WaitForSeconds(audioPlayer.clip.length);
                     }
-					currResponsesDisplayer.HighlightResponse(null);
+                    currResponsesDisplayer.HighlightResponse(null);
                 }
                 doneResponsePreview = true;
-				currResponsesDisplayer.SetCanInteractWithBtns(true);
+                currResponsesDisplayer.SetCanInteractWithBtns(true);
             }
         }
         else
@@ -461,44 +468,44 @@ public class DialoguesDisplayerUI : MonoBehaviour
         if (audioIsDone && !hasResponse)
         {
             continueBtn.gameObject.SetActive(true);
-			skipDialogueTutImg.gameObject.SetActive(true);
-		}
+            skipDialogueTutImg.gameObject.SetActive(true);
+        }
 
-		currResponseTime = 0;
+        currResponseTime = 0;
 
-		while (!hasPendingLineChange)
+        while (!hasPendingLineChange)
         {
-			currResponseTime += Time.deltaTime;
+            currResponseTime += Time.deltaTime;
 
-			if (preselectedResponse != null)
+            if (preselectedResponse != null)
             {
                 preselectedResponseAudioIsDone = !audioPlayer.isPlaying;
                 if (canSkipAudio.isOn) preselectedResponseAudioIsDone = true;
-				currResponsesDisplayer.ActiveConfirmationButton(preselectedResponseAudioIsDone);
+                currResponsesDisplayer.ActiveConfirmationButton(preselectedResponseAudioIsDone);
             }
             yield return null;
         }
 
 
-		state = dialogLineState.Exiting;
-        if(dialogueData.ExitAnim != null)
+        state = dialogLineState.Exiting;
+        if (dialogueData.ExitAnim != null)
         {
-			timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
-			timeLinePlayer.playableAsset = dialogueData.ExitAnim;
+            timeLinePlayer.extrapolationMode = DirectorWrapMode.None;
+            timeLinePlayer.playableAsset = dialogueData.ExitAnim;
             timeLinePlayer.Play();
-			while (timeLinePlayer.state == PlayState.Playing) yield return null;
-		}
+            while (timeLinePlayer.state == PlayState.Playing) yield return null;
+        }
         state = dialogLineState.NotShowing;
         hasPendingLineChange = false;
         currAnimSequence = null;
 
         if (!string.IsNullOrEmpty(currResponseChoiceAnalyticIDRta))
         {
-			Debug.Log("cur1 " + currResponseChoiceAnalyticIDRta + " " + currResponseAnalyticResponse);
-			Debug.Log("cur2 " + currResponseChoiceAnalyticIDCod + " " + currResponseAnalyticResponseVal);
-			Debug.Log("cur3 " + currResponseChoiceAnalyticIDTm + " " + currResponseTime);
+            Debug.Log("cur1 " + currResponseChoiceAnalyticIDRta + " " + currResponseAnalyticResponse);
+            Debug.Log("cur2 " + currResponseChoiceAnalyticIDCod + " " + currResponseAnalyticResponseVal);
+            Debug.Log("cur3 " + currResponseChoiceAnalyticIDTm + " " + currResponseTime);
 
-			narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDRta, currResponseAnalyticResponse);
+            narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDRta, currResponseAnalyticResponse);
             narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDCod, currResponseAnalyticResponseVal);
             narrativeSceneItem.itemAnalytics.Add(currResponseChoiceAnalyticIDTm, currResponseTime);
 
@@ -518,18 +525,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public void OnClickResponse(DialogueResponse responseClicked)
     {
         if (!audioIsDone) return;
-        
+
         currResponsesDisplayer.ActiveConfirmationButton(doneResponsePreview);
         //Response set for confirmation (You need to double click it to confirm)
         preselectedResponseAudioIsDone = false;
         var currResponseAudio = responseClicked.responseAudio;
 
-		if (responseClicked.responseAudioAlternative != null)
+        if (responseClicked.responseAudioAlternative != null)
         {
-			currResponseAudio = UserDataManager.CurrUser.sexo == UserSex.Mujer ? responseClicked.responseAudioAlternative : responseClicked.responseAudio;
-		}
-		audioPlayer.clip = currResponseAudio;
-        if(audioPlayer.clip != null) audioPlayer.Play();
+            currResponseAudio = UserDataManager.CurrUser.sexo == UserSex.Mujer ? responseClicked.responseAudioAlternative : responseClicked.responseAudio;
+        }
+        audioPlayer.clip = currResponseAudio;
+        if (audioPlayer.clip != null) audioPlayer.Play();
         preselectedResponse = responseClicked;
 
     }
@@ -584,7 +591,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
     private int AmiQuestionsCount = -1;
     private int EneQuestionsCount = -1;
-    
+
 
     public int GetQuestionIdxFor(NarrativeAnalyicsInfo info, bool isEmptAmi = false)
     {
@@ -609,15 +616,16 @@ public class DialoguesDisplayerUI : MonoBehaviour
                 return ConfQuestionsCount;
             case NarrativeAnalyticCategory.EmoBas:
                 EmoBasQuestionsCount++;
-                return EmoBasQuestionsCount;            
+                return EmoBasQuestionsCount;
             case NarrativeAnalyticCategory.EmoComp:
                 EmoCompQuestionsCount++;
                 return EmoCompQuestionsCount;
             default: return -1;
         }
-	}
+    }
 
-    public void AppearText() {
+    public void AppearText()
+    {
         var currDialogue = dialoguesToShow.dialogues[currShowingIdx];
         dialogueTxt.SetText(currText.ToString());
         appearTimer += Time.deltaTime;
@@ -629,16 +637,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
             if (currCharProgress >= currDialogueCharacters.Length) forceEndAppearingTxt = true;
             else currText.Append(currDialogueCharacters[currCharProgress]);
         }
-       
-        if (forceEndAppearingTxt) {
+
+        if (forceEndAppearingTxt)
+        {
             isAppearingTxt = false;
             dialogueTxt.SetText(SelectTextByGender(currDialogue));
             var turnOnAutoSkip = AutoContinueActive();
-            fullScreenInvisibleBtn.gameObject.SetActive(turnOnAutoSkip);       
+            fullScreenInvisibleBtn.gameObject.SetActive(turnOnAutoSkip);
         }
     }
 
-    public void HideDialogues(bool GoToNextScene) {
+    public void HideDialogues(bool GoToNextScene)
+    {
         isAppearingTxt = false;
         isShowing = false;
         dialoguesToShow = null;
@@ -649,9 +659,9 @@ public class DialoguesDisplayerUI : MonoBehaviour
         {
             SaveAnalytics();
             UnloadAllImages();
-			narrativeSceneItem.OnSequenceOver();
+            narrativeSceneItem.OnSequenceOver();
         }
-	}
+    }
 
 
     public void UnloadAllImages()
@@ -659,17 +669,17 @@ public class DialoguesDisplayerUI : MonoBehaviour
         var allImages = NarrativeSceneManager.Instance.allSpritesUsed;
         for (int i = 0; i < allImages.Length; i++)
         {
-			if (allImages[i] == null)
+            if (allImages[i] == null)
             {
                 continue;
             }
-            if (allImages[i].texture != null) 
+            if (allImages[i].texture != null)
             {
-				Resources.UnloadAsset(allImages[i].texture);
-			}
-			Resources.UnloadAsset(allImages[i]);
-		}
-		var allTimeLines = NarrativeSceneManager.Instance.allAnimClips;
+                Resources.UnloadAsset(allImages[i].texture);
+            }
+            Resources.UnloadAsset(allImages[i]);
+        }
+        var allTimeLines = NarrativeSceneManager.Instance.allAnimClips;
         for (int i = 0; i < allTimeLines.Length; i++)
         {
             if (allTimeLines[i] == null) continue;
@@ -680,7 +690,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public static void SaveAnalytics()
     {
         if (instance == null) return;
-		var analytics = Instance.narrativeSceneItem.itemAnalytics;
+        var analytics = Instance.narrativeSceneItem.itemAnalytics;
         if (analytics != null && analytics.Count > 0)
         {
 
@@ -688,24 +698,24 @@ public class DialoguesDisplayerUI : MonoBehaviour
             if (NarrativeSceneManager.Instance.NarrativeIdx == 1) collectionID = DataIds.Narratives2;
             else if (NarrativeSceneManager.Instance.NarrativeIdx == 2) collectionID = DataIds.Narratives3;
 
-			UserDataManager.SaveUserAnayticsPerGame(
+            UserDataManager.SaveUserAnayticsPerGame(
                 CollectionName: collectionID,
                 itemAnalytics: Instance.narrativeSceneItem.itemAnalytics,
                 shouldUseTestID: true);
         }
-	}
+    }
 
     public List<NarrativeNavigationNode> GetCurrNavigationNodes()
     {
-		//Storing the last node so that we know on which dialog line we were at the moment this history was asked for
-		choicesTree.Add(new NarrativeNavigationNode(lastDisplayedDialogLineIdx));
+        //Storing the last node so that we know on which dialog line we were at the moment this history was asked for
+        choicesTree.Add(new NarrativeNavigationNode(lastDisplayedDialogLineIdx));
         return choicesTree;
     }
 
     public string SelectTextByGender(DialogueData curr)
     {
         var text = curr.text;
-        if(UserDataManager.CurrUser.sexo == UserSex.Mujer && !string.IsNullOrEmpty(curr.textAlternative))
+        if (UserDataManager.CurrUser.sexo == UserSex.Mujer && !string.IsNullOrEmpty(curr.textAlternative))
         {
             text = curr.textAlternative;
         }
@@ -716,9 +726,18 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public AudioClip SelectAudioByGender(DialogueData curr)
     {
         var audio = curr.audio;
-        if(UserDataManager.CurrUser.sexo == UserSex.Mujer && curr.audioAlternative != null)
+        if (UserDataManager.CurrUser.sexo == UserSex.Mujer && curr.audioAlternative != null)
         {
             audio = curr.audioAlternative;
+        }
+        return audio;
+    }
+    public AudioClip SelectAudioResponseByGender(DialogueResponse curr)
+    {
+        var audio = curr.responseAudio;
+        if (UserDataManager.CurrUser.sexo == UserSex.Mujer && curr.responseAudioAlternative != null)
+        {
+            audio = curr.responseAudioAlternative;
         }
         return audio;
     }
