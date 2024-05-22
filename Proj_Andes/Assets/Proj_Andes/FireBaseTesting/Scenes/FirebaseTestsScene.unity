@@ -11078,7 +11078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "C\xF3digo de la instituci\xF3n"
+  m_text: "C\xF3digo de proyecto"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14135,7 +14135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Inserta el c\xF3digo de tu instituci\xF3n"
+  m_text: "Inserta el c\xF3digo de proyecto"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
   m_sharedMaterial: {fileID: -2667132593029464860, guid: df916dc1a1630e74bb40031284c64ff9, type: 2}
@@ -21445,7 +21445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1404287050
 RectTransform:
   m_ObjectHideFlags: 0

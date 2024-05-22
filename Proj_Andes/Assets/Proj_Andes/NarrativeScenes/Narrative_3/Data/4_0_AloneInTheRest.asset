@@ -22,8 +22,6 @@ MonoBehaviour:
     textAlternative: "\xBFQu\xE9 sientes en ese momento en que te quedas sola en
       el recreo?"
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses:
     - response: RABIA
       responseAlternative: 
@@ -39,6 +37,10 @@ MonoBehaviour:
         emotionSubCategory: 4
         inRelationTo: 0
         customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: MIEDO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -53,6 +55,10 @@ MonoBehaviour:
         emotionSubCategory: 3
         inRelationTo: 0
         customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: "ALEGR\xCDA"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 2f8adbdf4f061474e8de42501e487e48, type: 3}
@@ -67,6 +73,10 @@ MonoBehaviour:
         emotionSubCategory: 2
         inRelationTo: 0
         customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: TRISTEZA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 87046aa62dfe3b3439f1f7deb0b63cca, type: 3}
@@ -81,6 +91,10 @@ MonoBehaviour:
         emotionSubCategory: 1
         inRelationTo: 0
         customEmotionValue: 1
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: "NO S\xC9"
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 9b2411cc797a5ab4588b1f1e98cc986b, type: 3}
@@ -95,6 +109,10 @@ MonoBehaviour:
         emotionSubCategory: 10
         inRelationTo: 0
         customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     audio: {fileID: 8300000, guid: f581100083bf0eb479168fd637e3807d, type: 3}
     audioAlternative: {fileID: 8300000, guid: e448df789bf85144f8636ab2538dc009, type: 3}
     EnterAnim: {fileID: 0}
@@ -108,8 +126,6 @@ MonoBehaviour:
     text: "El recreo no estuvo tan ch\xE9vere, pero ya finaliz\xF3"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 4ec71455520c7854ca2b4dd110fd401d, type: 3}
     audioAlternative: {fileID: 0}
@@ -121,12 +137,10 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "Llegas a tu sal\xF3n y all\xED est\xE1 el profe de educaci\xF3n f\xEDsica.
+    text: "Llegas a tu sal\xF3n y all\xED est\xE1 la profe de educaci\xF3n f\xEDsica.
       Les pide a todos que salgan y les dice que van a hacer una actividad libre."
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 93527b5eb82ed764e87ccb2cc74dd854, type: 3}
     audioAlternative: {fileID: 0}
@@ -142,8 +156,6 @@ MonoBehaviour:
       seleccionen tendr\xE1n que hacer una actividad. R\xE1pido, \xA1escojan uno!"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses: []
     audio: {fileID: 8300000, guid: 566939eff23004d4a915190a0edac030, type: 3}
     audioAlternative: {fileID: 0}
@@ -158,8 +170,6 @@ MonoBehaviour:
     text: "\xBFCu\xE1l escoges?"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: 0c3dc869d1b9547409be13a4a759c19e, type: 3}
-    analyticChoiceID: 
-    analyticTimeID: 
     responses:
     - response: AROS
       responseAlternative: 
@@ -175,6 +185,10 @@ MonoBehaviour:
         emotionSubCategory: 0
         inRelationTo: 0
         customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: LAZO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: f3ac91e4e24310b4798fba4183b0e936, type: 3}
@@ -189,6 +203,10 @@ MonoBehaviour:
         emotionSubCategory: 0
         inRelationTo: 0
         customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     - response: RAQUETA
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 35c385e10a8b5c34b9aff29915c9739f, type: 3}
@@ -203,6 +221,10 @@ MonoBehaviour:
         emotionSubCategory: 0
         inRelationTo: 0
         customEmotionValue: 0
+        hasCustomID: 0
+        codCustomID: 
+        rtaCustomID: 
+        tmCustomID: 
     audio: {fileID: 8300000, guid: 4699d2b1941557b45974a77fb254a420, type: 3}
     audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
