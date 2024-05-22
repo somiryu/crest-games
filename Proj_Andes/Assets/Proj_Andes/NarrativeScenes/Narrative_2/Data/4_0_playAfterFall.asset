@@ -35,8 +35,8 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: Eso te pasa por lento y no fijarte por donde caminas! Ja ja
-    textAlternative: Eso te pasa por lenta y no fijarte por donde caminas! Ja ja
+    text: 'Ja ja! Eso te pasa por lento y no fijarte por donde caminas! '
+    textAlternative: 'Ja ja! Eso te pasa por lenta y no fijarte por donde caminas! '
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e93dd9c5fed5d094eb40313746d14dad, type: 3}
     responses: []
     audio: {fileID: 8300000, guid: e196782cb01397745a2e244766bdcf35, type: 3}
