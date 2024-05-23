@@ -14,51 +14,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - characterType: 0
+    autoContinueOnClickDialog: 0
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "\xA1Son\xF3 la campana! Vamos, r\xE1pido..."
-    audio: {fileID: 0}
-    responses: []
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    autoContinueOnClickDialog: 0
+    responses: []
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 0
-    text: "Ves con empci\xF3n el parque. No puedes esperar para ser el primero en
+    autoContinueOnClickDialog: 0
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
+    text: "Ves con emoci\xF3n el parque. No puedes esperar para ser el primero en
       subirte al columpio.."
-    audio: {fileID: 0}
-    responses: []
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    autoContinueOnClickDialog: 0
+    responses: []
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 0
+    autoContinueOnClickDialog: 0
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Desde que entras al sal\xF3n, sientes en tu panza que algo raro va a pasar.
       Te acercas a Cami, tu mejor amiga, y cuando le preguntas si ella tambi\xE9n
       siente lo mismo te reponde:"
-    audio: {fileID: 0}
-    responses: []
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    autoContinueOnClickDialog: 0
+    responses: []
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 0
+    autoContinueOnClickDialog: 0
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: Ya nos Vemos
-    audio: {fileID: 0}
-    responses: []
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    autoContinueOnClickDialog: 0
+    responses: []
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
   - characterType: 0
+    autoContinueOnClickDialog: 0
+    changeToSequence: {fileID: 0}
+    changeToSequenceStartDialogIdx: -1
+    changeToSequenceResponseIdxToGrayOut: -1
     text: "Ahora te toca buscar con qui\xE9n jugar! de estos tres personajes, \xBFa
       qui\xE9n le preguntarias?"
-    audio: {fileID: 0}
-    responses: []
+    textAlternative: 
     responsesDisplayerPrefab: {fileID: 0}
-    autoContinueOnClickDialog: 0
+    responses: []
+    audio: {fileID: 0}
+    audioAlternative: {fileID: 0}
     EnterAnim: {fileID: 0}
     IdleAnim: {fileID: 0}
     ExitAnim: {fileID: 0}
