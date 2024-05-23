@@ -25,22 +25,22 @@ public class TryAgainSequenceItem : SimpleGameSequenceItem
         for (int i = 0; i < UserDataManager.LastDocumentIDsStored.Count; i++)
         {
             if (!collectionFound.TryGetValue(UserDataManager.LastDocumentIDsStored[i], out var DocumentFound)) continue;
-
+            Debug.Log("tryclick " + UserDataManager.LastDocumentIDsStored[i]);
 			if (DocumentFound.TryGetValue(DataIds.mechHandThrown, out var valueFound))
 			{
 				DocumentFound.Add(DataIds.tryAgainClicksMechHand, clickAmounts);
-				//DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
-			}
-			else if (DocumentFound.TryGetValue(DataIds.frustPersBoostClicks, out var otherValueFound))
+                //DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
+            }
+            else if (DocumentFound.TryGetValue(DataIds.frustPersBoostClicks, out var otherValueFound))
 			{
 				DocumentFound.Add(DataIds.tryAgainClicksBoosters, clickAmounts);
-				//DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
-			}
-
-			foreach (var item in DocumentFound)
+                //DocumentFound.Add(DataIds.tryAgainClicksAfterWait, ExtraClickAmounts);
+            }
+            /*
+            foreach (var item in DocumentFound)
 			{
 				Debug.Log("frust " + item.Key + " " + item.Value);
-			}
+			}*/
 		}
     }
 

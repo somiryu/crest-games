@@ -9,7 +9,7 @@ public class FrustrationTermometer : SimpleGameSequenceItem
 
     public static FrustrationLevel LastFrustrationLevelPicked = FrustrationLevel.NONE;
 
-    public FrustrationLevel selectedFrustrationLevel;
+    public static FrustrationLevel selectedFrustrationLevel;
     public FrustrationLevel defaultFrustrationLevel;
     public SimpleGameSequenceItem frustrationGameItem;
     public static float timerToPickEmotion;
