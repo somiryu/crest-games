@@ -62,6 +62,7 @@ public class FrustrationThermometerController : MonoBehaviour
     void GetFrustationLevel(FrustrationLevels level)
     {
         currFrustratioNlevel = level.level;
+        Debug.Log(currFrustratioNlevel);
         ButtonPressed(level.frustLevelButton);
         for (int i = 0; i < frustlevelButtons.Length; i++)
         {
@@ -83,7 +84,8 @@ public class FrustrationThermometerController : MonoBehaviour
     void Continue()
     {
         FrustrationTermometer.LastFrustrationLevelPicked = currFrustratioNlevel;
-		frustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
+		FrustrationTermometer.selectedFrustrationLevel = currFrustratioNlevel;
+        Debug.Log(currFrustratioNlevel);
         FrustrationTermometer.timerToPickEmotion = timer;
         frustrationTermometer.OnSequenceOver();
     }
@@ -91,19 +93,17 @@ public class FrustrationThermometerController : MonoBehaviour
     void ButtonPressed(Button button)
     {
         button.image.color = Color.magenta;
-        Debug.Log("pressed");
     }
 
     void ButtonUnpressed(Button button)
     {
         button.image.color = Color.white;
-        Debug.Log("unpressed");
     }
 }
 public enum FrustrationLevel
 {
     Muy_Frustrado,
-    Frustrado,
+    Un_Poco_Frustrado,
     Un_Poco_Tranquilo,
     Muy_Tranquilo,
     NONE = -1,
