@@ -118,7 +118,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		//Init analytics
 		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
 		initialStars = UserDataManager.CurrUser.Coins;
-        chestOpennedCount = 0;
+        chestOpennedOrRoundCount = 0;
         timerPerChestOpenning = 0;
 	}
 
@@ -344,11 +344,11 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         timerPerChestOpenning += Time.deltaTime;
     }
 
-    int chestOpennedCount = 0;
+    int chestOpennedOrRoundCount = 0;
 
     void SaveNewChestOpenningnalytic(MonsterChestType type, int cost)
     {
-        chestOpennedCount++;
+        chestOpennedOrRoundCount++;
         var newAnalytic = new MonsterMarketRoundAnalytic();
         newAnalytic.time = timerPerChestOpenning;
         timerPerChestOpenning = 0;
@@ -368,7 +368,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 				break;
         }
         newAnalytic.marketIndex = MonsterMarketConfig.marketAppearTimes;
-        newAnalytic.chestCount = chestOpennedCount;
+        newAnalytic.chestCount = chestOpennedOrRoundCount;
         newAnalytic.initialStars = UserDataManager.CurrUser.Coins;
         newAnalytic.starsSpent = cost;
         newAnalytic.finalStars = newAnalytic.initialStars - cost;
@@ -522,14 +522,14 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         if (!openedAtLeastOneChest) chestTypeOpenedString = "Saltar"; 
         finalStars = UserDataManager.CurrUser.Coins;
         totalTime = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
-
-		var newAnalytic = new MonsterMarketRoundAnalytic();
+        chestOpennedOrRoundCount++;
+        var newAnalytic = new MonsterMarketRoundAnalytic();
 		newAnalytic.time = timerPerChestOpenning;
 		newAnalytic.chestTypeOpenedString = "Saltar";
 		newAnalytic.chestTypeOpenned = 4;
 
 		newAnalytic.marketIndex = MonsterMarketConfig.marketAppearTimes;
-		newAnalytic.chestCount = -1;
+		newAnalytic.chestCount = chestOpennedOrRoundCount;
 		newAnalytic.initialStars = initialStars;
 		newAnalytic.starsSpent = starsSpent;
 		newAnalytic.finalStars = finalStars;
