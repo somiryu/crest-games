@@ -253,7 +253,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         blockingPanel.gameObject.SetActive(true);
 		timePlayed = totalTime;
 		finalScoreText.text = successfulAttempts.ToString();
-		endOfGameContainer.gameObject.SetActive(true);
+        inGameObj.SetActive(false);
+        endOfGameContainer.gameObject.SetActive(true);
 		onPlay = false;
 		spawner.OnGameEnd();
 		gameConfig.SaveCoins(successfulAttempts);
@@ -261,7 +262,6 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 		audiosource.clip = noStartsAudio;
 		audiosource.Play();
         yield return new WaitForSeconds(noStartsAudio.length);
-		inGameObj.SetActive(false);
 		blockingPanel.gameObject.SetActive(false);
 		Debug.Log("Game over!");
 	}

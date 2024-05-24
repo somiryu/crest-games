@@ -9,7 +9,7 @@ public class FrustrationTermometer : SimpleGameSequenceItem
 
     public static FrustrationLevel LastFrustrationLevelPicked = FrustrationLevel.NONE;
 
-    public FrustrationLevel selectedFrustrationLevel;
+    public static FrustrationLevel selectedFrustrationLevel;
     public FrustrationLevel defaultFrustrationLevel;
     public SimpleGameSequenceItem frustrationGameItem;
     public static float timerToPickEmotion;
@@ -18,10 +18,8 @@ public class FrustrationTermometer : SimpleGameSequenceItem
         //If there's no IDs, then there isn't a previous game on which we could write, so we don't store anything
         if (UserDataManager.LastDocumentIDsStored == null || string.IsNullOrEmpty(UserDataManager.LastCollectionIDStored)) return;
 
-		if (!UserDataManager.userAnayticsPerGame.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound))
-		{
-			if (!DatabaseManager.pendingSessionsToUpload.TryGetValue(UserDataManager.LastCollectionIDStored, out collectionFound)) return;
-		}
+		if (!DatabaseManager.pendingSessionsToUpload.TryGetValue(UserDataManager.LastCollectionIDStored, out var collectionFound)) return;
+
 
 		for (int i = 0; i < UserDataManager.LastDocumentIDsStored.Count; i++)
         {

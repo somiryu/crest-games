@@ -36,7 +36,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     [SerializeField] GameObject skinObj;
     [SerializeField] Animator objAnim;
 
-    int thowns;
+    int throwns;
     float dragTimer;
     IEnumerator hookShootingRoutine;
 
@@ -47,7 +47,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
         hook.Init(this);
         audioSource = GetComponent<AudioSource>();
         lineRenderer.SetPosition(0, startPointLine.position);
-        thowns = 0;
+        throwns = 0;
     }
 
     void Update()
@@ -100,14 +100,15 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
     void StoreAnalytics()
     {
-        thowns++;
-        gameManager.currRoundAnalytics.roundCount = thowns;
-        gameManager.currRoundAnalytics.thrown = thowns;
+        throwns++;
+        gameManager.currRoundAnalytics.roundCount = throwns;
+        gameManager.currRoundAnalytics.thrown = throwns;
         gameManager.currRoundAnalytics.presition = dragTimer;
         gameManager.allRoundAnalytics.Add(gameManager.currRoundAnalytics);
-        Debug.Log("new one " + thowns);
+        Debug.Log("new one " + throwns);
         var newRound = new MechHandRoundAnalytics();
         gameManager.currRoundAnalytics = newRound;
+        dragTimer = 0;
     }
     public void OnClickSendHook()
     {

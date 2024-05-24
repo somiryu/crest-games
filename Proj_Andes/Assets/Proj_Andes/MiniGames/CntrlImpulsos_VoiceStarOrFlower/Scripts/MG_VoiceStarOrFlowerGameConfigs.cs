@@ -44,6 +44,7 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     }
     public override void SaveAnalytics()
     {
+        Debug.Log("voice id bef" + CurrFlowersAndCloudsGameID );
         if (string.IsNullOrEmpty(CurrFlowersAndCloudsGameID))
         {
             CurrFlowersAndCloudsGameID = Guid.NewGuid().ToString();
@@ -53,7 +54,7 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
         GameID = CurrFlowersAndCloudsGameID;
         shouldTryToSaveGeneralAnalytics = isLastFlowerAndCloudGameOnBatch;
 
-        Debug.Log("Will save general game analytics: " + shouldTryToSaveGeneralAnalytics);
+        Debug.Log("voice id " + CurrFlowersAndCloudsGameID + " Will save general game analytics: " + shouldTryToSaveGeneralAnalytics);
 
         if (!shouldTryToSaveGeneralAnalytics)
         {
@@ -92,6 +93,8 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     }
     public override void ResetCurrentAnalytics()
     {
+        if (!isLastFlowerAndCloudGameOnBatch) return;
+
         CurrFlowersAndCloudsGameID = null;
         GlobalGeneralGameAnalytics = new GeneralGameAnalytics();
     }

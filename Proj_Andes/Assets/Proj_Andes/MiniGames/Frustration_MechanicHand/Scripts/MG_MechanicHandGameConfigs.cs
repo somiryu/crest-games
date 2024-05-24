@@ -44,7 +44,7 @@ public class MG_MechanicHandGameConfigs : GameConfig
 
             UserDataManager.SaveUserAnayticsPerGame(DataIds.mechanicHandGame, currAnalyticsDictionary, newDocID);
         }
-
+		Debug.Log(UserDataManager.LastDocumentIDsStored.Count);
 		SetPostFrustration();
 	}
 
