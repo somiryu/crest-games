@@ -23,7 +23,7 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
         timer = 0;
         boosted = false;
         initPos.x = transform.position.x;
-        lifetime = manager.gameConfig.boosterTriggerRate * 2;
+        lifetime = manager.gameConfig.boosterTriggerRate * 1.2f;
         targetPos.x = manager.rocket.transform.position.x - initPos.x*2;
         manager.currentBooster = this;
         manager.currAnalytic = new BoostersAndScapeAnalytics();
@@ -41,6 +41,7 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
 
     void Recycle()
     {
+        if (!boosted) manager.Onfailed();
         pool.RecycleItem(this);
     }
     public void Boosted()

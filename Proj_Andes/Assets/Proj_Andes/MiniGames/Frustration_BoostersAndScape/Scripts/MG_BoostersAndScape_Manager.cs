@@ -261,7 +261,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 		Debug.Log("Game over!");
 	}
 
-    void Onfailed()
+    public void Onfailed()
     {
         Debug.Log("Failed boost");
         audiosource.clip = onFailedAudio;
