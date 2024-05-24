@@ -245,6 +245,11 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
     IEnumerator GameOverRoutine()
     {
+        if (successfulAttempts > 0)
+        {
+            successfulAttempts = 0;
+            Onfailed();
+        }
         blockingPanel.gameObject.SetActive(true);
 		timePlayed = totalTime;
 		finalScoreText.text = successfulAttempts.ToString();
