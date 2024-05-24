@@ -636,7 +636,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		Gratification_TurboRocket_GameConfig.postFrustration = 0;
 		MonsterMarketConfig.marketAppearTimes = -1;
 
-		TimeManager.createDate = TimeManager.Instance.GetCurrDate();
+		MG_VoiceStarOrFlowerGameConfigs.CurrFlowersAndCloudsGameID = null;
+
+        TimeManager.createDate = TimeManager.Instance.GetCurrDate();
 		GameSequencesList.CleanCurrUserTutorial();
         TimeManager.timer = 0;
 		if (continueSelectedFlag)
