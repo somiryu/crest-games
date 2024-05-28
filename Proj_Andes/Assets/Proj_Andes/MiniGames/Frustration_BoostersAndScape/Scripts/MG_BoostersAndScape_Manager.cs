@@ -248,7 +248,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         if (successfulAttemptsScore > 0)
         {
             successfulAttemptsScore = 0;
-            Onfailed();
+            MakeFailedClickFeedback();
         }
         blockingPanel.gameObject.SetActive(true);
 		timePlayed = totalTime;
@@ -269,13 +269,19 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     public void Onfailed()
     {
         Debug.Log("Failed boost");
-        audiosource.clip = onFailedAudio;
-        audiosource.Play();
         successfulAttemptsScore -= gameConfig.coinsOnFailure;
         if (successfulAttemptsScore < 0) successfulAttemptsScore = 0;
         GeneralGameAnalyticsManager.RegisterLose();
-        gameUIController.StarLost();
-    }
+        MakeFailedClickFeedback();
+	}
+
+    void MakeFailedClickFeedback()
+    {
+		audiosource.clip = onFailedAudio;
+		audiosource.Play();
+		gameUIController.StarLost();
+	}
+
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
         onBoost = true;
