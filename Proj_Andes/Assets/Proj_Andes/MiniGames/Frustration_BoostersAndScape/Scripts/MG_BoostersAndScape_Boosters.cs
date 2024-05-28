@@ -41,7 +41,6 @@ public class MG_BoostersAndScape_Boosters : MonoBehaviour
 
     void Recycle()
     {
-        if (!boosted) manager.Onfailed();
         pool.RecycleItem(this);
     }
     public void Boosted()

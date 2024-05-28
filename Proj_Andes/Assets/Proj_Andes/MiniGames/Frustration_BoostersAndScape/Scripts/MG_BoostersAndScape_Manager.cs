@@ -18,7 +18,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [HideInInspector] public MG_BoostersAndScape_Boosters currentBooster;
 
     [HideInInspector] public bool onPlay;
-    int successfulAttempts;
+    int successfulAttemptsScore;
     int totalAttempts;
     [HideInInspector] public float catchBoosterRange;
     [HideInInspector] public bool onTrapMode;
@@ -139,7 +139,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
     void Update()
     {
-        constantScoreText.text = successfulAttempts.ToString();
+        constantScoreText.text = successfulAttemptsScore.ToString();
 
         if (!onPlay) return;
         if (Input.GetMouseButtonDown(0)) currAnalytic.clicksToBoost++; 
@@ -201,7 +201,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 			}
 			else Onfailed();
 		}
-        if (successfulAttempts == gameConfig.boostersPerRun)
+        if (successfulAttemptsScore == gameConfig.boostersPerRun)
         {
             OnGameEnd();
             rocket.transform.position = Vector3.right * 5 * Time.deltaTime;
@@ -227,7 +227,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         inGameObj.SetActive(true);
         eogManager.OnGameStart();
         spawner.OnGameStart();
-        successfulAttempts = 0;
+        successfulAttemptsScore = 0;
         alienMov.OnGameStart();
         rocket.transform.position = startPos;
         totalAttempts = 0;
@@ -245,19 +245,19 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
     IEnumerator GameOverRoutine()
     {
-        if (successfulAttempts > 0)
+        if (successfulAttemptsScore > 0)
         {
-            successfulAttempts = 0;
-            Onfailed();
+            successfulAttemptsScore = 0;
+            MakeFailedClickFeedback();
         }
         blockingPanel.gameObject.SetActive(true);
 		timePlayed = totalTime;
-		finalScoreText.text = successfulAttempts.ToString();
+		finalScoreText.text = successfulAttemptsScore.ToString();
         inGameObj.SetActive(false);
         endOfGameContainer.gameObject.SetActive(true);
 		onPlay = false;
 		spawner.OnGameEnd();
-		gameConfig.SaveCoins(successfulAttempts);
+		gameConfig.SaveCoins(successfulAttemptsScore);
 		eogManager.OnGameOver();
 		audiosource.clip = noStartsAudio;
 		audiosource.Play();
@@ -269,13 +269,19 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     public void Onfailed()
     {
         Debug.Log("Failed boost");
-        audiosource.clip = onFailedAudio;
-        audiosource.Play();
-        successfulAttempts -= gameConfig.coinsOnFailure;
-        if (successfulAttempts < 0) successfulAttempts = 0;
+        successfulAttemptsScore -= gameConfig.coinsOnFailure;
+        if (successfulAttemptsScore < 0) successfulAttemptsScore = 0;
         GeneralGameAnalyticsManager.RegisterLose();
-        gameUIController.StarLost();
-    }
+        MakeFailedClickFeedback();
+	}
+
+    void MakeFailedClickFeedback()
+    {
+		audiosource.clip = onFailedAudio;
+		audiosource.Play();
+		gameUIController.StarLost();
+	}
+
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
         onBoost = true;
@@ -287,7 +293,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         alienMov.OnBoosted();
         booster.Boosted();
         spawner.spawner.nextSpawnTime = targetTime;
-        successfulAttempts++;
+        successfulAttemptsScore++;
         characterAnims.SetTrigger("Turbo");
         timer = 0;
 
