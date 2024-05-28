@@ -83,13 +83,6 @@ public class UserDataManager : ScriptableObject
 		return HasInternet;
 	}
 
-	[RuntimeInitializeOnLoadMethod]
-	static void RunOnStart()
-	{
-		Debug.Log("aplying callback");
-		//Application.wantsToQuit += SaveToServer;
-	}
-
 	public static void SaveUserAnayticsPerGame(
 		string CollectionName, 
 		Dictionary<string, object> itemAnalytics, 
@@ -130,14 +123,9 @@ public class UserDataManager : ScriptableObject
         }
     }
 
-    public static bool SaveToServer()
-	{
-		OnUserQuit();
-		return true;
-	}
-
 	public static void OnUserQuit()
 	{
+		Debug.Log("Calling on user quit");
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
