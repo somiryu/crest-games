@@ -27,22 +27,4 @@ public class AppSaveSystem : MonoBehaviour
 		instance = this;
 		Object.DontDestroyOnLoad(this);
 	}
-
-#if UNITY_ANDROID && !UNITY_EDITOR
-	private void OnApplicationFocus(bool focus)
-	{
-		UserDataManager.SaveToServer();
-	}
-
-	private void OnApplicationPause(bool pause)
-	{
-		UserDataManager.SaveToServer();
-	}
-
-
-	private void OnApplicationQuit()
-	{
-		UserDataManager.SaveToServer();
-	}
-#endif
 }

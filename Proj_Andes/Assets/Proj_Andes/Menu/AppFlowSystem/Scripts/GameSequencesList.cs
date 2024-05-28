@@ -137,6 +137,7 @@ public class GameSequencesList : ScriptableObject
             prevGame.SaveAnalytics();
             prevGame.SaveGeneralGameAnalytics();
         }
+		Debug.Log("Calling end sequence");
 		UserDataManager.OnUserQuit();
         ResetSequence();
         GoToNextItemInList();
