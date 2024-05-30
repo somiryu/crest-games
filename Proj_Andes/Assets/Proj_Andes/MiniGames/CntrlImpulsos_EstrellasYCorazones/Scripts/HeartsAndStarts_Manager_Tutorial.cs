@@ -80,6 +80,10 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     public void Init()
     {
         currRound = 0;
+        if (GameSequencesList.Instance.GetGameSequence() is HeartsAndStarts_TutorialConfig tutoConfig)
+        {
+            currTutoStepIdx = (int)tutoConfig.gameType;
+        }
         currTutoStep = myTutorialSteps[currTutoStepIdx];
         currConsecutiveLoses = 0;
         currConsecutiveWins = 0;        
@@ -95,7 +99,7 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
         allTutorialsDoneFlag = false;
 
         leftBtn.onClick.AddListener(OnClickedLeft);
-        rightBtn.onClick.AddListener(OnClickedRight);
+        rightBtn.onClick.AddListener(OnClickedRight); 
     }
 
 	void InitRound()
@@ -360,7 +364,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     {
 		inGameUIPanel.SetActive(false);
 		afterActionPanel.SetActive(true);
-		currTutoStepIdx++;
         onHold = true;
 		switch (currTutoStep.tutorialSteps)
 		{

@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HearthAndStarsTutorialConfigs", menuName = "TutorialConfig/HearthAndStarsTutorialConfigs")]
 public class HeartsAndStarts_TutorialConfig : SimpleGameSequenceItemTutorial
 {
-    public static HeartsAndFlowersGameType gameType;
-    public int gameIdx;
+    public HeartsAndFlowersGameType gameType;
+    public static int gameIdx;
 
     public override SimpleGameSequenceItem GetNextItem()
     {
