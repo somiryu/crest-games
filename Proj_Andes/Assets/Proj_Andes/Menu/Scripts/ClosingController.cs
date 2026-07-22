@@ -20,7 +20,7 @@ public class ClosingController : MonoBehaviour
         finalAudioSource.clip = finalAudio;
         finalAudioSource.Play();
         continueBtn.onClick.AddListener(closingItem.OnSequenceOver);
-        TimeManager.Instance.gameState = SessionStateLeft.Finished;
+        TimeManager.Instance.gameState = SessionStateLeft.Finalizado;
         rocketObj.SetActive(GameSequencesList.isTheNarrativeSequence == false);
 
     }

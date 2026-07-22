@@ -95,6 +95,7 @@ public enum UserLivingWith
 }
 public enum SessionStateLeft
 {
-	Abandoned,
-	Finished
+	Inconcluso,
+	Abandonado,
+	Finalizado
 }

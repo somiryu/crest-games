@@ -20,8 +20,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [HideInInspector] public bool onPlay;
     int successfulAttemptsScore;
     int totalAttempts;
-    [HideInInspector] public float catchBoosterRange;
     [HideInInspector] public bool onTrapMode;
+    [HideInInspector] public bool lossByCheat;
+    [HideInInspector] public int currStepTutorial;
     [HideInInspector] public float timer;
     bool onBoost;
     float targetTime;
@@ -274,6 +275,11 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         GeneralGameAnalyticsManager.RegisterLose();
         MakeFailedClickFeedback();
 	}
+
+    public void ManageTutorialStop(bool isTutorialOn)
+    {
+        onPlay = !isTutorialOn;
+    }
 
     void MakeFailedClickFeedback()
     {

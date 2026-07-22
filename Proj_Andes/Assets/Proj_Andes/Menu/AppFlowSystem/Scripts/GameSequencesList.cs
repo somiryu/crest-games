@@ -160,6 +160,11 @@ public class GameSequencesList : ScriptableObject
         return false;
     }
 
+    public int GetMarketAttempt()
+    {
+        return MonsterMarketConfig.marketAppearTimes;
+    }
+
 
 
 #if UNITY_EDITOR

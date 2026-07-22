@@ -41,7 +41,7 @@ public class TimeManager : MonoBehaviour
     {
         if (instance != null && instance != this) DestroyImmediate(instance.gameObject);
         instance = this;
-        gameState = SessionStateLeft.Abandoned;
+        gameState = SessionStateLeft.Abandonado;
         DontDestroyOnLoad(this);
     }
     public void CountTimeStart()

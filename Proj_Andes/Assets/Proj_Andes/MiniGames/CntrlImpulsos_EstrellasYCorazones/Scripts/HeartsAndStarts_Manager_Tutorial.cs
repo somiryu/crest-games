@@ -69,7 +69,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
     private float currConsecutiveWins = 0;
     private float currConsecutiveLoses = 0;
 
-    private bool wasShowingHelpHighlights = false;
 
 
     public void Awake()
@@ -192,7 +191,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 	}
 	void TurnOnHighlightHelps()
     {
-        wasShowingHelpHighlights = true;
 		if (currRequiresSameDirection && currShowingRight || !currRequiresSameDirection && !currShowingRight)
 		{
             leftBtnOnRightChoiceBG.gameObject.SetActive(false);
@@ -213,7 +211,6 @@ public class HeartsAndStarts_Manager_Tutorial : MonoBehaviour
 
     void TurnOffHighlightHelps()
     {
-        wasShowingHelpHighlights = false;
 		leftBtnOnRightChoiceBG.gameObject.SetActive(false);
 		rightBtnOnRightChoiceBG.gameObject.SetActive(false);
 		leftBtn.image.color = enabledBtnColor;

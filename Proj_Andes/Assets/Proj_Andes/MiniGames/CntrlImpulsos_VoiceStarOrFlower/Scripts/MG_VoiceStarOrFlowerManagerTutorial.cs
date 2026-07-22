@@ -86,7 +86,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
 
-    private bool gameoverFlag = false;
 
     int leftCount = 0;
     int rightCount = 0;
@@ -139,7 +138,6 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 
 		afterActionPanel.SetActive(false);
 		inGameUiPanel.SetActive(true);
-        gameoverFlag = false;
 
         if (currTutoConfig.gameType == VoiceOrImageGameType.Voice) currTargetImg.gameObject.SetActive(false);
 

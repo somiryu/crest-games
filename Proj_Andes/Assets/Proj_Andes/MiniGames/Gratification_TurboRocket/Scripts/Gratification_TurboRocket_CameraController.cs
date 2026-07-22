@@ -10,7 +10,6 @@ public class Gratification_TurboRocket_CameraController : MonoBehaviour
     [SerializeField] float visualOffset = -4.7f;
     [SerializeField] Vector2 endSequenceCamPos = new Vector2(1, 2);
     [SerializeField] float movPercent = 1f;
-    [SerializeField] float moveSpeed = 1f;
     float targetY;
     
 

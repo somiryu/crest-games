@@ -74,9 +74,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
     private bool currImgIsLeft = false;
     private bool currSoundIsLeft = false;
     
-    private int amountImgIsLeft = 0;
-    private int amountSoundIsLeft = 0;
-    private int amountDiscardButton = 0;
     private float propabilityShifter = 0;
 
     bool isPaused;
@@ -150,7 +147,6 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
         GeneralGameAnalyticsManager.Instance.Init(DataIds.voiceStarGame, MG_VoiceStarOrFlowerGameConfigs.GlobalGeneralGameAnalytics);
 	}
 
-	int repeatedPuzzleCounter = 0;
 
     void GetRandomSoundImage()
     {

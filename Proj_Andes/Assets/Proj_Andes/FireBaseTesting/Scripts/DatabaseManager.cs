@@ -61,6 +61,11 @@ public static class DatabaseManager
         else pendingUserDatasToUpload.Add(userData);
     }
 
+    public static void checkPending()
+    {
+        LoadFromLocal();
+    }
+
 
     public static void GetUserDatasList()
     {

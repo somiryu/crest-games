@@ -62,7 +62,6 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 			currRoundAnalyticsDic.Clear();
             currRoundAnalyticsDic.Add(DataIds.GameID, GameID);
             currRoundAnalyticsDic.Add(DataIds.heartsNFlowersFrustration, postFrustration);
-			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersSkill, (int)gameType);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersTest, (int)gameType);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersValid, passedTuto);
 			currRoundAnalyticsDic.Add(DataIds.heartsNFlowersTrial, currRound.roundCount);

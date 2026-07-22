@@ -25,6 +25,7 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     [SerializeField] ScoreStarsController starPrefab;
     public bool onTuto = false;
     public bool onPause;
+    public bool showHomeBtn;
     Animator anim;
     IEnumerator sendStars;
     private void Awake()

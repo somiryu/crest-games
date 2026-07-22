@@ -63,7 +63,7 @@ public static class DataIds
     public const string boostersAndScapeGame = "frustr_persecusion";
     public const string boostersAndScapeTotalBoostsActivated = "boosters_activated";
 
-    public const string magnetsGame = "buggy: los imanes y la energía";
+    public const string magnetsGame = "magnets";
     public const string magnetsEneryPicked = "magnet_collected";
 
     public const string sizeRocketsGame = "carrito_recolector";
@@ -91,12 +91,11 @@ public static class DataIds
 	public const string sizeRocketResponseString = "cr_respuesta";
 	public const string sizeRocketResponseInt = "cr_codigo";
 	public const string mouseUpCount = "cr_release";
-	public const string starsPerRound = "cr_premio";
+	public const string starsPerRound = "cr_estrellas";
 
     //Hearts and flowers analytics
     public const string heartsAndStarsGame = "corazones_flores";
-    public const string heartsNFlowersFrustration= "cf_modo";
-    public const string heartsNFlowersSkill = "cf_habilidad";
+    public const string heartsNFlowersFrustration = "cf_modo";
     public const string heartsNFlowersTest = "cf_prueba";
     public const string heartsNFlowersValid = "cf_valid";
     public const string heartsNFlowersTrial = "cf_intento";
@@ -130,7 +129,7 @@ public static class DataIds
 
 
     //MechHand analytics
-    public const string mechHandTest = "fg_prueba";
+    public const string mechHandTest = "fg_partida";
     public const string mechHandTrial = "fg_intento";
     public const string mechHandThrown = "fg_lanzamiento";
     public const string mechHandPresicion = "fg_precision";
@@ -138,10 +137,11 @@ public static class DataIds
     public const string mechHandFeelCode = "fg_emoc_cod";
     public const string mechHandFeelTiming = "fg_emoc_tm";
     public const string mechHandWaitClick = "fg_espera_click";
+    public const string mechHandLossByCheat = "fg_trampa_activada";
 
 
     //BoostHand analytics
-    public const string frustPersTest= "fp_prueba";
+    public const string frustPersTest = "fp_partida";
     public const string frustPersTrial = "fp_intento";
     public const string frustPersPresition = "fp_precision";
     public const string frustPersBoostClicks = "fp_turbo";
@@ -149,6 +149,8 @@ public static class DataIds
     public const string frustPersFeelCode = "fp_emoc_cod";
     public const string frustPersFeelTiming = "fp_emoc_tm";
     public const string frustPersWaitClick = "fp_espera_click";
+    public const string frustPersLossByCheat = "fp_trampa_activada";
+    public const string frustPersIsTutorial = "fp_es_tutorial";
 
     //Monster market
     public const string marketMonsterOrder = "mm_orden";

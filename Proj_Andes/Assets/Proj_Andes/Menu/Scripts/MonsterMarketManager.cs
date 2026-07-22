@@ -79,10 +79,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     //Analytics
     float timerPerChestOpenning;
-    bool openedAtLeastOneChest;
     float totalTime;
-    string chestTypeOpenedString;
-    int chestTypeOpenned;
     int initialStars;
     int finalStars;
     int starsSpent;
@@ -134,7 +131,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		monstersUIInChestOpenning.Init(5);
 		monstersUIInChestOpenning.RecycleAll();
 
-        openedAtLeastOneChest = false;
 		chestOpenedContainer.gameObject.SetActive(false);
 
 		confirmButton.onClick.AddListener(OpenButtonBeforeBuyChestOrContinuing);
@@ -311,8 +307,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 				SaveNewChestOpenningnalytic(MonsterChestType.Regular, marketConfig.RegularChestPrice);
 				marketConfig.ConsumeCoins(marketConfig.RegularChestPrice);
                 starsSpent += marketConfig.RegularChestPrice;
-                chestTypeOpenedString = "Pequeño";
-                chestTypeOpenned = 1;
                 OpenChest(1, 0, 0);
                 GeneralGameAnalyticsManager.RegisterLose();
                 break;
@@ -320,16 +314,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 				SaveNewChestOpenningnalytic(MonsterChestType.Rare, marketConfig.RareChestPrice);
 				marketConfig.ConsumeCoins(marketConfig.RareChestPrice);
 				starsSpent += marketConfig.RareChestPrice;
-                chestTypeOpenedString = "Mediano";
-                chestTypeOpenned = 2;
 				OpenChest(1, 1, 0);
                 break;
             case MonsterChestType.Legendary:
                 SaveNewChestOpenningnalytic(MonsterChestType.Legendary,marketConfig.LegendaryChestPrice);
 				marketConfig.ConsumeCoins(marketConfig.LegendaryChestPrice);
 				starsSpent += marketConfig.LegendaryChestPrice;
-                chestTypeOpenedString = "Grande";
-				chestTypeOpenned = 3;
 				OpenChest(1, 1, 1);
 				GeneralGameAnalyticsManager.RegisterWin();
 				break;
@@ -363,7 +353,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 				newAnalytic.chestTypeOpenned = 1;
 				break;
             case MonsterChestType.Regular:
-				newAnalytic.chestTypeOpenedString = "Pequeño";
+				newAnalytic.chestTypeOpenedString = "PequeÃ±o";
 				newAnalytic.chestTypeOpenned = 0;
 				break;
         }
@@ -433,7 +423,6 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     void OpenChest(int regularMonstersAmount, int rareMonstersAmount, int legendaryMonstersAmount)
     {
-        openedAtLeastOneChest = true;
 
         chestOpenButtonParent.gameObject.SetActive(false);
         chestOpenedContainer.gameObject.SetActive(true);
@@ -517,9 +506,10 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     }
 #endif
 
+    public void SaveForLaterPress() => SaveForLater();
+
     public void SaveForLater()
     {
-        if (!openedAtLeastOneChest) chestTypeOpenedString = "Saltar"; 
         finalStars = UserDataManager.CurrUser.Coins;
         totalTime = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
         chestOpennedOrRoundCount++;

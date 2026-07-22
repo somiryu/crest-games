@@ -583,7 +583,6 @@ public class DialoguesDisplayerUI : MonoBehaviour
         }
     }
 
-    private int EmptQuestionsCount = 0;
     private int AggQuestionsCount = -1;
     private int ConfQuestionsCount = -1;
     private int EmoCompQuestionsCount = -1;
