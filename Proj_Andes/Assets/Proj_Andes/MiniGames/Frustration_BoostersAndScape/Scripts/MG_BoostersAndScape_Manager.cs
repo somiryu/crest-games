@@ -20,11 +20,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     [HideInInspector] public bool onPlay;
     int successfulAttemptsScore;
     int totalAttempts;
+    [HideInInspector] public float catchBoosterRange;
     [HideInInspector] public bool onTrapMode;
-    [HideInInspector] public bool lossByCheat;
-    [HideInInspector] public int currStepTutorial;
     [HideInInspector] public float timer;
-    bool onBoost;
     float targetTime;
     Vector3 startPos;
     float totalTime;
@@ -63,7 +61,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
     [Header("Tutorial Anims")]
     [SerializeField] Animator tutorialAnims;
-    int currStepTurorial;
+    int currStepTutorial;
     public BoostersAndScapeAnalytics currAnalytic;
 
     public List<BoostersAndScapeAnalytics> currAnalytics = new List<BoostersAndScapeAnalytics>();
@@ -74,6 +72,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     public float timePlayed;
     public int clickRepetitions;
     public int lostByCheat;
+    public bool lossByCheat;
     public int boostersActivated;
     bool addedTimeManagUser;
 
@@ -92,7 +91,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     }
     void Init()
     {
-        currStepTurorial = 0;
+        currStepTutorial = 0;
         skinObjAnim = skinObj.GetComponentsInChildren<Animator>(true);
         charactetSkinableObj.OnCurrSkinObjChanged += UpdateCharacterAnimRef;
         tutorialAnims.gameObject.SetActive(false);
@@ -141,66 +140,26 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     void Update()
     {
         constantScoreText.text = successfulAttemptsScore.ToString();
+        var tutorialDone = UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone);
 
         if (!onPlay) return;
-        if (Input.GetMouseButtonDown(0)) currAnalytic.clicksToBoost++; 
         totalTime += Time.deltaTime;
         timer += Time.deltaTime;
         spawner.spawner.timer = timer;
         if(timer >= targetTime)
         {
-            if (onBoost)
-            {
-                onBoost = false;
-                targetTime = gameConfig.boosterTriggerRate;
-            }
             timer = 0;
+            targetTime = gameConfig.boosterTriggerRate;
             MoveToNextPos(currentBooster);
             spawner.spawner.SpawnNewItem();
         }
 
-        if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
-        {
-            if (currentBooster.Boosteable())
-            {
-                if(!addedTimeManagUser)
-                {
-                    TimeManager.Instance.SetNewStopTimeUser(this);
-                    Debug.Log("adding");
-                    addedTimeManagUser = true;
-                }
-                tutorialAnims.gameObject.SetActive(true);
-            }
-        }
+        ManageTutorialStop(!tutorialDone);
         if (Input.GetMouseButtonDown(0)) clickRepetitions++;
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !lossByCheat)
         {
-            if (!UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone))
-            {
-                if(addedTimeManagUser)
-                {
-                    TimeManager.Instance.RemoveNewStopTimeUser(this);
-                    Debug.Log("removing");
-                    addedTimeManagUser = false;
-                }
-                currStepTurorial++;
-                tutorialAnims.gameObject.SetActive(false);
-                if (currStepTurorial == 3)
-                {
-                    StartCoroutine(LetsPlay());
-                    UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
-                }
-            }
-
-            if (!TryForcedToFail())
-            {
-				if (currentBooster.Boosteable())
-				{
-					OnBoostered(currentBooster);
-				}
-				else Onfailed();
-			}
-			else Onfailed();
+            if (!TryForcedToFail() && currentBooster.Boosteable()) OnBoostered(currentBooster);
+            else Onfailed();
 		}
         if (successfulAttemptsScore == gameConfig.boostersPerRun)
         {
@@ -215,10 +174,14 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         currAnalytic.distanceInBetween = booster.DistanceInBoost;
         currAnalytic.roundCount = trials;
         currAnalytic.clicksToBoost = clickRepetitions;
+        currAnalytic.isTutorial = currStepTutorial < 4;
+        currAnalytic.lossByCheat = lossByCheat;
+        //The round in which the tutorial ends is still a tutorial round, the next one is not
+        if (currStepTutorial == 3) currStepTutorial = 4;
         currAnalytics.Add(currAnalytic);
-        Debug.Log("new one " + trials);
 
         clickRepetitions = 0;
+        lossByCheat = false;
         var newRound = new BoostersAndScapeAnalytics();
         currAnalytic = newRound;
     }
@@ -264,12 +227,10 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 		audiosource.Play();
         yield return new WaitForSeconds(noStartsAudio.length);
 		blockingPanel.gameObject.SetActive(false);
-		Debug.Log("Game over!");
 	}
 
     public void Onfailed()
     {
-        Debug.Log("Failed boost");
         successfulAttemptsScore -= gameConfig.coinsOnFailure;
         if (successfulAttemptsScore < 0) successfulAttemptsScore = 0;
         GeneralGameAnalyticsManager.RegisterLose();
@@ -278,7 +239,31 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
     public void ManageTutorialStop(bool isTutorialOn)
     {
-        onPlay = !isTutorialOn;
+        if (!isTutorialOn) return;
+        if (currentBooster.Boosteable())
+        {
+            tutorialAnims.gameObject.SetActive(true);
+            if (!addedTimeManagUser)
+            {
+                TimeManager.Instance.SetNewStopTimeUser(this);
+                addedTimeManagUser = true;
+            }
+        }
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            currStepTutorial++;
+            tutorialAnims.gameObject.SetActive(false);
+            if (addedTimeManagUser)
+            {
+                TimeManager.Instance.RemoveNewStopTimeUser(this);
+                addedTimeManagUser = false;
+            }
+            if (currStepTutorial == 3)
+            {
+                StartCoroutine(LetsPlay());
+                UserDataManager.CurrUser.RegisterTutorialStepDone(tutorialSteps.MG_BoostersAndScapeDone.ToString());
+            }
+        }
     }
 
     void MakeFailedClickFeedback()
@@ -290,17 +275,14 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
 
     public void OnBoostered(MG_BoostersAndScape_Boosters booster)
     {
-        onBoost = true;
         targetTime = 0.3f;
         boostersActivated++;
         GeneralGameAnalyticsManager.RegisterWin();
-        Debug.Log("Boosted");
 
         alienMov.OnBoosted();
         booster.Boosted();
         spawner.spawner.nextSpawnTime = targetTime;
         successfulAttemptsScore++;
-        characterAnims.SetTrigger("Turbo");
         timer = 0;
 
         gameUIController.StarEarned(Camera.main.WorldToScreenPoint(rocket.transform.position));
@@ -323,9 +305,9 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
     }
     public void MoveToNextPos(MG_BoostersAndScape_Boosters booster)
     {
+        alienMov.MoveToNextPoint();
         StoreAnalytics(currentBooster);
         totalAttempts++;
-        alienMov.MoveToNextPoint();
     }
 
     public bool TryForcedToFail()
@@ -340,6 +322,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
                 StartCoroutine(ShowTrapSign());
                 GeneralGameAnalyticsManager.RegisterLose();
                 lostByCheat++;
+                lossByCheat = true;
                 break;
             }
             else onTrapMode = false;
@@ -367,5 +350,7 @@ public class BoostersAndScapeAnalytics
     public int roundCount;
     public float distanceInBetween;
     public int clicksToBoost;
+    public bool isTutorial;
+    public bool lossByCheat;
 }
 

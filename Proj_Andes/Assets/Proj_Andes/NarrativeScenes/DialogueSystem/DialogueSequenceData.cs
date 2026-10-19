@@ -7,6 +7,11 @@ public class DialogueSequenceData : ScriptableObject
 
 	public override string ToString()
 	{
-		return null;
+		if (dialogues != null && dialogues.Length > 0)
+		{
+			DialogueData firstLine = dialogues[0];
+			return $"{firstLine.characterType}: {firstLine.text}";
+		}
+		return name;
 	}
 }

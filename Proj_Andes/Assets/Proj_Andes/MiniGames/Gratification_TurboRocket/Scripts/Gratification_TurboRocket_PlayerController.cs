@@ -71,6 +71,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
     private void Awake()
     {
+        Debug.Log("AWAKE Turbo Rocket");
         iTurboRocketManager.Instance = this;
 		artSkinnableObj.OnCurrSkinObjChanged += ReasignAnimator;
 		TryGetComponent(out myCollider);
@@ -81,6 +82,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
 	private void Start()
 	{
+		starsGatheredCount = 0;
 		artParent.gameObject.SetActive(true);
 		character.GetComponentInChildren<ParticleSystem>().Play();
 		planet.Init(5);
@@ -127,6 +129,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
     void Update()
     {
+        Debug.Log("PLAYING? " + onPlay);
         if (!onPlay || !iTurboRocketManager.Instance.onDoneAnim) return;
 
         ContinuousMovement();
@@ -191,6 +194,8 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
     public void OnEnterTurboMode()
     {
+        Debug.Log("Trying Turbo Mode");
+        if (onTurbo || !onPlay) return;
         GeneralGameAnalyticsManager.RegisterLose();
 		characterAnimator.ResetTrigger("Normal");
         characterAnimator.SetTrigger("Turbo");
@@ -207,6 +212,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
     }
     public void OnExitTurboMode()
     {
+        if (!onTurbo) return;
         characterAnimator.ResetTrigger("Turbo");
         if(turboDeacceleration != null) StopCoroutine(turboDeacceleration);
 		turboDeacceleration = TurboCounter();
@@ -219,12 +225,13 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         if (collider.CompareTag("Finish")) EndOfRide();
         else if (collider.TryGetComponent(out Gratification_TurboRocket_StarsController star))
         {
+            Debug.Log("COllision detected with star");
             if (onTurbo) return;
             if (star.isCaptured) return;
             if (!star.isInitialPosition) return;
             star.OnCaptured();
             GeneralGameAnalyticsManager.RegisterWin();
-            gameConfig.coinsCollected++;
+            Debug.Log("StarsGathered Count? >> " + starsGatheredCount);
         }
     }
  
@@ -239,6 +246,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 
         onPlay = false;
         levelConfig.coinsCollected = starsGatheredCount;
+        Debug.Log("Enf of Ride Coins >> " + starsGatheredCount);
 		character.GetComponentInChildren<ParticleSystem>().Stop();
 		artParent.gameObject.SetActive(false);
 

@@ -42,6 +42,7 @@ public class TimeManager : MonoBehaviour
         if (instance != null && instance != this) DestroyImmediate(instance.gameObject);
         instance = this;
         gameState = SessionStateLeft.Abandonado;
+        Debug.LogWarning("awake TimeManager >> game state " + gameState);
         DontDestroyOnLoad(this);
     }
     public void CountTimeStart()
@@ -87,6 +88,7 @@ public class TimeManager : MonoBehaviour
     }
     public void GetQuitGameAnalytics()
     {
+        Debug.Log("GetQuitGameAnalytics >> " + gameState);
         if (UserDataManager.CurrTestID == "Default Test ID")
         {
             return;

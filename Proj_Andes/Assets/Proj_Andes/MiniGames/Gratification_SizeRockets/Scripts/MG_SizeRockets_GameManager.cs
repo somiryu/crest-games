@@ -104,9 +104,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 
 		eogManager.OnGameStart();
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
-		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
-		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.medium));
-		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.large));
+		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.pequeño));
+		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.mediano));
+		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.grande));
 
 		smallRocketsPool.Init(5);
 		mediumRocketsPool.Init(5);
@@ -147,10 +147,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			smallRocketBtn.interactable = false;
 			mediumRocketBtn.interactable = false;
 			largeRocketBtn.interactable = false;
-			if (Input.GetMouseButtonUp(0) && EventSystem.current.IsPointerOverGameObject())
+			if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
 			{
 				currAnalytics.mouseUpCount++;
-				Debug.Log("Mouse up detected");
 			}
 		}
 		else
@@ -180,13 +179,13 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		largeRocketBtn.image.color = Color.white;
 		switch (types) 
 		{
-			case SizeRocketsRocketTypes.small:
+			case SizeRocketsRocketTypes.pequeño:
 				smallRocketBtn.image.color = selectedColor;
 				break;
-			case SizeRocketsRocketTypes.medium:
+			case SizeRocketsRocketTypes.mediano:
 				mediumRocketBtn.image.color = selectedColor;
 				break;
-			case SizeRocketsRocketTypes.large:
+			case SizeRocketsRocketTypes.grande:
 				largeRocketBtn.image.color = selectedColor;
 				break;
 		}
@@ -203,7 +202,6 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		currRocket.Init(rocketsPool, currTargetPlanet, basePlanet);
 		activeShips.Add(currRocket);
 		activeShip = currRocket;
-		Debug.Log("Just asigned ship: " + currShip);
 		shipsLeft--;
 		shipsLeftTxt.SetText(shipsLeft.ToString());
 		shipsLeftTxt.GetComponent<Animator>().SetTrigger("Score");
@@ -220,9 +218,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	{
 		return type switch
 		{
-			SizeRocketsRocketTypes.small => smallRocketsPool,
-			SizeRocketsRocketTypes.medium => mediumRocketsPool,
-			SizeRocketsRocketTypes.large => largeRocketsPool,
+			SizeRocketsRocketTypes.pequeño => smallRocketsPool,
+			SizeRocketsRocketTypes.mediano => mediumRocketsPool,
+			SizeRocketsRocketTypes.grande => largeRocketsPool,
 			_ => null
 		};
 	}
@@ -230,11 +228,11 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	{
 		switch(coins)
 		{
-			case SizeRocketsRocketTypes.small:
+			case SizeRocketsRocketTypes.pequeño:
 				return won1StarClip;
-			case SizeRocketsRocketTypes.medium:
+			case SizeRocketsRocketTypes.mediano:
 				return won2StarClip;
-			case SizeRocketsRocketTypes.large:
+			case SizeRocketsRocketTypes.grande:
 				return won4StarClip;
 			default: return null;
 		}
@@ -248,8 +246,9 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	{
 		currAnalytics.stars = coinsAmount;
 
-		if (rocket.rocketType == SizeRocketsRocketTypes.small) GeneralGameAnalyticsManager.RegisterLose();
+		if (rocket.rocketType == SizeRocketsRocketTypes.pequeño) GeneralGameAnalyticsManager.RegisterLose();
 		else GeneralGameAnalyticsManager.RegisterWin();
+		Debug.Log("Round change releases > " + currAnalytics.mouseUpCount);
 
 		roundCount++;
 
@@ -298,9 +297,9 @@ public class SizeRocketAnalytics
 
 public enum SizeRocketsRocketTypes
 {
-	small,
-	medium,
-	large,
+	pequeño,
+	mediano,
+	grande,
 	NONE
 }
 

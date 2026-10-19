@@ -46,6 +46,7 @@ public class Gratification_TurboRocket_UIController : MonoBehaviour
         player.onPlay = false;
         anim.SetTrigger("RideIntro");
         yield return new WaitForSecondsRealtime(waitTime);
+        Debug.Log("Waited?");
         player.onPlay = true;
         anim.enabled = false;
         player.onDoneAnim = true;

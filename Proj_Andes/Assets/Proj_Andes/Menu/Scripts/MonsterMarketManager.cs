@@ -101,26 +101,11 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
             }
         }
         instance = this;
-        MonsterMarketConfig.marketAppearTimes++;
+        MonsterMarketConfig.marketAppearTimes = GameSequencesList.Instance.GetMarketAttempt();
         MonsterMarketConfig.isLastMarket = GameSequencesList.Instance.IsLastMarket(marketConfig);
-        Debug.LogWarning("awake monster market");
-		Init();
-	}
+        //Each user starts the first market with the same amount of coins
+        if (MonsterMarketConfig.marketAppearTimes == 1) UserDataManager.CurrUser.Coins = 10;
 
-	private void Start()
-	{
-        if (marketIntro != null) StopCoroutine(marketIntro);
-        marketIntro = MarketIntro();
-		StartCoroutine(marketIntro);
-		//Init analytics
-		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
-		initialStars = UserDataManager.CurrUser.Coins;
-        chestOpennedOrRoundCount = 0;
-        timerPerChestOpenning = 0;
-	}
-
-	public void Init()
-	{
 		TryGetComponent(out audioSource);
 		myCollectionManager.Init(false);
 		myCollectionManager.HideCollection();
@@ -146,10 +131,19 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 		noResources = NoResources();
 		openChest = OpenChestAudios();
 		closeNoResourcesBtn.onClick.AddListener(CloseNoResources);
-		Debug.LogWarning("finish init monster market");
 	}
 
-
+	private void Start()
+	{
+        if (marketIntro != null) StopCoroutine(marketIntro);
+        marketIntro = MarketIntro();
+		StartCoroutine(marketIntro);
+		//Init analytics
+		GeneralGameAnalyticsManager.Instance.Init(DataIds.monsterMarket);
+		initialStars = UserDataManager.CurrUser.Coins;
+        chestOpennedOrRoundCount = 0;
+        timerPerChestOpenning = 0;
+	}
 
 	IEnumerator MarketIntro()
     {
@@ -241,7 +235,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 	void OnCollectionsClosed()
     {
         UpdateStateButtons();
-        if (UserDataManager.CurrUser.Coins == 0) SaveForLater();
+        if (UserDataManager.CurrUser.Coins == 0) SaveForLaterPress();
         myCollectionManager.OnClosedCollections -= OnCollectionsClosed;
 
         if (UserDataManager.CurrUser.IsTutorialStepDone(tutorialSteps.Market_Instruction) 
@@ -283,7 +277,7 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         audioSource.Play();
         if (currSelectedButton == saveForLaterButton)
         {
-            SaveForLater();
+            SaveForLaterPress();
             return;
         }
 
@@ -338,31 +332,34 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
 
     void SaveNewChestOpenningnalytic(MonsterChestType type, int cost)
     {
-        chestOpennedOrRoundCount++;
-        var newAnalytic = new MonsterMarketRoundAnalytic();
-        newAnalytic.time = timerPerChestOpenning;
-        timerPerChestOpenning = 0;
-        switch (type)
+        Debug.Log("Saving Chest opening analytics");
+        var chestType = type switch
         {
-            case MonsterChestType.Legendary:
-                newAnalytic.chestTypeOpenedString = "Grande";
-                newAnalytic.chestTypeOpenned = 3;
-                break;
-            case MonsterChestType.Rare:
-				newAnalytic.chestTypeOpenedString = "Mediano";
-				newAnalytic.chestTypeOpenned = 1;
-				break;
-            case MonsterChestType.Regular:
-				newAnalytic.chestTypeOpenedString = "Pequeño";
-				newAnalytic.chestTypeOpenned = 0;
-				break;
-        }
-        newAnalytic.marketIndex = MonsterMarketConfig.marketAppearTimes;
+            MonsterChestType.Regular => "Pequeño",
+            MonsterChestType.Rare => "Mediano",
+            MonsterChestType.Legendary => "Grande",
+            _ => ""
+        };
+        SaveAnalytics(chestType, cost);
+    }
+
+    void SaveAnalytics(string chestTypeOrJump, int cost)
+    {
+        chestOpennedOrRoundCount++;
+        var currCoins = UserDataManager.CurrUser.Coins;
+        var newAnalytic = new MonsterMarketRoundAnalytic();
         newAnalytic.chestCount = chestOpennedOrRoundCount;
-        newAnalytic.initialStars = UserDataManager.CurrUser.Coins;
+        newAnalytic.time = timerPerChestOpenning;
+        newAnalytic.chestTypeOpenedString = chestTypeOrJump;
+        if (chestTypeOrJump == "Saltar") newAnalytic.chestTypeOpenned = 4;
+        else if (chestTypeOrJump == "Grande") newAnalytic.chestTypeOpenned = 3;
+        else newAnalytic.chestTypeOpenned = chestTypeOrJump == "Mediano" ? 1 : 0;
+        newAnalytic.marketIndex = MonsterMarketConfig.marketAppearTimes;
+        newAnalytic.initialStars = currCoins;
+        newAnalytic.finalStars = currCoins - cost;
         newAnalytic.starsSpent = cost;
-        newAnalytic.finalStars = newAnalytic.initialStars - cost;
         AllRoundsAnalytics.Add(newAnalytic);
+        timerPerChestOpenning = 0;
     }
 
     void ShowNoResourcesCorroutine()
@@ -506,28 +503,10 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
     }
 #endif
 
-    public void SaveForLaterPress() => SaveForLater();
-
-    public void SaveForLater()
+    public void SaveForLaterPress()
     {
-        finalStars = UserDataManager.CurrUser.Coins;
-        totalTime = GeneralGameAnalyticsManager.Instance.analytics.timePlayed;
-        chestOpennedOrRoundCount++;
-        var newAnalytic = new MonsterMarketRoundAnalytic();
-		newAnalytic.time = timerPerChestOpenning;
-		newAnalytic.chestTypeOpenedString = "Saltar";
-		newAnalytic.chestTypeOpenned = 4;
-
-		newAnalytic.marketIndex = MonsterMarketConfig.marketAppearTimes;
-		newAnalytic.chestCount = chestOpennedOrRoundCount;
-		newAnalytic.initialStars = initialStars;
-		newAnalytic.starsSpent = starsSpent;
-		newAnalytic.finalStars = finalStars;
-		AllRoundsAnalytics.Add(newAnalytic);
-
-
+        SaveAnalytics("Saltar", 0);
         marketConfig.SetAnalyticsInfo(AllRoundsAnalytics);
-
 		chestOpenedContainer.gameObject.SetActive(false);
         marketConfig.OnSequenceOver();
     }

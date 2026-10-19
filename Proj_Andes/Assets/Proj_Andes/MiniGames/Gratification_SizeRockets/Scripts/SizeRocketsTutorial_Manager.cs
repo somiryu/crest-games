@@ -81,9 +81,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
 
 		selectedRocketType = SizeRocketsRocketTypes.NONE;
         moving = false;
-		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.small));
-		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.medium));
-		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.large));
+		smallRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.pequeño));
+		mediumRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.mediano));
+		largeRocketBtn.onClick.AddListener(() => OnPressedRocketBtn(SizeRocketsRocketTypes.grande));
 
 		smallRocketsPool.Init(5);
 		mediumRocketsPool.Init(5);
@@ -216,9 +216,9 @@ public class SizeRocketsTutorial_Manager : MonoBehaviour, ISizeRocketsManager
     {
         return type switch
         {
-            SizeRocketsRocketTypes.small => smallRocketsPool,
-            SizeRocketsRocketTypes.medium => mediumRocketsPool,
-            SizeRocketsRocketTypes.large => largeRocketsPool,
+            SizeRocketsRocketTypes.pequeño => smallRocketsPool,
+            SizeRocketsRocketTypes.mediano => mediumRocketsPool,
+            SizeRocketsRocketTypes.grande => largeRocketsPool,
             _ => null
         };
     }

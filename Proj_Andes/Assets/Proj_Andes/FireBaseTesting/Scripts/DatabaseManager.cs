@@ -59,11 +59,16 @@ public static class DatabaseManager
         var alreadyIn = pendingUserDatasToUpload.FindIndex(x => x.id_jugador == userData.id_jugador);
         if (alreadyIn != -1) pendingUserDatasToUpload[alreadyIn] = userData;
         else pendingUserDatasToUpload.Add(userData);
+        checkPending();
     }
 
     public static void checkPending()
     {
-        LoadFromLocal();
+        for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
+        {
+            Debug.Log("Pending " + i);
+            Debug.Log("User Sexo " + pendingUserDatasToUpload[i].sexo);
+        }
     }
 
 
@@ -97,7 +102,6 @@ public static class DatabaseManager
 
             foreach (DocumentSnapshot documentSnapshot in allUsersQuerySnapshot.Documents)
             {
-                Debug.Log(String.Format("Document data for {0} document:", documentSnapshot.Id));
                 UserData currUserData = documentSnapshot.ConvertTo<UserData>();
                 if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
                 {
@@ -165,6 +169,7 @@ public static class DatabaseManager
         bool ignoreEmptyUser = false)
     {
         savingIsDone = false;
+        Debug.Log("Called SaveUserDatasList in DatabaseManage -----------------------------");
         var shouldSkipSaving = false;
 #if UNITY_EDITOR
         shouldSkipSaving = FirebaseAnonymousLoginUI.saveOnlyLocalForTesting;
@@ -200,6 +205,7 @@ public static class DatabaseManager
 		//Pending users
 		var saveFile = new LocalSaveUsersList();
 		saveFile.datas = pendingUserDatasToUpload;
+		checkPending();
 		var jsonFile = JsonConvert.SerializeObject(saveFile);
 		PlayerPrefs.SetString(pendingUserJSONKey, jsonFile);
 
@@ -208,15 +214,11 @@ public static class DatabaseManager
 		obj.analytics = new Dictionary<string, Dictionary<string, Dictionary<string, object>>>(pendingSessionsToUpload);
 		var sessionsJSON = JsonConvert.SerializeObject(obj);
 		PlayerPrefs.SetString(pendingSessionsJSONKey, sessionsJSON);
+		Debug.Log("PlayerPrefs PendingUsers >" + PlayerPrefs.GetString(pendingUserJSONKey));
 
-
-        if (!mustSaveInDataBase)
+        if (!mustSaveInDataBase || !hasInternetConnection)
         {
-			savingIsDone = true;
-			return;
-        }
-        if (!hasInternetConnection)
-        {
+			Debug.Log("MustSaveInDataBase: " + mustSaveInDataBase);
 			savingIsDone = true;
 			return;
         }

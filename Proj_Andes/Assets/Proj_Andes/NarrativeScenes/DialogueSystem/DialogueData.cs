@@ -9,14 +9,14 @@ public class DialogueData
 	public CharactersTypes characterType;
 
 	[Tooltip("If true, the dialog will continue to the next line automatically when pressing the dialog box, (only works if no responses are present)")]
-	public bool autoContinueOnClickDialog;
+	public bool autoContinueOnClickDialog = true;
 
 	[Header("Change sequence on continue configs")]
 	public DialogueSequenceData changeToSequence;
 
-	public int changeToSequenceStartDialogIdx;
+	public int changeToSequenceStartDialogIdx = -1;
 
-	public int changeToSequenceResponseIdxToGrayOut;
+	public int changeToSequenceResponseIdxToGrayOut = -1;
 
 	[TextArea(1, 20)]
 	[Space]
@@ -44,6 +44,8 @@ public class DialogueData
 
 	public bool AllResponsesWereGrayOut(List<int> grayedOutResponseIdxes)
 	{
+		if (responses.Length == 0) return false;
+		if (responses.Length == grayedOutResponseIdxes.Count) return true;
 		return false;
 	}
 }

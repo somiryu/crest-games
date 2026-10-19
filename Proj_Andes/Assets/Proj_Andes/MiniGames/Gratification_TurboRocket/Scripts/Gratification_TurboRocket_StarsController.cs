@@ -35,6 +35,7 @@ public class Gratification_TurboRocket_StarsController : MonoBehaviour
         if (isCaptured) return;
          isCaptured = true;
         GetComponentInChildren<SpriteRenderer>().enabled = false;
+        Debug.Log("Stars Gathered count increase!");
         iTurboRocketManager.Instance.starsGatheredCount++;
         StartCoroutine( _OnCapturedwithDelay());
         GameUIController.Instance.StarEarned(Camera.main.WorldToScreenPoint(transform.position));

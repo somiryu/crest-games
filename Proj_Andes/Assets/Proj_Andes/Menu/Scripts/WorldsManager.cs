@@ -22,6 +22,8 @@ public class WorldsManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("START WORLDS MANAGER... show home btn!");
+        GameUIController.Instance.showHomeBtn = true;
         TryGetComponent(out audioSource);
         audioSource.clip = pickAWorldAudio;
         audioSource.Play();
@@ -51,5 +53,9 @@ public class WorldsManager : MonoBehaviour
     void ClickedActivePlanet()
     {
         GameSequencesList.Instance.GoToNextItemInList();
+    }
+    void OnDestroy()
+    {
+        GameUIController.Instance.showHomeBtn = false;
     }
 }

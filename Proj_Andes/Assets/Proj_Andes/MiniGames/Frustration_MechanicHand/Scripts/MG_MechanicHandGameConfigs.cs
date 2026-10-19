@@ -36,6 +36,7 @@ public class MG_MechanicHandGameConfigs : GameConfig
             currAnalyticsDictionary.Add(DataIds.mechHandTrial, currData.roundCount);
             currAnalyticsDictionary.Add(DataIds.mechHandThrown, currData.thrown);
             currAnalyticsDictionary.Add(DataIds.mechHandPresicion, currData.presition);
+            currAnalyticsDictionary.Add(DataIds.mechHandLossByCheat, currData.lossByCheat);
 
             var newDocID = Guid.NewGuid().ToString();
 

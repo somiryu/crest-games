@@ -274,6 +274,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
     {
         roundAnalytics.roundCount = currRound;
         currRound++;
+        Debug.Log("Current Round on RoundEnded after add >> " + currRound);
         if (currRequiresSameDirection) roundAnalytics.stimuli = 0;
         else roundAnalytics.stimuli = 1;
 

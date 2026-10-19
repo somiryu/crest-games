@@ -8,6 +8,10 @@ public class EmotionsAnalyticsValues
 
 	public float GetValueForEmotion(NarrativeAnalyticsFeeling type)
 	{
-		return 0f;
+		for (int i = 0; i < customValues.Count; i++)
+		{
+			if (customValues[i].emotionType == type) return customValues[i].value;
+		}
+		return 0;
 	}
 }

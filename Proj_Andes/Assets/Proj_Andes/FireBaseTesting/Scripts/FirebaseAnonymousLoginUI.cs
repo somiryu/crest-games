@@ -437,58 +437,69 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	}
 	void OnFinishedUserCreation()
 	{
+		Debug.Log("OnFinishedUserCreation in FirebaseAnonymousLoginUI > " + schoolTypeField.value);
 		var newUser = new UserData();
 		newUser.pin = nameField.text;
 		newUser.id_proyecto = UserDataManager.CurrInstitutionCode;
-		newUser.edad = int.TryParse(ageField.options[ageField.value].text, out var ageResult) ? ageResult : -1;
-		newUser.grado = int.TryParse(gradeField.options[gradeField.value].text, out var gradeResult) ? gradeResult : -1;
+
+		var ageText = ageField.options[ageField.value].text;
+		if (ageText == "19+") newUser.edad = 19;
+		else newUser.edad = int.TryParse(ageText, out var ageResult) ? ageResult : 99;
+
+		var gradeText = gradeField.options[gradeField.value].text;
+		if (gradeText == "Otro") newUser.grado = 98;
+		else newUser.grado = int.TryParse(gradeText, out var gradeResult) ? gradeResult : -99;
+
 		newUser.sexo = Enum.TryParse<UserSex>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserSex.NONE;
 		newUser.sexo_cod = (int) newUser.sexo;
 		newUser.tipo_colegio = schoolTypeField.options[schoolTypeField.value].text;
-		newUser.tipo_colegio_cod = schoolTypeField.value - 1;
+		newUser.tipo_colegio_cod = schoolTypeField.value == 0 ? (int)UserSchoolType.NONE : schoolTypeField.value - 1;
 		newUser.lugar_nacimiento = countryField.text;
 		newUser.vive = GetUserLivingWith();
+		if (string.IsNullOrEmpty(newUser.lugar_nacimiento)) newUser.lugar_nacimiento = "99";
 
 		var validData = true;
 		var errMsg = "";
 
 		var isAlreadyRegistered = UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.id_proyecto == newUser.id_proyecto);
 
-        if (string.IsNullOrEmpty(newUser.pin))
+		if (string.IsNullOrEmpty(newUser.pin))
 		{
-			errMsg = "El nombre de usuario está vacío o es inválido";
+			errMsg = "El pin de usuario estÃ¡ vacÃ­o";
+		}
+		else if (newUser.tipo_colegio_cod == (int)UserSchoolType.NONE)
+		{
+			errMsg = "El tipo de escuela estÃ¡ vacÃ­a o es invÃ¡lida";
 		}
 		else if (isAlreadyRegistered != -1)
 		{
-            errMsg = "El pin de usuario ya está registrado en esta institución";
-        }
-        else if (newUser.edad == -1)
+			errMsg = "El pin de usuario ya estÃ¡ registrado en esta instituciÃ³n";
+		}
+		else if (newUser.edad == 99)
 		{
-			errMsg = "El campo de edad está vacío o es inválido";
+			errMsg = "El campo de edad estÃ¡ vacÃ­o o es invÃ¡lido";
 		}
 		else if (newUser.sexo == UserSex.NONE)
 		{
-			errMsg = "El género está vacío o es inválido";
+			errMsg = "El gÃ©nero estÃ¡ vacÃ­o o es invÃ¡lido";
 		}
-		else if (newUser.tipo_colegio == UserSchoolType.NONE.ToString())
+		else if (newUser.grado == 99)
 		{
-			errMsg = "El tipo de escuela está vacía o es inválida";
-		}
-		else if (newUser.grado == -1)
-		{
-			errMsg = "El campo de grado está vacío o es inválido";
+			errMsg = "El campo de grado estÃ¡ vacÃ­o o es invÃ¡lido";
 		}
 		else if (string.IsNullOrEmpty(newUser.lugar_nacimiento))
 		{
-			errMsg = "El lugar de nacimiento está vacío o es inválido";
+			errMsg = "El lugar de nacimiento estÃ¡ vacÃ­o o es invÃ¡lido";
 		}
 		else if (string.IsNullOrEmpty(newUser.vive))
 		{
-			errMsg = "El campo 'Con quien vives' está vacío o es inválido";
+			errMsg = "El campo 'Con quien vives' estÃ¡ vacÃ­o o es invÃ¡lido";
 		}
 
-		Debug.Log("user" + newUser.pin + " " + newUser.id_proyecto + " " + newUser.edad + " " + 
-			newUser.lugar_nacimiento + " " + newUser.grado + " " + newUser.vive + " " + newUser.sexo + " " + newUser.tipo_colegio);
+		Debug.Log("Error? >> " + errMsg);
+		Debug.Log("USER INFO TO SAVE!:");
+		Debug.Log("Sexo >" + newUser.sexo);
+		Debug.Log("Sexo cod >" + newUser.sexo_cod);
 		validData = string.IsNullOrEmpty(errMsg);
 		wrongNewUserDataLabelPopUp.SetText(errMsg);
 

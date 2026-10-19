@@ -137,7 +137,6 @@ public class GameSequencesList : ScriptableObject
             prevGame.SaveAnalytics();
             prevGame.SaveGeneralGameAnalytics();
         }
-		Debug.Log("Calling end sequence");
 		UserDataManager.OnUserQuit();
         ResetSequence();
         GoToNextItemInList();
@@ -146,23 +145,29 @@ public class GameSequencesList : ScriptableObject
 
     public bool IsLastMarket(SimpleGameSequenceItem item)
     {
-        if (item is not MonsterMarketConfig marketItem) return false;
-        var lastMarketIdx = -1;
+        if (item is not MonsterMarketConfig) return false;
+        var currIdx = goToGameGroupIdx;
+        var lastMarketIdx = 0;
 		for (var i = 0; i < gameSequences.Count; i++)
         {
-            var curr = gameSequences[i];
-            if (curr is not MonsterMarketConfig currMarketToCheck) continue;
-			lastMarketIdx += 1;
+            if (gameSequences[i] is not MonsterMarketConfig) continue;
+            Debug.Log("Market id found >> " + i + " and we are in " + currIdx);
+            lastMarketIdx = i;
         }
-
-		var currMarketIdx = MonsterMarketConfig.marketAppearTimes;
-		if (lastMarketIdx == currMarketIdx) return true;
-        return false;
+        return currIdx == lastMarketIdx;
     }
 
+    //Returns which market (1 based) is the current item of the sequence
     public int GetMarketAttempt()
     {
-        return MonsterMarketConfig.marketAppearTimes;
+        var marketCount = 0;
+        for (var i = 0; i < gameSequences.Count; i++)
+        {
+            if (gameSequences[i] is not MonsterMarketConfig) continue;
+            marketCount++;
+            if (goToGameGroupIdx == i) return marketCount;
+        }
+        return 1;
     }
 
 

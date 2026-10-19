@@ -89,6 +89,7 @@ public class UserDataManager : ScriptableObject
 		string documentID = null, 
 		bool shouldUseTestID = true)
 	{
+		Debug.Log("SaveUserAnalyticsPerGame activated... building fields!!!");
 		var analyticsWithExtraFields = new Dictionary<string, object>();
         analyticsWithExtraFields.Add(DataIds.institutionCode, CurrUser.id_proyecto);
         analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id_jugador);
@@ -125,7 +126,7 @@ public class UserDataManager : ScriptableObject
 
 	public static void OnUserQuit()
 	{
-		Debug.Log("Calling on user quit");
+		Debug.Log("Calling on user quit---!");
 		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();

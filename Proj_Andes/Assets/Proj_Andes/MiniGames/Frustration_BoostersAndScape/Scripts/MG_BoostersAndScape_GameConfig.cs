@@ -33,8 +33,11 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
             itemAnalytics.Add(DataIds.frustPersTrial, currData.roundCount);
             itemAnalytics.Add(DataIds.frustPersPresition, currData.distanceInBetween);
             itemAnalytics.Add(DataIds.frustPersBoostClicks, currData.clicksToBoost);
+            itemAnalytics.Add(DataIds.frustPersIsTutorial, currData.isTutorial);
+            itemAnalytics.Add(DataIds.frustPersLossByCheat, currData.lossByCheat);
 
             var newDocID = Guid.NewGuid().ToString();
+            Debug.Log(itemAnalytics);
 
             UserDataManager.LastCollectionIDStored = DataIds.boostersAndScapeGame;
             UserDataManager.LastDocumentIDsStored.Add(newDocID);

@@ -266,4 +266,6 @@ public class MechHandRoundAnalytics
 	public int roundCount;
 	public int thrown;
 	public float presition;
+	//NOTE: never assigned in the shipped APK either, so fg_trampa_activada is always false (kept for parity)
+	public bool lossByCheat;
 }

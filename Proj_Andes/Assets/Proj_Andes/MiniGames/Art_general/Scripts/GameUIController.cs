@@ -51,6 +51,11 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         menuContainer.gameObject.SetActive(false);
         //StopCoroutine(sendStars);
     }
+    void Update()
+    {
+        if (GameSequencesList.isTheNarrativeSequence) showHomeBtn = true;
+        if (showHomeBtn) homeBtn.gameObject.SetActive(true);
+    }
     void OpenMenu()
     {
         menuContainer.gameObject.SetActive(true);

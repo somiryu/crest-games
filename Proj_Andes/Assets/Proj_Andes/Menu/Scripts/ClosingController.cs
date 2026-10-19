@@ -21,6 +21,7 @@ public class ClosingController : MonoBehaviour
         finalAudioSource.Play();
         continueBtn.onClick.AddListener(closingItem.OnSequenceOver);
         TimeManager.Instance.gameState = SessionStateLeft.Finalizado;
+        Debug.Log("<<<<<>>>>>>>>>> Start closing >> state " + TimeManager.Instance.gameState);
         rocketObj.SetActive(GameSequencesList.isTheNarrativeSequence == false);
 
     }

@@ -34,7 +34,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
     {
 		GameID = Guid.NewGuid().ToString();
 		itemAnalytics = new Dictionary<string, object>();
-
+		Debug.Log("Saving analytics!");
 
 		for (int i = 0;i < MG_SizeRockets_GameManager.Instance.analyticsPerRound.Length; i++)
 		{
@@ -47,6 +47,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 			itemAnalytics.Add(DataIds.sizeRocketResponseInt, (int) analytics.choiceType);
 			itemAnalytics.Add(DataIds.mouseUpCount, analytics.mouseUpCount);
 			itemAnalytics.Add(DataIds.starsPerRound, analytics.stars);
+			Debug.Log("Saving cr_release >> " + analytics.mouseUpCount);
 
 			UserDataManager.SaveUserAnayticsPerGame(DataIds.sizeRocketsGame, itemAnalytics);
 
