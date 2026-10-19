@@ -14,11 +14,25 @@ public class UserData
     [FirestoreProperty] public int edad { get; set; }
     [FirestoreProperty] public int grado { get; set; }
     [FirestoreProperty] public string sexo_field { get; set; }
+    //Profiles created before the shipped APK stored the sex as a number in "sexo" (0 Hombre, 1 Mujer).
+    //Mapped so it can be read as a fallback and is not erased when the document is saved again.
+    //object because the Firebase Unity SDK doesn't support nullable value types (null when the field is missing)
+    [FirestoreProperty("sexo")] public object sexo_legacy { get; set; }
     //Stored as a string in the database (sexo_field), so that the value is readable in the CMS
     [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
     public UserSex sexo
     {
-        get => Enum.TryParse(sexo_field, out UserSex value) ? value : UserSex.NONE;
+        get
+        {
+            if (Enum.TryParse(sexo_field, out UserSex value)) return value;
+            if (sexo_legacy is IConvertible legacyCode && !(sexo_legacy is string))
+            {
+                var code = legacyCode.ToInt64(null);
+                if (code == (int)UserSex.Hombre) return UserSex.Hombre;
+                if (code == (int)UserSex.Mujer) return UserSex.Mujer;
+            }
+            return UserSex.NONE;
+        }
         set => sexo_field = value.ToString();
     }
     [FirestoreProperty] public int sexo_cod { get; set; }

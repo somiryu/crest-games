@@ -47,6 +47,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] UsersListItem selectedUser;
 	[SerializeField] Button cancelSearchBarBtn;
 	[SerializeField] Button removeSelectedUser;
+
+	[Header("Delete User Confirmation")]
+	[SerializeField] Transform deleteUserPanel;
+	[SerializeField] Button deleteUserConfirmBtn;
+	[SerializeField] Button deleteUserCancelBtn;
+	[SerializeField] TMP_Text deleteUserNameLabel;
+	string userIdPendingToDelete;
 	[SerializeField] GameObject selectedUserLabelGO;
 	[SerializeField] TMP_Text selectedUserLabel;
 
@@ -141,6 +148,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		wantsToExitSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(true));
 		exitSessionBtn.onClick.AddListener(OnExitSession);
 		cancelSessionBtn.onClick.AddListener(() => closeSessionPanel.gameObject.SetActive(false));
+		deleteUserPanel.gameObject.SetActive(false);
+		deleteUserConfirmBtn.onClick.AddListener(OnDeleteUserConfirmed);
+		deleteUserCancelBtn.onClick.AddListener(CloseDeleteUserPanel);
 		musicBtn.onClick.AddListener(() => SwitchSoundActive());
 		goToExistingUserPanel.onClick.AddListener(OnWantsToAccessExistingUser);
 
@@ -553,11 +563,34 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         return currUserLivingWith;
 	}
 
+	//Deleting a profile can't be undone, so it's always confirmed first
 	public void RemoveUserOfBtn(UsersListItem item)
 	{
-		if (!currBtnsByDataID.TryGetValue(item, out var idFound)) Debug.LogError("Trying to delete a user but was not found on dictionary");
-		UserDataManager.Instance.RemoveUser(idFound);
-		userDeletionInProgress = true;
+		if (!currBtnsByDataID.TryGetValue(item, out var idFound))
+		{
+			Debug.LogError("Trying to delete a user but was not found on dictionary");
+			return;
+		}
+		userIdPendingToDelete = idFound;
+		deleteUserNameLabel.SetText(item.label.text);
+		deleteUserPanel.gameObject.SetActive(true);
+	}
+
+	void OnDeleteUserConfirmed()
+	{
+		if (!string.IsNullOrEmpty(userIdPendingToDelete))
+		{
+			UserDataManager.Instance.RemoveUser(userIdPendingToDelete);
+			userDeletionInProgress = true;
+			OnRemoveSelectedUserBtnPressed();
+		}
+		CloseDeleteUserPanel();
+	}
+
+	void CloseDeleteUserPanel()
+	{
+		userIdPendingToDelete = null;
+		deleteUserPanel.gameObject.SetActive(false);
 	}
 
 	public void OnSelectedUser(UsersListItem data)

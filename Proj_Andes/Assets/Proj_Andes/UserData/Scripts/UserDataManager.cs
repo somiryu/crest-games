@@ -236,8 +236,11 @@ public class UserDataManager : ScriptableObject
 
 	public void RemoveUser(string id)
 	{
+		//The current user is stored as an index, so keep it pointing to the same user after the list shrinks
+		var currUserID = currUserDataIdx != -1 ? CurrUserData.id_jugador : null;
 		var data = usersDatas.Find(x => x.id_jugador == id);
 		DatabaseManager.DeleteUserFromDataList(data);
+		SetCurrUser(currUserID == id ? null : currUserID);
 	}
 
 	public void SetCurrUser(string id)

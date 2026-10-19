@@ -91,38 +91,67 @@ public static class DatabaseManager
             return;
         }
 
+        //Kept so we can fall back to the local data if the server can't be reached
+        var localUsers = new List<UserData>(userDatas);
         userDatas.Clear();
 
 
         Query allUsers = db.Collection(DataIds.usersCollection);
         allUsers.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
-            QuerySnapshot allUsersQuerySnapshot = task.Result;
-            if (task.IsFaulted) Debug.LogError("FailedToGetUsersDataList");
-
-            foreach (DocumentSnapshot documentSnapshot in allUsersQuerySnapshot.Documents)
+            //userListDone must always be set, otherwise the loading screen waits forever
+            try
             {
-                UserData currUserData = documentSnapshot.ConvertTo<UserData>();
-                if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
+                if (task.IsFaulted || task.IsCanceled)
                 {
-                    Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id_jugador + " But ID already existed");
-                    continue;
+                    Debug.LogError("FailedToGetUsersDataList, using local data: " + task.Exception?.GetBaseException().Message);
+                    userDatas.Clear();
+                    userDatas.AddRange(localUsers);
+                    return;
                 }
-                userDatas.Add(currUserData);
+
+                foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+                {
+                    UserData currUserData;
+                    try
+                    {
+                        currUserData = documentSnapshot.ConvertTo<UserData>();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError("Skipping user document " + documentSnapshot.Id + " that couldn't be read: " + e.Message);
+                        continue;
+                    }
+                    //Older profiles only have the numeric "sexo". The constructor defaults sexo_field to Mujer,
+                    //so it has to be rebuilt from the legacy value, and is stored as text from now on
+                    if (!documentSnapshot.ContainsField("sexo_field"))
+                    {
+                        currUserData.sexo_field = null;
+                        currUserData.sexo_field = currUserData.sexo == UserSex.NONE ? null : currUserData.sexo.ToString();
+                    }
+                    if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
+                    {
+                        Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id_jugador + " But ID already existed");
+                        continue;
+                    }
+                    userDatas.Add(currUserData);
+                }
+
+                if (pendingUserDatasToUpload.Count > 0)
+                {
+                    for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
+                    {
+                        var currPending = pendingUserDatasToUpload[i];
+                        var idxFound = userDatas.FindIndex(x => x.id_jugador == currPending.id_jugador);
+                        if (idxFound != -1) userDatas[idxFound] = currPending;
+                        else userDatas.Add(currPending);
+                    }
+                }
             }
-
-            if (pendingUserDatasToUpload.Count > 0)
+            finally
             {
-                for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
-                {
-                    var currPending = pendingUserDatasToUpload[i];
-                    var idxFound = userDatas.FindIndex(x => x.id_jugador == currPending.id_jugador);
-                    if (idxFound != -1) userDatas[idxFound] = currPending;
-                    else userDatas.Add(currPending);
-                }
-			}
-
-			userListDone = true;
+                userListDone = true;
+            }
         });
     }
 
@@ -155,12 +184,46 @@ public static class DatabaseManager
         else pendingSessionsToUpload = new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
 	}
 
-  public static async void DeleteUserFromDataList(UserData dataToDelete)
+    //Only removes the profile, the sessions and analytics of the user are kept since they are research data
+    public static async void DeleteUserFromDataList(UserData dataToDelete)
     {
         UserDeletionCompleted = false;
-		await db.Collection(DataIds.usersCollection).Document(dataToDelete.pin + " " + dataToDelete.id_jugador).DeleteAsync()
-            .ContinueWithOnMainThread(task =>UserDeletionCompleted = true);
+        if (dataToDelete == null)
+        {
+            Debug.LogError("Trying to delete a user that doesn't exist");
+            UserDeletionCompleted = true;
+            return;
+        }
+
+        var userID = dataToDelete.id_jugador;
+        userDatas.RemoveAll(x => x.id_jugador == userID);
+        //Otherwise a user created offline would be uploaded again on the next sync
+        pendingUserDatasToUpload.RemoveAll(x => x.id_jugador == userID);
+        SaveUsersLocally();
+
+        //The UI can refresh right away: offline, Firestore keeps the deletion queued and its queries already exclude it
+        UserDeletionCompleted = true;
+
+        try
+        {
+            await db.Collection(DataIds.usersCollection).Document(userID).DeleteAsync();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to delete user " + userID + " from database: " + e.Message);
+        }
 	}
+
+    static void SaveUsersLocally()
+    {
+		var allUserObj = new LocalSaveUsersList();
+		allUserObj.datas = userDatas;
+		PlayerPrefs.SetString(UserDatasJSONKey, JsonConvert.SerializeObject(allUserObj));
+
+		var saveFile = new LocalSaveUsersList();
+		saveFile.datas = pendingUserDatasToUpload;
+		PlayerPrefs.SetString(pendingUserJSONKey, JsonConvert.SerializeObject(saveFile));
+    }
 
 
     public static async void SaveUserDatasList(List<UserData> userDatas, 
@@ -231,51 +294,60 @@ public static class DatabaseManager
 
 		testAmountsSavedToDataBase = 0;
 
-
-		for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
+        //savingIsDone must always be set, otherwise the loading screen waits forever.
+        //If something fails the pending data is kept locally so it's retried on the next sync.
+        try
         {
-            currLoadedObjs++;
-            currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
-            var updatedData = DatabaseManager.userDatas.Find(x => x.id_jugador == pendingUserDatasToUpload[i].id_jugador);
-            Debug.Log("Will save user: " + updatedData.pin);
-
-            DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(updatedData.id_jugador);      
-            await docRef.SetAsync(updatedData);
-        }
-
-
-        foreach(var GameDatas in pendingSessionsToUpload)
-        {
-			currLoadedObjs++;
-			currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
-			CollectionReference collRef = db.Collection(GameDatas.Key);
-            Debug.Log("Syncing GAME ID: " + GameDatas.Key);
-            if(GameDatas.Key == DataIds.test)
+            for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
             {
-                testAmountsSavedToDataBase = GameDatas.Value.Count;
-                Debug.Log("Amount of sesions saved: " + testAmountsSavedToDataBase);
+                currLoadedObjs++;
+                currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
+                var updatedData = DatabaseManager.userDatas.Find(x => x.id_jugador == pendingUserDatasToUpload[i].id_jugador);
+                if (updatedData == null) continue;
+                Debug.Log("Will save user: " + updatedData.pin);
+
+                DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(updatedData.id_jugador);      
+                await docRef.SetAsync(updatedData);
             }
-            foreach(var sessionData in GameDatas.Value)
+
+
+            foreach(var GameDatas in pendingSessionsToUpload)
             {
-				//Debug.Log("Syncing DOC ID: " + sessionData.Key);
-				DocumentReference docRef = collRef.Document(sessionData.Key);
-                await docRef.SetAsync(sessionData.Value);
+                currLoadedObjs++;
+                currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
+                CollectionReference collRef = db.Collection(GameDatas.Key);
+                Debug.Log("Syncing GAME ID: " + GameDatas.Key);
+                if(GameDatas.Key == DataIds.test)
+                {
+                    testAmountsSavedToDataBase = GameDatas.Value.Count;
+                    Debug.Log("Amount of sesions saved: " + testAmountsSavedToDataBase);
+                }
+                foreach(var sessionData in GameDatas.Value)
+                {
+                    //Debug.Log("Syncing DOC ID: " + sessionData.Key);
+                    DocumentReference docRef = collRef.Document(sessionData.Key);
+                    await docRef.SetAsync(sessionData.Value);
+                }
             }
-        }
 
-        if (hasInternetConnection)
+            if (hasInternetConnection)
+            {
+                pendingSessionsToUpload.Clear();
+                pendingUserDatasToUpload.Clear();
+                PlayerPrefs.DeleteKey(pendingUserJSONKey);
+                PlayerPrefs.DeleteKey(pendingSessionsJSONKey);
+            }
+            Debug.Log("Finished saving to database");
+        }
+        catch (Exception e)
         {
-            pendingSessionsToUpload.Clear();
-            pendingUserDatasToUpload.Clear();
-            PlayerPrefs.DeleteKey(pendingUserJSONKey);
-            PlayerPrefs.DeleteKey(pendingSessionsJSONKey);
+            Debug.LogError("Failed saving to database, data kept locally to retry: " + e.Message);
         }
-
-        currLoadProgress = 1;
-
-		savingIsDone = true;
-        Debug.Log("Finished saving to database");
-
+        finally
+        {
+            currLoadProgress = 1;
+            savingIsDone = true;
+        }
 	}
 
     //Each time we add something to the list, we need to redo the method, since the lists change causes an error on the iteration
