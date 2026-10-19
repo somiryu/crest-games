@@ -70,6 +70,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     private MG_HearthAndStars_RoundAnalytics roundAnalytics;
 
+    //The scene always references the Flowers config, so the rounds come from the config of the item being played
+    //(mixed plays 14, confirmed by the research team). Opening the scene on its own uses the scene's config.
+    int RoundsToPlay => GameSequencesList.Instance.prevGame is MG_HearthAndStarsGameConfigs playing ? playing.maxRounds : gameConfigs.maxRounds;
+
     [SerializeField] public List<MG_HearthAndStars_RoundAnalytics> AllRoundsAnalytics;
 
     public void Awake()
@@ -283,7 +287,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
-        if (currRound >= gameConfigs.maxRounds)
+        if (currRound >= RoundsToPlay)
         {
             GameOver();
             return;
