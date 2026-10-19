@@ -461,7 +461,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		else newUser.grado = int.TryParse(gradeText, out var gradeResult) ? gradeResult : -99;
 
 		newUser.sexo = Enum.TryParse<UserSex>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserSex.NONE;
-		newUser.sexo_cod = (int) newUser.sexo;
 		newUser.tipo_colegio = schoolTypeField.options[schoolTypeField.value].text;
 		newUser.tipo_colegio_cod = schoolTypeField.value == 0 ? (int)UserSchoolType.NONE : schoolTypeField.value - 1;
 		newUser.lugar_nacimiento = countryField.text;

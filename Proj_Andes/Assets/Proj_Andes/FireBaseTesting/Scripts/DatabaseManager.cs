@@ -122,13 +122,7 @@ public static class DatabaseManager
                         Debug.LogError("Skipping user document " + documentSnapshot.Id + " that couldn't be read: " + e.Message);
                         continue;
                     }
-                    //Older profiles only have the numeric "sexo". The constructor defaults sexo_field to Mujer,
-                    //so it has to be rebuilt from the legacy value, and is stored as text from now on
-                    if (!documentSnapshot.ContainsField("sexo_field"))
-                    {
-                        currUserData.sexo_field = null;
-                        currUserData.sexo_field = currUserData.sexo == UserSex.NONE ? null : currUserData.sexo.ToString();
-                    }
+                    currUserData.NormalizeSex();
                     if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
                     {
                         Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id_jugador + " But ID already existed");
@@ -164,13 +158,21 @@ public static class DatabaseManager
 		{
             var savedJSON = PlayerPrefs.GetString(UserDatasJSONKey);
 			var savedUsers = JsonConvert.DeserializeObject<LocalSaveUsersList>(savedJSON);
-			if (savedUsers != null && savedUsers.datas != null) userDatas.AddRange(savedUsers.datas);
+			if (savedUsers != null && savedUsers.datas != null)
+			{
+				foreach (var user in savedUsers.datas) user.NormalizeSex();
+				userDatas.AddRange(savedUsers.datas);
+			}
 		}
 
 		if (PlayerPrefs.HasKey(pendingUserJSONKey))
 		{
 			var pendingUsers = JsonConvert.DeserializeObject<LocalSaveUsersList>(PlayerPrefs.GetString(pendingUserJSONKey));
-			if (pendingUsers != null && pendingUsers.datas != null) pendingUserDatasToUpload.AddRange(pendingUsers.datas);
+			if (pendingUsers != null && pendingUsers.datas != null)
+			{
+				foreach (var user in pendingUsers.datas) user.NormalizeSex();
+				pendingUserDatasToUpload.AddRange(pendingUsers.datas);
+			}
             pendingSyncronizedUsersAmount = pendingUserDatasToUpload.Count;
 		}
 		else pendingUserDatasToUpload = new List<UserData>();
@@ -304,6 +306,7 @@ public static class DatabaseManager
                 currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
                 var updatedData = DatabaseManager.userDatas.Find(x => x.id_jugador == pendingUserDatasToUpload[i].id_jugador);
                 if (updatedData == null) continue;
+                updatedData.NormalizeSex();
                 Debug.Log("Will save user: " + updatedData.pin);
 
                 DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(updatedData.id_jugador);      
