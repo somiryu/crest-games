@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class AppSkipSceneButton : MonoBehaviour
 {
-    public static bool ActiveDebugGlobalUI = false;
+    //Only in the editor and in development builds, release builds never show the debug UI
+    public static bool ActiveDebugGlobalUI => Debug.isDebugBuild;
 
     public static string instancePrefabPath = "DebugGlobalUI";
     static AppSkipSceneButton instance;

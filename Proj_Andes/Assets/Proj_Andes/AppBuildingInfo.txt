@@ -1,13 +1,24 @@
-Apps build settings:
+Apps built from this project
+============================
 
- Minigames:
+Each app is an AppFlavor asset (Menu/AppFlowSystem/Scriptables/AppFlavors):
 
--- AppName --
-miniSEL - Minijuegos
--- overriden package name --
-com.HiHatGames.CREST
+  AppFlavor_Minijuegos   miniSEL - Minijuegos   com.HiHatGames.CREST              games sequence
+  AppFlavor_Historias    miniSel - Historias    com.HiHatGames.MiniSelNarratives  narrative sequence
 
--- App name --
-miniSel - Historias
--- overriden package name --
-com.HiHatGames.MiniSelNarratives
+Do not hand-edit GameSequencesList.isTheNarrativeSequence or AppSkipSceneButton.ActiveDebugGlobalUI anymore.
+
+  Hi Hat Games > App Flavor > Usar Minijuegos / Usar Historias
+      Makes that app the active one (Resources/ActiveAppFlavor) and applies its product
+      name and package to the Player Settings. Use it before pressing Play in the editor.
+
+  Hi Hat Games > Build > <app> - Android (release | desarrollo)
+      Applies the flavor and builds the APK into Builds/<flavor>/.
+      The debug overlay (skip scene button, skin/narrative selectors) only exists in the
+      editor and in development builds; release builds never show it.
+
+Before a release build:
+  - Raise Android "Bundle Version Code" (the APKs shipped on 2024-08-27 are versionCode 1, versionName 0.0).
+  - Sign with the same keystore as the shipped APKs (certificate created 2024-08-08), otherwise
+    devices must uninstall the old app first and lose any data not yet synced.
+  - Remove the Unity-MCP package (editor tooling) so its DLLs are not shipped.
