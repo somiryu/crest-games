@@ -283,21 +283,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
-        if(currGameType != HeartsAndFlowersGameType.Mixed)
+        if (currRound >= gameConfigs.maxRounds)
         {
-            if (currRound >= gameConfigs.maxRounds)
-            {
-                GameOver();
-                return;
-            }
-        }
-        else
-        {
-            if (currRound >= gameConfigs.maxRoundsOnMix)
-            {
-                GameOver();
-                return;
-            }
+            GameOver();
+            return;
         }
 
 

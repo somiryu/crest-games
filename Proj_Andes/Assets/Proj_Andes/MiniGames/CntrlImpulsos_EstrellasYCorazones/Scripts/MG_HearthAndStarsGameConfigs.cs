@@ -19,7 +19,6 @@ public class MG_HearthAndStarsGameConfigs : GameConfig
 
 	public float timePerChoice = 5f;
 	public int maxRounds = 8;
-	public int maxRoundsOnMix = 8;
 	public int initialCoins = 0;
 	public int coinsOnCorrectAnswer = 0;
 	public int coinsOnWrongAnswer = 0;
