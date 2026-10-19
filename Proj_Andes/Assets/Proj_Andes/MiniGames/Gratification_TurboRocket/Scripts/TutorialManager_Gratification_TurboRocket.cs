@@ -223,9 +223,9 @@ public class TutorialManager_Gratification_TurboRocket : MonoBehaviour, iTurboRo
         }
         ContinuousMovement();
 
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (GameInput.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var mouseWorldPos = Camera.main.ScreenToWorldPoint(GameInput.mousePosition);
             startYPos = transform.position.y;
             yMoveProgress = 0;
             targetYPos = mouseWorldPos.y;

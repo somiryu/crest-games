@@ -52,7 +52,7 @@ public class GeneralGameAnalyticsManager : MonoBehaviour
 	void HandleMouseClicks()
 	{
 		clickTimer += Time.deltaTime;
-		if (!Input.GetMouseButtonDown(0)) return;
+		if (!GameInput.GetMouseButtonDown(0)) return;
 		analytics.clicks++;
 		analytics.timesBetweenClicks.Add(clickTimer);
 		clickTimer = 0;

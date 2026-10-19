@@ -155,8 +155,8 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
         }
 
         ManageTutorialStop(!tutorialDone);
-        if (Input.GetMouseButtonDown(0)) clickRepetitions++;
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !lossByCheat)
+        if (GameInput.GetMouseButtonDown(0)) clickRepetitions++;
+        if (GameInput.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !lossByCheat)
         {
             if (!TryForcedToFail() && currentBooster.Boosteable()) OnBoostered(currentBooster);
             else Onfailed();
@@ -249,7 +249,7 @@ public class MG_BoostersAndScape_Manager : MonoBehaviour, IEndOfGameManager, ITi
                 addedTimeManagUser = true;
             }
         }
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (GameInput.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             currStepTutorial++;
             tutorialAnims.gameObject.SetActive(false);

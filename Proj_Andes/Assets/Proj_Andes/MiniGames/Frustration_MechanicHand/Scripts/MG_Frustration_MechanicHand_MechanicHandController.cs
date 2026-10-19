@@ -63,15 +63,15 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
     {
         if (MG_MechanicHand_GameManger.Instance.IsOnEndScreen) return;
         if (!canDrag) return;
-        if (Input.GetMouseButtonDown(0))
+        if (GameInput.GetMouseButtonDown(0))
         {
-            mouseDragStartPosition = Input.mousePosition.y;
-            lastFrameMousePos = Input.mousePosition.y;
+            mouseDragStartPosition = GameInput.mousePosition.y;
+            lastFrameMousePos = GameInput.mousePosition.y;
         }
-        if (Input.GetMouseButton(0))
+        if (GameInput.GetMouseButton(0))
         {
             dragTimer += Time.deltaTime;
-            var diff = mouseDragStartPosition - Input.mousePosition.y;
+            var diff = mouseDragStartPosition - GameInput.mousePosition.y;
             if (Mathf.Abs(diff) > dragDeathZone)
             {
                 if(isDragging== false)
@@ -84,7 +84,7 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
                 OnMouseDragging();
             }
         }
-        if (Input.GetMouseButtonUp(0))
+        if (GameInput.GetMouseButtonUp(0))
         {
             if (isDragging)
             {
@@ -124,13 +124,13 @@ public class MG_Frustration_MechanicHand_MechanicHandController : MonoBehaviour
 
     void OnMouseDragging()
     {
-        var currDelta = Input.mousePosition.y - lastFrameMousePos;
+        var currDelta = GameInput.mousePosition.y - lastFrameMousePos;
         var currAngles = transform.eulerAngles;
         currAngles.z += currDelta * rotSpeedMultiplier * Time.deltaTime;
         currAngles.z = ClampAngle(currAngles.z, -90f, 90f);
         transform.eulerAngles = currAngles;
 
-        lastFrameMousePos = Input.mousePosition.y;
+        lastFrameMousePos = GameInput.mousePosition.y;
     }
 
     float ClampAngle(float angle, float from, float to)

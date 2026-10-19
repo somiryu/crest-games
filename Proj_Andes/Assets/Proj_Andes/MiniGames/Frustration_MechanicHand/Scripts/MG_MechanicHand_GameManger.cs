@@ -145,7 +145,7 @@ public class MG_MechanicHand_GameManger : MonoBehaviour, IEndOfGameManager, ITim
 	void Update()
 	{
 		totalTime += Time.deltaTime;
-		if (Input.GetMouseButtonDown(0)) clickRepetitions++;
+		if (GameInput.GetMouseButtonDown(0)) clickRepetitions++;
 	}
 	void OnRoundStart()
 	{

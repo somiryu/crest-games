@@ -147,7 +147,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			smallRocketBtn.interactable = false;
 			mediumRocketBtn.interactable = false;
 			largeRocketBtn.interactable = false;
-			if (Input.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
+			if (GameInput.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
 			{
 				currAnalytics.mouseUpCount++;
 			}

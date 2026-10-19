@@ -133,9 +133,9 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
         if (!onPlay || !iTurboRocketManager.Instance.onDoneAnim) return;
 
         ContinuousMovement();
-        if (Input.GetMouseButtonDown(0) &&!EventSystem.current.IsPointerOverGameObject())
+        if (GameInput.GetMouseButtonDown(0) &&!EventSystem.current.IsPointerOverGameObject())
         {
-            var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var mouseWorldPos = Camera.main.ScreenToWorldPoint(GameInput.mousePosition);
             startYPos = transform.position.y;
             yMoveProgress = 0;
 			targetYPos = mouseWorldPos.y;
