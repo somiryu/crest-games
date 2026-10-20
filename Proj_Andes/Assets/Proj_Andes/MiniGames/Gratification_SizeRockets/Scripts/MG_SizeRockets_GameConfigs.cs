@@ -44,7 +44,7 @@ public class MG_SizeRockets_GameConfigs : GameConfig
 			itemAnalytics.Add(DataIds.frustrationMode, postFrustration);
 			itemAnalytics.Add(DataIds.tryIndex, analytics.tryIndex);
 			itemAnalytics.Add(DataIds.sizeRocketResponseString, analytics.choiceType.ToString());
-			itemAnalytics.Add(DataIds.sizeRocketResponseInt, (int) analytics.choiceType);
+			itemAnalytics.Add(DataIds.sizeRocketResponseInt, analytics.choiceType == SizeRocketsRocketTypes.NONE ? 99 : (int) analytics.choiceType);
 			itemAnalytics.Add(DataIds.mouseUpCount, analytics.mouseUpCount);
 			itemAnalytics.Add(DataIds.starsPerRound, analytics.stars);
 			Debug.Log("Saving cr_release >> " + analytics.mouseUpCount);

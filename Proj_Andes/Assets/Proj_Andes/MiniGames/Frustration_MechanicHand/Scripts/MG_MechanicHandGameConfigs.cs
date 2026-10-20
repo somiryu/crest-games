@@ -19,6 +19,7 @@ public class MG_MechanicHandGameConfigs : GameConfig
     public override void SaveAnalytics()
     {
 		repetition++;
+		if (repetition >= 3) repetition = 1;
         var currAnalytics = MG_MechanicHand_GameManger.Instance.allRoundAnalytics;
 		GameID = Guid.NewGuid().ToString();
         var currAnalyticsDictionary = new Dictionary<string, object>();

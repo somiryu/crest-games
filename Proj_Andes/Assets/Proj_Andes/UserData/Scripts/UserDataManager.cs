@@ -131,6 +131,7 @@ public class UserDataManager : ScriptableObject
 		var currSequence = GameSequencesList.Instance.GetGameSequence();
 		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
 
+		if (TimeManager.Instance.gameState != SessionStateLeft.Finalizado) TimeManager.Instance.gameState = SessionStateLeft.Abandonado;
 		TimeManager.Instance.ResetSessionTimerAndSave();
 		if (currSequence is MinigameGroups group)
 		{

@@ -83,6 +83,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		for (int i = 0; i < analyticsPerRound.Length; i++)
 		{
 			analyticsPerRound[i] = new SizeRocketAnalytics();
+			analyticsPerRound[i].choiceType = SizeRocketsRocketTypes.NONE;
 		}
 		TryGetComponent(out audioSource);
 		if (instance != null && instance != this) Destroy(instance);

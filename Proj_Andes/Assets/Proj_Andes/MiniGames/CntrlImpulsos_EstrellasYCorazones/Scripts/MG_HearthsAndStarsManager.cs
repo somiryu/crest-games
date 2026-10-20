@@ -70,9 +70,9 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     private MG_HearthAndStars_RoundAnalytics roundAnalytics;
 
-    //The scene always references the Flowers config, so the rounds come from the config of the item being played
-    //(mixed plays 14, confirmed by the research team). Opening the scene on its own uses the scene's config.
-    int RoundsToPlay => GameSequencesList.Instance.prevGame is MG_HearthAndStarsGameConfigs playing ? playing.maxRounds : gameConfigs.maxRounds;
+    //The shipped APK plays 14 rounds in every mode, whatever the config asset says (confirmed by production data).
+    //A constant instead of overwriting gameConfigs.maxRounds, so the editor doesn't save 14 into the asset.
+    const int RoundsToPlay = 14;
 
     [SerializeField] public List<MG_HearthAndStars_RoundAnalytics> AllRoundsAnalytics;
 
@@ -85,9 +85,10 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     public void Init()
     {
-        AllRoundsAnalytics = new List<MG_HearthAndStars_RoundAnalytics>(gameConfigs.maxRounds);
+        if (MG_HearthAndStarsGameConfigs.postFrustration == 1) currGameType = HeartsAndFlowersGameType.Flowers;
+        AllRoundsAnalytics = new List<MG_HearthAndStars_RoundAnalytics>(RoundsToPlay);
         currCoins = gameConfigs.initialCoins;
-        currRound = 0;
+        currRound = 1;
         audiosource = GetComponent<AudioSource>();
         flowerCount = 0;
         heartCount = 0;
@@ -287,7 +288,7 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
         currCoinsValueTxt.text = currCoins.ToString();
         currRoundValueTxt.text = currRound.ToString();
-        if (currRound >= RoundsToPlay)
+        if (currRound - 1 >= RoundsToPlay)
         {
             GameOver();
             return;

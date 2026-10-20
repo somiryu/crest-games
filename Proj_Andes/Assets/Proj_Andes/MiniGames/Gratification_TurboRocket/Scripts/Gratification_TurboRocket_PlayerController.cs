@@ -100,7 +100,7 @@ public class Gratification_TurboRocket_PlayerController : MonoBehaviour, IEndOfG
 	public void RideBegining()
 	{
 		ui.StartUi();
-        ui.StartCoroutine(ui.CameraMovement(2));
+        ui.StartCoroutine(ui.CameraMovement(8));
 		colls = new Collider[5];
 		currentSpeed = levelConfig.regularSpeed;
 		currentTargetSpeed = levelConfig.regularSpeed;
