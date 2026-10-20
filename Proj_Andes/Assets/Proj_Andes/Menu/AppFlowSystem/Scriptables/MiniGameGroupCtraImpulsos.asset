@@ -17,8 +17,7 @@ MonoBehaviour:
     scenePath: 
   miniGamesInGroup:
   - {fileID: 11400000, guid: d29116d12627e774c9c99a4a6abff81e, type: 2}
-  - {fileID: 11400000, guid: 8ba9cf229ee28dd44a21f3f5e1a70141, type: 2}
-  randomize: 1
+  randomize: 0
   CanBeOverridenByDebugFlag: 0
   hasNarrativeFixed: 0
   maxItemsToPlayOnRandomize: 1

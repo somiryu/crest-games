@@ -16,8 +16,8 @@ MonoBehaviour:
     sceneAsset: {fileID: 0}
     scenePath: 
   miniGamesInGroup:
-  - {fileID: 11400000, guid: 257a554bbfafabe44ac0f976fbe0bbda, type: 2}
-  - {fileID: 11400000, guid: 2d412b62f0ec7e844b5e60491e3b5888, type: 2}
+  - {fileID: 11400000, guid: 8eae9f8537289b6479cc1530d3554060, type: 2}
+  - {fileID: 11400000, guid: 6a8e85563e4d0f345872afaa7882124f, type: 2}
   randomize: 0
   CanBeOverridenByDebugFlag: 0
   hasNarrativeFixed: 0
