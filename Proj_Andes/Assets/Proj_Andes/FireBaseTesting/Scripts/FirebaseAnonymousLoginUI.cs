@@ -236,13 +236,13 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	void UReady()
 	{
-        var currClip = UserDataManager.CurrUser.sexo == UserSex.Mujer ? ureadyFAudio : ureadyMAudio;
+        var currClip = UserDataManager.CurrUser.UsesFeminineContent ? ureadyFAudio : ureadyMAudio;
         audioSource.clip = currClip;
         audioSource.Play();
 
         //finding which to deactivate
-        var currWelcome = UserDataManager.CurrUser.sexo == UserSex.Mujer ? ureadyWelcomeM : ureadyWelcomeF;
-        var currUready = UserDataManager.CurrUser.sexo == UserSex.Mujer ? ureadyM : ureadyF;
+        var currWelcome = UserDataManager.CurrUser.UsesFeminineContent ? ureadyWelcomeM : ureadyWelcomeF;
+        var currUready = UserDataManager.CurrUser.UsesFeminineContent ? ureadyM : ureadyF;
 		currWelcome.gameObject.SetActive(false); 
 		currUready.gameObject.SetActive(false);
 
@@ -460,7 +460,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		if (gradeText == "Otro") newUser.grado = 98;
 		else newUser.grado = int.TryParse(gradeText, out var gradeResult) ? gradeResult : -99;
 
-		newUser.sexo = Enum.TryParse<UserSex>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserSex.NONE;
+		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
 		newUser.tipo_colegio = schoolTypeField.options[schoolTypeField.value].text;
 		newUser.tipo_colegio_cod = schoolTypeField.value == 0 ? (int)UserSchoolType.NONE : schoolTypeField.value - 1;
 		newUser.lugar_nacimiento = countryField.text;
@@ -488,7 +488,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			errMsg = "El campo de edad está vacío o es inválido";
 		}
-		else if (newUser.sexo == UserSex.NONE)
+		else if (newUser.gender == UserGender.NONE)
 		{
 			errMsg = "El género está vacío o es inválido";
 		}
@@ -507,8 +507,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		Debug.Log("Error? >> " + errMsg);
 		Debug.Log("USER INFO TO SAVE!:");
-		Debug.Log("Sexo >" + newUser.sexo);
-		Debug.Log("Sexo cod >" + newUser.sexo_cod);
+		Debug.Log("Genero >" + newUser.gender);
+		Debug.Log("Genero cod >" + newUser.genero_cod);
 		validData = string.IsNullOrEmpty(errMsg);
 		wrongNewUserDataLabelPopUp.SetText(errMsg);
 
@@ -618,7 +618,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	{
 		afterLogInPanel.SetActive(true);
 
-		var currClip = UserDataManager.CurrUser.sexo == UserSex.Mujer ? welcomeFAudio : welcomeMAudio;
+		var currClip = UserDataManager.CurrUser.UsesFeminineContent ? welcomeFAudio : welcomeMAudio;
 		audioSource.clip = currClip;
 		audioSource.Play();
 
@@ -626,8 +626,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		var storedCheckPoint = currUser.CheckPointIdx; 
 
-		contWelcomeF.gameObject.SetActive(currUser.sexo == UserSex.Mujer);
-		contWelcomeM.gameObject.SetActive(currUser.sexo == UserSex.Hombre);
+		contWelcomeF.gameObject.SetActive(currUser.UsesFeminineContent);
+		contWelcomeM.gameObject.SetActive(!currUser.UsesFeminineContent);
 
 		var soundPref = PlayerPrefs.GetInt(currUser.id_jugador + " isTheSoundActive", 1);
 		Debug.Log("sound " + PlayerPrefs.GetInt(currUser.id_jugador + " isTheSoundActive"));

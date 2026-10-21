@@ -192,7 +192,7 @@ public static class MinigameBotRunner
         //Second safety net: even a save asked to upload stops before touching the database
         UserDataManager.Instance.HasInternet = false;
 
-        qaUser = new UserData { pin = "QA_BOT", id_proyecto = QaInstitution, edad = 8, grado = 3, sexo = UserSex.Hombre, lugar_nacimiento = "QA", vive = "Mama" };
+        qaUser = new UserData { pin = "QA_BOT", id_proyecto = QaInstitution, edad = 8, grado = 3, gender = UserGender.Masculino, lugar_nacimiento = "QA", vive = "Mama" };
         qaUser.tipo_colegio = UserSchoolType.Privado.ToString();
         qaUser.tipo_colegio_cod = (int)UserSchoolType.Privado;
         UserDataManager.CurrInstitutionCode = QaInstitution;

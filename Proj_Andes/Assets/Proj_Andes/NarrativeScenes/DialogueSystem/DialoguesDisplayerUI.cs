@@ -533,7 +533,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
 
         if (responseClicked.responseAudioAlternative != null)
         {
-            currResponseAudio = UserDataManager.CurrUser.sexo == UserSex.Mujer ? responseClicked.responseAudioAlternative : responseClicked.responseAudio;
+            currResponseAudio = UserDataManager.CurrUser.UsesFeminineContent ? responseClicked.responseAudioAlternative : responseClicked.responseAudio;
         }
         audioPlayer.clip = currResponseAudio;
         if (audioPlayer.clip != null) audioPlayer.Play();
@@ -714,7 +714,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public string SelectTextByGender(DialogueData curr)
     {
         var text = curr.text;
-        if (UserDataManager.CurrUser.sexo == UserSex.Mujer && !string.IsNullOrEmpty(curr.textAlternative))
+        if (UserDataManager.CurrUser.UsesFeminineContent && !string.IsNullOrEmpty(curr.textAlternative))
         {
             text = curr.textAlternative;
         }
@@ -725,7 +725,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public AudioClip SelectAudioByGender(DialogueData curr)
     {
         var audio = curr.audio;
-        if (UserDataManager.CurrUser.sexo == UserSex.Mujer && curr.audioAlternative != null)
+        if (UserDataManager.CurrUser.UsesFeminineContent && curr.audioAlternative != null)
         {
             audio = curr.audioAlternative;
         }
@@ -734,7 +734,7 @@ public class DialoguesDisplayerUI : MonoBehaviour
     public AudioClip SelectAudioResponseByGender(DialogueResponse curr)
     {
         var audio = curr.responseAudio;
-        if (UserDataManager.CurrUser.sexo == UserSex.Mujer && curr.responseAudioAlternative != null)
+        if (UserDataManager.CurrUser.UsesFeminineContent && curr.responseAudioAlternative != null)
         {
             audio = curr.responseAudioAlternative;
         }

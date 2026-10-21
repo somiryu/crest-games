@@ -67,7 +67,7 @@ public static class DatabaseManager
         for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
         {
             Debug.Log("Pending " + i);
-            Debug.Log("User Sexo " + pendingUserDatasToUpload[i].sexo);
+            Debug.Log("User Genero " + pendingUserDatasToUpload[i].gender);
         }
     }
 
@@ -122,7 +122,8 @@ public static class DatabaseManager
                         Debug.LogError("Skipping user document " + documentSnapshot.Id + " that couldn't be read: " + e.Message);
                         continue;
                     }
-                    currUserData.NormalizeSex();
+                    currUserData.AdoptLegacyGender(documentSnapshot);
+                    currUserData.NormalizeGender();
                     if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
                     {
                         Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id_jugador + " But ID already existed");
@@ -160,7 +161,7 @@ public static class DatabaseManager
 			var savedUsers = JsonConvert.DeserializeObject<LocalSaveUsersList>(savedJSON);
 			if (savedUsers != null && savedUsers.datas != null)
 			{
-				foreach (var user in savedUsers.datas) user.NormalizeSex();
+				foreach (var user in savedUsers.datas) user.NormalizeGender();
 				userDatas.AddRange(savedUsers.datas);
 			}
 		}
@@ -170,7 +171,7 @@ public static class DatabaseManager
 			var pendingUsers = JsonConvert.DeserializeObject<LocalSaveUsersList>(PlayerPrefs.GetString(pendingUserJSONKey));
 			if (pendingUsers != null && pendingUsers.datas != null)
 			{
-				foreach (var user in pendingUsers.datas) user.NormalizeSex();
+				foreach (var user in pendingUsers.datas) user.NormalizeGender();
 				pendingUserDatasToUpload.AddRange(pendingUsers.datas);
 			}
             pendingSyncronizedUsersAmount = pendingUserDatasToUpload.Count;
@@ -306,7 +307,7 @@ public static class DatabaseManager
                 currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
                 var updatedData = DatabaseManager.userDatas.Find(x => x.id_jugador == pendingUserDatasToUpload[i].id_jugador);
                 if (updatedData == null) continue;
-                updatedData.NormalizeSex();
+                updatedData.NormalizeGender();
                 Debug.Log("Will save user: " + updatedData.pin);
 
                 DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(updatedData.id_jugador);      
