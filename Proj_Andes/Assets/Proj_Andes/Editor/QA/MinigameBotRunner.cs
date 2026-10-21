@@ -193,8 +193,7 @@ public static class MinigameBotRunner
         UserDataManager.Instance.HasInternet = false;
 
         qaUser = new UserData { pin = "QA_BOT", id_proyecto = QaInstitution, edad = 8, grado = 3, gender = UserGender.Masculino, level = UserLevel.Primaria, lugar_nacimiento = "QA", vive = "Mama" };
-        qaUser.tipo_colegio = UserSchoolType.Privado.ToString();
-        qaUser.tipo_colegio_cod = (int)UserSchoolType.Privado;
+        qaUser.schoolSector = UserSector.PrivadoUrbano;
         UserDataManager.CurrInstitutionCode = QaInstitution;
         UserDataManager.Instance.RegisterNewUser(qaUser);
         UserDataManager.Instance.SetCurrUser(qaUser.id_jugador);

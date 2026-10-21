@@ -88,11 +88,14 @@ public class UserData
     {
         NormalizeGender();
         NormalizeLevel();
+        NormalizeSector();
     }
 
-    /// <summary>Reads the pre-rename fields of a Firestore document, which ConvertTo ignores.</summary>
-    public void AdoptLegacyGender(DocumentSnapshot document)
+    /// <summary>Reads the pre-rename fields of a Firestore document (sexo*, tipo_colegio*), which ConvertTo ignores.</summary>
+    public void AdoptLegacyFields(DocumentSnapshot document)
     {
+        if (document.TryGetValue<string>("tipo_colegio", out var legacySchool)) tipo_colegio = legacySchool;
+        if (document.TryGetValue<object>("tipo_colegio_cod", out var legacySchoolCode) && legacySchoolCode != null) tipo_colegio_cod = (int)Convert.ToInt64(legacySchoolCode);
         if (document.TryGetValue<string>("sexo_field", out var legacyField)) sexo_field = legacyField;
         if (document.TryGetValue<object>("sexo_cod", out var legacyCode) && legacyCode != null) sexo_cod = (int)Convert.ToInt64(legacyCode);
         if (document.TryGetValue<object>("sexo", out var legacyOld)) sexo_legacy = legacyOld;
@@ -127,8 +130,74 @@ public class UserData
         var gender = GenderFromCode(code);
         return gender == UserGender.Otro ? UserGender.NONE : gender;
     }
-    [FirestoreProperty] public string tipo_colegio { get; set; }
-    [FirestoreProperty] public int tipo_colegio_cod { get; set; }
+    // The school sector is stored like the gender: sector ("Privado urbano" ...) and sector_cod (0 Privado urbano,
+    // 1 Público urbano, 2 Público rural, 3 Privado rural; 99 unknown). It used to be tipo_colegio / tipo_colegio_cod
+    // with only "Privado" (0), "Público Urbano" (1) and "Público Rural" (2); those are read but never written back.
+    [FirestoreProperty] public string sector { get; set; }
+    [FirestoreProperty] public int sector_cod { get; set; }
+
+    public const int UnknownSectorCode = 99;
+
+    [Newtonsoft.Json.JsonProperty] string tipo_colegio { get; set; }
+    [Newtonsoft.Json.JsonProperty] int tipo_colegio_cod { get; set; } = UnknownSectorCode;
+    public bool ShouldSerializetipo_colegio() => false;
+    public bool ShouldSerializetipo_colegio_cod() => false;
+
+    [Newtonsoft.Json.JsonIgnore]
+    public UserSector schoolSector
+    {
+        get
+        {
+            var fromField = ParseSector(sector);
+            if (fromField != UserSector.NONE) return fromField;
+            if (IsSectorCode(sector_cod)) return (UserSector)sector_cod;
+            return LegacySector();
+        }
+        set
+        {
+            sector = value == UserSector.NONE ? null : SectorLabel(value);
+            sector_cod = (int)value;
+            tipo_colegio = null;
+            tipo_colegio_cod = UnknownSectorCode;
+        }
+    }
+
+    /// <summary>Makes sector and sector_cod agree with the resolved sector. Called whenever a profile is loaded or saved.</summary>
+    public void NormalizeSector() => schoolSector = schoolSector;
+
+    public static string SectorLabel(UserSector sector)
+    {
+        switch (sector)
+        {
+            case UserSector.PrivadoUrbano: return "Privado urbano";
+            case UserSector.PrivadoRural: return "Privado rural";
+            case UserSector.PublicoUrbano: return "Público urbano";
+            case UserSector.PublicoRural: return "Público rural";
+            default: return null;
+        }
+    }
+
+    /// <summary>The sector whose label is this text (ignoring case), or NONE (the dropdown placeholder, empty text...).</summary>
+    public static UserSector ParseSector(string label)
+    {
+        if (string.IsNullOrEmpty(label)) return UserSector.NONE;
+        foreach (UserSector candidate in new[] { UserSector.PrivadoUrbano, UserSector.PrivadoRural, UserSector.PublicoUrbano, UserSector.PublicoRural })
+            if (string.Equals(SectorLabel(candidate), label.Trim(), StringComparison.OrdinalIgnoreCase)) return candidate;
+        return UserSector.NONE;
+    }
+
+    static bool IsSectorCode(int code) => code == (int)UserSector.PrivadoUrbano || code == (int)UserSector.PublicoUrbano
+        || code == (int)UserSector.PublicoRural || code == (int)UserSector.PrivadoRural;
+
+    // Old profiles never said whether a private school was urban or rural: they keep code 0, which is now
+    // "Privado urbano". The old code 3 ("Otro") was never offered in the dropdown, so it means nothing.
+    UserSector LegacySector()
+    {
+        if (string.Equals(tipo_colegio?.Trim(), "Privado", StringComparison.OrdinalIgnoreCase)) return UserSector.PrivadoUrbano;
+        var fromLabel = ParseSector(tipo_colegio);
+        if (fromLabel != UserSector.NONE) return fromLabel;
+        return tipo_colegio_cod >= 0 && tipo_colegio_cod <= 2 ? (UserSector)tipo_colegio_cod : UserSector.NONE;
+    }
     [FirestoreProperty] public string lugar_nacimiento { get; set; }
     [FirestoreProperty] public string vive { get; set; }
 
@@ -155,8 +224,7 @@ public class UserData
         //Unknown until the profile is filled, a default value would hide missing data (it used to make boys load as Mujer)
         gender = UserGender.NONE;
         level = UserLevel.NONE;
-		tipo_colegio = UserSchoolType.NONE.ToString();
-		tipo_colegio_cod = (int)UserSchoolType.NONE;
+		schoolSector = UserSector.NONE;
 		lugar_nacimiento = string.Empty;
 		vive = string.Empty;
 
@@ -199,13 +267,13 @@ public enum UserLevel
 	NONE = 99,
 }
 
-public enum UserSchoolType
+public enum UserSector
 {
+	PrivadoUrbano = 0,
+	PublicoUrbano = 1,
+	PublicoRural = 2,
+	PrivadoRural = 3,
 	NONE = 99,
-    Privado = 0,
-    PublicoUrbano = 1,
-    PublicoRural = 2,
-    Otro = 3,
 }
 
 [Flags]

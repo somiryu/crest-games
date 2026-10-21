@@ -446,6 +446,17 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         }
 		narratives.forcedScene = narIdx;
 	}
+	/// <summary>
+	/// Only the student's pin is required here (the project code is asked for before, in its own panel).
+	/// Everything else may be left empty and is saved as unknown (99).
+	/// </summary>
+	public static string GetNewUserError(string pin, bool isAlreadyRegistered)
+	{
+		if (string.IsNullOrEmpty(pin)) return "El pin de usuario está vacío";
+		if (isAlreadyRegistered) return "El pin de usuario ya está registrado en esta institución";
+		return "";
+	}
+
 	void OnFinishedUserCreation()
 	{
 		Debug.Log("OnFinishedUserCreation in FirebaseAnonymousLoginUI > " + schoolTypeField.value);
@@ -464,49 +475,15 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
 		//Optional: stays unknown (99) when the placeholder is left selected
 		newUser.level = Enum.TryParse<UserLevel>(levelField.options[levelField.value].text, true, out var levelFound) ? levelFound : UserLevel.NONE;
-		newUser.tipo_colegio = schoolTypeField.options[schoolTypeField.value].text;
-		newUser.tipo_colegio_cod = schoolTypeField.value == 0 ? (int)UserSchoolType.NONE : schoolTypeField.value - 1;
+		//The code comes from the text, not from the position: the options aren't in the order of the codes
+		newUser.schoolSector = UserData.ParseSector(schoolTypeField.options[schoolTypeField.value].text);
 		newUser.lugar_nacimiento = countryField.text;
 		newUser.vive = GetUserLivingWith();
 		if (string.IsNullOrEmpty(newUser.lugar_nacimiento)) newUser.lugar_nacimiento = "99";
 
 		var validData = true;
-		var errMsg = "";
-
-		var isAlreadyRegistered = UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.id_proyecto == newUser.id_proyecto);
-
-		if (string.IsNullOrEmpty(newUser.pin))
-		{
-			errMsg = "El pin de usuario está vacío";
-		}
-		else if (newUser.tipo_colegio_cod == (int)UserSchoolType.NONE)
-		{
-			errMsg = "El tipo de escuela está vacía o es inválida";
-		}
-		else if (isAlreadyRegistered != -1)
-		{
-			errMsg = "El pin de usuario ya está registrado en esta institución";
-		}
-		else if (newUser.edad == 99)
-		{
-			errMsg = "El campo de edad está vacío o es inválido";
-		}
-		else if (newUser.gender == UserGender.NONE)
-		{
-			errMsg = "El género está vacío o es inválido";
-		}
-		else if (newUser.grado == 99)
-		{
-			errMsg = "El campo de grado está vacío o es inválido";
-		}
-		else if (string.IsNullOrEmpty(newUser.lugar_nacimiento))
-		{
-			errMsg = "El lugar de nacimiento está vacío o es inválido";
-		}
-		else if (string.IsNullOrEmpty(newUser.vive))
-		{
-			errMsg = "El campo 'Con quien vives' está vacío o es inválido";
-		}
+		var isAlreadyRegistered = UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.id_proyecto == newUser.id_proyecto) != -1;
+		var errMsg = GetNewUserError(newUser.pin, isAlreadyRegistered);
 
 		Debug.Log("Error? >> " + errMsg);
 		Debug.Log("USER INFO TO SAVE!:");

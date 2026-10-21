@@ -122,7 +122,7 @@ public static class DatabaseManager
                         Debug.LogError("Skipping user document " + documentSnapshot.Id + " that couldn't be read: " + e.Message);
                         continue;
                     }
-                    currUserData.AdoptLegacyGender(documentSnapshot);
+                    currUserData.AdoptLegacyFields(documentSnapshot);
                     currUserData.NormalizeFields();
                     if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
                     {

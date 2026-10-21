@@ -5237,7 +5237,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tipo de Colegio
+  m_text: Sector
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -20604,13 +20604,15 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Tipo de Colegio
+    - m_Text: Sector
       m_Image: {fileID: 0}
-    - m_Text: Privado
+    - m_Text: Privado urbano
       m_Image: {fileID: 0}
-    - m_Text: "P\xFAblico Urbano"
+    - m_Text: Privado rural
       m_Image: {fileID: 0}
-    - m_Text: "P\xFAblico Rural"
+    - m_Text: "P\xFAblico urbano"
+      m_Image: {fileID: 0}
+    - m_Text: "P\xFAblico rural"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -26867,7 +26869,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -0.000030517578, y: 11}
-  m_SizeDelta: {x: 0, y: 254.4575}
+  m_SizeDelta: {x: 0, y: 322.299}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1715811822
 MonoBehaviour:
@@ -32680,7 +32682,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 792968474}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.9999998
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
