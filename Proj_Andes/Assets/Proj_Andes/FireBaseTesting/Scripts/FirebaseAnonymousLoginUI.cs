@@ -61,8 +61,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[Header("Create new user panel")]
 	public GameObject createNewUserPanel;
 	[SerializeField] TMP_InputField nameField;
-    [SerializeField] TMP_Dropdown ageField;
-    [SerializeField] TMP_Dropdown gradeField;
+    //Open numeric answers: any number can be typed
+    [SerializeField] TMP_InputField ageField;
+    [SerializeField] TMP_InputField gradeField;
     [SerializeField] TMP_Dropdown sexField;
     [SerializeField] TMP_Dropdown levelField;
     [SerializeField] TMP_Dropdown schoolTypeField;
@@ -457,6 +458,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		return "";
 	}
 
+	public const int UnknownNumber = 99;
+
+	/// <summary>A number typed in an open numeric field; empty or not a number is unknown (99).</summary>
+	public static int ParseOpenNumber(string text)
+	{
+		return int.TryParse(text?.Trim(), out var number) && number >= 0 ? number : UnknownNumber;
+	}
+
+	/// <summary>Commas become hyphens (they break the CSV downloads); an empty answer is unknown ("99").</summary>
+	public static string CleanBirthplace(string text)
+	{
+		var clean = (text ?? string.Empty).Replace(",", "-").Trim();
+		return string.IsNullOrEmpty(clean) ? "99" : clean;
+	}
+
 	void OnFinishedUserCreation()
 	{
 		Debug.Log("OnFinishedUserCreation in FirebaseAnonymousLoginUI > " + schoolTypeField.value);
@@ -464,22 +480,16 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		newUser.pin = nameField.text;
 		newUser.id_proyecto = UserDataManager.CurrInstitutionCode;
 
-		var ageText = ageField.options[ageField.value].text;
-		if (ageText == "19+") newUser.edad = 19;
-		else newUser.edad = int.TryParse(ageText, out var ageResult) ? ageResult : 99;
-
-		var gradeText = gradeField.options[gradeField.value].text;
-		if (gradeText == "Otro") newUser.grado = 98;
-		else newUser.grado = int.TryParse(gradeText, out var gradeResult) ? gradeResult : -99;
+		newUser.edad = ParseOpenNumber(ageField.text);
+		newUser.grado = ParseOpenNumber(gradeField.text);
 
 		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
 		//Optional: stays unknown (99) when the placeholder is left selected
 		newUser.level = Enum.TryParse<UserLevel>(levelField.options[levelField.value].text, true, out var levelFound) ? levelFound : UserLevel.NONE;
 		//The code comes from the text, not from the position: the options aren't in the order of the codes
 		newUser.schoolSector = UserData.ParseSector(schoolTypeField.options[schoolTypeField.value].text);
-		newUser.lugar_nacimiento = countryField.text;
+		newUser.lugar_nacimiento = CleanBirthplace(countryField.text);
 		newUser.vive = GetUserLivingWith();
-		if (string.IsNullOrEmpty(newUser.lugar_nacimiento)) newUser.lugar_nacimiento = "99";
 
 		var validData = true;
 		var isAlreadyRegistered = UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.id_proyecto == newUser.id_proyecto) != -1;
@@ -488,7 +498,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		Debug.Log("Error? >> " + errMsg);
 		Debug.Log("USER INFO TO SAVE!:");
 		Debug.Log("Genero >" + newUser.gender);
-		Debug.Log("Genero cod >" + newUser.genero_cod);
+		Debug.Log("Genero cod >" + newUser.gen_cod);
 		Debug.Log("Nivel >" + newUser.level + " cod " + newUser.nivel_cod);
 		validData = string.IsNullOrEmpty(errMsg);
 		wrongNewUserDataLabelPopUp.SetText(errMsg);
@@ -517,8 +527,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.Instance.SetCurrUser(null);
 
         nameField.text = string.Empty;
-        ageField.SetValueWithoutNotify(0);
-		gradeField.SetValueWithoutNotify(0);
+        ageField.text = string.Empty;
+		gradeField.text = string.Empty;
 		sexField.SetValueWithoutNotify(0);
 		levelField.SetValueWithoutNotify(0);
 		schoolTypeField.SetValueWithoutNotify(0);

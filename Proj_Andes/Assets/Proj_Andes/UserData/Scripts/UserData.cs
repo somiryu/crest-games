@@ -14,15 +14,15 @@ public class UserData
     [FirestoreProperty] public int edad { get; set; }
     [FirestoreProperty] public int grado { get; set; }
     // The gender is stored in two fields that must always agree: genero ("Masculino"/"Femenino"/"Otro", read by the CMS)
-    // and genero_cod (0 Masculino, 1 Femenino, 9 Otro, 99 unknown). Only write them through `gender`, which updates both.
+    // and gen_cod (0 Masculino, 1 Femenino, 9 Otro, 99 unknown). Only write them through `gender`, which updates both.
     [FirestoreProperty] public string genero { get; set; }
-    [FirestoreProperty] public int genero_cod { get; set; }
+    [FirestoreProperty] public int gen_cod { get; set; }
 
     public const int UnknownGenderCode = 99;
 
     // Profiles created before the gender rename stored "sexo_field" ("Hombre"/"Mujer"), "sexo_cod" (0/1, 99 unknown) and
     // an old numeric "sexo". They are only read (from Firestore through AdoptLegacyGender, from the local save through
-    // Newtonsoft) and never written back: the first time the profile is normalized they are folded into genero/genero_cod.
+    // Newtonsoft) and never written back: the first time the profile is normalized they are folded into genero/gen_cod.
     [Newtonsoft.Json.JsonProperty] string sexo_field { get; set; }
     [Newtonsoft.Json.JsonProperty] int sexo_cod { get; set; } = UnknownGenderCode;
     [Newtonsoft.Json.JsonProperty] object sexo_legacy { get; set; }
@@ -36,14 +36,14 @@ public class UserData
         get
         {
             if (Enum.TryParse(genero, true, out UserGender fromField) && fromField != UserGender.NONE) return fromField;
-            var fromCode = GenderFromCode(genero_cod);
+            var fromCode = GenderFromCode(gen_cod);
             if (fromCode != UserGender.NONE) return fromCode;
             return LegacyGender();
         }
         set
         {
             genero = value == UserGender.NONE ? null : value.ToString();
-            genero_cod = value == UserGender.NONE ? UnknownGenderCode : (int)value;
+            gen_cod = value == UserGender.NONE ? UnknownGenderCode : (int)value;
             sexo_field = null;
             sexo_cod = UnknownGenderCode;
             sexo_legacy = null;
@@ -55,7 +55,7 @@ public class UserData
     [Newtonsoft.Json.JsonIgnore]
     public bool UsesFeminineContent => gender == UserGender.Femenino;
 
-    /// <summary>Makes genero and genero_cod agree with the resolved gender. Called whenever a profile is loaded or saved.</summary>
+    /// <summary>Makes genero and gen_cod agree with the resolved gender. Called whenever a profile is loaded or saved.</summary>
     public void NormalizeGender() => gender = gender;
 
     // The school level is stored like the gender: nivel ("Preescolar" ... "Otro") and nivel_cod (1, 2, 3, 4, 9; 99 unknown).
