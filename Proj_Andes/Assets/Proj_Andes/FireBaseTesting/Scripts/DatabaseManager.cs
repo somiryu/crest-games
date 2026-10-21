@@ -110,26 +110,33 @@ public static class DatabaseManager
                     return;
                 }
 
-                foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
+                //Converting a profile that still has the old field names (sexo*, tipo_colegio*) logs one warning with a full stack
+                //trace per field, thousands of them per sync. Only errors are logged while the profiles are converted.
+                var previousLogFilter = Debug.unityLogger.filterLogType;
+                Debug.unityLogger.filterLogType = LogType.Error;
+                try
                 {
-                    UserData currUserData;
-                    try
+                    foreach (DocumentSnapshot documentSnapshot in task.Result.Documents)
                     {
-                        currUserData = documentSnapshot.ConvertTo<UserData>();
+                        UserData currUserData;
+                        try
+                        {
+                            currUserData = documentSnapshot.ConvertTo<UserData>();
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError("Skipping user document " + documentSnapshot.Id + " that couldn't be read: " + e.Message);
+                            continue;
+                        }
+                        currUserData.AdoptLegacyFields(documentSnapshot);
+                        currUserData.NormalizeFields();
+                        if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador)) continue;
+                        userDatas.Add(currUserData);
                     }
-                    catch (Exception e)
-                    {
-                        Debug.LogError("Skipping user document " + documentSnapshot.Id + " that couldn't be read: " + e.Message);
-                        continue;
-                    }
-                    currUserData.AdoptLegacyFields(documentSnapshot);
-                    currUserData.NormalizeFields();
-                    if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
-                    {
-                        Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id_jugador + " But ID already existed");
-                        continue;
-                    }
-                    userDatas.Add(currUserData);
+                }
+                finally
+                {
+                    Debug.unityLogger.filterLogType = previousLogFilter;
                 }
 
                 if (pendingUserDatasToUpload.Count > 0)
