@@ -119,9 +119,8 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 useVoiceAsCorrectAnswer = false;
                 break;
             case VoiceOrImageGameType.Mixed:
-                if (MG_VoiceStarOrFlowerGameConfigs.Overwritten) useVoiceAsCorrectAnswer = MG_VoiceStarOrFlowerGameConfigs.OverridenUseVoiceAsTheCorrectAnswer;
-                else useVoiceAsCorrectAnswer = Random.Range(0f, 1f) > 0.5f;
-                Debug.Log("Will use voice as correct answer: " + useVoiceAsCorrectAnswer);
+                //Both stimuli appear and the player follows the image (it used to be drawn at random between voice and image)
+                useVoiceAsCorrectAnswer = false;
                 break;
         }
 
@@ -277,35 +276,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 currSoundIsLeft = currImgIsLeft;
                 break;
             case VoiceOrImageGameType.Mixed:
-				if (UseVoiceAsCorrectAnswer)
-				{
-					var lastWasSameDir = currSoundIsLeft;
-
-					var totalPosibility = (0.5f + propabilityShifter);
-
-					Debug.Log(totalPosibility + " chance increase by " + propabilityShifter);
-
-
-					currSoundIsLeft = Random.Range(0f, 1f) < totalPosibility;
-
-					if (rightCount >= currTutoConfig.consecutiveWinsToPass / 2) currSoundIsLeft = true;
-					else if (leftCount >= currTutoConfig.consecutiveWinsToPass / 2) currSoundIsLeft = false;
-
-					if (currSoundIsLeft) leftCount++;
-					else rightCount++;
-
-					if (currSoundIsLeft) currImgIsLeft = false;
-					else currImgIsLeft = true;
-
-					if (currSoundIsLeft == lastWasSameDir)
-					{
-						propabilityShifter += currSoundIsLeft ? -0.2f : 0.2f;
-					}
-					else propabilityShifter = 0;
-
-				}
-				else
-				{
+				//Mixed always follows the image: the follow-the-voice variant was removed
 					var lastWasSameDir = currImgIsLeft;
 
 					var totalPosibility = (0.5f + propabilityShifter);
@@ -328,7 +299,7 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
 					}
 					else propabilityShifter = 0;
 
-				}
+				
 				break;
         }
 
@@ -380,16 +351,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Mixed:
-                if (UseVoiceAsCorrectAnswer)
-                {
-                    if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
-                    else OnWrongChoice();
-                }
-                else //Img is correct answer
-                {
+                //Mixed always follows the image: the follow-the-voice variant was removed
                     if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
                     else OnWrongChoice();
-                }
+                
                 break;
         }
     }
@@ -409,16 +374,10 @@ public class MG_VoiceStarOrFlowerManagerTutorial : MonoBehaviour, IEndOfGameMana
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Mixed:
-                if (UseVoiceAsCorrectAnswer)
-                {
-                    if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
-                    else OnWrongChoice();
-                }
-                else //Img is correct answer
-                {
+                //Mixed always follows the image: the follow-the-voice variant was removed
                     if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
                     else OnWrongChoice();
-                }
+                
                 break;
         }
 	}

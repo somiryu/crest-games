@@ -39,10 +39,10 @@ public class AppSkipSceneButton : MonoBehaviour
         skipSceneBtn.onClick.AddListener(GameSequencesList.Instance.GoToNextItemInList);
         skinSelector.onValueChanged.AddListener(ForceSkinChange);
         narrativeSelector.onValueChanged.AddListener(OverrideNarrativeChanged);
-        voiceOrImageMixedOptionSelections.onValueChanged.AddListener(SelectMixedVoiceOrImageOption);
 
         narrativeSelector.gameObject.SetActive(false);
-        voiceOrImageMixedOptionSelections.gameObject.SetActive(!GameSequencesList.isTheNarrativeSequence);
+        //The mixed mode always follows the image now, so there is nothing to choose
+        voiceOrImageMixedOptionSelections.gameObject.SetActive(false);
         skinSelector.gameObject.SetActive(!GameSequencesList.isTheNarrativeSequence);
 	}
 
@@ -59,17 +59,5 @@ public class AppSkipSceneButton : MonoBehaviour
         skinManager.forceSkinType = true;
         skinManager.skinTypeToForce = (SkinType)skinIdx;
         skinManager.SetSkin(skinManager.skinTypeToForce);
-    }
-
-    void SelectMixedVoiceOrImageOption(int option)
-    {
-        if (option == 0) MG_VoiceStarOrFlowerGameConfigs.Overwritten = false;
-        else
-        {
-            MG_VoiceStarOrFlowerGameConfigs.Overwritten = true;
-            var selectedOption = option == 1 ? true : false;
-            MG_VoiceStarOrFlowerGameConfigs.OverridenUseVoiceAsTheCorrectAnswer = selectedOption;
-            Debug.Log("dropdown " + MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer);
-        }
     }
 }

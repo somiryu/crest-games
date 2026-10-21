@@ -103,7 +103,8 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
                 useVoiceAsCorrectAnswer = false;
                 break;
             case VoiceOrImageGameType.Mixed:
-                useVoiceAsCorrectAnswer = MG_VoiceStarOrFlowerGameConfigs.UseVoiceAsTheCorrectAnswer;
+                //Both stimuli appear and the player follows the image (the follow-the-voice variant was removed)
+                useVoiceAsCorrectAnswer = false;
                 break;
         }
         Debug.Log("starting " + currGameTypeConfig.gameType + " WILL USE VOICE " + useVoiceAsCorrectAnswer);
@@ -206,35 +207,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 
             case VoiceOrImageGameType.Mixed:
 
-                if (UseVoiceAsCorrectAnswer)
-                {
-					var lastWasSameDir = currSoundIsLeft;
-
-                    var totalPosibility = (0.5f + propabilityShifter);
-
-					Debug.Log(totalPosibility + " chance increase by " + propabilityShifter);
-
-
-					currSoundIsLeft = Random.Range(0f, 1f) < totalPosibility;
-
-                    if (rightCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = true;
-                    else if (leftCount >= currGameTypeConfig.maxRounds / 2) currSoundIsLeft = false;
-
-                    if (currSoundIsLeft) leftCount++;
-                    else rightCount++;
-
-                    if (currSoundIsLeft) currImgIsLeft = false;
-					else currImgIsLeft = true;
-
-					if (currSoundIsLeft == lastWasSameDir)
-					{
-						propabilityShifter += currSoundIsLeft ? -0.2f : 0.2f;
-					}
-					else propabilityShifter = 0;
-
-				}
-				else
-                {
+                //Mixed always follows the image: the follow-the-voice variant was removed
 					var lastWasSameDir = currImgIsLeft;
 
                     var totalPosibility = (0.5f + propabilityShifter);
@@ -255,7 +228,7 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
 					}
 					else propabilityShifter = 0;
 
-				}
+				
                 break;
         }
 
@@ -303,16 +276,10 @@ public class MG_VoiceStarOrFlowerManager : MonoBehaviour, IEndOfGameManager
                 else OnWrongChoice();
                 break;
             case VoiceOrImageGameType.Mixed:
-                if (UseVoiceAsCorrectAnswer)
-                {
-                    if (currSoundIsLeft && !currImgIsLeft) OnCorrectChoice();
-                    else OnWrongChoice();
-                }
-                else //Img is correct answer
-                {
+                //Mixed always follows the image: the follow-the-voice variant was removed
                     if (!currSoundIsLeft && currImgIsLeft) OnCorrectChoice();
                     else OnWrongChoice();
-                }
+                
                 break;
         }
     }
