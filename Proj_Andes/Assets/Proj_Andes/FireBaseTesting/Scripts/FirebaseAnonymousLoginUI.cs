@@ -64,6 +64,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     [SerializeField] TMP_Dropdown ageField;
     [SerializeField] TMP_Dropdown gradeField;
     [SerializeField] TMP_Dropdown sexField;
+    [SerializeField] TMP_Dropdown levelField;
     [SerializeField] TMP_Dropdown schoolTypeField;
     [SerializeField] TMP_InputField countryField;
 	[SerializeField] List<LivingWithType> livingWithToggles;
@@ -461,6 +462,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		else newUser.grado = int.TryParse(gradeText, out var gradeResult) ? gradeResult : -99;
 
 		newUser.gender = Enum.TryParse<UserGender>(sexField.options[sexField.value].text, true, out var genderFound) ? genderFound : UserGender.NONE;
+		//Optional: stays unknown (99) when the placeholder is left selected
+		newUser.level = Enum.TryParse<UserLevel>(levelField.options[levelField.value].text, true, out var levelFound) ? levelFound : UserLevel.NONE;
 		newUser.tipo_colegio = schoolTypeField.options[schoolTypeField.value].text;
 		newUser.tipo_colegio_cod = schoolTypeField.value == 0 ? (int)UserSchoolType.NONE : schoolTypeField.value - 1;
 		newUser.lugar_nacimiento = countryField.text;
@@ -509,6 +512,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		Debug.Log("USER INFO TO SAVE!:");
 		Debug.Log("Genero >" + newUser.gender);
 		Debug.Log("Genero cod >" + newUser.genero_cod);
+		Debug.Log("Nivel >" + newUser.level + " cod " + newUser.nivel_cod);
 		validData = string.IsNullOrEmpty(errMsg);
 		wrongNewUserDataLabelPopUp.SetText(errMsg);
 
@@ -539,6 +543,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         ageField.SetValueWithoutNotify(0);
 		gradeField.SetValueWithoutNotify(0);
 		sexField.SetValueWithoutNotify(0);
+		levelField.SetValueWithoutNotify(0);
 		schoolTypeField.SetValueWithoutNotify(0);
 		countryField.text = string.Empty;
         for (int i = 0; i < livingWithToggles.Count; i++) livingWithToggles[i].toggle.isOn = false;

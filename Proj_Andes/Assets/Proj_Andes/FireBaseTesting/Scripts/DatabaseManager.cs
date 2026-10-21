@@ -123,7 +123,7 @@ public static class DatabaseManager
                         continue;
                     }
                     currUserData.AdoptLegacyGender(documentSnapshot);
-                    currUserData.NormalizeGender();
+                    currUserData.NormalizeFields();
                     if (userDatas.Exists(x => x.id_jugador == currUserData.id_jugador))
                     {
                         Debug.Log("Trying to add user: " + currUserData.pin + " " + currUserData.id_jugador + " But ID already existed");
@@ -161,7 +161,7 @@ public static class DatabaseManager
 			var savedUsers = JsonConvert.DeserializeObject<LocalSaveUsersList>(savedJSON);
 			if (savedUsers != null && savedUsers.datas != null)
 			{
-				foreach (var user in savedUsers.datas) user.NormalizeGender();
+				foreach (var user in savedUsers.datas) user.NormalizeFields();
 				userDatas.AddRange(savedUsers.datas);
 			}
 		}
@@ -171,7 +171,7 @@ public static class DatabaseManager
 			var pendingUsers = JsonConvert.DeserializeObject<LocalSaveUsersList>(PlayerPrefs.GetString(pendingUserJSONKey));
 			if (pendingUsers != null && pendingUsers.datas != null)
 			{
-				foreach (var user in pendingUsers.datas) user.NormalizeGender();
+				foreach (var user in pendingUsers.datas) user.NormalizeFields();
 				pendingUserDatasToUpload.AddRange(pendingUsers.datas);
 			}
             pendingSyncronizedUsersAmount = pendingUserDatasToUpload.Count;
@@ -307,7 +307,7 @@ public static class DatabaseManager
                 currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
                 var updatedData = DatabaseManager.userDatas.Find(x => x.id_jugador == pendingUserDatasToUpload[i].id_jugador);
                 if (updatedData == null) continue;
-                updatedData.NormalizeGender();
+                updatedData.NormalizeFields();
                 Debug.Log("Will save user: " + updatedData.pin);
 
                 DocumentReference docRef = db.Collection(DataIds.usersCollection).Document(updatedData.id_jugador);      

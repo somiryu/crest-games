@@ -58,6 +58,38 @@ public class UserData
     /// <summary>Makes genero and genero_cod agree with the resolved gender. Called whenever a profile is loaded or saved.</summary>
     public void NormalizeGender() => gender = gender;
 
+    // The school level is stored like the gender: nivel ("Preescolar" ... "Otro") and nivel_cod (1, 2, 3, 4, 9; 99 unknown).
+    // Profiles created before the field existed come without it and stay unknown (99) until they are filled.
+    [FirestoreProperty] public string nivel { get; set; }
+    [FirestoreProperty] public int nivel_cod { get; set; }
+
+    public const int UnknownLevelCode = 99;
+
+    [Newtonsoft.Json.JsonIgnore]
+    public UserLevel level
+    {
+        get
+        {
+            if (Enum.TryParse(nivel, true, out UserLevel fromField) && fromField != UserLevel.NONE) return fromField;
+            return Enum.IsDefined(typeof(UserLevel), nivel_cod) ? (UserLevel)nivel_cod : UserLevel.NONE;
+        }
+        set
+        {
+            nivel = value == UserLevel.NONE ? null : value.ToString();
+            nivel_cod = (int)value;
+        }
+    }
+
+    /// <summary>Makes nivel and nivel_cod agree with the resolved level. Called whenever a profile is loaded or saved.</summary>
+    public void NormalizeLevel() => level = level;
+
+    /// <summary>Normalizes every field that is stored twice (text and code).</summary>
+    public void NormalizeFields()
+    {
+        NormalizeGender();
+        NormalizeLevel();
+    }
+
     /// <summary>Reads the pre-rename fields of a Firestore document, which ConvertTo ignores.</summary>
     public void AdoptLegacyGender(DocumentSnapshot document)
     {
@@ -122,6 +154,7 @@ public class UserData
         grado = 99;
         //Unknown until the profile is filled, a default value would hide missing data (it used to make boys load as Mujer)
         gender = UserGender.NONE;
+        level = UserLevel.NONE;
 		tipo_colegio = UserSchoolType.NONE.ToString();
 		tipo_colegio_cod = (int)UserSchoolType.NONE;
 		lugar_nacimiento = string.Empty;
@@ -152,6 +185,16 @@ public enum UserGender
 {
 	Masculino = 0,
 	Femenino = 1,
+	Otro = 9,
+	NONE = 99,
+}
+
+public enum UserLevel
+{
+	Preescolar = 1,
+	Primaria = 2,
+	Secundaria = 3,
+	Superior = 4,
 	Otro = 9,
 	NONE = 99,
 }
