@@ -68,7 +68,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
     [SerializeField] TMP_Dropdown levelField;
     [SerializeField] TMP_Dropdown schoolTypeField;
     [SerializeField] TMP_InputField countryField;
-	[SerializeField] List<LivingWithType> livingWithToggles;
 	[SerializeField] Button createBtn;
 	[SerializeField] Button cancelBtn;
 	[SerializeField] Button wrongNewUserDataPopUp;
@@ -489,7 +488,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		//The code comes from the text, not from the position: the options aren't in the order of the codes
 		newUser.schoolSector = UserData.ParseSector(schoolTypeField.options[schoolTypeField.value].text);
 		newUser.lugar_nacimiento = CleanBirthplace(countryField.text);
-		newUser.vive = GetUserLivingWith();
 
 		var validData = true;
 		var isAlreadyRegistered = UserDataManager.Instance.usersDatas.FindIndex(x => x.pin == newUser.pin && x.id_proyecto == newUser.id_proyecto) != -1;
@@ -533,26 +531,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		levelField.SetValueWithoutNotify(0);
 		schoolTypeField.SetValueWithoutNotify(0);
 		countryField.text = string.Empty;
-        for (int i = 0; i < livingWithToggles.Count; i++) livingWithToggles[i].toggle.isOn = false;
 
         selectUserContainer.gameObject.SetActive(true);
     }
 
-    public string GetUserLivingWith()
-	{
-		var currUserLivingWith = "";
-		int familyTypeCount = 0;
-		for (int i = 0; i < livingWithToggles.Count; i++)
-		{
-			if (livingWithToggles[i].GetValue())
-			{
-				familyTypeCount++;
-				currUserLivingWith += (familyTypeCount > 1 ? "," : "") + livingWithToggles[i].livingWithType.ToString();
-			}
-		}
-        Debug.Log(currUserLivingWith);
-        return currUserLivingWith;
-	}
 
 	//Deleting a profile can't be undone, so it's always confirmed first
 	public void RemoveUserOfBtn(UsersListItem item)

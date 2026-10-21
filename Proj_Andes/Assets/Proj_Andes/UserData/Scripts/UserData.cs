@@ -199,7 +199,6 @@ public class UserData
         return tipo_colegio_cod >= 0 && tipo_colegio_cod <= 2 ? (UserSector)tipo_colegio_cod : UserSector.NONE;
     }
     [FirestoreProperty] public string lugar_nacimiento { get; set; }
-    [FirestoreProperty] public string vive { get; set; }
 
     [FirestoreProperty] public Dictionary<string, bool> tutorialStepsDone { get; set; } = new Dictionary<string, bool>();
 	   
@@ -226,7 +225,6 @@ public class UserData
         level = UserLevel.NONE;
 		schoolSector = UserSector.NONE;
 		lugar_nacimiento = string.Empty;
-		vive = string.Empty;
 
         CheckPointIdx = -1;
 		CheckPointSubIdx = -1;
@@ -276,17 +274,6 @@ public enum UserSector
 	NONE = 99,
 }
 
-[Flags]
-public enum UserLivingWith
-{
-	NONE = 0,
-	Papa = 1,
-	Mama = 2,
-	Hermanos = 4,
-	Tios = 8,
-	Abuelos = 16,
-	Otros = 32,
-}
 public enum SessionStateLeft
 {
 	Inconcluso,
