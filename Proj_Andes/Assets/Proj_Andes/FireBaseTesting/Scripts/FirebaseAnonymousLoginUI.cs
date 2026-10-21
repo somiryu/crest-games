@@ -647,10 +647,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
 		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
 
-		MG_SizeRockets_GameConfigs.postFrustration = 0;
-		MG_VoiceStarOrFlowerGameConfigs.postFrustration = 0;
-		MG_HearthAndStarsGameConfigs.postFrustration = 0;
-		Gratification_TurboRocket_GameConfig.postFrustration = 0;
 		MonsterMarketConfig.marketAppearTimes = -1;
 
 		MG_VoiceStarOrFlowerGameConfigs.CurrFlowersAndCloudsGameID = null;

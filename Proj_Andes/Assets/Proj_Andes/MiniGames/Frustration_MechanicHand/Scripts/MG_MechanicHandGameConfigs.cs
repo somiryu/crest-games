@@ -47,16 +47,8 @@ public class MG_MechanicHandGameConfigs : GameConfig
             UserDataManager.SaveUserAnayticsPerGame(DataIds.mechanicHandGame, currAnalyticsDictionary, newDocID);
         }
 		Debug.Log(UserDataManager.LastDocumentIDsStored.Count);
-		SetPostFrustration();
 	}
 
-	public static void SetPostFrustration()
-	{
-		MG_SizeRockets_GameConfigs.postFrustration = 1;
-		MG_VoiceStarOrFlowerGameConfigs.postFrustration = 1;
-		MG_HearthAndStarsGameConfigs.postFrustration = 1;
-		Gratification_TurboRocket_GameConfig.postFrustration = 1;
-	}
     public override void ResetCurrentAnalytics()
     {
         base.ResetCurrentAnalytics();

@@ -16,7 +16,6 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
     public int starsAmount;
     public int tutoStarsAmount;
     public float minTurboTime;
-    public static int postFrustration = 0;
 
     [HideInInspector][NonSerialized] public int coinsCollected;
 
@@ -31,7 +30,6 @@ public class Gratification_TurboRocket_GameConfig : GameConfig
         GameID = Guid.NewGuid().ToString();
 
         itemAnalytics.Add(DataIds.GameID, GameID);
-        itemAnalytics.Add(DataIds.turboStarsFrustrationMode, postFrustration);
         itemAnalytics.Add(DataIds.turboStarsStars, coinsCollected);
         itemAnalytics.Add(DataIds.turboStarsTurboUses, turboUsedTimes);
         itemAnalytics.Add(DataIds.turboStarsTurboTime, totalTurboTime);

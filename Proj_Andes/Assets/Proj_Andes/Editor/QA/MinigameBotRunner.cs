@@ -37,10 +37,10 @@ public static class MinigameBotRunner
     //Columns exported by crest-cms (src/routes/(admin)/admin/descargables) with their database names
     static readonly Dictionary<string, string[]> CmsContract = new Dictionary<string, string[]>
     {
-        { DataIds.heartsAndStarsGame, new[] { "cf_codigo", "cf_estimulo", "cf_intento", "cf_modo", "cf_prueba", "cf_respuesta", "cf_tiempo", "cf_valid" } },
-        { DataIds.voiceStarGame, new[] { "nf_prueba", "nf_codigo", "nf_estimulo_aud", "nf_estimulo_vis", "nf_intento", "nf_respuesta", "nf_valid_1", "nf_valid_2", "nf_valid_3", "nf_modo", "nf_tiempo" } },
-        { DataIds.sizeRocketsGame, new[] { "cr_modo", "cr_codigo", "cr_intento", "cr_estrellas", "cr_release", "cr_respuesta" } },
-        { DataIds.turboRocketGame, new[] { "te_estrellas", "te_modo", "te_tiempo_total", "te_turbo", "te_turbo_tm" } },
+        { DataIds.heartsAndStarsGame, new[] { "cf_codigo", "cf_estimulo", "cf_intento", "cf_prueba", "cf_respuesta", "cf_tiempo", "cf_valid" } },
+        { DataIds.voiceStarGame, new[] { "nf_prueba", "nf_codigo", "nf_estimulo_aud", "nf_estimulo_vis", "nf_intento", "nf_respuesta", "nf_valid_1", "nf_valid_2", "nf_valid_3", "nf_tiempo" } },
+        { DataIds.sizeRocketsGame, new[] { "cr_codigo", "cr_intento", "cr_estrellas", "cr_release", "cr_respuesta" } },
+        { DataIds.turboRocketGame, new[] { "te_estrellas", "te_tiempo_total", "te_turbo", "te_turbo_tm" } },
         { DataIds.monsterMarket, new[] { "mm_cofre_cod", "mm_cofre_rta", "mm_cofre_intento", "mm_cofre_tm", "mm_estrellas_gast", "mm_estrellas_post", "mm_estrellas_pre", "mm_orden" } },
         { DataIds.mechanicHandGame, new[] { "fg_partida", "fg_intento", "fg_precision", "fg_trampa_activada", "fg_emoc_rta", "fg_emoc_cod", "fg_emoc_tm", "fg_espera_click" } },
         { DataIds.boostersAndScapeGame, new[] { "fp_partida", "fp_intento", "fp_turbo", "fp_precision", "fp_trampa_activada", "fp_emoc_rta", "fp_emoc_cod", "fp_emoc_tm", "fp_espera_click" } },

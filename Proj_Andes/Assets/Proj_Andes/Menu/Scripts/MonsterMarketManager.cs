@@ -343,8 +343,12 @@ public class MonsterMarketManager : MonoBehaviour, ITimeManagement
         SaveAnalytics(chestType, cost);
     }
 
+    //Only the first two markets (after the tutorial and the first intermediate one) are part of the analytics
+    const int LastMarketThatSavesAnalytics = 2;
+
     void SaveAnalytics(string chestTypeOrJump, int cost)
     {
+        if (MonsterMarketConfig.marketAppearTimes > LastMarketThatSavesAnalytics) return;
         chestOpennedOrRoundCount++;
         var currCoins = UserDataManager.CurrUser.Coins;
         var newAnalytic = new MonsterMarketRoundAnalytic();

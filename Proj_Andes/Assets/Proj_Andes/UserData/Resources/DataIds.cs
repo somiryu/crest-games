@@ -86,7 +86,6 @@ public static class DataIds
     public const string time_Spent = "tiempo_total";
 
 	//Size rockets analytics
-	public const string frustrationMode = "cr_modo";
 	public const string tryIndex = "cr_intento";
 	public const string sizeRocketResponseString = "cr_respuesta";
 	public const string sizeRocketResponseInt = "cr_codigo";
@@ -95,7 +94,6 @@ public static class DataIds
 
     //Hearts and flowers analytics
     public const string heartsAndStarsGame = "corazones_flores";
-    public const string heartsNFlowersFrustration = "cf_modo";
     public const string heartsNFlowersTest = "cf_prueba";
     public const string heartsNFlowersValid = "cf_valid";
     public const string heartsNFlowersTrial = "cf_intento";
@@ -105,7 +103,6 @@ public static class DataIds
     public const string heartsNFlowersTime = "cf_tiempo";
 
     //Cloud or flower analytics
-    public const string cloudNFlowerFrustrationMode = "nf_modo";
     public const string cloudNFlowerTest = "nf_prueba";
     public const string cloudNFlowerPassedTuto1 = "nf_valid_1";
     public const string cloudNFlowerPassedTuto2 = "nf_valid_2";
@@ -120,7 +117,6 @@ public static class DataIds
 
 
     //Turbo rocket analytics
-    public const string turboStarsFrustrationMode = "te_modo";
     public const string turboStarsStars = "te_estrellas";
     public const string turboStarsTurboUses = "te_turbo";
     public const string turboStarsTurboTime = "te_turbo_tm";

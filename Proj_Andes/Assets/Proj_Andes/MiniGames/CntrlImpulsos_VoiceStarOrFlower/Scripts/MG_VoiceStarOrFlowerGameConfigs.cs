@@ -24,7 +24,6 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
     public static int passedTuto1 = 0;
     public static int passedTuto2 = 0;
     public static int passedTuto3 = 0;
-    public static int postFrustration = 0;
 
     public override string GetSceneID() => DataIds.voiceStarGame;
 
@@ -67,7 +66,6 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
             currAnalyticsDictionary.Clear();
             currAnalyticsDictionary.Add(DataIds.GameID, GameID);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerTest, (int)gameType);
-            currAnalyticsDictionary.Add(DataIds.cloudNFlowerFrustrationMode, postFrustration);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto1, passedTuto1);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto2, passedTuto2);
             currAnalyticsDictionary.Add(DataIds.cloudNFlowerPassedTuto3, passedTuto3);
@@ -80,7 +78,6 @@ public class MG_VoiceStarOrFlowerGameConfigs : GameConfig
 
 			UserDataManager.SaveUserAnayticsPerGame(DataIds.voiceStarGame, currAnalyticsDictionary);
 		}
-        Debug.Log("post frust voice" + postFrustration);
     }
     public override void AferGeneralAnalyticsSaved()
     {

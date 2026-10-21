@@ -85,7 +85,6 @@ public class MG_HearthsAndStarsManager : MonoBehaviour, IEndOfGameManager
 
     public void Init()
     {
-        if (MG_HearthAndStarsGameConfigs.postFrustration == 1) currGameType = HeartsAndFlowersGameType.Flowers;
         AllRoundsAnalytics = new List<MG_HearthAndStars_RoundAnalytics>(RoundsToPlay);
         currCoins = gameConfigs.initialCoins;
         currRound = 1;

@@ -46,7 +46,6 @@ public class MG_BoostersAndScape_GameConfig : GameConfig
         }
 
 
-        MG_MechanicHandGameConfigs.SetPostFrustration();
     }
     public override void ResetCurrentAnalytics()
     {
