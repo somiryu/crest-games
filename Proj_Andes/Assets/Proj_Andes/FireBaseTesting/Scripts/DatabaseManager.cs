@@ -18,6 +18,7 @@ public static class DatabaseManager
     public static string UserDatasJSONKey = "UserDatasList";
     public static string pendingUserJSONKey = "PendingUsersList";
     public static string pendingSessionsJSONKey = "PendingSessionsList";
+    public static string localOnlyUsersJSONKey = "LocalOnlyUserIds";
 
     public static List<UserData> userDatas = new List<UserData>();
 
@@ -25,6 +26,10 @@ public static class DatabaseManager
 
     public static Dictionary<string, Dictionary<string, Dictionary<string, object>>> pendingSessionsToUpload 
         = new Dictionary<string, Dictionary<string, Dictionary<string, object>>>(); 
+
+    //Profiles created on this tablet whose first finished session hasn't been queued yet. They only exist locally: they
+    //must survive the sync (which replaces the list with the server's) and are uploaded when their session finishes.
+    static HashSet<string> localOnlyUserIds = new HashSet<string>();
 
     public static bool userListDone = false;
     public static bool savingIsDone = false;
@@ -71,6 +76,97 @@ public static class DatabaseManager
         }
     }
 
+
+    #region Finished sessions only
+    //The minigames app only uploads sessions that were finished (the closing scene was reached, which saves the "prueba"
+    //document with the state Finalizado). Whatever a abandoned session left is discarded and never uploaded.
+    public static bool OnlyFinishedSessionsAreUploaded => !GameSequencesList.isTheNarrativeSequence;
+
+    public static void MarkProfileAsLocalOnly(string userID)
+    {
+        if (string.IsNullOrEmpty(userID) || !localOnlyUserIds.Add(userID)) return;
+        SaveLocalOnlyIds();
+    }
+
+    public static void ForgetLocalOnlyProfile(string userID)
+    {
+        if (!localOnlyUserIds.Remove(userID)) return;
+        SaveLocalOnlyIds();
+    }
+
+    static void SaveLocalOnlyIds() => PlayerPrefs.SetString(localOnlyUsersJSONKey, JsonConvert.SerializeObject(new List<string>(localOnlyUserIds)));
+
+    static void LoadLocalOnlyIds()
+    {
+        localOnlyUserIds = new HashSet<string>();
+        if (!PlayerPrefs.HasKey(localOnlyUsersJSONKey)) return;
+        var ids = JsonConvert.DeserializeObject<List<string>>(PlayerPrefs.GetString(localOnlyUsersJSONKey));
+        if (ids != null) localOnlyUserIds.UnionWith(ids);
+    }
+
+    /// <summary>Ids of the sessions whose "prueba" document says Finalizado.</summary>
+    public static HashSet<string> GetFinishedSessionIds(Dictionary<string, Dictionary<string, Dictionary<string, object>>> sessions)
+    {
+        var finished = new HashSet<string>();
+        if (sessions == null || !sessions.TryGetValue(DataIds.test, out var tests)) return finished;
+        foreach (var test in tests)
+        {
+            if (test.Value != null && test.Value.TryGetValue(DataIds.state, out var state) && state != null
+                && state.ToString() == SessionStateLeft.Finalizado.ToString()) finished.Add(test.Key);
+        }
+        return finished;
+    }
+
+    static bool BelongsToAnUnfinishedSession(Dictionary<string, object> doc, HashSet<string> finishedSessions)
+    {
+        return doc != null && doc.TryGetValue(DataIds.TestID, out var sessionID) && sessionID != null && !finishedSessions.Contains(sessionID.ToString());
+    }
+
+    /// <summary>A copy with only the documents of finished sessions (documents without a session id are kept).</summary>
+    public static Dictionary<string, Dictionary<string, Dictionary<string, object>>> FinishedSessionsOnly(Dictionary<string, Dictionary<string, Dictionary<string, object>>> sessions)
+    {
+        var finished = GetFinishedSessionIds(sessions);
+        var result = new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
+        foreach (var collection in sessions)
+        {
+            var docs = new Dictionary<string, Dictionary<string, object>>();
+            foreach (var doc in collection.Value)
+                if (!BelongsToAnUnfinishedSession(doc.Value, finished)) docs.Add(doc.Key, doc.Value);
+            if (docs.Count > 0) result.Add(collection.Key, docs);
+        }
+        return result;
+    }
+
+    /// <summary>Removes, in place, every document of a session that wasn't finished. Returns how many were removed.</summary>
+    public static int RemoveUnfinishedSessions(Dictionary<string, Dictionary<string, Dictionary<string, object>>> sessions)
+    {
+        var finished = GetFinishedSessionIds(sessions);
+        return RemoveDocs(sessions, doc => BelongsToAnUnfinishedSession(doc, finished));
+    }
+
+    /// <summary>Removes, in place, every document that belongs to this session. Returns how many were removed.</summary>
+    public static int RemoveSessionDocs(Dictionary<string, Dictionary<string, Dictionary<string, object>>> sessions, string sessionID)
+    {
+        if (string.IsNullOrEmpty(sessionID)) return 0;
+        return RemoveDocs(sessions, doc => doc != null && doc.TryGetValue(DataIds.TestID, out var id) && id != null && id.ToString() == sessionID);
+    }
+
+    static int RemoveDocs(Dictionary<string, Dictionary<string, Dictionary<string, object>>> sessions, Func<Dictionary<string, object>, bool> shouldRemove)
+    {
+        var removed = 0;
+        var emptied = new List<string>();
+        foreach (var collection in sessions)
+        {
+            var ids = new List<string>();
+            foreach (var doc in collection.Value) if (shouldRemove(doc.Value)) ids.Add(doc.Key);
+            foreach (var id in ids) collection.Value.Remove(id);
+            removed += ids.Count;
+            if (collection.Value.Count == 0) emptied.Add(collection.Key);
+        }
+        foreach (var key in emptied) sessions.Remove(key);
+        return removed;
+    }
+    #endregion
 
     public static void GetUserDatasList()
     {
@@ -139,6 +235,9 @@ public static class DatabaseManager
                     Debug.unityLogger.filterLogType = previousLogFilter;
                 }
 
+                foreach (var localUser in localUsers)
+                    if (localOnlyUserIds.Contains(localUser.id_jugador) && !userDatas.Exists(x => x.id_jugador == localUser.id_jugador)) userDatas.Add(localUser);
+
                 if (pendingUserDatasToUpload.Count > 0)
                 {
                     for (int i = 0; i < pendingUserDatasToUpload.Count; i++)
@@ -161,6 +260,7 @@ public static class DatabaseManager
     {
         pendingSyncronizedSessionsAmount = 0;
         pendingSyncronizedUsersAmount = 0;
+        LoadLocalOnlyIds();
 
 		if (PlayerPrefs.HasKey(UserDatasJSONKey))
 		{
@@ -192,6 +292,14 @@ public static class DatabaseManager
             pendingSyncronizedSessionsAmount = pendingSessionsToUpload.Count;
         }
         else pendingSessionsToUpload = new Dictionary<string, Dictionary<string, Dictionary<string, object>>>();
+
+        if (OnlyFinishedSessionsAreUploaded)
+        {
+            //Whatever an abandoned session left on this tablet (also from older versions) is not uploaded
+            var discarded = RemoveUnfinishedSessions(pendingSessionsToUpload);
+            if (discarded > 0) Debug.Log("Discarded " + discarded + " documents of sessions that were never finished");
+            pendingSyncronizedSessionsAmount = pendingSessionsToUpload.Count;
+        }
 	}
 
     //Only removes the profile, the sessions and analytics of the user are kept since they are research data
@@ -209,6 +317,7 @@ public static class DatabaseManager
         userDatas.RemoveAll(x => x.id_jugador == userID);
         //Otherwise a user created offline would be uploaded again on the next sync
         pendingUserDatasToUpload.RemoveAll(x => x.id_jugador == userID);
+        ForgetLocalOnlyProfile(userID);
         SaveUsersLocally();
 
         //The UI can refresh right away: offline, Firestore keeps the deletion queued and its queries already exclude it
@@ -284,7 +393,9 @@ public static class DatabaseManager
 
 		//Pending sessions
 		var obj = new FullSessionData();
-		obj.analytics = new Dictionary<string, Dictionary<string, Dictionary<string, object>>>(pendingSessionsToUpload);
+		obj.analytics = OnlyFinishedSessionsAreUploaded
+			? FinishedSessionsOnly(pendingSessionsToUpload)
+			: new Dictionary<string, Dictionary<string, Dictionary<string, object>>>(pendingSessionsToUpload);
 		var sessionsJSON = JsonConvert.SerializeObject(obj);
 		PlayerPrefs.SetString(pendingSessionsJSONKey, sessionsJSON);
 		Debug.Log("PlayerPrefs PendingUsers >" + PlayerPrefs.GetString(pendingUserJSONKey));
@@ -300,7 +411,8 @@ public static class DatabaseManager
 
         currLoadProgress = 0;
         var currLoadedObjs = 0;
-        var totalLoadNeeded = pendingUserDatasToUpload.Count + pendingSessionsToUpload.Count;
+        var sessionsToUpload = OnlyFinishedSessionsAreUploaded ? FinishedSessionsOnly(pendingSessionsToUpload) : pendingSessionsToUpload;
+        var totalLoadNeeded = pendingUserDatasToUpload.Count + sessionsToUpload.Count;
 
 		testAmountsSavedToDataBase = 0;
 
@@ -322,7 +434,7 @@ public static class DatabaseManager
             }
 
 
-            foreach(var GameDatas in pendingSessionsToUpload)
+            foreach(var GameDatas in sessionsToUpload)
             {
                 currLoadedObjs++;
                 currLoadProgress = Mathf.InverseLerp(0, totalLoadNeeded, currLoadedObjs);
@@ -343,7 +455,17 @@ public static class DatabaseManager
 
             if (hasInternetConnection)
             {
-                pendingSessionsToUpload.Clear();
+                if (ReferenceEquals(sessionsToUpload, pendingSessionsToUpload)) pendingSessionsToUpload.Clear();
+                else
+                {
+                    //only what was uploaded leaves the queue
+                    foreach (var uploaded in sessionsToUpload)
+                    {
+                        if (!pendingSessionsToUpload.TryGetValue(uploaded.Key, out var queued)) continue;
+                        foreach (var docID in uploaded.Value.Keys) queued.Remove(docID);
+                        if (queued.Count == 0) pendingSessionsToUpload.Remove(uploaded.Key);
+                    }
+                }
                 pendingUserDatasToUpload.Clear();
                 PlayerPrefs.DeleteKey(pendingUserJSONKey);
                 PlayerPrefs.DeleteKey(pendingSessionsJSONKey);

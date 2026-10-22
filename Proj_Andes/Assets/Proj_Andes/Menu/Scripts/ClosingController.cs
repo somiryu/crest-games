@@ -21,6 +21,8 @@ public class ClosingController : MonoBehaviour
         finalAudioSource.Play();
         continueBtn.onClick.AddListener(closingItem.OnSequenceOver);
         TimeManager.Instance.gameState = SessionStateLeft.Finalizado;
+        //Reaching this scene is what makes the session finished: from here its data is queued for upload
+        if (!GameSequencesList.isTheNarrativeSequence) UserDataManager.CommitFinishedSession();
         Debug.Log("<<<<<>>>>>>>>>> Start closing >> state " + TimeManager.Instance.gameState);
         rocketObj.SetActive(GameSequencesList.isTheNarrativeSequence == false);
 

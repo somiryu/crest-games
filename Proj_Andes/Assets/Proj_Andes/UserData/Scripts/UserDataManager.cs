@@ -124,19 +124,75 @@ public class UserDataManager : ScriptableObject
         }
     }
 
+	/// <summary>
+	/// The minigames session reached the closing scene: it is finished, so its documents (and the child's profile, which
+	/// is only uploaded together with a finished session) are queued for upload.
+	/// </summary>
+	public static void CommitFinishedSession()
+	{
+		if (CurrUser.id_jugador == defaultUserID) return;
+		//Saves the "prueba" document of the session with the state Finalizado, which is what marks its documents as uploadable
+		TimeManager.Instance.ResetSessionTimerAndSave();
+		DatabaseManager.AddPendingUserData(CurrUser);
+		DatabaseManager.ForgetLocalOnlyProfile(CurrUser.id_jugador);
+		DatabaseManager.SaveUserDatasList(Instance.usersDatas, userAnayticsPerGame, mustSaveInDataBase: false);
+	}
+
+	/// <summary>
+	/// The minigames session was abandoned: everything it generated is discarded, nothing is uploaded and the child
+	/// has to start the whole game again.
+	/// </summary>
+	public static void DiscardCurrentSession()
+	{
+		var removed = 0;
+		//CurrTestID reads "Default Test ID" when no session is running: nothing to remove then
+		if (CurrTestID != "Default Test ID")
+		{
+			removed += DatabaseManager.RemoveSessionDocs(DatabaseManager.pendingSessionsToUpload, CurrTestID);
+			removed += DatabaseManager.RemoveSessionDocs(userAnayticsPerGame, CurrTestID);
+		}
+		Debug.Log("Abandoned session discarded, " + removed + " documents removed");
+		CurrTestID = null;
+		LastCollectionIDStored = null;
+		LastDocumentIDsStored = null;
+		TimeManager.timer = 0;
+		TimeManager.Instance.gameState = SessionStateLeft.Abandonado;
+		ResetResumePoint(CurrUser);
+	}
+
+	//Sessions can't be resumed: a child that didn't finish starts the whole game again
+	static void ResetResumePoint(UserData user)
+	{
+		user.CheckPointIdx = -1;
+		user.CheckPointSubIdx = -1;
+		user.itemsPlayedIdxs.Clear();
+		user.narrativeNavCheckPointsNodes = null;
+	}
+
 	public static void OnUserQuit()
 	{
 		Debug.Log("Calling on user quit---!");
-		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
-		var currSequence = GameSequencesList.Instance.GetGameSequence();
-		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
+		if (GameSequencesList.isTheNarrativeSequence) SaveNarrativeResumePoint();
+		else ResetResumePoint(CurrUser);
 
 		if (TimeManager.Instance.gameState != SessionStateLeft.Finalizado) TimeManager.Instance.gameState = SessionStateLeft.Abandonado;
 		TimeManager.Instance.ResetSessionTimerAndSave();
-		if (currSequence is MinigameGroups group)
-		{
-			CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
-		}
+
+		//Don't save if we are using the default user
+		if (CurrUser.id_jugador == defaultUserID) return;
+
+		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
+		UserDataManager.Instance.SaveDataToRemoteDataBase();
+	}
+
+
+	//The narratives app still resumes where the child left
+	static void SaveNarrativeResumePoint()
+	{
+		CurrUser.CheckPointIdx = GameSequencesList.Instance.goToGameGroupIdx;
+		var currSequence = GameSequencesList.Instance.GetGameSequence();
+		CurrUser.CheckPointSubIdx = currSequence.GetCurrItemIdx();
+		if (currSequence is MinigameGroups group) CurrUser.itemsPlayedIdxs = group.GetItemsPlayedData();
 		else CurrUser.itemsPlayedIdxs.Clear();
 
 		var dialogSystem = DialoguesDisplayerUI.Instance;
@@ -146,14 +202,7 @@ public class UserDataManager : ScriptableObject
 			CurrUser.narrativeNavCheckPointsNodes = dialogSystem.GetCurrNavigationNodes();
 		}
 		else CurrUser.narrativeNavCheckPointsNodes = null;
-
-		//Don't save if we are using the default user
-		if (CurrUser.id_jugador == defaultUserID) return;
-
-		//TODO ADD A Pause here so that the player can't leave if the data hasn't been fully saved yet
-		UserDataManager.Instance.SaveDataToRemoteDataBase();
 	}
-
 
 	//Doing this to avoid an issue that happens if you call resources from a "Task" (Happening when user just logged in)
 	public static void Init()

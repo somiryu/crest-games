@@ -139,6 +139,17 @@ public class GameSequencesList : ScriptableObject
     }
 
 
+    /// <summary>
+    /// The facilitator left a minigames session before it was finished: nothing of it is saved, and the child starts again.
+    /// </summary>
+    public void AbandonSequence()
+    {
+        UserDataManager.DiscardCurrentSession();
+        ResetSequence();
+        GoToNextItemInList();
+    }
+
+
     public bool IsLastMarket(SimpleGameSequenceItem item)
     {
         if (item is not MonsterMarketConfig) return false;

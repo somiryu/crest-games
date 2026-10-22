@@ -78,7 +78,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	[Header("After Log in Panel")]
 	[SerializeField] GameObject afterLogInPanel;
-	[SerializeField] Button afterLogInContinueBtn;
 	[SerializeField] Button afterLogInNewGameBtn;
 	[SerializeField] Button cancelAfterLogBtn;
 	[Space(20)]
@@ -132,7 +131,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 	string logInsuccedID;
 
-	bool continueSelectedFlag;
 
 	private void Awake()
 	{
@@ -158,7 +156,6 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		goToUserCreationPanel.onClick.AddListener(OnWantsToCreateNewUser);
 		wrongNewUserDataPopUp.onClick.AddListener(() => wrongNewUserDataPopUp.gameObject.SetActive(false));
 		logInFailedPopUp.onClick.AddListener(() => logInFailedPopUp.gameObject.SetActive(false));
-		afterLogInContinueBtn.onClick.AddListener(OnContinueGameBtnPressed);
 		afterLogInNewGameBtn.onClick.AddListener(UReady);
 
 		for (int i = 0; i < btnsPerNarrative.Count; i++)
@@ -182,14 +179,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		{
 			uReadyPanel.gameObject.SetActive(false);
 			afterLogInPanel.gameObject.SetActive(true);
-			continueSelectedFlag = false;
 
 		});
 
 
 		readyBtb.onClick.AddListener(OnReadyConfirmBtnPressed);
 
-		continueSelectedFlag = false;
 		searchField.onValueChanged.AddListener((_) => SearchUser());
 		removeSelectedUser.onClick.AddListener(OnRemoveSelectedUserBtnPressed);
 		confirmUserBtn.onClick.AddListener(() => OnSelectedUser(selectedUser));
@@ -511,6 +506,7 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			else newUser.id_jugador = Guid.NewGuid().ToString();
 
 			UserDataManager.Instance.RegisterNewUser(newUser);
+			if (!GameSequencesList.isTheNarrativeSequence) DatabaseManager.MarkProfileAsLocalOnly(newUser.id_jugador);
 			createNewUserPanel.SetActive(false);
 			RebuildUsersList();
 			OnSelectedUser(newUser.id_jugador);
@@ -598,15 +594,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 
 		var currUser = UserDataManager.CurrUser;
 
-		var storedCheckPoint = currUser.CheckPointIdx; 
-
 		contWelcomeF.gameObject.SetActive(currUser.UsesFeminineContent);
 		contWelcomeM.gameObject.SetActive(!currUser.UsesFeminineContent);
 
 		var soundPref = PlayerPrefs.GetInt(currUser.id_jugador + " isTheSoundActive", 1);
 		Debug.Log("sound " + PlayerPrefs.GetInt(currUser.id_jugador + " isTheSoundActive"));
 		AssignSoundActive(soundPref);
-        afterLogInContinueBtn.gameObject.SetActive(storedCheckPoint != -1 && !GameSequencesList.isTheNarrativeSequence);
     }
 	void OnSelectedNarrative()
 	{
@@ -635,17 +628,12 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		PlayerPrefs.SetInt(UserDataManager.CurrUser.id_jugador + " isTheSoundActive", active);
 	}
 
-	public void OnContinueGameBtnPressed()
-	{
-		continueSelectedFlag = true;
-
-		UReady();
-	}
-
     public void OnReadyConfirmBtnPressed()
 	{
 		UserDataManager.CurrTestID = Guid.NewGuid().ToString();
-		DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
+		//The minigames profile is uploaded together with its first finished session, so it never stays alone in the database
+		if (GameSequencesList.isTheNarrativeSequence) DatabaseManager.AddPendingUserData(UserDataManager.CurrUser);
+		TimeManager.Instance.gameState = SessionStateLeft.Abandonado;
 
 		MonsterMarketConfig.marketAppearTimes = -1;
 
@@ -654,22 +642,10 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
         TimeManager.createDate = TimeManager.Instance.GetCurrDate();
 		GameSequencesList.CleanCurrUserTutorial();
         TimeManager.timer = 0;
-		if (continueSelectedFlag)
-		{
-			var targetSequence = GameSequencesList.Instance.gameSequences[UserDataManager.CurrUser.CheckPointIdx];
-			if (targetSequence is MinigameGroups group)
-			{
-				group.SetItemsPlayedData(UserDataManager.CurrUser.itemsPlayedIdxs);
-			}
-			DialoguesDisplayerUI.CheckPointTreeToConsume = UserDataManager.CurrUser.narrativeNavCheckPointsNodes;
-            if (!GameSequencesList.isTheNarrativeSequence) GameSequencesList.Instance.GoToSequenceIdx(UserDataManager.CurrUser.CheckPointIdx, UserDataManager.CurrUser.CheckPointSubIdx);
-		}
-		else
-		{
-			UserDataManager.CurrUser.myCollectionMonsters.Clear();
-			UserDataManager.CurrUser.Coins = 10;
-            GameSequencesList.Instance.GoToNextSequence(loadScene: !GameSequencesList.isTheNarrativeSequence);
-		}
+		//Sessions can't be resumed: every session starts from the beginning
+		UserDataManager.CurrUser.myCollectionMonsters.Clear();
+		UserDataManager.CurrUser.Coins = 10;
+		GameSequencesList.Instance.GoToNextSequence(loadScene: !GameSequencesList.isTheNarrativeSequence);
         if (GameSequencesList.isTheNarrativeSequence) StartCoroutine(LoadingSceneAsync(currNextNarr));
     }
 

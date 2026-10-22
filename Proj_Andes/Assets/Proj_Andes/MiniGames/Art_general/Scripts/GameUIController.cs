@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,12 @@ public class GameUIController : MonoBehaviour, ITimeManagement
     [SerializeField] Transform menuContainer;
     [SerializeField] Button continueBtn;
     [SerializeField] Button exitBtn;
+    [Header("Exit confirmation (minigames): the facilitator must type the word to abandon the session")]
+    [SerializeField] GameObject exitConfirmPanel;
+    [SerializeField] TMP_InputField exitConfirmInput;
+    [SerializeField] Button exitConfirmBtn;
+    [SerializeField] Button exitCancelBtn;
+    public const string ExitWord = "salir";
     [SerializeField] Button musicBtn;
     [SerializeField] Sprite soundActivated;
     [SerializeField] Sprite soundDeactivated;
@@ -38,7 +45,14 @@ public class GameUIController : MonoBehaviour, ITimeManagement
         TryGetComponent(out anim);
         homeBtn.onClick.AddListener(OpenMenu);
         continueBtn.onClick.AddListener(Continue);
-        exitBtn.onClick.AddListener(ExitGame);
+        exitBtn.onClick.AddListener(OnExitPressed);
+        if (exitConfirmPanel != null)
+        {
+            exitConfirmPanel.SetActive(false);
+            exitConfirmInput.onValueChanged.AddListener(text => exitConfirmBtn.interactable = IsExitWord(text));
+            exitConfirmBtn.onClick.AddListener(ConfirmAbandon);
+            exitCancelBtn.onClick.AddListener(CancelExit);
+        }
         onPause = false;
         //Audio active by default
         pool.Init(40);
@@ -82,6 +96,38 @@ public class GameUIController : MonoBehaviour, ITimeManagement
             }
         }
     }
+    /// <summary>The word that has to be typed to leave a session (ignores case and spaces around it).</summary>
+    public static bool IsExitWord(string text) => string.Equals(text?.Trim(), ExitWord, StringComparison.OrdinalIgnoreCase);
+
+    void OnExitPressed()
+    {
+        //The narratives app keeps resuming where the child left, so it exits as before
+        if (GameSequencesList.isTheNarrativeSequence || exitConfirmPanel == null)
+        {
+            ExitGame();
+            return;
+        }
+        exitConfirmInput.text = string.Empty;
+        exitConfirmBtn.interactable = false;
+        exitConfirmPanel.SetActive(true);
+    }
+
+    void CancelExit()
+    {
+        exitConfirmInput.text = string.Empty;
+        exitConfirmPanel.SetActive(false);
+    }
+
+    //Leaving a minigames session discards it: nothing of it is saved or uploaded
+    void ConfirmAbandon()
+    {
+        if (!IsExitWord(exitConfirmInput.text)) return;
+        exitConfirmPanel.SetActive(false);
+        TimeManager.Instance.RemoveNewStopTimeUser(this);
+        onPause = false;
+        GameSequencesList.Instance.AbandonSequence();
+    }
+
     public void ExitGame()
     {
         TimeManager.Instance.RemoveNewStopTimeUser(this);

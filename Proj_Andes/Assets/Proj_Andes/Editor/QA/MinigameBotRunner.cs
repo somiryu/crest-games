@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEditor;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,8 @@ public static class MinigameBotRunner
     //Optional, to replay part of the sequence: sequence index to start at and how many scenes to play
     public const string StartIndexKey = "QA.MinigameBot.StartIndex";
     public const string SceneLimitKey = "QA.MinigameBot.SceneLimit";
+    //When the scene limit is reached, abandon the session through the real UI (home, "salir", confirm) and check it was discarded
+    public const string AbandonAtLimitKey = "QA.MinigameBot.AbandonAtLimit";
     const string MinijuegosFlavorPath = "Assets/Proj_Andes/Menu/AppFlowSystem/Scriptables/AppFlavors/AppFlavor_Minijuegos.asset";
     const string QaInstitution = "QA_BOT_LOCAL";
     const double MaxSecondsPerScene = 300;
@@ -56,6 +59,10 @@ public static class MinigameBotRunner
     static int sceneIndex;
     static bool loggedIn;
     static int startIndex, sceneLimit;
+    static bool abandoning, abandonConfirmed;
+    static int abandonStep;
+    static double abandonAt;
+    static string abandonSession;
     static UserData qaUser;
     static readonly StringBuilder report = new StringBuilder();
     static readonly List<string> problems = new List<string>();
@@ -108,6 +115,7 @@ public static class MinigameBotRunner
         diagnostics.Clear();
         errorsInScene.Clear();
         report.Clear();
+        abandoning = abandonConfirmed = false; abandonStep = 0;
         SnapshotLocalSave();
         Application.runInBackground = true;
         Application.logMessageReceived += OnLog;
@@ -149,6 +157,7 @@ public static class MinigameBotRunner
             GameSequencesList.Instance.GoToNextItemInList();
             return;
         }
+        if (abandoning) { AbandonTick(); return; }
         if (Now < nextActionAt || pendingRelease != null || dragEnd > 0) return;
         nextActionAt = Now + 0.5 + rng.NextDouble() * 1.1;
 
@@ -167,9 +176,88 @@ public static class MinigameBotRunner
         pendingRelease = null;
         dragEnd = 0;
 
+        if (abandoning && abandonConfirmed) { VerifyAbandon(); return; }
+
         //The sequence went back to the user selection screen: the whole run is over
         if (loggedIn && GameSequencesList.Instance.goToGameGroupIdx == 0 && sceneIndex > 2) Finish("secuencia completa");
-        else if (sceneLimit > 0 && sceneIndex >= sceneLimit + 2) Finish("límite de escenas");
+        else if (sceneLimit > 0 && sceneIndex >= sceneLimit + 2)
+        {
+            if (EditorPrefs.GetBool(AbandonAtLimitKey, false)) { abandoning = true; abandonStep = 0; abandonAt = Now + 1.5; }
+            else Finish("límite de escenas");
+        }
+    }
+
+    // ---------- Abandoning a session through the real UI ----------
+
+    static int CountSessionDocs(string sessionID)
+    {
+        var count = 0;
+        foreach (var queue in new[] { DatabaseManager.pendingSessionsToUpload, UserDataManager.userAnayticsPerGame })
+            foreach (var collection in queue)
+                foreach (var doc in collection.Value)
+                    if (doc.Value != null && doc.Value.TryGetValue(DataIds.TestID, out var id) && id != null && id.ToString() == sessionID) count++;
+        return count;
+    }
+
+    static void AbandonTick()
+    {
+        if (Now < abandonAt || abandonConfirmed) return;
+        abandonAt = Now + 1.5;
+        var ui = GameUIController.Instance;
+        if (ui == null) { problems.Add("Abandono: no hay GameUIController en " + currentScene); Finish("abandono fallido"); return; }
+        var panel = Field<GameObject>(ui, "exitConfirmPanel");
+        var input = Field<TMP_InputField>(ui, "exitConfirmInput");
+        var confirm = Field<Button>(ui, "exitConfirmBtn");
+        switch (abandonStep)
+        {
+            case 0:
+                abandonSession = UserDataManager.CurrTestID;
+                var before = CountSessionDocs(abandonSession);
+                report.AppendLine().AppendLine("## Abandono de la sesión").AppendLine().AppendLine($"- Antes: sesión {abandonSession}, {before} documentos en cola, escena {currentScene}");
+                if (before == 0) problems.Add("Abandono: la sesión no tenía documentos que descartar (usa un inicio posterior o más escenas)");
+                Tap(Field<Button>(ui, "homeBtn"));
+                break;
+            case 1:
+                Tap(Field<Button>(ui, "exitBtn"));
+                break;
+            case 2:
+                var visible = panel != null && panel.activeSelf;
+                report.AppendLine($"- Ventana de confirmación visible: {visible}; 'confirmar' habilitado sin escribir nada: {confirm.interactable}");
+                if (!visible) problems.Add("Abandono: no apareció la ventana de confirmación");
+                if (confirm.interactable) problems.Add("Abandono: 'confirmar' estaba habilitado sin escribir la palabra");
+                input.text = "sali";
+                break;
+            case 3:
+                report.AppendLine($"- Con 'sali' el botón confirmar está habilitado: {confirm.interactable}");
+                if (confirm.interactable) problems.Add("Abandono: 'confirmar' se habilitó con una palabra incorrecta");
+                input.text = "SALIR ";
+                break;
+            case 4:
+                report.AppendLine($"- Con 'SALIR ' el botón confirmar está habilitado: {confirm.interactable}");
+                if (!confirm.interactable) { problems.Add("Abandono: 'confirmar' no se habilitó al escribir la palabra"); Finish("abandono fallido"); return; }
+                abandonConfirmed = true;
+                Tap(confirm);
+                break;
+        }
+        abandonStep++;
+    }
+
+    static void VerifyAbandon()
+    {
+        var left = CountSessionDocs(abandonSession);
+        var saved = PlayerPrefs.GetString(DatabaseManager.pendingSessionsJSONKey, "");
+        var inSavedQueue = !string.IsNullOrEmpty(abandonSession) && saved.Contains(abandonSession);
+        var profileQueued = qaUser != null && DatabaseManager.pendingUserDatasToUpload.Exists(u => u.id_jugador == qaUser.id_jugador);
+        var profileStays = qaUser != null && DatabaseManager.userDatas.Exists(u => u.id_jugador == qaUser.id_jugador);
+        var testId = UserDataManager.CurrTestID;
+        var idx = GameSequencesList.Instance.goToGameGroupIdx;
+        report.AppendLine($"- Después: documentos de la sesión en cola {left}, en el guardado local {inSavedQueue}, perfil en cola de subida {profileQueued}, perfil sigue en la tablet {profileStays}, id de sesión '{testId}', posición de la secuencia {idx}, escena {SceneManager.GetActiveScene().name}");
+        if (left != 0) problems.Add($"Abandono: quedaron {left} documentos de la sesión en la cola");
+        if (inSavedQueue) problems.Add("Abandono: la sesión sigue en el guardado local");
+        if (profileQueued) problems.Add("Abandono: el perfil quedó en la cola de subida sin haber terminado una sesión");
+        if (testId != "Default Test ID") problems.Add("Abandono: sigue activo el id de la sesión");
+        if (idx != 0) problems.Add("Abandono: la secuencia no volvió al inicio");
+        Finish("abandono comprobado");
     }
 
     static void EndScene(string result)
@@ -406,6 +494,27 @@ public static class MinigameBotRunner
 
     // ---------- Results ----------
 
+    //A finished session is queued whole, with the child's profile, and nothing else is left behind
+    static void VerifyFinishedSession()
+    {
+        var pending = DatabaseManager.pendingSessionsToUpload;
+        var finished = DatabaseManager.GetFinishedSessionIds(pending);
+        var total = 0; foreach (var c in pending) total += c.Value.Count;
+        var finishedDocs = 0; foreach (var c in DatabaseManager.FinishedSessionsOnly(pending)) finishedDocs += c.Value.Count;
+        var profileQueued = qaUser != null && DatabaseManager.pendingUserDatasToUpload.Exists(u => u.id_jugador == qaUser.id_jugador);
+        var saved = PlayerPrefs.GetString(DatabaseManager.pendingSessionsJSONKey, "");
+        var persisted = finished.Count == 1 && saved.Contains(new List<string>(finished)[0]);
+        var resumePoint = qaUser != null ? qaUser.CheckPointIdx : 0;
+        report.AppendLine().AppendLine("## Sesión finalizada").AppendLine();
+        report.AppendLine($"- Sesiones finalizadas en cola: {finished.Count}; documentos en cola: {total}, de sesiones finalizadas: {finishedDocs}");
+        report.AppendLine($"- Perfil del jugador en cola de subida: {profileQueued}; sesión en el guardado local: {persisted}; punto de retoma del perfil: {resumePoint}");
+        if (finished.Count != 1) problems.Add($"Sesión finalizada: se esperaba 1 sesión finalizada en la cola y hay {finished.Count}");
+        if (total != finishedDocs) problems.Add($"Sesión finalizada: hay {total - finishedDocs} documentos de sesiones sin finalizar en la cola");
+        if (!profileQueued) problems.Add("Sesión finalizada: el perfil no quedó en la cola de subida");
+        if (!persisted) problems.Add("Sesión finalizada: la sesión no quedó en el guardado local");
+        if (resumePoint != -1) problems.Add("Sesión finalizada: el perfil conserva un punto de retoma");
+    }
+
     static void Finish(string why)
     {
         if (!running) return;
@@ -415,6 +524,7 @@ public static class MinigameBotRunner
         if (currentScene != null && why != "secuencia completa") EndScene(why);
         GameInput.ClearSimulation();
 
+        if (why == "secuencia completa" && startIndex == 0 && sceneLimit == 0) VerifyFinishedSession();
         ValidateAnalytics();
 
         report.AppendLine().AppendLine($"Duración total: {(Now - startedAt) / 60:0.0} min. Fin: {why}.").AppendLine();
