@@ -7,7 +7,9 @@ El certificado (keystore) con el que HiHat firmó los APK de 2024 se perdió y n
 1. **Unity Hub** con **Unity 2022.3.13f1** (la versión exacta del proyecto, ver `Proj_Andes/ProjectSettings/ProjectVersion.txt`).
 2. En Unity Hub → Installs → 2022.3.13f1 → Add modules: **Android Build Support**, con sus submódulos **OpenJDK** y **Android SDK & NDK Tools**. No hace falta instalar Android Studio.
 3. Clonar `crest-games` y abrir la carpeta `Proj_Andes` desde Unity Hub.
-4. El archivo de Firebase `Proj_Andes/Assets/google-services.json` ya está en el repo y registra los dos apps (`com.HiHatGames.CREST` y `com.HiHatGames.MiniSelNarratives`). Cambiar de certificado no afecta a Firebase: el app usa autenticación anónima y Firestore, que no dependen de la firma.
+4. **Poner Android como plataforma activa**: File → Build Settings → Android → Switch Platform, y esperar a que termine de recompilar. Si se construye desde otra plataforma, Burst falla con "Burst requires the Android NDK to be correctly installed" aunque el NDK esté instalado. El menú de build lo revisa y ofrece cambiarla.
+5. **Librerías Android de Firebase**: la carpeta `Proj_Andes/Assets/Plugins` no está en git. En un clon nuevo, antes del primer build: Assets → External Dependency Manager → Android Resolver → Force Resolve. Si durante un build pregunta "Enable Android Auto-resolution?", responder Disable (las librerías ya están resueltas).
+6. El archivo de Firebase `Proj_Andes/Assets/google-services.json` ya está en el repo y registra los dos apps (`com.HiHatGames.CREST` y `com.HiHatGames.MiniSelNarratives`). Cambiar de certificado no afecta a Firebase: el app usa autenticación anónima y Firestore, que no dependen de la firma.
 
 ## 2. Crear el certificado nuevo (una sola vez, y guardarlo bien)
 

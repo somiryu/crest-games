@@ -80,6 +80,16 @@ public static class AppFlavorBuildMenu
 
     static void Build(AppFlavor flavor, bool development)
     {
+        //Burst only finds the embedded Android NDK when its editor code was compiled with Android as the active platform,
+        //so switching inside the build fails ("Burst requires the Android NDK"). Switch first and build again afterwards.
+        if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
+        {
+            if (EditorUtility.DisplayDialog("Cambiar a Android primero",
+                "La plataforma activa es " + EditorUserBuildSettings.activeBuildTarget + ". Hay que cambiar a Android y esperar a que Unity recompile antes de construir.\n\nCuando termine, vuelve a usar este menú de build.",
+                "Cambiar a Android", "Cancelar"))
+                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
+            return;
+        }
         if (!Validate(development)) return;
         Apply(flavor);
 
