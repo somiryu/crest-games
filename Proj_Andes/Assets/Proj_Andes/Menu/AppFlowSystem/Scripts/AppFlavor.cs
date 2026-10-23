@@ -14,6 +14,9 @@ public class AppFlavor : ScriptableObject
     public bool isNarrativeApp;
     [Tooltip("Optional, if empty the icon in Player Settings is kept")]
     public Texture2D icon;
+    [Tooltip("Android adaptive icon (8.0+), both layers 1024x1024. The drawing must fit the central circle of about 626 px")]
+    public Texture2D adaptiveIconBackground;
+    public Texture2D adaptiveIconForeground;
 
     public const string ActiveFlavorResourcePath = "ActiveAppFlavor";
 

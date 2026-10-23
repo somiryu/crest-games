@@ -15,4 +15,6 @@ MonoBehaviour:
   productName: miniSEL - Minijuegos
   applicationIdentifier: com.HiHatGames.CREST
   isNarrativeApp: 0
-  icon: {fileID: 0}
+  icon: {fileID: 2800000, guid: 1aef6925dd45487fa5ef0b9995c4a837, type: 3}
+  adaptiveIconBackground: {fileID: 2800000, guid: 2efdd383bcc544bd84be33b44ab58521, type: 3}
+  adaptiveIconForeground: {fileID: 2800000, guid: 61b0fd6162ca4c94a080b17ee9762939, type: 3}

@@ -15,4 +15,6 @@ MonoBehaviour:
   productName: miniSel - Historias
   applicationIdentifier: com.HiHatGames.MiniSelNarratives
   isNarrativeApp: 1
-  icon: {fileID: 0}
+  icon: {fileID: 2800000, guid: d48a21f7f67949b0a318ef0d0adbea6c, type: 3}
+  adaptiveIconBackground: {fileID: 2800000, guid: 053f706836244ee9b6e589da1c8a696a, type: 3}
+  adaptiveIconForeground: {fileID: 2800000, guid: 651031fbdb0544498d574cf0de7ef268, type: 3}

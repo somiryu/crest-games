@@ -69,6 +69,7 @@ public static class AppFlavorBuildMenu
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, flavor.applicationIdentifier);
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS, flavor.applicationIdentifier);
         if (flavor.icon != null) PlayerSettings.SetIcons(NamedBuildTarget.Unknown, new[] { flavor.icon }, IconKind.Any);
+        ApplyAndroidIcons(flavor);
         //AppVersion.Number is the single source of the version, so the APK never disagrees with the version_app it uploads
         PlayerSettings.Android.bundleVersionCode = AppVersion.Number;
         PlayerSettings.bundleVersion = AppVersion.Label;
@@ -76,6 +77,25 @@ public static class AppFlavorBuildMenu
         AssetDatabase.SaveAssets();
         AppFlavor.ClearCache();
         Debug.Log($"App flavor: {flavor.productName} ({flavor.applicationIdentifier}), narrative app: {flavor.isNarrativeApp}");
+    }
+
+    //Legacy and round icons use the full icon; the adaptive one (Android 8+) uses the two layers, background first
+    static void ApplyAndroidIcons(AppFlavor flavor)
+    {
+        var android = NamedBuildTarget.Android;
+        void SetAll(PlatformIconKind kind, params Texture2D[] layers)
+        {
+            var icons = PlayerSettings.GetPlatformIcons(android, kind);
+            foreach (var icon in icons) icon.SetTextures(layers);
+            PlayerSettings.SetPlatformIcons(android, kind, icons);
+        }
+        if (flavor.icon != null)
+        {
+            SetAll(UnityEditor.Android.AndroidPlatformIconKind.Legacy, flavor.icon);
+            SetAll(UnityEditor.Android.AndroidPlatformIconKind.Round, flavor.icon);
+        }
+        if (flavor.adaptiveIconBackground != null && flavor.adaptiveIconForeground != null)
+            SetAll(UnityEditor.Android.AndroidPlatformIconKind.Adaptive, flavor.adaptiveIconBackground, flavor.adaptiveIconForeground);
     }
 
     static void Build(AppFlavor flavor, bool development)
