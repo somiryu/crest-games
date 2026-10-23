@@ -15,8 +15,9 @@ public class UserData
     [FirestoreProperty] public int grado { get; set; }
     //AppVersion.Number of the build that last uploaded the profile, required by the Firestore rules (set in NormalizeFields)
     [FirestoreProperty] public int version_app { get; set; }
-    // The gender is stored in two fields that must always agree: genero ("Masculino"/"Femenino"/"Otro", read by the CMS)
-    // and gen_cod (0 Masculino, 1 Femenino, 9 Otro, 99 unknown). Only write them through `gender`, which updates both.
+    // The gender is stored in two fields that must always agree: genero ("masculino"/"femenino"/"otro", lowercase as in the
+    // database model, read by the CMS) and gen_cod (0 masculino, 1 femenino, 9 otro, 99 unknown). Only write them through
+    // `gender`, which updates both. Reading ignores case, so profiles saved as "Masculino" still load.
     [FirestoreProperty] public string genero { get; set; }
     [FirestoreProperty] public int gen_cod { get; set; }
 
@@ -44,7 +45,7 @@ public class UserData
         }
         set
         {
-            genero = value == UserGender.NONE ? null : value.ToString();
+            genero = value == UserGender.NONE ? null : value.ToString().ToLowerInvariant();
             gen_cod = value == UserGender.NONE ? UnknownGenderCode : (int)value;
             sexo_field = null;
             sexo_cod = UnknownGenderCode;
@@ -60,8 +61,9 @@ public class UserData
     /// <summary>Makes genero and gen_cod agree with the resolved gender. Called whenever a profile is loaded or saved.</summary>
     public void NormalizeGender() => gender = gender;
 
-    // The school level is stored like the gender: nivel ("Preescolar" ... "Otro") and nivel_cod (1, 2, 3, 4, 9; 99 unknown).
-    // Profiles created before the field existed come without it and stay unknown (99) until they are filled.
+    // The school level is stored like the gender: nivel ("preescolar" ... "otro", lowercase) and nivel_cod (1, 2, 3, 4, 9;
+    // 99 unknown). Profiles created before the field existed come without it and stay unknown (99) until they are filled.
+    // Reading ignores case, so profiles saved as "Preescolar" still load.
     [FirestoreProperty] public string nivel { get; set; }
     [FirestoreProperty] public int nivel_cod { get; set; }
 
@@ -77,7 +79,7 @@ public class UserData
         }
         set
         {
-            nivel = value == UserLevel.NONE ? null : value.ToString();
+            nivel = value == UserLevel.NONE ? null : value.ToString().ToLowerInvariant();
             nivel_cod = (int)value;
         }
     }
@@ -133,9 +135,10 @@ public class UserData
         var gender = GenderFromCode(code);
         return gender == UserGender.Otro ? UserGender.NONE : gender;
     }
-    // The school sector is stored like the gender: sector ("Privado urbano" ...) and sector_cod (0 Privado urbano,
-    // 1 Público urbano, 2 Público rural, 3 Privado rural; 99 unknown). It used to be tipo_colegio / tipo_colegio_cod
-    // with only "Privado" (0), "Público Urbano" (1) and "Público Rural" (2); those are read but never written back.
+    // The school sector is stored like the gender: sector ("privado urbano" ..., lowercase and without accents as in the
+    // database model) and sector_cod (0 privado urbano, 1 publico urbano, 2 publico rural, 3 privado rural; 99 unknown).
+    // It used to be tipo_colegio / tipo_colegio_cod with only "Privado" (0), "Público Urbano" (1) and "Público Rural" (2);
+    // those are read but never written back. Reading ignores case and accents ("Público urbano" still loads).
     [FirestoreProperty] public string sector { get; set; }
     [FirestoreProperty] public int sector_cod { get; set; }
 
@@ -172,21 +175,31 @@ public class UserData
     {
         switch (sector)
         {
-            case UserSector.PrivadoUrbano: return "Privado urbano";
-            case UserSector.PrivadoRural: return "Privado rural";
-            case UserSector.PublicoUrbano: return "Público urbano";
-            case UserSector.PublicoRural: return "Público rural";
+            case UserSector.PrivadoUrbano: return "privado urbano";
+            case UserSector.PrivadoRural: return "privado rural";
+            case UserSector.PublicoUrbano: return "publico urbano";
+            case UserSector.PublicoRural: return "publico rural";
             default: return null;
         }
     }
 
-    /// <summary>The sector whose label is this text (ignoring case), or NONE (the dropdown placeholder, empty text...).</summary>
+    /// <summary>The sector whose label is this text (ignoring case and accents, so the dropdown's "Público urbano" works),
+    /// or NONE (the dropdown placeholder, empty text...).</summary>
     public static UserSector ParseSector(string label)
     {
         if (string.IsNullOrEmpty(label)) return UserSector.NONE;
+        var plain = WithoutAccents(label.Trim());
         foreach (UserSector candidate in new[] { UserSector.PrivadoUrbano, UserSector.PrivadoRural, UserSector.PublicoUrbano, UserSector.PublicoRural })
-            if (string.Equals(SectorLabel(candidate), label.Trim(), StringComparison.OrdinalIgnoreCase)) return candidate;
+            if (string.Equals(SectorLabel(candidate), plain, StringComparison.OrdinalIgnoreCase)) return candidate;
         return UserSector.NONE;
+    }
+
+    static string WithoutAccents(string text)
+    {
+        var builder = new System.Text.StringBuilder(text.Length);
+        foreach (var c in text.Normalize(System.Text.NormalizationForm.FormD))
+            if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c) != System.Globalization.UnicodeCategory.NonSpacingMark) builder.Append(c);
+        return builder.ToString().Normalize(System.Text.NormalizationForm.FormC);
     }
 
     static bool IsSectorCode(int code) => code == (int)UserSector.PrivadoUrbano || code == (int)UserSector.PublicoUrbano

@@ -14,11 +14,11 @@ public class UserDataLevelTests
         Assert.AreEqual(UserData.UnknownLevelCode, user.nivel_cod);
     }
 
-    [TestCase(UserLevel.Preescolar, "Preescolar", 1)]
-    [TestCase(UserLevel.Primaria, "Primaria", 2)]
-    [TestCase(UserLevel.Secundaria, "Secundaria", 3)]
-    [TestCase(UserLevel.Superior, "Superior", 4)]
-    [TestCase(UserLevel.Otro, "Otro", 9)]
+    [TestCase(UserLevel.Preescolar, "preescolar", 1)]
+    [TestCase(UserLevel.Primaria, "primaria", 2)]
+    [TestCase(UserLevel.Secundaria, "secundaria", 3)]
+    [TestCase(UserLevel.Superior, "superior", 4)]
+    [TestCase(UserLevel.Otro, "otro", 9)]
     [TestCase(UserLevel.NONE, null, UserData.UnknownLevelCode)]
     public void SettingLevelWritesBothFields(UserLevel level, string expectedField, int expectedCode)
     {
@@ -28,7 +28,8 @@ public class UserDataLevelTests
         Assert.AreEqual(expectedCode, user.nivel_cod);
     }
 
-    [TestCase("{\"nivel\":\"Superior\",\"nivel_cod\":4}", UserLevel.Superior, TestName = "Current profile")]
+    [TestCase("{\"nivel\":\"superior\",\"nivel_cod\":4}", UserLevel.Superior, TestName = "Current profile")]
+    [TestCase("{\"nivel\":\"Primaria\",\"nivel_cod\":2}", UserLevel.Primaria, TestName = "Capitalized level saved before lowercase")]
     [TestCase("{\"nivel_cod\":3}", UserLevel.Secundaria, TestName = "Code only")]
     [TestCase("{\"nivel\":\"NONE\",\"nivel_cod\":2}", UserLevel.Primaria, TestName = "NONE text falls back to the code")]
     [TestCase("{\"nivel_cod\":7}", UserLevel.NONE, TestName = "A code that doesn't exist is unknown")]

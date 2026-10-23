@@ -16,9 +16,9 @@ public class UserDataGenderTests
         Assert.AreEqual(UserData.UnknownGenderCode, user.gen_cod);
     }
 
-    [TestCase(UserGender.Masculino, "Masculino", 0)]
-    [TestCase(UserGender.Femenino, "Femenino", 1)]
-    [TestCase(UserGender.Otro, "Otro", 9)]
+    [TestCase(UserGender.Masculino, "masculino", 0)]
+    [TestCase(UserGender.Femenino, "femenino", 1)]
+    [TestCase(UserGender.Otro, "otro", 9)]
     [TestCase(UserGender.NONE, null, UserData.UnknownGenderCode)]
     public void SettingGenderWritesBothFields(UserGender gender, string expectedField, int expectedCode)
     {
@@ -28,9 +28,11 @@ public class UserDataGenderTests
         Assert.AreEqual(expectedCode, user.gen_cod);
     }
 
-    [TestCase("{\"genero\":\"Masculino\",\"gen_cod\":0}", UserGender.Masculino, TestName = "Current man")]
-    [TestCase("{\"genero\":\"Femenino\",\"gen_cod\":1}", UserGender.Femenino, TestName = "Current woman")]
-    [TestCase("{\"genero\":\"Otro\",\"gen_cod\":9}", UserGender.Otro, TestName = "Current other")]
+    [TestCase("{\"genero\":\"masculino\",\"gen_cod\":0}", UserGender.Masculino, TestName = "Current man")]
+    [TestCase("{\"genero\":\"femenino\",\"gen_cod\":1}", UserGender.Femenino, TestName = "Current woman")]
+    [TestCase("{\"genero\":\"otro\",\"gen_cod\":9}", UserGender.Otro, TestName = "Current other")]
+    [TestCase("{\"genero\":\"Masculino\",\"gen_cod\":0}", UserGender.Masculino, TestName = "Capitalized man saved before lowercase")]
+    [TestCase("{\"genero\":\"Femenino\",\"gen_cod\":1}", UserGender.Femenino, TestName = "Capitalized woman saved before lowercase")]
     [TestCase("{\"gen_cod\":9}", UserGender.Otro, TestName = "Code only")]
     [TestCase("{\"genero\":\"NONE\",\"gen_cod\":1}", UserGender.Femenino, TestName = "NONE text falls back to the code")]
     [TestCase("{\"genero\":\"Femenino\",\"gen_cod\":1,\"sexo_field\":\"Hombre\"}", UserGender.Femenino, TestName = "New fields win over legacy")]
@@ -57,8 +59,17 @@ public class UserDataGenderTests
         user.NormalizeGender();
         var saved = JsonConvert.SerializeObject(user);
         Assert.IsFalse(saved.Contains("sexo"), saved);
-        Assert.IsTrue(saved.Contains("\"genero\":\"Masculino\""), saved);
+        Assert.IsTrue(saved.Contains("\"genero\":\"masculino\""), saved);
         Assert.IsTrue(saved.Contains("\"gen_cod\":0"), saved);
+    }
+
+    [Test]
+    public void NormalizingLowercasesACapitalizedGender()
+    {
+        var user = FromSavedJson("{\"genero\":\"Femenino\",\"gen_cod\":1}");
+        user.NormalizeFields();
+        Assert.AreEqual("femenino", user.genero);
+        Assert.AreEqual(1, user.gen_cod);
     }
 
     [Test]
@@ -67,7 +78,7 @@ public class UserDataGenderTests
         var user = new UserData { gender = UserGender.Otro };
         var loaded = FromSavedJson(JsonConvert.SerializeObject(user));
         Assert.AreEqual(UserGender.Otro, loaded.gender);
-        Assert.AreEqual("Otro", loaded.genero);
+        Assert.AreEqual("otro", loaded.genero);
         Assert.AreEqual(9, loaded.gen_cod);
     }
 
