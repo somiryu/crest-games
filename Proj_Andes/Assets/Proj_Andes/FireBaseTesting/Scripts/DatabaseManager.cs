@@ -52,13 +52,16 @@ public static class DatabaseManager
     }
 #endif
 
-    //config/app.min_version: builds below it must be replaced. -1 while unknown (offline or not answered)
+    //config/app holds the minimum version of each app: builds below it must be replaced. -1 while unknown (offline,
+    //not answered, or the field doesn't exist: the narratives app has none until it is reviewed, so it is never blocked)
     public const string ConfigCollection = "config";
     public const string AppConfigDocument = "app";
-    public const string MinVersionField = "min_version";
+    public const string MinigamesMinVersionField = "min_version_minijuegos";
+    public const string NarrativesMinVersionField = "min_version_narrativas";
+    public static string MinVersionField => GameSequencesList.isTheNarrativeSequence ? NarrativesMinVersionField : MinigamesMinVersionField;
     public static long minAppVersion = -1;
 
-    /// <summary>Reads config/app.min_version from the server. Offline or after the timeout it stays -1 and the app keeps working.</summary>
+    /// <summary>Reads this app's minimum version from config/app. Offline or after the timeout it stays -1 and the app keeps working.</summary>
     public static IEnumerator LoadMinAppVersionRoutine(float timeoutSeconds)
     {
         minAppVersion = -1;
