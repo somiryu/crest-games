@@ -49,6 +49,7 @@ public static class MinigameBotRunner
         { DataIds.boostersAndScapeGame, new[] { "fp_partida", "fp_intento", "fp_turbo", "fp_precision", "fp_trampa_activada", "fp_emoc_rta", "fp_emoc_cod", "fp_emoc_tm", "fp_espera_click" } },
     };
     static readonly string[] CommonKeys = { DataIds.institutionCode, DataIds.UserID, DataIds.TestID };
+    static string rocketCheck;
     static readonly string[] AllowedRocketAnswers = { "pequeño", "mediano", "grande" };
 
     static bool running;
@@ -116,6 +117,7 @@ public static class MinigameBotRunner
         errorsInScene.Clear();
         report.Clear();
         abandoning = abandonConfirmed = false; abandonStep = 0;
+        rocketTravelReleases = new int[0]; rocketAudioReleases = 0; rocketCheck = null;
         SnapshotLocalSave();
         Application.runInBackground = true;
         Application.logMessageReceived += OnLog;
@@ -304,6 +306,7 @@ public static class MinigameBotRunner
             case "Frustration_MechanicHand_TestScene": if (rng.NextDouble() < 0.5) { StartDrag(); return; } break;
             case "Gratification_TurboRocket_Tutorial": if (TapWhereTheTutorialHandPoints()) return; goto case "Gratification_TurboRocket";
             case "Gratification_TurboRocket": if (rng.NextDouble() < 0.4) { TapScreen(); return; } break;
+            case "Gratification_SizeRockets": if (PlayRockets()) return; break;
         }
         ActOnUI();
     }
@@ -317,6 +320,34 @@ public static class MinigameBotRunner
         if (canBoost ? rng.NextDouble() < 0.8 : rng.NextDouble() < 0.15) TapScreen();
         else ActOnUI();
         nextActionAt = Now + 0.15 + rng.NextDouble() * 0.35;
+    }
+
+    //Carrito: lifting the finger while the ship travels counts for that attempt (cr_release), not during the stars audio after it
+    static int[] rocketTravelReleases = new int[0];
+    static int rocketAudioReleases;
+
+    static bool PlayRockets()
+    {
+        var manager = MG_SizeRockets_GameManager.Instance;
+        if (manager == null) return false;
+        var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+        int Travelling() => (int)typeof(MG_SizeRockets_GameManager).GetField("travellingRound", flags).GetValue(manager);
+        var ships = (System.Collections.IList)typeof(MG_SizeRockets_GameManager).GetField("activeShips", flags).GetValue(manager);
+        if (ships.Count == 0 || rng.NextDouble() < 0.3) return false;
+        if (rocketTravelReleases.Length != manager.analyticsPerRound.Length) rocketTravelReleases = new int[manager.analyticsPerRound.Length];
+
+        TapScreen();
+        var release = pendingRelease;
+        if (release == null) return true;
+        pendingRelease = () =>
+        {
+            var round = Travelling();
+            if (round >= 0) rocketTravelReleases[round]++;
+            else rocketAudioReleases++;
+            release();
+        };
+        nextActionAt = Now + 0.3 + rng.NextDouble() * 0.4;
+        return true;
     }
 
     static HashSet<Button> previouslyTappable = new HashSet<Button>();
@@ -578,12 +609,23 @@ public static class MinigameBotRunner
                     if (doc.TryGetValue(DataIds.sizeRocketResponseString, out var answer) && !AllowedRocketAnswers.Contains(answer as string))
                         missing["cr_respuesta=" + answer] = missing.TryGetValue("cr_respuesta=" + answer, out var n) ? n + 1 : 1;
 
+            if (contract.Key == DataIds.sizeRocketsGame && rocketTravelReleases.Length > 0)
+            {
+                var lastGame = docs.Last()[DataIds.GameID]?.ToString();
+                var rows = docs.Where(d => d[DataIds.GameID]?.ToString() == lastGame).OrderBy(d => System.Convert.ToInt32(d[DataIds.tryIndex])).ToList();
+                var saved = rows.Select(d => System.Convert.ToInt32(d[DataIds.mouseUpCount])).ToArray();
+                var ok = saved.SequenceEqual(rocketTravelReleases);
+                rocketCheck = $"cr_release por intento: guardado [{string.Join(", ", saved)}], esperado [{string.Join(", ", rocketTravelReleases)}]; dedos levantados durante el audio de estrellas (no cuentan): {rocketAudioReleases} → " + (ok ? "OK" : "NO COINCIDE");
+                if (!ok) problems.Add("carrito_recolector: " + rocketCheck);
+            }
+
             var text = missing.Count == 0 ? "ninguna" : string.Join(", ", missing.Select(m => $"{m.Key} ({m.Value}/{docs.Count})"));
             //Rounds per game: documents that share an id_juego, in the order the games were played
             var perGame = docs.Where(d => d.ContainsKey(DataIds.GameID)).GroupBy(d => d[DataIds.GameID]?.ToString()).Select(g => g.Count().ToString());
             report.AppendLine($"| {contract.Key} | {docs.Count} (por partida: {string.Join(", ", perGame)}) | {text} |");
             if (missing.Count > 0) problems.Add($"{contract.Key}: faltan columnas del CMS: {text}");
         }
+        if (rocketCheck != null) report.AppendLine().AppendLine("Carrito, " + rocketCheck);
         var others = collections.Keys.Except(CmsContract.Keys).Select(k => $"{k} ({collections[k].Count})");
         report.AppendLine().AppendLine("Otras colecciones generadas: " + string.Join(", ", others));
     }

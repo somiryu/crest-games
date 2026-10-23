@@ -75,6 +75,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
     public SizeRocketAnalytics[] analyticsPerRound;
 
 	int roundCount;
+	int travellingRound = -1;
 
 	private void Awake()
 	{
@@ -148,9 +149,10 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 			smallRocketBtn.interactable = false;
 			mediumRocketBtn.interactable = false;
 			largeRocketBtn.interactable = false;
-			if (GameInput.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended))
+			//Releases count for the attempt whose ship is travelling, not during the stars audio that follows it
+			if (travellingRound >= 0 && (GameInput.GetMouseButtonUp(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)))
 			{
-				currAnalytics.mouseUpCount++;
+				analyticsPerRound[travellingRound].mouseUpCount++;
 			}
 		}
 		else
@@ -210,7 +212,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 		mediumRocketBtn.interactable = false;
 		largeRocketBtn.interactable = false;
         currAnalytics.tryIndex = roundCount + 1;
-
+		travellingRound = roundCount;
     }
 
 
@@ -246,6 +248,7 @@ public class MG_SizeRockets_GameManager : MonoBehaviour, IEndOfGameManager, ISiz
 	IEnumerator RoundEndSequence(MG_SizeRockets_Rocket rocket, int coinsAmount)
 	{
 		currAnalytics.stars = coinsAmount;
+		travellingRound = -1;
 
 		if (rocket.rocketType == SizeRocketsRocketTypes.pequeño) GeneralGameAnalyticsManager.RegisterLose();
 		else GeneralGameAnalyticsManager.RegisterWin();
