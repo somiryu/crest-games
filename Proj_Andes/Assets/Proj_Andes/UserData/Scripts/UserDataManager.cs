@@ -94,6 +94,7 @@ public class UserDataManager : ScriptableObject
         analyticsWithExtraFields.Add(DataIds.institutionCode, CurrUser.id_proyecto);
         analyticsWithExtraFields.Add(DataIds.UserID, CurrUser.id_jugador);
         if (shouldUseTestID) analyticsWithExtraFields.Add(DataIds.TestID, CurrTestID);
+        analyticsWithExtraFields.Add(DataIds.AppVersionField, AppVersion.Number);
 		//analyticsWithExtraFields.Add(DataIds.GameOrderInSequence, GameSequencesList.Instance.goToGameGroupIdx);
 		analyticsWithExtraFields.AddRange(itemAnalytics);
 

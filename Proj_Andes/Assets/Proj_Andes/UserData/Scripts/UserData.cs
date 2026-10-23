@@ -13,6 +13,8 @@ public class UserData
     [FirestoreProperty] public string id_proyecto { get; set; }
     [FirestoreProperty] public int edad { get; set; }
     [FirestoreProperty] public int grado { get; set; }
+    //AppVersion.Number of the build that last uploaded the profile, required by the Firestore rules (set in NormalizeFields)
+    [FirestoreProperty] public int version_app { get; set; }
     // The gender is stored in two fields that must always agree: genero ("Masculino"/"Femenino"/"Otro", read by the CMS)
     // and gen_cod (0 Masculino, 1 Femenino, 9 Otro, 99 unknown). Only write them through `gender`, which updates both.
     [FirestoreProperty] public string genero { get; set; }
@@ -89,6 +91,7 @@ public class UserData
         NormalizeGender();
         NormalizeLevel();
         NormalizeSector();
+        version_app = AppVersion.Number;
     }
 
     /// <summary>Reads the pre-rename fields of a Firestore document (sexo*, tipo_colegio*), which ConvertTo ignores.</summary>

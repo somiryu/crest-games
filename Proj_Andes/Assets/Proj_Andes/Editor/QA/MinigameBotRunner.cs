@@ -48,7 +48,7 @@ public static class MinigameBotRunner
         { DataIds.mechanicHandGame, new[] { "fg_partida", "fg_intento", "fg_precision", "fg_trampa_activada", "fg_emoc_rta", "fg_emoc_cod", "fg_emoc_tm", "fg_espera_click" } },
         { DataIds.boostersAndScapeGame, new[] { "fp_partida", "fp_intento", "fp_turbo", "fp_precision", "fp_trampa_activada", "fp_emoc_rta", "fp_emoc_cod", "fp_emoc_tm", "fp_espera_click" } },
     };
-    static readonly string[] CommonKeys = { DataIds.institutionCode, DataIds.UserID, DataIds.TestID };
+    static readonly string[] CommonKeys = { DataIds.institutionCode, DataIds.UserID, DataIds.TestID, DataIds.AppVersionField };
     static string rocketCheck;
     static readonly string[] AllowedRocketAnswers = { "pequeño", "mediano", "grande" };
 
@@ -333,7 +333,8 @@ public static class MinigameBotRunner
         var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
         int Travelling() => (int)typeof(MG_SizeRockets_GameManager).GetField("travellingRound", flags).GetValue(manager);
         var ships = (System.Collections.IList)typeof(MG_SizeRockets_GameManager).GetField("activeShips", flags).GetValue(manager);
-        if (ships.Count == 0 || rng.NextDouble() < 0.3) return false;
+        //Mostly holds the move button like a child, sometimes lifts the finger
+        if (ships.Count == 0 || rng.NextDouble() < 0.65) return false;
         if (rocketTravelReleases.Length != manager.analyticsPerRound.Length) rocketTravelReleases = new int[manager.analyticsPerRound.Length];
 
         TapScreen();

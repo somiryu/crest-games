@@ -75,6 +75,8 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 	[SerializeField] Button logInFailedPopUp;
 	[SerializeField] TMP_Text logInFailTxt;
 	[SerializeField] TMP_Text logInsuccedIDUITxt;
+	//Shown over everything, with no way to continue, when config/app.min_version is above this build
+	[SerializeField] GameObject outdatedVersionPanel;
 
 	[Header("After Log in Panel")]
 	[SerializeField] GameObject afterLogInPanel;
@@ -404,6 +406,21 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 			}
 		}
 		RebuildUsersList();
+
+		//Checked after the sync, so what this tablet already played is uploaded while the rules still accept this version
+		if (UserDataManager.Instance.HasInternet)
+		{
+			yield return DatabaseManager.LoadMinAppVersionRoutine(timeoutSeconds: 5);
+			if (AppVersion.IsOutdated(DatabaseManager.minAppVersion)) ShowOutdatedVersionPanel();
+		}
+	}
+
+	void ShowOutdatedVersionPanel()
+	{
+		Debug.LogWarning($"App version {AppVersion.Number} is below the minimum {DatabaseManager.minAppVersion}, blocking the app");
+		if (outdatedVersionPanel == null) return;
+		outdatedVersionPanel.transform.SetAsLastSibling();
+		outdatedVersionPanel.SetActive(true);
 	}
 
 	IEnumerator SyncDataSliderRoutine()

@@ -11,6 +11,8 @@ public static class DataIds
     public const string UserID = "id_jugador";
     public const string GameID = "id_juego";
     public const string GameType = "juego_tipo";
+    //AppVersion.Number of the build that wrote the document, required by the Firestore rules
+    public const string AppVersionField = "version_app";
 
     //Generic IDs
     public const string totalClicks = "click_repetions";

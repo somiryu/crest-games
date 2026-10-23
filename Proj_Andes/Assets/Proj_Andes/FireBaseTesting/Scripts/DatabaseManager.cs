@@ -52,6 +52,28 @@ public static class DatabaseManager
     }
 #endif
 
+    //config/app.min_version: builds below it must be replaced. -1 while unknown (offline or not answered)
+    public const string ConfigCollection = "config";
+    public const string AppConfigDocument = "app";
+    public const string MinVersionField = "min_version";
+    public static long minAppVersion = -1;
+
+    /// <summary>Reads config/app.min_version from the server. Offline or after the timeout it stays -1 and the app keeps working.</summary>
+    public static IEnumerator LoadMinAppVersionRoutine(float timeoutSeconds)
+    {
+        minAppVersion = -1;
+        var task = db.Collection(ConfigCollection).Document(AppConfigDocument).GetSnapshotAsync(Source.Server);
+        var giveUpAt = Time.realtimeSinceStartup + timeoutSeconds;
+        while (!task.IsCompleted && Time.realtimeSinceStartup < giveUpAt) yield return null;
+        if (!task.IsCompleted || task.IsFaulted || task.IsCanceled)
+        {
+            Debug.LogWarning("Could not read the minimum app version, the app keeps working: " + (task.Exception?.GetBaseException().Message ?? "timeout"));
+            yield break;
+        }
+        if (task.Result.Exists && task.Result.TryGetValue<long>(MinVersionField, out var minVersion)) minAppVersion = minVersion;
+        Debug.Log($"App version {AppVersion.Number}, minimum published {minAppVersion}");
+    }
+
     public static void DisableFirebaseOfflineSave()
     {
         db.Settings.PersistenceEnabled = false;

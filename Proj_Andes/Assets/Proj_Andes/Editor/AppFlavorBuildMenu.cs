@@ -69,6 +69,9 @@ public static class AppFlavorBuildMenu
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, flavor.applicationIdentifier);
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS, flavor.applicationIdentifier);
         if (flavor.icon != null) PlayerSettings.SetIcons(NamedBuildTarget.Unknown, new[] { flavor.icon }, IconKind.Any);
+        //AppVersion.Number is the single source of the version, so the APK never disagrees with the version_app it uploads
+        PlayerSettings.Android.bundleVersionCode = AppVersion.Number;
+        PlayerSettings.bundleVersion = AppVersion.Label;
 
         AssetDatabase.SaveAssets();
         AppFlavor.ClearCache();
@@ -110,8 +113,8 @@ public static class AppFlavorBuildMenu
         var androidDefines = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.Android);
         if (!development && androidDefines.Contains("UNITY_MCP"))
             problems.Add("El paquete Unity-MCP está instalado (define UNITY_MCP_*): sus DLLs de Assets/Plugins/NuGet entrarían al APK de release.");
-        if (PlayerSettings.Android.bundleVersionCode <= 1)
-            problems.Add($"Version code es {PlayerSettings.Android.bundleVersionCode}, igual al de los APK publicados (1). Súbelo para distinguir este build de los publicados.");
+        if (AppVersion.Number <= 1)
+            problems.Add($"AppVersion.Number es {AppVersion.Number}, igual al de los APK publicados (1). Súbelo en Scripts/AppVersion.cs para distinguir este build de los publicados.");
 
         if (problems.Count == 0) return true;
         return EditorUtility.DisplayDialog("Revisar antes del build", string.Join("\n\n", problems), "Construir de todas formas", "Cancelar");
