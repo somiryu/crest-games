@@ -653,6 +653,9 @@ public class FirebaseAnonymousLoginUI : MonoBehaviour
 		TimeManager.Instance.gameState = SessionStateLeft.Abandonado;
 
 		MonsterMarketConfig.marketAppearTimes = -1;
+		//fg_prueba / fp_prueba count the claw and chase games of this session: 1 for the first one, 2 for the second
+		MG_MechanicHandGameConfigs.repetition = 0;
+		MG_BoostersAndScape_GameConfig.repetition = 0;
 
 		MG_VoiceStarOrFlowerGameConfigs.CurrFlowersAndCloudsGameID = null;
 

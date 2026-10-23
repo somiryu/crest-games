@@ -45,11 +45,12 @@ public static class MinigameBotRunner
         { DataIds.sizeRocketsGame, new[] { "cr_codigo", "cr_intento", "cr_estrellas", "cr_release", "cr_respuesta" } },
         { DataIds.turboRocketGame, new[] { "te_estrellas", "te_tiempo_total", "te_turbo", "te_turbo_tm" } },
         { DataIds.monsterMarket, new[] { "mm_cofre_cod", "mm_cofre_rta", "mm_cofre_intento", "mm_cofre_tm", "mm_estrellas_gast", "mm_estrellas_post", "mm_estrellas_pre", "mm_orden" } },
-        { DataIds.mechanicHandGame, new[] { "fg_partida", "fg_intento", "fg_precision", "fg_trampa_activada", "fg_emoc_rta", "fg_emoc_cod", "fg_emoc_tm", "fg_espera_click" } },
-        { DataIds.boostersAndScapeGame, new[] { "fp_partida", "fp_intento", "fp_turbo", "fp_precision", "fp_trampa_activada", "fp_emoc_rta", "fp_emoc_cod", "fp_emoc_tm", "fp_espera_click" } },
+        { DataIds.mechanicHandGame, new[] { "fg_prueba", "fg_intento", "fg_precision", "fg_trampa_activada", "fg_emoc_rta", "fg_emoc_cod", "fg_emoc_tm", "fg_espera_click" } },
+        { DataIds.boostersAndScapeGame, new[] { "fp_prueba", "fp_intento", "fp_turbo", "fp_precision", "fp_trampa_activada", "fp_emoc_rta", "fp_emoc_cod", "fp_emoc_tm", "fp_espera_click" } },
     };
     static readonly string[] CommonKeys = { DataIds.institutionCode, DataIds.UserID, DataIds.TestID, DataIds.AppVersionField };
     static string rocketCheck;
+    static readonly List<string> frustrationChecks = new List<string>();
     static readonly string[] AllowedRocketAnswers = { "pequeño", "mediano", "grande" };
 
     static bool running;
@@ -117,7 +118,7 @@ public static class MinigameBotRunner
         errorsInScene.Clear();
         report.Clear();
         abandoning = abandonConfirmed = false; abandonStep = 0;
-        rocketTravelReleases = new int[0]; rocketAudioReleases = 0; rocketCheck = null;
+        rocketTravelReleases = new int[0]; rocketAudioReleases = 0; rocketCheck = null; frustrationChecks.Clear();
         SnapshotLocalSave();
         Application.runInBackground = true;
         Application.logMessageReceived += OnLog;
@@ -288,6 +289,9 @@ public static class MinigameBotRunner
         UserDataManager.Instance.RegisterNewUser(qaUser);
         UserDataManager.Instance.SetCurrUser(qaUser.id_jugador);
         loggedIn = true;
+        //As if other sessions had been played before without closing the app: the session must still number its games 1 and 2
+        MG_MechanicHandGameConfigs.repetition = 5;
+        MG_BoostersAndScape_GameConfig.repetition = 5;
         ui.OnReadyConfirmBtnPressed();
         if (startIndex > 0) GameSequencesList.Instance.GoToSequenceIdx(startIndex, -1);
     }
@@ -620,6 +624,18 @@ public static class MinigameBotRunner
                 if (!ok) problems.Add("carrito_recolector: " + rocketCheck);
             }
 
+            //fg_prueba / fp_prueba: the games of the session are numbered 1, 2... in the order they were played
+            var testField = contract.Key == DataIds.mechanicHandGame ? DataIds.mechHandTest : contract.Key == DataIds.boostersAndScapeGame ? DataIds.frustPersTest : null;
+            if (testField != null)
+            {
+                var numbers = docs.Where(d => d.ContainsKey(DataIds.GameID) && d.ContainsKey(testField)).GroupBy(d => d[DataIds.GameID]?.ToString())
+                    .Select(g => System.Convert.ToInt32(g.First()[testField])).ToList();
+                var ok = numbers.SequenceEqual(Enumerable.Range(1, numbers.Count));
+                var line = $"{testField} por partida en orden de juego: [{string.Join(", ", numbers)}] → " + (ok ? "OK" : "NO COINCIDE (se esperaba 1, 2...)");
+                frustrationChecks.Add(line);
+                if (!ok) problems.Add(contract.Key + ": " + line);
+            }
+
             var text = missing.Count == 0 ? "ninguna" : string.Join(", ", missing.Select(m => $"{m.Key} ({m.Value}/{docs.Count})"));
             //Rounds per game: documents that share an id_juego, in the order the games were played
             var perGame = docs.Where(d => d.ContainsKey(DataIds.GameID)).GroupBy(d => d[DataIds.GameID]?.ToString()).Select(g => g.Count().ToString());
@@ -627,6 +643,7 @@ public static class MinigameBotRunner
             if (missing.Count > 0) problems.Add($"{contract.Key}: faltan columnas del CMS: {text}");
         }
         if (rocketCheck != null) report.AppendLine().AppendLine("Carrito, " + rocketCheck);
+        foreach (var line in frustrationChecks) report.AppendLine().AppendLine("Frustración, " + line);
         var others = collections.Keys.Except(CmsContract.Keys).Select(k => $"{k} ({collections[k].Count})");
         report.AppendLine().AppendLine("Otras colecciones generadas: " + string.Join(", ", others));
     }

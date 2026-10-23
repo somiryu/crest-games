@@ -127,7 +127,7 @@ public static class DataIds
 
 
     //MechHand analytics
-    public const string mechHandTest = "fg_partida";
+    public const string mechHandTest = "fg_prueba";
     public const string mechHandTrial = "fg_intento";
     public const string mechHandThrown = "fg_lanzamiento";
     public const string mechHandPresicion = "fg_precision";
@@ -139,7 +139,7 @@ public static class DataIds
 
 
     //BoostHand analytics
-    public const string frustPersTest = "fp_partida";
+    public const string frustPersTest = "fp_prueba";
     public const string frustPersTrial = "fp_intento";
     public const string frustPersPresition = "fp_precision";
     public const string frustPersBoostClicks = "fp_turbo";
