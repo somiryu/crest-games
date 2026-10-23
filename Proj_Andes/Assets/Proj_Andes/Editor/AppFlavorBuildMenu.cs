@@ -134,6 +134,27 @@ public static class AppFlavorBuildMenu
             EditorUtility.RevealInFinder(outputPath);
         }
         else Debug.LogError($"Build {summary.result}: {summary.totalErrors} errors, see the console");
+        StopGradleDaemons();
+    }
+
+    //The Gradle daemon a build leaves running keeps up to 4 GB of RAM until Unity quits; the next build starts a new one
+    static void StopGradleDaemons()
+    {
+        try
+        {
+            var jdk = UnityEditor.Android.AndroidExternalToolsSettings.jdkRootPath;
+            var launcher = Directory.GetFiles(Path.Combine(UnityEditor.Android.AndroidExternalToolsSettings.gradlePath, "lib"), "gradle-launcher-*.jar").FirstOrDefault();
+            if (string.IsNullOrEmpty(jdk) || launcher == null) return;
+            var info = new System.Diagnostics.ProcessStartInfo(Path.Combine(jdk, "bin", "java"), $"-classpath \"{launcher}\" org.gradle.launcher.GradleMain --stop")
+            {
+                UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true,
+            };
+            info.EnvironmentVariables["JAVA_HOME"] = jdk;
+            using var process = System.Diagnostics.Process.Start(info);
+            process.WaitForExit(30000);
+            Debug.Log("Gradle daemons stopped: " + process.StandardOutput.ReadToEnd().Trim());
+        }
+        catch (System.Exception e) { Debug.LogWarning("Could not stop the Gradle daemons: " + e.Message); }
     }
 
     //Release builds must not carry editor tooling, and every new build needs a higher version code
