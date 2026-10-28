@@ -34,7 +34,7 @@ MonoBehaviour:
     changeToSequence: {fileID: 0}
     changeToSequenceStartDialogIdx: -1
     changeToSequenceResponseIdxToGrayOut: -1
-    text: "\xBFC\xF3mo te sientes t\xFA al saber que la mascota de Alex est\xE1 enferma?\r\r"
+    text: "\xBFC\xF3mo te sientes t\xFA al saber que Alex est\xE1 triste por su mascota?\r\r"
     textAlternative: 
     responsesDisplayerPrefab: {fileID: 5329665876752624690, guid: e62724b8be589394e8313e3eb4c358e8, type: 3}
     analyticChoiceID: emp9_other_feelings

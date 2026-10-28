@@ -66,7 +66,7 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 3
         inRelationTo: 0
-        customEmotionValue: 0.5
+        customEmotionValue: 0
     - response: NERVIOS
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: 3c1ffd53265abe746afd68643e7abb3d, type: 3}
@@ -170,7 +170,7 @@ MonoBehaviour:
         conflictSubCategory: 0
         emotionSubCategory: 2
         inRelationTo: 0
-        customEmotionValue: 0.5
+        customEmotionValue: 0
     - response: ORGULLO
       responseAlternative: 
       responseImage: {fileID: 21300000, guid: dd808026b5a8217409596c3bfb244917, type: 3}
